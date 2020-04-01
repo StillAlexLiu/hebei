@@ -60,7 +60,7 @@ export default {
         background-position: center;
     }
 
-    border-bottom: 4px solid #1e8db0;
+    border-bottom: 1px solid #5385D7;
 
     .text-right {
         font-size: 30px;

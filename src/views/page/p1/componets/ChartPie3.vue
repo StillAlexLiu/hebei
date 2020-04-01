@@ -1,10 +1,15 @@
 <template>
-    <v-chart class="full-width" :autoresize='true' :options='options'/>
+    <chart :options='options'/>
 </template>
 
 <script>
 export default {
   name: 'ChartPie3',
+  data () {
+    return {
+      center: ['50%', '40%']
+    }
+  },
   props: {
     data: {
       type: Object,
@@ -31,28 +36,13 @@ export default {
       default: '#3DB9CF'
     }
   },
-  data () {
-    return {
-      options: {}
-    }
-  },
-  watch: {
-    data: {
-      immediate: true,
-      deep: true,
-      handler: function () {
-        this.options = this.getOption(this.data, this.dimensions, this.icons, this.max, this.color)
-      }
-    }
-  },
-  methods: {
-    getOption (data, dimensions, icons, max, color) {
+  computed: {
+    options () {
       return {
         title: [{
-          text: data.value,
-          subtext: data.name,
+          subtext: this.data.name,
           x: 'center',
-          bottom: '32%',
+          bottom: '44%',
           textStyle: {
             color: '#fff',
             fontSize: 24,
@@ -64,9 +54,19 @@ export default {
             fontWeight: 'normal'
           }
         }, {
-          text: (data.value / max * 100).toFixed(2) + '%',
+          text: (this.data.value / this.max * 100).toFixed(2) + '%',
           x: 'center',
-          bottom: '12%',
+          bottom: '16%',
+          textStyle: {
+            color: this.color,
+            fontSize: 40,
+            fontFamily: 'LESLIE',
+            fontWeight: 'normal'
+          }
+        }, {
+          text: this.data.value + '户',
+          x: 'center',
+          bottom: '8%',
           textStyle: {
             color: '#fff',
             fontSize: 24,
@@ -79,20 +79,20 @@ export default {
               type: 'image',
               style: {
                 image: this.icons,
-                width: 60,
-                height: 60
+                width: 80,
+                height: 80
               },
               left: 'center',
-              top: '35%'
+              top: '25%'
             }
           ]
         },
         series: [
           {
-            name: data.name,
+            name: this.data.name,
             type: 'pie',
-            radius: [80, 100],
-            center: ['50%', '50%'],
+            radius: ['67%', '83%'],
+            center: this.center,
             hoverAnimation: false,
             labelLine: {
               normal: {
@@ -107,14 +107,14 @@ export default {
             },
             data: [
               {
-                value: data.value,
-                name: data.name,
+                value: this.data.value,
+                name: this.data.name,
                 itemStyle: {
-                  color: color
+                  color: this.color
                 }
               },
               {
-                value: max - data.value,
+                value: this.max - this.data.value,
                 name: 'rose2',
                 itemStyle: {
                   color: 'transparent'
@@ -123,11 +123,11 @@ export default {
             ]
           },
           {
-            name: data.name,
+            name: this.data.name,
             type: 'pie',
             z: 0,
-            radius: [85, 95],
-            center: ['50%', '50%'],
+            radius: ['70%', '80%'],
+            center: this.center,
             labelLine: {
               normal: {
                 show: false

@@ -151,9 +151,10 @@ export default {
             },
             name: '市场主体数量',
             type: 'bar',
-            barWidth: '61.8%',
+            barWidth: '20',
             itemStyle: {
               normal: {
+                barBorderRadius: [30, 30, 0, 0],
                 color: function (params) {
                   return colors[params.dataIndex % colors.length]
                 }

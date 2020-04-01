@@ -6,6 +6,7 @@ import radio from './radio'
 import charts from './echarts'
 import video from './video'
 import table from './table'
+import './css/index.less'
 
 export default {
   install: (Vue, options) => {

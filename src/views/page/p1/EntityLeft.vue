@@ -1,22 +1,29 @@
 <template>
-    <container-calc type="tb" :number="50" class="EntityLeft full-width full-height">
+    <container-calc type="tb" :number="50" class="EntityLeft full">
         <template slot="fix">
-            <RadioSimple :data="radioData" v-model="select" class="w-2-7 full-height radio float-right"/>
+            <RadioSimple :data="radioData" v-model="select" class="w-2-7 full-height radio " style="margin-left: 15px"/>
         </template>
-        <div slot="calc" class="border full-width full-height">
-            <Container class="w-1-2 h-1-3" :title="select.value===0?'市场主体趋势':'新增市场主体趋势'">
-                <ChartBar :data="barData" :dimensions="select.value===0?['year','number']:['month','number']"/>
+        <div slot="calc" class=" full-width full-height">
+            <Container class=" h-1-3" :title="select.value===0?'市场主体趋势':'新增市场主体趋势'">
+                <div class="w-1-2 full-height">
+                    <ChartBar :data="barData" :dimensions="select.value===0?['year','number']:['month','number']"/>
+                </div>
+                <NumberGroup class="w-1-2 full-height" :data="quantityData"></NumberGroup>
             </Container>
-            <NumberGroup class="w-1-2 h-1-3" :data="quantityData"></NumberGroup>
             <Container class="w-1-2 h-1-3" :title="select.value===0?'市场主体产业占比':'新增市场主体产业占比'">
                 <div class="full-height w-1-3" v-for="(item,index) in pieData" :key="index">
                     <ChartPie3 :data="item" :icons="icons[index]" :max="getMax(pieData)" :color="colors[index]"/>
                 </div>
             </Container>
             <Container class="w-1-2 h-1-3" :title="select.value===0?'市场主体规模情况（1000万以上）':'新增市场主体规模情况（1000万以上）'">
-                <ChartBarGroup :data="barGroupData" :dimensions="['year','step1','step2','step3']"
-                               :legend="['1000-5000万元','5000-1亿元','1亿元以上']"
-                               :colors="['#FF997D', '#4A90E2', '#FFD86D']" unit="单位：户"/>
+                <ChartBarLine :data="barGroupData" :dimensions="['year','step1','step2','step3']"
+                              :legend="['1000-5000万元','5000-1亿元','1亿元以上']"
+                              :type="['bar','bar','bar']"
+                              :twoAxis="false"
+                              :colors="['#FF997D', '#4A90E2', '#FFD86D']" unit="单位：户"/>
+                <!--                <ChartBarGroup :data="barGroupData" :dimensions="['year','step1','step2','step3']"-->
+                <!--                               :legend="['1000-5000万元','5000-1亿元','1亿元以上']"-->
+                <!--                               :colors="['#FF997D', '#4A90E2', '#FFD86D']" unit="单位：户"/>-->
             </Container>
             <Container class="w-1-2 h-1-3" :title="select.value===0?'市场主体区域分布':'新增市场主体区域分布'">
                 <ChartBarSimple :data="barData2" :dimensions="['name','value']" unit="单位：户"
@@ -24,8 +31,10 @@
             </Container>
             <Container class="w-1-2 h-1-3" :title="select.value===0?'市场主体生命周期分析':'市场主体生命周期分析'">
                 <!-- <ChartHalfPie :data="halfPieData"/> -->
-                <ChartBarGroup :data="barGroupData2[select.value]" :dimensions="['year','step1','step2','step3']"
+                <ChartBarLine :data="barGroupData2[select.value]" :dimensions="['year','step1','step2','step3']"
                                :legend="['10年以下','10-20年','20年以上']"
+                              :type="['bar','bar','bar']"
+                              :twoAxis="false"
                                :colors="['rgb(285, 232, 134)', 'rgb(72, 144, 226)', '#FF997D']" unit="单位：户"/>
             </Container>
         </div>
@@ -40,10 +49,12 @@ import ChartBarGroup from './componets/ChartBarGroup'
 import ChartBarSimple from './componets/ChartBarSimple'
 // import ChartHalfPie from './componets/ChartHalfPie'
 import Mock from 'mockjs'
+import ChartBarLine from './componets/ChartBarLine'
 
 export default {
   name: 'EntityLeft',
   components: {
+    ChartBarLine,
     // ChartHalfPie,
     ChartBarSimple,
     ChartBarGroup,
@@ -201,7 +212,7 @@ export default {
 
 <style scoped lang="less">
 .EntityLeft {
-    padding: 10px 20px;
+    padding: 10px 0;
 
     .radio {
         font-size: 32px;

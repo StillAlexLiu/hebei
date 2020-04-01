@@ -1,19 +1,16 @@
 <template>
     <div class="EntityMapInfo full-width ">
-        <ContainerInfo>
-            <div class="title">{{data['主体名称']}}</div>
+        <Container :title="data['主体名称']">
             <div class="table">
                 <div v-for="(value,key) in data" :key="key">
                     <div>{{key}}</div>
                     <div>{{value}}</div>
                 </div>
             </div>
-        </ContainerInfo>
-        <ContainerInfo class="sub">
-            <container title="企业五官图" class="full">
-                <ChartRadar :data="radarData" class="full"/>
-            </container>
-        </ContainerInfo>
+        </Container>
+        <container title="企业五官图" class="sub">
+            <ChartRadar :data="radarData" class="full"/>
+        </container>
     </div>
 </template>
 <script>
@@ -22,7 +19,7 @@ import Mock from 'mockjs'
 
 export default {
   name: 'EntityMapInfo',
-  components: { ChartRadar },
+  components: {ChartRadar},
   data () {
     return {
       radarData: [{
@@ -96,7 +93,7 @@ export default {
                 margin-bottom: 5px;
 
                 &:nth-child(1) {
-                    color: #1e8db0;
+                    color: #fff;
                     width: 8rem;
                     /*text-align: right;*/
                     text-align: justify;

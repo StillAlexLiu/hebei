@@ -19,8 +19,8 @@ export default {
   install: (Vue) => {
     Vue.component('ContainerBorderStyle1', ContainerBorderStyle1)
     Vue.component('ContainerCalc', ContainerCalc)
-    // Vue.component('Container', ContainerCenterTitle)
-    Vue.component('Container', Container)
+    Vue.component('Container', ContainerCenterTitle)
+    // Vue.component('Container2', Container)
     Vue.component('ContainerWithIcon', ContainerWithIcon)
     // 山东的
     Vue.component('ContainerBorder1', ContainerBorder1)
