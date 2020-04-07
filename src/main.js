@@ -10,7 +10,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import dataLoader from './assets/dataLoader'
-import liquidfill from '../src/assets/js/liquidFill'
+// import liquidfill from '../src/assets/js/liquidFill'
 
 import 'video.js/dist/video-js.css'
 library.add(fas)
@@ -32,7 +32,6 @@ Vue.use(components, { // 引用安智封装组件
   }
 })
 Vue.use(utils)
-Vue.use(liquidfill)
 new Vue({
   router,
   store,
