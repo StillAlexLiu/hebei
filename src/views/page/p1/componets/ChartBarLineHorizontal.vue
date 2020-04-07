@@ -83,7 +83,6 @@ export default {
             show: true,
             position: 'right',
             formatter: (value) => {
-              console.log(value)
               return value.value.value + this.units[i]
             }
           },

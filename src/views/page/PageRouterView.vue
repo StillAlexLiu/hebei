@@ -47,7 +47,7 @@ export default {
       deep: false,
       immediate: false,
       handler: function () {
-        this.selectIndex = this.headerData.findIndex((value, index) => {
+        this.selectIndex = this.headerData.findIndex((value) => {
           return value.name === this.$route.name
         })
       }
@@ -68,11 +68,11 @@ export default {
     initTab () {
       // 加载tab数据
       this.headerData = this.$router.options.routes[0].children
-      this.selectIndex = this.headerData.findIndex((value, index) => {
+      this.selectIndex = this.headerData.findIndex((value) => {
         return value.name === this.$route.name
       })
     },
-    routeTo (item, index) {
+    routeTo (item) {
       this.safeRoute(item.name)
     },
     to () {
@@ -104,7 +104,7 @@ export default {
     .view {
         height: calc(-@height + ~"100%");
         box-sizing: border-box;
-        padding: 0 @padding @padding @padding;
+        padding: 0
     }
 
     .left-title {

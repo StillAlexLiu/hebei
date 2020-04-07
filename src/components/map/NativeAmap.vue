@@ -5,7 +5,7 @@
         <MapInfoBlock>
             <slot name="info"></slot>
         </MapInfoBlock>
-<!--        <search-box :number="pointNumber"/>-->
+        <search-box :number="pointNumber"/>
     </div>
 </template>
 

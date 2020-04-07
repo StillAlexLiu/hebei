@@ -51,11 +51,11 @@
 </template>
 
 <script>
-import complaintCircleR from './compontes/complaintCircleR';
-import comPlaintBarR from './compontes/comPlaintBarR';
-import complaintBarRH from './compontes/complaintBarRH';
-import complaintPieR from './compontes/complaintPieR';
-import complaintPieRT from './compontes/complaintPieRT';
+import complaintCircleR from './compontes/complaintCircleR'
+import comPlaintBarR from './compontes/comPlaintBarR'
+import complaintBarRH from './compontes/complaintBarRH'
+import complaintPieR from './compontes/complaintPieR'
+import complaintPieRT from './compontes/complaintPieRT'
 export default {
   name: 'ComplaintRight',
   components: {
@@ -65,7 +65,7 @@ export default {
     complaintPieR,
     complaintPieRT
   },
-  data() {
+  data () {
     return {
       averager: '平均处置期限',
       averageDay: '28.7',
@@ -157,9 +157,9 @@ export default {
           '2'
         ]
       }
-    };
+    }
   }
-};
+}
 </script>
 
 <style scoped lang='less'>
@@ -202,7 +202,6 @@ export default {
         text-align: center;
         height: 2.58rem;
         font-size: 2rem;
-        font-family: MicrosoftYaHei-Bold;
         font-weight: bold;
         color: rgba(255, 255, 255, 1);
         line-height: 2.58rem;
@@ -215,7 +214,6 @@ export default {
         margin-bottom: 2rem;
       }
       .day {
-        font-family: PangMenZhengDao;
         font-weight: bolder;
         color: #79dfef;
         font-size: 4rem;

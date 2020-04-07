@@ -21,24 +21,24 @@ export default {
     }
   },
   methods: {
-    getOption (data) {
+    getOption () {
       return {
-        title: [   
-        {
+        title: [
+          {
             text: '线索',
-            subtext:  845+'件',
-            textStyle:{
-                fontSize: 24,
-                color: '#fff'
+            subtext: 845 + '件',
+            textStyle: {
+              fontSize: 24,
+              color: '#fff'
             },
             subtextStyle: {
-                fontSize: 20,
-                color: '#fff'
+              fontSize: 20,
+              color: '#fff'
             },
             textAlign: 'center',
             x: '50%',
-            y: '40%',
-        }],
+            y: '40%'
+          }],
         // legend: {
         //   orient: 'vertical',
         //   icon: 'circle',

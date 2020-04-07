@@ -54,189 +54,189 @@ import liquidfill from './components/echarts-liquidfill'
 import echartsWline from '../p7/components/echarts-wLine'
 import bgNum from '../p11/components/bgNum'
 export default {
-    name: 'headOfficeLeft',
-    data() {
-      return {
-        charaterlist1: {
-          name: '直属单位',
-          data: [
-            {
-              name: '总户数',
-              num: Mock.Random.natural(100, 2000)
-            }, {
-              name: '新增主体',
-              num: Mock.Random.natural(50, 100)
-            }
-          ]
-        },
-        charaterlist2: {
-          name: '人员',
-          data: [
-            {
-                name: '总人数',
-                num: Mock.Random.natural(100, 2000)
-            }, {
-                name: '新增',
-                num: Mock.Random.natural(50, 100)
-            }
-          ]
-        },
-        hellowPie2: {
-          legend: ['计量','特种设备','食品','产品质量','其他'],
-          pieData: [
-            {
-              value: Mock.Random.natural(100, 2000),
-              name: '计量'
-            }, {
-              value: Mock.Random.natural(100, 2000),
-              name: '特种设备'
-            }, {
-              value: Mock.Random.natural(100, 2000),
-              name: '食品'
-            }, {
-              value: Mock.Random.natural(100, 2000),
-              name: '产品质量'
-            }, {
-              value: Mock.Random.natural(100, 2000),
-              name: '其他'
-            }
-          ]
-        },
-        hellowPie: {
-        legend: ['雇员' ,'执法人员', '检查人员'],
-        pieData: [
-            {
-                value: Mock.Random.natural(10, 70),
-                name: '雇员'
-            },
-            {
-                value: Mock.Random.natural(10, 70),
-                name: '执法人员'
-            },
-            {
-                value: Mock.Random.natural(10, 70),
-                name: '检查人员'
-            }
-          ]
-        },
-        numberData: [
+  name: 'headOfficeLeft',
+  data () {
+    return {
+      charaterlist1: {
+        name: '直属单位',
+        data: [
           {
-            name: '市场主体总数',
-            value: Mock.Random.natural(100, 2000)
+            name: '总户数',
+            num: Mock.Random.natural(100, 2000)
           }, {
-            name: '本月新增数量',
-            value: Mock.Random.natural(100, 2000)
-          }, {
-            name: '本月注销数量',
-            value: Mock.Random.natural(100, 2000)
-          }
-        ],
-        chart3: {
-          xdata: [
-            '2016',
-            '2017',
-            '2018',
-            '2019',
-            '2020'
-          ],
-          ydata: [
-            Mock.Random.natural(100, 2000),
-            Mock.Random.natural(100, 2000),
-            Mock.Random.natural(100, 2000),
-            Mock.Random.natural(100, 2000),
-            Mock.Random.natural(100, 2000)
-          ]
-        },
-        lidata: [['主体数量', Mock.Random.natural(1, 100)], ['主体数量', Mock.Random.natural(1, 100)], ['主体数量', Mock.Random.natural(1, 100)]],
-        tabdata: 0,
-        rightLine: {
-            legend: [
-            '合格率'
-            ],
-            xdata: [
-            '一月',
-            '二月',
-            '三月',
-            '四月',
-            '五月',
-            '六月',
-            '七月',
-            '八月',
-            '九月',
-            '十月',
-            '十一月',
-            '十二月'
-            ],
-            ydata: [
-            [
-                Mock.Random.natural(70, 1000),
-                Mock.Random.natural(70, 1000),
-                Mock.Random.natural(70, 1000),
-                Mock.Random.natural(70, 1000),
-                Mock.Random.natural(70, 1000),
-                Mock.Random.natural(70, 1000),
-                Mock.Random.natural(70, 1000),
-                Mock.Random.natural(70, 1000),
-                Mock.Random.natural(70, 1000),
-                Mock.Random.natural(70, 1000),
-                Mock.Random.natural(70, 1000),
-                Mock.Random.natural(70, 1000)
-            ]
-          ]
-        },
-        bglist: [
-          {
-            name: '食品',
-            num: Mock.Random.natural(100000, 200000),
-            img: require('./components/img/食品.png')
-          }, {
-            name: '药品',
-            num: Mock.Random.natural(100000, 200000),
-            img: require('./components/img/药品.png')
-          }, {
-            name: '医疗器械',
-            num: Mock.Random.natural(100000, 200000),
-            img: require('./components/img/医疗器械.png')
-          }, {
-            name: '化妆品',
-            num: Mock.Random.natural(100000, 200000),
-            img: require('./components/img/化妆品.png')
-          }, {
-            name: '特种设备',
-            num: Mock.Random.natural(100000, 200000),
-            img: require('./components/img/特种设备.png')
-          }, {
-            name: '广告',
-            num: Mock.Random.natural(100000, 200000),
-            img: require('./components/img/广告.png')
-          }, {
-            name: '工业品',
-            num: Mock.Random.natural(100000, 200000),
-            img: require('./components/img/工业品.png')
-          }, {
-            name: '计量',
-            num: Mock.Random.natural(100000, 200000),
-            img: require('./components/img/计量.png')
+            name: '新增主体',
+            num: Mock.Random.natural(50, 100)
           }
         ]
-      }
-    },
-    components: {
-        charaterlist,
-        echartsHollowPie,
-        echartsPie,
-        NumberGroup,
-        comPlaintBarR,
-        tableTab2,
-        liquidfill,
-        echartsWline,
-        bgNum
-    },
-    methods: {
-        clickActive2(data) {
-            this.tabdata = data
+      },
+      charaterlist2: {
+        name: '人员',
+        data: [
+          {
+            name: '总人数',
+            num: Mock.Random.natural(100, 2000)
+          }, {
+            name: '新增',
+            num: Mock.Random.natural(50, 100)
+          }
+        ]
+      },
+      hellowPie2: {
+        legend: ['计量', '特种设备', '食品', '产品质量', '其他'],
+        pieData: [
+          {
+            value: Mock.Random.natural(100, 2000),
+            name: '计量'
+          }, {
+            value: Mock.Random.natural(100, 2000),
+            name: '特种设备'
+          }, {
+            value: Mock.Random.natural(100, 2000),
+            name: '食品'
+          }, {
+            value: Mock.Random.natural(100, 2000),
+            name: '产品质量'
+          }, {
+            value: Mock.Random.natural(100, 2000),
+            name: '其他'
+          }
+        ]
+      },
+      hellowPie: {
+        legend: ['雇员', '执法人员', '检查人员'],
+        pieData: [
+          {
+            value: Mock.Random.natural(10, 70),
+            name: '雇员'
+          },
+          {
+            value: Mock.Random.natural(10, 70),
+            name: '执法人员'
+          },
+          {
+            value: Mock.Random.natural(10, 70),
+            name: '检查人员'
+          }
+        ]
+      },
+      numberData: [
+        {
+          name: '市场主体总数',
+          value: Mock.Random.natural(100, 2000)
+        }, {
+          name: '本月新增数量',
+          value: Mock.Random.natural(100, 2000)
+        }, {
+          name: '本月注销数量',
+          value: Mock.Random.natural(100, 2000)
         }
+      ],
+      chart3: {
+        xdata: [
+          '2016',
+          '2017',
+          '2018',
+          '2019',
+          '2020'
+        ],
+        ydata: [
+          Mock.Random.natural(100, 2000),
+          Mock.Random.natural(100, 2000),
+          Mock.Random.natural(100, 2000),
+          Mock.Random.natural(100, 2000),
+          Mock.Random.natural(100, 2000)
+        ]
+      },
+      lidata: [['主体数量', Mock.Random.natural(1, 100)], ['主体数量', Mock.Random.natural(1, 100)], ['主体数量', Mock.Random.natural(1, 100)]],
+      tabdata: 0,
+      rightLine: {
+        legend: [
+          '合格率'
+        ],
+        xdata: [
+          '一月',
+          '二月',
+          '三月',
+          '四月',
+          '五月',
+          '六月',
+          '七月',
+          '八月',
+          '九月',
+          '十月',
+          '十一月',
+          '十二月'
+        ],
+        ydata: [
+          [
+            Mock.Random.natural(70, 1000),
+            Mock.Random.natural(70, 1000),
+            Mock.Random.natural(70, 1000),
+            Mock.Random.natural(70, 1000),
+            Mock.Random.natural(70, 1000),
+            Mock.Random.natural(70, 1000),
+            Mock.Random.natural(70, 1000),
+            Mock.Random.natural(70, 1000),
+            Mock.Random.natural(70, 1000),
+            Mock.Random.natural(70, 1000),
+            Mock.Random.natural(70, 1000),
+            Mock.Random.natural(70, 1000)
+          ]
+        ]
+      },
+      bglist: [
+        {
+          name: '食品',
+          num: Mock.Random.natural(100000, 200000),
+          img: require('./components/img/食品.png')
+        }, {
+          name: '药品',
+          num: Mock.Random.natural(100000, 200000),
+          img: require('./components/img/药品.png')
+        }, {
+          name: '医疗器械',
+          num: Mock.Random.natural(100000, 200000),
+          img: require('./components/img/医疗器械.png')
+        }, {
+          name: '化妆品',
+          num: Mock.Random.natural(100000, 200000),
+          img: require('./components/img/化妆品.png')
+        }, {
+          name: '特种设备',
+          num: Mock.Random.natural(100000, 200000),
+          img: require('./components/img/特种设备.png')
+        }, {
+          name: '广告',
+          num: Mock.Random.natural(100000, 200000),
+          img: require('./components/img/广告.png')
+        }, {
+          name: '工业品',
+          num: Mock.Random.natural(100000, 200000),
+          img: require('./components/img/工业品.png')
+        }, {
+          name: '计量',
+          num: Mock.Random.natural(100000, 200000),
+          img: require('./components/img/计量.png')
+        }
+      ]
     }
+  },
+  components: {
+    charaterlist,
+    echartsHollowPie,
+    echartsPie,
+    NumberGroup,
+    comPlaintBarR,
+    tableTab2,
+    liquidfill,
+    echartsWline,
+    bgNum
+  },
+  methods: {
+    clickActive2 (data) {
+      this.tabdata = data
+    }
+  }
 }
 </script>
 

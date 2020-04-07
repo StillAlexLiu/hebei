@@ -3,60 +3,59 @@
 </template>
 
 <script>
-import graphic from "echarts/lib/util/graphic";
 export default {
-  name: "ChartBar",
-  props: ["xdata", "ydata"],
-  data() {
+  name: 'ChartBar',
+  props: ['xdata', 'ydata'],
+  data () {
     return {
       options: {}
-    };
+    }
   },
   watch: {
     xdata: {
       immediate: true,
       deep: true,
-      handler: function() {
-        this.options = this.getOption(this.data);
+      handler: function () {
+        this.options = this.getOption(this.data)
       }
     }
   },
   methods: {
-    getOption(data) {
+    getOption () {
       return {
         tooltip: {},
         grid: {
-          top: "5%",
-          left: "5%",
-          right: "10%",
-          bottom: "5%",
+          top: '5%',
+          left: '5%',
+          right: '10%',
+          bottom: '5%',
           containLabel: true
         },
         legend: {
           show: true,
-          right: "4%",
-          top: "0%",
-          icon: "stack",
+          right: '4%',
+          top: '0%',
+          icon: 'stack',
           itemWidth: 10,
           itemHeight: 10,
           textStyle: {
-            color: "#fff",
+            color: '#fff',
             fontSize: 24
           },
           nameTextStyle: {
-            color: "#fff"
+            color: '#fff'
           },
-          data: ["单位:件"]
+          data: ['单位:件']
         },
         xAxis: [
           {
-            type: "value",
+            type: 'value',
             boundaryGap: true,
             axisLine: {
               // 坐标轴轴线相关设置。数学上的x轴
               show: false,
               lineStyle: {
-                color: "#f9f9f9"
+                color: '#f9f9f9'
               }
             },
             splitLine: {
@@ -68,7 +67,7 @@ export default {
               interval: 0,
               rotate: 20,
               textStyle: {
-                color: "#d1e6eb",
+                color: '#d1e6eb',
                 margin: 30,
                 fontSize: 20
               }
@@ -80,11 +79,11 @@ export default {
         ],
         yAxis: [
           {
-            type: "category",
+            type: 'category',
             splitLine: {
               show: false,
               lineStyle: {
-                color: "#0a3256"
+                color: '#0a3256'
               }
             },
             axisLine: {
@@ -94,7 +93,7 @@ export default {
               show: true,
               interval: 0,
               textStyle: {
-                color: "#fff",
+                color: '#fff',
                 fontSize: 20
               }
             },
@@ -111,34 +110,34 @@ export default {
             },
             label: {
               show: true,
-              position: "right",
-              formatter: "{c}件",
+              position: 'right',
+              formatter: '{c}件',
               textStyle: {
-                color: "#fff",
+                color: '#fff',
                 fontSize: 20
               }
             },
-            name: "单位:件",
-            type: "bar",
+            name: '单位:件',
+            type: 'bar',
             // barWidth:getRemSize(15),
             itemStyle: {
               normal: {
                 show: true,
-                color: "#277ace",
+                color: '#277ace',
                 barBorderRadius: 50,
                 borderWidth: 0,
-                borderColor: "#333"
+                borderColor: '#333'
               }
             },
-            barGap: "0%",
-            barCategoryGap: "50%",
+            barGap: '0%',
+            barCategoryGap: '50%',
             data: this.ydata
           }
         ]
-      };
+      }
     }
   }
-};
+}
 </script>
 
 <style scoped lang='less'>

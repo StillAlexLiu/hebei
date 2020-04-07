@@ -38,7 +38,7 @@ export default {
       this.$emit('change', item, index)
     }
   },
-  mounted() {
+  mounted () {
 
   }
 }

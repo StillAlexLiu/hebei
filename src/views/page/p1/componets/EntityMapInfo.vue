@@ -19,7 +19,7 @@ import Mock from 'mockjs'
 
 export default {
   name: 'EntityMapInfo',
-  components: {ChartRadar},
+  components: { ChartRadar },
   data () {
     return {
       radarData: [{

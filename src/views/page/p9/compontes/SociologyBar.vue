@@ -3,26 +3,25 @@
 </template>
 
 <script>
-import graphic from 'echarts/lib/util/graphic';
 export default {
   name: 'SociologyBar',
   props: ['xdata', 'ydata'],
-  data() {
+  data () {
     return {
       options: {}
-    };
+    }
   },
   watch: {
     xdata: {
       immediate: true,
       deep: true,
-      handler: function() {
-        this.options = this.getOption(this.data);
+      handler: function () {
+        this.options = this.getOption(this.data)
       }
     }
   },
   methods: {
-    getOption(data) {
+    getOption () {
       return {
         // color: ["#4162ff", "#c78b42", "#CD3F2A", "#ff6e72", "#9692ff"],
         tooltip: {},
@@ -125,7 +124,7 @@ export default {
             },
             name: '备案量',
             type: 'bar',
-            color: "rgba(79,204,255,0.8)",
+            color: 'rgba(79,204,255,0.8)',
             itemStyle: {
               normal: {
                 show: true,
@@ -138,10 +137,10 @@ export default {
             data: this.ydata
           }
         ]
-      };
+      }
     }
   }
-};
+}
 </script>
 
 <style scoped lang='less'>

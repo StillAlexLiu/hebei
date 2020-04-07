@@ -12,8 +12,8 @@
                 <div class="btn"
                      :key="index" @click="itemClick(item,index,data[activeIndex].children)">
                     <img class="img" alt :src="item.icon"/>
-                    <img class="icon" v-if="item.active&&!item.children" alt src="./img/item_select.png"/>
                     <div>{{item.name}}</div>
+                    <img class="icon" v-if="item.active&&!item.children" alt src="./img/item_select.png"/>
                     <font-awesome-icon v-if="item.children" :class="item.active?'rotate-up':'rotate-down'"
                                        class="more"
                                        icon="angle-double-up"/>
@@ -128,11 +128,11 @@ export default {
 
 <style scoped lang="less">
 .MapSelector {
-    background:linear-gradient(180deg,rgba(32,35,58,.8) 0%,rgba(36,41,66,.8) 100%);
+    background: linear-gradient(180deg, rgba(32, 35, 58, .8) 0%, rgba(36, 41, 66, .8) 100%);
     position: absolute;
     bottom: 0;
-    height: 38.2%;
-    width: 38.2%;
+    height: 510px;
+    width: 940px;
     text-align: center;
 
     .tab-group {
@@ -157,9 +157,10 @@ export default {
     }
 
     .btn-group {
-        height: calc(~"100% - 40px");
+        height: calc(~"100% - 50px");
         display: flex;
         flex-wrap: wrap;
+        justify-content: flex-start;
         overflow-y: auto;
     }
 
@@ -174,30 +175,39 @@ export default {
         align-self: flex-start;
         width: calc(~"100% / 6");
         /*flex-grow: 1;*/
-        padding: 10px;
+        /*flex-basis: calc(~"100% / 6");*/
         overflow: hidden;
-        font-size: 16px;
+        font-size: 26px;
         position: relative;
-
+        height: 230px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        >div{
+            height: 60px;
+            margin-top: 10px;
+            line-height: 30px;
+        }
         > .img {
-            width: 70%;
-            cursor: pointer;
+            height: 84px;
+            align-self: center;
         }
 
         > .icon {
             position: absolute;
-            right: 5px;
-            top: 5px;
-            width: 40px;
-            height: 40px;
+            right: 25px;
+            top: 45px;
+            width: 30px;
+            height: 30px;
         }
 
         > .more {
             position: absolute;
-            right: 5px;
-            top: 75px;
-            width: 40px;
-            height: 40px;
+            right: 25px;
+            top: 100px;
+            width: 30px;
+            height: 30px;
         }
     }
 

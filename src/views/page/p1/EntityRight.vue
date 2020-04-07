@@ -42,7 +42,6 @@
 import { mapActions, mapState } from 'vuex'
 import TableBaseInfo from './componets/TableBaseInfo'
 import TabTable from './componets/tabTable'
-import Mock from 'mockjs'
 import numberPie from './componets/numberPie'
 import ChartMountain from './componets/ChartMountain'
 import BorderInOut from './componets/borderInOut'
@@ -89,17 +88,17 @@ export default {
         {
           name: '应报（户）',
           value: 6097056,
-          img: require("./componets/img/nianbao/1.png")
+          img: require('./componets/img/nianbao/1.png')
         },
         {
           name: '已报（户）',
           value: 1346339,
-          img: require("./componets/img/nianbao/2.png")
+          img: require('./componets/img/nianbao/2.png')
         },
         {
           name: '公示率',
           value: '22.08%',
-          img: require("./componets/img/nianbao/3.png")
+          img: require('./componets/img/nianbao/3.png')
         }
       ],
       barLineData: [
@@ -175,19 +174,18 @@ export default {
         }
       ],
 
-
       barHorizontalData: [
-        {"name": "承德", "value": "630"},
-        {"name": "秦皇岛", "value": "1100"},
-        {"name": "张家口", "value": "1120"},
-        {"name": "衡水", "value": "1508"},
-        {"name": "邢台", "value": "1729"},
-        {"name": "廊坊", "value": "1930"},
-        {"name": "保定", "value": "1937"},
-        {"name": "唐山", "value": "2381"},
-        {"name": "沧州", "value": "2400"},
-        {"name": "邯郸", "value": "2706"},
-        {"name": "石家庄", "value": "4281"}
+        { 'name': '承德', 'value': '630' },
+        { 'name': '秦皇岛', 'value': '1100' },
+        { 'name': '张家口', 'value': '1120' },
+        { 'name': '衡水', 'value': '1508' },
+        { 'name': '邢台', 'value': '1729' },
+        { 'name': '廊坊', 'value': '1930' },
+        { 'name': '保定', 'value': '1937' },
+        { 'name': '唐山', 'value': '2381' },
+        { 'name': '沧州', 'value': '2400' },
+        { 'name': '邯郸', 'value': '2706' },
+        { 'name': '石家庄', 'value': '4281' }
       ]
     }
   },

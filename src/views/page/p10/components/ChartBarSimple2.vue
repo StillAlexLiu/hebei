@@ -129,8 +129,8 @@ export default {
             label: {
               normal: {
                 show: true,
-                formatter: function(value, index) {
-                  return value.data.value+'%'
+                formatter: function (value) {
+                  return value.data.value + '%'
                 },
                 position: 'top',
                 textStyle: {

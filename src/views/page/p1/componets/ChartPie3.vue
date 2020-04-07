@@ -26,7 +26,7 @@ export default {
     max: {
       type: Number,
       default: 0
-    },
+    }
   },
   computed: {
     options () {

@@ -42,15 +42,14 @@
 </template>
 
 <script>
-import SociologyLineR from "./compontes/SociologyLineR"
-import SociologyBarR from "./compontes/SociologyBarR"
-import SociologyCircleR from "./compontes/SociologyCircleR"
-import SociologyBarRH from "./compontes/SociologyBarRH"
-import SociologyLiquidfill from "./compontes/SociologyLiquidfill"
-
+import SociologyLineR from './compontes/SociologyLineR'
+import SociologyBarR from './compontes/SociologyBarR'
+import SociologyCircleR from './compontes/SociologyCircleR'
+import SociologyBarRH from './compontes/SociologyBarRH'
+import SociologyLiquidfill from './compontes/SociologyLiquidfill'
 
 export default {
-  name: "SociologyRight",
+  name: 'SociologyRight',
   components: {
     SociologyLineR,
     SociologyBarR,
@@ -61,88 +60,88 @@ export default {
   data () {
     return {
       List: [
-        {zhibiaoName: "执照遗失办理", value: 382},
-        {zhibiaoName: "电梯维保管理", value: 124417},
-        {zhibiaoName: "广告企业上传", value: 10}
+        { zhibiaoName: '执照遗失办理', value: 382 },
+        { zhibiaoName: '电梯维保管理', value: 124417 },
+        { zhibiaoName: '广告企业上传', value: 10 }
       ],
       SociologyLineData: {
         xdata: [
-          "石家庄市",
-          "唐山市",
-          "秦皇岛市",
-          "邯郸市",
-          "邢台市",
-          "保定市",
-          "张家口市",
-          "承德市",
-          "沧州市",
-          "廊坊市",
-          "衡水市"
+          '石家庄市',
+          '唐山市',
+          '秦皇岛市',
+          '邯郸市',
+          '邢台市',
+          '保定市',
+          '张家口市',
+          '承德市',
+          '沧州市',
+          '廊坊市',
+          '衡水市'
         ],
         ydata: [
-          "12",
-          "7",
-          "9",
-          "8",
-          "2",
-          "10",
-          "6",
-          "8",
-          "12",
-          "6",
-          "3",
-          "5",
-          "7",
-          "2"
+          '12',
+          '7',
+          '9',
+          '8',
+          '2',
+          '10',
+          '6',
+          '8',
+          '12',
+          '6',
+          '3',
+          '5',
+          '7',
+          '2'
         ]
       },
       SociologyBarData: {
         xdata: [
-          "石家庄市",
-          "唐山市",
-          "秦皇岛市",
-          "邯郸市",
-          "邢台市",
-          "保定市",
-          "张家口市",
-          "承德市",
-          "沧州市",
-          "廊坊市",
-          "衡水市"
+          '石家庄市',
+          '唐山市',
+          '秦皇岛市',
+          '邯郸市',
+          '邢台市',
+          '保定市',
+          '张家口市',
+          '承德市',
+          '沧州市',
+          '廊坊市',
+          '衡水市'
         ],
         ydata: [
-          "15",
-          "12",
-          "4",
-          "2",
-          "23",
-          "15",
-          "5",
-          "24",
-          "14",
-          "1",
-          "6",
-          "15",
-          "17",
-          "24"
+          '15',
+          '12',
+          '4',
+          '2',
+          '23',
+          '15',
+          '5',
+          '24',
+          '14',
+          '1',
+          '6',
+          '15',
+          '17',
+          '24'
         ]
       },
       SociologyPieData: {
         imgUrl: './compontes/img/icon_mhzhjg_icon_jgquanjing_quanjuguanjian_banjielv@2x_5.png',
         pieData: [
-          {name: "房地产", value: 2},
-          {name: "药品", value: 7},
-          {name: "医疗器械", value: 1}
+          { name: '房地产', value: 2 },
+          { name: '药品', value: 7 },
+          { name: '医疗器械', value: 1 }
         ]
       },
       SociologyBarHData: {
         xdata: [
-          "已完成",
-          "维保数"
+          '已完成',
+          '维保数'
         ],
         ydata: [
-          "12",
-          "234"
+          '12',
+          '234'
         ]
       },
       liquidfull: [['完成率', 80]]
@@ -183,12 +182,11 @@ export default {
             float: left;
             width: 26rem;
             height: 12rem;
-            margin-top: 0rem;
+            margin-top: 0;
 
             p:first-child {
                 height: 4.92rem;
                 font-size: 3.67rem;
-                font-family: MicrosoftYaHei;
                 color: rgba(255, 255, 255, 1);
                 line-height: 4.92rem;
             }
@@ -197,7 +195,6 @@ export default {
                 // width: 3rem;
                 // height: 3.92rem;
                 font-size: 3rem;
-                font-family: MicrosoftYaHei;
                 color: rgba(254, 105, 65, 1);
                 line-height: 3.92rem;
                 display: inline;
@@ -205,7 +202,6 @@ export default {
 
             p:last-child span {
                 font-size: 5.33rem;
-                font-family: MicrosoftYaHei-Bold;
                 font-weight: bold;
                 color: rgba(254, 105, 65, 1);
                 line-height: 7.08rem;

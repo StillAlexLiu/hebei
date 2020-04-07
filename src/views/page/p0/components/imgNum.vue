@@ -7,13 +7,13 @@
 </template>
 <script>
 export default {
-    name: 'echarts-imgNum',
-    props: ['data'],
-    data() {
-        return {
+  name: 'echarts-imgNum',
+  props: ['data'],
+  data () {
+    return {
 
-        }
     }
+  }
 }
 </script>
 

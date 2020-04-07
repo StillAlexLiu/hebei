@@ -12,13 +12,13 @@
 </template>
 <script>
 export default {
-    name: 'numberPie',
-    props: ['data2'],
-    data() {
-        return {
+  name: 'numberPie',
+  props: ['data2'],
+  data () {
+    return {
 
-        }
     }
+  }
 }
 </script>
 <style lang="less">

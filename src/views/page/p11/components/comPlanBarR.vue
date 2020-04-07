@@ -85,7 +85,7 @@ export default {
               fontSize: 15,
               color: '#fff'
             },
-            name:'单位:/户',
+            name: '单位:/户',
             show: true,
             x: 'center',
             type: 'value',

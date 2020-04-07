@@ -3,28 +3,27 @@
 </template>
 
 <script>
-import graphic from 'echarts/lib/util/graphic';
 export default {
   name: 'SociologyBar',
   props: ['xdata', 'ydata'],
-  data() {
+  data () {
     return {
       options: {}
-    };
+    }
   },
   watch: {
     xdata: {
       immediate: true,
       deep: true,
-      handler: function() {
-        this.options = this.getOption(this.data);
+      handler: function () {
+        this.options = this.getOption(this.data)
       }
     }
   },
   methods: {
-    getOption(data) {
+    getOption () {
       return {
-        color: ["#4162ff", "#c78b42", "#CD3F2A", "#ff6e72", "#9692ff"],
+        color: ['#4162ff', '#c78b42', '#CD3F2A', '#ff6e72', '#9692ff'],
         tooltip: {},
         grid: {
           top: '10%',
@@ -76,8 +75,8 @@ export default {
             },
             axisTick: {
               show: false
-            },
-            
+            }
+
           }
         ],
         yAxis: [
@@ -128,10 +127,10 @@ export default {
             type: 'bar',
             itemStyle: {
               normal: {
-                color: function(params) {
+                color: function (params) {
                   // build a color map as your need.
-                  var colorList = ["#FE6941", "#61EADF"];
-                  return colorList[params.dataIndex];
+                  var colorList = ['#FE6941', '#61EADF']
+                  return colorList[params.dataIndex]
                 }
               }
             },
@@ -140,10 +139,10 @@ export default {
             data: this.ydata
           }
         ]
-      };
+      }
     }
   }
-};
+}
 </script>
 
 <style scoped lang='less'>

@@ -17,13 +17,13 @@
 </template>
 <script>
 export default {
-    name: 'mainInfo',
-    props: ['data'],
-    data () {
-        return {
-            
-        }
+  name: 'mainInfo',
+  props: ['data'],
+  data () {
+    return {
+
     }
+  }
 }
 </script>
 

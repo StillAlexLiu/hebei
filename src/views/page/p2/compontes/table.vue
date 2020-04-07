@@ -19,24 +19,24 @@
 
 <script>
 export default {
-    name: 'table',
-    props: ['data'],
-    components: {
+  name: 'table',
+  props: ['data'],
+  components: {
 
-    },
-    data () {
-        return {
-            tableList: [
-                {
-                    value: '抽查事项'
-                }, {
-                    value: '联合部门'
-                }, {
-                    value: '抽查主体'
-                }
-            ]
+  },
+  data () {
+    return {
+      tableList: [
+        {
+          value: '抽查事项'
+        }, {
+          value: '联合部门'
+        }, {
+          value: '抽查主体'
         }
+      ]
     }
+  }
 }
 </script>
 
@@ -48,7 +48,7 @@ export default {
       width: 98%;
       background: rgba(30, 141, 176, 0.2);
       margin-top: 1.5rem;
-      border: 0.33rem solid 1c92d2;
+      border: 0.33rem solid #1c92d2;
       box-sizing: border-box;
       overflow: auto;
       position: relative;
@@ -74,14 +74,12 @@ export default {
         // width: 2.25rem;
         height: 4.2rem;
         font-size: 2.2rem;
-        font-family: MicrosoftYaHei-Bold;
         font-weight: bold;
         color: rgba(255, 255, 255, 1);
         line-height: 2rem;
       }
       tr {
         font-size: 2rem;
-        font-family: MicrosoftYaHei-Bold;
         font-weight: bold;
         color: rgba(255, 255, 255, 1);
         line-height: 3.2rem;

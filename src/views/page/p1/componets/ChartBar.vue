@@ -48,7 +48,7 @@ export default {
           itemWidth: 10,
           itemHeight: 10,
           selectedMode: false,
-          itemGap: 10,
+          itemGap: 10
         },
         dataset: {
           dimensions: dimensions,
@@ -72,7 +72,7 @@ export default {
           },
           axisLabel: {
             interval: 0,
-            rotate: 0,
+            rotate: 0
           },
           splitLine: {
             show: false

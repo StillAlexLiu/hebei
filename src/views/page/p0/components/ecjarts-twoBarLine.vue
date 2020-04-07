@@ -5,7 +5,7 @@
 <script>
 export default {
   name: 'ChartBar',
-  props:['data'],
+  props: ['data'],
   data () {
     return {
       options: {}
@@ -24,7 +24,7 @@ export default {
     getOption (data) {
       return {
         legend: {
-          data: ['投诉量', '举报量','已处理投诉'],
+          data: ['投诉量', '举报量', '已处理投诉'],
           // top: '3%',
           right: '5%',
           position: 'center',
@@ -47,7 +47,7 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: true,
-          data:data.xdata,
+          data: data.xdata,
           axisLine: {
             lineStyle: {
               color: '#334B73',
@@ -123,7 +123,7 @@ export default {
                 color: 'rgb(63,163,206,0.7)'
               }
             }
-          },{
+          }, {
             label: {
               normal: {
                 show: true,
@@ -170,7 +170,7 @@ export default {
   }
 }
 </script>
- 
+
 <style scoped lang="less">
 .ChartBar {
 

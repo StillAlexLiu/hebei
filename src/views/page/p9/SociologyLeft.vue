@@ -62,15 +62,15 @@
 </template>
 
 <script>
-import SociologyBar from './compontes/SociologyBar';
-import SociologyLine from './compontes/SociologyLine';
+import SociologyBar from './compontes/SociologyBar'
+import SociologyLine from './compontes/SociologyLine'
 export default {
   name: 'SociologyLeft',
   components: {
     SociologyBar,
     SociologyLine
   },
-  data() {
+  data () {
     return {
       List: [
         { zhibiaoName: '电梯问题反馈', value: 1299 },
@@ -82,12 +82,12 @@ export default {
         { value2: 658, value1: 875, value3: '75.2', name: '故障报修' },
         { value2: 61, value1: 80, value3: '76.25', name: '应急救援' }
       ],
-      ListCard:[
+      ListCard: [
         { value2: 266, value1: 344, value3: '77.33', name: '举报投诉' },
         { value2: 658, value1: 875, value3: '75.2', name: '故障报修' },
         { value2: 61, value1: 80, value3: '76.25', name: '应急救援' }
       ],
-      SociologyData:{
+      SociologyData: {
         xdata: [
           '石家庄市',
           '唐山市',
@@ -118,38 +118,38 @@ export default {
           '2'
         ]
       },
-      SociologyData1:{
+      SociologyData1: {
         xdata: [
-            '2019-02',
-            '2019-03',
-            '2019-04',
-            '2019-05',
-            '2019-06',
-            '2019-07',
-            '2019-08',
-            '2019-09',
-            '2019-10',
-            '2019-11',
-            '2019-12',
-            '2020-01'
-          ],
-          ydata: [
-            '9310',
-            '3579',
-            '5498',
-            '4586',
-            '4488',
-            '3752',
-            '3782',
-            '3311',
-            '3545',
-            '3986',
-            '3943',
-            '4230'
-          ]}
-    };
+          '2019-02',
+          '2019-03',
+          '2019-04',
+          '2019-05',
+          '2019-06',
+          '2019-07',
+          '2019-08',
+          '2019-09',
+          '2019-10',
+          '2019-11',
+          '2019-12',
+          '2020-01'
+        ],
+        ydata: [
+          '9310',
+          '3579',
+          '5498',
+          '4586',
+          '4488',
+          '3752',
+          '3782',
+          '3311',
+          '3545',
+          '3986',
+          '3943',
+          '4230'
+        ] }
+    }
   }
-};
+}
 </script>
 
 <style scoped lang='less'>
@@ -178,11 +178,10 @@ export default {
       float: left;
       width: 26rem;
       height: 12rem;
-      margin-top: 0rem;
+      margin-top: 0;
       p:first-child {
         height: 4.92rem;
         font-size: 3.67rem;
-        font-family: MicrosoftYaHei;
         color: rgba(255, 255, 255, 1);
         line-height: 4.92rem;
       }
@@ -190,14 +189,12 @@ export default {
         // width: 3rem;
         // height: 3.92rem;
         font-size: 3rem;
-        font-family: MicrosoftYaHei;
         color: rgba(254, 105, 65, 1);
         line-height: 3.92rem;
         display: inline;
       }
       p:last-child span {
         font-size: 5.33rem;
-        font-family: MicrosoftYaHei-Bold;
         font-weight: bold;
         color: rgba(254, 105, 65, 1);
         line-height: 7.08rem;
@@ -232,7 +229,6 @@ export default {
         .socialSolvingtitle {
           text-align: right;
           font-size: 2rem;
-          font-family: MicrosoftYaHei;
           color: rgba(255, 255, 255, 1);
           line-height: 2rem;
           margin-bottom: 0.5rem;
@@ -245,7 +241,6 @@ export default {
           float: left;
           width: 12rem;
           font-size: 2.5rem;
-          font-family: MicrosoftYaHei;
           color: rgba(255, 255, 255, 1);
           line-height: 2.5rem;
           text-align: right;
@@ -345,7 +340,6 @@ export default {
       span:first-child {
         height: 6rem;
         font-size: 3rem;
-        font-family: MicrosoftYaHei;
         color: rgba(255, 255, 255, 1);
         line-height: 6rem;
         padding-left: 20%;
@@ -353,7 +347,6 @@ export default {
       }
       span:last-child {
         font-size: 4.5rem;
-        font-family: MicrosoftYaHei-Bold;
         font-weight: bold;
         color: rgba(255, 148, 0, 1);
         line-height: 6rem;

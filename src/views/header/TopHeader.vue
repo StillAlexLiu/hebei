@@ -23,7 +23,7 @@ import DateTime from './DateTime'
 
 export default {
   name: 'TopHeader',
-  components: {DateTime},
+  components: { DateTime },
   data () {
     return {
       info: ''

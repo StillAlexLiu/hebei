@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import graphic from 'echarts/lib/util/graphic'
 export default {
   name: 'ChartLine',
   props: {
@@ -19,23 +18,23 @@ export default {
       }
     }
   },
-  data() {
+  data () {
     return {
       options: {}
-    };
+    }
   },
   watch: {
     data: {
       immediate: true,
       deep: true,
-      handler: function() {
+      handler: function () {
         console.log(this.data)
         this.options = this.getOption(this.xdata, this.ydata)
       }
     }
   },
   methods: {
-    getOption(data) {
+    getOption () {
       return {
         tooltip: {},
         grid: {
@@ -52,14 +51,14 @@ export default {
           icon: 'stack',
           itemWidth: 15,
           itemHeight: 15,
-          selectedMode: false ,
+          selectedMode: false,
           textStyle: {
             color: '#fff',
             fontSize: 20
           },
           nameTextStyle: {
             color: '#fff'
-          },
+          }
         },
         xAxis: [
           {
@@ -90,7 +89,7 @@ export default {
         yAxis: [
           {
             type: 'value',
-            name:'单位(件)',
+            name: '单位(件)',
             min: 0,
             splitNumber: 7,
             nameLocation: 'end',
@@ -109,7 +108,7 @@ export default {
             axisLabel: {
               margin: 20,
               textStyle: {
-                fontSize:20,
+                fontSize: 20,
                 color: '#d1e6eb'
               }
             },
@@ -133,19 +132,19 @@ export default {
               }
             },
             lineStyle: {
-                color: 'rgb(46, 117, 163)',
-                width: 2
+              color: 'rgb(46, 117, 163)',
+              width: 2
             },
             itemStyle: {
-              color:'rgb(46, 117, 163)'
+              color: 'rgb(46, 117, 163)'
             },
             data: this.data.ydata
           }
         ]
-      };
+      }
     }
   }
-};
+}
 </script>
 
 <style scoped lang="less">

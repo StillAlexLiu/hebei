@@ -26,7 +26,7 @@ export default {
     }
   },
   methods: {
-    getOption (data) {
+    getOption () {
       return {
         title: {
           top: '45%',
@@ -42,7 +42,6 @@ export default {
         series: [
           {
             type: 'liquidFill',
-            name: '主体数量',
             // radius: ['70%', '75%'],
             radius: '67%',
             itemStyle: {

@@ -3,26 +3,25 @@
 </template>
 
 <script>
-import graphic from 'echarts/lib/util/graphic'
 export default {
   name: 'ChartLine',
   props: ['xdata', 'ydata'],
-  data() {
+  data () {
     return {
       options: {}
-    };
+    }
   },
   watch: {
     xdata: {
       immediate: true,
       deep: true,
-      handler: function() {
+      handler: function () {
         this.options = this.getOption(this.data)
       }
     }
   },
   methods: {
-    getOption(data) {
+    getOption () {
       return {
         tooltip: {},
         grid: {
@@ -130,7 +129,7 @@ export default {
                 lineStyle: {
                   color: '#FFBF24',
                   width: 2
-                },
+                }
                 // areaStyle: {
                 //   color: new graphic.LinearGradient(
                 //     0,
@@ -155,10 +154,10 @@ export default {
             data: this.ydata
           }
         ]
-      };
+      }
     }
   }
-};
+}
 </script>
 
 <style scoped lang="less">

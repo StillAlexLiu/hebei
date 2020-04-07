@@ -2,7 +2,7 @@
     <div class=" full-width" v-if="JSON.stringify(data)!=='null'" >
         <div class="block">
             <div class="title full-width">
-                <div class="logo"><img src="./img/logo.png"></div>
+                <div class="logo"><img src="./img/logo.png" alt></div>
                 <div class="text"> {{data['注册信息']['基本信息']['主体名称']}}</div>
                 <div class="status">{{data['注册信息']['基本信息']['企业状态']}}</div>
             </div>
@@ -16,7 +16,7 @@ import InfoTable from './infoTable'
 
 export default {
   name: 'TableBaseInfo',
-  components: {InfoTable},
+  components: { InfoTable },
   props: {
     data: {
       type: Object,

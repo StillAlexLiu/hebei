@@ -3,26 +3,25 @@
 </template>
 
 <script>
-import graphic from 'echarts/lib/util/graphic'
 export default {
   name: 'ChartBar',
   props: ['xdata', 'ydata'],
-  data() {
+  data () {
     return {
       options: {}
-    };
+    }
   },
   watch: {
     xdata: {
       immediate: true,
       deep: true,
-      handler: function() {
+      handler: function () {
         this.options = this.getOption(this.data)
       }
     }
   },
   methods: {
-    getOption(data) {
+    getOption () {
       return {
         tooltip: {},
         grid: {
@@ -75,8 +74,8 @@ export default {
             },
             axisTick: {
               show: false
-            },
-            
+            }
+
           }
         ],
         yAxis: [
@@ -104,7 +103,7 @@ export default {
             },
             data: this.xdata
           }
-          
+
         ],
         series: [
           {
@@ -137,10 +136,10 @@ export default {
             data: this.ydata
           }
         ]
-      };
+      }
     }
   }
-};
+}
 </script>
 
 <style scoped lang='less'>

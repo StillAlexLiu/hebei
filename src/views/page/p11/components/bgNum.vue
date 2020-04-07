@@ -9,13 +9,13 @@
 
 <script>
 export default {
-    props: ['data'],
-    name: 'bgNum',
-    data() {
-      return {
+  props: ['data'],
+  name: 'bgNum',
+  data () {
+    return {
 
-      }
     }
+  }
 }
 </script>
 <style lang="less">
@@ -32,7 +32,6 @@ export default {
             background-position: center;
         }
         .name{
-            margin-top: 3rem;
             font-size: 2rem;
             margin: 8rem 0 0 0;
             text-align: center;

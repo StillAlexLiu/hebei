@@ -19,13 +19,13 @@
 
 <script>
 export default {
-    name: 'rightList',
-    props: ['data'],
-    data() {
-      return {
-            
-      }
+  name: 'rightList',
+  props: ['data'],
+  data () {
+    return {
+
     }
+  }
 }
 </script>
 
@@ -50,18 +50,18 @@ export default {
             .list1_1{
                 width: 40%;
                 margin-right: 5%;
-                height: 100%; 
+                height: 100%;
                 float: left;
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
-                .name{ 
+                .name{
                   margin-top: 5rem;
                   font-size: 2rem;
                   text-align: center;
                   font-weight: bold;
                 }
-                .num{ 
-                  margin-top: 0rem;
+                .num{
+                  margin-top: 0;
                   font-size: 2rem;
                   text-align: center;
                   font-weight: bold;
@@ -77,17 +77,17 @@ export default {
             .list2_1{
                 width: 28%;
                 margin-right: 5%;
-                height: 100%; 
+                height: 100%;
                 float: left;
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
-                .name{ 
+                .name{
                   margin-top: 3rem;
                   font-size: 2rem;
                   text-align: center;
                   font-weight: bold;
                 }
-                .num{ 
+                .num{
                   margin-top: 0.5rem;
                   font-size: 2rem;
                   text-align: center;

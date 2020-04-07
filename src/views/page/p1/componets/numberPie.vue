@@ -38,7 +38,6 @@ export default {
     flex-direction: row;
     justify-content: space-between;
 
-
     .item {
         flex-grow: 1;
         background-size: 84% auto;

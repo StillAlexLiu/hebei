@@ -122,8 +122,8 @@ export default {
     ]),
     getSelect (data) { // 分发全局map select 事件
       console.log(data)
-      this.getSelectItem(data)
       this.Dispatch(data)
+      this.getSelectItem(data)
       this.setPageData({
         key: 'globalMapSelect',
         data: data
@@ -136,7 +136,6 @@ export default {
       for (let i = 0; i < items.length; i++) {
         this.point = [...this.point, ...this.makePoint(items[i].number, items[i].icon)]
       }
-      console.log(this.point)
     },
     clearInfo () {
       // 切换清除右上角

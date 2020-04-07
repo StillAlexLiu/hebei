@@ -1,6 +1,8 @@
 <template>
     <div class="searchBox">
-        <input v-model="text" @focus="onFocus">
+        <label>
+            <input v-model="text" @focus="onFocus">
+        </label>
         <i @click="click"/>
         <div>总数：{{number}}</div>
     </div>
@@ -33,44 +35,44 @@ export default {
 <style scoped lang="less">
 .searchBox {
     position: absolute;
-    top: 2rem;
-    left: 2rem;
-    height: 3.6rem;
-    width: 40rem;
+    top: 80px;
+    left: 40px;
+    height: 36px;
+    width: 400px;
 
     input {
-        width: 30rem;
+        width: 300px;
         height: 100%;
         background: rgba(30, 141, 176, .59);
-        border: .1rem solid #22aec5;
-        font-size: 1.8rem;
+        border: 1px solid #22aec5;
+        font-size: 16px;
         color: #fff;
-        padding-left: 1.25rem;
-        padding-right: 4rem;
+        padding-left: 12px;
+        padding-right: 40px;
         border-radius: 0;
-        line-height: 3.6rem;
+        line-height: 36px;
     }
 
     > div {
-        width: 10rem;
+        width: 100px;
         position: absolute;
         right: 0;
         top: 0;
         height: 100%;
         font-size: 20px;
-        line-height: 3.6rem;
-        text-indent: 1rem;
+        line-height: 36px;
+        text-indent: 10px;
     }
 
     i {
-        height: 2.5rem;
-        width: 2.5rem;
+        height: 25px;
+        width: 25px;
         display: block;
         position: absolute;
         background: url("./img/search.png");
         background-size: 100% 100%;
-        right: 11rem;
-        top: 0.6rem;
+        right: 110px;
+        top: 6px;
         cursor: pointer;
     }
 }

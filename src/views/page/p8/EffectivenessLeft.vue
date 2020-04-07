@@ -44,11 +44,11 @@
 </template>
 
 <script>
-import EffectivenessPie from './compontes/EffectivenessPie';
-import EffectivenessLine from './compontes/EffectivenessLine';
-import EffectivenessCircle from './compontes/EffectivenessCircle';
-import EffectivenessBar from './compontes/EffectivenessBar';
-import EffectivenessSolving from './compontes/EffectivenessSolving';
+import EffectivenessPie from './compontes/EffectivenessPie'
+import EffectivenessLine from './compontes/EffectivenessLine'
+import EffectivenessCircle from './compontes/EffectivenessCircle'
+import EffectivenessBar from './compontes/EffectivenessBar'
+import EffectivenessSolving from './compontes/EffectivenessSolving'
 export default {
   name: 'EffectivenessLeft',
   components: {
@@ -58,7 +58,7 @@ export default {
     EffectivenessBar,
     EffectivenessSolving
   },
-  data() {
+  data () {
     return {
       select: {},
       radioData: [
@@ -447,7 +447,7 @@ export default {
           { value2: 12, value1: 16, value3: '75', name: '邢台市' },
           { value2: 5, value1: 14, value3: '35.71', name: '廊坊市' },
           { value2: 10, value1: 14, value3: '71.43', name: '沧州市' },
-          { value2: 8, value1: 8, value3: '100', name: '石家庄市' },
+          { value2: 8, value1: 8, value3: '100', name: '石家庄市' }
         ],
         [
           { value2: 41, value1: 41, value3: '100', name: '秦皇岛市' },
@@ -489,9 +489,9 @@ export default {
           { value2: 72, value1: 72, value3: '100', name: '衡水市' }
         ]
       ]
-    };
+    }
   }
-};
+}
 </script>
 
 <style scoped lang='less'>
@@ -518,7 +518,6 @@ export default {
         border: 1px solid transparent;
         p {
           font-size: 2.67rem;
-          font-family: MicrosoftYaHei-Bold;
           font-weight: bold;
           color: #fff;
           line-height: 6rem;
@@ -532,7 +531,6 @@ export default {
         text-align: center;
         p:first-child {
           font-size: 5rem;
-          font-family: MicrosoftYaHei-Bold;
           font-weight: bold;
           color: #b4ec51;
           line-height: 0.33rem;
@@ -540,7 +538,6 @@ export default {
         }
         p:last-child {
           font-size: 2.67rem;
-          font-family: MicrosoftYaHei;
           color: rgba(241, 238, 244, 1);
           line-height: 1.5rem;
           text-align: center;
@@ -557,7 +554,6 @@ export default {
         text-align: center;
         p:first-child {
           font-size: 4rem;
-          font-family: MicrosoftYaHei-Bold;
           font-weight: bold;
           color: #fff;
           line-height: 0.33rem;
@@ -565,7 +561,6 @@ export default {
         }
         p:last-child {
           font-size: 2.67rem;
-          font-family: MicrosoftYaHei;
           color: rgba(241, 238, 244, 1);
           line-height: 0.33rem;
           text-align: center;
@@ -578,7 +573,6 @@ export default {
         text-align: center;
         p:first-child {
           font-size: 5rem;
-          font-family: MicrosoftYaHei-Bold;
           font-weight: bold;
           color: #b4ec51;
           line-height: 0.33rem;
@@ -586,7 +580,6 @@ export default {
         }
         p:last-child {
           font-size: 2.67rem;
-          font-family: MicrosoftYaHei;
           color: rgba(241, 238, 244, 1);
           line-height: 0.33rem;
           text-align: center;

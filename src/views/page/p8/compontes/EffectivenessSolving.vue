@@ -27,15 +27,15 @@
 
 <script>
 export default {
-  props:['data'],
-  data() {
+  props: ['data'],
+  data () {
     return {
-    };
+    }
   },
-  created() {},
-  mounted() {
+  created () {},
+  mounted () {
   }
-};
+}
 </script>
 
 <style lang="less">
@@ -58,7 +58,6 @@ export default {
       .EffectivenessSolvingtitle {
         text-align: right;
         font-size: 2rem;
-        font-family: MicrosoftYaHei;
         color: rgba(255, 255, 255, 1);
         line-height: 2.5rem;
         margin-bottom: 0.5rem;
@@ -71,7 +70,6 @@ export default {
         float: left;
         width: 20rem;
         font-size: 2rem;
-        font-family: MicrosoftYaHei;
         color: rgba(255, 255, 255, 1);
         text-align: left;
         position: absolute;
@@ -79,7 +77,6 @@ export default {
         span {
           padding-right: 2rem;
           font-size: 2rem;
-          font-family: MicrosoftYaHei;
           color: rgba(122, 250, 255, 0.54);
           height: 5rem;
           line-height: 5rem

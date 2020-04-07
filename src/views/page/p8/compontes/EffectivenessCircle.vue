@@ -6,22 +6,22 @@
 export default {
   name: 'ChartPie',
   props: ['data'],
-  data() {
+  data () {
     return {
       options: {}
-    };
+    }
   },
   watch: {
     data: {
       immediate: true,
       deep: true,
-      handler: function() {
-        this.options = this.getOption(this.data);
+      handler: function () {
+        this.options = this.getOption(this.data)
       }
     }
   },
   methods: {
-    getOption(data) {
+    getOption () {
       return {
         series: [
           {
@@ -51,10 +51,10 @@ export default {
             }
           }
         ]
-      };
+      }
     }
   }
-};
+}
 </script>
 
 <style scoped lang='less'>

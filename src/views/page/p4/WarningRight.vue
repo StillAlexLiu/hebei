@@ -42,7 +42,6 @@
 <script>
 import tableHeader from './components/table'
 import mainInfo from './components/mainInfo'
-import listNumber from './components/listNumber'
 import Mock from 'mockjs'
 import echartsPie from './components/echarts-pieGroup'
 import NumberTop from './components/NumberTop'
@@ -56,7 +55,6 @@ export default {
     ChartLine,
     tableHeader,
     mainInfo,
-    listNumber,
     echartsPie,
     NumberTop
   },
