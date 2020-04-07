@@ -1,8 +1,9 @@
 <template>
     <div class="borderInOut">
         <div class="item" v-for="(item,index) in data" :key="index">
-            <div class="name"><span>{{item.name}}</span></div>
-            <div class="value"><span>{{item.value}}</span></div>
+            <div><img :src="item.img"></div>
+            <div class="value number-font" :class="isPercent(item.value)?'percent':''">{{item.value}}</div>
+            <div class="name">{{item.name}}</div>
         </div>
     </div>
 </template>
@@ -17,51 +18,53 @@ export default {
         return []
       }
     }
+  },
+  methods: {
+    isPercent (value) {
+      let str = value.toString()
+      return str.substring(str.length - 1, str.length) === '%'
+    }
   }
 }
 </script>
 
 <style scoped lang="less">
 .borderInOut {
-    background-image: url("./img/border-out.png");
-    background-size: 100% 100%;
+    background-image: url("./img/right-bg.png");
+    background-size: 100% 70%;
     background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     text-align: center;
-    padding: 0 10px;
+    padding: 110px 0px;
 
     > .item {
         flex-grow: 1;
-        display: table;
         height: 100%;
         width: 0;
-        background-size: 96% 90%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-image: url("./img/border-in.png");
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
 
-        > div {
-            display: table-row;
-
-            > * {
-                display: table-cell;
-                vertical-align: middle;
-            }
-
+        img {
+            width: 40px;
         }
 
         .name {
-
+            font-size: 28px;
         }
 
         .value {
-            > * {
-                font-size: 40px;
-                color: #79DFEF;
-            }
+            font-size: 52px;
+            line-height: 52px;
+            color: #79DFEF;
         }
+    }
+
+    .percent {
+        color: #F88B30 !important;
     }
 }
 </style>

@@ -1,38 +1,41 @@
 <template>
-    <container-calc type="tb" :number="50" class="AnalysisCenter full  block-padding">
-        <template slot="fix">
-            <RadioSimple :data="[{name:'综合监管'}]" class="w-1-5 full-height radio"/>
-        </template>
-        <div slot="calc" class=" full">
-            <div class="h-2-8">
-                <div class="full-height full-width">
-                    <numberList :data='numlist1' @key='endKey'/>
+    <div class="full" style="padding-top: 60px">
+        <container-calc type="tb" :number="50" class="AnalysisCenter full  block-padding">
+            <template slot="fix">
+                <RadioSimple :data="[{name:'综合监管'}]" class="w-1-5 full-height radio"/>
+            </template>
+            <div slot="calc" class=" full">
+                <div class="h-2-8">
+                    <div class="full-height full-width">
+                        <numberList :data='numlist1' @key='endKey'/>
+                    </div>
+                </div>
+                <div class="h-3-8">
+                    <div class="full-height w-1-3">
+                        <echartsAccrossBar :data='acrossBar1[key]'/>
+                    </div>
+                    <div class="full-height w-1-3">
+                        <echartsAccrossBar :data='acrossBar2[key]'/>
+                    </div>
+                    <div class="full-height w-1-3">
+                        <echartsAccrossBar :data='acrossBar3[key]'/>
+                    </div>
+                </div>
+                <div class="h-3-8">
+                    <div class="full-height w-1-3">
+                        <echartsWline :data='rightLine'></echartsWline>
+                    </div>
+                    <div class="full-height w-1-3">
+                        <echartsBar :data='rightLine2'></echartsBar>
+                    </div>
+                    <div class="full-height w-1-3">
+                        <echartsHollowPie :data='hellowPie2'></echartsHollowPie>
+                    </div>
                 </div>
             </div>
-            <div class="h-3-8">
-                <div class="full-height w-1-3">
-                    <echartsAccrossBar :data='acrossBar1[key]'/>
-                </div>
-                <div class="full-height w-1-3">
-                    <echartsAccrossBar :data='acrossBar2[key]'/>
-                </div>
-                <div class="full-height w-1-3">
-                    <echartsAccrossBar :data='acrossBar3[key]'/>
-                </div>
-            </div>
-            <div class="h-3-8">
-                <div class="full-height w-1-3">
-                    <echartsWline :data='rightLine'></echartsWline>
-                </div>
-                <div class="full-height w-1-3">
-                    <echartsBar :data='rightLine2'></echartsBar>
-                </div>
-                <div class="full-height w-1-3">
-                    <echartsHollowPie  :data='hellowPie2'></echartsHollowPie>
-                </div>
-            </div>
-        </div>
-    </container-calc>
+        </container-calc>
+    </div>
+
 </template>
 
 <script>

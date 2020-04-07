@@ -1,56 +1,78 @@
 <template>
-    <div class="numberPie">
-        <div class="number" v-for="(item, index) in data2" :key="index">
-            <p class="number_name" :style="{'background-image': 'url(' + item.img + ')'}">
-                {{item.num}}
-            </p>
-            <p class="number_p">
+    <div class="numberPie full">
+        <div class="item all" :style="{'background-image': 'url(' + data.all.img + ')'}">
+            <div class="value value2 number-font">
+                {{data.all.value}}
+            </div>
+            <div class="name name2">
+                {{data.all.name}}
+            </div>
+        </div>
+        <div class="item" v-for="(item, index) in data.list" :key="index"
+             :style="{'background-image': 'url(' + item.img + ')'}">
+            <div class="value number-font">
+                {{item.value}}
+            </div>
+            <div class="name">
                 {{item.name}}
-            </p>
+            </div>
         </div>
     </div>
 </template>
 <script>
 export default {
-    name: 'numberPie',
-    props: ['data2'],
-    data() {
-        return {
-
-        }
+  name: 'numberPie',
+  props: {
+    data: {
+      type: Object,
+      default: () => {
+        return {}
+      }
     }
+  }
 }
 </script>
 <style lang="less">
-    .numberPie{
-        width: 100%;
-        height: 100%;
-        padding: 3% 5%;
-        .number{
-            width: 23.3%;
-            margin-right: 5%;
-            margin-left: 5%;
-            height: 90%;
-            float: left;
+.numberPie {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+
+    .item {
+        flex-grow: 1;
+        background-size: 84% auto;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+
+        .name {
+            font-size: 32px;
+            line-height: 32px;
         }
-        .number_name{
-            width: 100%;
-            line-height: 23rem;
-            height: 90%;
-            text-align: center;
-            font-size: 3rem;
-            color: white;
-            border-radius: 50%;
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
+
+        .value {
+            color: #fff;
+            font-size: 60px;
+            line-height: 120px;
         }
-        .number_p{
-            width: 100%;
-            height: 10%;
-            text-align: center;
-            line-height: 100%;
-            font-size: 3rem;
-            color: white;
+
+        .name2 {
+            line-height: 0;
+        }
+
+        .value2 {
+            color: #fff;
+            font-size: 60px;
+            line-height: 280px;
         }
     }
+
+    .all {
+        background-size: 80% auto;
+    }
+}
 </style>

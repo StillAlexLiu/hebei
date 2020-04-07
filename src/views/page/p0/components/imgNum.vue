@@ -11,7 +11,7 @@ export default {
     props: ['data'],
     data() {
         return {
-            
+
         }
     }
 }
@@ -28,10 +28,10 @@ export default {
         background-repeat: no-repeat;
             img{
                 width: 25%;
-                height: 67%; 
+                height: 67%;
                 margin-top: 5.5%;
                 float: left;
-                margin-right: 5rem;
+                margin-right: 3rem;
                 margin-left: 3rem;
             }
             .span_name2{

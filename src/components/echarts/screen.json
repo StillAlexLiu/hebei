@@ -14,7 +14,7 @@
   ],
   "backgroundColor": "rgba(0,0,0,0)",
   "textStyle": {
-    "fontSize": 20,
+    "fontSize": 14,
     "fontFamily": "PingFang",
     "color": "#ccc"
   },
@@ -268,7 +268,7 @@
     "axisLabel": {
       "show": true,
       "textStyle": {
-        "fontSize": 20,
+        "fontSize": 14,
         "color": "#ccc"
       }
     },
@@ -297,7 +297,7 @@
         "color": "#ffffff"
       },
       "textStyle": {
-        "fontSize": 20,
+        "fontSize": 14,
         "color": "#ccc"
       }
     },
@@ -310,7 +310,7 @@
     "axisLabel": {
       "show": true,
       "textStyle": {
-        "fontSize": 20,
+        "fontSize": 14,
         "color": "#ccc"
       }
     },
@@ -419,7 +419,7 @@
   "legend": {
     "textStyle": {
       "color": "#ccc",
-      "fontSize": 20
+      "fontSize": 14
     }
   },
   "tooltip": {

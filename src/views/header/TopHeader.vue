@@ -5,6 +5,7 @@
         </div>
         <div class="full-height w-3-7 title">
             <!--            {{$dataAll.config.title}}-->
+            <img src="./img/logo.png" alt>河北省市场监督管理局智慧监管中心
         </div>
         <div class="full-height w-2-7 info">
             <div class="full-height w-7-8 text-right">
@@ -22,7 +23,7 @@ import DateTime from './DateTime'
 
 export default {
   name: 'TopHeader',
-  components: { DateTime },
+  components: {DateTime},
   data () {
     return {
       info: ''
@@ -50,14 +51,20 @@ export default {
     }
 
     .title {
-        font-size: 60px;
+        font-size: 64px;
         font-weight: bold;
-        text-align-last: justify;
         padding: 0 200px;
         box-sizing: border-box;
-        background-image: url("../../assets/images/河北省市场监督管理.png");
-        background-repeat: no-repeat;
-        background-position: center;
+        letter-spacing: 38px;
+        /*background-image: url("../../assets/images/河北省市场监督管理.png");*/
+        /*background-repeat: no-repeat;*/
+        /*background-position: center;*/
+
+        img {
+            width: 96px;
+            vertical-align: middle;
+            margin-right: 40px;
+        }
     }
 
     border-bottom: 1px solid #5385D7;

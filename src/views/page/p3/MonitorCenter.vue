@@ -46,6 +46,7 @@ export default {
 
 <style scoped lang="less">
 .MonitorCenter {
+    padding-top: 60px;
     .video-container {
         padding: 20px;
 

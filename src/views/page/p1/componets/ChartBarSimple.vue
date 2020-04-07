@@ -1,5 +1,5 @@
 <template>
-    <v-chart class="full-width" :autoresize='true' :options='options'/>
+    <chart :options='options'/>
 </template>
 
 <script>
@@ -61,11 +61,7 @@ export default {
           },
           axisLabel: {
             interval: 0,
-            rotate: 0,
-            textStyle: {
-              color: '#fff',
-              fontSize: 18
-            }
+            rotate: 0
           },
           splitLine: {
             show: false
@@ -81,8 +77,7 @@ export default {
             splitNumber: 7,
             nameLocation: 'end',
             nameTextStyle: {
-              color: 'white',
-              fontSize: 18
+              fontSize: 14
             },
             show: true,
             x: 'center',
@@ -95,10 +90,6 @@ export default {
             },
             axisLabel: {
               // interval:0,
-              textStyle: {
-                color: '#fff',
-                fontSize: 18
-              }
             },
             splitLine: {
               lineStyle: {
@@ -109,7 +100,6 @@ export default {
           {
             name: '',
             nameTextStyle: {
-              color: '#fff',
               fontSize: 22
             },
             show: true,
@@ -123,11 +113,7 @@ export default {
             },
             axisLabel: {
               // interval:0,
-              formatter: '{value}%',
-              textStyle: {
-                color: '#fff',
-                fontSize: 24
-              }
+              formatter: '{value}%'
             },
             splitLine: {
               show: false,
@@ -142,11 +128,7 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'top',
-                textStyle: {
-                  color: '#fff',
-                  fontSize: 20
-                }
+                position: 'top'
               }
             },
             name: '市场主体数量',

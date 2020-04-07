@@ -1,5 +1,7 @@
 <template>
-    <div class='SociologyCenter full'></div>
+    <div class="SociologyCenter full">
+        <div class='full'></div>
+    </div>
 </template>
 
 <script>
@@ -10,6 +12,10 @@ export default {
 
 <style scoped lang='less'>
 .SociologyCenter {
-    background-image: url(./compontes/img/index-bg.png)
+    padding-top: 60px;
+
+    > div {
+        background-image: url(./compontes/img/index-bg.png)
+    }
 }
 </style>

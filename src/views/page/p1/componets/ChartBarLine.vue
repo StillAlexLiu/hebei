@@ -1,6 +1,5 @@
 <template>
     <chart :options='options'/>
-<!--    <div>{{options}}</div>-->
 </template>
 
 <script>
@@ -117,7 +116,7 @@ export default {
             nameLocation: 'end',
             nameGap: 6,
             nameTextStyle: {
-              fontSize: 12
+              fontSize: 14
             },
             splitLine: {
               show: i === 0
@@ -134,7 +133,7 @@ export default {
               nameLocation: 'end',
               nameGap: 6,
               nameTextStyle: {
-                fontSize: 12
+                fontSize: 14
               },
               splitLine: {
                 show: i === 0

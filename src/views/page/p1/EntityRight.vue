@@ -1,41 +1,36 @@
 <template>
     <div class="full-width full-height">
-        <div v-if="JSON.stringify(p1)!=='null'" class="info full">
-            <table-base-info class="h-1-4" v-if="p1" :data="p1"/>
-            <div class="h-3-4" style="padding-top: 20px">
-                <tab-table class="full" :data="p1"/>
-            </div>
-        </div>
+        <container title="一企一档" v-if="JSON.stringify(p1)!=='null'" class="info full" style="position: relative">
+            <font-awesome-icon class="fa" icon='times'
+                               style="position: absolute;right: 30px;font-size: 30px;top: 20px" @click="close"/>
+            <table-base-info class="h-4-11" v-if="p1" :data="p1"/>
+            <tab-table class="h-7-11" :data="p1"/>
+        </container>
         <template v-else>
-            <div class="h-1-3">
-                <container title="企业年报" class=" w-1-2 full-height ">
-                    <div class="full-height w-1-4 text-center">
-                        <img src="./componets/img/rlt.png" alt="" style="width: 100%;padding: 70px 20px;"/>
-                    </div>
-                    <div class="w-3-4 full-height" style="padding: 20px 0">
-                        <BorderInOut class="full" :data="dataTop"/>
-                    </div>
-                </container>
-                <container title="公示抽查" class="w-1-2  full-height">
-                    <NumberGroup4 :data="NumberGroup5Data"/>
-                </container>
-            </div>
-            <container class="h-1-3 full-width" title="信用约束">
-                <div class="full-height w-1-5">
-                    <NumberGroup2 :data='numberData' class="full"/>
+            <container title="市场主体年报情况" class="h-1-3">
+                <div class="w-1-2 full-height">
+                    <BorderInOut class="full" :data="dataTop"/>
                 </div>
-                <div class="w-4-5 full-height">
-                    <numberPie :data2='pieData'/>
+                <div class="w-1-2 full-height">
+                    <ChartBarLine :data="barLineData" :type="['bar','line']"
+                                  :legend="['公示数','公示率']"
+                                  :colors="['#4A90E2','#FE6941']"
+                                  :units="['户','%']"
+                                  :dimensions="['name','value','value2']"/>
                 </div>
             </container>
+            <container class="h-1-3 full-width" title="信用约束">
+                <numberPie :data='pieData'/>
+            </container>
             <div class="h-1-3 full-width">
-                <container title="失信惩戒" class="full-height w-1-2">
-                    <container-info class="full">
-                        <chart-mountain :data="mountainData"/>
-                    </container-info>
+                <container title="经营异常因素分析" class="full-height w-1-2">
+                    <chart-mountain :data="mountainData"/>
                 </container>
-                <container title="守信激励" class="full-height w-1-2">
-                    <NumberGroup4 :data="NumberGroup4Data"/>
+                <container title="失信企业地区分布" class="full-height w-1-2">
+                    <ChartBarLineHorizontal :data="barHorizontalData" :type="['bar']" :legend="['']"
+                                            :units="['户']"
+                                            :colors="['#FFBB70']"
+                                            :dimensions="['name','value']"/>
                 </container>
             </div>
         </template>
@@ -44,26 +39,26 @@
 
 <script>
 
-import { mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import TableBaseInfo from './componets/TableBaseInfo'
 import TabTable from './componets/tabTable'
-import NumberGroup2 from './componets/numberGroup2'
 import Mock from 'mockjs'
 import numberPie from './componets/numberPie'
 import ChartMountain from './componets/ChartMountain'
-import NumberGroup4 from './componets/NumberGroup4'
 import BorderInOut from './componets/borderInOut'
+import ChartBarLine from './componets/ChartBarLine'
+import ChartBarLineHorizontal from './componets/ChartBarLineHorizontal'
 
 export default {
   name: 'p1right',
   components: {
+    ChartBarLineHorizontal,
+    ChartBarLine,
     BorderInOut,
-    NumberGroup4,
     ChartMountain,
     TabTable,
     TableBaseInfo,
-    NumberGroup2,
-    numberPie,
+    numberPie
   },
   computed: {
     ...mapState({
@@ -90,167 +85,122 @@ export default {
   },
   data () {
     return {
-      rightTop: [
-        [
-          {
-            name: '今日叫号数',
-            num: Mock.Random.natural(1000, 20000)
-          },
-          {
-            name: '环比',
-            num: '0.14',
-            jiantou: 1
-          }
-        ],
-        [
-          {
-            name: '今日叫号数',
-            num: Mock.Random.natural(1000, 20000)
-          },
-          {
-            name: '环比',
-            num: '0.14',
-            jiantou: 2
-          }
-        ]
-      ],
-
-      group3: [
-        {
-          name: '个体户',
-          num: Mock.Random.natural(100, 2000)
-        }, {
-          name: '企业',
-          num: Mock.Random.natural(100, 2000)
-        }, {
-          name: '高校',
-          num: Mock.Random.natural(100, 2000)
-        }, {
-          name: '科研组织',
-          num: Mock.Random.natural(100, 2000)
-        }
-      ],
-      barData2: [
-        {
-          name: '01/21',
-          value: Mock.Random.natural(100, 2000)
-        }, {
-          name: '01/22',
-          value: Mock.Random.natural(100, 2000)
-        }, {
-          name: '01/26',
-          value: Mock.Random.natural(100, 2000)
-        }, {
-          name: '01/27',
-          value: Mock.Random.natural(100, 2000)
-        }
-      ],
-      videoUrl: this.$dataAll.videoUrl,
-      imgUrl1: {
-        img1: require('./componets/img/png5.png'),
-        img2: require('./componets/img/png6.png')
-      },
-      imgUrl2: {
-        img1: require('./componets/img/png7.png'),
-        img2: require('./componets/img/png8.png')
-      },
-      numberData: [
-        {
-          name1: '经营异常企业',
-          num1: Mock.Random.natural(100, 2000)
-        }
-      ],
-      pieData: [
-        {
-          num: Mock.Random.natural(1000, 2000),
-          name: '列严',
-          img: require('./componets/img/jingyingyichang3.png')
-        },
-        {
-          num: Mock.Random.natural(1000, 2000),
-          name: '列异',
-          img: require('./componets/img/31.png')
-        }, {
-          num: Mock.Random.natural(1000, 2000),
-          name: '移出',
-          img: require('./componets/img/32.png')
-        }
-      ],
-      mountainData: [
-        {
-          name: '清理“僵尸”企业',
-          value: Mock.Random.natural(100, 500)
-        },
-        {
-          name: '失信企业股权冻结',
-          value: Mock.Random.natural(100, 500)
-        },
-        {
-          name: '预警企业内部监控',
-          value: Mock.Random.natural(100, 500)
-        }
-      ],
-      NumberGroup4Data: [
-        {
-          name: '诚信典型',
-          img: require('./componets/img/诚信典型.png'),
-          value: Mock.Random.natural(100, 500),
-          unit: '户'
-        },
-        {
-          name: '绿色通道',
-          img: require('./componets/img/绿色通道.png'),
-          value: Mock.Random.natural(100, 500),
-          unit: '户次'
-        },
-        {
-          name: '容缺受理',
-          img: require('./componets/img/容缺受理.png'),
-          value: Mock.Random.natural(100, 500),
-          unit: '户次'
-        }
-      ],
-      NumberGroup5Data: [
-        {
-          name: '抽查总数（家）',
-          img: require('./componets/img/ri1.png'),
-          value: Mock.Random.natural(100, 500),
-          unit: ''
-        },
-        {
-          name: '完成率',
-          img: require('./componets/img/ri2.png'),
-          value: Mock.Random.natural(100, 500),
-          unit: ''
-        },
-        {
-          name: '正常率',
-          img: require('./componets/img/ri3.png'),
-          value: Mock.Random.natural(100, 500),
-          unit: ''
-        }
-      ],
       dataTop: [
         {
-          name: '应报（件）',
-          value: Mock.Random.natural(100, 500)
+          name: '应报（户）',
+          value: 6097056,
+          img: require("./componets/img/nianbao/1.png")
         },
         {
-          name: '已报（件）',
-          value: Mock.Random.natural(100, 500)
+          name: '已报（户）',
+          value: 1346339,
+          img: require("./componets/img/nianbao/2.png")
         },
         {
           name: '公示率',
-          value: Mock.Random.natural(10, 90) + '%'
+          value: '22.08%',
+          img: require("./componets/img/nianbao/3.png")
         }
+      ],
+      barLineData: [
+        {
+          'name': '公有制企业',
+          'value': 29917,
+          'value2': 25.36
+        },
+        {
+          'name': '私营企业',
+          'value': 517733,
+          'value2': 33.47
+        },
+        {
+          'name': '外资企业',
+          'value': 3844,
+          'value2': 39.38
+        },
+        {
+          'name': '个体户',
+          'value': 766568,
+          'value2': 17.80
+        },
+        {
+          'name': '农专',
+          'value': 27198,
+          'value2': 23.63
+        }
+      ],
+      pieData: {
+        all: {
+          name: '经营异常主体',
+          value: 1057812,
+          img: require('./componets/img/yueshu/0.png')
+        },
+        list: [
+          {
+            name: '移出',
+            value: 446213,
+            img: require('./componets/img/yueshu/1.png')
+          },
+          {
+            name: '列异',
+            value: 1036061,
+            img: require('./componets/img/yueshu/2.png')
+          }, {
+            name: '列严',
+            value: 21751,
+            img: require('./componets/img/yueshu/3.png')
+          }
+        ]
+      },
+      mountainData: [
+        {
+          name: '未在规定责令的期限内公示有关企业信息',
+          value: 1114,
+          color: 'linear-gradient(180deg,rgba(79,255,148,1) 0%,rgba(56,167,120,1) 100%)'
+        },
+        {
+          name: '公示企业信息隐瞒真实信息、弄虚作假',
+          value: 5761,
+          color: 'linear-gradient(180deg,rgba(87,182,255,1) 0%,rgba(0,138,255,1) 100%)'
+        },
+        {
+          name: '通过登记的住所(经营场所)无法联系',
+          value: 96599,
+          color: 'linear-gradient(180deg,rgba(255,245,87,1) 0%,rgba(255,188,0,1) 100%)'
+        },
+        {
+          name: '未按规定期限公示年度报告',
+          value: 1888870,
+          color: 'linear-gradient(180deg,rgba(255,87,87,1) 0%,rgba(255,64,64,1) 100%)'
+        }
+      ],
+
+
+      barHorizontalData: [
+        {"name": "承德", "value": "630"},
+        {"name": "秦皇岛", "value": "1100"},
+        {"name": "张家口", "value": "1120"},
+        {"name": "衡水", "value": "1508"},
+        {"name": "邢台", "value": "1729"},
+        {"name": "廊坊", "value": "1930"},
+        {"name": "保定", "value": "1937"},
+        {"name": "唐山", "value": "2381"},
+        {"name": "沧州", "value": "2400"},
+        {"name": "邯郸", "value": "2706"},
+        {"name": "石家庄", "value": "4281"}
       ]
     }
   },
   methods: {
-    // getTableData (data) {
-    //   console.log(data)
-    //   this.tableData = data
-    // }
+    ...mapActions([
+      'setPageData'
+    ]),
+    close () {
+      this.setPageData({
+        key: 'p1',
+        data: null
+      })
+    }
   }
 }
 </script>

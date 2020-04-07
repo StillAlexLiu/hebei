@@ -1,10 +1,10 @@
 <template>
     <div class="number-group ">
         <ContainerBorderStyle1 v-for="(item,index) in data" :key="index" class="w-1-3 item">
-            <div class="w-2-5 img full-height">
-                <span><img src="./img/png4.png" alt=""></span>
+            <div class="w-4-11 img full-height">
+                <img :src="item.img" alt="">
             </div>
-            <div class="w-3-5 number full-height">
+            <div class="w-7-11 number full-height">
                 <div class="name"> {{item.name}}</div>
                 <div class="value number-font">{{item.value}}</div>
             </div>
@@ -37,16 +37,15 @@ export default {
 
     .img {
         text-align: center;
-        display: table;
-
-        span {
-            display: table-cell;
-            text-align: center;
-            vertical-align: middle;
-        }
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding-left: 10px;
 
         img {
-            width: 70%;
+            width: 86%;
         }
     }
 
@@ -61,14 +60,13 @@ export default {
         }
 
         .value {
-            /*font-weight: bold;*/
             font-size: 36px;
         }
 
     }
 
     > .item {
-        /*margin: 30px 0;*/
+        margin: 10px 0;
     }
 }
 </style>

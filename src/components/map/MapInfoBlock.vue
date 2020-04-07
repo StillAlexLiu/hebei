@@ -13,8 +13,8 @@ export default {
 <style scoped lang="less">
 .info {
     position: absolute;
-    top: 2rem;
-    right: 2rem;
+    top: 60px;
+    right: -15px;
     width: 800px;
     max-height: 95%;
     overflow-y: auto;

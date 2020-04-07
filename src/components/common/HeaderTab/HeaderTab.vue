@@ -39,7 +39,7 @@ export default {
     }
   },
   mounted() {
-    
+
   }
 }
 </script>
@@ -56,11 +56,11 @@ export default {
     flex-wrap: nowrap;
 
     > div {
-        height: 72px;
+        height: 55px;
         width: 260px;
         margin: 0 5px;
-        font-size: 30px;
-        line-height: 72px;
+        font-size: 32px;
+        line-height: 55px;
         background-image: url("./img/tab-default.png");
         background-size: 100% 100%;
         cursor: pointer;

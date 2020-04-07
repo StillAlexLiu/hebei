@@ -1,5 +1,5 @@
 <template>
-    <div>{{time}}</div>
+    <div class="time">{{time}}</div>
 </template>
 
 <script>
@@ -22,6 +22,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+.time {
+    font-size: 36px;
+}
 </style>

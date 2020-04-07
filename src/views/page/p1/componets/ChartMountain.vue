@@ -1,8 +1,9 @@
 <template>
     <div class="ChartMountain full">
         <div class="item " v-for="(item,index) in data" :key="index">
+            <div :style="{'background':item.color}" class="point"></div>
             <div class="name">{{item.name}}</div>
-            <div class="value">{{item.value}}<span>户</span></div>
+            <div class="value">{{item.value}}</div>
         </div>
     </div>
 </template>
@@ -23,31 +24,36 @@ export default {
 
 <style scoped lang="less">
 .ChartMountain {
-    background-image: url("./img/分组 6.png");
-    background-position: center right;
-    background-size: 65% auto;
+    background-image: url("./img/filter.png");
     background-repeat: no-repeat;
-    vertical-align: middle;
-    display: table;
-    padding: 15px 0;
+    background-position: right;
+    background-size: auto 81%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 35px 0 50px 0;
 
     > .item {
-        display: table-row;
-        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
 
-        > div {
-            display: table-cell;
-            text-align: center;
-            vertical-align: middle;
+        .point {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
         }
 
         .name {
-            width: 36%;
+            flex-basis: 60%;
             font-size: 24px;
         }
 
         .value {
             font-size: 30px;
+            flex-basis: calc(40% - 24px);
+            text-align: center;
 
             span {
                 font-size: 24px;

@@ -21,7 +21,7 @@ import InfoTable2 from './infoTable2'
 
 export default {
   name: 'tabTable',
-  components: { InfoTable2 },
+  components: {InfoTable2},
   props: {
     data: {
       type: Object,
@@ -53,12 +53,11 @@ export default {
 
 <style scoped lang="less">
 .main {
-
-    background-color: rgba(0, 35, 46, .5);
+    background: #02203A;
 }
 
 .active {
-    background-color: #2d9fb9
+    background-color: #299ACA
 }
 
 .tab {
@@ -71,6 +70,7 @@ export default {
 .tables {
     overflow-y: auto;
     height: 100%;
+    padding: 10px;
 
     > div {
         display: block;
@@ -87,7 +87,7 @@ export default {
 }
 
 .sub-title {
-    background: #0c3343;
+    background: #0A3051;
     text-align: left;
     height: 3rem;
     line-height: 3rem;

@@ -171,15 +171,15 @@ export default {
         {
           num: Mock.Random.natural(1000, 2000),
           name: '办理中',
-          img: require('../p1/componets/img/31.png')
+          img: require('../p1/componets/img/yueshu/1.png')
         }, {
           num: Mock.Random.natural(1000, 2000),
           name: '已办理',
-          img: require('../p1/componets/img/32.png')
+          img: require('../p1/componets/img/yueshu/2.png')
         }, {
           num: Mock.Random.natural(1000, 2000),
           name: '已过期',
-          img: require('../p1/componets/img/jingyingyichang3.png')
+          img: require('../p1/componets/img/yueshu/3.png')
         }
       ],
       barData2: [

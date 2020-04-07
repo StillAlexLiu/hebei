@@ -1,5 +1,5 @@
 <template>
-    <v-chart class="full-width" :autoresize='true' :options='options'/>
+    <chart :options='options'/>
 </template>
 
 <script>
@@ -17,6 +17,10 @@ export default {
       default: () => {
         return null
       }
+    },
+    unit: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -45,10 +49,6 @@ export default {
           itemHeight: 10,
           selectedMode: false,
           itemGap: 10,
-          textStyle: {
-            fontSize: 20,
-            color: '#fff'
-          }
         },
         dataset: {
           dimensions: dimensions,
@@ -73,10 +73,6 @@ export default {
           axisLabel: {
             interval: 0,
             rotate: 0,
-            textStyle: {
-              color: '#fff',
-              fontSize: 18
-            }
           },
           splitLine: {
             show: false
@@ -87,11 +83,9 @@ export default {
         },
         yAxis: [
           {
-            nameTextStyle: {
-              padding: [-2, 0, -1, -30],
-              fontSize: 15,
-              color: '#fff'
-            },
+            name: this.unit,
+            nameLocation: 'end',
+            nameGap: 16,
             show: true,
             x: 'center',
             type: 'value',
@@ -102,43 +96,8 @@ export default {
               show: false
             },
             axisLabel: {
-              // interval:0,
-              textStyle: {
-                color: '#fff',
-                fontSize: 18
-              }
             },
             splitLine: {
-              lineStyle: {
-                color: 'rgba(51,75,115,0.4)'
-              }
-            }
-          },
-          {
-            name: '',
-            nameTextStyle: {
-              color: '#fff',
-              fontSize: 22
-            },
-            show: true,
-            x: 'center',
-            type: 'value',
-            axisTick: {
-              show: false
-            },
-            axisLine: {
-              show: false
-            },
-            axisLabel: {
-              // interval:0,
-              formatter: '{value}%',
-              textStyle: {
-                color: '#fff',
-                fontSize: 24
-              }
-            },
-            splitLine: {
-              show: false,
               lineStyle: {
                 color: 'rgba(51,75,115,0.4)'
               }
@@ -150,11 +109,7 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'top',
-                textStyle: {
-                  color: '#fff',
-                  fontSize: 22
-                }
+                position: 'top'
               }
             },
             name: '市场主体数量',
@@ -163,11 +118,11 @@ export default {
             symbol: 'rect',
             itemStyle: {
               normal: {
-                color: '#3D9AEE'
+                color: '#FF98A4'
               }
             },
             symbolRepeat: true,
-            symbolSize: [20, 4],
+            symbolSize: [30, 15],
             symbolMargin: 5
           },
           {
@@ -182,7 +137,7 @@ export default {
               }
             },
             symbolRepeat: true,
-            symbolSize: [20, 4],
+            symbolSize: [30, 15],
             symbolMargin: 5
           }
         ]

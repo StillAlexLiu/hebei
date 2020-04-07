@@ -28,13 +28,13 @@ export default {
     > div {
         margin: auto 0;
         text-align: center;
-        font-size: 24px;
         font-weight: bold;
 
         > div {
             writing-mode: vertical-rl;
             margin: 34px auto;
             cursor: pointer;
+            font-size: 24px;
         }
 
         .fa {

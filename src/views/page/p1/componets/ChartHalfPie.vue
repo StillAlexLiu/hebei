@@ -52,8 +52,9 @@ export default {
             containLabel: true
           },
           textStyle: {
-            color: '#fff',
-            fontSize: 30
+            color: '#79DFEF',
+            fontFamily: 'LESLIE',
+            fontSize: 42
           }
         },
         color: [
@@ -96,7 +97,7 @@ export default {
             name: '',
             type: 'pie',
             center: ['50%', '50%'],
-            radius: ['25%', '55%'],
+            radius: ['36%', '80%'],
             avoidLabelOverlap: false,
             startAngle: 0,
             endAngle: 135,

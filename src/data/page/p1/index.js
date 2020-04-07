@@ -13,7 +13,7 @@ export default [
       // 模拟数据,如果接口写完传true，否则传false
       if (isApiDone(false)) {
         Mock.mock('/screen/entity/getByYear', 'post', {
-          'data|4': [
+          'data|5': [
             {
               'year|+1': 2017,
               'number|+10000': Mock.Random.natural(16000, 18000)

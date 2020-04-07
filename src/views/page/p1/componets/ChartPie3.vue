@@ -23,18 +23,10 @@ export default {
         return null
       }
     },
-    icons: {
-      type: String,
-      default: null
-    },
     max: {
       type: Number,
       default: 0
     },
-    color: {
-      type: String,
-      default: '#3DB9CF'
-    }
   },
   computed: {
     options () {
@@ -58,7 +50,7 @@ export default {
           x: 'center',
           bottom: '16%',
           textStyle: {
-            color: this.color,
+            color: this.data.color,
             fontSize: 40,
             fontFamily: 'LESLIE',
             fontWeight: 'normal'
@@ -78,7 +70,7 @@ export default {
             {
               type: 'image',
               style: {
-                image: this.icons,
+                image: this.data.icon,
                 width: 80,
                 height: 80
               },
@@ -110,7 +102,7 @@ export default {
                 value: this.data.value,
                 name: this.data.name,
                 itemStyle: {
-                  color: this.color
+                  color: this.data.color
                 }
               },
               {

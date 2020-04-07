@@ -52,7 +52,6 @@ export default {
     flex-wrap: nowrap;
     justify-content: center;
     /*height: auto;*/
-    font-size: 32px;
     flex-direction: row;
 
     > div {
@@ -67,6 +66,7 @@ export default {
         > p {
             display: table-cell;
             vertical-align: middle;
+            font-size: 32px;
             color: #79dfef;
         }
     }

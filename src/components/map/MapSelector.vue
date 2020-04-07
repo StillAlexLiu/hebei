@@ -128,7 +128,7 @@ export default {
 
 <style scoped lang="less">
 .MapSelector {
-    background-color: rgba(0, 19, 27, .7);
+    background:linear-gradient(180deg,rgba(32,35,58,.8) 0%,rgba(36,41,66,.8) 100%);
     position: absolute;
     bottom: 0;
     height: 38.2%;
@@ -136,18 +136,16 @@ export default {
     text-align: center;
 
     .tab-group {
-        height: 40px;
+        height: 50px;
         display: flex;
         flex-wrap: nowrap;
         justify-content: flex-start;
-        /*flex-direction: row;*/
 
         .tab-item {
             flex-grow: 1;
-            /*background: linear-gradient(to top, rgb(16, 19, 26), rgb(21, 62, 79));*/
             background-image: url("./img/select_default.png");
-            line-height: 40px;
-            font-size: 24px;
+            line-height: 50px;
+            font-size: 22px;
             padding: 0 10px;
             background-size: 100% 100%;
         }
@@ -169,7 +167,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         overflow-y: auto;
-        border: 1px dashed #1E8DB0;
+        border: 1px dashed #4294D2;
     }
 
     .btn {

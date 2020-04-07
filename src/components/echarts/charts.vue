@@ -26,11 +26,11 @@ export default {
           }
         },
         grid: {
-          // containLabel: true,
-          left: 60,
+          containLabel: true,
+          left: 10,
           top: 60,
-          right: 60,
-          bottom: 40
+          right: 10,
+          bottom: 10
         }
       }
     }

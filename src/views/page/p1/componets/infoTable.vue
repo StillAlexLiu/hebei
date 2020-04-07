@@ -1,8 +1,8 @@
 <template>
     <div class="table  full-width">
         <div class="item" v-for="(value,key) in data" :key="key">
-            <div class="key">{{key}}：</div>
-            <div class="val">{{value}}</div>
+            <div class="key w-1-6">{{key}}</div>
+            <div class="value w-5-6">{{value}}</div>
         </div>
     </div>
 </template>
@@ -24,27 +24,36 @@ export default {
 <style scoped lang="less">
 .table {
     width: 100%;
-    display: block;
+    background: linear-gradient(180deg, rgba(32, 35, 58, 1) 0%, rgba(36, 41, 66, 1) 100%);
+    display: flex;
+    height: 400px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .item {
-    width: 50%;
+    flex-basis: 49.6%;
     float: left;
-    height: 2.6rem;
-    font-size: 2rem;
+    height: 50px;
+    font-size: 22px;
 
     > div {
         float: left;
+        height: 100%;
+        line-height: 50px;
     }
 
     .key {
-        width: 30%;
         text-align: right;
+        background-color: #0B3053;
+        padding-right: 15px;
     }
 
-    .val {
-        width: 70%;
+    .value {
+        text-indent: 25px;
         text-align: left;
+        background: rgba(0, 32, 59, 1);
     }
 }
 </style>

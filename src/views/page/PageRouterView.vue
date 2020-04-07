@@ -8,12 +8,12 @@
                 <router-view name="left"/>
             </div>
         </div>
-        <div class="w-3-7 full-height">
-            <HeaderTab class="tab" :data="headerData" v-model="selectIndex" @change="routeTo"/>
+        <div class="w-3-7 full-height" style="position: relative">
             <div class="view">
                 <router-view name="center"/>
                 <CenterMap class="full-height full-width" v-if="centerFlag"/>
             </div>
+            <HeaderTab class="tab" :data="headerData" v-model="selectIndex" @change="routeTo"/>
         </div>
         <div class="w-2-7 full-height">
             <router-view name="right"/>
@@ -81,7 +81,7 @@ export default {
     safeRoute (name) { // 路由安全跳转，同一路由不二次跳转，否则报错
       if (this.$route.name !== name) {
         console.log(name)
-        this.$router.push({ name: name })
+        this.$router.push({name: name})
       }
     }
   }
@@ -89,13 +89,16 @@ export default {
 </script>
 
 <style scoped lang="less">
-@height: 100px;
+@height: 20px;
 @padding: 10px;
 @titleWidth: 100px;
 .PageRouterView {
 
     .tab {
-        height: @height;
+        height: 60px;
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 
     .view {
