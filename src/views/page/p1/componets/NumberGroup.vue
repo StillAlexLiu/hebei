@@ -6,7 +6,7 @@
             </div>
             <div class="w-7-11 number full-height">
                 <div class="name"> {{item.name}}</div>
-                <div class="value number-font">{{item.value}}</div>
+                <div class="value number-font">{{item.value.toLocaleString()}}</div>
             </div>
         </ContainerBorderStyle1>
     </div>

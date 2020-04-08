@@ -21,7 +21,7 @@ import InfoTable2 from './infoTable2'
 
 export default {
   name: 'tabTable',
-  components: {InfoTable2},
+  components: { InfoTable2 },
   props: {
     data: {
       type: Object,

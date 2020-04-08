@@ -81,7 +81,7 @@ export default {
     safeRoute (name) { // 路由安全跳转，同一路由不二次跳转，否则报错
       if (this.$route.name !== name) {
         console.log(name)
-        this.$router.push({name: name})
+        this.$router.push({ name: name })
       }
     }
   }

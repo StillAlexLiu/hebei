@@ -166,7 +166,7 @@ export default {
         zoom: this.zoom,
         autoRotation: true,
         center: this.center,
-        mapStyle: 'amap://styles/grey'
+        mapStyle: 'amap://styles/darkblue'
       })
       let self = this
 

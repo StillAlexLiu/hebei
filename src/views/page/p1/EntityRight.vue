@@ -25,6 +25,7 @@
             <div class="h-1-3 full-width">
                 <container title="经营异常因素分析" class="full-height w-1-2">
                     <chart-mountain :data="mountainData"/>
+                    <!--                    <ChartPie :data="mountainData"/>-->
                 </container>
                 <container title="失信企业地区分布" class="full-height w-1-2">
                     <ChartBarLineHorizontal :data="barHorizontalData" :type="['bar']" :legend="['']"
@@ -47,10 +48,12 @@ import ChartMountain from './componets/ChartMountain'
 import BorderInOut from './componets/borderInOut'
 import ChartBarLine from './componets/ChartBarLine'
 import ChartBarLineHorizontal from './componets/ChartBarLineHorizontal'
+// import ChartPie from './componets/ChartPie'
 
 export default {
   name: 'p1right',
   components: {
+    // ChartPie,
     ChartBarLineHorizontal,
     ChartBarLine,
     BorderInOut,

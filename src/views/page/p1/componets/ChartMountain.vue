@@ -2,7 +2,9 @@
     <div class="ChartMountain full">
         <div class="item " v-for="(item,index) in data" :key="index">
             <div :style="{'background':item.color}" class="point"></div>
-            <div class="name">{{item.name}}</div>
+            <div class="name">
+                {{item.name}}
+            </div>
             <div class="value">{{item.value}}</div>
         </div>
     </div>
@@ -31,7 +33,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding: 35px 0 50px 0;
+    padding: 35px 0 50px 10px;
 
     > .item {
         display: flex;

@@ -3,6 +3,7 @@ import Container from './Container'
 import ContainerBorderStyle1 from './ContainerBorderStyle1'
 import ContainerWithIcon from './ContainerWithIcon'
 import ContainerCenterTitle from './ContainerCenterTitle'
+import ContainerLeftTitle from './ContainerLeftTitle'
 // 山东的
 import ContainerBorder1 from './ContainerBorder1'
 import ContainerBorder2 from './ContainerBorder2'
@@ -19,7 +20,8 @@ export default {
   install: (Vue) => {
     Vue.component('ContainerBorderStyle1', ContainerBorderStyle1)
     Vue.component('ContainerCalc', ContainerCalc)
-    Vue.component('Container', ContainerCenterTitle)
+    Vue.component('Container', ContainerLeftTitle)
+    Vue.component('ContainerCenterTitle', ContainerCenterTitle)
     Vue.component('Container2', Container)
     Vue.component('ContainerWithIcon', ContainerWithIcon)
     // 山东的
