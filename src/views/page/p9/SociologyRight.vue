@@ -1,5 +1,5 @@
 <template>
-    <div class="SociologyRight full">
+    <div class="SociologyRight full page-style">
         <container class="h-2-8" title="企业办事统计">
             <div class="list full">
                 <div class="list_box  full-height" v-for="(item,index) in List" :key="index">

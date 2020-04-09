@@ -1,9 +1,9 @@
 <template>
-    <container-calc type="tb" :number="50" class="SupervisionLeft full-width full-height">
+    <container-calc type="tb" :number="53" class="SupervisionLeft full-width full-height page-style">
         <template slot="fix">
-            <RadioSimple :data="radioData" v-model="select" class="w-3-7 full-height radio float-right"/>
+            <RadioSimple :data="radioData" v-model="select" class="w-3-7 full-height radio"/>
         </template>
-        <div slot="calc" class="border full-width full-height sub" v-if="globalMapSelect.tab">
+        <div slot="calc" class=" full-width full-height sub" v-if="globalMapSelect.tab">
             <Page1 v-if="selectName ==='综合监管'||selectName ==='综合监管'" :dimension="select.value"/>
             <Page2 v-if="selectName ==='智慧食品监管'" :dimension="select.value" :name="selectItem.name"/>
             <Page3 v-if="selectName ==='智慧药械监管'" :dimension="select.value"/>
@@ -77,21 +77,5 @@ export default {
 
 <style scoped lang="less">
 .SupervisionLeft {
-    padding: 10px 20px;
-
-    .radio {
-        font-size: 32px;
-    }
-
-    .border {
-        border: 1px solid #22aec5;
-    }
-
-    .sub {
-        > div {
-            width: 100%;
-            height: 100%;
-        }
-    }
 }
 </style>

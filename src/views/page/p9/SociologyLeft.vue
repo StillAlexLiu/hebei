@@ -1,5 +1,5 @@
 <template>
-  <div class='SociologyLeft full'>
+  <div class='SociologyLeft full page-style'>
     <container class='h-2-8' title='使民服务统计使用情况'>
       <div class='list'>
         <div class='list_box' v-for='(item,index) in List' :key='index'>

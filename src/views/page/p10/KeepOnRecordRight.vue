@@ -1,5 +1,5 @@
 <template>
-    <div class="KeepOnRecordRight full">
+    <div class="KeepOnRecordRight full page-style">
         <div class="h-1-3">
             <container class="w-1-2 full-height" :title="'许可临期逾期预警'">
                 <tableHeader :data='tableData'></tableHeader>

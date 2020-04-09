@@ -1,8 +1,8 @@
 <template>
     <div class="full" style="padding-top: 60px">
-        <container-calc type="tb" :number="50" class="AnalysisCenter full  block-padding">
+        <container-calc type="tb" :number="53" class="AnalysisCenter full  page-style">
             <template slot="fix">
-                <RadioSimple :data="[{name:'综合监管'}]" class="w-1-5 full-height radio"/>
+                <RadioSimple :data="[{name:'综合监管'}]" class="w-1-8 full-height radio"/>
             </template>
             <div slot="calc" class=" full">
                 <div class="h-2-8">

@@ -1,35 +1,32 @@
 <template>
-    <container-calc type="tb" :number="50" class="EntityLeft full-width full-height">
-        <div slot="calc" class="border full-width full-height">
-            <Container class="h-1-3 full-width" title="监管任务">
-                <div class="full-height w-1-2">
-                    <echartsTwoPie :data='twodata1'>
-                        <echartsHellow :data='hellowPie2' slot="slot1"></echartsHellow>
-                        <echartsHellow2 :data='hellowPie3' slot="slot2"></echartsHellow2>
-                    </echartsTwoPie>
-                </div>
-                <div class="full-height w-1-2">
-                    <echartsTwoPie :data='twodata2'>
-                        <echartsHellow :data='hellowPie2' slot="slot1"></echartsHellow>
-                        <echartsHellow2 :data='hellowPie3' slot="slot2"></echartsHellow2>
-                    </echartsTwoPie>
-                </div>
-            </Container>
-            <Container class="h-1-3 full-width" title="投诉举报">
-                <echartsTwoBarLine :data='twoData'></echartsTwoBarLine>
-            </Container>
-            <Container class="h-1-3 full-width" title="执法办案">
-                <div class="full-height w-2-7">
-                    <imgNum :data='imgdata1'></imgNum>
-                    <imgNum :data='imgdata2'></imgNum>
-                </div>
-                <div class="full-height w-5-7">
-                    <echartsWline :data='rightLine'></echartsWline>
-                </div>
-            </Container>
-        </div>
-
-    </container-calc>
+    <div class=" full-width full-height page-style">
+        <Container class="h-1-3 full-width" title="监管任务">
+            <div class="full-height w-1-2">
+                <echartsTwoPie :data='twodata1'>
+                    <echartsHellow :data='hellowPie2' slot="slot1"></echartsHellow>
+                    <echartsHellow2 :data='hellowPie3' slot="slot2"></echartsHellow2>
+                </echartsTwoPie>
+            </div>
+            <div class="full-height w-1-2">
+                <echartsTwoPie :data='twodata2'>
+                    <echartsHellow :data='hellowPie2' slot="slot1"></echartsHellow>
+                    <echartsHellow2 :data='hellowPie3' slot="slot2"></echartsHellow2>
+                </echartsTwoPie>
+            </div>
+        </Container>
+        <Container class="h-1-3 full-width" title="投诉举报">
+            <echartsTwoBarLine :data='twoData'></echartsTwoBarLine>
+        </Container>
+        <Container class="h-1-3 full-width" title="执法办案">
+            <div class="full-height w-2-7">
+                <imgNum :data='imgdata1'></imgNum>
+                <imgNum :data='imgdata2'></imgNum>
+            </div>
+            <div class="full-height w-5-7">
+                <echartsWline :data='rightLine'></echartsWline>
+            </div>
+        </Container>
+    </div>
 </template>
 
 <script>
@@ -77,7 +74,8 @@ export default {
         ]
       },
       twoData: {
-        xdata: ['石家庄市',
+        xdata: [
+          '石家庄市',
           '唐山市',
           '秦皇岛市',
           '邯郸市',
@@ -87,7 +85,8 @@ export default {
           '承德市',
           '沧州市',
           '廊坊市',
-          '衡水市'],
+          '衡水市'
+        ],
         bardata1: [
           Mock.Random.natural(100, 2000),
           Mock.Random.natural(100, 2000),

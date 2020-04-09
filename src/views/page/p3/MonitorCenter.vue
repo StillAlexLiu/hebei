@@ -48,7 +48,7 @@ export default {
 .MonitorCenter {
     padding-top: 60px;
     .video-container {
-        padding: 20px;
+        padding: 10px;
 
         > .item {
             padding: 3px;

@@ -1,7 +1,7 @@
 <template>
-    <container-calc type="tb" :number="50" class="AuditLeft full  block-padding">
+    <container-calc type="tb" :number="53" class="AuditLeft full page-style">
         <template slot="fix">
-            <RadioSimple :data="radioData" v-model="select" class="w-3-7 full-height radio float-right"/>
+            <RadioSimple :data="radioData" v-model="select" class="w-3-7 full-height radio "/>
         </template>
         <div slot="calc" class=" full">
             <div class="h-2-8">

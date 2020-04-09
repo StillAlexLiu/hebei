@@ -1,6 +1,5 @@
-NumberGroup.vue
 <template>
-    <div class="MonitorLeft full">
+    <div class="MonitorLeft full page-style">
         <container class="h-2-8" title="远程监控接入情况">
             <NumberGroup :data='numberData' class="full"/>
         </container>

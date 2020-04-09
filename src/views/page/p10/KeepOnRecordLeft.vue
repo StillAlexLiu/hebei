@@ -1,9 +1,9 @@
 <template>
-    <container-calc type="tb" :number="50" class="KeepOnRecordLeft full">
+    <container-calc type="tb" :number="53" class="KeepOnRecordLeft full page-style">
         <template slot="fix">
-            <RadioSimple :data="radioData" v-model="select" class="w-2-7 full-height radio float-right"/>
+            <RadioSimple :data="radioData" v-model="select" class="w-3-7 full-height radio "/>
         </template>
-        <div slot="calc" class="border full">
+        <div slot="calc" class=" full">
             <container class="h-1-3" title="许可备案主体趋势">
                 <container-info class="full-height w-1-2">
                     <ChartBarLine :data="barLineData[select.value]" :dimensions="['name','value']"
@@ -72,71 +72,91 @@ export default {
         }
       ],
       barLineData: [
-        [{
-          name: '2017',
-          value: Mock.Random.natural(10000, 40000)
-        }, {
-          name: '2018',
-          value: Mock.Random.natural(10000, 40000)
-        }, {
-          name: '2019',
-          value: Mock.Random.natural(10000, 40000)
-        }], [{
-          name: '2017',
-          value: Mock.Random.natural(10000, 40000)
-        }, {
-          name: '2018',
-          value: Mock.Random.natural(10000, 40000)
-        }, {
-          name: '2019',
-          value: Mock.Random.natural(10000, 40000)
-        }], [{
-          name: '2017',
-          value: Mock.Random.natural(10000, 40000)
-        }, {
-          name: '2018',
-          value: Mock.Random.natural(10000, 40000)
-        }, {
-          name: '2019',
-          value: Mock.Random.natural(10000, 40000)
-        }]],
-      data1: [[{
-        name: '(非外国)企业',
-        value: Mock.Random.natural(200, 400)
-      }, {
-        name: '外企',
-        value: Mock.Random.natural(100, 300)
-      }, {
-        name: '个体工商户',
-        value: Mock.Random.natural(10000, 30000)
-      }, {
-        name: '农名专业合作社',
-        value: Mock.Random.natural(10000, 40000)
-      }], [{
-        name: '(非外国)企业',
-        value: Mock.Random.natural(200, 400)
-      }, {
-        name: '外企',
-        value: Mock.Random.natural(100, 300)
-      }, {
-        name: '个体工商户',
-        value: Mock.Random.natural(10000, 30000)
-      }, {
-        name: '农名专业合作社',
-        value: Mock.Random.natural(10000, 40000)
-      }], [{
-        name: '(非外国)企业',
-        value: Mock.Random.natural(200, 400)
-      }, {
-        name: '外企',
-        value: Mock.Random.natural(100, 300)
-      }, {
-        name: '个体工商户',
-        value: Mock.Random.natural(10000, 30000)
-      }, {
-        name: '农名专业合作社',
-        value: Mock.Random.natural(10000, 40000)
-      }]],
+        [
+          {
+            name: '2017',
+            value: Mock.Random.natural(10000, 40000)
+          },
+          {
+            name: '2018',
+            value: Mock.Random.natural(10000, 40000)
+          },
+          {
+            name: '2019',
+            value: Mock.Random.natural(10000, 40000)
+          }
+        ], [
+          {
+            name: '2017',
+            value: Mock.Random.natural(10000, 40000)
+          }, {
+            name: '2018',
+            value: Mock.Random.natural(10000, 40000)
+          }, {
+            name: '2019',
+            value: Mock.Random.natural(10000, 40000)
+          }
+        ], [
+          {
+            name: '2017',
+            value: Mock.Random.natural(10000, 40000)
+          }, {
+            name: '2018',
+            value: Mock.Random.natural(10000, 40000)
+          }, {
+            name: '2019',
+            value: Mock.Random.natural(10000, 40000)
+          }
+        ]
+      ],
+      data1: [
+        [
+          {
+            name: '(非外国)企业',
+            value: Mock.Random.natural(200, 400)
+          },
+          {
+            name: '外企',
+            value: Mock.Random.natural(100, 300)
+          },
+          {
+            name: '个体工商户',
+            value: Mock.Random.natural(10000, 30000)
+          },
+          {
+            name: '农名专业合作社',
+            value: Mock.Random.natural(10000, 40000)
+          }
+        ], [
+          {
+            name: '(非外国)企业',
+            value: Mock.Random.natural(200, 400)
+          }, {
+            name: '外企',
+            value: Mock.Random.natural(100, 300)
+          }, {
+            name: '个体工商户',
+            value: Mock.Random.natural(10000, 30000)
+          }, {
+            name: '农名专业合作社',
+            value: Mock.Random.natural(10000, 40000)
+          }
+        ], [
+          {
+            name: '(非外国)企业',
+            value: Mock.Random.natural(200, 400)
+          }, {
+            name: '外企',
+            value: Mock.Random.natural(100, 300)
+          }, {
+            name: '个体工商户',
+            value: Mock.Random.natural(10000, 30000)
+          }, {
+            name: '农名专业合作社',
+            value: Mock.Random.natural(10000, 40000)
+          }
+        ]
+      ],
       data2: [],
       array: ['食品', '工业产品', '特种设备', '计量', '广告', '药械'],
       roundData: {
@@ -220,7 +240,6 @@ export default {
 
 <style scoped lang="less">
 .KeepOnRecordLeft {
-    padding: 10px 20px;
 
 }
 </style>

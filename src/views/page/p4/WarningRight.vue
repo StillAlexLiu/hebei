@@ -1,5 +1,5 @@
 <template>
-    <div class="WarningRight full">
+    <div class="WarningRight full page-style">
         <div class="h-1-3">
             <container class="full-height w-1-2" title="预警列表">
                 <tableHeader :data='tableData'></tableHeader>

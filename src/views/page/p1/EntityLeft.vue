@@ -1,7 +1,7 @@
 <template>
-    <container-calc type="tb" :number="53" class="EntityLeft full">
+    <container-calc type="tb" :number="53" class="EntityLeft full page-style">
         <template slot="fix">
-            <RadioSimple :data="radioData" v-model="select" class="w-2-7 full-height radio " style="margin-left: 15px"/>
+            <RadioSimple :data="radioData" v-model="select" class="w-2-7 full-height radio "/>
         </template>
         <div slot="calc" class=" full-width full-height">
             <Container class=" h-1-3" :title="select.value===0?entityType+'趋势':'新增'+entityType+'趋势'">
@@ -9,7 +9,8 @@
                     <ChartBar :data="barData" :dimensions="['name','value']"
                               :unit="'户'"/>
                 </div>
-                <NumberGroup class="w-1-2 full-height" :data="quantityData" v-if="entityType==='市场主体'"/>
+                <NumberGroup class="w-1-2 full-height" :data="quantityData" v-if="false"/>
+                <NumberGroup3 class="w-1-2 full-height" :data="quantityData" v-if="entityType==='市场主体'"/>
                 <NumberGroup2 class="w-1-2 full-height" :data="quantityData" v-else/>
             </Container>
             <Container class="w-1-2 h-1-3" :title="select.value===0?entityType+'产业占比':'新增'+entityType+'产业占比'">
@@ -54,10 +55,12 @@ import ChartBarSimple from './componets/ChartBarSimple'
 import ChartBarLine from './componets/ChartBarLine'
 import ChartHalfPie from './componets/ChartHalfPie'
 import { mapState } from 'vuex'
+import NumberGroup3 from './componets/NumberGroup3'
 
 export default {
   name: 'EntityLeft',
   components: {
+    NumberGroup3,
     NumberGroup2,
     ChartHalfPie,
     ChartBarLine,
@@ -82,7 +85,7 @@ export default {
       ],
       config: this.$dataAll.p1,
       barData: [], // 第一个柱图
-      quantityData: [], // 柱图右侧
+      quantityData: {}, // 柱图右侧
       pieData: [], // 三个饼图
       barGroupData: [], // 第二行第二个柱形图
       barData2: [],
@@ -116,43 +119,43 @@ export default {
                   }
                 ]
               },
-              info: [
-                // {
-                //   'name': '总数',
-                //   'value': 6275815,
-                //   img: require('./componets/img/entity/entity-zong.png')
-                // },
-                {
-                  'name': '公有制企业',
-                  'value': 119946,
-                  img: require('./componets/img/entity/entity-gong.png')
-                },
-                {
-                  'name': '外资企业',
-                  'value': 9863,
-                  img: require('./componets/img/entity/entity-wai.png')
-                },
-                {
-                  'name': '私营企业',
-                  'value': 1597234,
-                  img: require('./componets/img/entity/entity-si.png')
-                },
-                {
-                  'name': '个体工商户',
-                  'value': 4433075,
-                  img: require('./componets/img/entity/entity-ge.png')
-                },
-                {
-                  'name': '农民合作社',
-                  'value': 115576,
-                  img: require('./componets/img/entity/entity-nong.png')
-                },
-                {
-                  'name': '其他',
-                  'value': 121,
-                  img: require('./componets/img/entity/entity-nong.png')
-                }
-              ]
+              info: {
+                'name': '总数',
+                'value': 6275815,
+                img: require('./componets/img/entity/entity-zong.png'),
+                data: [
+                  {
+                    'name': '公有制企业',
+                    'value': 119946,
+                    img: require('./componets/img/entity/entity-gong.png')
+                  },
+                  {
+                    'name': '外资企业',
+                    'value': 9863,
+                    img: require('./componets/img/entity/entity-wai.png')
+                  },
+                  {
+                    'name': '私营企业',
+                    'value': 1597234,
+                    img: require('./componets/img/entity/entity-si.png')
+                  },
+                  {
+                    'name': '个体工商户',
+                    'value': 4433075,
+                    img: require('./componets/img/entity/entity-ge.png')
+                  },
+                  {
+                    'name': '农民合作社',
+                    'value': 115576,
+                    img: require('./componets/img/entity/entity-nong.png')
+                  },
+                  {
+                    'name': '其他',
+                    'value': 121,
+                    img: require('./componets/img/entity/entity-nong.png')
+                  }
+                ]
+              }
             },
             block2: {
               chart: {
@@ -247,43 +250,43 @@ export default {
                   }
                 ]
               },
-              info: [
-                // {
-                //   'name': '总数',
-                //   'value': 174923,
-                //   img: require('./componets/img/entity/entity-zong.png')
-                // },
-                {
-                  'name': '公有制企业',
-                  'value': 2001,
-                  img: require('./componets/img/entity/entity-gong.png')
-                },
-                {
-                  'name': '外资企业',
-                  'value': 102,
-                  img: require('./componets/img/entity/entity-wai.png')
-                },
-                {
-                  'name': '私营企业',
-                  'value': 51208,
-                  img: require('./componets/img/entity/entity-si.png')
-                },
-                {
-                  'name': '个体工商户',
-                  'value': 121110,
-                  img: require('./componets/img/entity/entity-ge.png')
-                },
-                {
-                  'name': '农民合作社',
-                  'value': 485,
-                  img: require('./componets/img/entity/entity-nong.png')
-                },
-                {
-                  'name': '其他',
-                  'value': 17,
-                  img: require('./componets/img/entity/entity-nong.png')
-                }
-              ]
+              info: {
+                'name': '总数',
+                'value': 174923,
+                img: require('./componets/img/entity/entity-zong.png'),
+                data: [
+                  {
+                    'name': '公有制企业',
+                    'value': 2001,
+                    img: require('./componets/img/entity/entity-gong.png')
+                  },
+                  {
+                    'name': '外资企业',
+                    'value': 102,
+                    img: require('./componets/img/entity/entity-wai.png')
+                  },
+                  {
+                    'name': '私营企业',
+                    'value': 51208,
+                    img: require('./componets/img/entity/entity-si.png')
+                  },
+                  {
+                    'name': '个体工商户',
+                    'value': 121110,
+                    img: require('./componets/img/entity/entity-ge.png')
+                  },
+                  {
+                    'name': '农民合作社',
+                    'value': 485,
+                    img: require('./componets/img/entity/entity-nong.png')
+                  },
+                  {
+                    'name': '其他',
+                    'value': 17,
+                    img: require('./componets/img/entity/entity-nong.png')
+                  }
+                ]
+              }
             },
             block2: {
               chart: {
@@ -498,12 +501,12 @@ export default {
               },
               info: {
                 'name': '公有制企业',
-                'value': 1926,
+                'value': 2001,
                 img: require('./componets/img/entity/entity-gong.png'),
                 data: [
                   {
                     'name': '户数(个)',
-                    'value': 107885
+                    'value': 2001
                   },
                   {
                     'name': '同比上涨',
@@ -733,12 +736,12 @@ export default {
               },
               info: {
                 'name': '外资企业',
-                'value': 1926,
+                'value': 102,
                 img: require('./componets/img/entity/entity-gong.png'),
                 data: [
                   {
                     'name': '户数(个)',
-                    'value': 86
+                    'value': 102
                   },
                   {
                     'name': '同比上涨',
@@ -968,12 +971,12 @@ export default {
               },
               info: {
                 'name': '私营企业',
-                'value': 48891,
+                'value': 51208,
                 img: require('./componets/img/entity/entity-si.png'),
                 data: [
                   {
                     'name': '户数(个)',
-                    'value': 48891
+                    'value': 51208
                   },
                   {
                     'name': '同比上涨',
@@ -1201,12 +1204,12 @@ export default {
               },
               info: {
                 'name': '个体工商户',
-                'value': 130634,
+                'value': 137614,
                 img: require('./componets/img/entity/entity-ge.png'),
                 data: [
                   {
                     'name': '户数(个)',
-                    'value': 130634
+                    'value': 137614
                   },
                   {
                     'name': '同比上涨',
@@ -1625,11 +1628,6 @@ export default {
 
 <style scoped lang="less">
 .EntityLeft {
-    padding: 10px 0;
-
-    .radio {
-        font-size: 32px;
-    }
 
     .border {
         border: 1px solid #22aec5;

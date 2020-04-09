@@ -1,9 +1,9 @@
 <template>
-    <container-calc type="tb" :number="50" class="EntityLeft full-width full-height">
+    <container-calc type="tb" :number="53" class="EntityLeft full-width full-height page-style">
         <template slot="fix" class="h-1-10 full-width">
-            <RadioSimple :data="radioData" @input='input2' class="w-2-7 full-height radio float-right"/>
+            <RadioSimple :data="radioData" @input='input2' class="w-3-7 full-height radio"/>
         </template>
-        <div slot="calc" class="border full-width full-height">
+        <div slot="calc" class=" full-width full-height">
             <Container class="h-1-3 full-width" title="市场主体">
                 <NumberGroup :data='numberData[select2]' class="full-height w-1-5"></NumberGroup>
                 <div class="w-2-4 full-height">

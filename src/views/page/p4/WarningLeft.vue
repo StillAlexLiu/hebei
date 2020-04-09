@@ -1,9 +1,9 @@
 <template>
-    <container-calc type="tb" :number="50" class="WarningLeft full-width full-height">
+    <container-calc type="tb" :number="53" class="WarningLeft full-width full-height page-style">
         <template slot="fix">
-            <RadioSimple :data="radioData" v-model="select" class="w-3-7 full-height radio float-right"/>
+            <RadioSimple :data="radioData" v-model="select" class="w-3-7 full-height radio "/>
         </template>
-        <div slot="calc" class="border full-width full-height">
+        <div slot="calc" class=" full-width full-height">
             <container class="h-2-8" title="本月预警数量">
                 <NumberGroup class="full" :data="numberGroup"/>
             </container>
@@ -137,62 +137,68 @@ export default {
       }
     },
     makeNumberGroup () {
-      this.numberGroup = [{
-        name: '食品',
-        value: 554,
-        value1: 431,
-        value2: 123,
-        icon: require('./components/img/1.png')
-      }, {
-        name: '电梯',
-        value: 71,
-        value1: 63,
-        value2: 8,
-        icon: require('./components/img/2.png')
-      }, {
-        name: '药品',
-        value: 0,
-        value1: 0,
-        value2: 0,
-        icon: require('./components/img/3.png')
-      }, {
-        name: '消费维权',
-        value: 0,
-        value1: 0,
-        value2: 0,
-        icon: require('./components/img/4.png')
-      }, {
-        name: '证照期限',
-        value: 0,
-        value1: 0,
-        value2: 0,
-        icon: require('./components/img/5.png')
-      }]
+      this.numberGroup = [
+        {
+          name: '食品',
+          value: 554,
+          value1: 431,
+          value2: 123,
+          icon: require('./components/img/1.png')
+        }, {
+          name: '电梯',
+          value: 71,
+          value1: 63,
+          value2: 8,
+          icon: require('./components/img/2.png')
+        }, {
+          name: '药品',
+          value: 0,
+          value1: 0,
+          value2: 0,
+          icon: require('./components/img/3.png')
+        }, {
+          name: '消费维权',
+          value: 0,
+          value1: 0,
+          value2: 0,
+          icon: require('./components/img/4.png')
+        }, {
+          name: '证照期限',
+          value: 0,
+          value1: 0,
+          value2: 0,
+          icon: require('./components/img/5.png')
+        }
+      ]
     },
     makePieData () {
-      this.pieData1 = [{
-        name: '消费维权',
-        value: Mock.Random.natural(0, 100)
-      }, {
-        name: '药品',
-        value: Mock.Random.natural(0, 100)
-      }, {
-        name: '电梯',
-        value: Mock.Random.natural(0, 100)
-      }, {
-        name: '食品',
-        value: Mock.Random.natural(0, 100)
-      }]
-      this.pieData2 = [{
-        name: '食品冷链运输',
-        value: Mock.Random.natural(0, 100)
-      }, {
-        name: '电梯故障',
-        value: Mock.Random.natural(0, 100)
-      }, {
-        name: '网络餐饮',
-        value: Mock.Random.natural(0, 100)
-      }]
+      this.pieData1 = [
+        {
+          name: '消费维权',
+          value: Mock.Random.natural(0, 100)
+        }, {
+          name: '药品',
+          value: Mock.Random.natural(0, 100)
+        }, {
+          name: '电梯',
+          value: Mock.Random.natural(0, 100)
+        }, {
+          name: '食品',
+          value: Mock.Random.natural(0, 100)
+        }
+      ]
+      this.pieData2 = [
+        {
+          name: '食品冷链运输',
+          value: Mock.Random.natural(0, 100)
+        }, {
+          name: '电梯故障',
+          value: Mock.Random.natural(0, 100)
+        }, {
+          name: '网络餐饮',
+          value: Mock.Random.natural(0, 100)
+        }
+      ]
     }
   }
 }

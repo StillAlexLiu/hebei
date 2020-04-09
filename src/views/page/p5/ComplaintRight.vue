@@ -1,5 +1,5 @@
 <template>
-  <div class='ComplaintRight full'>
+  <div class='ComplaintRight full page-style'>
     <div class='full-width h-2-8'>
       <container title='线索数量及处置期限情况' class='full-height w-1-2'>
         <div class='full-height w-2-3'>

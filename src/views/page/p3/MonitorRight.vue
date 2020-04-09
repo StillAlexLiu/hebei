@@ -16,6 +16,6 @@ export default {
 
 <style scoped lang="less">
 .MonitorRight {
-    padding: 30px 30px 30px 0;
+    padding: 10px 10px 10px 0;
 }
 </style>

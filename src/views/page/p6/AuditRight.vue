@@ -1,5 +1,5 @@
 <template>
-    <div class="AuditRight full">
+    <div class="AuditRight full page-style">
         <container title="案件处理流程跟踪" class="h-2-8 full-width">
             <ChartTree :data="treeData"/>
         </container>

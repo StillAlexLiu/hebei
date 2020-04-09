@@ -1,9 +1,9 @@
 <template>
-    <container-calc type="tb" :number="50" class="AnalysisRight full  block-padding">
+    <container-calc type="tb" :number="53" class="AnalysisRight full page-style">
         <template slot="fix">
-            <RadioSimple :data="[{name:'稽查办案'}]" class="w-1-4 full-height radio"/>
+            <RadioSimple :data="[{name:'稽查办案'}]" class="w-1-7 full-height radio"/>
         </template>
-        <div slot="calc" class="border full">
+        <div slot="calc" class=" full">
             <div class="h-2-8">
                 <container class="full-height w-1-2" title="线索来源">
                     <leftImages :data='leftImage'></leftImages>

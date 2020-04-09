@@ -4,7 +4,7 @@
     <!--            <RadioSimple :data="[{name:'市场准入'}]" class="w-1-4 full-height radio"/>-->
     <!--        </template>-->
     <!--        <div slot="calc" class="border full">-->
-    <div class="AnalysisLeft full">
+    <div class="AnalysisLeft full page-style">
         <div class="h-2-8">
             <container class="full-height w-1-2" title="一网通办办理事项">
                 <pnglist :data='chart1'></pnglist>

@@ -26,14 +26,15 @@ export default {
 
 <style scoped lang="less">
 .ChartMountain {
-    background-image: url("./img/filter.png");
+    background-image: url("./img/z.png");
+    /*background-image: url("./img/filter.png");*/
     background-repeat: no-repeat;
     background-position: right;
     background-size: auto 81%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding: 35px 0 50px 10px;
+    padding: 30px 0 30px 10px;
 
     > .item {
         display: flex;
@@ -48,13 +49,13 @@ export default {
         }
 
         .name {
-            flex-basis: 60%;
-            font-size: 24px;
+            flex-basis: 45%;
+            font-size: 18px;
         }
 
         .value {
             font-size: 30px;
-            flex-basis: calc(40% - 24px);
+            flex-basis: calc(55% - 24px);
             text-align: center;
 
             span {

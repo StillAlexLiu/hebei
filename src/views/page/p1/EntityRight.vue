@@ -1,5 +1,5 @@
 <template>
-    <div class="full-width full-height">
+    <div class="full-width full-height page-style">
         <container title="一企一档" v-if="JSON.stringify(p1)!=='null'" class="info full" style="position: relative">
             <font-awesome-icon class="fa" icon='times'
                                style="position: absolute;right: 30px;font-size: 30px;top: 20px" @click="close"/>

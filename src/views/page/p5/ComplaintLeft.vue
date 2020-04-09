@@ -1,9 +1,9 @@
 <template>
-    <container-calc type='tb' :number='50' class='ComplaintLeft full block-padding'>
+    <container-calc type='tb' :number='53' class='ComplaintLeft full  page-style'>
         <template slot='fix'>
-            <RadioSimple :data='radioData' v-model='select' class='w-3-7 full-height radio float-right'/>
+            <RadioSimple :data='radioData' v-model='select' class='w-3-7 full-height radio '/>
         </template>
-        <div slot='calc' class='border full' v-if='select.value'>
+        <div slot='calc' class=' full' v-if='select.value'>
             <div title='投诉举报趋势分析' class='h-2-8'>
                 <container title='投诉举报趋势分析' class='full-height w-1-3'>
                     <div class='complaints_box'>

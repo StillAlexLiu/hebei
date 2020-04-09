@@ -77,6 +77,7 @@ export default {
 
         > p {
             color: #fff;
+            font-size: 32px;
         }
     }
 }
