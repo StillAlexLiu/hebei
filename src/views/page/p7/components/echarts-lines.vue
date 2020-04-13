@@ -105,7 +105,7 @@ export default {
         ]
         charts.linesData.push(lines)
       }
-      let option = {
+      const option = {
         xAxis: {
           show: false,
           type: 'value'

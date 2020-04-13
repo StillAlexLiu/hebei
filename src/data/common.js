@@ -4,7 +4,7 @@ import isApiDone from './mockCheck'
 // 用mock模拟数据
 Mock.setup({ timeout: '40-300' })
 
-let data = {
+const data = {
   // 获取值班人员信息
   getDutyInfo: () => {
     // 模拟数据,如果接口写完传true，否则传false
@@ -15,7 +15,7 @@ let data = {
           '张强',
           '李莉莉'
         ],
-        'phone': '0311-00000000'
+        phone: '0311-00000000'
       })
     }
     return http.post('/screen/getDutyInfo')

@@ -189,7 +189,7 @@ export default {
     makeData () {
       this.data2 = []
       for (let j = 0; j < 3; j++) {
-        let item = []
+        const item = []
         for (let i = 0; i < this.array.length; i++) {
           item.push({
             name: this.array[i],
@@ -204,7 +204,7 @@ export default {
     makeLineData () {
       this.lineData1 = []
       for (let j = 0; j < 3; j++) {
-        let item = []
+        const item = []
         for (let i = 0; i < 6; i++) {
           item.push({
             name: '2019-0' + i,
@@ -221,7 +221,7 @@ export default {
     makeBarData () {
       this.barData = []
       for (let j = 0; j < 3; j++) {
-        let item = []
+        const item = []
         for (let i = 0; i < this.city.length; i++) {
           item.push({
             name: this.city[i],

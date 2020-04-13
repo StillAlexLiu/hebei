@@ -106,29 +106,29 @@ export default {
       ],
       barLineData: [
         {
-          'name': '公有制企业',
-          'value': 29917,
-          'value2': 25.36
+          name: '公有制企业',
+          value: 29917,
+          value2: 25.36
         },
         {
-          'name': '私营企业',
-          'value': 517733,
-          'value2': 33.47
+          name: '私营企业',
+          value: 517733,
+          value2: 33.47
         },
         {
-          'name': '外资企业',
-          'value': 3844,
-          'value2': 39.38
+          name: '外资企业',
+          value: 3844,
+          value2: 39.38
         },
         {
-          'name': '个体户',
-          'value': 766568,
-          'value2': 17.80
+          name: '个体户',
+          value: 766568,
+          value2: 17.80
         },
         {
-          'name': '农专',
-          'value': 27198,
-          'value2': 23.63
+          name: '农专',
+          value: 27198,
+          value2: 23.63
         }
       ],
       pieData: {
@@ -178,17 +178,17 @@ export default {
       ],
 
       barHorizontalData: [
-        { 'name': '承德', 'value': '630' },
-        { 'name': '秦皇岛', 'value': '1100' },
-        { 'name': '张家口', 'value': '1120' },
-        { 'name': '衡水', 'value': '1508' },
-        { 'name': '邢台', 'value': '1729' },
-        { 'name': '廊坊', 'value': '1930' },
-        { 'name': '保定', 'value': '1937' },
-        { 'name': '唐山', 'value': '2381' },
-        { 'name': '沧州', 'value': '2400' },
-        { 'name': '邯郸', 'value': '2706' },
-        { 'name': '石家庄', 'value': '4281' }
+        { name: '承德', value: '630' },
+        { name: '秦皇岛', value: '1100' },
+        { name: '张家口', value: '1120' },
+        { name: '衡水', value: '1508' },
+        { name: '邢台', value: '1729' },
+        { name: '廊坊', value: '1930' },
+        { name: '保定', value: '1937' },
+        { name: '唐山', value: '2381' },
+        { name: '沧州', value: '2400' },
+        { name: '邯郸', value: '2706' },
+        { name: '石家庄', value: '4281' }
       ]
     }
   },

@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     isPercent (value) {
-      let str = value.toString()
+      const str = value.toString()
       return str.substring(str.length - 1, str.length) === '%'
     }
   }

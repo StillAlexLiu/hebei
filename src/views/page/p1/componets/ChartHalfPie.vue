@@ -30,9 +30,9 @@ export default {
   methods: {
     getOption (data) {
       let total = 0
-      let tempData = []
+      const tempData = []
       for (let i = 0; i < data.length; i++) {
-        let item = data[i]
+        const item = data[i]
         total += item.value * 1
         tempData.push({
           name: '',

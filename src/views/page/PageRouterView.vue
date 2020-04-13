@@ -52,7 +52,7 @@ export default {
         })
       }
     },
-    '$route': {
+    $route: {
       deep: false,
       immediate: true,
       handler: function () {

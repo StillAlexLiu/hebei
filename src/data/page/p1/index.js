@@ -49,30 +49,30 @@ export default [
       // 模拟数据,如果接口写完传true，否则传false
       if (isApiDone(false)) {
         Mock.mock('/screen/entity/GetQuantity', 'post', {
-          'data': [
+          data: [
             {
-              'name': '总数',
-              'value': Mock.Random.natural(1600, 1800)
+              name: '总数',
+              value: Mock.Random.natural(1600, 1800)
             },
             {
-              'name': '公有制企业',
-              'value': Mock.Random.natural(1600, 1800)
+              name: '公有制企业',
+              value: Mock.Random.natural(1600, 1800)
             },
             {
-              'name': '外资企业',
-              'value': Mock.Random.natural(1600, 1800)
+              name: '外资企业',
+              value: Mock.Random.natural(1600, 1800)
             },
             {
-              'name': '私营企业',
-              'value': Mock.Random.natural(1600, 1800)
+              name: '私营企业',
+              value: Mock.Random.natural(1600, 1800)
             },
             {
-              'name': '个体工商户',
-              'value': Mock.Random.natural(1600, 1800)
+              name: '个体工商户',
+              value: Mock.Random.natural(1600, 1800)
             },
             {
-              'name': '农民合作社',
-              'value': Mock.Random.natural(1600, 1800)
+              name: '农民合作社',
+              value: Mock.Random.natural(1600, 1800)
             }
           ]
         })
@@ -87,30 +87,30 @@ export default [
       // 模拟数据,如果接口写完传true，否则传false
       if (isApiDone(false)) {
         Mock.mock('/screen/entity/GetQuantityNewly', 'post', {
-          'data': [
+          data: [
             {
-              'name': '总数',
-              'value': Mock.Random.natural(1600, 1800)
+              name: '总数',
+              value: Mock.Random.natural(1600, 1800)
             },
             {
-              'name': '公有制企业',
-              'value': Mock.Random.natural(1600, 1800)
+              name: '公有制企业',
+              value: Mock.Random.natural(1600, 1800)
             },
             {
-              'name': '外资企业',
-              'value': Mock.Random.natural(1600, 1800)
+              name: '外资企业',
+              value: Mock.Random.natural(1600, 1800)
             },
             {
-              'name': '私营企业',
-              'value': Mock.Random.natural(1600, 1800)
+              name: '私营企业',
+              value: Mock.Random.natural(1600, 1800)
             },
             {
-              'name': '个体工商户',
-              'value': Mock.Random.natural(1600, 1800)
+              name: '个体工商户',
+              value: Mock.Random.natural(1600, 1800)
             },
             {
-              'name': '农民合作社',
-              'value': Mock.Random.natural(1600, 1800)
+              name: '农民合作社',
+              value: Mock.Random.natural(1600, 1800)
             }
           ]
         })
@@ -125,18 +125,18 @@ export default [
       // 模拟数据,如果接口写完传true，否则传false
       if (isApiDone(false)) {
         Mock.mock('/screen/entity/getRatioByIndustry', 'post', {
-          'data': [
+          data: [
             {
-              'name': '第一产业',
-              'value': 292
+              name: '第一产业',
+              value: 292
             },
             {
-              'name': '第二产业',
-              'value': 13303
+              name: '第二产业',
+              value: 13303
             },
             {
-              'name': '第三产业',
-              'value': 107657
+              name: '第三产业',
+              value: 107657
             }
           ]
         })
@@ -151,18 +151,18 @@ export default [
       // 模拟数据,如果接口写完传true，否则传false
       if (isApiDone(false)) {
         Mock.mock('/screen/entity/getRatioByIndustryNewly', 'post', {
-          'data': [
+          data: [
             {
-              'name': '第一产业',
-              'value': 0
+              name: '第一产业',
+              value: 0
             },
             {
-              'name': '第二产业',
-              'value': 86
+              name: '第二产业',
+              value: 86
             },
             {
-              'name': '第三产业',
-              'value': 1225
+              name: '第三产业',
+              value: 1225
             }
           ]
         })
@@ -177,24 +177,24 @@ export default [
       // 模拟数据,如果接口写完传true，否则传false
       if (isApiDone(false)) {
         Mock.mock('/screen/entity/scale', 'post', {
-          'data': [
+          data: [
             {
-              'year': '2016年',
-              'step1': 292,
-              'step2': 2292,
-              'step3': 392
+              year: '2016年',
+              step1: 292,
+              step2: 2292,
+              step3: 392
             },
             {
-              'year': '2017年',
-              'step1': 392,
-              'step2': 2392,
-              'step3': 492
+              year: '2017年',
+              step1: 392,
+              step2: 2392,
+              step3: 492
             },
             {
-              'year': '2018年',
-              'step1': 192,
-              'step2': 4292,
-              'step3': 492
+              year: '2018年',
+              step1: 192,
+              step2: 4292,
+              step3: 492
             }
           ]
         })
@@ -209,24 +209,24 @@ export default [
       // 模拟数据,如果接口写完传true，否则传false
       if (isApiDone(false)) {
         Mock.mock('/screen/entity/scaleNewly', 'post', {
-          'data': [
+          data: [
             {
-              'year': '2016年',
-              'step1': 292,
-              'step2': 792,
-              'step3': 392
+              year: '2016年',
+              step1: 292,
+              step2: 792,
+              step3: 392
             },
             {
-              'year': '2017年',
-              'step1': 292,
-              'step2': 892,
-              'step3': 492
+              year: '2017年',
+              step1: 292,
+              step2: 892,
+              step3: 492
             },
             {
-              'year': '2018年',
-              'step1': 192,
-              'step2': 492,
-              'step3': 792
+              year: '2018年',
+              step1: 192,
+              step2: 492,
+              step3: 792
             }
           ]
         })
@@ -241,50 +241,50 @@ export default [
       // 模拟数据,如果接口写完传true，否则传false
       if (isApiDone(false)) {
         Mock.mock('/screen/entity/region', 'post', {
-          'data': [
+          data: [
             {
-              'name': '石家庄市',
-              'value': Mock.Random.natural(300, 1800)
+              name: '石家庄市',
+              value: Mock.Random.natural(300, 1800)
             },
             {
-              'name': '唐山市',
-              'value': Mock.Random.natural(300, 1800)
+              name: '唐山市',
+              value: Mock.Random.natural(300, 1800)
             },
             {
-              'name': '邯郸市',
-              'value': Mock.Random.natural(300, 1800)
+              name: '邯郸市',
+              value: Mock.Random.natural(300, 1800)
             },
             {
-              'name': '保定市',
-              'value': Mock.Random.natural(300, 1800)
+              name: '保定市',
+              value: Mock.Random.natural(300, 1800)
             },
             {
-              'name': '沧州市',
-              'value': Mock.Random.natural(300, 1800)
+              name: '沧州市',
+              value: Mock.Random.natural(300, 1800)
             },
             {
-              'name': '邢台市',
-              'value': Mock.Random.natural(300, 1800)
+              name: '邢台市',
+              value: Mock.Random.natural(300, 1800)
             },
             {
-              'name': '廊坊市',
-              'value': Mock.Random.natural(300, 1800)
+              name: '廊坊市',
+              value: Mock.Random.natural(300, 1800)
             },
             {
-              'name': '承德市',
-              'value': Mock.Random.natural(300, 1800)
+              name: '承德市',
+              value: Mock.Random.natural(300, 1800)
             },
             {
-              'name': '张家口市',
-              'value': Mock.Random.natural(300, 1800)
+              name: '张家口市',
+              value: Mock.Random.natural(300, 1800)
             },
             {
-              'name': '衡水市',
-              'value': Mock.Random.natural(300, 1800)
+              name: '衡水市',
+              value: Mock.Random.natural(300, 1800)
             },
             {
-              'name': '秦皇岛市',
-              'value': Mock.Random.natural(300, 1800)
+              name: '秦皇岛市',
+              value: Mock.Random.natural(300, 1800)
             }
           ]
         })
@@ -299,50 +299,50 @@ export default [
       // 模拟数据,如果接口写完传true，否则传false
       if (isApiDone(false)) {
         Mock.mock('/screen/entity/regionNewly', 'post', {
-          'data': [
+          data: [
             {
-              'name': '石家庄市',
-              'value': Mock.Random.natural(10, 500)
+              name: '石家庄市',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '唐山市',
-              'value': Mock.Random.natural(10, 500)
+              name: '唐山市',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '邯郸市',
-              'value': Mock.Random.natural(10, 500)
+              name: '邯郸市',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '保定市',
-              'value': Mock.Random.natural(10, 500)
+              name: '保定市',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '沧州市',
-              'value': Mock.Random.natural(10, 500)
+              name: '沧州市',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '邢台市',
-              'value': Mock.Random.natural(10, 500)
+              name: '邢台市',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '廊坊市',
-              'value': Mock.Random.natural(10, 500)
+              name: '廊坊市',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '承德市',
-              'value': Mock.Random.natural(10, 500)
+              name: '承德市',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '张家口市',
-              'value': Mock.Random.natural(10, 500)
+              name: '张家口市',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '衡水市',
-              'value': Mock.Random.natural(10, 500)
+              name: '衡水市',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '秦皇岛市',
-              'value': Mock.Random.natural(10, 500)
+              name: '秦皇岛市',
+              value: Mock.Random.natural(10, 500)
             }
           ]
         })
@@ -357,26 +357,26 @@ export default [
       // 模拟数据,如果接口写完传true，否则传false
       if (isApiDone(false)) {
         Mock.mock('/screen/entity/trade', 'post', {
-          'data': [
+          data: [
             {
-              'name': '建筑业',
-              'value': Mock.Random.natural(10, 500)
+              name: '建筑业',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '文化，体育和娱乐业',
-              'value': Mock.Random.natural(10, 500)
+              name: '文化，体育和娱乐业',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '租赁和商务服务业',
-              'value': Mock.Random.natural(10, 500)
+              name: '租赁和商务服务业',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '科学研究和技术服务业',
-              'value': Mock.Random.natural(10, 500)
+              name: '科学研究和技术服务业',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '批发和零售业',
-              'value': Mock.Random.natural(10, 500)
+              name: '批发和零售业',
+              value: Mock.Random.natural(10, 500)
             }
           ]
         })
@@ -391,26 +391,26 @@ export default [
       // 模拟数据,如果接口写完传true，否则传false
       if (isApiDone(false)) {
         Mock.mock('/screen/entity/tradeNewly', 'post', {
-          'data': [
+          data: [
             {
-              'name': '建筑业',
-              'value': Mock.Random.natural(10, 500)
+              name: '建筑业',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '文化，体育和娱乐业',
-              'value': Mock.Random.natural(10, 500)
+              name: '文化，体育和娱乐业',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '租赁和商务服务业',
-              'value': Mock.Random.natural(10, 500)
+              name: '租赁和商务服务业',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '科学研究和技术服务业',
-              'value': Mock.Random.natural(10, 500)
+              name: '科学研究和技术服务业',
+              value: Mock.Random.natural(10, 500)
             },
             {
-              'name': '批发和零售业',
-              'value': Mock.Random.natural(10, 500)
+              name: '批发和零售业',
+              value: Mock.Random.natural(10, 500)
             }
           ]
         })

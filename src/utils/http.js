@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let handler = (code, url, params, message) => {
+const handler = (code, url, params, message) => {
   console.error('状态：' + code + '，错误信息：' + message)
   console.log(url)
   if (params) {
@@ -8,7 +8,7 @@ let handler = (code, url, params, message) => {
   }
 }
 
-let post = (url, params) => {
+const post = (url, params) => {
   return new Promise((resolve) => {
     axios.post(url, params).then(value => {
       if (value.status === 200) {
@@ -22,7 +22,7 @@ let post = (url, params) => {
   })
 }
 
-let get = (url) => {
+const get = (url) => {
   return new Promise((resolve) => {
     axios.get(url).then(value => {
       if (value.status === 200) {

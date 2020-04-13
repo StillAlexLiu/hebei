@@ -109,7 +109,7 @@ export default {
             itemStyle: {
               normal: {
                 color: function (params) {
-                  let colorList = [
+                  const colorList = [
                     '#4A90E2',
                     '#54AFED',
                     '#22AEC5',

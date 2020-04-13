@@ -6,9 +6,9 @@ const NO_NETWORK = 2 // 无网络环境，完全使用mock
 const PRODUCT = 3 // 生产环境，关闭所有mock
 
 // 将上面的值赋值到STATUS上
-let STATUS = DEV
+const STATUS = DEV
 
-let isApiDone = (isDone) => {
+const isApiDone = (isDone) => {
   let rtn = true
   if (STATUS === 1) { // 生产环境
     if (isDone) {

@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     getOption (data) {
-      let option = {
+      const option = {
         grid: {
           left: '15%',
           right: '20%',
@@ -77,8 +77,8 @@ export default {
                 show: true,
                 position: 'right',
                 formatter: function (params) {
-                  let str = params.name
-                  let lastName = str.charAt(str.length - 1)
+                  const str = params.name
+                  const lastName = str.charAt(str.length - 1)
                   if (lastName === '率') {
                     return params.value + '%'
                   }

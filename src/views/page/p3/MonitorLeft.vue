@@ -96,16 +96,16 @@ export default {
       barLineData: [],
       pieData: [
         {
-          'name': '陌生人进入',
-          'value': Mock.Random.natural(1600, 1800)
+          name: '陌生人进入',
+          value: Mock.Random.natural(1600, 1800)
         },
         {
-          'name': '发现动物',
-          'value': Mock.Random.natural(1600, 1800)
+          name: '发现动物',
+          value: Mock.Random.natural(1600, 1800)
         },
         {
-          'name': '行为不规范',
-          'value': Mock.Random.natural(1600, 1800)
+          name: '行为不规范',
+          value: Mock.Random.natural(1600, 1800)
         }
       ]
     }

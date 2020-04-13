@@ -32,8 +32,8 @@ export default {
   },
   methods: {
     getOption (data) {
-      let str = data.name
-      let lastName = str.charAt(str.length - 1)
+      const str = data.name
+      const lastName = str.charAt(str.length - 1)
       let newName = ''
       if (lastName === '率') {
         newName = data.num + '%'

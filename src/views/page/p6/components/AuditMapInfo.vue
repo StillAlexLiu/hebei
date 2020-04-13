@@ -88,8 +88,8 @@ export default {
     }
   },
   mounted () {
-    let arr1 = []
-    let arr2 = []
+    const arr1 = []
+    const arr2 = []
     for (let i = 0; i < 20; i++) {
       arr1.push({
         status: '调查取证',

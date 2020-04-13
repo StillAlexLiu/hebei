@@ -36,7 +36,7 @@ export default {
     }
   },
   mounted () {
-    for (let key in this.data) {
+    for (const key in this.data) {
       if (this.activeKey === '' || this.activeKey === null) {
         this.activeKey = key
       }

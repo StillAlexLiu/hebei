@@ -91,7 +91,7 @@ export default {
     },
     removeActive (array) {
       for (let i = 0; i < array.length; i++) {
-        let item = array[i]
+        const item = array[i]
         item.active = false
         if (item.children) {
           this.removeActive(item.children)
@@ -107,7 +107,7 @@ export default {
     findActive () {
       this.selectArray = []
       for (let i = 0; i < this.data[this.activeIndex].children.length; i++) {
-        let item = this.data[this.activeIndex].children[i]
+        const item = this.data[this.activeIndex].children[i]
         if (item.children) {
           item.children.forEach((v) => {
             if (v.active) {

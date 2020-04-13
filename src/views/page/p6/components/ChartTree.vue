@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     getOption (data) {
-      let label = {
+      const label = {
         position: 'inside',
         verticalAlign: 'middle',
         color: '#fff',

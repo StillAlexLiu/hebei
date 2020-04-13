@@ -36,7 +36,7 @@ export default {
   methods: {
     getOption (data, dimensions) {
       console.log(dimensions)
-      let series = []
+      const series = []
       for (let i = 0; i < dimensions.length - 1; i++) {
         series.push({
           name: '最新注册量' + i,

@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     getOption (data, dimensions, legend, colors, unit) {
-      let series = []
+      const series = []
       console.log(legend)
       for (let i = 0; i < legend.length; i++) {
         series.push({

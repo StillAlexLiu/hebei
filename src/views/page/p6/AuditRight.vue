@@ -113,74 +113,74 @@ export default {
       }],
       pieData: [
         {
-          'name': '已处理',
-          'value': Mock.Random.natural(1600, 1800)
+          name: '已处理',
+          value: Mock.Random.natural(1600, 1800)
         },
         {
-          'name': '未处理',
-          'value': Mock.Random.natural(1600, 1800)
+          name: '未处理',
+          value: Mock.Random.natural(1600, 1800)
         }
       ],
       pieData1: [
         {
-          'name': '广告',
-          'value': Mock.Random.natural(1000, 1800)
+          name: '广告',
+          value: Mock.Random.natural(1000, 1800)
         },
         {
-          'name': '商标',
-          'value': Mock.Random.natural(1000, 1800)
+          name: '商标',
+          value: Mock.Random.natural(1000, 1800)
         },
         {
-          'name': '产品质量',
-          'value': Mock.Random.natural(1000, 1800)
+          name: '产品质量',
+          value: Mock.Random.natural(1000, 1800)
         },
         {
-          'name': '不正当竞争',
-          'value': Mock.Random.natural(1000, 1800)
+          name: '不正当竞争',
+          value: Mock.Random.natural(1000, 1800)
         }
       ],
       numbers: [
         {
-          'name': '承办部门',
-          'value': Mock.Random.natural(1000, 1800)
+          name: '承办部门',
+          value: Mock.Random.natural(1000, 1800)
         },
         {
-          'name': '核审部门',
-          'value': Mock.Random.natural(1000, 1800)
+          name: '核审部门',
+          value: Mock.Random.natural(1000, 1800)
         },
         {
-          'name': '会审部门',
-          'value': Mock.Random.natural(1000, 1800)
+          name: '会审部门',
+          value: Mock.Random.natural(1000, 1800)
         },
         {
-          'name': '归档部门',
-          'value': Mock.Random.natural(1000, 1800)
+          name: '归档部门',
+          value: Mock.Random.natural(1000, 1800)
         }
       ],
       nameOnlyData: [
         {
-          'name': '电子用印',
-          'value': Mock.Random.natural(1000, 1800)
+          name: '电子用印',
+          value: Mock.Random.natural(1000, 1800)
         },
         {
-          'name': '移动审批',
-          'value': Mock.Random.natural(1000, 1800)
+          name: '移动审批',
+          value: Mock.Random.natural(1000, 1800)
         },
         {
-          'name': '视频证据',
-          'value': Mock.Random.natural(1000, 1800)
+          name: '视频证据',
+          value: Mock.Random.natural(1000, 1800)
         },
         {
-          'name': '文书证据',
-          'value': Mock.Random.natural(1000, 1800)
+          name: '文书证据',
+          value: Mock.Random.natural(1000, 1800)
         },
         {
-          'name': '图片证据',
-          'value': Mock.Random.natural(1000, 1800)
+          name: '图片证据',
+          value: Mock.Random.natural(1000, 1800)
         },
         {
-          'name': '其他证据',
-          'value': Mock.Random.natural(1000, 1800)
+          name: '其他证据',
+          value: Mock.Random.natural(1000, 1800)
         }
       ]
     }

@@ -9,7 +9,7 @@ import videoUrl from './videoUrl'
 // 用mock模拟数据
 Mock.setup({ timeout: '40-300' })
 
-let data = {
+const data = {
   geo,
   config, // 页面配置数据，静态数据
   common, // 大屏通用接口
@@ -25,7 +25,7 @@ let data = {
           '张强',
           '李莉莉'
         ],
-        'phone': '0311-00000000'
+        phone: '0311-00000000'
       })
     }
     return http.post('/screen/getDutyInfo')

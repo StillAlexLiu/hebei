@@ -45,8 +45,8 @@ export default {
   },
   methods: {
     start (time, offset) {
-      let dom = this.$refs.roll
-      let self = this
+      const dom = this.$refs.roll
+      const self = this
       setTimeout(function () {
         self.width = -dom.offsetWidth
       }, offset * 1000)

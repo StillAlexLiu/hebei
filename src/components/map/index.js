@@ -9,9 +9,9 @@ window.initMap = () => {
   bus.$emit('onAMapLoad', null)
 }
 
-let loadJs = (options) => {
-  let url = 'https://webapi.amap.com/maps?v=' + options.version + '&key=' + options.key + '&callback=initMap'
-  let script = document.createElement('script')
+const loadJs = (options) => {
+  const url = 'https://webapi.amap.com/maps?v=' + options.version + '&key=' + options.key + '&callback=initMap'
+  const script = document.createElement('script')
   script.type = 'text/javascript'
   script.src = url
   document.getElementsByTagName('body')[0].appendChild(script)

@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     getOption (data) {
-      let indata = []
+      const indata = []
       for (let i = 0; i < data.length; i++) {
         indata.push(data[i].value)
       }

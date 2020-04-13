@@ -128,7 +128,7 @@ export default {
     },
     mapZoom (newZoom, oldZoom) { // 缩放复位
       if (oldZoom > newZoom && newZoom === 8 && this.mapDepth === 2) {
-        let layers = this.map.getLayers()
+        const layers = this.map.getLayers()
         console.log(layers)
         for (let i = 0; i < layers.length; i++) {
           if (layers[i].CLASS_NAME === 'AMap.DistrictLayer.Province') {
@@ -169,7 +169,7 @@ export default {
         // mapStyle: 'amap://styles/grey'
         mapStyle: 'amap://styles/7ac2f867a34cdfd376071d2c69b126bd'
       })
-      let self = this
+      const self = this
 
       this.map.on('zoomend', this.zoomListener)
       this.map.on('click', this.clickListener)
@@ -185,8 +185,8 @@ export default {
     isPointInRing (point) {
       let find = false
       for (let i = 0; i < this.paths.length; i++) {
-        let path = this.paths[i]
-        let check = window.AMap.GeometryUtil.isPointInRing(point, path)
+        const path = this.paths[i]
+        const check = window.AMap.GeometryUtil.isPointInRing(point, path)
         if (check) {
           find = point
         }
@@ -194,7 +194,7 @@ export default {
       return find
     },
     isPointInPolygon (point) {
-      let check = window.AMap.GeometryUtil.isPointInPolygon(point, this.paths)
+      const check = window.AMap.GeometryUtil.isPointInPolygon(point, this.paths)
       if (check) {
         return point
       } else {
@@ -215,10 +215,10 @@ export default {
     addGrid (data) {
       console.log(data)
       if (data) {
-        let grids = []
+        const grids = []
         for (let i = 0; i < data.length; i++) {
-          let item = data[i]
-          let polygon = new window.AMap.Polygon({
+          const item = data[i]
+          const polygon = new window.AMap.Polygon({
             path: item.geo,
             strokeColor: item.border ? item.border : '#fff',
             strokeWeight: 1,
@@ -229,23 +229,23 @@ export default {
           })
           grids.push(polygon)
         }
-        let overlayGroups = new window.AMap.OverlayGroup(grids)
+        const overlayGroups = new window.AMap.OverlayGroup(grids)
         this.map.add(overlayGroups)
       }
     },
     addMassMarks (data) { // 海量点
       console.log('海量点')
-      let style = [{
+      const style = [{
         // url: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
         url: data[0].icon ? data[0].icon : 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
         anchor: new AMap.Pixel(0, 0),
         size: data[0].icon ? new AMap.Size(36, 36) : new AMap.Size(36, 20)
       }]
       console.log(style)
-      let points = []
+      const points = []
       for (let i = 0; i < data.length; i++) {
-        let marker = data[i]
-        let coordinate = this.transCoordinate(marker.coordinate)
+        const marker = data[i]
+        const coordinate = this.transCoordinate(marker.coordinate)
         if (coordinate) {
           marker.lnglat = coordinate
           points.push(marker)
@@ -265,13 +265,13 @@ export default {
     },
     disProvince (adcode, depth) { // 省份图层
       this.mapDepth = depth
-      let self = this
+      const self = this
       this.disProvinceLayer = new window.AMap.DistrictLayer.Province({
         zIndex: 12,
         adcode: adcode,
         depth: depth,
         styles: {
-          'fill': 'rgba(34,174 ,197,.1)', // 中国地级市边界
+          fill: 'rgba(34,174 ,197,.1)', // 中国地级市边界
           'province-stroke': 'cornflowerblue',
           'city-stroke': function (properties) {
             // properties为可用于做样式映射的字段，包含
@@ -279,7 +279,7 @@ export default {
             // adcode_pro
             // adcode_cit
             // adcode
-            let adcode = properties.adcode
+            const adcode = properties.adcode
             return self.getColorByAdcode(adcode)
           },
           'county-stroke': 'rgba(255,255,255,0.5)' // 中国区县边界
@@ -293,7 +293,7 @@ export default {
     clickListener (ev) {
       const px = ev.pixel
       // 拾取所在位置的行政区
-      let props = this.disProvinceLayer.getDistrictByContainerPos(px)
+      const props = this.disProvinceLayer.getDistrictByContainerPos(px)
       if (props) {
         this.removeEvent()
         this.disProvince([props.adcode], 2)
@@ -301,7 +301,7 @@ export default {
       }
     },
     removeEvent () {
-      let layers = this.map.getLayers()
+      const layers = this.map.getLayers()
       for (let i = 0; i < layers.length; i++) {
         if (layers[i].CLASS_NAME === 'AMap.DistrictLayer.Province') {
           this.map.remove(layers[i])

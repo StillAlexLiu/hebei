@@ -92,7 +92,7 @@ export default {
       immediate: true,
       deep: true,
       handler: function () {
-        let find = this.$dataAll.config.mapTab.find(value => {
+        const find = this.$dataAll.config.mapTab.find(value => {
           return value.name === this.$route.name
         })
         // 清除地图点
@@ -131,7 +131,7 @@ export default {
     },
     getSelectItem (data) {
       this.clearInfo()
-      let items = data.items
+      const items = data.items
       this.point = []
       for (let i = 0; i < items.length; i++) {
         this.point = [...this.point, ...this.makePoint(items[i].number, items[i].icon)]
@@ -150,7 +150,7 @@ export default {
       console.log(this.point)
     },
     makePoint (number, icon) {
-      let rtn = []
+      const rtn = []
       for (let i = 0; i < number; i++) {
         rtn.push({
           name: '河北' + Mock.mock('@cword(3)') + '有限责任公司',
@@ -162,12 +162,12 @@ export default {
     },
     addGrid () {
       // 初始化网格 用于限制点位置坐标用，可不写
-      let find = this.geo.features.find(val => {
+      const find = this.geo.features.find(val => {
         return val.properties.name === '河北'
       })
-      let coordinates = find.geometry.coordinates
+      const coordinates = find.geometry.coordinates
       for (let i = 0; i < coordinates.length; i++) {
-        let item = coordinates[i]
+        const item = coordinates[i]
         console.log(item)
         this.grid.push({
           geo: item,
