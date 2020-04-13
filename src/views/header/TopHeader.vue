@@ -56,9 +56,6 @@ export default {
         padding: 0 200px;
         box-sizing: border-box;
         letter-spacing: 38px;
-        /*background-image: url("../../assets/images/河北省市场监督管理.png");*/
-        /*background-repeat: no-repeat;*/
-        /*background-position: center;*/
 
         img {
             width: 96px;

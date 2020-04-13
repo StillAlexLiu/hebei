@@ -4,7 +4,7 @@ module.exports = {
     'vue-echarts',
     'resize-detector'
   ],
-  lintOnSave: false,
+  lintOnSave: true,
   devServer: {
     // proxy: {
     //   '/comet': {

@@ -9,16 +9,11 @@ import data from './data'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import dataLoader from './assets/dataLoader'
-// import liquidfill from '../src/assets/js/liquidFill'
 
 import 'video.js/dist/video-js.css'
 library.add(fas)
 
 moment.locale('zh-cn')
-
-// 整理的数据，模拟数据
-Vue.prototype.$mockData = dataLoader
 
 Vue.config.productionTip = false
 Vue.prototype.$moment = moment
