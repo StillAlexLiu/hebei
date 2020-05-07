@@ -5,7 +5,7 @@
         </div>
         <div class="full-height w-3-7 title">
             <!--            {{$dataAll.config.title}}-->
-            <img src="./img/logo.png" alt>河北省市场监督管理局智慧监管中心
+            <img src="./img/logo.png" alt>智能管控中心
         </div>
         <div class="full-height w-2-7 info">
             <div class="full-height w-7-8 text-right">

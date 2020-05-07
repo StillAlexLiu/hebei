@@ -116,7 +116,7 @@ const routes = [
       },
       {
         path: 'analysis',
-        name: '数据分析',
+        name: '专题报告',
         components: {
           left: AnalysisLeft,
           center: AnalysisCenter,
