@@ -166,8 +166,8 @@ export default {
         zoom: this.zoom,
         autoRotation: true,
         center: this.center,
-        // mapStyle: 'amap://styles/grey'
-        mapStyle: 'amap://styles/7ac2f867a34cdfd376071d2c69b126bd'
+        mapStyle: 'amap://styles/grey'
+        // mapStyle: 'amap://styles/7ac2f867a34cdfd376071d2c69b126bd'
       })
       const self = this
 

@@ -28,10 +28,11 @@ export default {
           left: 'center',
           text: this.data[1] + '%',
           textStyle: {
-            color: 'white',
+            color: '#79DFEF',
             fontStyle: 'normal',
             fontWeight: 'normal',
-            fontSize: 20
+            fontFamily: 'LESLIE',
+            fontSize: 50
           }
         },
         series: [
@@ -39,7 +40,7 @@ export default {
             type: 'liquidFill',
             radius: '80%',
             itemStyle: {
-              color: '#31CBE5',
+              color: '#4D596F',
               opacity: 1,
               shadowBlur: 0,
               shadowColor: 'blue'

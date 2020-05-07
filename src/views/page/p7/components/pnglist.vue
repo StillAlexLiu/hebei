@@ -1,16 +1,20 @@
 <template>
-  <div id="pnglist">
-      <ul>
-          <li v-for="(item, index) in data" :key="index" >
-              <img :src="item.imgurl" alt="">
-              <p class="list_p1">{{item.name}}</p>
-              <p class="list_p2">{{item.num}} <span class="list_p3">{{item.dw}}</span> </p>
-              <div class="list_zb">
-                {{item.gl}}%
-              </div>
-          </li>
-      </ul>
-  </div>
+    <div id="pnglist">
+        <div v-for="(item, index) in data" :key="index" class="item">
+            <div class="img border-bottom h-2-5">
+                <img :src="item.imgurl" alt="">
+            </div>
+            <div class="text border-bottom h-2-5">
+                <div class="list_p1 ">{{item.name}}</div>
+                <div class="list_p2  number-font">{{item.num}} <span class="list_p3">{{item.dw}}</span></div>
+            </div>
+            <div class="list_zb h-1-5">
+                <div>
+                    {{item.gl}}%
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -18,8 +22,7 @@ export default {
   components: {},
   props: ['data'],
   data () {
-    return {
-    }
+    return {}
   }
 }
 </script>
@@ -27,58 +30,52 @@ export default {
 #pnglist {
     width: 100%;
     height: 100%;
-    background: rgba(8,11,54,0.4);
-    ul{
-        width: 100%;
-        height: 100%;
-        li{
-            width: 25%;
-            height: 78%;
-            float: left;
-            list-style: none;
-            margin-top: 3%;
-            img{
-                width: 70%;
-                height: 11rem;
-                border-bottom: 1px solid #F45E41;
-                padding-bottom: 15px;
-            }
-            .list_p1{
-                font-size: 1.4rem;
-                margin: 0;
-                line-height: 2.5rem;
-                width: 75%;
-                text-align: center;
-            }
-            .list_p2{
-                font-size: 2.5rem;
-                margin: 0;
-                line-height: 2.5rem;
-                color: #F45E41;
-                font-weight: bold;
-                border-bottom: 1px solid #F45E41;
-                text-align: center;
-                width: 70%
-            }
-            .list_p3{
-              font-size: 1.5rem;
-              margin: 0;
-              line-height: 2.5rem;
-              color: #F45E41;
-              font-weight: bold;
-              text-align: center;
-              width: 70%
-            }
-        }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    padding: 30px 0;
+    text-align: center;
+
+    .item {
+        flex: 1;
+        padding: 0 10px;
     }
-    .list_zb{
-      width: 5rem;
-      height: 3rem;
-      background-color: #F45E41;
-      margin: 1rem 3.5rem;
-      float: left;
-      line-height: 3rem;
-      text-align: center;
+
+    .border-bottom {
+        border-bottom: 1px solid #F45E41;
+    }
+
+    img {
+        width: 84px;
+        height: 84px;
+    }
+
+    .list_p1 {
+        font-size: 24px;
+    }
+
+    .list_p2 {
+        color: #F45E41;
+        font-size: 48px;
+    }
+
+    .list_p3 {
+        color: #F45E41;
+        font-size: 14px;;
+    }
+
+    .list_zb {
+        padding-top: 9px;
+
+        > div {
+            width: 68px;
+            height: 24px;
+            background: linear-gradient(270deg, rgba(237, 92, 97, 0.42) 0%, rgba(237, 92, 97, 1) 100%);
+            margin: 0 auto;
+            line-height: 24px;
+            font-size: 20px;
+        }
     }
 }
 </style>

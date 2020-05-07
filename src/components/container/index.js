@@ -4,6 +4,8 @@ import ContainerBorderStyle1 from './ContainerBorderStyle1'
 import ContainerWithIcon from './ContainerWithIcon'
 import ContainerCenterTitle from './ContainerCenterTitle'
 import ContainerLeftTitle from './ContainerLeftTitle'
+import ContainerFour from './ContainerFour'
+import ContainerSmallTitle from './ContainerSmallTitle'
 // 山东的
 import ContainerBorder1 from './ContainerBorder1'
 import ContainerBorder2 from './ContainerBorder2'
@@ -24,6 +26,8 @@ export default {
     Vue.component('ContainerCenterTitle', ContainerCenterTitle)
     Vue.component('Container2', Container)
     Vue.component('ContainerWithIcon', ContainerWithIcon)
+    Vue.component('ContainerFour', ContainerFour)
+    Vue.component('ContainerSmallTitle', ContainerSmallTitle)
     // 山东的
     Vue.component('ContainerBorder1', ContainerBorder1)
     Vue.component('ContainerBorder2', ContainerBorder2)

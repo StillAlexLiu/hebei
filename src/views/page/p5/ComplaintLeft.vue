@@ -5,28 +5,13 @@
         </template>
         <div slot='calc' class=' full' v-if='select.value'>
             <div title='投诉举报趋势分析' class='h-2-8'>
-                <container title='投诉举报趋势分析' class='full-height w-1-3'>
-                    <div class='complaints_box'>
-                        <div class='event_cont'>
-                            <p>事件总数(件)</p>
-                            <span class='event_total'>{{eventTotal[select.value].value}}</span>
-                        </div>
-                        <div class='event_cont'>
-                            <p>同比</p>
-                            <span style='color:#F76B1C'>{{eventTotal[select.value].currentRatio}}%</span>
-                            <img class='img' v-bind:src='eventTotal[select.value].eventImg' alt/>
-                        </div>
-                        <div class='event_cont'>
-                            <p>环比</p>
-                            <span style='color:#F76B1C'>{{eventTotal[select.value].relativeRatio}}%</span>
-                            <img class='img' v-bind:src='eventTotal[select.value].eventImg' alt/>
-                        </div>
+                <container title='投诉举报趋势分析' class='full-height '>
+                    <InfoBox class="w-1-3" :data="eventTotal[select.value]"/>
+                    <div class='full-height w-2-3'>
+                        <ChartsBarLine :data="chart5[select.value]" :dimensions="['name','value']" :legend="['事件数量']"
+                                       :units="['单位：件']" :type="['line']" is-area :colors="['#00EEE0']"/>
                     </div>
                 </container>
-                <div class='full-height w-2-3'>
-                    <complaintLine :xdata='chart5[select.value].xdata'
-                                   :ydata='chart5[select.value].ydata'></complaintLine>
-                </div>
             </div>
             <div class='h-3-8'>
                 <container class='w-1-2 full-height' title='各市场所投诉举报分布'>
@@ -34,18 +19,18 @@
                                   :ydata='chart6[select.value].ydata'></complaintBar>
                 </container>
                 <container class='w-1-2 full-height' title='投诉举报来源分析'>
-                    <complaintPie :data='chart7[select.value]'></complaintPie>
+                    <ChartsPie :data='chart7[select.value]' :show-value="true"/>
                 </container>
             </div>
             <div class='h-3-8'>
                 <container class='w-1-2 full-height' title='七类集中场所数据分布'>
-                    <complaintCircle :data='chart8[select.value]'></complaintCircle>
+                    <echartsHollowPie :data='chart8[select.value]'></echartsHollowPie>
                 </container>
                 <container class='w-1-2 full-height' title='商业综合体投诉举报top10'>
                     <div class='complain_spread'>
                         <table class='discharge_table'>
                             <thead>
-                            <tr style='background:#12475E;'>
+                            <tr>
                                 <th v-for='(item,index) in tableList' :key='index'>{{item.value}}</th>
                             </tr>
                             </thead>
@@ -68,18 +53,21 @@
 </template>
 
 <script>
-import complaintLine from './compontes/complaintLine'
 import complaintBar from './compontes/complaintBar'
-import complaintPie from './compontes/complaintPie'
-import complaintCircle from './compontes/complaintCircle'
+import InfoBox from './compontes/InfoBox'
+import ChartsBarLine from '../p0/components/ChartsBarLine'
+import Mock from 'mockjs'
+import ChartsPie from '../p2/compontes/ChartsPie'
+import echartsHollowPie from '../p2/compontes/echartsHollowPie'
 
 export default {
   name: 'ComplaintLeft',
   components: {
-    complaintLine,
+    ChartsPie,
+    ChartsBarLine,
+    InfoBox,
     complaintBar,
-    complaintPie,
-    complaintCircle
+    echartsHollowPie
   },
   data () {
     return {
@@ -118,96 +106,115 @@ export default {
         }
       ],
       chart5: [
-        {
-          xdata: [
-            '2019-02',
-            '2019-03',
-            '2019-04',
-            '2019-05',
-            '2019-06',
-            '2019-07',
-            '2019-08',
-            '2019-09',
-            '2019-10',
-            '2019-11',
-            '2019-12',
-            '2020-01'
-          ],
-          ydata: [
-            '9310',
-            '3579',
-            '5498',
-            '4586',
-            '4488',
-            '3752',
-            '3782',
-            '3311',
-            '3545',
-            '3986',
-            '3943',
-            '4230'
-          ]
-        },
-        {
-          xdata: [
-            '2019-02',
-            '2019-03',
-            '2019-04',
-            '2019-05',
-            '2019-06',
-            '2019-07',
-            '2019-08',
-            '2019-09',
-            '2019-10',
-            '2019-11',
-            '2019-12',
-            '2020-01'
-          ],
-          ydata: [
-            '2310',
-            '3279',
-            '5398',
-            '1586',
-            '2488',
-            '4752',
-            '3722',
-            '3211',
-            '1545',
-            '2986',
-            '3943',
-            '3230'
-          ]
-        },
-        {
-          xdata: [
-            '2019-02',
-            '2019-03',
-            '2019-04',
-            '2019-05',
-            '2019-06',
-            '2019-07',
-            '2019-08',
-            '2019-09',
-            '2019-10',
-            '2019-11',
-            '2019-12',
-            '2020-01'
-          ],
-          ydata: [
-            '3310',
-            '1279',
-            '2398',
-            '1786',
-            '2458',
-            '4252',
-            '7722',
-            '2211',
-            '5545',
-            '4986',
-            '2943',
-            '6230'
-          ]
-        }
+        [{
+          name: '2019.02',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.03',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.04',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.05',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.06',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.07',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.08',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.09',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.10',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.11',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.12',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2020.01',
+          value: Mock.Random.natural(2000, 3500)
+        }], [{
+          name: '2019.02',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.03',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.04',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.05',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.06',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.07',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.08',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.09',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.10',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.11',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.12',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2020.01',
+          value: Mock.Random.natural(2000, 3500)
+        }], [{
+          name: '2019.02',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.03',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.04',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.05',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.06',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.07',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.08',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.09',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.10',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.11',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2019.12',
+          value: Mock.Random.natural(2000, 3500)
+        }, {
+          name: '2020.01',
+          value: Mock.Random.natural(2000, 3500)
+        }]
       ],
       chart6: [
         {
@@ -748,54 +755,12 @@ export default {
 <style scoped lang='less'>
 .ComplaintLeft {
     .complaints_box {
-        padding-top: 2rem;
-        height: 21rem;
-        width: 45rem;
-        margin-top: 2rem;
-        border: 0.1rem solid #22aec5;
-        font-size: 3rem;
-        padding-left: 1rem;
-        padding-right: 2rem;
-        box-sizing: border-box;
 
-        .event_cont {
-            width: 100%;
-            overflow: hidden;
-            height: 5rem;
-            margin-top: 0.5rem;
-
-            .event_total {
-                color: #1C92D2;
-                margin-left: 2rem;
-            }
-
-            .img {
-                width: 3rem;
-                height: 3rem;
-                margin-top: -1rem;
-            }
-
-            p {
-                float: left;
-                color: #fff;
-                margin: 0;
-            }
-
-            span {
-                color: #1c92d2;
-                float: left;
-                font-weight: bolder;
-                margin-left: 8rem;
-            }
-        }
     }
 
     .complain_spread {
         .discharge_table {
             width: 98%;
-            background: rgba(30, 141, 176, 0.2);
-            margin-top: 1.5rem;
-            border: 0.33rem solid #1c92d2;
             box-sizing: border-box;
             overflow: auto;
             position: relative;
@@ -818,15 +783,15 @@ export default {
                 display: table;
                 width: 100%;
                 table-layout: fixed;
+                background: #3D94D5;
             }
 
             th {
                 // width: 2.25rem;
-                height: 4.2rem;
-                font-size: 2.2rem;
-                font-weight: bold;
-                color: rgba(255, 255, 255, 1);
-                line-height: 2rem;
+                height: 50px;
+                font-size: 22px;
+                color: #fff;
+                /*line-height: 50*/
 
                 &:first-child {
                     width: 7rem;
@@ -839,14 +804,12 @@ export default {
 
             tr {
                 font-size: 2rem;
-                font-weight: bold;
                 color: rgba(255, 255, 255, 1);
                 line-height: 3.2rem;
                 text-align: center;
 
                 td {
-                    padding: 0.3rem;
-                    font-size: 2rem;
+                    font-size: 22px;
                     word-break: keep-all;
                     white-space: nowrap;
                     overflow: hidden;
@@ -862,7 +825,6 @@ export default {
             }
 
             .tableTr {
-                border-bottom: 0.3rem solid rgba(black, 0.7);
             }
         }
     }

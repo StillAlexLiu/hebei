@@ -1,5 +1,5 @@
 <template>
-    <div class="full-width full-height">
+    <div class=" ft">
         <TopHeader class="header full-width"/>
         <PageRouterView class="view full-width"/>
     </div>
@@ -16,6 +16,13 @@ export default {
 </script>
 
 <style scoped lang="less">
+.ft {
+    overflow: hidden;
+    width: 1920*7/2px;
+    height: 1080*3/2px;
+    background-color: #1A1A2C;
+}
+
 @height: 100px;
 .header {
     height: @height;

@@ -1,10 +1,12 @@
 <template>
-<div class="accross_bar">
-    <v-chart class="full-width" :autoresize='true' :options='option'/>
-    <div class="back">
-        {{data.name}}
+    <div class="accross_bar">
+        <v-chart class="full-width" :autoresize='true' :options='option'/>
+        <div class="ab-can">
+            <div class="back">
+                {{data.name}}
+            </div>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -73,7 +75,7 @@ export default {
             name: '数量',
             type: 'bar',
             stack: '总量',
-            barWidth: 20,
+            barWidth: 34,
             label: {
               normal: {
                 show: true,
@@ -91,9 +93,9 @@ export default {
             },
             itemStyle: {
               normal: {
-                barBorderWidth: '0',
-                barBorderRadius: [10, 10, 10, 10],
-                barBorderColor: 'rgb(0,255,132)',
+                barBorderWidth: '1',
+                // barBorderRadius: [10, 10, 10, 10],
+                // barBorderColor: 'rgb(0,255,132)',
                 color: '#F98E1A'
               },
               emphasis: {
@@ -114,23 +116,32 @@ export default {
 </script>
 
 <style scoped lang='less'>
-.accross_bar{
+.accross_bar {
     width: 100%;
     height: 100%;
     background-image: url('./img/11.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position: relative;
-    .back{
+
+    .ab-can {
         position: absolute;
-        top: 73%;
-        width: 250px;
-        height: 45px;
-        left: 33%;
-        background-color: #2DA8C1;
-        line-height: 45px;
-        font-size: 2.5rem;
+        width: 100%;
+        height: 60px;
+        bottom: 100px;
+    }
+
+    .back {
+        width: 220px;
+        height: 68px;
+        background-image: url('./img/44.png');
+        background-size: 220px 68px;
+        line-height: 68px;
+        font-size: 36px;
+        font-weight: bold;
         text-align: center;
+        bottom: 0;
+        margin: 0 auto;
     }
 }
 </style>

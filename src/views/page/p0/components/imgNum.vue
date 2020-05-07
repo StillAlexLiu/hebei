@@ -1,54 +1,66 @@
 <template>
-    <div class="echartsTwoPie2">
-        <img src="../components/img/图标.png" alt="">
-        <span class="span_name2">{{data.name}}</span>
-        <span class="span_num2">{{data.num}} </span>
+    <div class="imgNum full">
+        <div v-for="(item,index) in data" :key="index" class="item">
+            <div class="w-1-3 img full-height dt">
+                <span class="dc"><img :src="item.img" alt=""></span>
+            </div>
+            <div class="w-2-3 text full-height dt">
+                <div class="name dr"><span class="dc">{{item.name}}</span></div>
+                <div class="value dr "><span class="dc number-font">{{item.value}}</span></div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
 export default {
-  name: 'echarts-imgNum',
-  props: ['data'],
-  data () {
-    return {
-
+  name: 'imgNum',
+  props: {
+    data: {
+      type: Array,
+      default: () => {
+        return []
+      }
     }
+  },
+  data () {
+    return {}
   }
 }
 </script>
 
 <style lang="less">
-    .echartsTwoPie2{
-        width: 100%;
-        height: 37%;
-        border: 3px solid rgb(1,9,99);
-        margin: 8% 0 0 0;
-        background-image: url('./img/背景框.png');
-        background-size:100% 100%;
-        background-repeat: no-repeat;
-            img{
-                width: 25%;
-                height: 67%;
-                margin-top: 5.5%;
-                float: left;
-                margin-right: 3rem;
-                margin-left: 3rem;
+.imgNum {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    .item {
+        flex: 0.4;
+        background-image: url('./img/bg-zf@2x.png');
+        background-size: 100% 100%;
+        padding: 30px 0;
+
+        .img {
+            text-align: center;
+
+            img {
+                height: 84px;
             }
-            .span_name2{
-                font-size: 2.5rem;
-                color: white;
-                line-height: 4rem;
-                display: block;
-                margin-top: 2.5rem;
-                font-weight: bold;
+        }
+
+        .text {
+
+            .name {
+                font-size: 28px;
             }
-            .span_num2{
-                color:rgb(121 ,223, 299);
-                font-size: 3rem;
-                float: left;
-                display: block;
-                margin-top: 1rem;
-                font-weight: bold;
+
+            .value {
+                > * {
+                    font-size: 60px;
+                }
             }
+        }
     }
+
+}
 </style>

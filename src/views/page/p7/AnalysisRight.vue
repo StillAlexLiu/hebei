@@ -9,12 +9,12 @@
                     <leftImages :data='leftImage'></leftImages>
                 </container>
                 <container class="full-height w-1-2" title="案件类型">
-                    <echartsPie :data='hellowPie'></echartsPie>
+                    <ChartsPie :data='hellowPie' is-pie/>
                 </container>
             </div>
             <div class="h-3-8">
                 <container class="full-height w-1-2" title="案件主体">
-                    <echartshollowPie :data='hellowPie2'></echartshollowPie>
+                    <ChartsPie :data='hellowPie2'/>
                 </container>
                 <container class="full-height w-1-2" title="案件办理">
                     <threePie :data='threePie'></threePie>
@@ -22,7 +22,8 @@
             </div>
             <div class="h-3-8">
                 <container class="full-height w-1-2" title="适用程序">
-                    <routine :data='tableData'></routine>
+<!--                    <routine :data='tableData'></routine>-->
+                    <ChartsFunnel :data='tableData'/>
                 </container>
                 <container class="full-height w-1-2" title="复议诉讼">
                     <div class="w-1-4 h-6-8" v-for="(item, index) in liquidfillData[itemD.key]" :key="index">
@@ -37,13 +38,12 @@
 
 <script>
 import leftImages from './components/leftImage'
-import echartsPie from './components/echarts-pie'
-import echartshollowPie from './components/echarts-hollowPie'
 import threePie from './components/threePie'
-import routine from './components/routine'
 import radioBtn from './components/radioButton'
 import Mock from 'mockjs'
 import echartsliquidfill from '../p2/compontes/echarts-liquidfill'
+import ChartsPie from '../p2/compontes/ChartsPie'
+import ChartsFunnel from './components/ChartsFunnel'
 
 export default {
   name: 'AnalysisRight',
@@ -80,94 +80,90 @@ export default {
           }
         ]
       },
-      hellowPie: {
-        pieData: [
-          {
-            value: Mock.Random.natural(1, 1000),
-            name: '医疗器械'
-          }, {
-            value: Mock.Random.natural(1, 1000),
-            name: '药品安全'
-          }, {
-            value: Mock.Random.natural(1, 1000),
-            name: '食品安全'
-          }, {
-            value: Mock.Random.natural(1, 1000),
-            name: '物价'
-          }, {
-            value: Mock.Random.natural(1, 1000),
-            name: '标准化'
-          }, {
-            value: Mock.Random.natural(1, 1000),
-            name: '计量'
-          }, {
-            value: Mock.Random.natural(1, 1000),
-            name: '产品质量'
-          }, {
-            value: Mock.Random.natural(1, 1000),
-            name: '合同'
-          }
-        ]
-      },
-      hellowPie2: {
-        pieData: [
-          {
-            value: Mock.Random.natural(1, 1000),
-            name: '公有制企业'
-          }, {
-            value: Mock.Random.natural(1, 1000),
-            name: '私营企业'
-          }, {
-            value: Mock.Random.natural(1, 1000),
-            name: '外资企业'
-          }, {
-            value: Mock.Random.natural(1, 1000),
-            name: '公司'
-          }, {
-            value: Mock.Random.natural(1, 1000),
-            name: '个体工商户'
-          }, {
-            value: Mock.Random.natural(1, 1000),
-            name: '自然人'
-          }
-        ]
-      },
+      hellowPie: [
+        {
+          value: Mock.Random.natural(1, 1000),
+          name: '医疗器械'
+        }, {
+          value: Mock.Random.natural(1, 1000),
+          name: '药品安全'
+        }, {
+          value: Mock.Random.natural(1, 1000),
+          name: '食品安全'
+        }, {
+          value: Mock.Random.natural(1, 1000),
+          name: '物价'
+        }, {
+          value: Mock.Random.natural(1, 1000),
+          name: '标准化'
+        }, {
+          value: Mock.Random.natural(1, 1000),
+          name: '计量'
+        }, {
+          value: Mock.Random.natural(1, 1000),
+          name: '产品质量'
+        }, {
+          value: Mock.Random.natural(1, 1000),
+          name: '合同'
+        }
+      ],
+      hellowPie2: [
+        {
+          value: Mock.Random.natural(1, 1000),
+          name: '公有制企业'
+        }, {
+          value: Mock.Random.natural(1, 1000),
+          name: '私营企业'
+        }, {
+          value: Mock.Random.natural(1, 1000),
+          name: '外资企业'
+        }, {
+          value: Mock.Random.natural(1, 1000),
+          name: '公司'
+        }, {
+          value: Mock.Random.natural(1, 1000),
+          name: '个体工商户'
+        }, {
+          value: Mock.Random.natural(1, 1000),
+          name: '自然人'
+        }
+      ],
       threePie: [
         {
-          color: '#F89535',
+          img: require('./components/img/i1.png'),
           name: '办理中',
           num: Mock.Random.natural(1, 100)
         }, {
-          color: '#48BB7F',
+          img: require('./components/img/i2.png'),
           name: '已办理',
           num: Mock.Random.natural(1, 100)
         }, {
-          color: '#48BB7F',
+          img: require('./components/img/i3.png'),
           name: '平均办理时间',
-          num: Mock.Random.natural(1, 100)
+          num: ''
         }
       ],
       tableData: [
         {
-          name: '责令改正（件）',
-          num: Mock.Random.natural(1, 100)
+          name: '责令改正',
+          value: Mock.Random.natural(1, 2000)
         }, {
           name: '当场处罚案件',
-          num: Mock.Random.natural(1, 100)
+          value: Mock.Random.natural(1, 2000)
         }, {
           name: '一般程序案件',
-          num: Mock.Random.natural(1, 100)
+          value: Mock.Random.natural(1, 3000)
         }, {
           name: '特殊程序案件',
-          num: Mock.Random.natural(1, 100)
+          value: Mock.Random.natural(1, 5000)
         }
       ],
       radioData: [{
-        name: '复议案件',
+        name: '复议案件(93件)',
         key: 'reconsider',
         active: true
       }, {
-        name: '诉讼案件',
+        name: '诉讼案件(31件)',
         key: 'lawsuit',
         active: false
       }],
@@ -187,11 +183,10 @@ export default {
     }
   },
   components: {
+    ChartsFunnel,
+    ChartsPie,
     leftImages,
-    echartsPie,
-    echartshollowPie,
     threePie,
-    routine,
     radioBtn,
     echartsliquidfill
   }

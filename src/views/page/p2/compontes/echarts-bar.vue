@@ -1,133 +1,204 @@
 <template>
-    <v-chart class="full-width" :autoresize='true' :options='options'/>
+    <chart :options='options'/>
 </template>
 
 <script>
 export default {
-  name: 'ChartBar',
-  props: ['xdata', 'ydata'],
-  data () {
-    return {
-      options: {}
-    }
-  },
-  watch: {
-    xdata: {
-      immediate: true,
-      deep: true,
-      handler: function () {
-        this.options = this.getOption(this.data)
+  name: 'ChartBarLine',
+  props: {
+    title: {
+      type: String,
+      default: ''
+    },
+    data: {
+      type: Array,
+      default: () => {
+        return []
       }
+    },
+    dimensions: {
+      type: Array,
+      default: () => {
+        return null
+      }
+    },
+    units: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    colors: {
+      type: Array,
+      default: () => {
+        return null
+      }
+    },
+    type: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    legend: {
+      type: Array,
+      default: () => {
+        return null
+      }
+    },
+    borderRadius: {
+      type: Boolean,
+      default: true
+    },
+    barWidth: {
+      type: Number,
+      default: 20
+    },
+    twoAxis: {
+      type: Boolean,
+      default: true
+    },
+    lineWithCircle: {
+      type: Boolean,
+      default: true
+    },
+    isArea: {
+      type: Boolean,
+      default: false
+    },
+    smooth: {
+      type: Boolean,
+      default: false
+    },
+    rotate: {
+      type: Number,
+      default: 0
     }
   },
-  methods: {
-    getOption (data) {
-      return {
-        tooltip: {},
-        grid: {
-          top: '12%',
-          left: '1%',
-          right: '1%',
-          bottom: '1%',
-          containLabel: true
-        },
-        legend: {
-          show: false
-        },
-        xAxis: [
-          {
-            type: 'category',
-            boundaryGap: true,
-            axisLine: {
-              // 坐标轴轴线相关设置。数学上的x轴
-              show: true,
-              lineStyle: {
-                color: '#f9f9f9'
-              }
-            },
-            axisLabel: {
-              // 坐标轴刻度标签的相关设置
-              interval: 0,
-              rotate: 20,
-              textStyle: {
-                color: '#d1e6eb',
-                margin: 30,
-                fontSize: 20
-              }
-            },
-            axisTick: {
-              show: false
-            },
-            data: this.xdata
+  computed: {
+    options () {
+      const series = []
+      const yAxis = []
+      for (let i = 0; i < this.type.length; i++) {
+        const item = {
+          type: this.type[i],
+          name: this.legend[i],
+          itemStyle: {
+            normal: {}
           }
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            min: 0,
-            splitNumber: 7,
-            nameLocation: 'end',
-            nameTextStyle: {
-              color: 'white'
-            },
-            splitLine: {
-              show: true,
-              lineStyle: {
-                color: '#0a3256'
+        }
+        if (this.twoAxis) {
+          item.yAxisIndex = i
+        }
+        if (this.type[i] === 'bar') {
+          item.barWidth = this.barWidth
+
+          if (this.borderRadius) {
+            item.itemStyle.normal.barBorderRadius = [30, 30, 0, 0]
+          }
+        }
+        if (this.type[i] === 'line') {
+          if (this.lineWithCircle) {
+            item.symbolSize = 8
+            item.itemStyle = {
+              borderColor: '#fff',
+              borderWidth: 1
+            }
+          } else {
+            item.symbolSize = 0
+          }
+          if (this.smooth) {
+            item.smooth = true
+          }
+          if (this.isArea) {
+            item.areaStyle = {
+              color: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [{
+                  offset: 0, color: this.colors[i]
+                }, {
+                  offset: 1, color: 'rgba(0,0,0,0)'
+                }],
+                global: false
               }
-            },
-            axisLine: {
-              show: false
-            },
-            axisLabel: {
-              margin: 20,
-              textStyle: {
-                color: '#d1e6eb'
-              }
-            },
-            axisTick: {
-              show: false
             }
           }
-        ],
-        series: [
-          {
-            name: '最新注册量',
-            type: 'bar',
-            barWidth: 30,
-            tooltip: {
-              show: false
+        }
+        series.push(item)
+        if (this.twoAxis) {
+          yAxis.push({
+            name: this.units[i],
+            min: 0,
+            nameLocation: 'end',
+            nameGap: 6,
+            nameTextStyle: {
+              fontSize: 12
             },
-            label: {
+            splitLine: {
+              show: i === 0
+            },
+            show: true,
+            // x: 'center',
+            type: 'value'
+          })
+        } else {
+          if (i === 0) {
+            yAxis.push({
+              name: this.units[i],
+              min: 0,
+              nameLocation: 'end',
+              nameGap: 6,
+              nameTextStyle: {
+                fontSize: 12
+              },
+              splitLine: {
+                show: i === 0
+              },
               show: true,
-              position: 'top',
-              textStyle: {
-                color: '#fff',
-                fontSize: 20
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: function (params) {
-                  const colorList = [
-                    '#4A90E2',
-                    '#54AFED',
-                    '#22AEC5',
-                    '#22C4B6',
-                    '#205420',
-                    '#61EADF',
-                    '#F09077'
-                  ]
-                  return colorList[params.dataIndex]
-                }
-              }
-            },
-            data: this.ydata
+              // x: 'center',
+              type: 'value'
+            })
           }
-        ]
+        }
+      }
+      console.log(this.legend)
+      console.log(series)
+      console.log(yAxis)
+      return {
+        color: this.colors,
+        title: {
+          text: this.title
+        },
+        legend: {
+          show: true,
+          left: 'right',
+          selectedMode: false,
+          itemWidth: 13,
+          itemHeight: 7,
+          data: this.legend
+        },
+        dataset: {
+          dimensions: this.dimensions,
+          source: this.data
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: true,
+          axisLabel: {
+            interval: 0
+            // rotate: -12
+          }
+        },
+        yAxis: yAxis,
+        series: series
       }
     }
-  }
+  },
+  methods: {}
 }
 </script>
 

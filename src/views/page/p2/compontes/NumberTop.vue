@@ -1,79 +1,101 @@
 <template>
-  <div class="number-group full-height  full-width">
-    <container-border3 v-for="(item,index) in data2" :key="index" class="item">
-      <img :src="imgs[index].imgUrl" alt="" class="title_img">
-      <p class="title_name2">{{item.title}}</p>
-      <div class="box_box">
-        <p class="title_name">{{item.name1}}</p>
-        <p class="title_num">{{item.num1}}</p>
-      </div>
-      <div class="box">
-        <p class="title_name">{{item.name2}}</p>
-        <p class="title_num title_num3">{{item.num2}}</p>
-      </div>
-    </container-border3>
-  </div>
+    <div class="number-group full-height  full-width">
+        <container-border31 v-for="(item,index) in data" :key="index" class="item">
+            <div class="full item-in">
+                <div class="h-1-2 b-line">
+                    <div class="w-1-2 full-height">
+                        <div class="img" :style="{backgroundImage:'url('+item.img+')'}">
+                            {{ item.short }}
+                        </div>
+                    </div>
+                    <div class="w-1-2 full-height title">
+                        {{ item.title }}
+                    </div>
+                </div>
+                <div class="h-1-2">
+                    <div class="h-1-2 sub-block">
+                        <div class="name w-1-2">{{item.data[0].name}}</div>
+                        <div class="value w-1-2 number-font">{{item.data[0].value}}</div>
+                    </div>
+                    <div class="h-1-2 sub-block">
+                        <div class="name w-1-2">{{item.data[1].name}}</div>
+                        <div class="value w-1-2 number-font">{{item.data[1].value}}</div>
+                    </div>
+                </div>
+            </div>
+        </container-border31>
+    </div>
 </template>
 
 <script>
 
 export default {
   name: 'NumberGroup',
-  props: ['data2', 'imgs'],
-  data: () => {
-    return {
+  props: {
+    data: {
+      type: Array,
+      default: () => {
+        return []
+      }
     }
+  },
+  data: () => {
+    return {}
   }
 }
 </script>
 
 <style scoped lang="less">
 .number-group {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  .box_box{
-      width: 100%;
-      height: 3rem;
-  }
-  .title_img{
-    width: 5rem;
-    height: 5rem;
-    margin:1rem auto;
-    display: block;
-  }
-  .title_name{
-    font-size: 2rem;
-    margin: 0;
-    float: left;
-    line-height: 2rem;
-    margin: 1rem 1rem 0 7rem;
-  }
-  .title_name2{
-    font-size: 3rem;
-    display: block;
-    text-align: center;
-    margin: 0;
-    line-height: 4rem;
-  }
-  .title_num{
-    font-size: 3rem;
-    color:rgb(12,226,81);
-    line-height: 4rem;
-    font-family:SFNSDisplay;
-    margin-left:2rem;
-  }
-  .title_num3{
-      color:rgb(251,122,31)
-  }
-  .title_unit{
-    font-size: 18px;
-    color:#79DFEF;
-  }
-  > .item {
-    flex-grow: 1;
-    margin: 3rem 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px 0;
 
-  }
+    > .item {
+        text-align: center;
+        flex: 1;
+
+        .item-in {
+            padding: 10px;
+
+            .b-line {
+                border-bottom: 2px solid rgba(74, 144, 226, 0.31);
+                padding-top: 35px;
+            }
+
+            .title {
+                font-size: 24px;
+                line-height: 84px;
+            }
+
+            .img {
+                width: 84px;
+                height: 84px;
+                margin: 0 auto;
+                background-size: 84px 84px;
+                line-height: 84px;
+                font-weight: bold;
+                font-size: 40px;
+            }
+
+            .sub-block {
+                padding: 10px 30px;
+
+                .name {
+                    font-size: 24px;
+                    text-align: left;
+                    line-height: 60px;
+                }
+
+                .value {
+                    color: #79DFEF;
+                    line-height: 60px;
+                    text-align: right;
+                    font-size: 36px;
+                }
+            }
+        }
+    }
 }
 </style>

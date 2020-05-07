@@ -1,5 +1,5 @@
 <template>
-    <v-chart class="full-width" :autoresize='true' :options='options'/>
+    <chart :options='options'/>
 </template>
 
 <script>
@@ -11,27 +11,25 @@ export default {
       default: () => {
         return []
       }
+    },
+    legend: {
+      type: String,
+      default: '数量'
+    },
+    color: {
+      type: String,
+      default: '#FF98A4'
+    },
+    barWidth: {
+      type: Number,
+      default: 30
     }
   },
-  data () {
-    return {
-      options: {}
-    }
-  },
-  watch: {
-    data: {
-      immediate: true,
-      deep: true,
-      handler: function () {
-        this.options = this.getOption(this.data)
-      }
-    }
-  },
-  methods: {
-    getOption (data) {
+  computed: {
+    options () {
       return {
         legend: {
-          data: ['数量'],
+          data: [this.legend],
           // top: '3%',
           right: '5%',
           position: 'center',
@@ -39,13 +37,10 @@ export default {
           itemHeight: 10,
           selectedMode: false,
           itemGap: 10,
-          textStyle: {
-            fontSize: 20,
-            color: '#fff'
-          }
+          textStyle: {}
         },
         dataset: {
-          source: data
+          source: this.data
         },
         grid: {
           left: '2%',
@@ -66,10 +61,7 @@ export default {
           axisLabel: {
             interval: 0,
             rotate: 0,
-            textStyle: {
-              color: '#fff',
-              fontSize: 18
-            }
+            textStyle: {}
           },
           splitLine: {
             show: false
@@ -81,9 +73,7 @@ export default {
         yAxis: [
           {
             nameTextStyle: {
-              padding: [-2, 0, -1, -30],
-              fontSize: 15,
-              color: '#fff'
+              padding: [-2, 0, -1, -30]
             },
             show: true,
             x: 'center',
@@ -96,10 +86,6 @@ export default {
             },
             axisLabel: {
               // interval:0,
-              textStyle: {
-                color: '#fff',
-                fontSize: 18
-              }
             },
             splitLine: {
               lineStyle: {
@@ -109,10 +95,7 @@ export default {
           },
           {
             name: '',
-            nameTextStyle: {
-              color: '#fff',
-              fontSize: 22
-            },
+            nameTextStyle: {},
             show: true,
             x: 'center',
             type: 'value',
@@ -125,10 +108,7 @@ export default {
             axisLabel: {
               // interval:0,
               formatter: '{value}%',
-              textStyle: {
-                color: '#fff',
-                fontSize: 24
-              }
+              textStyle: {}
             },
             splitLine: {
               show: false,
@@ -144,29 +124,26 @@ export default {
               normal: {
                 show: true,
                 position: 'top',
-                textStyle: {
-                  color: '#fff',
-                  fontSize: 22
-                }
+                textStyle: {}
               }
             },
-            name: '数量',
+            name: this.legend,
             type: 'pictorialBar',
-            barWidth: '80%',
+            barWidth: this.barWidth,
             symbol: 'rect',
             itemStyle: {
               normal: {
-                color: '#3D9AEE'
+                color: this.color
               }
             },
             symbolRepeat: true,
-            symbolSize: [50, 8],
+            symbolSize: [this.barWidth, 15],
             symbolMargin: 5
           },
           {
             name: '',
             type: 'pictorialBar',
-            barWidth: '80%',
+            barWidth: this.barWidth,
             barGap: '-100%',
             symbol: 'rect',
             itemStyle: {
@@ -175,7 +152,7 @@ export default {
               }
             },
             symbolRepeat: true,
-            symbolSize: [50, 8],
+            symbolSize: [this.barWidth, 15],
             symbolMargin: 5
           }
         ]

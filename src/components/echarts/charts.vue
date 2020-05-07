@@ -21,7 +21,7 @@ export default {
       defaultOption: {
         title: {
           textStyle: {
-            fontSize: 14,
+            fontSize: 24,
             fontWeight: 'normal'
           }
         },

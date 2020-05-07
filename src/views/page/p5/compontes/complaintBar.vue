@@ -1,27 +1,13 @@
 <template>
-  <v-chart class='full-width' :autoresize='true' :options='options' />
+    <chart :options='options'/>
 </template>
 
 <script>
 export default {
   name: 'ChartBar',
   props: ['xdata', 'ydata'],
-  data () {
-    return {
-      options: {}
-    }
-  },
-  watch: {
-    xdata: {
-      immediate: true,
-      deep: true,
-      handler: function () {
-        this.options = this.getOption(this.data)
-      }
-    }
-  },
-  methods: {
-    getOption () {
+  computed: {
+    options () {
       return {
         tooltip: {},
         grid: {
@@ -38,13 +24,13 @@ export default {
           icon: 'stack',
           itemWidth: 10,
           itemHeight: 10,
-          textStyle: {
-            color: '#fff',
-            fontSize: 24
-          },
-          nameTextStyle: {
-            color: '#fff'
-          },
+          // textStyle: {
+          //   color: '#fff',
+          //   fontSize: 24
+          // },
+          // nameTextStyle: {
+          //   color: '#fff'
+          // },
           data: ['投诉举报数量']
         },
         xAxis: [
@@ -92,11 +78,11 @@ export default {
             },
             axisLabel: {
               show: true,
-              interval: 0,
-              textStyle: {
-                color: '#fff',
-                fontSize: 20
-              }
+              interval: 0
+              // textStyle: {
+              //   color: '#fff',
+              //   fontSize: 20
+              // }
             },
             axisTick: {
               show: false
@@ -113,11 +99,11 @@ export default {
             label: {
               show: true,
               position: 'right',
-              formatter: '{c}件',
-              textStyle: {
-                color: '#fff',
-                fontSize: 20
-              }
+              formatter: '{c}件'
+              // textStyle: {
+              //   color: '#fff',
+              //   fontSize: 20
+              // }
             },
             name: '投诉举报数量',
             type: 'bar',
@@ -126,7 +112,7 @@ export default {
               normal: {
                 show: true,
                 color: '#277ace',
-                barBorderRadius: 50,
+                // barBorderRadius: 50,
                 borderWidth: 0,
                 borderColor: '#333'
               }

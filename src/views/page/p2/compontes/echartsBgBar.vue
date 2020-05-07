@@ -1,8 +1,5 @@
 <template>
-    <div class="bgBar">
-        <p>全省特种设备增长趋势</p>
-        <v-chart class="full-width chart" :autoresize='true' :options='options'/>
-    </div>
+    <v-chart class="full-width chart" :autoresize='true' :options='options'/>
 </template>
 
 <script>
@@ -31,7 +28,7 @@ export default {
           top: '12%',
           left: '5%',
           right: '5%',
-          bottom: '13%',
+          bottom: '6%',
           containLabel: true
         },
         legend: {
@@ -140,20 +137,5 @@ export default {
 
 <style scoped lang="less">
 .bgBar {
-    background-image: url('../compontes/img/png.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
-    >p {
-        color: white;
-        font-size: 1rem;
-        width: 100%;
-        display: inline-block;
-        text-align: center;
-        background-color: rgba(104, 166, 187, 0.5);
-        line-height: 4rem;
-        margin: 0;
-    }
 }
 </style>

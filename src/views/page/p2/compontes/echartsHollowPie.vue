@@ -1,31 +1,87 @@
 <template>
-    <v-chart class="full-width" :autoresize='true' :options='options'/>
+    <chart :options='options'/>
 </template>
 
 <script>
 export default {
   name: 'ChartBar',
-  props: ['data'],
-  data () {
-    return {
-      options: {}
-    }
-  },
-  watch: {
+  props: {
     data: {
-      immediate: true,
-      deep: true,
-      handler: function () {
-        this.options = this.getOption(this.data)
+      type: Array,
+      default: () => {
+        return {}
       }
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    img: {
+      type: String,
+      default: ''
     }
   },
-  methods: {
-    getOption (data) {
+  computed: {
+    options () {
+      const rich = {
+        white: {
+          color: '#79DFEF',
+          fontSize: 22,
+          align: 'left',
+          padding: [0, 0]
+        }
+      }
+      const placeHolderStyle = {
+        normal: {
+          label: {
+            show: false
+          },
+          labelLine: {
+            show: false
+          },
+          color: 'rgba(0, 0, 0, 0)',
+          borderColor: 'rgba(0, 0, 0, 0)',
+          borderWidth: 0
+        }
+      }
+      const data = []
+      let max = 0
+      for (let i = 0; i < this.data.length; i++) {
+        max += this.data[i].value * 1
+      }
+      for (let i = 0; i < this.data.length; i++) {
+        data.push({
+          value: this.data[i].value,
+          name: this.data[i].name,
+          itemStyle: {
+            normal: {
+              borderWidth: 1
+              // borderColor: color[i]
+            }
+          }
+        }, {
+          value: max / 50,
+          name: '',
+          itemStyle: placeHolderStyle
+        })
+      }
       return {
+        graphic: {
+          elements: [
+            {
+              type: 'image',
+              style: {
+                image: this.img,
+                height: 120,
+                width: 120
+              },
+              left: 'center',
+              top: 'middle'
+            }
+          ]
+        },
         title: {
-          text: this.data.name1,
-          subtext: this.data.name2,
+          text: this.title,
           x: 'center',
           y: 'center',
           textStyle: {
@@ -37,23 +93,37 @@ export default {
             fontSize: 22
           }
         },
+        grid: {
+          left: 0
+        },
         series: [
           {
             name: '访问来源',
             type: 'pie',
-            radius: ['50%', '70%'],
+            radius: ['65%', '70%'],
             center: ['50%', '50%'],
-            data: this.data.pieData,
-            hoverAnimation: false,
             label: {
-              color: 'white',
-              fontSize: 25
+              show: true,
+              position: 'outside',
+              color: '#ddd',
+              // label: {
+              //   color: 'white',
+              fontSize: 22,
+              // },
+              align: 'left',
+              alignTo: 'edge',
+              margin: 20,
+              formatter: function (params) {
+                if (params.name !== '') {
+                  return params.name + '\n{white|' + params.percent + '%}'
+                } else {
+                  return ''
+                }
+                // return params.percent
+              },
+              rich: rich
             },
-            labelLine: {
-              lineStyle: {
-                color: 'white'
-              }
-            }
+            data: data
           }
         ]
       }

@@ -1,9 +1,9 @@
 <template>
     <div class="full numberGroup">
         <div v-for="(item,index) in data" class="item" :key="index">
-            <img :src="item.img">
-            <p class="name">{{item.name}}</p>
-            <p class="value">{{item.value}}</p>
+            <div class="img h-3-7"><img :src="item.img"></div>
+            <div class="name h-2-7">{{item.name}}</div>
+            <div class="value h-2-7 number-font">{{item.value}}</div>
         </div>
     </div>
 </template>
@@ -37,24 +37,21 @@ export default {
         background-size: 100% 100%;
         background-position: center;
         flex-grow: 0;
-        flex-basis: 30%;
+        flex-basis: 28%;
         text-align: center;
         padding: 40px 0;
 
-        > img {
-            height: 20%;
+        img {
+            height: 114px;
         }
 
         .name {
             font-size: 34px;
-            font-weight: bold;
         }
 
         .value {
-            font-size: 90px;
-            font-weight: bold;
+            font-size: 82px;
             color: #79DFEF;
-            margin: 0;
         }
     }
 }

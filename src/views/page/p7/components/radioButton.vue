@@ -1,9 +1,10 @@
 <template>
-  <div class="btn-group">
-    <div v-for="(item,index) in data " :key="index" :class="selectIndex===index?'active':''" @click="click(data,index)">
-      {{item.name}}
+    <div class="btn-group">
+        <div v-for="(item,index) in data " :key="index" :class="selectIndex===index?'active':''"
+             @click="click(data,index)">
+            {{item.name}}
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -51,20 +52,23 @@ export default {
 
 <style scoped lang="less">
 .btn-group {
-  padding: 0.3rem 1rem;
-  display: inline-block;
-  margin-left: 15rem;
-  > div {
-    float: left;
-    width: 18rem;
-    height: 100%;
-    font-size: 2rem;
-    line-height: 2.4rem;
-    border: 0.1rem solid #22aec5;
-    text-align: center;
-    &.active {
-      background-color: rgba(30, 141, 176, 0.59);
+    height: 50px;
+    display: inline-block;
+    width: 100%;
+
+    > div {
+        float: left;
+        width: 50%;
+        height: 100%;
+        font-size: 22px;
+        line-height: 50px;
+        border: 1px solid #4F85DF;
+        text-align: center;
+        background-color: #131D3A;
+
+        &.active {
+            background-color:#315FBC;
+        }
     }
-  }
 }
 </style>

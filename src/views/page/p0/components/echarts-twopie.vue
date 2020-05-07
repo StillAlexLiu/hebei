@@ -1,14 +1,18 @@
 <template>
     <div class="echartsTwoPie">
-        <div class="twoHeader">
-            <img :src="data.url" alt="">
-            <span class="span_name">{{data.name}}</span>
-            <span class="span_num">{{data.num}}</span>
+        <div class="twoHeader h-3-10">
+            <div class="w-1-2 full-height img">
+                <img :src="data.url" alt="">
+            </div>
+            <div class="w-1-2 full-height text ">
+                <div class="span_name h-1-3">{{data.name}}</div>
+                <div class="span_num h-2-3 number-font">{{data.num}}</div>
+            </div>
         </div>
-        <div class="w-1-2 heightH ">
+        <div class="w-1-2 heightH h-7-10">
             <slot name="slot1"></slot>
         </div>
-        <div class="w-1-2 heightH">
+        <div class="w-1-2 heightH h-7-10 " :class="border?'border-right':''">
             <slot name="slot2"></slot>
         </div>
     </div>
@@ -16,7 +20,18 @@
 <script>
 export default {
   name: 'echarts-twopie',
-  props: ['data'],
+  props: {
+    data: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    },
+    border: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {}
   }
@@ -27,43 +42,43 @@ export default {
 .echartsTwoPie {
     width: 100%;
     height: 100%;
-    border-right: 3px solid rgb(1, 9, 99);
-    padding-left: 2rem;
+    padding-top: 30px;
 
     .twoHeader {
-        width: 70%;
-        height: 30%;
-        display: block;
-        margin-left: 15%;
+        text-align: center;
+
+        .img {
+            text-align: right;
+            overflow: hidden;
+        }
+
+        .text {
+            text-align: left;
+            padding: 0 26px;
+        }
 
         img {
-            width: 15%;
-            height: 75%;
-            margin-left: 18%;
-            margin-top: 1.5%;
-            float: left;
-            margin-right: 3rem;
+            width: 81px;
+            height: 81px;
+            vertical-align: middle;
         }
 
         .span_name {
-            font-size: 2.5rem;
-            color: white;
-            line-height: 5rem;
-            display: block;
+            font-size: 24px;
+            color: #fff;
         }
 
         .span_num {
-            color: rgb(254, 105, 65);
-            font-size: 3rem;
-            float: left;
-            display: block;
+            color: #79DFEF;
+            font-size: 48px;
         }
     }
 
-    .heightH {
-        width: 50%;
-        height: 80%;
-        float: left;
+    .border-right {
+        background-image: linear-gradient(0, #1E8DB0, #1E8DB0);
+        background-size: 2px 40%;
+        background-position: right center;
+        background-repeat: no-repeat;
     }
 }
 </style>

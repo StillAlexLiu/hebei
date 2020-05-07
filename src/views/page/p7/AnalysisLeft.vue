@@ -18,13 +18,13 @@
                 <charaterlist :data='charaterlist2'/>
             </div>
             <div class="w-2-6 full-height">
-                <echartsHollowPie :data='hellowPie2'/>
+                <ChartsPie :data='hellowPie2' :is-pie="true"/>
             </div>
             <div class="w-1-6 full-height">
                 <charaterlist :data='charaterlist1'/>
             </div>
             <div class="w-2-6 full-height">
-                <echartsPie :data='hellowPie'/>
+                <ChartsPie :data='hellowPie'/>
             </div>
         </container>
         <div class="h-3-8">
@@ -33,7 +33,7 @@
             </container>
             <container class="full-height w-1-2" title="标准化建设">
                 <div class="w-3-7 full-height">
-                    <ChartPie :data="pieData"/>
+                    <ChartsPie :data="pieData" is-pie/>
                 </div>
                 <value-only class="w-4-7 full-height" :data="data3"/>
             </container>
@@ -45,30 +45,26 @@
 <script>
 import pnglist from './components/pnglist'
 import charaterlist from './components/charaterlist'
-import echartsHollowPie from './components/echarts-hollowPie'
-import echartsPie from './components/echarts-pie'
 import Mock from 'mockjs'
 import NumberGroup from './components/numberGroup'
-import ChartPie from './components/ChartPie'
 import ValueOnly from './components/valueOnly'
+import ChartsPie from '../p2/compontes/ChartsPie'
 
 export default {
   name: 'AnalysisLeft',
   components: {
+    ChartsPie,
     ValueOnly,
-    ChartPie,
     NumberGroup,
     pnglist,
-    charaterlist,
-    echartsHollowPie,
-    echartsPie
+    charaterlist
   },
   data () {
     return {
       chart1: [
         {
           imgurl: require('./components/img/1.png'),
-          name: '入网办理事项数',
+          name: '入网办理事项',
           num: '25',
           dw: '件',
           gl: '5'
@@ -107,7 +103,7 @@ export default {
           gl: '15'
         }, {
           imgurl: require('./components/img/7.png'),
-          name: '食品许可告知承诺数',
+          name: '食品许可告知承诺',
           num: '2560',
           dw: '件',
           gl: '5'
@@ -120,7 +116,7 @@ export default {
         }
       ],
       charaterlist1: {
-        name: '检验检测机构',
+        name: '检测机构情况',
         data: [
           {
             name: '总户数',
@@ -131,49 +127,47 @@ export default {
           }
         ]
       },
-      hellowPie: {
-        pieData: [
-          {
-            value: Mock.Random.natural(10, 70),
-            name: '计量标准'
-          },
-          {
-            value: Mock.Random.natural(10, 70),
-            name: '医疗器械'
-          },
-          {
-            value: Mock.Random.natural(10, 70),
-            name: '药品'
-          },
-          {
-            value: Mock.Random.natural(10, 70),
-            name: '食品'
-          },
-          {
-            value: Mock.Random.natural(10, 70),
-            name: '产品质量'
-          },
-          {
-            value: Mock.Random.natural(10, 70),
-            name: '特种设备'
-          }
-        ]
-      },
+      hellowPie: [
+        {
+          value: Mock.Random.natural(10, 70),
+          name: '计量标准'
+        },
+        {
+          value: Mock.Random.natural(10, 70),
+          name: '医疗器械'
+        },
+        {
+          value: Mock.Random.natural(10, 70),
+          name: '药品'
+        },
+        {
+          value: Mock.Random.natural(10, 70),
+          name: '食品'
+        },
+        {
+          value: Mock.Random.natural(10, 70),
+          name: '产品质量'
+        },
+        {
+          value: Mock.Random.natural(10, 70),
+          name: '特种设备'
+        }
+      ],
       numberGroup: [
         {
           name: '产品品牌',
           value: Mock.Random.natural(10, 70),
-          img: require('./components/img/产业品牌.png')
+          img: require('./components/img/icon／mhzhjg_icon_jgquanjing_quanjuguanjian_banjielv@2x.png')
         },
         {
           name: '企业品牌',
           value: Mock.Random.natural(10, 70),
-          img: require('./components/img/企业品牌.png')
+          img: require('./components/img/icon／mhzhjg_icon_jgquanjing_quanjuguanjian_banjielv@2x(1).png')
         },
         {
           name: '区域品牌',
           value: Mock.Random.natural(10, 70),
-          img: require('./components/img/区域品牌.png')
+          img: require('./components/img/icon／mhzhjg_icon_jgquanjing_quanjuguanjian_banjielv@2x(2).png')
         }
       ],
       pieData: [{
@@ -191,31 +185,29 @@ export default {
         value: Mock.Random.natural(10, 70)
       },
       charaterlist2: {
-        name: '人员',
+        name: '数量',
         data: [
           {
             name: '总人数',
-            num: 7217
+            num: '7217人'
           }, {
             name: '新增',
-            num: 716
+            num: '716人'
           }
         ]
       },
-      hellowPie2: {
-        pieData: [
-          {
-            value: '1115',
-            name: '执法人员'
-          }, {
-            value: '1250',
-            name: '审查人员'
-          }, {
-            value: '1893',
-            name: '雇员'
-          }
-        ]
-      },
+      hellowPie2: [
+        {
+          value: '1115',
+          name: '执法人员'
+        }, {
+          value: '1250',
+          name: '审查人员'
+        }, {
+          value: '1893',
+          name: '雇员'
+        }
+      ],
       dobulePie: [
         {
           color: '#AD5F53',

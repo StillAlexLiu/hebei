@@ -1,8 +1,11 @@
 <template>
-<div class="pieGroup">
-   <v-chart class="full-width echarts" :autoresize='true' :options='options'/>
-   <p class="p_name">{{data.name}}</p>
-</div>
+    <div class="pieGroup full-height">
+        <container-border31 class="full-height">
+            <div class="full-height bg" :style="{backgroundImage:'url('+data.img+')'}">
+                <chart :options='options'/>
+            </div>
+        </container-border31>
+    </div>
 </template>
 
 <script>
@@ -16,106 +19,47 @@ export default {
       }
     }
   },
-  data () {
-    return {
-      options: {}
-    }
-  },
-  watch: {
-    data: {
-      immediate: true,
-      deep: true,
-      handler: function () {
-        this.options = this.getOption(this.data)
-      }
-    }
-  },
-  methods: {
-    getOption (data) {
-      const str = data.name
-      const lastName = str.charAt(str.length - 1)
-      let newName = ''
-      if (lastName === '率') {
-        newName = data.num + '%'
-      } else {
-        newName = data.num
-      }
+  computed: {
+    options () {
       return {
-        title: {
-          text: newName,
-          x: 'center',
-          y: 'center',
+        legend: {
+          orient: 'vertical',
+          bottom: 10,
+          left: 10,
           textStyle: {
-            color: '#fff',
-            fontSize: 30,
-            fontWeight: 'normal'
+            fontSize: '18'
           }
         },
-        calculable: true,
         series: [
           {
             type: 'pie',
-            radius: [65, 90],
+            radius: ['30%', '45%'],
             center: ['50%', '50%'],
             hoverAnimation: false,
-            labelLine: {
-              normal: {
-                show: false
-              }
-            },
+            avoidLabelOverlap: true,
             label: {
-              normal: {
-                show: false,
-                position: 'center'
-              }
-            },
-            data: [
-              {
-                value: this.data.num,
-                itemStyle: {
-                  color: '#3DB9CF'
+              show: true,
+              formatter: (params) => {
+                console.log(params)
+                return '{value|' + params.value + '}' + '\n' + '{name|' + params.name + '}'
+              },
+              rich: {
+                value: {
+                  color: '#79DFEF',
+                  fontSize: '28'
+                },
+                name: {
+                  fontSize: '28'
                 }
               },
-              {
-                value: 1000,
-                name: 'rose2',
-                itemStyle: {
-                  color: 'transparent'
-                }
-              }
-            ]
-          },
-          {
+              distanceToLabelLine: -20
+            },
             labelLine: {
-              normal: {
-                show: false
-              }
+              length: 10,
+              length2: 20
+              // smooth: true
             },
-            label: {
-              normal: {
-                show: false,
-                position: 'center'
-              }
-            },
-            type: 'pie',
-            radius: [70, 85],
-            center: ['50%', '50%'],
-            hoverAnimation: false,
-            data: [
-              {
-                value: this.data.num,
-                itemStyle: {
-                  color: 'transparent'
-                }
-              },
-              {
-                value: 1000,
-                name: 'rose2',
-                itemStyle: {
-                  color: '#434857'
-                }
-              }
-            ]
+            data: this.data.data
           }
         ]
       }
@@ -125,21 +69,24 @@ export default {
 </script>
 
 <style scoped lang="less">
-.pieGroup{
-    width: 70%;
-    height: 80%;
-    margin: 10% auto;
-    background-image: url('./img/png13.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    .echarts{
-      height: 80%!important;
+.pieGroup {
+    padding: 10px;
+
+    .bg {
+        background-size: 64px 64px;
+        background-position: center;
+        background-repeat: no-repeat;
     }
-    .p_name{
-      width: 100%;
-      text-align: center;
-      margin: 0;
-      font-size: 2rem;
+
+    .echarts {
+        height: 80% !important;
+    }
+
+    .p_name {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        font-size: 2rem;
     }
 }
 </style>

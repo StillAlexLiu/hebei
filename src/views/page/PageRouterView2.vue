@@ -6,28 +6,37 @@
             <!--            右侧路由出口-->
             <div class="full-height float-left right-container">
                 <div class="full-height w-1-6" style="text-align: center">
-                    <img src="./p0/components/img/左侧.png" style="height: 97%;margin-top:20px">
+                    <img src="./p0/components/img/pngLeft.png" style="width: 235px;margin-top:20px">
                 </div>
-                <div class="full-height w-5-6">
+                <div class="full-height w-5-6" style="padding-top: 11px">
                     <div class="h-1-3">
-                        <div class="w-1-2 full-height">
-                            <div class="info-title">领导组</div>
-                            <img class="info-img" src="./p0/components/img/info1.png">
-                            <img class="info-img" src="./p0/components/img/info2.png">
-                        </div>
-                        <container title="人员信息" class="w-1-2  full-height">
+                        <container title="领导组" class="w-2-5  full-height">
+                            <img class="info-img" src="./p0/components/img/png1.png">
+                            <img class="info-img" src="./p0/components/img/png2.png">
+                        </container>
+                        <container title="人员信息" class="w-3-5  full-height">
                             <ContainerInfo class="full">
-                                <img src="./p0/components/img/信息.png" class="full-width">
+                                <div class="full" style="padding: 10px">
+                                    <img src="./p0/components/img/信息.png" class="full-width">
+                                    <div
+                                        style="width:234px;height:49px;line-height:49px;text-align:center;background:rgba(61,148,213,0.25);margin-top: 20px;">
+                                        AG12642
+                                    </div>
+                                </div>
                             </ContainerInfo>
                         </container>
                     </div>
                     <container title="位置" class="h-2-3">
-                        <a-map class="full-height full-width" :zoom="zoom"
-                               :center="center"
-                               :adcode="adcode"
-                               :depth="depth"
-                               :id-key="13"
-                        />
+                        <div class="full" style="padding: 30px 0">
+                            <img src="./p0/components/img/位置@2x.png" class="full-width">
+                            <!--                        <a-map class="full-height full-width" :zoom="zoom"-->
+                            <!--                               :center="center"-->
+                            <!--                               :adcode="adcode"-->
+                            <!--                               :depth="depth"-->
+                            <!--                               :id-key="13"-->
+                            <!--                        />-->
+
+                        </div>
                     </container>
                 </div>
             </div>
@@ -37,7 +46,7 @@
             <div class="view">
                 <div class="full-height w-1-5">
                     <div class="info-can">
-                        <div class="title">已接入参会方</div>
+                        <!--                        <div class="title">已接入参会方</div>-->
                     </div>
 
                 </div>
@@ -45,9 +54,12 @@
                     <img src="./p0/components/img/指挥.png" class="full">
                 </div>
                 <div class="full-height w-1-5">
-                    <container title="即时信息" class="full">
-                        <chat class="full" :data="chatData"/>
-                    </container>
+                    <!--                    <container title="即时信息" class="full">-->
+                    <!--                        <chat class="full" :data="chatData"/>-->
+                    <!--                    </container>-->
+                    <div class="full" style="padding-left:30px">
+                        <img src="./p0/components/img/chat-can-bg.png" class=" " style="width:489px;">
+                    </div>
                 </div>
             </div>
         </div>
@@ -59,12 +71,12 @@
 
 <script>
 import LeftTitle from './PageRouterView/LeftTitle'
-import Chat from './p0/components/Chat'
+// import Chat from './p0/components/Chat'
 
 export default {
   name: 'PageRouterView',
   components: {
-    Chat,
+    // Chat,
     LeftTitle
   },
   data () {
@@ -132,7 +144,7 @@ export default {
 
     initTab () {
       // 加载tab数据
-      this.headerData = this.$router.options.routes[0].children
+      this.headerData = [this.$router.options.routes[1], ...this.$router.options.routes[0].children]
       this.selectIndex = this.headerData.findIndex((value, index) => {
         return value.name === this.$route.name
       })
@@ -188,12 +200,12 @@ export default {
     }
 
     .info-img {
-        height: 160px;
-        margin-right: 20px;
+        height: 164px;
+        margin: 10px;
     }
 
     .info-can {
-        background-image: url("./p0/components/img/chat.png");
+        background-image: url("./p0/components/img/info-can-bg.png");
         background-size: 98% 100%;
         background-position: center;
         text-align: center;

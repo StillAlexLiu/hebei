@@ -1,7 +1,12 @@
 <template>
     <div class="number-elevator full-height  full-width">
-        <p class="elevator_num">{{data.num}}</p>
-        <p class="elevator_name">{{data.name}}</p>
+        <div class="w-1-2 full-height">
+            <img src="./img/特种设备.png" alt="">
+        </div>
+        <div class="w-1-2 full-height text">
+            <div class="name h-1-2">{{data.name}}</div>
+            <div class="value h-1-2 number-font">{{data.value}}</div>
+        </div>
     </div>
 </template>
 
@@ -18,28 +23,26 @@ export default {
 
 <style scoped lang="less">
 .number-elevator {
-    background-image: url('./img/特种设备.png');
-    background-size: 100% auto;
-    background-position: center;
-    background-repeat: no-repeat;
 
-    .elevator_num {
-        font-size: 5rem;
-        font-weight: bold;
-        text-align: left;
-        color: #FE6941;
-        width: 55%;
-        float: right;
-        margin: 7rem 0 10px 0;
+    text-align: center;
+
+    img {
+        width: 245px;
+        height: 245px;
+        margin-top: 100px;
     }
 
-    .elevator_name {
-        font-size: 3rem;
-        text-align: left;
-        width: 55%;
-        float: right;
-        margin: 0;
-        color: #DFDDE4;
+    .text {
+        padding: 140px 0;
+
+        .name {
+            font-size: 24px;
+        }
+
+        .value {
+            font-size: 72px;
+            color: #79DFEF;
+        }
     }
 }
 </style>

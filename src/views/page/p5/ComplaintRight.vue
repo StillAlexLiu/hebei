@@ -1,72 +1,67 @@
 <template>
-  <div class='ComplaintRight full page-style'>
-    <div class='full-width h-2-8'>
-      <container title='线索数量及处置期限情况' class='full-height w-1-2'>
-        <div class='full-height w-2-3'>
-          <complaintPieR :data='chart1'></complaintPieR>
+    <div class='ComplaintRight full page-style'>
+        <div class='full-width h-2-8'>
+            <container title='线索数量及处置期限情况' class='full-height w-1-2'>
+                <div class='full-height w-2-3'>
+                    <complaintPieR :data='chart1'></complaintPieR>
+                </div>
+                <div class='full-height w-1-3'>
+                    <RightInfoBox :data="infoData1"/>
+                </div>
+            </container>
+            <container title='案件数量及处置期限情况' class='full-height w-1-2'>
+                <div class='full-height w-2-3'>
+                    <complaintPieRT :data='chart2'></complaintPieRT>
+                </div>
+                <div class='full-height w-1-3'>
+                    <RightInfoBox :data="infoData2"/>
+                </div>
+            </container>
         </div>
-        <div class='full-height w-1-3'>
-          <div class='complainCircle'>
-            <div class='average_day'>
-              <img
-                src='./compontes/img/icon_mhzhjg_icon_tousujubao_xiansuoqixian_default@2x.png'
-                alt
-              />
-              <p>{{averager}}</p>
-              <p class='day'>{{averageDay}}天</p>
-            </div>
-          </div>
+        <container title='市队举报线索处理情况' class='full-width h-3-8'>
+            <comPlaintBarR :data='chart3' color="#41C8DE" :barWidth="80"></comPlaintBarR>
+        </container>
+        <div class='full-width h-3-8'>
+            <container title='类型分布情况' class='w-1-2 full-height'>
+                <echartsHollowPie :data='chart4'></echartsHollowPie>
+            </container>
+            <container title='市队食品生产类举报案件分布' class='w-1-2 full-height'>
+                <complaintBarRH :xdata='chart5.xdata' :ydata='chart5.ydata'></complaintBarRH>
+            </container>
         </div>
-      </container>
-      <container title='案件数量及处置期限情况' class='full-height w-1-2'>
-        <div class='full-height w-2-3'>
-          <complaintPieRT :data='chart2'></complaintPieRT>
-        </div>
-        <div class='full-height w-1-3'>
-          <div class='complainCircle'>
-            <div class='average_day'>
-              <img
-                src='./compontes/img/icon_mhzhjg_icon_tousujubao_xiansuoqixian_default@2x.png'
-                alt
-              />
-              <p>{{averager}}</p>
-              <p class='day'>{{averageDay1}}天</p>
-            </div>
-          </div>
-        </div>
-      </container>
     </div>
-    <container title='市队举报线索处理情况' class='full-width h-3-8'>
-      <comPlaintBarR :data='chart3'></comPlaintBarR>
-    </container>
-    <div class='full-width h-3-8'>
-      <container title='类型分布情况' class='w-1-2 full-height'>
-        <complaintCircleR :data='chart4'></complaintCircleR>
-      </container>
-      <container title='市队食品生产类举报案件分布' class='w-1-2 full-height'>
-        <complaintBarRH :xdata='chart5.xdata' :ydata='chart5.ydata'></complaintBarRH>
-      </container>
-    </div>
-  </div>
 </template>
 
 <script>
-import complaintCircleR from './compontes/complaintCircleR'
 import comPlaintBarR from './compontes/comPlaintBarR'
 import complaintBarRH from './compontes/complaintBarRH'
 import complaintPieR from './compontes/complaintPieR'
 import complaintPieRT from './compontes/complaintPieRT'
+import RightInfoBox from './compontes/RightInfoBox'
+import echartsHollowPie from '../p2/compontes/echartsHollowPie'
+
 export default {
   name: 'ComplaintRight',
   components: {
-    complaintCircleR,
+    RightInfoBox,
     comPlaintBarR,
     complaintBarRH,
     complaintPieR,
-    complaintPieRT
+    complaintPieRT,
+    echartsHollowPie
   },
   data () {
     return {
+      infoData1: {
+        name: '平均处置期限',
+        value: '6.5',
+        img: require('./compontes/img/icon／mhzhjg_icon_tousujubao_xiansuoqixian_default@2x.png')
+      },
+      infoData2: {
+        name: '平均处置期限',
+        value: '94.7',
+        img: require('./compontes/img/icon／mhzhjg_icon_tousujubao_anjianqixian_default@2x.png')
+      },
       averager: '平均处置期限',
       averageDay: '28.7',
       averageDay1: '76.1',
@@ -100,7 +95,7 @@ export default {
           '6',
           '9',
           '10',
-          '0',
+          '10',
           '14',
           '6',
           '8',
@@ -164,64 +159,71 @@ export default {
 
 <style scoped lang='less'>
 .ComplaintRight {
-  .complainCircle {
-    width: 100%;
-    height: 100%;
-    float: left;
-    cursor: pointer;
-    .fakeBig,
-    .fakeBigTwo {
-      border-radius: 100rem;
-      width: 9rem;
-      height: 9rem;
-      z-index: 10000;
-      position: absolute;
-      top: 13rem;
-      left: 18rem;
-    }
-    .fakeBigTwo {
-      left: 86rem;
-    }
-    .circleOne {
-      float: left;
-      width: 55rem;
-      height: 100%;
-    }
-    .average_day {
-      background: url('./compontes/img/img_mhzhjg_img_zhutixinxi_pingjunshoumingbg_default@2x.png');
-      background-size: 100% 100%;
-      width: 17rem;
-      height: 20rem;
-      float: right;
-      margin-right: 5rem;
-      // background: rgba(#113f4c, 0.2);
-      // margin-left: 55rem;
-      margin-top: 2rem;
-      & > p {
-        width: 17rem;
-        text-align: center;
-        height: 2.58rem;
-        font-size: 2rem;
-        font-weight: bold;
-        color: rgba(255, 255, 255, 1);
-        line-height: 2.58rem;
-      }
-      img {
-        width: 3rem;
-        height: 3rem;
-        margin-top: 2rem;
-        margin-left: 7rem;
-        margin-bottom: 2rem;
-      }
-      .day {
-        font-weight: bolder;
-        color: #79dfef;
-        font-size: 4rem;
+    .complainCircle {
         width: 100%;
-        text-align: center;
-        margin-top: 3rem;
-      }
+        height: 100%;
+        float: left;
+        cursor: pointer;
+
+        .fakeBig,
+        .fakeBigTwo {
+            border-radius: 100rem;
+            width: 9rem;
+            height: 9rem;
+            z-index: 10000;
+            position: absolute;
+            top: 13rem;
+            left: 18rem;
+        }
+
+        .fakeBigTwo {
+            left: 86rem;
+        }
+
+        .circleOne {
+            float: left;
+            width: 55rem;
+            height: 100%;
+        }
+
+        .average_day {
+            background: url('./compontes/img/img_mhzhjg_img_zhutixinxi_pingjunshoumingbg_default@2x.png');
+            background-size: 100% 100%;
+            width: 17rem;
+            height: 20rem;
+            float: right;
+            margin-right: 5rem;
+            // background: rgba(#113f4c, 0.2);
+            // margin-left: 55rem;
+            margin-top: 2rem;
+
+            & > p {
+                width: 17rem;
+                text-align: center;
+                height: 2.58rem;
+                font-size: 2rem;
+                font-weight: bold;
+                color: rgba(255, 255, 255, 1);
+                line-height: 2.58rem;
+            }
+
+            img {
+                width: 3rem;
+                height: 3rem;
+                margin-top: 2rem;
+                margin-left: 7rem;
+                margin-bottom: 2rem;
+            }
+
+            .day {
+                font-weight: bolder;
+                color: #79dfef;
+                font-size: 4rem;
+                width: 100%;
+                text-align: center;
+                margin-top: 3rem;
+            }
+        }
     }
-  }
 }
 </style>

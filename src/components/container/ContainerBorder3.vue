@@ -12,10 +12,10 @@ export default {
 
 <style scoped lang="less">
 .container-border {
-  background-image: url("asset/img/container-center-line.png");
+  background-image: url("asset/img/container-new-style1.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 95% 95%;
-  padding: 1rem;
+  padding: 10px;
 }
 </style>
