@@ -29,8 +29,8 @@
             <div class="w-1-6 full-height">
                 <tableTab v-model="tabData" @active='clickActive'></tableTab>
             </div>
-            <ContainerCenterTitle class="w-2-6 full-height">
-                <echartsliquidfill title="当前抽检合格率" :data='liquidfill[select2][tabData]'></echartsliquidfill>
+            <ContainerCenterTitle title="当前抽检合格率"  class="w-2-6 full-height">
+                <echartsliquidfill :data='liquidfill[select2][tabData]'></echartsliquidfill>
             </ContainerCenterTitle>
             <ContainerCenterTitle title="合格率趋势" class="w-3-6 full-height">
                 <ChartsBarLine :data='chart10' :dimensions="['name','value']" :legend="['食品检验检测合格率']"

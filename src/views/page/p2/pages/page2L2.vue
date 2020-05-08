@@ -12,6 +12,7 @@
                 <ChartBarLine :data='chart3[dimension].data' :dimensions="['name','value']"
                               :type="['bar']"
                               :colors="[barColor]"
+                              :units="['单位：户次']"
                               :legend="['监督检查数量']"></ChartBarLine>
             </container>
         </div>
@@ -34,7 +35,6 @@
 
 <script>
 import NumberTop from '../compontes/NumberTop'
-import echartsBar from '../compontes/echarts-bar'
 import echartsHollowPie from '../compontes/echartsHollowPie'
 import echarts from 'echarts'
 import ChartBarLine from '../../p1/componets/ChartBarLine'
@@ -49,7 +49,6 @@ export default {
   },
   components: {
     ChartBarLine,
-    echartsBar,
     echartsHollowPie,
     NumberTop
   },
@@ -65,7 +64,7 @@ export default {
           color: 'rgba(50,198,223,.40)'
         }
       ]),
-      chart3:[{
+      chart3: [{
         data: [
           {
             name: '石家庄市',
@@ -300,7 +299,7 @@ export default {
           }]
         }, {
           title: '监督抽检',
-          short: '查',
+          short: '抽',
           img: require('./../compontes/img/text-bg-purple.png'),
           data: [{
             name: '检验件数',
@@ -344,7 +343,7 @@ export default {
           }]
         }, {
           title: '监督抽检',
-          short: '查',
+          short: '抽',
           img: require('./../compontes/img/text-bg-purple.png'),
           data: [{
             name: '检验件数',
@@ -388,7 +387,7 @@ export default {
           }]
         }, {
           title: '监督抽检',
-          short: '查',
+          short: '抽',
           img: require('./../compontes/img/text-bg-purple.png'),
           data: [{
             name: '检验件数',

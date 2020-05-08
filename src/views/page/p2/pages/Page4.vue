@@ -8,6 +8,7 @@
                 <ChartBarLine :data='chart5' :dimensions="['name','value']"
                               :type="['line']"
                               :colors="['#61EADF']"
+                              :units="['单位：台']"
                               :legend="['特种设备数量']"></ChartBarLine>
             </container>
         </div>
@@ -19,12 +20,14 @@
                 <ChartBarLine :data='chart3[dimension].data' :dimensions="['name','value']" :type="['bar']"
                               :colors="[barColor]"
                               :border-radius="true"
-                              :legend="['分布数量']"></ChartBarLine>
+                              :units="['单位：台']"
+                              :legend="['特种设备数量']"></ChartBarLine>
             </container>
         </div>
         <div class="h-1-3">
             <container class="w-1-2 full-height" title="电梯二维码覆盖情况">
                 <echartsHollowPie :data='chart6.data'
+                                  :show-value="true"
                                   :img="chart6.img"></echartsHollowPie>
             </container>
             <container class="w-1-2 full-height" title="老旧特种设备占比情况">

@@ -40,8 +40,11 @@ export default {
             label: {
               show: true,
               formatter: (params) => {
-                console.log(params)
-                return '{value|' + params.value + '}' + '\n' + '{name|' + params.name + '}'
+                if (params.name === '') {
+                  return ''
+                } else {
+                  return '{value|' + params.value + '}' + '\n' + '{name|' + params.name + '}'
+                }
               },
               rich: {
                 value: {

@@ -19,13 +19,13 @@
             </container>
         </div>
         <container title='市队举报线索处理情况' class='full-width h-3-8'>
-            <comPlaintBarR :data='chart3' color="#41C8DE" :barWidth="80"></comPlaintBarR>
+            <comPlaintBarR :data='chart3' color="#41C8DE" :barWidth="80" legend="线索处理数量" unit="单位：件"></comPlaintBarR>
         </container>
         <div class='full-width h-3-8'>
-            <container title='类型分布情况' class='w-1-2 full-height'>
+            <container title='案件类型分布' class='w-1-2 full-height'>
                 <echartsHollowPie :data='chart4'></echartsHollowPie>
             </container>
-            <container title='市队食品生产类举报案件分布' class='w-1-2 full-height'>
+            <container title='市队投诉举报案件分布' class='w-1-2 full-height'>
                 <complaintBarRH :xdata='chart5.xdata' :ydata='chart5.ydata'></complaintBarRH>
             </container>
         </div>

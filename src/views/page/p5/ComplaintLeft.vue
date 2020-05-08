@@ -14,7 +14,7 @@
                 </container>
             </div>
             <div class='h-3-8'>
-                <container class='w-1-2 full-height' title='各市场所投诉举报分布'>
+                <container class='w-1-2 full-height' title='各市投诉举报情况'>
                     <complaintBar :xdata='chart6[select.value].xdata'
                                   :ydata='chart6[select.value].ydata'></complaintBar>
                 </container>
@@ -236,7 +236,7 @@ export default {
             '6',
             '9',
             '10',
-            '0',
+            '10',
             '14',
             '6',
             '8',
@@ -297,7 +297,7 @@ export default {
             '6',
             '6',
             '9',
-            '0',
+            '10',
             '7',
             '14',
             '6',

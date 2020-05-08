@@ -12,6 +12,7 @@
                 <ChartBarLine :data='chart3[dimension].data' :dimensions="['name','value']"
                               :type="['bar']"
                               :colors="[barColor]"
+                              :units="['单位：户次']"
                               :legend="['监督检查数量']"></ChartBarLine>
             </container>
         </div>
@@ -20,14 +21,15 @@
                 <echartsHollowPie :data='hellowPie3[dimension].data'
                                   :title="hellowPie3[dimension].title"></echartsHollowPie>
             </container>
-            <container class="w-1-2 full-height" title="各市抽检清空统计">
+            <container class="w-1-2 full-height" title="各市抽检情况统计">
                 <!-- <echartsBar :xdata='chart3[dimension].xdata' :ydata='chart3[dimension].ydata'></echartsBar> -->
                 <ChartBarLine :data='rightLine[dimension].data' :dimensions="['name','value']"
                               :type="['line']"
                               :colors="['#FE6941']"
                               :is-area="true"
+                              :units="['单位：件']"
                               :smooth="true"
-                              :legend="['抽检数量']"></ChartBarLine>
+                              :legend="['抽查件数']"></ChartBarLine>
             </container>
         </div>
     </div>
@@ -35,9 +37,7 @@
 
 <script>
 import NumberTop from '../compontes/NumberTop'
-import echartsBar from '../compontes/echarts-bar'
 import echartsHollowPie from '../compontes/echartsHollowPie'
-import echartsWline from '../../p7/components/echarts-wLine'
 import ChartBarLine from '../../p1/componets/ChartBarLine'
 import echarts from 'echarts'
 
@@ -51,10 +51,8 @@ export default {
   },
   components: {
     ChartBarLine,
-    echartsBar,
     echartsHollowPie,
-    NumberTop,
-    echartsWline
+    NumberTop
   },
   data () {
     return {
@@ -432,7 +430,7 @@ export default {
         ]
       }],
       hellowPie3: [{
-        title: '抽检类型占比',
+        title: '抽检不合格类型',
         data: [
           {
             value: 321,
@@ -449,7 +447,7 @@ export default {
           }
         ]
       }, {
-        title: '抽检类型占比',
+        title: '抽检不合格类型',
         data: [
           {
             value: 331,
@@ -466,7 +464,7 @@ export default {
           }
         ]
       }, {
-        title: '抽检类型占比',
+        title: '抽检不合格类型',
         data: [
           {
             value: 315,
@@ -497,7 +495,7 @@ export default {
           }]
         }, {
           title: '监督抽检',
-          short: '查',
+          short: '抽',
           img: require('./../compontes/img/text-bg-purple.png'),
           data: [{
             name: '检验件数',
@@ -541,7 +539,7 @@ export default {
           }]
         }, {
           title: '监督抽检',
-          short: '查',
+          short: '抽',
           img: require('./../compontes/img/text-bg-purple.png'),
           data: [{
             name: '检验件数',
@@ -585,7 +583,7 @@ export default {
           }]
         }, {
           title: '监督抽检',
-          short: '查',
+          short: '抽',
           img: require('./../compontes/img/text-bg-purple.png'),
           data: [{
             name: '检验件数',

@@ -19,6 +19,10 @@ export default {
     img: {
       type: String,
       default: ''
+    },
+    showValue: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -113,9 +117,13 @@ export default {
               align: 'left',
               alignTo: 'edge',
               margin: 20,
-              formatter: function (params) {
+              formatter: (params) => {
                 if (params.name !== '') {
-                  return params.name + '\n{white|' + params.percent + '%}'
+                  if (this.showValue) {
+                    return params.name + '\n{white|' + params.value + '}'
+                  } else {
+                    return params.name + '\n{white|' + params.percent + '%}'
+                  }
                 } else {
                   return ''
                 }

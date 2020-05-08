@@ -11,6 +11,7 @@
             <container class="w-1-2 full-height" title="各市监督抽检情况统计">
                 <ChartBarLine :data='chart3[dimension].data' :dimensions="['name','value']"
                               :type="['bar']"
+                              :units="['单位：户次']"
                               :colors="[barColor]"
                               :legend="['监督检查数量']"></ChartBarLine>
             </container>
@@ -20,13 +21,14 @@
                 <echartsHollowPie :data='hellowPie3[dimension].data'
                                   :title="hellowPie3[dimension].title"></echartsHollowPie>
             </container>
-            <container class="w-1-2 full-height" title="各市抽检清空统计">
+            <container class="w-1-2 full-height" title="各市抽检情况统计">
                 <ChartBarLine :data='chart4[dimension].data' :dimensions="['name','value']"
                               :type="['line']"
                               :colors="['#FE6941']"
                               :is-area="true"
+                              :units="['单位：件']"
                               :smooth="true"
-                              :legend="['监督检查数量']"></ChartBarLine>
+                              :legend="['抽查件数']"></ChartBarLine>
             </container>
         </div>
     </div>
@@ -428,7 +430,7 @@ export default {
         ]
       }],
       hellowPie3: [{
-        title: '抽检类型占比',
+        title: '抽检不合格类型',
         data: [
           {
             value: 321,
@@ -445,7 +447,7 @@ export default {
           }
         ]
       }, {
-        title: '抽检类型占比',
+        title: '抽检不合格类型',
         data: [
           {
             value: 331,
@@ -462,7 +464,7 @@ export default {
           }
         ]
       }, {
-        title: '抽检类型占比',
+        title: '抽检不合格类型',
         data: [
           {
             value: 315,
@@ -493,7 +495,7 @@ export default {
           }]
         }, {
           title: '监督抽检',
-          short: '查',
+          short: '抽',
           img: require('./../compontes/img/text-bg-purple.png'),
           data: [{
             name: '检验件数',
@@ -537,7 +539,7 @@ export default {
           }]
         }, {
           title: '监督抽检',
-          short: '查',
+          short: '抽',
           img: require('./../compontes/img/text-bg-purple.png'),
           data: [{
             name: '检验件数',
@@ -581,7 +583,7 @@ export default {
           }]
         }, {
           title: '监督抽检',
-          short: '查',
+          short: '抽',
           img: require('./../compontes/img/text-bg-purple.png'),
           data: [{
             name: '检验件数',

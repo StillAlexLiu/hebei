@@ -22,12 +22,15 @@
             </div>
             <div class="h-3-8">
                 <container class="full-height w-1-2" title="适用程序">
-<!--                    <routine :data='tableData'></routine>-->
+                    <!--                    <routine :data='tableData'></routine>-->
                     <ChartsFunnel :data='tableData'/>
                 </container>
                 <container class="full-height w-1-2" title="复议诉讼">
                     <div class="w-1-4 h-6-8" v-for="(item, index) in liquidfillData[itemD.key]" :key="index">
-                        <echartsliquidfill :data='item'/>
+                        <div class="h-5-6">
+                            <echartsliquidfill :data='item'/>
+                        </div>
+                        <div class="h-1-6" style="text-align: center;font-size: 24px;">{{ item[0] }}</div>
                     </div>
                     <radioBtn :data='radioData' v-model="itemD"/>
                 </container>

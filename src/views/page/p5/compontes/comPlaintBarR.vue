@@ -16,6 +16,10 @@ export default {
       type: String,
       default: '数量'
     },
+    unit: {
+      type: String,
+      default: ''
+    },
     color: {
       type: String,
       default: '#FF98A4'
@@ -72,6 +76,7 @@ export default {
         },
         yAxis: [
           {
+            name: this.unit,
             nameTextStyle: {
               padding: [-2, 0, -1, -30]
             },

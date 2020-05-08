@@ -81,13 +81,13 @@ export default {
         dw: '户次',
         key: 1
       }, {
-        name: '智能预警',
+        name: '智慧监管',
         num: '4893',
         dw: '户次',
         key: 2
       }],
       acrossBar1: [{
-        ydata: ['双随机户次', '双随机平均抽查率', '双随机发现问题数'],
+        ydata: ['双随机发现问题数', '双随机平均抽查率', '双随机户次'],
         xdata: [Mock.Random.natural(70, 1000), Mock.Random.natural(70, 100), Mock.Random.natural(70, 1000)],
         name: '双随机'
       }, {
@@ -144,25 +144,18 @@ export default {
         name: '2020年',
         value: Mock.Random.natural(70, 1000)
       }],
-      rightLine2: [{
-        name: '2015年',
-        value: Mock.Random.natural(70, 1000)
-      }, {
-        name: '2016年',
-        value: Mock.Random.natural(70, 1000)
-      }, {
-        name: '2017年',
-        value: Mock.Random.natural(70, 1000)
-      }, {
-        name: '2018年',
-        value: Mock.Random.natural(70, 1000)
-      }, {
-        name: '2019年',
-        value: Mock.Random.natural(70, 1000)
-      }, {
-        name: '2020年',
-        value: Mock.Random.natural(70, 1000)
-      }],
+      rightLine2: [{ name: '石家庄', value: '1922' },
+        { name: '唐山', value: '1217' },
+        { name: '秦皇岛', value: '571' },
+        { name: '邯郸', value: '814' },
+        { name: '邢台', value: '601' },
+        { name: '保定', value: '1121' },
+        { name: '张家口', value: '601' },
+        { name: '承德', value: '462' },
+        { name: '沧州', value: '935' },
+        { name: '廊坊', value: '1088' },
+        { name: '衡水', value: '430' },
+        { name: '雄安新区', value: '96' }],
       hellowPie2: [
         {
           value: Mock.Random.natural(70, 1000),
