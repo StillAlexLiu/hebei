@@ -1,9 +1,9 @@
 <template>
-  <div id='tableTab'>
-      <ul>
-          <li v-for="(item,index) in nameData" :key="index" @click="tabCli(item,index)" :class="{clickColor : active == index}">{{ item.name }}</li>
-      </ul>
-  </div>
+    <div id='tableTab'>
+        <div class="item" v-for="(item,index) in nameData" :key="index" @click="tabCli(item,index)"
+             :class="{clickColor : active == index}">{{ item.name }}
+        </div>
+    </div>
 </template>
 
 <script>
@@ -43,31 +43,32 @@ export default {
 }
 </script>
 <style scoped lang='less'>
-#tableTab{
+#tableTab {
     width: 100%;
     height: 100%;
     text-align: center;
-    margin-top: 7rem;
-    ul{
-        margin: 40px 0 0 0;
-        width: 100%;
-        padding: 0;
-        li{
-            list-style: none;
-            width: 100%;
-            line-height: 60px;
-            background: #122E3C;
-            margin-bottom: 10px;
-            font-size: 25px;
-            color: white;
-            cursor: pointer;
-            border: 1px solid rgb(8,7 41)
-        }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .item {
+        list-style: none;
+        width: 220px;
+        height: 68px;
+        line-height: 68px;
+        background: rgba(17, 17, 23, 1) linear-gradient(180deg, rgba(30, 121, 176, 0) 0%, rgba(30, 100, 176, 0.4) 100%);
+        border: 2px solid rgba(61, 148, 213, 1);
+        font-size: 36px;
+        margin-top: 15px;
+        margin-bottom: 15px;
     }
-    .clickColor{
-        background-image: url('./img/png5.png')!important;
+
+    .clickColor {
+        background-image: url('./img/png5.png') !important;
         background-size: 100% 100%;
         background-repeat: no-repeat;
+        border: none;
     }
 }
 </style>

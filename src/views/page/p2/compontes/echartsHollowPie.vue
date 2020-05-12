@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'ChartBar',
+  name: 'ChartsHollowPie',
   props: {
     data: {
       type: Array,
@@ -23,6 +23,28 @@ export default {
     showValue: {
       type: Boolean,
       default: false
+    },
+    imgSize: {
+      type: Array,
+      default: () => {
+        return [120, 120]
+      }
+    },
+    imgPosition: {
+      type: Array,
+      default: () => {
+        return ['center', 'middle']
+      }
+    },
+    titlePosition: {
+      type: Array,
+      default: () => {
+        return ['center', 'center']
+      }
+    },
+    titleSize:{
+      type: Number,
+      default: 22
     }
   },
   computed: {
@@ -69,34 +91,51 @@ export default {
           itemStyle: placeHolderStyle
         })
       }
+      const elements = []
+      const image = {
+        type: 'image',
+        style: {
+          image: this.img,
+          height: this.imgSize[0],
+          width: this.imgSize[1]
+        },
+        left: this.imgPosition[0],
+        top: this.imgPosition[1]
+      }
+      const text = {
+        type: 'text',
+        left: this.titlePosition[0],
+        top: this.titlePosition[1],
+        z: 100,
+        style: {
+          fill: '#fff',
+          text: this.title,
+          font: this.titleSize + 'px LESLIE'
+        }
+      }
+      if (this.img !== '') {
+        elements.push(image)
+      }
+      if (this.title !== '') {
+        elements.push(text)
+      }
       return {
         graphic: {
-          elements: [
-            {
-              type: 'image',
-              style: {
-                image: this.img,
-                height: 120,
-                width: 120
-              },
-              left: 'center',
-              top: 'middle'
-            }
-          ]
+          elements: elements
         },
-        title: {
-          text: this.title,
-          x: 'center',
-          y: 'center',
-          textStyle: {
-            color: 'white',
-            fontSize: 22
-          },
-          subtextStyle: {
-            color: 'white',
-            fontSize: 22
-          }
-        },
+        // title: {
+        //   text: this.title,
+        //   x: 'center',
+        //   y: 'center',
+        //   textStyle: {
+        //     color: 'white',
+        //     fontSize: 22
+        //   },
+        //   subtextStyle: {
+        //     color: 'white',
+        //     fontSize: 22
+        //   }
+        // },
         grid: {
           left: 0
         },
@@ -104,7 +143,7 @@ export default {
           {
             name: '访问来源',
             type: 'pie',
-            radius: ['65%', '70%'],
+            radius: ['57%', '62%'],
             center: ['50%', '50%'],
             label: {
               show: true,

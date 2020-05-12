@@ -6,6 +6,10 @@
         <div class="h-1-3">
             <container class="w-1-2 full-height" title="监督检查发现问题类型占比分析">
                 <echartsHollowPie :data='hellowPie2[dimension].data'
+                                  :img="img"
+                                  :img-size="[90,90]"
+                                  :img-position="['center','30%']"
+                                  :title-position="['center','55%']"
                                   :title="hellowPie2[dimension].title"></echartsHollowPie>
             </container>
             <container class="w-1-2 full-height" title="各市监督抽检情况统计">
@@ -18,8 +22,8 @@
         </div>
         <div class="h-1-3">
             <container class="w-1-2 full-height" title="食品抽检不合格情况分析">
-                <echartsHollowPie :data='hellowPie3[dimension].data'
-                                  :title="hellowPie3[dimension].title"></echartsHollowPie>
+                <ChartsPie :data='hellowPie3[dimension].data'
+                           :title="hellowPie3[dimension].title"></ChartsPie>
             </container>
             <container class="w-1-2 full-height" title="各市抽检情况统计">
                 <ChartBarLine :data='chart4[dimension].data' :dimensions="['name','value']"
@@ -40,6 +44,7 @@ import ChartBarLine from '../compontes/echarts-bar'
 import echartsHollowPie from '../compontes/echartsHollowPie'
 
 import echarts from 'echarts'
+import ChartsPie from '../compontes/ChartsPie'
 
 export default {
   name: 'Page2_1',
@@ -50,12 +55,14 @@ export default {
     }
   },
   components: {
+    ChartsPie,
     ChartBarLine,
     echartsHollowPie,
     NumberTop
   },
   data () {
     return {
+      img: require('./../compontes/img/info.png'),
       barColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
         {
           offset: 0,

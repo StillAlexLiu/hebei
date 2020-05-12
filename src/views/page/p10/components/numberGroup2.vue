@@ -1,22 +1,20 @@
 <template>
     <div class="numberGroup2 full">
-        <container-info-card v-for="(item,index) in data" :key="index" class="item">
-            <div class="name">
-                <div>{{item.name}}</div>
+        <container-border31 v-for="(item,index) in data" :key="index" class="item">
+            <div class="full item-in">
+                <div class="h-2-5 b-line">
+                    <div class="img" :style="{backgroundImage:'url('+item.img+')'}">
+                        {{ item.short }}
+                    </div>
+                </div>
+                <div class="h-3-5 text">
+                    <div v-for="(item2,index) in item.data" :key="index">
+                        <div class="name w-1-2">{{ item2.name }}</div>
+                        <div class="value w-1-2 number-font">{{ item2.value }}</div>
+                    </div>
+                </div>
             </div>
-            <div class="value">
-                <div>累计有效</div>
-                <div class="c1">{{item.value1}}</div>
-            </div>
-            <div class="value">
-                <div>已处理</div>
-                <div class="c2">{{item.value2}}</div>
-            </div>
-            <div class="value">
-                <div>待处理</div>
-                <div class="c3">{{item.value3}}</div>
-            </div>
-        </container-info-card>
+        </container-border31>
     </div>
 </template>
 
@@ -37,57 +35,56 @@ export default {
 <style scoped lang="less">
 .numberGroup2 {
     display: flex;
-    direction: ltr;
     justify-content: space-around;
-    flex-flow: nowrap;
-    align-items: center;
+    /*align-items: center;*/
+    flex-direction: row;
 
     > .item {
-        height: 80%;
-        background-repeat: no-repeat;
-        background-size: 90% 100%;
-        background-position: center;
-        flex-grow: 0;
-        flex-basis: 40%;
+        flex-grow: 1;
         text-align: center;
-        padding: 20px 0;
 
-        .name {
-            font-size: 30px;
-            line-height: 130px;
-            height: 130px;
-        }
+        .item-in {
+            padding: 10px;
 
-        .value {
-            height: calc(~"(100% - 130px)/3");
-            width: 100%;
+            .b-line {
+                border-bottom: 2px solid rgba(74, 144, 226, 0.31);
+                padding-top: 35px;
+            }
 
-            > div {
-                float: left;
-                width: 50%;
+            .img {
+                width: 84px;
+                height: 84px;
+                margin: 0 auto;
+                background-size: 84px 84px;
+                line-height: 84px;
+                font-weight: bold;
+                font-size: 40px;
+            }
 
-                &:nth-child(1) {
-                    text-align: right;
+            .text {
+                padding: 10px 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: stretch;
+                >div{
+                    flex: 1;
                 }
 
-                &:nth-child(2) {
-                    text-indent: 10px;
+                .name {
+                    font-size: 24px;
                     text-align: left;
+                    line-height: 60px;
+                }
+
+                .value {
+                    color: #79DFEF;
+                    font-size: 36px;
+                    text-align: right;
+                    line-height: 60px;
                 }
             }
         }
-    }
-
-    .c1 {
-        color: #22AEC5;
-    }
-
-    .c2 {
-        color: #44D7B6;
-    }
-
-    .c3 {
-        color: #FA6400;
     }
 }
 </style>

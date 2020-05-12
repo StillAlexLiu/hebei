@@ -25,19 +25,20 @@ export default {
 <style scoped lang="less">
 .numberGroup {
     display: flex;
-    direction: ltr;
+    flex-direction: column;
     justify-content: space-around;
     flex-flow: nowrap;
     align-items: center;
+    padding: 20px;
 
     > .item {
         height: 90%;
+        margin: 0 10px;
+        flex: 1;
         background-image: url("./img/背景.png");
         background-repeat: no-repeat;
         background-size: 100% 100%;
         background-position: center;
-        flex-grow: 0;
-        flex-basis: 28%;
         text-align: center;
         padding: 40px 0;
 

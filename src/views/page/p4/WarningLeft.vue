@@ -9,25 +9,39 @@
             </container>
             <div class="h-3-8">
                 <container class="full-height w-1-2" title="智能预营趋势分析">
-                    <ChartLine :data="lineData1" :dimensions="['name','value1','value2','value3','value4','value5']"
-                               :legend="['食品','药品','特种设备','消费维权','无证无照']"/>
+                    <ChartsBarLine :data="lineData1" :dimensions="['name','value1','value2','value3','value4','value5']"
+                                   :type="['line','line','line','line','line']"
+                                   smooth
+                                   :is-area="true"
+                                   :two-axis="false"
+                                   :colors="['#FFD86D','#FE6941','#B576ED','#6EE86D','#61EADF']"
+                                   :legend="['食品','药品','特种设备','消费维权','无证无照']"/>
                 </container>
                 <container class="full-height w-1-2" title="各市本月预警分布情况">
-                    <ChartBarGroup unit="单位：次" :data="barData" :dimensions="['name','value']" :legend="['预警数量']"
-                                   :colors="['#1E889E']"/>
+                    <ChartsBarLine unit="单位：次" :data="barData" :dimensions="['name','value']" :legend="['预警数量']"
+                                   :type="['bar']"
+                                   :border-radius="false"
+                                   :bar-width="40"
+                                   :colors="['#4FCCFF']"/>
                 </container>
             </div>
             <div class="h-3-8">
                 <container class="full-height w-1-2" title="智能预警类型分布">
                     <div class="w-1-2 full-height">
-                        <ChartPie :is-circle="false" :data="pieData1"/>
+                        <ChartsPie :is-circle="false" :data="pieData1" :show-legend="false"/>
                     </div>
                     <div class="w-1-2 full-height">
-                        <ChartPie :is-circle="true" :data="pieData2"/>
+                        <ChartsHollowPie :is-circle="true" :data="pieData2" :img="pieData2Img" :imgSize="[70,70]"/>
                     </div>
                 </container>
                 <container class="full-height w-1-2" title="食品预警同比环比分析">
-                    <ChartLine :data="lineData2" :dimensions="['name','value1','value2']" :legend="['同比','环比']"/>
+                    <ChartsBarLine :data="lineData2" :dimensions="['name','value1','value2']"
+                                   :type="['line','line']"
+                                   smooth
+                                   :is-area="true"
+                                   :two-axis="false"
+                                   :colors="['#FE6941','#61EADF']"
+                                   :legend="['同比','环比']"/>
                 </container>
             </div>
         </div>
@@ -36,17 +50,17 @@
 
 <script>
 import NumberGroup from './components/NumberGroup'
-import ChartLine from './components/ChartLine'
 import Mock from 'mockjs'
-import ChartBarGroup from './components/ChartBarGroup'
-import ChartPie from './components/ChartPie'
+import ChartsBarLine from '../p0/components/ChartsBarLine'
+import ChartsPie from '../p2/compontes/ChartsPie'
+import ChartsHollowPie from '../p2/compontes/echartsHollowPie'
 
 export default {
   name: 'WarningLeft',
   components: {
-    ChartPie,
-    ChartBarGroup,
-    ChartLine,
+    ChartsHollowPie,
+    ChartsPie,
+    ChartsBarLine,
     NumberGroup
   },
   data () {
@@ -84,7 +98,8 @@ export default {
         '衡水市'
       ],
       pieData1: [],
-      pieData2: []
+      pieData2: [],
+      pieData2Img: require('./components/img/icon.png')
     }
   },
   mounted () {

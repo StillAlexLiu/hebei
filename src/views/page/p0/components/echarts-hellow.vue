@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'ChartBar',
+  name: 'echarts-hellow',
   props: ['data'],
   data () {
     return {
@@ -36,7 +36,6 @@ export default {
               show: true,
               position: 'center',
               formatter: function (p) {
-                console.error()
                 if (p.name !== '') {
                   return p.name + '\n\n' + p.value
                 } else {

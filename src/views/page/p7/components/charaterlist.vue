@@ -1,12 +1,11 @@
 <template>
-    <div id="charaterlist">
+    <div class="charaterlist full">
         <div class="list_header">
             {{data.name}}
         </div>
-        <div class="list_img"></div>
         <div class="list_botton" v-for="(item, index) in data.data" :key="index">
-            <span class="btn_span1 number-font">{{item.name}}</span>
-            <span class="number-font">{{item.num}}</span>
+            <div class="name ">{{item.name}}</div>
+            <div class="value number-font">{{item.num}}</div>
         </div>
     </div>
 </template>
@@ -21,44 +20,37 @@ export default {
 }
 </script>
 <style scoped lang='less'>
-#charaterlist {
+.charaterlist {
     text-align: center;
-    margin: 7rem 3rem;
+    width: 100%;
+    padding: 40px 0;
 
     .list_header {
         width: 100%;
-        height: 68px;
-        line-height: 68px;
-        font-size: 36px;
+        height: 62px;
+        line-height: 62px;
+        font-size: 24px;
         font-weight: bold;
-        background: #3483C3;
-    }
-
-    .list_img {
-        width: 100%;
-        height: 10px;
-        background-image: url('./img/twobar.png');
-        background-size: 100% 100%;
+        background-image: url("./img/title.png");
+        background-size: 202px 62px;
+        background-position: center;
         background-repeat: no-repeat;
     }
 
     .list_botton {
         width: 100%;
-        height: 120px;
-        line-height: 120px;
-        background: #1B296A;
 
-        .number-font {
-            color: #fff !important;
+        text-align: left;
+        padding: 0 60px;
+
+        .name {
+            font-size: 24px;
+            margin-top: 20px;
         }
 
-        span {
-            font-size: 36px;
-        }
-
-        .btn_span1 {
-            margin-right: 10px;
-            font-size: 20px;
+        .value {
+            font-size: 42px;
+            color: #FE6941;
         }
     }
 }

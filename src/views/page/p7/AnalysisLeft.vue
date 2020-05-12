@@ -28,14 +28,18 @@
             </div>
         </container>
         <div class="h-3-8">
-            <container class="full-height w-1-2" title="品牌力量">
-                <number-group :data="numberGroup"/>
-            </container>
-            <container class="full-height w-1-2" title="标准化建设">
-                <div class="w-3-7 full-height">
-                    <ChartsPie :data="pieData" is-pie/>
+            <container class="full-height " title="质量强省">
+                <div class="w-5-10 full-height">
+                    <number-group :data="numberGroup"/>
                 </div>
-                <value-only class="w-4-7 full-height" :data="data3"/>
+                <div class="w-1-10 full-height">
+                    <NumberGroup2 :data="pieData"/>
+                </div>
+                <div class="w-4-10 full-height">
+                    <ChartsBarLine :data="data3" :type="['line']" :dimensions="['name','value']"
+                                   :units="['单位:项']"
+                                   :legend="['企业公开标准项数量']"/>
+                </div>
             </container>
         </div>
     </div>
@@ -47,14 +51,16 @@ import pnglist from './components/pnglist'
 import charaterlist from './components/charaterlist'
 import Mock from 'mockjs'
 import NumberGroup from './components/numberGroup'
-import ValueOnly from './components/valueOnly'
 import ChartsPie from '../p2/compontes/ChartsPie'
+import NumberGroup2 from './components/NumberGroup2'
+import ChartsBarLine from '../p0/components/ChartsBarLine'
 
 export default {
   name: 'AnalysisLeft',
   components: {
+    ChartsBarLine,
+    NumberGroup2,
     ChartsPie,
-    ValueOnly,
     NumberGroup,
     pnglist,
     charaterlist
@@ -180,10 +186,25 @@ export default {
         name: '已标准化',
         value: Mock.Random.natural(10, 70)
       }],
-      data3: {
-        name: '标准示范企业',
+      data3: [{
+        name: '2019.6',
         value: Mock.Random.natural(10, 70)
-      },
+      }, {
+        name: '2019.7',
+        value: Mock.Random.natural(10, 70)
+      }, {
+        name: '2019.8',
+        value: Mock.Random.natural(10, 70)
+      }, {
+        name: '2019.9',
+        value: Mock.Random.natural(10, 70)
+      }, {
+        name: '2019.10',
+        value: Mock.Random.natural(10, 70)
+      }, {
+        name: '2019.11',
+        value: Mock.Random.natural(10, 70)
+      }],
       charaterlist2: {
         name: '数量',
         data: [

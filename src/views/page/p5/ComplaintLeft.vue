@@ -24,7 +24,7 @@
             </div>
             <div class='h-3-8'>
                 <container class='w-1-2 full-height' title='七类集中场所数据分布'>
-                    <echartsHollowPie :data='chart8[select.value]'></echartsHollowPie>
+                    <echartsHollowPie :titleSize="34" :data='chart8[select.value]' :title="'七类集中场\n所数据分布'"></echartsHollowPie>
                 </container>
                 <container class='w-1-2 full-height' title='商业综合体投诉举报top10'>
                     <div class='complain_spread'>

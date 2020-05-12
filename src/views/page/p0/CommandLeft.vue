@@ -16,6 +16,7 @@
         <Container class="h-1-3 full-width" title="许可备案">
             <div class="w-1-6 full-height">
                 <tableTab v-model="tabData2" @active='clickActive2'></tableTab>
+                <KeyValueInfo :data="{name:'特种设备许可数量',value:'424,212'}" style="margin-top: 10px"/>
             </div>
             <ContainerCenterTitle title="许可类型分布" class="w-3-6 full-height">
                 <ChartsPie :data='hellowPie2[select2][tabData2].pieData'/>
@@ -51,10 +52,12 @@ import tableTab from './components/tableTab'
 import echartsliquidfill from '../p2/compontes/echarts-liquidfill'
 import ChartsPie from './components/ChartsPie'
 import ChartsBarLine from './components/ChartsBarLine'
+import KeyValueInfo from './components/KeyValueInfo'
 
 export default {
   name: 'CommandLeft',
   components: {
+    KeyValueInfo,
     ChartsBarLine,
     ChartsPie,
     NumberGroup,

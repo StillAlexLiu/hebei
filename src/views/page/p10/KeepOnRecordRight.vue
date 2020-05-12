@@ -2,22 +2,23 @@
     <div class="KeepOnRecordRight full page-style">
         <div class="h-1-3">
             <container class="w-1-2 full-height" :title="'许可临期逾期预警'">
-                <tableHeader :data='tableData'></tableHeader>
+                <CommonTable :data="tableData" :headers="['许可证类型','预警内容','企业名称','剩余时间']" :show-order="false"/>
             </container>
             <container class="w-1-2  full-height" :title="'许可备案办理'">
-                <numberPie :data2='pieData'/>
+                <numberPie :data='pieData'/>
             </container>
         </div>
         <div class="h-1-3">
             <container class="w-1-2  full-height" :title="'许可办理结果分析'">
-                <container-info class="full">
-                    <ChartBarSimple2 :data="barData2" :dimensions="['name','value']" unit=""
-                                     :legend="['通过率']"
-                                     :colors="['rgb(52, 171, 190)']"/>
-                </container-info>
+                <ChartsBarLine :data="barData2" :dimensions="['name','value']" :units="'%'"
+                               :type="['bar']"
+                               :border-radius="false"
+                               :bar-width="56"
+                               :legend="['通过率']"
+                               :colors="[barColor]"/>
             </container>
             <container class="w-1-2 full-height" :title="'审批不通过原因分析'">
-                <echartsjuxing :data='juxingdata'></echartsjuxing>
+                <ChartsPie :data='juxingdata' :show-legend="false"/>
             </container>
         </div>
         <div class="h-1-3">
@@ -30,44 +31,58 @@
             <!--                                :colors="['rgb(52, 171, 190)']"/>-->
             <!--            </container>-->
             <container class="w-1-2 full-height" title="许可平均办理时间">
-                <container-info class="full">
-                    <Round :data="roundData"/>
-                </container-info>
+                <Round :data="roundData"/>
             </container>
             <container class="w-1-2 full-height" title="各市办理时间">
-                <container-info class="full">
-                    <ChartBarHorizontal :data="barData" :dimensions="['name','value']"/>
-                </container-info>
+                <ChartsBarLine :data="barData" :dimensions="['name','value']" :units="'%'"
+                               :type="['bar']"
+                               :border-radius="false"
+                               :bar-width="40"
+                               :legend="['办理率']"
+                               :colors="[barColor2]"/>
             </container>
         </div>
     </div>
 </template>
 
 <script>
-import tableHeader from './components/table'
 import Mock from 'mockjs'
 import numberPie from './components/numberPie'
-import ChartBarSimple2 from './components/ChartBarSimple2'
-// import ChartBarSimple from './components/ChartBarSimple'
-// import complaintPie from './components/complaintPie'
-import echartsjuxing from './components/echarts-juxing'
 import Round from './components/Round'
-import ChartBarHorizontal from './components/ChartBarHorizontal'
+import ChartsBarLine from '../p0/components/ChartsBarLine'
+import echarts from 'echarts'
+import ChartsPie from '../p2/compontes/ChartsPie'
 
 export default {
   name: 'KeepOnRecordRight',
   components: {
-    tableHeader,
+    ChartsPie,
+    ChartsBarLine,
     numberPie,
-    // ChartBarSimple,
-    // complaintPie,
-    ChartBarHorizontal,
-    Round,
-    echartsjuxing,
-    ChartBarSimple2
+    Round
   },
   data () {
     return {
+      barColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
+        {
+          offset: 0,
+          color: 'rgba(0,225,148,1)'
+        },
+        {
+          offset: 1,
+          color: 'rgba(0,225,148,0.2)'
+        }
+      ]),
+      barColor2: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
+        {
+          offset: 0,
+          color: 'rgba(34,174,197,1)'
+        },
+        {
+          offset: 1,
+          color: 'rgba(79,204,255,0.2)'
+        }
+      ]),
       juxingdata: [
         {
           value: Mock.Random.natural(600, 1000),
@@ -171,11 +186,11 @@ export default {
         {
           num: Mock.Random.natural(1000, 2000),
           name: '办理中',
-          img: require('../p1/componets/img/yueshu/1.png')
+          img: require('../p1/componets/img/yueshu/2.png')
         }, {
           num: Mock.Random.natural(1000, 2000),
           name: '已办理',
-          img: require('../p1/componets/img/yueshu/2.png')
+          img: require('../p1/componets/img/yueshu/1.png')
         }, {
           num: Mock.Random.natural(1000, 2000),
           name: '已过期',
@@ -260,7 +275,8 @@ export default {
       ],
       roundData: {
         name: '全省',
-        value: '7天'
+        value: '7天',
+        percent: '0.14%'
       },
       barData: []
     }

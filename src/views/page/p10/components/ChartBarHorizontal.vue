@@ -1,5 +1,5 @@
 <template>
-    <v-chart class="full-width" :autoresize='true' :options='options'/>
+    <chart :options='options'/>
 </template>
 
 <script>
@@ -17,50 +17,23 @@ export default {
       default: () => {
         return null
       }
-    }
-  },
-  data () {
-    return {
-      options: {}
-    }
-  },
-  watch: {
-    data: {
-      immediate: true,
-      deep: true,
-      handler: function () {
-        this.options = this.getOption(this.data, this.dimensions)
+    },
+    color: {
+      type: Array,
+      default: () => {
+        return []
       }
     }
   },
-  methods: {
-    getOption (data, dimensions) {
-      console.log(dimensions)
-      const series = []
-      for (let i = 0; i < dimensions.length - 1; i++) {
-        series.push({
-          name: '最新注册量' + i,
-          type: 'bar',
-          barWidth: '38%',
-          stack: '总量',
-          tooltip: {
-            show: false
-          },
-          label: {
-            show: true,
-            position: 'right',
-            textStyle: {
-              color: '#fff',
-              fontSize: 20
-            }
-          },
-          itemStyle: {
-            normal: {
-              // color: '#2EE1A2'
-            }
-          }
-
-        })
+  computed: {
+    options () {
+      const data = []
+      for (let i = 0; i < this.data.length; i++) {
+        const item = this.data[i]
+        item.itemStyle = {
+          color: this.color[i % this.color.length]
+        }
+        data.push(item)
       }
       return {
         tooltip: {},
@@ -71,11 +44,7 @@ export default {
           bottom: '1%',
           containLabel: true
         },
-        color: ['#2EE1A2', '#54AFED', '#22AEC5', '#22C4B6', '#205420', '#61EADF', '#F09077'],
-        dataset: {
-          dimensions: dimensions,
-          source: data
-        },
+        color: this.color,
         legend: {
           show: false
         },
@@ -134,7 +103,25 @@ export default {
             }
           }
         ],
-        series: series
+        series: [{
+          name: '',
+          type: 'bar',
+          barWidth: '38%',
+          stack: '总量',
+          tooltip: {
+            show: false
+          },
+          label: {
+            show: true,
+            position: 'right'
+          },
+          itemStyle: {
+            normal: {
+              // color: '#2EE1A2'
+            }
+          },
+          data: data
+        }]
       }
     }
   }

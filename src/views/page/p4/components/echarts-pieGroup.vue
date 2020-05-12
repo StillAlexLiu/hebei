@@ -1,8 +1,8 @@
 <template>
-<div class="pieGroup">
-   <v-chart class="full-width echarts" :autoresize='true' :options='options'/>
-   <p class="p_name">{{data.name}}</p>
-</div>
+    <div class="pieGroup">
+        <v-chart class="full-width echarts" :autoresize='true' :options='options'/>
+        <div class="p_name">{{data.name}}</div>
+    </div>
 </template>
 
 <script>
@@ -14,6 +14,10 @@ export default {
       default: () => {
         return {}
       }
+    },
+    isPercent: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -32,10 +36,8 @@ export default {
   },
   methods: {
     getOption (data) {
-      const str = data.name
-      const lastName = str.charAt(str.length - 1)
       let newName = ''
-      if (lastName === '率') {
+      if (this.isPercent) {
         newName = data.num + '%'
       } else {
         newName = data.num
@@ -46,16 +48,17 @@ export default {
           x: 'center',
           y: 'center',
           textStyle: {
-            color: '#fff',
+            color: '#61EADF',
             fontSize: 30,
-            fontWeight: 'normal'
+            fontWeight: 'normal',
+            fontFamily: 'LESLIE'
           }
         },
         calculable: true,
         series: [
           {
             type: 'pie',
-            radius: [65, 90],
+            radius: ['60%', '80%'],
             center: ['50%', '50%'],
             hoverAnimation: false,
             labelLine: {
@@ -73,7 +76,7 @@ export default {
               {
                 value: this.data.num,
                 itemStyle: {
-                  color: '#3DB9CF'
+                  color: '#61EADF'
                 }
               },
               {
@@ -98,7 +101,7 @@ export default {
               }
             },
             type: 'pie',
-            radius: [70, 85],
+            radius: ['60%', '80%'],
             center: ['50%', '50%'],
             hoverAnimation: false,
             data: [
@@ -125,18 +128,20 @@ export default {
 </script>
 
 <style scoped lang="less">
-.pieGroup{
+.pieGroup {
     width: 70%;
     height: 80%;
     margin: 10% auto;
-    .echarts{
-      height: 80%!important;
+
+    .echarts {
+        height: 80% !important;
     }
-    .p_name{
-      width: 100%;
-      text-align: center;
-      margin: 0;
-      font-size: 2rem;
+
+    .p_name {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        font-size: 30px;
     }
 }
 </style>

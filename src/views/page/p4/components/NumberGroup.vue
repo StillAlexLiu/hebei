@@ -9,7 +9,7 @@
                     </span>
                 </div>
                 <div class="w-3-5 cell full-height text-left">
-                    <div class="h-3-5" style="font-size: 60px">
+                    <div class="h-3-5 number-font" style="font-size: 72px;color: #46CFFF">
                         {{item.value}}
                     </div>
                     <div class="h-2-5" style="font-size: 32px">
@@ -20,11 +20,11 @@
             <div class="h-1-2 pd">
                 <div class=" h-1-2   full-width">
                     <div class="w-1-2 full-height key">已处理</div>
-                    <div class="w-1-2 full-height text-left value c1">{{item.value1}}</div>
+                    <div class="w-1-2 full-height text-left value c1 number-font">{{item.value1}}</div>
                 </div>
                 <div class=" h-1-2   full-width">
                     <div class="w-1-2 full-height key">待处理</div>
-                    <div class="w-1-2 full-height text-left value c2">{{item.value2}}</div>
+                    <div class="w-1-2 full-height text-left value c2 number-font">{{item.value2}}</div>
                 </div>
             </div>
         </container-border32>

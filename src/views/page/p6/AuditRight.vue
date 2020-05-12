@@ -5,26 +5,21 @@
         </container>
         <div class="h-3-8">
             <container class="w-1-2 full-height" title="案卷流转情况跟踪">
-                <container-info class="full">
-                    <NumberGroup :data="numbers"/>
-                </container-info>
+                <NumberGroup :data="numbers"/>
             </container>
             <container class="w-1-2 full-height" title="案件全程电子化">
-                <container-info class="full">
-                    <NameOnly :data="nameOnlyData" class="full"/>
-                </container-info>
+                <NameOnly :data="nameOnlyData" class="full"/>
             </container>
         </div>
         <div class="h-3-8">
             <container class="w-1-2 full-height" title="物品处理情况">
-                <container-info class="full">
-                    <ChartPie :data="pieData" :is-circle="true"/>
-                </container-info>
+                <ChartsPie :data="pieData" :is-circle="true" :show-legend="false"/>
             </container>
             <container class="w-1-2 full-height" title="包容审慎">
-                <container-info class="full">
-                    <ChartPie :data="pieData1"/>
-                </container-info>
+                <RadioSimple :data="[{name:'不予处罚'},{name:'减轻处罚'}]" style="height: 45px"/>
+                <div style="height: calc(100% - 45px)">
+                    <ChartsPie :data="pieData1" :is-pie="true" :show-legend="false"/>
+                </div>
             </container>
         </div>
     </div>
@@ -32,7 +27,7 @@
 
 <script>
 import ChartTree from './components/ChartTree'
-import ChartPie from './components/ChartPie'
+import ChartsPie from '../p2/compontes/ChartsPie'
 import Mock from 'mockjs'
 import NumberGroup from './components/numberGroup'
 import NameOnly from './components/nameOnly'
@@ -42,7 +37,7 @@ export default {
   components: {
     NameOnly,
     NumberGroup,
-    ChartPie,
+    ChartsPie,
     ChartTree
   },
   data () {

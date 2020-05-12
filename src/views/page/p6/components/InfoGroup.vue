@@ -1,17 +1,23 @@
 <template>
-  <div class="number-group full-height  full-width">
-    <container-info-card v-for="(item,index) in data" :key="index" class="item">
-     <div class="itemName">{{item.name}}</div>
-     <div class="itemNum">
-       <p class="num_p1">本年</p>
-       <p class="num_p2">{{item.yearData}}</p>
-     </div>
-     <div class="itemNum">
-       <p class="num_p1">累计</p>
-       <p class="num_p2">{{item.addup}}</p>
-     </div>
-    </container-info-card>
-  </div>
+    <div class="number-group full-height  full-width">
+        <ContainerFourDash v-for="(item,index) in data" :key="index" class="item">
+            <div class="full" style="padding: 15px">
+                <ContainerOnlyTitle class="title">
+                    {{item.name}}
+                </ContainerOnlyTitle>
+                <div class="text">
+                    <div class="w-1-2 full-height">
+                        <div class="name">本年</div>
+                        <div class="value number-font">{{item.yearData}}</div>
+                    </div>
+                    <div class="w-1-2 full-height">
+                        <div class="name">累计</div>
+                        <div class="value number-font">{{item.addup}}</div>
+                    </div>
+                </div>
+            </div>
+        </ContainerFourDash>
+    </div>
 </template>
 
 <script>
@@ -20,42 +26,41 @@ export default {
   name: 'InfoGroup',
   props: ['data'],
   data: () => {
-    return {
-    }
+    return {}
   }
 }
 </script>
 <style scoped lang="less">
 .number-group {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 
-  > .item {
-    flex-grow: 1;
-    margin: 1rem 1.5rem;
+    > .item {
+        flex-grow: 1;
+        margin: 30px 40px;
+    }
 
-  }
-  .itemName{
-    width: 100%;
-    height: 140px;
-    text-align: center;
-    line-height: 140px;
-    font-size: 30px;
-  }
-  .itemNum{
-    width: 100px;
-    height: 150px;
-    float: left;
-    margin-left: 10rem;
-    margin-top: 2rem;
-    .num_p1{
-      font-size: 2rem;
+    .title {
+        height: 125px;
+        font-size: 56px;
     }
-    .num_p2{
-      font-size: 3rem;
-      color: #E59B23;
+
+    .text {
+        height: calc(100% - 125px);
+        text-align: center;
+
+        .name {
+            font-size: 32px;
+            height: 50%;
+            line-height: 60px;
+        }
+
+        .value {
+            font-size: 54px;
+            color: #F5A623;
+            height: 50%;
+        }
     }
-  }
 }
 </style>

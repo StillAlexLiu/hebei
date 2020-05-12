@@ -28,11 +28,60 @@ export default {
     showValue: {
       type: Boolean,
       default: false
+    },
+    showLegend: {
+      type: Boolean,
+      default: true
+    },
+    img: {
+      type: String,
+      default: ''
+    },
+    imgSize: {
+      type: Array,
+      default: () => {
+        return [120, 120]
+      }
+    },
+    centerValue: {
+      type: String,
+      default: ''
     }
   },
   computed: {
     options () {
+      const elements = []
+      const img = {
+        type: 'image',
+        style: {
+          image: this.img,
+          height: this.imgSize[0],
+          width: this.imgSize[1]
+        },
+        left: 'center',
+        top: 'middle'
+      }
+      const text = {
+        type: 'text',
+        left: 'center',
+        top: 'center',
+        z: 100,
+        style: {
+          fill: '#fff',
+          text: this.centerValue,
+          font: ' 52px LESLIE'
+        }
+      }
+      if (this.img !== '') {
+        elements.push(img)
+      }
+      if (this.centerValue !== '') {
+        elements.push(text)
+      }
       return {
+        graphic: {
+          elements: elements
+        },
         title: {
           text: this.title,
           x: 'center',
@@ -43,7 +92,7 @@ export default {
           }
         },
         legend: {
-          show: true
+          show: this.showLegend
         },
         series: [
           {

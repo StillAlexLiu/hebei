@@ -21,6 +21,37 @@ export default {
   },
   computed: {
     options () {
+      const data = []
+      for (let i = 0; i < this.data.data.length; i++) {
+        const item = this.data.data[i]
+        item.label = {
+          show: true,
+          formatter: (params) => {
+            if (params.name === '') {
+              return ''
+            } else {
+              return '{value|' + params.value + '}' + '\n' + '{name|' + params.name + '}'
+            }
+          },
+          rich: {
+            value: {
+              color: '#79DFEF',
+              fontSize: '28'
+            },
+            name: {
+              fontSize: '28'
+            }
+          },
+          distanceToLabelLine: -20
+        }
+        item.labelLine = {
+          length: 10,
+          length2: 10,
+          // smooth: true
+          show: item.name !== ''
+        }
+        data.push(item)
+      }
       return {
         legend: {
           orient: 'vertical',
@@ -37,32 +68,7 @@ export default {
             center: ['50%', '50%'],
             hoverAnimation: false,
             avoidLabelOverlap: true,
-            label: {
-              show: true,
-              formatter: (params) => {
-                if (params.name === '') {
-                  return ''
-                } else {
-                  return '{value|' + params.value + '}' + '\n' + '{name|' + params.name + '}'
-                }
-              },
-              rich: {
-                value: {
-                  color: '#79DFEF',
-                  fontSize: '28'
-                },
-                name: {
-                  fontSize: '28'
-                }
-              },
-              distanceToLabelLine: -20
-            },
-            labelLine: {
-              length: 10,
-              length2: 20
-              // smooth: true
-            },
-            data: this.data.data
+            data: data
           }
         ]
       }

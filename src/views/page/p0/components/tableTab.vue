@@ -42,9 +42,8 @@ export default {
 <style scoped lang='less'>
 #tableTab{
     width: 100%;
-    height: 100%;
     text-align: center;
-    margin-top: 7rem;
+    margin-top: 80px;
     ul{
         margin: 40px 0 0 0;
         width: 100%;

@@ -4,33 +4,33 @@
             <RadioSimple :data="radioData" v-model="select" class="w-3-7 full-height radio "/>
         </template>
         <div slot="calc" class=" full">
-            <container class="h-1-3" title="许可备案主体趋势">
-                <container-info class="full-height w-1-2">
-                    <ChartBarLine :data="barLineData[select.value]" :dimensions="['name','value']"
-                                  :legend="['许可备案主体数量']"
-                                  :colors="['#13344B']"
+            <div class="h-1-3">
+                <container class="full-height w-1-2" title="许可备案主体趋势">
+                    <ChartsBarLine :data="barLineData[select.value]" :dimensions="['name','value']"
+                                   :legend="['许可备案主体数量']"
+                                   :type="['line']"
+                                   :colors="['#61EADF']"
                     />
-                </container-info>
-                <div class="full-height w-1-2">
-                    <number-group1 :data="data1[select.value]"/>
-                </div>
-            </container>
+                </container>
+                <container class="full-height w-1-2" title="知识产权许可备案情况">
+                    <ChartsBarLine :data="areaLines[select.value]"
+                                   :dimensions="['name','value','value1','value2','value3']"
+                                   :legend="['商标','专利','马德里国际商标','PCT国际专利']"
+                                   :type="['line','line','line','line']"
+                                   :is-area="true"
+                                   :colors="['#22C5B7','#FF997D','#FFD86D','#87A0F6']"/>
+                </container>
+            </div>
             <container class="h-1-3" title="许可备案分类统计">
                 <number-group2 :data="data2[select.value]"/>
             </container>
             <div class="h-1-3">
                 <container class="w-1-2 full-height" title="知识产权许可备案情况">
-                    <container-info class="full">
-                        <ChartLine :data="lineData1[select.value]"
-                                   :dimensions="['name','value1','value2','value3','value4']"
-                                   :legend="['商标','专利','马德里国际商标','PCT国际专利']"/>
-                    </container-info>
+                    <ChartsPie :data="pieData[select.value]" :is-pie="true" :show-value="true"/>
                 </container>
                 <container class="w-1-2 full-height" title="知识产权热门区域排行榜">
-                    <container-info class="full">
-                        <ChartBarHorizontal :data="barData[select.value]"
-                                            :dimensions="['name','value','value1','value2','value3']"/>
-                    </container-info>
+                    <ChartBarHorizontal :data="barData[select.value]"
+                                        :color="['#4A90E2','#5DC3FF','#91D243','#50E3C2','#B8E986','#87A0F6','#FFD589','#FE9E55','#FE6941','#FF98A4','#22AEC5']"/>
                 </container>
             </div>
         </div>
@@ -38,21 +38,19 @@
 </template>
 
 <script>
-import ChartBarLine from './components/ChartBarLine'
 import Mock from 'mockjs'
-import NumberGroup1 from './components/numberGroup1'
+import ChartsPie from '../p2/compontes/ChartsPie'
 import NumberGroup2 from './components/numberGroup2'
 import ChartBarHorizontal from './components/ChartBarHorizontal'
-import ChartLine from './components/ChartLine'
+import ChartsBarLine from '../p0/components/ChartsBarLine'
 
 export default {
   name: 'KeepOnRecordLeft',
   components: {
+    ChartsBarLine,
     ChartBarHorizontal,
-    ChartLine,
-    NumberGroup1,
     NumberGroup2,
-    ChartBarLine
+    ChartsPie
   },
   data () {
     return {
@@ -109,56 +107,107 @@ export default {
           }
         ]
       ],
-      data1: [
+      areaLines: [
         [
           {
-            name: '(非外国)企业',
-            value: Mock.Random.natural(200, 400)
+            name: '商标',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
           },
           {
-            name: '外企',
-            value: Mock.Random.natural(100, 300)
+            name: '专利',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
           },
           {
-            name: '个体工商户',
-            value: Mock.Random.natural(10000, 30000)
+            name: '马德里国际商标',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
           },
           {
-            name: '农名专业合作社',
-            value: Mock.Random.natural(10000, 40000)
+            name: 'PCT国际专利',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
           }
         ], [
           {
-            name: '(非外国)企业',
-            value: Mock.Random.natural(200, 400)
-          }, {
-            name: '外企',
-            value: Mock.Random.natural(100, 300)
-          }, {
-            name: '个体工商户',
-            value: Mock.Random.natural(10000, 30000)
-          }, {
-            name: '农名专业合作社',
-            value: Mock.Random.natural(10000, 40000)
+            name: '商标',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
+          },
+          {
+            name: '专利',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
+          },
+          {
+            name: '马德里国际商标',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
+          },
+          {
+            name: 'PCT国际专利',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
           }
         ], [
           {
-            name: '(非外国)企业',
-            value: Mock.Random.natural(200, 400)
-          }, {
-            name: '外企',
-            value: Mock.Random.natural(100, 300)
-          }, {
-            name: '个体工商户',
-            value: Mock.Random.natural(10000, 30000)
-          }, {
-            name: '农名专业合作社',
-            value: Mock.Random.natural(10000, 40000)
+            name: '商标',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
+          },
+          {
+            name: '专利',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
+          },
+          {
+            name: '马德里国际商标',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
+          },
+          {
+            name: 'PCT国际专利',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
           }
         ]
       ],
       data2: [],
       array: ['食品', '工业产品', '特种设备', '计量', '广告', '药械'],
+      short: ['食', '工', '特', '计', '告', '械'],
+      img: [
+        require('./components/img/text-bg-yellow.png'),
+        require('./components/img/text-bg-orange.png'),
+        require('./components/img/text-bg-orange.png'),
+        require('./components/img/text-bg-orange.png'),
+        require('./components/img/text-bg-pink.png'),
+        require('./components/img/text-bg-purple.png')
+      ],
       roundData: {
         name: '全省',
         value: '7天'
@@ -177,7 +226,8 @@ export default {
         '衡水市'
       ],
       barData: [],
-      lineData1: []
+      pieData: [],
+      pieArray: ['信息传输', '软件和信息技术服务业', '其他', '服务业', '制造业', '科学研究和技术服务业']
     }
   },
   mounted () {
@@ -193,29 +243,36 @@ export default {
         for (let i = 0; i < this.array.length; i++) {
           item.push({
             name: this.array[i],
-            value1: Mock.Random.natural(10000, 40000),
-            value2: Mock.Random.natural(100, 1000),
-            value3: Mock.Random.natural(100, 1000)
+            img: this.img[i],
+            short: this.short[i],
+            data: [
+              {
+                name: '累计有效',
+                value: Mock.Random.natural(10000, 40000)
+              }, {
+                name: '已处理',
+                value: Mock.Random.natural(100, 1000)
+              }, {
+                name: '待处理',
+                value: Mock.Random.natural(100, 1000)
+              }
+            ]
           })
         }
         this.data2.push(item)
       }
     },
     makeLineData () {
-      this.lineData1 = []
+      this.pieData = []
       for (let j = 0; j < 3; j++) {
         const item = []
         for (let i = 0; i < 6; i++) {
           item.push({
-            name: '2019-0' + i,
-            value1: Mock.Random.natural(500, 1300),
-            value2: Mock.Random.natural(500, 1400),
-            value3: Mock.Random.natural(400, 1800),
-            value4: Mock.Random.natural(800, 900),
-            value5: Mock.Random.natural(800, 1600)
+            name: this.pieArray[i],
+            value: Mock.Random.natural(500, 1300)
           })
         }
-        this.lineData1.push(item)
+        this.pieData.push(item)
       }
     },
     makeBarData () {
@@ -225,10 +282,7 @@ export default {
         for (let i = 0; i < this.city.length; i++) {
           item.push({
             name: this.city[i],
-            value: Mock.Random.natural(1, 7),
-            value1: Mock.Random.natural(1, 7),
-            value2: Mock.Random.natural(1, 7),
-            value3: Mock.Random.natural(1, 7)
+            value: 15 * (i + 1) + Mock.Random.natural(0, 15)
           })
         }
         this.barData.push(item)

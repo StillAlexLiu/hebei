@@ -1,7 +1,9 @@
 <template>
     <div class="accross_bar">
-        <v-chart class="full-width" :autoresize='true' :options='option'/>
-        <div class="ab-can">
+        <div class="h-3-4 c-can">
+            <v-chart class="full-width" :autoresize='true' :options='option'/>
+        </div>
+        <div class="ab-can h-1-4">
             <div class="back">
                 {{data.name}}
             </div>
@@ -28,12 +30,24 @@ export default {
     }
   },
   methods: {
-    getOption (data) {
+    getOption () {
+      const data = []
+      const colors = ['#4A90E2', '#91D243', '#FE6941']
+      for (let i = 0; i < this.data.xdata.length; i++) {
+        data.push({
+          value: this.data.xdata[i],
+          itemStyle: {
+            color: colors[i]
+          }
+        })
+      }
+
       const option = {
         grid: {
           left: '15%',
           right: '20%',
           bottom: '25%',
+          top: '20%',
           containLabel: true
         },
         yAxis: {
@@ -76,6 +90,11 @@ export default {
             type: 'bar',
             stack: '总量',
             barWidth: 34,
+            showBackground: true,
+            backgroundStyle: {
+              borderColor: '#5FA2F3',
+              borderWidth: 1
+            },
             label: {
               normal: {
                 show: true,
@@ -91,21 +110,8 @@ export default {
                 fontSize: 24
               }
             },
-            itemStyle: {
-              normal: {
-                barBorderWidth: '1',
-                // barBorderRadius: [10, 10, 10, 10],
-                // barBorderColor: 'rgb(0,255,132)',
-                color: '#F98E1A'
-              },
-              emphasis: {
-                barBorderWidth: '1',
-                barBorderColor: 'rgb(0,255,132)'
-                // color: 'rgba(26,177,98,.8)'
-              }
-            },
             // 顺序 从下向上 传入
-            data: this.data.xdata
+            data: data
           }
         ]
       }
@@ -119,16 +125,20 @@ export default {
 .accross_bar {
     width: 100%;
     height: 100%;
-    background-image: url('./img/11.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
     position: relative;
 
+    .c-can {
+        background-image: url('./img/11.png');
+        background-size: 744px 285px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
     .ab-can {
-        position: absolute;
-        width: 100%;
-        height: 60px;
-        bottom: 100px;
+        /*position: absolute;*/
+        /*width: 100%;*/
+        /*height: 60px;*/
+        /*bottom: 100px;*/
     }
 
     .back {

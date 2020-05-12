@@ -5,8 +5,8 @@
                 {{item.name}}
             </div>
             <img src="./img/Group5@2x.png">
-            <div class="value">
-                {{item.value}}
+            <div class="value number-font">
+                {{item.value}}件
             </div>
         </div>
     </div>
@@ -42,11 +42,10 @@ export default {
     }
 
     .value {
-        font-size: 42px;
-        font-weight: bold;
-        color: #b8e986;
+        font-size: 54px;
+        color: #fff;
         line-height: 130px;
-        height: 120px;
+        height: 123px;
         background-size: auto 100%;
         background-position: center;
         background-image: url("./img/bg.png");

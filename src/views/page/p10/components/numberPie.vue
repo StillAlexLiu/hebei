@@ -1,57 +1,52 @@
 <template>
-    <div class="numberPie2">
-        <div class="number2" v-for="(item, index) in data2" :key="index">
-            <p class="number_name2" :style="{'background-image': 'url(' + item.img + ')'}">
-                {{item.num}}
-            </p>
-            <p class="number_p2">
-                {{item.name}}
-            </p>
+    <div class="numberPie full">
+        <div class="item" v-for="(item, index) in data" :key="index"
+             :style="{'background-image': 'url(' + item.img + ')'}">
+            <div class="number_name2 ">
+                <div class="number-font value">{{item.num}}件</div>
+                <div class="name"> {{item.name}}</div>
+            </div>
         </div>
     </div>
 </template>
 <script>
 export default {
   name: 'numberPie',
-  props: ['data2'],
-  data () {
-    return {
-
+  props: {
+    data: {
+      type: Array,
+      default: () => {
+        return []
+      }
     }
   }
 }
 </script>
 <style lang="less">
-    .numberPie2{
-        width: 100%;
-        height: 100%;
-        padding: 3% 3%;
-        .number2{
-            width: 23.3%;
-            margin-right: 5%;
-            margin-left: 5%;
-            height: 90%;
-            float: left;
-        }
-        .number_name2{
-            width: 125%;
-            line-height: 22rem;
-            height: 80%;
-            text-align: center;
-            font-size: 3rem;
-            color: white;
-            border-radius: 50%;
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
-        }
-        .number_p2{
-            width: 100%;
-            height: 10%;
-            text-align: center;
-            line-height: 100%;
-            font-size: 3rem;
-            color: white;
-            margin-left: 11%;
-        }
+.numberPie {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+
+    .item {
+        flex: 1;
+        background-position: center;
+        background-size: 90% auto;
+        background-repeat: no-repeat;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
+
+    .value {
+        font-size: 36px;
+    }
+
+    .name {
+        font-size: 24px;
+    }
+}
 </style>
