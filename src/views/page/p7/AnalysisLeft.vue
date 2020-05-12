@@ -18,13 +18,13 @@
                 <charaterlist :data='charaterlist2'/>
             </div>
             <div class="w-2-6 full-height">
-                <ChartsPie :data='hellowPie2' :is-pie="true"/>
+                <ChartsPie :data='hellowPie2' :is-pie="true" :show-value="true"/>
             </div>
             <div class="w-1-6 full-height">
                 <charaterlist :data='charaterlist1'/>
             </div>
             <div class="w-2-6 full-height">
-                <ChartsPie :data='hellowPie'/>
+                <ChartsPie :data='hellowPie' :show-all="true"/>
             </div>
         </container>
         <div class="h-3-8">

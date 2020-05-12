@@ -46,6 +46,10 @@ export default {
     centerValue: {
       type: String,
       default: ''
+    },
+    unit: {
+      type: String,
+      default: ''
     }
   },
   computed: {
@@ -113,9 +117,9 @@ export default {
               formatter: (params) => {
                 if (params.name !== '') {
                   if (this.showAll) {
-                    return params.name + '\n{white|' + params.value + '}' + '\n{white|' + params.percent + '%}'
+                    return params.name + '\n{white|' + params.value + this.unit + '}' + '\n{white|' + params.percent + '%}'
                   } else if (this.showValue) {
-                    return params.name + '\n{white|' + params.value + '}'
+                    return params.name + '\n{white|' + params.value + this.unit + '}'
                   } else {
                     return params.name + '\n{white|' + params.percent + '%}'
                   }

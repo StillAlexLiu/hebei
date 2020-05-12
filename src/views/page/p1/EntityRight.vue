@@ -90,66 +90,66 @@ export default {
       dataTop: [
         {
           name: '应报（户）',
-          value: 6097056,
+          value: 6041587,
           img: require('./componets/img/nianbao/1.png')
         },
         {
           name: '已报（户）',
-          value: 1346339,
+          value: 2319583,
           img: require('./componets/img/nianbao/2.png')
         },
         {
           name: '公示率',
-          value: '22.08%',
+          value: '38.39%',
           img: require('./componets/img/nianbao/3.png')
         }
       ],
       barLineData: [
         {
           name: '公有制企业',
-          value: 29917,
-          value2: 25.36
+          value: 62661,
+          value2: 53.44
         },
         {
           name: '私营企业',
-          value: 517733,
-          value2: 33.47
+          value: 842206,
+          value2: 54.75
         },
         {
           name: '外资企业',
-          value: 3844,
-          value2: 39.38
+          value: 6497,
+          value2: 66.72
         },
         {
           name: '个体户',
-          value: 766568,
-          value2: 17.80
+          value: 1352894,
+          value2: 31.75
         },
         {
           name: '农专',
-          value: 27198,
-          value2: 23.63
+          value: 51927,
+          value2: 45.27
         }
       ],
       pieData: {
         all: {
           name: '经营异常主体',
-          value: 1057812,
+          value: 1025552,
           img: require('./componets/img/yueshu/0.png')
         },
         list: [
           {
             name: '移出',
-            value: 446213,
+            value: 458256,
             img: require('./componets/img/yueshu/1.png')
           },
           {
             name: '列异',
-            value: 1036061,
+            value: 1003764,
             img: require('./componets/img/yueshu/2.png')
           }, {
             name: '列严',
-            value: 21751,
+            value: 21788,
             img: require('./componets/img/yueshu/3.png')
           }
         ]
@@ -157,38 +157,38 @@ export default {
       mountainData: [
         {
           name: '未在规定责令的期限内公示有关企业信息',
-          value: 1114,
+          value: 1069,
           color: 'linear-gradient(180deg,rgba(79,255,148,1) 0%,rgba(56,167,120,1) 100%)'
         },
         {
           name: '公示企业信息隐瞒真实信息、弄虚作假',
-          value: 5761,
+          value: 5530,
           color: 'linear-gradient(180deg,rgba(87,182,255,1) 0%,rgba(0,138,255,1) 100%)'
         },
         {
           name: '通过登记的住所(经营场所)无法联系',
-          value: 96599,
+          value: 97748,
           color: 'linear-gradient(180deg,rgba(255,245,87,1) 0%,rgba(255,188,0,1) 100%)'
         },
         {
           name: '未按规定期限公示年度报告',
-          value: 1888870,
+          value: 1872436,
           color: 'linear-gradient(180deg,rgba(255,87,87,1) 0%,rgba(255,64,64,1) 100%)'
         }
       ],
 
       barHorizontalData: [
-        { name: '承德', value: '630' },
-        { name: '秦皇岛', value: '1100' },
-        { name: '张家口', value: '1120' },
-        { name: '衡水', value: '1508' },
-        { name: '邢台', value: '1729' },
-        { name: '廊坊', value: '1930' },
-        { name: '保定', value: '1937' },
-        { name: '唐山', value: '2381' },
-        { name: '沧州', value: '2400' },
-        { name: '邯郸', value: '2706' },
-        { name: '石家庄', value: '4281' }
+        { name: '石家庄', value: '4315' },
+        { name: '唐山', value: '2366' },
+        { name: '秦皇岛', value: '1098' },
+        { name: '邯郸', value: '2711' },
+        { name: '邢台', value: '1736' },
+        { name: '保定', value: '1942' },
+        { name: '张家口', value: '1115' },
+        { name: '承德', value: '649' },
+        { name: '沧州', value: '2388' },
+        { name: '廊坊', value: '1927' },
+        { name: '衡水', value: '1512' }
       ]
     }
   },

@@ -42,7 +42,7 @@ export default {
         return ['center', 'center']
       }
     },
-    titleSize:{
+    titleSize: {
       type: Number,
       default: 22
     }
@@ -181,6 +181,5 @@ export default {
 
 <style scoped lang="less">
 .ChartBar {
-
 }
 </style>

@@ -3,7 +3,7 @@
         <div class='full-width h-2-8'>
             <container title='线索数量及处置期限情况' class='full-height w-1-2'>
                 <div class='full-height w-2-3'>
-                    <complaintPieR :data='chart1'></complaintPieR>
+                    <ChartsPieValueLegend :data='chart1'/>
                 </div>
                 <div class='full-height w-1-3'>
                     <RightInfoBox :data="infoData1"/>
@@ -11,7 +11,7 @@
             </container>
             <container title='案件数量及处置期限情况' class='full-height w-1-2'>
                 <div class='full-height w-2-3'>
-                    <complaintPieRT :data='chart2'></complaintPieRT>
+                    <ChartsPieValueLegend :data='chart2'/>
                 </div>
                 <div class='full-height w-1-3'>
                     <RightInfoBox :data="infoData2"/>
@@ -23,7 +23,7 @@
         </container>
         <div class='full-width h-3-8'>
             <container title='案件类型分布' class='w-1-2 full-height'>
-                <echartsHollowPie :data='chart4'></echartsHollowPie>
+                <echartsHollowPie :data='chart4' :title="'案件类型分布'" :title-size="36"/>
             </container>
             <container title='市队投诉举报案件分布' class='w-1-2 full-height'>
                 <complaintBarRH :xdata='chart5.xdata' :ydata='chart5.ydata'></complaintBarRH>
@@ -35,19 +35,17 @@
 <script>
 import comPlaintBarR from './compontes/comPlaintBarR'
 import complaintBarRH from './compontes/complaintBarRH'
-import complaintPieR from './compontes/complaintPieR'
-import complaintPieRT from './compontes/complaintPieRT'
 import RightInfoBox from './compontes/RightInfoBox'
 import echartsHollowPie from '../p2/compontes/echartsHollowPie'
+import ChartsPieValueLegend from './compontes/ChartsPieValueLegend'
 
 export default {
   name: 'ComplaintRight',
   components: {
+    ChartsPieValueLegend,
     RightInfoBox,
     comPlaintBarR,
     complaintBarRH,
-    complaintPieR,
-    complaintPieRT,
     echartsHollowPie
   },
   data () {
@@ -70,11 +68,9 @@ export default {
         { name: '不予立案', value: 456 }
       ],
       chart2: [
-        { name: '不予行政处罚', value: 22 },
-        { name: '给予行政处罚', value: 80 },
-        { name: '移送其他\n行政管理部门', value: 21 },
-        { name: '移送司法机关', value: 0 },
-        { name: '不得给予\n行政处罚（销案）', value: 19 }
+        { name: '行政处罚数量', value: 22 },
+        { name: '移送数量', value: 21 },
+        { name: '销案数量', value: 45 }
       ],
       chart3: {
         xdata: [

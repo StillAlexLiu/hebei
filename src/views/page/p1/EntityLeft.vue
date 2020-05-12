@@ -69,7 +69,7 @@ export default {
     NumberGroup,
     ChartBar
   },
-  data () {
+  data: function () {
     return {
       select: {},
       entityType: '市场主体',
@@ -115,7 +115,7 @@ export default {
 
                   }, {
                     name: '2020',
-                    value: 6275815
+                    value: 6400232
                   }
                 ]
               },
@@ -126,27 +126,27 @@ export default {
                 data: [
                   {
                     name: '公有制企业',
-                    value: 119946,
+                    value: 120787,
                     img: require('./componets/img/entity/entity-gong.png')
                   },
                   {
                     name: '外资企业',
-                    value: 9863,
+                    value: 9904,
                     img: require('./componets/img/entity/entity-wai.png')
                   },
                   {
                     name: '私营企业',
-                    value: 1597234,
+                    value: 1634254,
                     img: require('./componets/img/entity/entity-si.png')
                   },
                   {
                     name: '个体工商户',
-                    value: 4433075,
+                    value: 4519348,
                     img: require('./componets/img/entity/entity-ge.png')
                   },
                   {
                     name: '农民合作社',
-                    value: 115576,
+                    value: 115804,
                     img: require('./componets/img/entity/entity-nong.png')
                   },
                   {
@@ -162,19 +162,19 @@ export default {
                 data: [
                   {
                     name: '第一产业',
-                    value: 338486,
+                    value: 345646,
                     icon: require('./componets/img/pie/pie1.png'),
                     color: '#22AEC5'
                   },
                   {
                     name: '第二产业',
-                    value: 885046,
+                    value: 903197,
                     icon: require('./componets/img/pie/pie2.png'),
                     color: '#35A3FF'
                   },
                   {
                     name: '第三产业',
-                    value: 5051233,
+                    value: 5150344,
                     icon: require('./componets/img/pie/pie3.png'),
                     color: '#FE6941'
                   }
@@ -189,25 +189,25 @@ export default {
                   { year: '2017', step1: '124680', step2: '21483', step3: '12642' },
                   { year: '2018', step1: '145582', step2: '25036', step3: '14270' },
                   { year: '2019', step1: '166255', step2: '28305', step3: '15780' },
-                  { year: '2020', step1: '169544', step2: '28858', step3: '16025' }
+                  { year: '2020', step1: '173132', step2: '29378', step3: '16200' }
                 ]
               }
             },
             block4: {
               chart: {
                 data: [
-                  { name: '石家庄', value: '1162414' },
-                  { name: '唐山', value: '682831' },
-                  { name: '秦皇岛', value: '269928' },
-                  { name: '邯郸', value: '836839' },
-                  { name: '邢台', value: '608637' },
-                  { name: '保定', value: '864944' },
-                  { name: '张家口', value: '304699' },
-                  { name: '承德', value: '262762' },
-                  { name: '沧州', value: '504944' },
-                  { name: '廊坊', value: '418882' },
-                  { name: '衡水', value: '356428' },
-                  { name: '雄安新区', value: '2424' }
+                  { name: '石家庄', value: 1186591 },
+                  { name: '唐山', value: 700242 },
+                  { name: '秦皇岛', value: 274950 },
+                  { name: '邯郸', value: 846284 },
+                  { name: '邢台', value: 619272 },
+                  { name: '保定', value: 880872 },
+                  { name: '张家口', value: 311750 },
+                  { name: '承德', value: 267151 },
+                  { name: '沧州', value: 517419 },
+                  { name: '廊坊', value: 429173 },
+                  { name: '衡水', value: 363908 },
+                  { name: '雄安新区', value: 2542 }
                 ]
               }
             },
@@ -219,7 +219,7 @@ export default {
                   { year: '2017', step1: '3629123', step2: '341407', step3: '24325' },
                   { year: '2018', step1: '4376287', step2: '507951', step3: '29629' },
                   { year: '2019', step1: '5422692', step2: '642970', step3: '36271' },
-                  { year: '2020', step1: '5436070', step2: '784325', step3: '55403' }
+                  { year: '2020', step1: '5563567', step2: '781373', step3: '55275' }
                 ]
               }
             }
@@ -243,10 +243,9 @@ export default {
                   }, {
                     name: '2019',
                     value: 1188032
-
                   }, {
                     name: '2020',
-                    value: 174923
+                    value: 358628
                   }
                 ]
               },
@@ -257,27 +256,27 @@ export default {
                 data: [
                   {
                     name: '公有制企业',
-                    value: 2001,
+                    value: 3531,
                     img: require('./componets/img/entity/entity-gong.png')
                   },
                   {
                     name: '外资企业',
-                    value: 102,
+                    value: 166,
                     img: require('./componets/img/entity/entity-wai.png')
                   },
                   {
                     name: '私营企业',
-                    value: 51208,
+                    value: 95975,
                     img: require('./componets/img/entity/entity-si.png')
                   },
                   {
                     name: '个体工商户',
-                    value: 121110,
+                    value: 257814,
                     img: require('./componets/img/entity/entity-ge.png')
                   },
                   {
                     name: '农民合作社',
-                    value: 485,
+                    value: 1111,
                     img: require('./componets/img/entity/entity-nong.png')
                   },
                   {
@@ -293,19 +292,19 @@ export default {
                 data: [
                   {
                     name: '第一产业',
-                    value: 7771,
+                    value: 17211,
                     icon: require('./componets/img/pie/pie1.png'),
                     color: '#22AEC5'
                   },
                   {
                     name: '第二产业',
-                    value: 28407,
+                    value: 50197,
                     icon: require('./componets/img/pie/pie2.png'),
                     color: '#35A3FF'
                   },
                   {
                     name: '第三产业',
-                    value: 138740,
+                    value: 291212,
                     icon: require('./componets/img/pie/pie3.png'),
                     color: '#FE6941'
                   }
@@ -320,36 +319,36 @@ export default {
                   { year: '2017', step1: '22026', step2: '3597', step3: '1904' },
                   { year: '2018', step1: '20902', step2: '3556', step3: '1628' },
                   { year: '2019', step1: '20673', step2: '3268', step3: '1509' },
-                  { year: '2020', step1: '3346', step2: '560', step3: '246' }
+                  { year: '2020', step1: '6491', step2: '955', step3: '392' }
                 ]
               }
             },
             block4: {
               chart: {
                 data: [
-                  { name: '石家庄', value: '37798' },
-                  { name: '唐山', value: '21996' },
-                  { name: '秦皇岛', value: '5753' },
-                  { name: '邯郸', value: '19318' },
-                  { name: '邢台', value: '21030' },
-                  { name: '保定', value: '19941' },
-                  { name: '张家口', value: '5703' },
-                  { name: '承德', value: '5247' },
-                  { name: '沧州', value: '12823' },
-                  { name: '廊坊', value: '14375' },
-                  { name: '衡水', value: '10776' },
-                  { name: '雄安新区', value: '163' }
+                  { name: '石家庄', value: '72441' },
+                  { name: '唐山', value: '43715' },
+                  { name: '秦皇岛', value: '12970' },
+                  { name: '邯郸', value: '38769' },
+                  { name: '邢台', value: '38910' },
+                  { name: '保定', value: '46906' },
+                  { name: '张家口', value: '15554' },
+                  { name: '承德', value: '11679' },
+                  { name: '沧州', value: '28849' },
+                  { name: '廊坊', value: '28268' },
+                  { name: '衡水', value: '20263' },
+                  { name: '雄安新区', value: '304' }
                 ]
               }
             },
             block5: {
               chart: {
                 data: [
-                  { name: '交通运输、仓储和邮政业', value: '9426' },
-                  { name: '居民服务、修理和其他服务业', value: '12568' },
-                  { name: '住宿和餐饮业', value: '14373' },
-                  { name: '制造业', value: '20234' },
-                  { name: '批发和零售业', value: '81718' }
+                  { name: '居民服务、修理和其他服务业', value: '24367' },
+                  { name: '交通运输、仓储和邮政业', value: '25302' },
+                  { name: '制造业', value: '34549' },
+                  { name: '住宿和餐饮业', value: '36826' },
+                  { name: '批发和零售业', value: '165348' }
                 ]
               }
             }
@@ -378,7 +377,7 @@ export default {
 
                   }, {
                     name: '2020',
-                    value: 119946
+                    value: 120787
                   }
                 ]
               },
@@ -389,19 +388,19 @@ export default {
                 data: [
                   {
                     name: '户数(个)',
-                    value: 119946
+                    value: 120787
                   },
                   {
                     name: '同比上涨',
-                    value: '11.18%'
+                    value: '11.13%'
                   },
                   {
                     name: '资本（亿元）',
-                    value: 39457.6547797594
+                    value: 398570349.7
                   },
                   {
                     name: '同比上涨',
-                    value: '15.52%'
+                    value: '14.98%'
                   }
                 ]
               }
@@ -411,19 +410,19 @@ export default {
                 data: [
                   {
                     name: '第一产业',
-                    value: 2817,
+                    value: 2845,
                     icon: require('./componets/img/pie/pie1.png'),
                     color: '#22AEC5'
                   },
                   {
                     name: '第二产业',
-                    value: 19682,
+                    value: 19842,
                     icon: require('./componets/img/pie/pie2.png'),
                     color: '#35A3FF'
                   },
                   {
                     name: '第三产业',
-                    value: 97446,
+                    value: 98099,
                     icon: require('./componets/img/pie/pie3.png'),
                     color: '#FE6941'
                   }
@@ -438,25 +437,25 @@ export default {
                   { year: '2017', step1: '11433', step2: '3874', step3: '4664' },
                   { year: '2018', step1: '13373', step2: '4625', step3: '5346' },
                   { year: '2019', step1: '15402', step2: '5261', step3: '5991' },
-                  { year: '2020', step1: '15715', step2: '5395', step3: '6095' }
+                  { year: '2020', step1: '15969', step2: '5472', step3: '6167' }
                 ]
               }
             },
             block4: {
               chart: {
                 data: [
-                  { name: '石家庄', value: '24952' },
-                  { name: '唐山', value: '12891' },
-                  { name: '秦皇岛', value: '5951' },
-                  { name: '邯郸', value: '13810' },
-                  { name: '邢台', value: '8572' },
-                  { name: '保定', value: '15808' },
-                  { name: '张家口', value: '10119' },
-                  { name: '承德', value: '5950' },
-                  { name: '沧州', value: '8353' },
-                  { name: '廊坊', value: '7142' },
-                  { name: '衡水', value: '5591' },
-                  { name: '雄安新区', value: '744' }
+                  { name: '石家庄', value: '25081' },
+                  { name: '唐山', value: '12977' },
+                  { name: '秦皇岛', value: '5998' },
+                  { name: '邯郸', value: '13933' },
+                  { name: '邢台', value: '8632' },
+                  { name: '保定', value: '15872' },
+                  { name: '张家口', value: '10150' },
+                  { name: '承德', value: '5978' },
+                  { name: '沧州', value: '8488' },
+                  { name: '廊坊', value: '7199' },
+                  { name: '衡水', value: '5657' },
+                  { name: '雄安新区', value: '759' }
                 ]
               }
             },
@@ -468,7 +467,7 @@ export default {
                   { year: '2017', step1: '51739', step2: '25988', step3: '15673' },
                   { year: '2018', step1: '60284', step2: '27180', step3: '17789' },
                   { year: '2019', step1: '70124', step2: '27970', step3: '19885' },
-                  { year: '2020', step1: '69065', step2: '29202', step3: '21679' }
+                  { year: '2020', step1: '70063', step2: '29100', step3: '21624' }
                 ]
               }
             }
@@ -495,13 +494,13 @@ export default {
 
                   }, {
                     name: '2020',
-                    value: 2001
+                    value: 3531
                   }
                 ]
               },
               info: {
                 name: '公有制企业',
-                value: 2001,
+                value: 3531,
                 img: require('./componets/img/entity/entity-gong.png'),
                 data: [
                   {
@@ -510,15 +509,15 @@ export default {
                   },
                   {
                     name: '同比上涨',
-                    value: '-26.80%'
+                    value: '-12.94%'
                   },
                   {
                     name: '资本（亿元）',
-                    value: 483.445157
+                    value: 9614259.234
                   },
                   {
                     name: '同比上涨',
-                    value: '-19.92%'
+                    value: '-9.56%'
                   }
                 ]
               }
@@ -528,19 +527,19 @@ export default {
                 data: [
                   {
                     name: '第一产业',
-                    value: 136,
+                    value: 167,
                     icon: require('./componets/img/pie/pie1.png'),
                     color: '#22AEC5'
                   },
                   {
                     name: '第二产业',
-                    value: 313,
+                    value: 553,
                     icon: require('./componets/img/pie/pie2.png'),
                     color: '#35A3FF'
                   },
                   {
                     name: '第三产业',
-                    value: 1552,
+                    value: 2811,
                     icon: require('./componets/img/pie/pie3.png'),
                     color: '#FE6941'
                   }
@@ -555,7 +554,7 @@ export default {
                   { year: '2017', step1: '2098', step2: '748', step3: '786' },
                   { year: '2018', step1: '1940', step2: '751', step3: '682' },
                   { year: '2019', step1: '2029', step2: '636', step3: '645' },
-                  { year: '2020', step1: '318', step2: '135', step3: '104' }
+                  { year: '2020', step1: '576', step2: '212', step3: '161' }
 
                 ]
               }
@@ -563,29 +562,30 @@ export default {
             block4: {
               chart: {
                 data: [
-                  { name: '石家庄', value: '412' },
-                  { name: '唐山', value: '209' },
-                  { name: '秦皇岛', value: '119' },
-                  { name: '邯郸', value: '215' },
-                  { name: '邢台', value: '142' },
-                  { name: '保定', value: '149' },
-                  { name: '张家口', value: '147' },
-                  { name: '承德', value: '66' },
-                  { name: '沧州', value: '300' },
-                  { name: '廊坊', value: '118' },
-                  { name: '衡水', value: '84' },
-                  { name: '雄安新区', value: '40' }
+                  { name: '石家庄', value: '722' },
+                  { name: '唐山', value: '369' },
+                  { name: '秦皇岛', value: '170' },
+                  { name: '邯郸', value: '377' },
+                  { name: '邢台', value: '271' },
+                  { name: '保定', value: '297' },
+                  { name: '张家口', value: '256' },
+                  { name: '承德', value: '131' },
+                  { name: '沧州', value: '489' },
+                  { name: '廊坊', value: '225' },
+                  { name: '衡水', value: '169' },
+                  { name: '雄安新区', value: '55' }
+
                 ]
               }
             },
             block5: {
               chart: {
                 data: [
-                  { name: '制造业', value: '139' },
-                  { name: '房地产业', value: '179' },
-                  { name: '租赁和商务服务业', value: '230' },
-                  { name: '科学研究和技术服务业', value: '295' },
-                  { name: '批发和零售业', value: '496' }
+                  { name: '制造业', value: '233' },
+                  { name: '房地产业', value: '284' },
+                  { name: '租赁和商务服务业', value: '416' },
+                  { name: '科学研究和技术服务业', value: '529' },
+                  { name: '批发和零售业', value: '882' }
                 ]
               }
             }
@@ -614,30 +614,30 @@ export default {
 
                   }, {
                     name: '2020',
-                    value: 9863
+                    value: 9904
                   }
                 ]
               },
               info: {
                 name: '外资企业',
-                value: 9863,
+                value: 9904,
                 img: require('./componets/img/entity/entity-wai.png'),
                 data: [
                   {
                     name: '户数(个)',
-                    value: 9863
+                    value: 9904
                   },
                   {
                     name: '同比上涨',
-                    value: '6.74%'
+                    value: '6.62%'
                   },
                   {
                     name: '资本（亿元）',
-                    value: 5442.96028
+                    value: 54449305.61
                   },
                   {
                     name: '同比上涨',
-                    value: '48.61%'
+                    value: '47.40%'
                   }
                 ]
               }
@@ -647,19 +647,19 @@ export default {
                 data: [
                   {
                     name: '第一产业',
-                    value: 104,
+                    value: 105,
                     icon: require('./componets/img/pie/pie1.png'),
                     color: '#22AEC5'
                   },
                   {
                     name: '第二产业',
-                    value: 2125,
+                    value: 2119,
                     icon: require('./componets/img/pie/pie2.png'),
                     color: '#35A3FF'
                   },
                   {
                     name: '第三产业',
-                    value: 7631,
+                    value: 7680,
                     icon: require('./componets/img/pie/pie3.png'),
                     color: '#FE6941'
                   }
@@ -674,25 +674,27 @@ export default {
                   { year: '2017', step1: '592', step2: '320', step3: '549' },
                   { year: '2018', step1: '651', step2: '348', step3: '603' },
                   { year: '2019', step1: '706', step2: '392', step3: '676' },
-                  { year: '2020', step1: '715', step2: '394', step3: '681' }
+                  { year: '2020', step1: '706', step2: '394', step3: '686' }
+
                 ]
               }
             },
             block4: {
               chart: {
                 data: [
-                  { name: '石家庄', value: '1922' },
-                  { name: '唐山', value: '1217' },
+                  { name: '石家庄', value: '1928' },
+                  { name: '唐山', value: '1229' },
                   { name: '秦皇岛', value: '571' },
-                  { name: '邯郸', value: '814' },
-                  { name: '邢台', value: '601' },
-                  { name: '保定', value: '1121' },
-                  { name: '张家口', value: '601' },
-                  { name: '承德', value: '462' },
-                  { name: '沧州', value: '935' },
-                  { name: '廊坊', value: '1088' },
-                  { name: '衡水', value: '430' },
+                  { name: '邯郸', value: '818' },
+                  { name: '邢台', value: '609' },
+                  { name: '保定', value: '1139' },
+                  { name: '张家口', value: '600' },
+                  { name: '承德', value: '460' },
+                  { name: '沧州', value: '936' },
+                  { name: '廊坊', value: '1090' },
+                  { name: '衡水', value: '428' },
                   { name: '雄安新区', value: '96' }
+
                 ]
               }
             },
@@ -704,7 +706,8 @@ export default {
                   { year: '2017', step1: '4604', step2: '3470', step3: '403' },
                   { year: '2018', step1: '4092', step2: '4544', step3: '482' },
                   { year: '2019', step1: '4525', step2: '4666', step3: '570' },
-                  { year: '2020', step1: '4329', step2: '4397', step3: '1137' }
+                  { year: '2020', step1: '4366', step2: '4395', step3: '1143' }
+
                 ]
               }
             }
@@ -730,7 +733,7 @@ export default {
                     value: 643
                   }, {
                     name: '2020',
-                    value: 102
+                    value: 166
                   }
                 ]
               },
@@ -741,19 +744,19 @@ export default {
                 data: [
                   {
                     name: '户数(个)',
-                    value: 102
+                    value: 166
                   },
                   {
                     name: '同比上涨',
-                    value: '-29.51%'
+                    value: '-12.63%'
                   },
                   {
                     name: '资本（亿元）',
-                    value: 12.9560
+                    value: 195106.43
                   },
                   {
                     name: '同比上涨',
-                    value: '-89.77%'
+                    value: '-88.18%'
                   }
                 ]
               }
@@ -763,19 +766,19 @@ export default {
                 data: [
                   {
                     name: '第一产业',
-                    value: 0,
+                    value: 1,
                     icon: require('./componets/img/pie/pie1.png'),
                     color: '#22AEC5'
                   },
                   {
                     name: '第二产业',
-                    value: 4,
+                    value: 8,
                     icon: require('./componets/img/pie/pie2.png'),
                     color: '#35A3FF'
                   },
                   {
                     name: '第三产业',
-                    value: 98,
+                    value: 157,
                     icon: require('./componets/img/pie/pie3.png'),
                     color: '#FE6941'
                   }
@@ -790,36 +793,39 @@ export default {
                   { year: '2017', step1: '55', step2: '26', step3: '47' },
                   { year: '2018', step1: '59', step2: '28', step3: '54' },
                   { year: '2019', step1: '55', step2: '44', step3: '73' },
-                  { year: '2020', step1: '9', step2: '2', step3: '5' }
+                  { year: '2020', step1: '10', step2: '3', step3: '8' }
+
                 ]
               }
             },
             block4: {
               chart: {
                 data: [
-                  { name: '石家庄', value: '14' },
-                  { name: '唐山', value: '9' },
-                  { name: '秦皇岛', value: '5' },
-                  { name: '邯郸', value: '18' },
-                  { name: '邢台', value: '9' },
-                  { name: '保定', value: '8' },
-                  { name: '张家口', value: '6' },
+                  { name: '石家庄', value: '26' },
+                  { name: '唐山', value: '24' },
+                  { name: '秦皇岛', value: '8' },
+                  { name: '邯郸', value: '22' },
+                  { name: '邢台', value: '16' },
+                  { name: '保定', value: '22' },
+                  { name: '张家口', value: '10' },
                   { name: '承德', value: '1' },
-                  { name: '沧州', value: '11' },
-                  { name: '廊坊', value: '11' },
+                  { name: '沧州', value: '14' },
+                  { name: '廊坊', value: '13' },
                   { name: '衡水', value: '8' },
                   { name: '雄安新区', value: '2' }
+
                 ]
               }
             },
             block5: {
               chart: {
                 data: [
-                  { name: '住宿和餐饮业', value: '5' },
-                  { name: '科学研究和技术服务业', value: '12' },
-                  { name: '租赁和商务服务业', value: '13' },
-                  { name: '信息传输、软件和信息技术服务业', value: '20' },
-                  { name: '批发和零售业', value: '40' }
+                  { name: '住宿和餐饮业', value: '8' },
+                  { name: '租赁和商务服务业', value: '17' },
+                  { name: '科学研究和技术服务业', value: '18' },
+                  { name: '信息传输、软件和信息技术服务业', value: '23' },
+                  { name: '批发和零售业', value: '79' }
+
                 ]
               }
             }
@@ -848,7 +854,7 @@ export default {
 
                   }, {
                     name: '2020',
-                    value: 1597234
+                    value: 1634254
                   }
                 ]
               },
@@ -859,15 +865,15 @@ export default {
                 data: [
                   {
                     name: '户数(个)',
-                    value: 1597234
+                    value: 1634254
                   },
                   {
                     name: '同比上涨',
-                    value: '23.55%'
+                    value: '23.45%'
                   },
                   {
                     name: '资本（亿元）',
-                    value: 80481.11408
+                    value: 820612283.5
                   },
                   {
                     name: '同比上涨',
@@ -881,19 +887,19 @@ export default {
                 data: [
                   {
                     name: '第一产业',
-                    value: 61556,
+                    value: 63305,
                     icon: require('./componets/img/pie/pie1.png'),
                     color: '#22AEC5'
                   },
                   {
                     name: '第二产业',
-                    value: 458483,
+                    value: 469534,
                     icon: require('./componets/img/pie/pie2.png'),
                     color: '#35A3FF'
                   },
                   {
                     name: '第三产业',
-                    value: 1077195,
+                    value: 1101415,
                     icon: require('./componets/img/pie/pie3.png'),
                     color: '#FE6941'
                   }
@@ -908,7 +914,7 @@ export default {
                   { year: '2017', step1: '108353', step2: '17117', step3: '7411' },
                   { year: '2018', step1: '127043', step2: '19882', step3: '8301' },
                   { year: '2019', step1: '145469', step2: '22460', step3: '9092' },
-                  { year: '2020', step1: '148411', step2: '22869', step3: '9224' }
+                  { year: '2020', step1: '151733', step2: '23310', step3: '9319' }
 
                 ]
               }
@@ -916,18 +922,19 @@ export default {
             block4: {
               chart: {
                 data: [
-                  { name: '石家庄', value: '345010' },
-                  { name: '唐山', value: '122532' },
-                  { name: '秦皇岛', value: '69994' },
-                  { name: '邯郸', value: '185120' },
-                  { name: '邢台', value: '151211' },
-                  { name: '保定', value: '225980' },
-                  { name: '张家口', value: '70726' },
-                  { name: '承德', value: '57586' },
-                  { name: '沧州', value: '136362' },
-                  { name: '廊坊', value: '135526' },
-                  { name: '衡水', value: '95601' },
-                  { name: '雄安新区', value: '1584' }
+                  { name: '石家庄', value: '351597' },
+                  { name: '唐山', value: '124763' },
+                  { name: '秦皇岛', value: '71188' },
+                  { name: '邯郸', value: '189082' },
+                  { name: '邢台', value: '155681' },
+                  { name: '保定', value: '231600' },
+                  { name: '张家口', value: '72209' },
+                  { name: '承德', value: '58894' },
+                  { name: '沧州', value: '139393' },
+                  { name: '廊坊', value: '140172' },
+                  { name: '衡水', value: '97986' },
+                  { name: '雄安新区', value: '1687' }
+
                 ]
               }
             },
@@ -939,7 +946,8 @@ export default {
                   { year: '2017', step1: '856575', step2: '98375', step3: '4966' },
                   { year: '2018', step1: '1105940', step2: '114998', step3: '7398' },
                   { year: '2019', step1: '1399004', step2: '137484', step3: '10545' },
-                  { year: '2020', step1: '1419609', step2: '163694', step3: '14786' }
+                  { year: '2020', step1: '1456258', step2: '163224', step3: '14772' }
+
                 ]
               }
             }
@@ -965,7 +973,7 @@ export default {
                     value: 318666
                   }, {
                     name: '2020',
-                    value: 51208
+                    value: 95975
                   }
                 ]
               },
@@ -976,19 +984,19 @@ export default {
                 data: [
                   {
                     name: '户数(个)',
-                    value: 51208
+                    value: 95975
                   },
                   {
                     name: '同比上涨',
-                    value: '-24.17%'
+                    value: '-5.39%'
                   },
                   {
                     name: '资本（亿元）',
-                    value: 1676.613864
+                    value: 31853886.209552
                   },
                   {
                     name: '同比上涨',
-                    value: '-21.16%'
+                    value: '-6.83%'
                   }
                 ]
               }
@@ -998,19 +1006,19 @@ export default {
                 data: [
                   {
                     name: '第一产业',
-                    value: 1917,
+                    value: 3885,
                     icon: require('./componets/img/pie/pie1.png'),
                     color: '#22AEC5'
                   },
                   {
                     name: '第二产业',
-                    value: 15404,
+                    value: 27474,
                     icon: require('./componets/img/pie/pie2.png'),
                     color: '#35A3FF'
                   },
                   {
                     name: '第三产业',
-                    value: 33887,
+                    value: 64616,
                     icon: require('./componets/img/pie/pie3.png'),
                     color: '#FE6941'
                   }
@@ -1025,36 +1033,39 @@ export default {
                   { year: '2017', step1: '19636', step2: '2811', step3: '1070' },
                   { year: '2018', step1: '18690', step2: '2768', step3: '890' },
                   { year: '2019', step1: '18426', step2: '2577', step3: '790' },
-                  { year: '2020', step1: '2994', step2: '415', step3: '133' }
+                  { year: '2020', step1: '5841', step2: '729', step3: '216' }
+
                 ]
               }
             },
             block4: {
               chart: {
                 data: [
-                  { name: '石家庄', value: '10081' },
-                  { name: '唐山', value: '3650' },
-                  { name: '秦皇岛', value: '1872' },
-                  { name: '邯郸', value: '6897' },
-                  { name: '邢台', value: '6019' },
-                  { name: '保定', value: '5728' },
-                  { name: '张家口', value: '1815' },
-                  { name: '承德', value: '1788' },
-                  { name: '沧州', value: '3967' },
-                  { name: '廊坊', value: '5787' },
-                  { name: '衡水', value: '3483' },
-                  { name: '雄安新区', value: '121' }
+                  { name: '石家庄', value: '18708' },
+                  { name: '唐山', value: '6834' },
+                  { name: '秦皇岛', value: '3398' },
+                  { name: '邯郸', value: '12022' },
+                  { name: '邢台', value: '10901' },
+                  { name: '保定', value: '12363' },
+                  { name: '张家口', value: '3716' },
+                  { name: '承德', value: '3405' },
+                  { name: '沧州', value: '7503' },
+                  { name: '廊坊', value: '10837' },
+                  { name: '衡水', value: '6041' },
+                  { name: '雄安新区', value: '247' }
+
                 ]
               }
             },
             block5: {
               chart: {
                 data: [
-                  { name: '租赁和商务服务业', value: '4852' },
-                  { name: '科学研究和技术服务业', value: '5573' },
-                  { name: '建筑业', value: '6721' },
-                  { name: '制造业', value: '8611' },
-                  { name: '批发和零售业', value: '14964' }
+                  { name: '租赁和商务服务业', value: '8711' },
+                  { name: '科学研究和技术服务业', value: '10378' },
+                  { name: '建筑业', value: '12719' },
+                  { name: '制造业', value: '14620' },
+                  { name: '批发和零售业', value: '29310' }
+
                 ]
               }
             }
@@ -1083,7 +1094,7 @@ export default {
 
                   }, {
                     name: '2020',
-                    value: 4433075
+                    value: 4519348
                   }
                 ]
               },
@@ -1094,19 +1105,19 @@ export default {
                 data: [
                   {
                     name: '户数(个)',
-                    value: 4433075
+                    value: 4519348
                   },
                   {
                     name: '同比上涨',
-                    value: '22.50%'
+                    value: '22.86%'
                   },
                   {
                     name: '资本（亿元）',
-                    value: 4250.522259
+                    value: 44006523.0034
                   },
                   {
                     name: '同比上涨',
-                    value: '24.38%'
+                    value: '25.97%'
                   }
                 ]
               }
@@ -1116,19 +1127,19 @@ export default {
                 data: [
                   {
                     name: '第一产业',
-                    value: 166924,
+                    value: 172070,
                     icon: require('./componets/img/pie/pie1.png'),
                     color: '#22AEC5'
                   },
                   {
                     name: '第二产业',
-                    value: 404455,
+                    value: 411389,
                     icon: require('./componets/img/pie/pie2.png'),
                     color: '#35A3FF'
                   },
                   {
                     name: '第三产业',
-                    value: 3860650,
+                    value: 3934845,
                     icon: require('./componets/img/pie/pie3.png'),
                     color: '#FE6941'
                   }
@@ -1143,24 +1154,26 @@ export default {
                   { year: '2017', step1: '366', step2: '17', step3: '1' },
                   { year: '2018', step1: '443', step2: '23', step3: '1' },
                   { year: '2019', step1: '516', step2: '32', step3: '1' },
-                  { year: '2020', step1: '527', step2: '33', step3: '3' }
+                  { year: '2020', step1: '549', step2: '33', step3: '3' }
+
                 ]
               }
             },
             block4: {
               chart: {
                 data: [
-                  { name: '石家庄', value: '776922' },
-                  { name: '唐山', value: '536104' },
-                  { name: '秦皇岛', value: '187998' },
-                  { name: '邯郸', value: '631151' },
-                  { name: '邢台', value: '437569' },
-                  { name: '保定', value: '606479' },
-                  { name: '张家口', value: '213933' },
-                  { name: '承德', value: '186004' },
-                  { name: '沧州', value: '347350' },
-                  { name: '廊坊', value: '268769' },
-                  { name: '衡水', value: '240796' }
+                  { name: '石家庄', value: '794432' },
+                  { name: '唐山', value: '551050' },
+                  { name: '秦皇岛', value: '191770' },
+                  { name: '邯郸', value: '636495' },
+                  { name: '邢台', value: '443672' },
+                  { name: '保定', value: '616703' },
+                  { name: '张家口', value: '219447' },
+                  { name: '承德', value: '189043' },
+                  { name: '沧州', value: '356667' },
+                  { name: '廊坊', value: '274304' },
+                  { name: '衡水', value: '245765' }
+
                 ]
               }
             },
@@ -1172,7 +1185,7 @@ export default {
                   { year: '2017', step1: '2612466', step2: '212285', step3: '3282' },
                   { year: '2018', step1: '3099982', step2: '356566', step3: '3957' },
                   { year: '2019', step1: '3843831', step2: '462849', step3: '5268' },
-                  { year: '2020', step1: '3843105', step2: '572156', step3: '17797' }
+                  { year: '2020', step1: '3931742', step2: '569857', step3: '17732' }
                 ]
               }
             }
@@ -1198,7 +1211,7 @@ export default {
                     value: 849168
                   }, {
                     name: '2020',
-                    value: 137614
+                    value: 257814
                   }
                 ]
               },
@@ -1209,19 +1222,19 @@ export default {
                 data: [
                   {
                     name: '户数(个)',
-                    value: 137614
+                    value: 257814
                   },
                   {
                     name: '同比上涨',
-                    value: '-17.28%'
+                    value: '3.57%'
                   },
                   {
                     name: '资本（亿元）',
-                    value: 170.5798576
+                    value: 3342588.196
                   },
                   {
                     name: '同比上涨',
-                    value: '2.94%'
+                    value: '26.31%'
                   }
                 ]
               }
@@ -1231,19 +1244,19 @@ export default {
                 data: [
                   {
                     name: '第一产业',
-                    value: 6234,
+                    value: 12073,
                     icon: require('./componets/img/pie/pie1.png'),
                     color: '#22AEC5'
                   },
                   {
                     name: '第二产业',
-                    value: 14060,
+                    value: 22145,
                     icon: require('./componets/img/pie/pie2.png'),
                     color: '#35A3FF'
                   },
                   {
                     name: '第三产业',
-                    value: 117314,
+                    value: 223588,
                     icon: require('./componets/img/pie/pie3.png'),
                     color: '#FE6941'
                   }
@@ -1258,35 +1271,38 @@ export default {
                   { year: '2017', step1: '67', step2: '5', step3: '0' },
                   { year: '2018', step1: '77', step2: '6', step3: '0' },
                   { year: '2019', step1: '73', step2: '9', step3: '0' },
-                  { year: '2020', step1: '13', step2: '1', step3: '4' }
+                  { year: '2020', step1: '33', step2: '1', step3: '2' }
+
                 ]
               }
             },
             block4: {
               chart: {
                 data: [
-                  { name: '石家庄', value: '30161' },
-                  { name: '唐山', value: '20287' },
-                  { name: '秦皇岛', value: '4305' },
-                  { name: '邯郸', value: '13795' },
-                  { name: '邢台', value: '16895' },
-                  { name: '保定', value: '16639' },
-                  { name: '张家口', value: '4459' },
-                  { name: '承德', value: '3948' },
-                  { name: '沧州', value: '10010' },
-                  { name: '廊坊', value: '9250' },
-                  { name: '衡水', value: '7865' }
+                  { name: '石家庄', value: '52903' },
+                  { name: '唐山', value: '36200' },
+                  { name: '秦皇岛', value: '9321' },
+                  { name: '邯郸', value: '26312' },
+                  { name: '邢台', value: '27689' },
+                  { name: '保定', value: '34143' },
+                  { name: '张家口', value: '11455' },
+                  { name: '承德', value: '8032' },
+                  { name: '沧州', value: '20777' },
+                  { name: '廊坊', value: '17074' },
+                  { name: '衡水', value: '13908' }
+
                 ]
               }
             },
             block5: {
               chart: {
                 data: [
-                  { name: '交通运输、仓储和邮政业', value: '9278' },
-                  { name: '制造业', value: '12697' },
-                  { name: '居民服务、修理和其他服务业', value: '12900' },
-                  { name: '住宿和餐饮业', value: '16733' },
-                  { name: '批发和零售业', value: '74013' }
+                  { name: '制造业', value: '19682' },
+                  { name: '交通运输、仓储和邮政业', value: '22033' },
+                  { name: '居民服务、修理和其他服务业', value: '22285' },
+                  { name: '住宿和餐饮业', value: '35769' },
+                  { name: '批发和零售业', value: '135066' }
+
                 ]
               }
             }
@@ -1314,7 +1330,7 @@ export default {
                     value: 115103
                   }, {
                     name: '2020',
-                    value: 115588
+                    value: 115804
                   }
                 ]
               },
@@ -1325,19 +1341,19 @@ export default {
                 data: [
                   {
                     name: '户数(个)',
-                    value: 115588
+                    value: 115804
                   },
                   {
                     name: '同比上涨',
-                    value: '3.39%'
+                    value: '3.44%'
                   },
                   {
                     name: '资本（亿元）',
-                    value: 2515.008222
+                    value: 25172802.487975
                   },
                   {
                     name: '同比上涨',
-                    value: '2.48%'
+                    value: '2.58%'
                   }
                 ]
               }
@@ -1347,19 +1363,19 @@ export default {
                 data: [
                   {
                     name: '第一产业',
-                    value: 107096,
+                    value: 107320,
                     icon: require('./componets/img/pie/pie1.png'),
                     color: '#22AEC5'
                   },
                   {
                     name: '第二产业',
-                    value: 282,
+                    value: 286,
                     icon: require('./componets/img/pie/pie2.png'),
                     color: '#35A3FF'
                   },
                   {
                     name: '第三产业',
-                    value: 8210,
+                    value: 8198,
                     icon: require('./componets/img/pie/pie3.png'),
                     color: '#FE6941'
                   }
@@ -1374,24 +1390,26 @@ export default {
                   { year: '2017', step1: '3935', step2: '155', step3: '16' },
                   { year: '2018', step1: '4071', step2: '158', step3: '18' },
                   { year: '2019', step1: '4161', step2: '160', step3: '19' },
-                  { year: '2020', step1: '4170', step2: '161', step3: '19' }
+                  { year: '2020', step1: '4167', step2: '160', step3: '19' }
+
                 ]
               }
             },
             block4: {
               chart: {
                 data: [
-                  { name: '石家庄', value: '13587' },
-                  { name: '唐山', value: '10056' },
-                  { name: '秦皇岛', value: '5405' },
-                  { name: '邯郸', value: '5943' },
-                  { name: '邢台', value: '10683' },
-                  { name: '保定', value: '15551' },
-                  { name: '张家口', value: '9321' },
-                  { name: '承德', value: '12762' },
-                  { name: '沧州', value: '11922' },
-                  { name: '廊坊', value: '6354' },
-                  { name: '衡水', value: '14004' }
+                  { name: '石家庄', value: '13530' },
+                  { name: '唐山', value: '10187' },
+                  { name: '秦皇岛', value: '5411' },
+                  { name: '邯郸', value: '5954' },
+                  { name: '邢台', value: '10675' },
+                  { name: '保定', value: '15552' },
+                  { name: '张家口', value: '9340' },
+                  { name: '承德', value: '12776' },
+                  { name: '沧州', value: '11911' },
+                  { name: '廊坊', value: '6401' },
+                  { name: '衡水', value: '14067' }
+
                 ]
               }
             },
@@ -1403,7 +1421,8 @@ export default {
                   { year: '2017', step1: '103689', step2: '1263', step3: '0' },
                   { year: '2018', step1: '105923', step2: '4639', step3: '0' },
                   { year: '2019', step1: '105130', step2: '9973', step3: '0' },
-                  { year: '2020', step1: '100744', step2: '14843', step3: '1' }
+                  { year: '2020', step1: '101031', step2: '14772', step3: '1' }
+
                 ]
               }
             }
@@ -1429,7 +1448,7 @@ export default {
                     value: 4541
                   }, {
                     name: '2020',
-                    value: 485
+                    value: 1111
                   }
                 ]
               },
@@ -1440,19 +1459,19 @@ export default {
                 data: [
                   {
                     name: '户数(个)',
-                    value: 485
+                    value: 1111
                   },
                   {
                     name: '同比上涨',
-                    value: '-62.34%'
+                    value: '-37.83%'
                   },
                   {
                     name: '资本（亿元）',
-                    value: 8.235915
+                    value: 189934.45
                   },
                   {
                     name: '同比上涨',
-                    value: '-59.22%'
+                    value: '-32.30%'
                   }
                 ]
               }
@@ -1462,19 +1481,19 @@ export default {
                 data: [
                   {
                     name: '第一产业',
-                    value: 472,
+                    value: 1085,
                     icon: require('./componets/img/pie/pie1.png'),
                     color: '#22AEC5'
                   },
                   {
                     name: '第二产业',
-                    value: 2,
+                    value: 6,
                     icon: require('./componets/img/pie/pie2.png'),
                     color: '#35A3FF'
                   },
                   {
                     name: '第三产业',
-                    value: 11,
+                    value: 20,
                     icon: require('./componets/img/pie/pie3.png'),
                     color: '#FE6941'
                   }
@@ -1489,7 +1508,7 @@ export default {
                   { year: '2017', step1: '170', step2: '7', step3: '1' },
                   { year: '2018', step1: '136', step2: '3', step3: '2' },
                   { year: '2019', step1: '90', step2: '2', step3: '1' },
-                  { year: '2020', step1: '9', step2: '1', step3: '0' }
+                  { year: '2020', step1: '24', step2: '1', step3: '0' }
 
                 ]
               }
@@ -1497,28 +1516,29 @@ export default {
             block4: {
               chart: {
                 data: [
-                  { name: '石家庄', value: '39' },
-                  { name: '唐山', value: '126' },
-                  { name: '秦皇岛', value: '35' },
-                  { name: '邯郸', value: '15' },
-                  { name: '邢台', value: '13' },
-                  { name: '保定', value: '24' },
-                  { name: '张家口', value: '51' },
-                  { name: '承德', value: '54' },
-                  { name: '沧州', value: '28' },
-                  { name: '廊坊', value: '50' },
-                  { name: '衡水', value: '50' }
+                  { name: '石家庄', value: '75' },
+                  { name: '唐山', value: '280' },
+                  { name: '秦皇岛', value: '70' },
+                  { name: '邯郸', value: '34' },
+                  { name: '邢台', value: '30' },
+                  { name: '保定', value: '81' },
+                  { name: '张家口', value: '114' },
+                  { name: '承德', value: '110' },
+                  { name: '沧州', value: '64' },
+                  { name: '廊坊', value: '116' },
+                  { name: '衡水', value: '137' }
+
                 ]
               }
             },
             block5: {
               chart: {
                 data: [
-                  { name: '电力、热力、燃气及水生产和供应业', value: '2' },
-                  { name: '批发和零售业', value: '2' },
-                  { name: '租赁和商务服务业', value: '2' },
-                  { name: '科学研究和技术服务业', value: '7' },
-                  { name: '农、林、牧、渔业', value: '472' }
+                  { name: '租赁和商务服务业', value: '3' },
+                  { name: '批发和零售业', value: '4' },
+                  { name: '电力、热力、燃气及水生产和供应业', value: '5' },
+                  { name: '科学研究和技术服务业', value: '12' },
+                  { name: '农、林、牧、渔业', value: '1085' }
                 ]
               }
             }

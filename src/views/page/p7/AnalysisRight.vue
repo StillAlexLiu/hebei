@@ -9,12 +9,12 @@
                     <leftImages :data='leftImage'></leftImages>
                 </container>
                 <container class="full-height w-1-2" title="案件类型">
-                    <ChartsPie :data='hellowPie' is-pie />
+                    <ChartsPie :data='hellowPie' is-pie :show-value="true" :unit="'件'"/>
                 </container>
             </div>
             <div class="h-3-8">
                 <container class="full-height w-1-2" title="案件主体">
-                    <ChartsPie :data='hellowPie2' :centerValue="'2300'"/>
+                    <ChartsPie :data='hellowPie2' :centerValue="'2300'" :show-value="true" :unit="'户'"/>
                 </container>
                 <container class="full-height w-1-2" title="案件办理">
                     <threePie :data='threePie'></threePie>

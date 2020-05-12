@@ -13,12 +13,12 @@
         </div>
         <div class="h-3-8">
             <container class="w-1-2 full-height" title="物品处理情况">
-                <ChartsPie :data="pieData" :is-circle="true" :show-legend="false"/>
+                <ChartsPieValueLegend :data="pieData" :text="'物品处理\n案件数量\n500件'" :text-size="28"/>
             </container>
             <container class="w-1-2 full-height" title="包容审慎">
                 <RadioSimple :data="[{name:'不予处罚'},{name:'减轻处罚'}]" style="height: 45px"/>
                 <div style="height: calc(100% - 45px)">
-                    <ChartsPie :data="pieData1" :is-pie="true" :show-legend="false"/>
+                    <ChartsPie :data="pieData1" :is-pie="true" :show-legend="false" :show-value="true"/>
                 </div>
             </container>
         </div>
@@ -31,10 +31,12 @@ import ChartsPie from '../p2/compontes/ChartsPie'
 import Mock from 'mockjs'
 import NumberGroup from './components/numberGroup'
 import NameOnly from './components/nameOnly'
+import ChartsPieValueLegend from '../p5/compontes/ChartsPieValueLegend'
 
 export default {
   name: 'AuditRight',
   components: {
+    ChartsPieValueLegend,
     NameOnly,
     NumberGroup,
     ChartsPie,

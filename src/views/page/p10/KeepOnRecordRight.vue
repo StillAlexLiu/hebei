@@ -10,7 +10,7 @@
         </div>
         <div class="h-1-3">
             <container class="w-1-2  full-height" :title="'许可办理结果分析'">
-                <ChartsBarLine :data="barData2" :dimensions="['name','value']" :units="'%'"
+                <ChartsBarLine :data="barData2" :dimensions="['name','value']" :units="['%']"
                                :type="['bar']"
                                :border-radius="false"
                                :bar-width="56"
@@ -18,7 +18,8 @@
                                :colors="[barColor]"/>
             </container>
             <container class="w-1-2 full-height" :title="'审批不通过原因分析'">
-                <ChartsPie :data='juxingdata' :show-legend="false"/>
+                <ChartsPieValueLegend :data='juxingdata' :colors="['#99ED66','#00A3E8','#FF4B07','#FFB900']"
+                                      :show-legend="false" :text="'不通过总数\n12431'" :text-size="30"/>
             </container>
         </div>
         <div class="h-1-3">
@@ -34,7 +35,7 @@
                 <Round :data="roundData"/>
             </container>
             <container class="w-1-2 full-height" title="各市办理时间">
-                <ChartsBarLine :data="barData" :dimensions="['name','value']" :units="'%'"
+                <ChartsBarLine :data="barData" :dimensions="['name','value']" :units="['%']"
                                :type="['bar']"
                                :border-radius="false"
                                :bar-width="40"
@@ -51,12 +52,12 @@ import numberPie from './components/numberPie'
 import Round from './components/Round'
 import ChartsBarLine from '../p0/components/ChartsBarLine'
 import echarts from 'echarts'
-import ChartsPie from '../p2/compontes/ChartsPie'
+import ChartsPieValueLegend from '../p5/compontes/ChartsPieValueLegend'
 
 export default {
   name: 'KeepOnRecordRight',
   components: {
-    ChartsPie,
+    ChartsPieValueLegend,
     ChartsBarLine,
     numberPie,
     Round
@@ -84,10 +85,6 @@ export default {
         }
       ]),
       juxingdata: [
-        {
-          value: Mock.Random.natural(600, 1000),
-          name: '不通过总数'
-        },
         {
           value: Mock.Random.natural(100, 500),
           name: '材料不规范'

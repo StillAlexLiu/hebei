@@ -28,7 +28,7 @@
             <div class="h-3-8">
                 <container class="full-height w-1-2" title="智能预警类型分布">
                     <div class="w-1-2 full-height">
-                        <ChartsPie :is-circle="false" :data="pieData1" :show-legend="false"/>
+                        <ChartsPie :is-circle="false" :data="pieData1" :show-legend="false" :is-pie="true"/>
                     </div>
                     <div class="w-1-2 full-height">
                         <ChartsHollowPie :is-circle="true" :data="pieData2" :img="pieData2Img" :imgSize="[70,70]"/>
@@ -37,8 +37,6 @@
                 <container class="full-height w-1-2" title="食品预警同比环比分析">
                     <ChartsBarLine :data="lineData2" :dimensions="['name','value1','value2']"
                                    :type="['line','line']"
-                                   smooth
-                                   :is-area="true"
                                    :two-axis="false"
                                    :colors="['#FE6941','#61EADF']"
                                    :legend="['同比','环比']"/>
