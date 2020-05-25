@@ -16,8 +16,8 @@
                 <NumberElevator :data='chart4[dimension]'></NumberElevator>
             </container>
             <container class="w-1-2 full-height" title="双随机监管">
-                <div class="w-1-2 full-height" v-for="(item, index) in chart5[dimension]" :key="index">
-                    <echartsPieGroup :data='item'></echartsPieGroup>
+                <div class="w-1-2 full-height" v-for="(item, name,index) in chart5[dimension]" :key="index">
+                    <echartsPieGroup :data='item' :colors="colors[index]"></echartsPieGroup>
                 </div>
             </container>
         </div>
@@ -46,6 +46,7 @@ export default {
   },
   data () {
     return {
+      colors: [['#FE6941', '#4B8FE2'], ['#B8E986', '#3E404D']],
       chart1: [[
         {
           name: '综合监管',

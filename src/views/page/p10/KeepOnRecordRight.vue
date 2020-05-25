@@ -35,11 +35,11 @@
                 <Round :data="roundData"/>
             </container>
             <container class="w-1-2 full-height" title="各市办理时间">
-                <ChartsBarLine :data="barData" :dimensions="['name','value']" :units="['%']"
+                <ChartsBarLine :data="barData" :dimensions="['name','value']" :units="['单位：天']"
                                :type="['bar']"
                                :border-radius="false"
                                :bar-width="40"
-                               :legend="['办理率']"
+                               :legend="['办理时间']"
                                :colors="[barColor2]"/>
             </container>
         </div>

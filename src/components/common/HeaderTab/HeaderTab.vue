@@ -1,6 +1,6 @@
 <template>
     <div class="header-tab">
-        <div v-for="(item,index) in data" :key="index" :class="index===value?'active':''"
+        <div v-for="(item,index) in tData" :key="index" :class="index===value?'active':''"
              @click="tabChange(index,item)">
             {{item.name}}
         </div>
@@ -18,6 +18,18 @@ export default {
   data: () => {
     return {
       activeName: ''
+    }
+  },
+  computed: {
+    tData () {
+      const rtn = []
+      for (let i = 0; i < this.data.length; i++) {
+        const item = this.data[i]
+        if (item.name !== '') {
+          rtn.push(item)
+        }
+      }
+      return rtn
     }
   },
   props: {

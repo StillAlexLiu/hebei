@@ -18,6 +18,7 @@
                                    :legend="['商标','专利','马德里国际商标','PCT国际专利']"
                                    :type="['line','line','line','line']"
                                    :is-area="true"
+                                   :two-axis="false"
                                    :colors="['#22C5B7','#FF997D','#FFD86D','#87A0F6']"/>
                 </container>
             </div>
@@ -25,7 +26,7 @@
                 <number-group2 :data="data2[select.value]"/>
             </container>
             <div class="h-1-3">
-                <container class="w-1-2 full-height" title="知识产权许可备案情况">
+                <container class="w-1-2 full-height" title="知识产权行业分析">
                     <ChartsPie :data="pieData[select.value]" :is-pie="true" :show-value="true"/>
                 </container>
                 <container class="w-1-2 full-height" title="知识产权热门区域排行榜">
@@ -110,28 +111,42 @@ export default {
       areaLines: [
         [
           {
-            name: '商标',
+            name: '2019.12',
             value: Mock.Random.natural(200, 400),
             value1: Mock.Random.natural(200, 400),
             value2: Mock.Random.natural(200, 400),
             value3: Mock.Random.natural(200, 400)
           },
           {
-            name: '专利',
+            name: '2020.1',
             value: Mock.Random.natural(200, 400),
             value1: Mock.Random.natural(200, 400),
             value2: Mock.Random.natural(200, 400),
             value3: Mock.Random.natural(200, 400)
           },
           {
-            name: '马德里国际商标',
+            name: '2020.2',
             value: Mock.Random.natural(200, 400),
             value1: Mock.Random.natural(200, 400),
             value2: Mock.Random.natural(200, 400),
             value3: Mock.Random.natural(200, 400)
           },
           {
-            name: 'PCT国际专利',
+            name: '2020.3',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
+          },
+          {
+            name: '2020.4',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
+          },
+          {
+            name: '2020.5',
             value: Mock.Random.natural(200, 400),
             value1: Mock.Random.natural(200, 400),
             value2: Mock.Random.natural(200, 400),
@@ -139,28 +154,42 @@ export default {
           }
         ], [
           {
-            name: '商标',
+            name: '2019.12',
             value: Mock.Random.natural(200, 400),
             value1: Mock.Random.natural(200, 400),
             value2: Mock.Random.natural(200, 400),
             value3: Mock.Random.natural(200, 400)
           },
           {
-            name: '专利',
+            name: '2020.1',
             value: Mock.Random.natural(200, 400),
             value1: Mock.Random.natural(200, 400),
             value2: Mock.Random.natural(200, 400),
             value3: Mock.Random.natural(200, 400)
           },
           {
-            name: '马德里国际商标',
+            name: '2020.2',
             value: Mock.Random.natural(200, 400),
             value1: Mock.Random.natural(200, 400),
             value2: Mock.Random.natural(200, 400),
             value3: Mock.Random.natural(200, 400)
           },
           {
-            name: 'PCT国际专利',
+            name: '2020.3',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
+          },
+          {
+            name: '2020.4',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
+          },
+          {
+            name: '2020.5',
             value: Mock.Random.natural(200, 400),
             value1: Mock.Random.natural(200, 400),
             value2: Mock.Random.natural(200, 400),
@@ -168,28 +197,42 @@ export default {
           }
         ], [
           {
-            name: '商标',
+            name: '2019.12',
             value: Mock.Random.natural(200, 400),
             value1: Mock.Random.natural(200, 400),
             value2: Mock.Random.natural(200, 400),
             value3: Mock.Random.natural(200, 400)
           },
           {
-            name: '专利',
+            name: '2020.1',
             value: Mock.Random.natural(200, 400),
             value1: Mock.Random.natural(200, 400),
             value2: Mock.Random.natural(200, 400),
             value3: Mock.Random.natural(200, 400)
           },
           {
-            name: '马德里国际商标',
+            name: '2020.2',
             value: Mock.Random.natural(200, 400),
             value1: Mock.Random.natural(200, 400),
             value2: Mock.Random.natural(200, 400),
             value3: Mock.Random.natural(200, 400)
           },
           {
-            name: 'PCT国际专利',
+            name: '2020.3',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
+          },
+          {
+            name: '2020.4',
+            value: Mock.Random.natural(200, 400),
+            value1: Mock.Random.natural(200, 400),
+            value2: Mock.Random.natural(200, 400),
+            value3: Mock.Random.natural(200, 400)
+          },
+          {
+            name: '2020.5',
             value: Mock.Random.natural(200, 400),
             value1: Mock.Random.natural(200, 400),
             value2: Mock.Random.natural(200, 400),

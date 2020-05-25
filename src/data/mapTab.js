@@ -197,6 +197,11 @@ export default [
           active: false,
           number: 200
         }]
+    }, {
+      name: '指挥调度',
+      active: false,
+      single: true,
+      children: []
     }]
   },
   {
@@ -797,30 +802,30 @@ export default [
           number: 20
         }]
     }, {
-      name: '电梯预警',
+      name: '特种设备',
       active: false,
       single: true,
       children: [
         {
-          name: '电梯维保',
+          name: '特种设备维保',
           icon: require('../assets/images/mapTabs/p4/t3/1.png'),
           active: false,
           number: 20
         },
         {
-          name: '电梯检验',
+          name: '特种设备检验',
           icon: require('../assets/images/mapTabs/p4/t3/2.png'),
           active: false,
           number: 20
         },
         {
-          name: '电梯故障',
+          name: '特种设备故障',
           icon: require('../assets/images/mapTabs/p4/t3/3.png'),
           active: false,
           number: 20
         },
         {
-          name: '老旧电梯',
+          name: '老旧特种设备',
           icon: require('../assets/images/mapTabs/p4/t3/4.png'),
           active: false,
           number: 20

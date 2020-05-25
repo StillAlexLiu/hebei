@@ -1,9 +1,11 @@
 <template>
-  <div id='tableTab'>
-      <ul>
-          <li v-for="(item,index) in nameData" :key="index" @click="tabCli(item,index)" :class="{clickColor : active == index}">{{ item.name }}</li>
-      </ul>
-  </div>
+    <div id='tableTab'>
+        <ul>
+            <li v-for="(item,index) in nameData" :key="index" @click="tabCli(item,index)"
+                :class="{clickColor : active == index}">{{ item.name }}
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
@@ -13,11 +15,11 @@ export default {
     return {
       nameData: [
         {
-          name: '食品',
-          key: 'case'
-        }, {
           name: '特种设备',
           key: 'clew'
+        }, {
+          name: '食品',
+          key: 'case'
         }
       ],
       active: 0
@@ -40,15 +42,17 @@ export default {
 }
 </script>
 <style scoped lang='less'>
-#tableTab{
+#tableTab {
     width: 100%;
     text-align: center;
     margin-top: 80px;
-    ul{
+
+    ul {
         margin: 40px 0 0 0;
         width: 100%;
         padding: 0;
-        li{
+
+        li {
             list-style: none;
             width: 100%;
             line-height: 60px;
@@ -59,11 +63,12 @@ export default {
             font-size: 25px;
             color: white;
             cursor: pointer;
-            border: 1px solid rgb(8,7 41)
+            border: 1px solid rgb(8, 7 41)
         }
     }
-    .clickColor{
-        background-image: url('./img/2.png')!important;
+
+    .clickColor {
+        background-image: url('./img/2.png') !important;
         background-size: 100% 100%;
         background-repeat: no-repeat;
     }

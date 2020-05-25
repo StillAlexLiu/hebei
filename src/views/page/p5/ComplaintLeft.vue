@@ -15,8 +15,8 @@
             </div>
             <div class='h-3-8'>
                 <container class='w-1-2 full-height' title='各市投诉举报情况'>
-                    <complaintBar :xdata='chart6[select.value].xdata'
-                                  :ydata='chart6[select.value].ydata'></complaintBar>
+                    <ChartBarHorizontal :data="chart6[select.value]"
+                                        :color="['#4A90E2','#5DC3FF','#91D243','#50E3C2','#B8E986','#87A0F6','#FFD589','#FE9E55','#FE6941','#FF98A4','#22AEC5']"/>
                 </container>
                 <container class='w-1-2 full-height' title='投诉举报来源分析'>
                     <ChartsPie :data='chart7[select.value]' :show-value="true"/>
@@ -24,7 +24,8 @@
             </div>
             <div class='h-3-8'>
                 <container class='w-1-2 full-height' title='七类集中场所数据分布'>
-                    <echartsHollowPie :titleSize="34" :data='chart8[select.value]' :title="'七类集中场\n所数据分布'"></echartsHollowPie>
+                    <echartsHollowPie :titleSize="34" :data='chart8[select.value]'
+                                      :title="'七类集中场\n所数据分布'"></echartsHollowPie>
                 </container>
                 <container class='w-1-2 full-height' title='商业综合体投诉举报top10'>
                     <div class='complain_spread'>
@@ -53,20 +54,20 @@
 </template>
 
 <script>
-import complaintBar from './compontes/complaintBar'
 import InfoBox from './compontes/InfoBox'
 import ChartsBarLine from '../p0/components/ChartsBarLine'
 import Mock from 'mockjs'
 import ChartsPie from '../p2/compontes/ChartsPie'
 import echartsHollowPie from '../p2/compontes/echartsHollowPie'
+import ChartBarHorizontal from '../p10/components/ChartBarHorizontal'
 
 export default {
   name: 'ComplaintLeft',
   components: {
+    ChartBarHorizontal,
     ChartsPie,
     ChartsBarLine,
     InfoBox,
-    complaintBar,
     echartsHollowPie
   },
   data () {
@@ -217,99 +218,43 @@ export default {
         }]
       ],
       chart6: [
-        {
-          xdata: [
-            '石家庄市',
-            '唐山市',
-            '秦皇岛市',
-            '邯郸市',
-            '邢台市',
-            '保定市',
-            '张家口市',
-            '承德市',
-            '沧州市',
-            '廊坊市',
-            '衡水市'
-          ],
-          ydata: [
-            '6',
-            '6',
-            '9',
-            '10',
-            '10',
-            '14',
-            '6',
-            '8',
-            '16',
-            '6',
-            '3',
-            '5',
-            '7',
-            '2'
-          ]
-        },
-        {
-          xdata: [
-            '石家庄市',
-            '唐山市',
-            '秦皇岛市',
-            '邯郸市',
-            '邢台市',
-            '保定市',
-            '张家口市',
-            '承德市',
-            '沧州市',
-            '廊坊市',
-            '衡水市'
-          ],
-          ydata: [
-            '26',
-            '7',
-            '19',
-            '10',
-            '5',
-            '4',
-            '3',
-            '8',
-            '6',
-            '6',
-            '2',
-            '6',
-            '7',
-            '1'
-          ]
-        },
-        {
-          xdata: [
-            '石家庄市',
-            '唐山市',
-            '秦皇岛市',
-            '邯郸市',
-            '邢台市',
-            '保定市',
-            '张家口市',
-            '承德市',
-            '沧州市',
-            '廊坊市',
-            '衡水市'
-          ],
-          ydata: [
-            '6',
-            '6',
-            '9',
-            '10',
-            '7',
-            '14',
-            '6',
-            '8',
-            '6',
-            '6',
-            '13',
-            '5',
-            '17',
-            '7'
-          ]
-        }
+        [
+          { name: '石家庄', value: '45' },
+          { name: '唐山', value: '66' },
+          { name: '秦皇岛', value: '98' },
+          { name: '邯郸', value: '11' },
+          { name: '邢台', value: '16' },
+          { name: '保定', value: '42' },
+          { name: '张家口', value: '15' },
+          { name: '承德', value: '69' },
+          { name: '沧州', value: '88' },
+          { name: '廊坊', value: '27' },
+          { name: '衡水', value: '12' }
+        ], [
+          { name: '石家庄', value: '45' },
+          { name: '唐山', value: '66' },
+          { name: '秦皇岛', value: '98' },
+          { name: '邯郸', value: '11' },
+          { name: '邢台', value: '16' },
+          { name: '保定', value: '42' },
+          { name: '张家口', value: '15' },
+          { name: '承德', value: '69' },
+          { name: '沧州', value: '88' },
+          { name: '廊坊', value: '27' },
+          { name: '衡水', value: '12' }
+        ], [
+          { name: '石家庄', value: '45' },
+          { name: '唐山', value: '66' },
+          { name: '秦皇岛', value: '98' },
+          { name: '邯郸', value: '11' },
+          { name: '邢台', value: '16' },
+          { name: '保定', value: '42' },
+          { name: '张家口', value: '15' },
+          { name: '承德', value: '69' },
+          { name: '沧州', value: '88' },
+          { name: '廊坊', value: '27' },
+          { name: '衡水', value: '12' }
+        ]
       ],
       chart7: [
         [

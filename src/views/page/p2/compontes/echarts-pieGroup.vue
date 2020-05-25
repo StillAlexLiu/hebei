@@ -17,6 +17,12 @@ export default {
       default: () => {
         return {}
       }
+    },
+    colors: {
+      type: Array,
+      default: () => {
+        return []
+      }
     }
   },
   computed: {
@@ -52,7 +58,9 @@ export default {
         }
         data.push(item)
       }
+      console.log(this.colors)
       return {
+        color: this.colors,
         legend: {
           orient: 'vertical',
           bottom: 10,

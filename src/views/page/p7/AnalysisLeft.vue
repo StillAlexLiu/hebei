@@ -177,14 +177,14 @@ export default {
         }
       ],
       pieData: [{
-        name: '标准过期',
-        value: Mock.Random.natural(10, 70)
+        name: '省地方标准',
+        value: 2763
       }, {
-        name: '未申请标准化',
-        value: Mock.Random.natural(10, 70)
+        name: '京津冀协同\n地方标准',
+        value: 54
       }, {
-        name: '已标准化',
-        value: Mock.Random.natural(10, 70)
+        name: '自我声明\n公开企业',
+        value: 14168
       }],
       data3: [{
         name: '2019.6',

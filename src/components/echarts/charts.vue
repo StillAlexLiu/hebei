@@ -1,6 +1,6 @@
 <template>
     <div class="charts">
-        <v-chart :options='computedOptions' :autoresize='true' theme="screen" @click="this.handler"/>
+        <v-chart :options='computedOptions' ref="ec" :autoresize='true' theme="screen" @click="this.handler"/>
         <!--        {{computedOptions}}-->
     </div>
 </template>
@@ -36,6 +36,9 @@ export default {
     }
   },
   computed: {
+    width () {
+      return this.$refs.ec.width
+    },
     computedOptions () {
       if (!this.options.grid) {
         const assign = {

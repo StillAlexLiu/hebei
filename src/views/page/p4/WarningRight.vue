@@ -35,7 +35,7 @@
             </container>
             <container class="w-1-2 full-height" title="发现问题检查项分析">
                 <CommonTable :data='tableData2'
-                             :headers="[ '检查内容','发现问题次数']"/>
+                             :headers="['检查内容','发现问题次数']"/>
             </container>
         </div>
     </div>
@@ -109,23 +109,23 @@ export default {
         }
       ],
       tableData2: [{
-        count: Mock.Random.natural(1, 100),
-        text: '是否具备开展检查条件'
+        text: '是否具备开展检查条件',
+        count: Mock.Random.natural(1, 100)
       }, {
-        count: Mock.Random.natural(1, 100),
-        text: '经营内容与许可事项是否一致'
+        text: '经营内容与许可事项是否一致',
+        count: Mock.Random.natural(1, 100)
       }, {
-        count: Mock.Random.natural(1, 100),
-        text: '是否异地经营'
+        text: '是否异地经营',
+        count: Mock.Random.natural(1, 100)
       }, {
-        count: Mock.Random.natural(1, 100),
-        text: '是否亮证亮黑经营'
+        text: '是否亮证亮黑经营',
+        count: Mock.Random.natural(1, 100)
       }, {
-        count: Mock.Random.natural(1, 100),
-        text: '证照是否在有效期范围内'
+        text: '证照是否在有效期范围内',
+        count: Mock.Random.natural(1, 100)
       }, {
-        count: Mock.Random.natural(1, 100),
-        text: '是否具备开展检查条件'
+        text: '是否具备开展检查条件',
+        count: Mock.Random.natural(1, 100)
       }],
       mainInfo: {
         title: '龙神餐饮有限公司',

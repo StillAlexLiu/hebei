@@ -121,7 +121,7 @@ export default {
               },
               info: {
                 name: '总数',
-                value: 6275815,
+                value: 6400232,
                 img: require('./componets/img/entity/entity-zong.png'),
                 data: [
                   {
@@ -151,7 +151,7 @@ export default {
                   },
                   {
                     name: '其他',
-                    value: 121,
+                    value: 135,
                     img: require('./componets/img/entity/entity-nong.png')
                   }
                 ]
@@ -251,7 +251,7 @@ export default {
               },
               info: {
                 name: '总数',
-                value: 174923,
+                value: 358628,
                 img: require('./componets/img/entity/entity-zong.png'),
                 data: [
                   {
@@ -281,7 +281,7 @@ export default {
                   },
                   {
                     name: '其他',
-                    value: 17,
+                    value: 31,
                     img: require('./componets/img/entity/entity-nong.png')
                   }
                 ]

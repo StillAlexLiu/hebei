@@ -42,6 +42,7 @@ export default {
 
         > .name {
             font-size: 18px;
+            white-space: pre-wrap;
         }
 
         .value {

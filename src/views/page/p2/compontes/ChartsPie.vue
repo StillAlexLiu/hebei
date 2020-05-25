@@ -72,6 +72,7 @@ export default {
         z: 100,
         style: {
           fill: '#fff',
+          textAlign: 'center',
           text: this.centerValue,
           font: ' 52px LESLIE'
         }

@@ -30,20 +30,21 @@
                                   :show-value="true"
                                   :img="chart6.img"></echartsHollowPie>
             </container>
-            <container class="w-1-2 full-height" title="老旧特种设备占比情况">
-                <echartsliqudfill :data='liquidfull[dimension]'></echartsliqudfill>
+            <container class="w-1-2 full-height" title="计量基础">
+                <InfoCard :data="InfoCardData"/>
+                <!--                <echartsliqudfill :data='liquidfull[dimension]'></echartsliqudfill>-->
             </container>
         </div>
     </div>
 </template>
 <script>
 import NumberElevator from '../compontes/Number-elevator'
-import echartsliqudfill from '../compontes/echarts-liquidfill.vue'
 import ChartBarLine from '../compontes/echarts-bar'
 import ChartsPie from './../compontes/ChartsPie'
 import echartsHollowPie from '../compontes/echartsHollowPie'
 import Mock from 'mockjs'
 import echarts from 'echarts'
+import InfoCard from '../compontes/InfoCard'
 
 export default {
   name: 'Page4',
@@ -54,11 +55,11 @@ export default {
     }
   },
   components: {
+    InfoCard,
     NumberElevator,
     echartsHollowPie,
     ChartBarLine,
-    ChartsPie,
-    echartsliqudfill
+    ChartsPie
   },
   data: () => {
     return {
@@ -346,7 +347,33 @@ export default {
           name: '场(厂)内专用机动车辆'
         }
       ],
-      liquidfull: [['维持', 10], ['维持', 30], ['维持', 50]]
+      InfoCardData: {
+        data1: [
+          {
+            name: '全省强检计量器具',
+            value: '315807台/件'
+          },
+          {
+            name: '省外溯源计量器具',
+            value: '68台/件'
+          }
+        ],
+        data2: [
+          {
+            name: '全省社会公用计量标准考核',
+            value: '110项',
+            img: require('./../compontes/img/icon-全省@2x.png')
+          }, {
+            name: '发布实施地方计量标准',
+            value: '4项',
+            img: require('./../compontes/img/icon-地方@2x.png')
+          }, {
+            name: '省级法定计量检定考核机构',
+            value: '40家',
+            img: require('./../compontes/img/icon-省级@2x.png')
+          }
+        ]
+      }
     }
   }
 }

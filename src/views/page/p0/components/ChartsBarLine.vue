@@ -165,9 +165,6 @@ export default {
           }
         }
       }
-      console.log(this.legend)
-      console.log(series)
-      console.log(yAxis)
       return {
         color: this.colors,
         title: {

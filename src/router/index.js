@@ -29,6 +29,10 @@ import KeepOnRecordLeft from '../views/page/p10/KeepOnRecordLeft'
 import KeepOnRecordRight from '../views/page/p10/KeepOnRecordRight'
 // import headOfficeLeft from '../views/page/p11/headOfficeLeft'
 // import headOfficeRight from '../views/page/p11/headOfficeRight'
+import DispatchLeft from '../views/page/p0-1/DispatchLeft'
+import DispatchCenter from '../views/page/p0-1/DispatchCenter'
+import DispatchRight from '../views/page/p0-1/DispatchRight'
+
 Vue.use(VueRouter)
 /**
  *
@@ -139,18 +143,16 @@ const routes = [
           center: SociologyCenter,
           right: SociologyRight
         }
+      },
+      {
+        path: 'dispatch',
+        name: '',
+        components: {
+          left: DispatchLeft,
+          center: DispatchCenter,
+          right: DispatchRight
+        }
       }]
-  },
-  {
-    path: '/index2',
-    name: '指挥调度',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Index2'),
-    children: [
-
-    ]
   }
 ]
 

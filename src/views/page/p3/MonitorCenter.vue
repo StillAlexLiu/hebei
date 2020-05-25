@@ -20,22 +20,22 @@ export default {
     return {
       videoUrl: this.$dataAll.videoUrl,
       videoNames: [{
-        name: '康得思酒店',
+        name: '注册大厅',
         address: '河北省石家庄新华区'
       }, {
-        name: '康得思酒店',
+        name: '注册大厅',
         address: '河北省石家庄新华区'
       }, {
-        name: '康得思酒店',
+        name: '注册大厅',
         address: '河北省石家庄新华区'
       }, {
-        name: '康得思酒店',
+        name: '注册大厅',
         address: '河北省石家庄新华区'
       }, {
-        name: '康得思酒店',
+        name: '注册大厅',
         address: '河北省石家庄新华区'
       }, {
-        name: '康得思酒店',
+        name: '注册大厅',
         address: '河北省石家庄新华区'
       }
       ]

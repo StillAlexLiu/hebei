@@ -84,7 +84,9 @@ export default {
       p9Info: null,
       p10Info: null,
       routeName: '',
-      showIndex: ''
+      showIndex: '',
+      commandName: '',
+      commandDetail: {}
     }
   },
   watch: {
@@ -178,12 +180,16 @@ export default {
     },
     Dispatch (data) {
       console.log(data)
+      this.commandName = ''
       this.p2InfoDetail = {}
       this.p4Info = {}
       this.p5Info = {}
       this.p6Info = {}
       this.p10Info = {}
       switch (this.$route.name) {
+        case '综合指挥':
+          this.commandClick(data.tab.name)
+          break
         case '智能预警':
           this.p4Name = data.tab.name
           break
@@ -306,6 +312,12 @@ export default {
         name: '检查时间',
         value: 'time'
       }]
+    },
+    commandClick (data) {
+      if (data === '指挥调度') {
+        this.$router.push({ path: '/dispatch' })
+      }
+      // this.$router.push({ name: name })
     }
   }
 }

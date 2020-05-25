@@ -9,7 +9,7 @@
                     </span>
                 </div>
                 <div class="w-3-5 cell full-height text-left">
-                    <div class="h-3-5 number-font" style="font-size: 72px;color: #46CFFF">
+                    <div class="h-3-5 number-font" style="font-size: 72px;color: #46CFFF;padding-top: 20px">
                         {{item.value}}
                     </div>
                     <div class="h-2-5" style="font-size: 32px">

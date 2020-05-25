@@ -4,9 +4,9 @@
             <RadioSimple :data="radioData" v-model="select" class="w-3-7 full-height radio "/>
         </template>
         <div slot="calc" class=" full-width full-height">
-            <container class="h-2-8" title="本月预警数量">
+            <div class="h-2-8" title="本月预警数量">
                 <NumberGroup class="full" :data="numberGroup"/>
-            </container>
+            </div>
             <div class="h-3-8">
                 <container class="full-height w-1-2" title="智能预营趋势分析">
                     <ChartsBarLine :data="lineData1" :dimensions="['name','value1','value2','value3','value4','value5']"
@@ -17,11 +17,12 @@
                                    :colors="['#FFD86D','#FE6941','#B576ED','#6EE86D','#61EADF']"
                                    :legend="['食品','药品','特种设备','消费维权','无证无照']"/>
                 </container>
-                <container class="full-height w-1-2" title="各市本月预警分布情况">
+                <container class="full-height w-1-2" title="各市预警分布情况">
                     <ChartsBarLine unit="单位：次" :data="barData" :dimensions="['name','value']" :legend="['预警数量']"
                                    :type="['bar']"
                                    :border-radius="false"
                                    :bar-width="40"
+                                   :units="['单位：件']"
                                    :colors="['#4FCCFF']"/>
                 </container>
             </div>
@@ -34,7 +35,7 @@
                         <ChartsHollowPie :is-circle="true" :data="pieData2" :img="pieData2Img" :imgSize="[70,70]"/>
                     </div>
                 </container>
-                <container class="full-height w-1-2" title="食品预警同比环比分析">
+                <container class="full-height w-1-2" title="预警同比环比分析">
                     <ChartsBarLine :data="lineData2" :dimensions="['name','value1','value2']"
                                    :type="['line','line']"
                                    :two-axis="false"
@@ -158,7 +159,7 @@ export default {
           value2: 123,
           icon: require('./components/img/1.png')
         }, {
-          name: '电梯',
+          name: '特种设备',
           value: 71,
           value1: 63,
           value2: 8,
@@ -188,27 +189,30 @@ export default {
       this.pieData1 = [
         {
           name: '消费维权',
-          value: Mock.Random.natural(0, 100)
+          value: Mock.Random.natural(0, 100) + 100
         }, {
           name: '药品',
-          value: Mock.Random.natural(0, 100)
+          value: Mock.Random.natural(0, 100) + 100
         }, {
-          name: '电梯',
-          value: Mock.Random.natural(0, 100)
+          name: '特种设备',
+          value: Mock.Random.natural(0, 100) + 100
         }, {
           name: '食品',
-          value: Mock.Random.natural(0, 100)
+          value: Mock.Random.natural(0, 100) + 100
         }
       ]
       this.pieData2 = [
         {
-          name: '食品冷链运输',
+          name: '特种设备维保',
           value: Mock.Random.natural(0, 100)
         }, {
-          name: '电梯故障',
+          name: '特种设备检验',
           value: Mock.Random.natural(0, 100)
         }, {
-          name: '网络餐饮',
+          name: '特种设备故障',
+          value: Mock.Random.natural(0, 100)
+        }, {
+          name: '老旧特种设备',
           value: Mock.Random.natural(0, 100)
         }
       ]

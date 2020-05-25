@@ -67,7 +67,7 @@ export default {
 
     initTab () {
       // 加载tab数据
-      this.headerData = [this.$router.options.routes[1], ...this.$router.options.routes[0].children]
+      this.headerData = this.$router.options.routes[0].children
       this.selectIndex = this.headerData.findIndex((value) => {
         return value.name === this.$route.name
       })

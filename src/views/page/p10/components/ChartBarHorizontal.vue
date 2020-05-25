@@ -28,11 +28,13 @@ export default {
   computed: {
     options () {
       const data = []
+      const ydata = []
       for (let i = 0; i < this.data.length; i++) {
         const item = this.data[i]
         item.itemStyle = {
           color: this.color[i % this.color.length]
         }
+        ydata.push(item.name)
         data.push(item)
       }
       return {
@@ -52,6 +54,7 @@ export default {
           {
             type: 'category',
             boundaryGap: true,
+            data: ydata,
             axisLine: {
               // 坐标轴轴线相关设置。数学上的x轴
               show: true,
@@ -61,12 +64,7 @@ export default {
             },
             axisLabel: {
               // 坐标轴刻度标签的相关设置
-              interval: 0,
-              textStyle: {
-                color: '#d1e6eb',
-                margin: 15,
-                fontSize: 20
-              }
+              interval: 0
             },
             axisTick: {
               show: false

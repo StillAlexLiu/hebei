@@ -1,7 +1,8 @@
 <template>
     <div class="AuditRight full page-style">
         <container title="案件处理流程跟踪" class="h-2-8 full-width">
-            <ChartTree :data="treeData"/>
+            <ChartTree :data="treeData" v-if="false"/>
+            <ChartsGraph :data="graphData" :link="graphData"/>
         </container>
         <div class="h-3-8">
             <container class="w-1-2 full-height" title="案卷流转情况跟踪">
@@ -32,10 +33,12 @@ import Mock from 'mockjs'
 import NumberGroup from './components/numberGroup'
 import NameOnly from './components/nameOnly'
 import ChartsPieValueLegend from '../p5/compontes/ChartsPieValueLegend'
+import ChartsGraph from './components/ChartsGraph'
 
 export default {
   name: 'AuditRight',
   components: {
+    ChartsGraph,
     ChartsPieValueLegend,
     NameOnly,
     NumberGroup,
@@ -50,6 +53,39 @@ export default {
       ],
       p6case: [],
       caseHandler: '',
+      graphData: [
+        {
+          name: '线索', index: 0, value: '10'
+        },
+        {
+          name: '立案', index: 1, value: '24'
+        },
+        {
+          name: '调查取证', index: 2, value: '204'
+        },
+        {
+          name: '调查终结', index: 3, value: '43'
+        },
+        {
+          name: '处罚告知', index: 4, value: '16'
+        },
+        {
+          name: '复核', index: 5, value: '0'
+        },
+        {
+          name: '听证', index: 5, value: '0'
+        },
+        {
+          name: '处罚决定', index: 6, value: '43'
+        },
+        {
+          name: '执行', index: 7, value: '56'
+        },
+        {
+          name: '归档', index: 8, value: '876'
+        }
+      ],
+      graphLink: [],
       treeData: [{
         name: '线索',
         value: 19,

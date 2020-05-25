@@ -2,12 +2,15 @@
     <div class="numberGroup2 full">
         <container-border31 v-for="(item,index) in data" :key="index" class="item">
             <div class="full item-in">
-                <div class="h-2-5 b-line">
+                <div class="h-2-4 b-line">
                     <div class="img" :style="{backgroundImage:'url('+item.img+')'}">
                         {{ item.short }}
                     </div>
+                    <div class="title">
+                        {{ item.name }}
+                    </div>
                 </div>
-                <div class="h-3-5 text">
+                <div class="h-2-4 text">
                     <div v-for="(item2,index) in item.data" :key="index">
                         <div class="name w-1-2">{{ item2.name }}</div>
                         <div class="value w-1-2 number-font">{{ item2.value }}</div>
@@ -67,7 +70,8 @@ export default {
                 flex-direction: column;
                 justify-content: center;
                 align-items: stretch;
-                >div{
+
+                > div {
                     flex: 1;
                 }
 
@@ -85,6 +89,11 @@ export default {
                 }
             }
         }
+    }
+
+    .title {
+        padding-top: 10px;
+        font-size: 24px;
     }
 }
 </style>

@@ -63,6 +63,7 @@ export default {
         z: 100,
         style: {
           fill: '#fff',
+          textAlign: 'center',
           text: this.text,
           font: this.textSize + 'px LESLIE'
         }
