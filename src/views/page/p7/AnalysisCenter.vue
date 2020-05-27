@@ -45,15 +45,11 @@
 import numberList from './components/numberList'
 import echartsAccrossBar from './components/echarts-accrossBar'
 import Mock from 'mockjs'
-import ChartsBarLine from '../p0/components/ChartsBarLine'
 import echarts from 'echarts'
-import ChartsPie from '../p2/compontes/ChartsPie'
 
 export default {
   name: 'AnalysisCenter',
   components: {
-    ChartsPie,
-    ChartsBarLine,
     numberList,
     echartsAccrossBar
   },

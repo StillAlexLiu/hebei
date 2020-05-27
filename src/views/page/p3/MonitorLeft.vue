@@ -5,21 +5,26 @@
         </container>
         <div class="h-3-8">
             <container class="full-height w-1-2" title="发现问题数量">
-                <ChartPie class="full" :data="pieData" :isCircle="true"/>
+                <ChartsPie class="full" :data="pieData" :show-value="true"/>
             </container>
             <container class="full-height w-1-2" title="各市监控覆盖情况">
-                <ChartBar :data="barData" :dimensions="['name','value']"/>
+                <ChartsBarLine :data="barData" :dimensions="['name','value']" :type="['bar']" :legend="['监控数量']"
+                               :units="['台']"
+                               :colors="['#FF997D']"/>
             </container>
         </div>
         <div class="h-3-8">
             <container class="full-height w-1-2" title="问题解决情况">
-                <ChartBarLine :data="barLineData" :dimensions="['name','value1','value2','value3']"
-                              :legend="['总量','已解决','解决率']"
-                              :dataIndex="[0,0,1]"
+                <ChartsBarLine :data="barLineData" :dimensions="['name','value1','value2','value3']"
+                               :legend="['总量','已解决','解决率']"
+                               :type="['bar','bar','line']"
+                               :dataIndex="[0,0,1]"
                 />
             </container>
             <container class="full-height w-1-2" title="各市问题解决情况">
-                <ChartBarHorizontal :data="barData" :dimensions="['name','value']"/>
+                <ChartsBarLineHorizontal :data="barData" :type="['bar']" :legend="['']"
+                                         :colors="['#2EE1A2']"
+                                         :dimensions="['name','value']"/>
             </container>
         </div>
     </div>
@@ -28,18 +33,10 @@
 <script>
 import Mock from 'mockjs'
 import NumberGroup from './components/NumberGroup'
-import ChartBar from './components/ChartBar'
-import ChartBarLine from './components/ChartBarLine'
-import ChartBarHorizontal from './components/ChartBarHorizontal'
-import ChartPie from './components/ChartPie'
 
 export default {
   name: 'MonitorLeft',
   components: {
-    ChartPie,
-    ChartBarHorizontal,
-    ChartBarLine,
-    ChartBar,
     NumberGroup
   },
   data () {

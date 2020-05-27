@@ -14,27 +14,17 @@
             <RadioSimple :data="tab4Data" style="height: 50px"/>
             <img src="./compontes/img/电梯右侧.png" alt="" style="height: calc(100% - 50px)">
         </div>
-        <div v-if="selectName ==='双随机监管'" :dimension="select.value" class="full" style="position: relative">
-            <page5-center
-                style="position: absolute;width: 150%;right: calc( 100% + 10px);height:calc( 100% - 110px);top:100px;"
-                class="full"/>
-            <page5-right/>
-        </div>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import Page5Center from './pages/page5Center'
-import Page5Right from './pages/page5Right'
 import Page2R from './pages/page2R'
 
 export default {
   name: 'SupervisionRight',
   components: {
-    Page2R,
-    Page5Right,
-    Page5Center
+    Page2R
   },
   data () {
     return {

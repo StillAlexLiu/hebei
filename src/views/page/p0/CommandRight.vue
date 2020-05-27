@@ -45,18 +45,16 @@
 <script>
 
 import Mock from 'mockjs'
+import echarts from 'echarts'
 import echartsTwoPie from './components/echarts-twopie'
 import imgNum from './components/imgNum'
 import ChartsPieIcon from './components/ChartsPieIcon'
-import ChartsBarLine from './components/ChartsBarLine'
-import echarts from 'echarts'
 import RightNumberGroup from './components/RightNumberGroup'
 
 export default {
   name: 'CommandLeft',
   components: {
     RightNumberGroup,
-    ChartsBarLine,
     ChartsPieIcon,
     echartsTwoPie,
     imgNum

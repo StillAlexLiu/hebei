@@ -54,7 +54,7 @@ export default {
             padding: 3px;
 
             .top {
-                background-color: #132831;
+                background-color: #121923;
                 text-indent: 30px;
 
                 .name {

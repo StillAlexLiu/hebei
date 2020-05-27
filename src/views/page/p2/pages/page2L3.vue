@@ -5,31 +5,31 @@
         </container>
         <div class="h-1-3">
             <container class="w-1-2 full-height" title="监督检查发现问题类型占比分析">
-                <echartsHollowPie :data='hellowPie2[dimension].data'
-                                  :title="hellowPie2[dimension].title"></echartsHollowPie>
+                <ChartsPiePiecewise :data='hellowPie2[dimension].data'
+                                    :title="hellowPie2[dimension].title"></ChartsPiePiecewise>
             </container>
             <container class="w-1-2 full-height" title="各市监督抽检情况统计">
-                <ChartBarLine :data='chart3[dimension].data' :dimensions="['name','value']"
-                              :type="['bar']"
-                              :colors="[barColor]"
-                              :units="['单位：户次']"
-                              :legend="['监督检查数量']"></ChartBarLine>
+                <ChartsBarLine :data='chart3[dimension].data' :dimensions="['name','value']"
+                               :type="['bar']"
+                               :colors="[barColor]"
+                               :units="['单位：户次']"
+                               :legend="['监督检查数量']"></ChartsBarLine>
             </container>
         </div>
         <div class="h-1-3">
             <container class="w-1-2 full-height" title="食品抽检不合格情况分析">
-                <echartsHollowPie :data='hellowPie3[dimension].data'
-                                  :title="hellowPie3[dimension].title"></echartsHollowPie>
+                <ChartsPiePiecewise :data='hellowPie3[dimension].data'
+                                    :title="hellowPie3[dimension].title"></ChartsPiePiecewise>
             </container>
             <container class="w-1-2 full-height" title="各市抽检情况统计">
                 <!-- <echartsBar :xdata='chart3[dimension].xdata' :ydata='chart3[dimension].ydata'></echartsBar> -->
-                <ChartBarLine :data='rightLine[dimension].data' :dimensions="['name','value']"
-                              :type="['line']"
-                              :colors="['#FE6941']"
-                              :is-area="true"
-                              :units="['单位：件']"
-                              :smooth="true"
-                              :legend="['抽查件数']"></ChartBarLine>
+                <ChartsBarLine :data='rightLine[dimension].data' :dimensions="['name','value']"
+                               :type="['line']"
+                               :colors="['#FE6941']"
+                               :is-area="true"
+                               :units="['单位：件']"
+                               :smooth="true"
+                               :legend="['抽查件数']"></ChartsBarLine>
             </container>
         </div>
     </div>
@@ -37,8 +37,6 @@
 
 <script>
 import NumberTop from '../compontes/NumberTop'
-import echartsHollowPie from '../compontes/echartsHollowPie'
-import ChartBarLine from '../../p1/componets/ChartBarLine'
 import echarts from 'echarts'
 
 export default {
@@ -50,8 +48,6 @@ export default {
     }
   },
   components: {
-    ChartBarLine,
-    echartsHollowPie,
     NumberTop
   },
   data () {
@@ -614,18 +610,7 @@ export default {
             name: '预警数',
             value: '0'
           }]
-        }]],
-      images1: [
-        {
-          imgUrl: require('../compontes/img/60.png')
-        }, {
-          imgUrl: require('../compontes/img/64.png')
-        }, {
-          imgUrl: require('../compontes/img/63.png')
-        }, {
-          imgUrl: require('../compontes/img/52.png')
-        }
-      ]
+        }]]
     }
   },
   watch: {

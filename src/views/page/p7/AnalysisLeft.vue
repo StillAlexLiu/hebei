@@ -51,16 +51,14 @@ import pnglist from './components/pnglist'
 import charaterlist from './components/charaterlist'
 import Mock from 'mockjs'
 import NumberGroup from './components/numberGroup'
-import ChartsPie from '../p2/compontes/ChartsPie'
 import NumberGroup2 from './components/NumberGroup2'
-import ChartsBarLine from '../p0/components/ChartsBarLine'
+import ChartsBarLine from '../../../components/echarts/ChartsBarLine'
 
 export default {
   name: 'AnalysisLeft',
   components: {
     ChartsBarLine,
     NumberGroup2,
-    ChartsPie,
     NumberGroup,
     pnglist,
     charaterlist

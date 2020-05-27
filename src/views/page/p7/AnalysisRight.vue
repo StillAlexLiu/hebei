@@ -28,7 +28,7 @@
                 <container class="full-height w-1-2" title="复议诉讼">
                     <div class="w-1-4 h-6-8" v-for="(item, index) in liquidfillData[itemD.key]" :key="index">
                         <div class="h-5-6">
-                            <echartsliquidfill :data='item'/>
+                            <ChartsLiquidFill :data='item'/>
                         </div>
                         <div class="h-1-6" style="text-align: center;font-size: 24px;">{{ item[0] }}</div>
                     </div>
@@ -40,16 +40,20 @@
 </template>
 
 <script>
+import Mock from 'mockjs'
 import leftImages from './components/leftImage'
 import threePie from './components/threePie'
 import radioBtn from './components/radioButton'
-import Mock from 'mockjs'
-import echartsliquidfill from '../p2/compontes/echarts-liquidfill'
-import ChartsPie from '../p2/compontes/ChartsPie'
 import ChartsFunnel from './components/ChartsFunnel'
 
 export default {
   name: 'AnalysisRight',
+  components: {
+    ChartsFunnel,
+    leftImages,
+    threePie,
+    radioBtn
+  },
   data () {
     return {
       leftImage: {
@@ -184,14 +188,6 @@ export default {
         ]
       }
     }
-  },
-  components: {
-    ChartsFunnel,
-    ChartsPie,
-    leftImages,
-    threePie,
-    radioBtn,
-    echartsliquidfill
   }
 }
 </script>

@@ -20,41 +20,39 @@
             </Container>
             <Container class="w-1-2 h-1-3"
                        :title="select.value===0?entityType+'规模情况（1000万以上）':'新增'+entityType+'规模情况（1000万以上）'">
-                <ChartBarLine :data="barGroupData" :dimensions="['year','step1','step2','step3']"
-                              :legend="['1000-5000万元','5000-1亿元','1亿元以上']"
-                              :type="['bar','bar','bar']"
-                              :twoAxis="false"
-                              :colors="['#FFD589', '#4A90E2', '#B8E986']" :units="['户']"/>
+                <ChartsBarLine :data="barGroupData" :dimensions="['year','step1','step2','step3']"
+                               :legend="['1000-5000万元','5000-1亿元','1亿元以上']"
+                               :type="['bar','bar','bar']"
+                               :twoAxis="false"
+                               :colors="['#FFD589', '#4A90E2', '#B8E986']" :units="['户']"/>
             </Container>
             <Container class="w-1-2 h-1-3" v-if="select.value===1" :title="'新增'+entityType+'行业TOP5'">
                 <ChartHalfPie :data="halfPieData"/>
             </Container>
             <Container class="w-1-2 h-1-3" :title="select.value===0?entityType+'区域分布':'新增'+entityType+'区域分布'">
-                <ChartBarSimple :data="barData2" :dimensions="['name','value']" unit="户"
-                                :colors="['#4A90E2','#5DC3FF','#91D243','#50E3C2','#B8E986','#87A0F6','#FFD589','#FE9E55','#FE6941','#FF98A4','#22AEC5']"/>
+                <ChartsBarSimple :data="barData2" :dimensions="['name','value']" unit="户"
+                                 :colors="['#4A90E2','#5DC3FF','#91D243','#50E3C2','#B8E986','#87A0F6','#FFD589','#FE9E55','#FE6941','#FF98A4','#22AEC5']"/>
             </Container>
             <Container class="w-1-2 h-1-3" v-if="select.value===0"
                        :title="select.value===0?entityType+'生命周期分析':'新增'+entityType+'生命周期分析'">
-                <ChartBarLine v-if="select.value===0" :data="barGroupData2"
-                              :dimensions="['year','step1','step2','step3']"
-                              :legend="['10年以下','10-20年','20年以上']"
-                              :type="['bar','bar','bar']"
-                              :twoAxis="false"
-                              :colors="['#B8E986', '#FF98A4', '#4A90E2']" :units="['户']"/>
+                <ChartsBarLine v-if="select.value===0" :data="barGroupData2"
+                               :dimensions="['year','step1','step2','step3']"
+                               :legend="['10年以下','10-20年','20年以上']"
+                               :type="['bar','bar','bar']"
+                               :twoAxis="false"
+                               :colors="['#B8E986', '#FF98A4', '#4A90E2']" :units="['户']"/>
             </Container>
         </div>
     </container-calc>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import ChartBar from './componets/ChartBar'
+import ChartPie3 from './componets/ChartPie3'
+import ChartHalfPie from './componets/ChartHalfPie'
 import NumberGroup from './componets/NumberGroup'
 import NumberGroup2 from './componets/NumberGroup2'
-import ChartPie3 from './componets/ChartPie3'
-import ChartBarSimple from './componets/ChartBarSimple'
-import ChartBarLine from './componets/ChartBarLine'
-import ChartHalfPie from './componets/ChartHalfPie'
-import { mapState } from 'vuex'
 import NumberGroup3 from './componets/NumberGroup3'
 
 export default {
@@ -63,8 +61,6 @@ export default {
     NumberGroup3,
     NumberGroup2,
     ChartHalfPie,
-    ChartBarLine,
-    ChartBarSimple,
     ChartPie3,
     NumberGroup,
     ChartBar

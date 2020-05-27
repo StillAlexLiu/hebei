@@ -23,7 +23,7 @@
         </container>
         <div class='full-width h-3-8'>
             <container title='案件类型分布' class='w-1-2 full-height'>
-                <echartsHollowPie :data='chart4' :title="'案件类型分布'" :title-size="36"/>
+                <ChartsPiePiecewise :data='chart4' :title="'案件类型分布'" :title-size="36"/>
             </container>
             <container title='市队投诉举报案件分布' class='w-1-2 full-height'>
                 <complaintBarRH :xdata='chart5.xdata' :ydata='chart5.ydata'></complaintBarRH>
@@ -36,17 +36,13 @@
 import comPlaintBarR from './compontes/comPlaintBarR'
 import complaintBarRH from './compontes/complaintBarRH'
 import RightInfoBox from './compontes/RightInfoBox'
-import echartsHollowPie from '../p2/compontes/echartsHollowPie'
-import ChartsPieValueLegend from './compontes/ChartsPieValueLegend'
 
 export default {
   name: 'ComplaintRight',
   components: {
-    ChartsPieValueLegend,
     RightInfoBox,
     comPlaintBarR,
-    complaintBarRH,
-    echartsHollowPie
+    complaintBarRH
   },
   data () {
     return {

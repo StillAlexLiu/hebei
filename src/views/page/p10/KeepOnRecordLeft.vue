@@ -30,8 +30,8 @@
                     <ChartsPie :data="pieData[select.value]" :is-pie="true" :show-value="true"/>
                 </container>
                 <container class="w-1-2 full-height" title="知识产权热门区域排行榜">
-                    <ChartBarHorizontal :data="barData[select.value]"
-                                        :color="['#4A90E2','#5DC3FF','#91D243','#50E3C2','#B8E986','#87A0F6','#FFD589','#FE9E55','#FE6941','#FF98A4','#22AEC5']"/>
+                    <ChartsBarHorizontal :data="barData[select.value]"
+                                         :color="['#4A90E2','#5DC3FF','#91D243','#50E3C2','#B8E986','#87A0F6','#FFD589','#FE9E55','#FE6941','#FF98A4','#22AEC5']"/>
                 </container>
             </div>
         </div>
@@ -40,18 +40,12 @@
 
 <script>
 import Mock from 'mockjs'
-import ChartsPie from '../p2/compontes/ChartsPie'
 import NumberGroup2 from './components/numberGroup2'
-import ChartBarHorizontal from './components/ChartBarHorizontal'
-import ChartsBarLine from '../p0/components/ChartsBarLine'
 
 export default {
   name: 'KeepOnRecordLeft',
   components: {
-    ChartsBarLine,
-    ChartBarHorizontal,
-    NumberGroup2,
-    ChartsPie
+    NumberGroup2
   },
   data () {
     return {

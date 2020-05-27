@@ -15,8 +15,8 @@
             </div>
             <div class='h-3-8'>
                 <container class='w-1-2 full-height' title='各市投诉举报情况'>
-                    <ChartBarHorizontal :data="chart6[select.value]"
-                                        :color="['#4A90E2','#5DC3FF','#91D243','#50E3C2','#B8E986','#87A0F6','#FFD589','#FE9E55','#FE6941','#FF98A4','#22AEC5']"/>
+                    <ChartsBarHorizontal :data="chart6[select.value]"
+                                         :color="['#4A90E2','#5DC3FF','#91D243','#50E3C2','#B8E986','#87A0F6','#FFD589','#FE9E55','#FE6941','#FF98A4','#22AEC5']"/>
                 </container>
                 <container class='w-1-2 full-height' title='投诉举报来源分析'>
                     <ChartsPie :data='chart7[select.value]' :show-value="true"/>
@@ -24,8 +24,8 @@
             </div>
             <div class='h-3-8'>
                 <container class='w-1-2 full-height' title='七类集中场所数据分布'>
-                    <echartsHollowPie :titleSize="34" :data='chart8[select.value]'
-                                      :title="'七类集中场\n所数据分布'"></echartsHollowPie>
+                    <ChartsPiePiecewise :titleSize="34" :data='chart8[select.value]'
+                                        :title="'七类集中场\n所数据分布'"></ChartsPiePiecewise>
                 </container>
                 <container class='w-1-2 full-height' title='商业综合体投诉举报top10'>
                     <div class='complain_spread'>
@@ -55,20 +55,12 @@
 
 <script>
 import InfoBox from './compontes/InfoBox'
-import ChartsBarLine from '../p0/components/ChartsBarLine'
 import Mock from 'mockjs'
-import ChartsPie from '../p2/compontes/ChartsPie'
-import echartsHollowPie from '../p2/compontes/echartsHollowPie'
-import ChartBarHorizontal from '../p10/components/ChartBarHorizontal'
 
 export default {
   name: 'ComplaintLeft',
   components: {
-    ChartBarHorizontal,
-    ChartsPie,
-    ChartsBarLine,
-    InfoBox,
-    echartsHollowPie
+    InfoBox
   },
   data () {
     return {

@@ -18,7 +18,7 @@
             </container>
             <container class=" full-height w-1-2" title="预警主体风险评估">
                 <div class="w-1-3 full-height">
-                    <echartsPie :data='hellowPie' :is-percent="true"/>
+                    <chartsPie :data='hellowPie' :is-percent="true"/>
                 </div>
                 <div class="w-2-3 full-height">
                     <NumberTop :data='topnum'></NumberTop>
@@ -44,16 +44,14 @@
 <script>
 import mainInfo from './components/mainInfo'
 import Mock from 'mockjs'
-import echartsPie from './components/echarts-pieGroup'
+import chartsPie from './components/charts-pie'
 import NumberTop from './components/NumberTop'
-import ChartsBarLine from '../p0/components/ChartsBarLine'
 
 export default {
   name: 'WarningRight',
   components: {
-    ChartsBarLine,
     mainInfo,
-    echartsPie,
+    chartsPie,
     NumberTop
   },
   data () {

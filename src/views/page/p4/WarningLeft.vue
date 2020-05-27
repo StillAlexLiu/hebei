@@ -32,7 +32,7 @@
                         <ChartsPie :is-circle="false" :data="pieData1" :show-legend="false" :is-pie="true"/>
                     </div>
                     <div class="w-1-2 full-height">
-                        <ChartsHollowPie :is-circle="true" :data="pieData2" :img="pieData2Img" :imgSize="[70,70]"/>
+                        <ChartsPiePiecewise :is-circle="true" :data="pieData2" :img="pieData2Img" :imgSize="[70,70]"/>
                     </div>
                 </container>
                 <container class="full-height w-1-2" title="预警同比环比分析">
@@ -50,16 +50,10 @@
 <script>
 import NumberGroup from './components/NumberGroup'
 import Mock from 'mockjs'
-import ChartsBarLine from '../p0/components/ChartsBarLine'
-import ChartsPie from '../p2/compontes/ChartsPie'
-import ChartsHollowPie from '../p2/compontes/echartsHollowPie'
 
 export default {
   name: 'WarningLeft',
   components: {
-    ChartsHollowPie,
-    ChartsPie,
-    ChartsBarLine,
     NumberGroup
   },
   data () {

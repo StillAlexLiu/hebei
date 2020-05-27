@@ -24,7 +24,6 @@ import WarningRight from '../views/page/p4/WarningRight'
 import MonitorLeft from '../views/page/p3/MonitorLeft'
 import MonitorCenter from '../views/page/p3/MonitorCenter'
 import MonitorRight from '../views/page/p3/MonitorRight'
-import page5Center from '../views/page/p2/pages/page5Center'
 import KeepOnRecordLeft from '../views/page/p10/KeepOnRecordLeft'
 import KeepOnRecordRight from '../views/page/p10/KeepOnRecordRight'
 // import headOfficeLeft from '../views/page/p11/headOfficeLeft'
@@ -75,15 +74,7 @@ const routes = [
         components: {
           left: SupervisionLeft,
           right: SupervisionRight
-        },
-        children: [{
-          path: 'suiji',
-          name: '双随机',
-          component: page5Center
-          // components: {
-          //   center: page5Center
-          // }
-        }]
+        }
       },
       {
         path: 'monitor',

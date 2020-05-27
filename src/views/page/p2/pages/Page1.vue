@@ -159,31 +159,6 @@ export default {
           img: require('../compontes/img/6.png')
         }
       ]],
-      img_data2: [[
-        {
-          imgUrl: require('../compontes/img/png7.png')
-        }, {
-          imgUrl: require('../compontes/img/png8.png')
-        }, {
-          imgUrl: require('../compontes/img/png9.png')
-        }
-      ], [
-        {
-          imgUrl: require('../compontes/img/png7.png')
-        }, {
-          imgUrl: require('../compontes/img/png8.png')
-        }, {
-          imgUrl: require('../compontes/img/png9.png')
-        }
-      ], [
-        {
-          imgUrl: require('../compontes/img/png7.png')
-        }, {
-          imgUrl: require('../compontes/img/png8.png')
-        }, {
-          imgUrl: require('../compontes/img/png9.png')
-        }
-      ]],
       chart2: [[
         {
           name: '主体数量',
@@ -410,27 +385,6 @@ export default {
             }],
             img: require('../compontes/img/folder2.png')
           }
-        }
-      ],
-      img_data3: [
-        {
-          imgUrl: require('../compontes/img/png10.png'),
-          name: '主体数量',
-          value: '943',
-          name1: '监管户次',
-          value1: '1337'
-        }, {
-          imgUrl: require('../compontes/img/png11.png'),
-          name: '主体数量',
-          value: '2149',
-          name1: '监管户次',
-          value1: '1200'
-        }, {
-          imgUrl: require('../compontes/img/png12.png'),
-          name: '主体数量',
-          value: '1456',
-          name1: '监管户次',
-          value1: '56'
         }
       ]
     }

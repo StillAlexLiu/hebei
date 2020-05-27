@@ -50,15 +50,11 @@
 import Mock from 'mockjs'
 import numberPie from './components/numberPie'
 import Round from './components/Round'
-import ChartsBarLine from '../p0/components/ChartsBarLine'
 import echarts from 'echarts'
-import ChartsPieValueLegend from '../p5/compontes/ChartsPieValueLegend'
 
 export default {
   name: 'KeepOnRecordRight',
   components: {
-    ChartsPieValueLegend,
-    ChartsBarLine,
     numberPie,
     Round
   },

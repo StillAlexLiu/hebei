@@ -22,7 +22,6 @@
                 <WarningMapInfo v-if="routeName==='智能预警'" :data="p4Info"/>
                 <AuditMapInfo v-if="routeName==='稽查办案'" :data="p6Info"/>
                 <ComplaintMapInfo v-if="routeName==='投诉举报'" :data="p5Info"/>
-                <EffectivenessMapInfo v-if="routeName==='效能评价'" :data="p9Info"/>
             </div>
         </a-map>
     </div>
@@ -34,7 +33,6 @@ import Mock from 'mockjs'
 import EntityMapInfo from '../p1/componets/EntityMapInfo'
 import WarningMapInfo from '../p4/components/WarningMapInfo'
 import AuditMapInfo from '../p6/components/AuditMapInfo'
-import EffectivenessMapInfo from '../p8/compontes/EffectivenessMapInfo'
 import SupervisionMapInfo from '../p2/compontes/SupervisionMapInfo'
 import ComplaintMapInfo from '../p5/compontes/ComplaintMapInfo'
 import KeepOnRecordMapInfo from '../p10/components/KeepOnRecordMapInfo'
@@ -45,7 +43,6 @@ export default {
     KeepOnRecordMapInfo,
     ComplaintMapInfo,
     SupervisionMapInfo,
-    EffectivenessMapInfo,
     AuditMapInfo,
     WarningMapInfo,
     EntityMapInfo
@@ -81,7 +78,6 @@ export default {
       p2InfoDetail: {},
       p5Info: {},
       p6Info: {},
-      p9Info: null,
       p10Info: null,
       routeName: '',
       showIndex: '',
@@ -195,9 +191,6 @@ export default {
           break
         case '综合监管':
           this.p2Name = data.tab.name
-          break
-        case '效能评价':
-          this.p9Info = data.items[0]
           break
         default:
           break

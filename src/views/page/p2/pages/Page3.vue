@@ -1,33 +1,11 @@
 <template>
     <div class="Page3 full">
-        <container class="h-1-3" title="智慧药品监管">
-            <NumberBorder :data='borderData[dimension]'></NumberBorder>
-        </container>
-        <div class="h-1-3">
-            <container class="w-1-2 full-height" title="监督检查情况">
-              <NumberReport :accept_data='chart1[dimension]' :img='img_data2'></NumberReport>
-            </container>
-            <container class="w-1-2 full-height" title="医疗器械各市监管情况">
-              <RadioSimple :data="radioData2" v-model="select" class="full-width h-1-8 radio float-right"/>
-              <echartsMoreBar :data='acrossBar[select.value][dimension]' class="full-width h-7-8"></echartsMoreBar>
-            </container>
-        </div>
-        <div class="h-1-3">
-            <container class="w-1-2 full-height" title="产品抽检情况分析">
-              <echartsLine :data='rightLine[dimension]'></echartsLine>
-            </container>
-            <container class="w-1-2 full-height" title="药械不良反应监测">
-              <echartsLine :data='rightLine2[dimension]'></echartsLine>
-            </container>
-        </div>
+        产品质量左侧
     </div>
 </template>
 
 <script>
-import echartsLine from '../compontes/echarts-Line'
-import NumberBorder from '../compontes/NumberBorder'
-import NumberReport from '../compontes/NumberReport'
-import echartsMoreBar from '../compontes/moreBar'
+
 export default {
   name: 'Page3',
   props: {
@@ -37,10 +15,6 @@ export default {
     }
   },
   components: {
-    echartsLine,
-    NumberBorder,
-    NumberReport,
-    echartsMoreBar
   },
   data () {
     return {
@@ -266,13 +240,7 @@ export default {
           num1: 2267
         }
       ]],
-      img_data2: [
-        {
-          imgUrl: require('../compontes/img/47.png')
-        }, {
-          imgUrl: require('../compontes/img/46.png')
-        }
-      ],
+
       borderData: [[
         {
           name: '药品零售单位',

@@ -1,13 +1,13 @@
 <template>
     <div class="number-group full-height  full-width">
-        <container-border32 v-for="(item,index) in data" :key="index" class="item full-height"
-                            :class="'w-1-'+data.length">
+        <container-border3 v-for="(item,index) in data" :key="index" class="item full-height"
+                           :class="'w-1-'+data.length">
             <div class="h-2-4 cell full-width">
                 <img :src="item.imgUrl" alt="">
             </div>
             <div class="name_p1 h-1-4 cell  full-width">{{item.name1}}</div>
             <div class="num_p1 h-1-4 cell  full-width">{{item.num1}}<span class="sub">户</span></div>
-        </container-border32>
+        </container-border3>
     </div>
 </template>
 

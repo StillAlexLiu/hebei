@@ -31,7 +31,7 @@
                 <tableTab v-model="tabData" @active='clickActive'></tableTab>
             </div>
             <ContainerCenterTitle title="当前抽检合格率"  class="w-2-6 full-height">
-                <echartsliquidfill :data='liquidfill[select2][tabData]'></echartsliquidfill>
+                <ChartsLiquidFill :data='liquidfill[select2][tabData]'/>
             </ContainerCenterTitle>
             <ContainerCenterTitle title="合格率趋势" class="w-3-6 full-height">
                 <ChartsBarLine :data='chart10' :dimensions="['name','value']" :legend="['食品检验检测合格率']"
@@ -49,21 +49,17 @@ import Mock from 'mockjs'
 import NumberGroup from './components/NumberGroup'
 import comPlaintBarR from '../p5/compontes/comPlaintBarR'
 import tableTab from './components/tableTab'
-import echartsliquidfill from '../p2/compontes/echarts-liquidfill'
 import ChartsPie from './components/ChartsPie'
-import ChartsBarLine from './components/ChartsBarLine'
 import KeyValueInfo from './components/KeyValueInfo'
 
 export default {
   name: 'CommandLeft',
   components: {
     KeyValueInfo,
-    ChartsBarLine,
     ChartsPie,
     NumberGroup,
     comPlaintBarR,
-    tableTab,
-    echartsliquidfill
+    tableTab
   },
   data () {
     return {

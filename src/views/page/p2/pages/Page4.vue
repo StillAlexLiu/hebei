@@ -5,11 +5,11 @@
                 <NumberElevator :data='chart4[dimension]'></NumberElevator>
             </container>
             <container class="w-1-2 full-height" title="全省特种设备增长趋势">
-                <ChartBarLine :data='chart5' :dimensions="['name','value']"
-                              :type="['line']"
-                              :colors="['#61EADF']"
-                              :units="['单位：台']"
-                              :legend="['特种设备数量']"></ChartBarLine>
+                <ChartsBarLine :data='chart5' :dimensions="['name','value']"
+                               :type="['line']"
+                               :colors="['#61EADF']"
+                               :units="['单位：台']"
+                               :legend="['特种设备数量']"></ChartsBarLine>
             </container>
         </div>
         <div class="h-1-3">
@@ -17,18 +17,18 @@
                 <ChartsPie :data='hellowPie2' is-pie/>
             </container>
             <container class="w-1-2 full-height" title="各市分布数量">
-                <ChartBarLine :data='chart3[dimension].data' :dimensions="['name','value']" :type="['bar']"
-                              :colors="[barColor]"
-                              :border-radius="true"
-                              :units="['单位：台']"
-                              :legend="['特种设备数量']"></ChartBarLine>
+                <ChartsBarLine :data='chart3[dimension].data' :dimensions="['name','value']" :type="['bar']"
+                               :colors="[barColor]"
+                               :border-radius="true"
+                               :units="['单位：台']"
+                               :legend="['特种设备数量']"></ChartsBarLine>
             </container>
         </div>
         <div class="h-1-3">
             <container class="w-1-2 full-height" title="电梯二维码覆盖情况">
-                <echartsHollowPie :data='chart6.data'
-                                  :show-value="true"
-                                  :img="chart6.img"></echartsHollowPie>
+                <ChartsPiePiecewise :data='chart6.data'
+                                    :show-value="true"
+                                    :img="chart6.img"></ChartsPiePiecewise>
             </container>
             <container class="w-1-2 full-height" title="计量基础">
                 <InfoCard :data="InfoCardData"/>
@@ -39,9 +39,6 @@
 </template>
 <script>
 import NumberElevator from '../compontes/Number-elevator'
-import ChartBarLine from '../compontes/echarts-bar'
-import ChartsPie from './../compontes/ChartsPie'
-import echartsHollowPie from '../compontes/echartsHollowPie'
 import Mock from 'mockjs'
 import echarts from 'echarts'
 import InfoCard from '../compontes/InfoCard'
@@ -56,10 +53,7 @@ export default {
   },
   components: {
     InfoCard,
-    NumberElevator,
-    echartsHollowPie,
-    ChartBarLine,
-    ChartsPie
+    NumberElevator
   },
   data: () => {
     return {

@@ -646,6 +646,32 @@ export default [
         id: ''
       }]
     }, {
+      name: '产品质量监管',
+      active: false,
+      single: true,
+      children: [{
+        name: '生产',
+        icon: require('./../assets/images/mapTabs/p2/t2/1.png'),
+        active: false,
+        number: 200,
+        json: [],
+        id: ''
+      }, {
+        name: '流通',
+        icon: require('./../assets/images/mapTabs/p2/t2/2.png'),
+        active: false,
+        number: 200,
+        json: [],
+        id: ''
+      }, {
+        name: '餐饮',
+        icon: require('./../assets/images/mapTabs/p2/t2/3.png'),
+        active: false,
+        number: 200,
+        json: [],
+        id: ''
+      }]
+    }, {
       name: '特种设备监管',
       active: false,
       single: true,

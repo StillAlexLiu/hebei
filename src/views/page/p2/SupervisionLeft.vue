@@ -6,9 +6,8 @@
         <div slot="calc" class=" full-width full-height sub" v-if="globalMapSelect.tab">
             <Page1 v-if="selectName ==='综合监管'||selectName ==='综合监管'" :dimension="select.value"/>
             <Page2 v-if="selectName ==='智慧食品监管'" :dimension="select.value" :name="selectItem.name"/>
-            <Page3 v-if="selectName ==='智慧药械监管'" :dimension="select.value"/>
+            <Page3 v-if="selectName ==='产品质量监管'" :dimension="select.value"/>
             <Page4 v-if="selectName ==='特种设备监管'" :dimension="select.value"/>
-            <Page5 v-if="selectName ==='双随机监管'" :dimension="select.value"/>
         </div>
     </container-calc>
 </template>
@@ -18,7 +17,6 @@ import Page1 from './pages/Page1'
 import Page2 from './pages/Page2'
 import Page3 from './pages/Page3'
 import Page4 from './pages/Page4'
-import Page5 from './pages/Page5'
 import { mapState } from 'vuex'
 
 export default {
@@ -63,7 +61,6 @@ export default {
     }
   },
   components: {
-    Page5,
     Page4,
     Page3,
     Page2,

@@ -28,21 +28,17 @@
 
 <script>
 import ChartTree from './components/ChartTree'
-import ChartsPie from '../p2/compontes/ChartsPie'
 import Mock from 'mockjs'
 import NumberGroup from './components/numberGroup'
 import NameOnly from './components/nameOnly'
-import ChartsPieValueLegend from '../p5/compontes/ChartsPieValueLegend'
 import ChartsGraph from './components/ChartsGraph'
 
 export default {
   name: 'AuditRight',
   components: {
     ChartsGraph,
-    ChartsPieValueLegend,
     NameOnly,
     NumberGroup,
-    ChartsPie,
     ChartTree
   },
   data () {

@@ -12,11 +12,11 @@
                     <BorderInOut class="full" :data="dataTop"/>
                 </div>
                 <div class="w-1-2 full-height">
-                    <ChartBarLine :data="barLineData" :type="['bar','line']"
-                                  :legend="['公示数','公示率']"
-                                  :colors="['#4A90E2','#FE6941']"
-                                  :units="['户','%']"
-                                  :dimensions="['name','value','value2']"/>
+                    <ChartsBarLine :data="barLineData" :type="['bar','line']"
+                                   :legend="['公示数','公示率']"
+                                   :colors="['#4A90E2','#FE6941']"
+                                   :units="['户','%']"
+                                   :dimensions="['name','value','value2']"/>
                 </div>
             </container>
             <container class="h-1-3 full-width" title="信用约束">
@@ -28,10 +28,10 @@
                     <!--                    <ChartPie :data="mountainData"/>-->
                 </container>
                 <container title="失信企业地区分布" class="full-height w-1-2">
-                    <ChartBarLineHorizontal :data="barHorizontalData" :type="['bar']" :legend="['']"
-                                            :units="['户']"
-                                            :colors="['#FFBB70']"
-                                            :dimensions="['name','value']"/>
+                    <ChartsBarLineHorizontal :data="barHorizontalData" :type="['bar']" :legend="['']"
+                                             :units="['户']"
+                                             :colors="['#FFBB70']"
+                                             :dimensions="['name','value']"/>
                 </container>
             </div>
         </template>
@@ -46,16 +46,10 @@ import TabTable from './componets/tabTable'
 import numberPie from './componets/numberPie'
 import ChartMountain from './componets/ChartMountain'
 import BorderInOut from './componets/borderInOut'
-import ChartBarLine from './componets/ChartBarLine'
-import ChartBarLineHorizontal from './componets/ChartBarLineHorizontal'
-// import ChartPie from './componets/ChartPie'
 
 export default {
   name: 'p1right',
   components: {
-    // ChartPie,
-    ChartBarLineHorizontal,
-    ChartBarLine,
     BorderInOut,
     ChartMountain,
     TabTable,
