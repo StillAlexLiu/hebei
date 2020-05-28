@@ -1,29 +1,25 @@
 <template>
-    <div class="SupervisionRight full" v-if="globalMapSelect.tab">
+    <div class="SupervisionRight full page-style" v-if="globalMapSelect.tab">
         <div v-if="selectName ==='综合监管'||selectName ==='综合监管'" :dimension="select.value" class="full">
             <img src="./compontes/img/综合监管右侧.png" alt="" class="img_width">
         </div>
-        <Page2R v-if="selectName ==='智慧食品监管'" :dimension="select.value" class="full" :name="selectItem.name">
-
-        </Page2R>
+        <Page2R v-if="selectName ==='智慧食品监管'" :dimension="select.value" class="full" :name="selectItem.name"/>
         <div v-if="selectName ==='智慧药械监管'" :dimension="select.value" class="full">
             <img src="./compontes/img/河北监管系统.png" alt="" class="img_width">
         </div>
-        <div v-if="selectName ==='特种设备监管'" :dimension="select.value" class="full"
-             style="text-align: center;padding: 10px">
-            <RadioSimple :data="tab4Data" style="height: 50px"/>
-            <img src="./compontes/img/电梯右侧.png" alt="" style="height: calc(100% - 50px)">
-        </div>
+        <Page4R v-if="selectName ==='特种设备监管'" class="full"/>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import Page2R from './pages/page2R'
+import Page4R from './pages/Page4R'
 
 export default {
   name: 'SupervisionRight',
   components: {
+    Page4R,
     Page2R
   },
   data () {
@@ -31,29 +27,7 @@ export default {
       select: {},
       pageIndex: 0,
       selectName: '综合监管',
-      selectItem: {},
-      tab4Data: [
-        {
-          name: '基础数据',
-          value: '1'
-        },
-        {
-          name: '二维码',
-          value: '2'
-        },
-        {
-          name: ' 老旧特种设备',
-          value: '3'
-        },
-        {
-          name: '智能预警',
-          value: '4'
-        },
-        {
-          name: ' 社会共治',
-          value: '5'
-        }
-      ]
+      selectItem: {}
     }
   },
   computed: {

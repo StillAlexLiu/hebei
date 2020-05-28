@@ -2,7 +2,7 @@
     <div class='RightNumberGroup'>
         <div class="item" v-for="(item,index) in data" :key="index">
             <div class="name h-1-3">{{ item.name }}</div>
-            <div class="value h-2-3 number-font" :style="{color:colors[index]&&colors[i]!==''?colors[index]:''}">{{
+            <div class="value h-2-3 number-font" :style="{color:colors[index]&&colors[index]!==''?colors[index]:''}">{{
                 item.value }}
             </div>
         </div>

@@ -8,7 +8,7 @@
 import Table2 from '../compontes/table2'
 
 export default {
-  name: 'page2R1',
+  name: 'RightDia',
   components: { Table2 },
   data () {
     return {

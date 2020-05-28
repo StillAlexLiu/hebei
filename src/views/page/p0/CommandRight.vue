@@ -35,7 +35,7 @@
                                :legend="['执法办案趋势']"
                                :colors="['#55B0EE']"
                                :is-area="true"
-                               :units="'数量(件)'"
+                               :units="['数量(件)']"
                                :type="['line']"/>
             </Container>
         </div>

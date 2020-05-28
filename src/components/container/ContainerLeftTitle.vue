@@ -3,6 +3,9 @@
         <div class="main">
             <div class="title">
                 <div class="text">{{title}}</div>
+                <div class="right">
+                    <slot name="right"/>
+                </div>
             </div>
             <div class="body">
                 <slot/>
@@ -38,7 +41,7 @@ export default {
 .Container {
     padding: 9px 15px;
 
-    >.main {
+    > .main {
         height: 100%;
         width: 100%;
         /*background: linear-gradient(180deg, #20233A 0%, #242942 100%);*/

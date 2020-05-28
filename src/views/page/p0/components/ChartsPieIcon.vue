@@ -46,7 +46,6 @@ export default {
             label: {
               show: true,
               formatter: (params) => {
-                console.log(params)
                 if (params.name === '') {
                   return ''
                 } else {

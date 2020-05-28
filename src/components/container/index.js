@@ -8,6 +8,7 @@ import ContainerFour from './ContainerFour'
 import ContainerFourDash from './ContainerFourDash'
 import ContainerSmallTitle from './ContainerSmallTitle'
 import ContainerOnlyTitle from './ContainerOnlyTitle'
+import ContainerCenterTitle2 from './ContainerCenterTitle2'
 // 山东的
 import ContainerBorder1 from './ContainerBorder1'
 import ContainerBorder2 from './ContainerBorder2'
@@ -43,5 +44,6 @@ export default {
     Vue.component('ContainerInfo', ContainerInfo)
     Vue.component('ContainerInfoCard', ContainerInfoCard)
     Vue.component('ContainerWarning', ContainerWarning)
+    Vue.component('ContainerCenterTitle2', ContainerCenterTitle2)
   }
 }

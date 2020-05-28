@@ -438,7 +438,6 @@ export default {
       immediate: true,
       deep: true,
       handler: function () {
-        console.log(this.select2, 'ddsssss')
       }
     }
   },
