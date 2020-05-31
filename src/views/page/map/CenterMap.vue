@@ -164,6 +164,7 @@ export default {
         return val.properties.name === '河北'
       })
       const coordinates = find.geometry.coordinates
+      console.log(coordinates)
       for (let i = 0; i < coordinates.length; i++) {
         const item = coordinates[i]
         console.log(item)

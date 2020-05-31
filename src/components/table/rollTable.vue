@@ -1,13 +1,13 @@
 <template>
-    <div class="rollTable">
+    <div class="rollTable " style="position: relative">
         <div style="overflow:hidden;margin-top:60px;">
-            <transition-group name="list" tag='div' ref="table" style="width: 100%">
+            <transition-group name="list" tag='div' ref="table" style="width: 100%" class="table">
                 <div class="row  body  list-item full-width" v-for="(item,index) in showData"
                      :key="item.__index+'m'"
                      @click="click(item,index)">
                     <div class="cell" v-for="(itemd,indexd) in dimension" :key="indexd+'&'+item.__index"
                          :style="{width:widths.length>0?widths[index]/wc*100 +'%':(100/dimension.length)+'%'}">
-                        {{item[itemd.value]}}
+                        <span>     {{item[itemd.value]}}</span>
                     </div>
                 </div>
             </transition-group>
@@ -126,7 +126,7 @@ export default {
     }
 
     .table {
-        display: table;
+        /*display: table;*/
     }
 
     .header {
@@ -146,10 +146,10 @@ export default {
     .row {
         width: 100%;
         height: 80px;
+
         .cell {
             height: 100%;
             float: left;
-            vertical-align: middle;
         }
     }
 
@@ -158,6 +158,12 @@ export default {
 
         .cell {
             border: 1px solid #37adc3;
+            display: table;
+
+            span {
+                display: table-cell;
+                vertical-align: middle;
+            }
         }
     }
 

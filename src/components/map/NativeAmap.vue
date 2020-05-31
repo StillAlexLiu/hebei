@@ -116,6 +116,7 @@ export default {
           for (let i = 0; i < this.grid.length; i++) {
             this.paths.push([...this.grid[i].geo])
           }
+          console.log(this.paths)
           this.$nextTick(() => {
             this.loadAMap(() => {
               // this.initMap()
@@ -174,7 +175,7 @@ export default {
       this.map.on('zoomend', this.zoomListener)
       this.map.on('click', this.clickListener)
 
-      window.AMap.plugin('AMap.DistrictLayer', function () { // 异步加载插件
+      window.AMap.plugin(['AMap.DistrictLayer'], function () { // 异步加载插件
         self.disProvince(self.adcode, self.depth)
       })
     },
@@ -285,6 +286,8 @@ export default {
           'county-stroke': 'rgba(255,255,255,0.5)' // 中国区县边界
         }
       })
+      const layer = this.disProvinceLayer
+      console.error(layer)
       this.disProvinceLayer.setMap(this.map)
     },
     zoomListener () {
