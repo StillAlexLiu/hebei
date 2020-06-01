@@ -95,10 +95,11 @@ export default {
         this.$nextTick(() => {
           this.loadAMap(() => {
             try {
-              this.map.remove(this.markers)
+              this.removeMassMarks()
             } catch (e) {
               console.log(e)
             }
+            this.map.setZoomAndCenter(9, this.center)
             this.pointNumber = 0
             if (this.point.length > 0) {
               this.addMassMarks(this.point)
@@ -130,7 +131,7 @@ export default {
     mapZoom (newZoom, oldZoom) { // 缩放复位
       console.log('zoom:' + newZoom)
       console.log(this.proDepth)
-      if (oldZoom > newZoom && newZoom === 8 && this.proDepth === 2) {
+      if (oldZoom > newZoom && newZoom === 8 && this.proDepth > 0) {
         const layers = this.map.getLayers()
         console.log(layers)
         this.removeDisProvinceLayer()
@@ -139,6 +140,8 @@ export default {
         //   //   this.map.remove(layers[i])
         //   // }
         // }
+        this.removeMassMarks()
+        this.addMassMarks(this.point)
         this.SearchDistrict(this.adcode[0], 0)
       }
     }
@@ -183,8 +186,16 @@ export default {
         self.SearchDistrict(self.adcode[0], self.depth)
       })
     },
-    clickHandler (data) {
-      console.log(data)
+    clickHandler (e) {
+      const data = e.target.getExtData()
+      if (data.points && data.points.length > 0) {
+        this.removeDisProvinceLayer()
+        console.log(this.proDepth++)
+        this.SearchDistrict(data.name, this.proDepth)
+        this.map.setZoomAndCenter(9, [e.lnglat.lng, e.lnglat.lat])
+        this.removeMassMarks()
+        this.addMassMarks(data.points)
+      }
       this.$emit('pointClick', data)
     },
     isPointInRing (point) {
@@ -244,53 +255,27 @@ export default {
     },
     addMassMarks (data) { // 海量点
       console.log('海量点')
+      console.log(data)
       this.markers = []
       for (let i = 0; i < data.length; i++) {
         const item = data[i]
+        console.log(item)
         const marker = new window.AMap.Marker({
           content: this.contentMaker(item),
           position: this.transCoordinate(item.coordinate),
           zIndex: 101,
           title: item.name,
-          extData: {
-            points: item.points
-          }
+          extData: item
         })
         console.log(marker)
+        marker.on('click', this.clickHandler)
         this.markers.push(marker)
       }
-      this.markers.on('click', clickHandler)
+      console.log(this.markers)
       this.map.add(this.markers)
-      // const style = [{
-      //   // url: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
-      //   url: data[0].icon ? data[0].icon : 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
-      //   anchor: new AMap.Pixel(0, 0),
-      //   size: data[0].icon ? new AMap.Size(36, 36) : new AMap.Size(36, 20)
-      // }]
-      // console.log(style)
-      // const points = []
-      // for (let i = 0; i < data.length; i++) {
-      //   const marker = data[i]
-      //   console.log(marker)
-      //   const coordinate = this.transCoordinate(marker.coordinate)
-      //   if (coordinate) {
-      //     marker.lnglat = coordinate
-      //     points.push(marker)
-      //   }
-      // }
-      // console.log(points)
-      // this.pointNumber = points.length
-      // if (points.length > 0) {
-      //   this.mass = new window.AMap.MassMarks(points, {
-      //     opacity: 0.8,
-      //     zIndex: 111,
-      //     cursor: 'pointer',
-      //     label: '2312312',
-      //     style: style
-      //   })
-      //   this.mass.on('click', this.clickHandler)
-      //   this.mass.setMap(this.map)
-      // }
+    },
+    removeMassMarks () {
+      this.map.remove(this.markers)
     },
     searchFunc (adcode) {
       const districtSearch = new window.AMap.DistrictSearch({
