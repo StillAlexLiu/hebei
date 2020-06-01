@@ -82,7 +82,43 @@ export default {
       routeName: '',
       showIndex: '',
       commandName: '',
-      commandDetail: {}
+      commandDetail: {},
+      city: [
+        {
+          name: '秦皇岛市',
+          center: [119.586579, 39.942531]
+        }, {
+          name: '廊坊市',
+          center: [116.704441, 39.523927]
+        }, {
+          name: '张家口市',
+          center: [114.884091, 40.811901]
+        }, {
+          name: '唐山市',
+          center: [118.175393, 39.635113]
+        }, {
+          name: '沧州市',
+          center: [116.857461, 38.310582]
+        }, {
+          name: '承德市',
+          center: [117.939152, 40.976204]
+        }, {
+          name: '邯郸市',
+          center: [114.490686, 36.612273]
+        }, {
+          name: '石家庄市',
+          center: [114.502461, 38.045474]
+        }, {
+          name: '邢台市',
+          center: [114.508851, 37.0682]
+        }, {
+          name: '衡水市',
+          center: [115.665993, 37.735097]
+        }, {
+          name: '保定市',
+          center: [115.482331, 38.867657]
+        }
+      ]
     }
   },
   watch: {
@@ -132,7 +168,8 @@ export default {
       const items = data.items
       this.point = []
       for (let i = 0; i < items.length; i++) {
-        this.point = [...this.point, ...this.makePoint(items[i].number, items[i].icon)]
+        // this.point = [...this.point, ...this.makePoint(items[i].number, items[i].icon)]
+        this.point = [...this.point, ...this.makeTreePoint(items[i].number, items[i].icon)]
       }
     },
     clearInfo () {
@@ -157,6 +194,29 @@ export default {
         })
       }
       return rtn
+    },
+    makeTreePoint (number, icon) {
+      const list = []
+      const len = this.city.length
+      for (let i = 0; i < len; i++) {
+        const item = this.city[i]
+        list.push({
+          name: item.name,
+          icon: icon,
+          coordinate: item.center,
+          points: []
+        })
+      }
+      for (let i = 0; i < number; i++) {
+        list[i % len].points.push({
+          name: '河北' + Mock.mock('@cword(3)') + '有限责任公司',
+          icon: icon,
+          coordinate: [Mock.mock('@float(113.784594, 119.54143)'), Mock.mock('@float(36.359861, 42.578391)')]
+        })
+      }
+      console.log(list)
+      return list
+      // city
     },
     addGrid () {
       // 初始化网格 用于限制点位置坐标用，可不写
