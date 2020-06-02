@@ -1,6 +1,6 @@
 <template>
     <div class="NativeAmap">
-        <div class="full-width full-height" :id="'container'+idKey"></div>
+        <div class="a-map full-width full-height" :id="'container'+idKey"></div>
         <MapSelector v-if="selector&&selectorData.length>0" :data="selectorData" @getSelect="getSelect"/>
         <MapInfoBlock>
             <slot name="info"></slot>
@@ -171,6 +171,7 @@ export default {
         rotateEnable: true,
         pitchEnable: true,
         zoom: this.zoom,
+        viewMode: '3D',
         autoRotation: true,
         center: this.center,
         mapStyle: 'amap://styles/grey'
@@ -386,5 +387,9 @@ export default {
 .NativeAmap {
     position: relative;
     overflow: hidden;
+
+    > .a-map {
+        position: absolute;
+    }
 }
 </style>
