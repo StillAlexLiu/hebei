@@ -13,10 +13,10 @@
                            :showX="false"
                            :colors="['#50E3C2','#FF9177','#00B1FA','#8A7CEF','#FFE17D','#00E138','#FF7B83']"/>
         </container>
-        <container class="h-1-3 w-1-2">
+        <container class="h-1-3 w-1-2" title="特种设备生产和充装单位情况">
             <ChartsPiePiecewise :data="pieData2" :title="'总数\n3278'" :titleSize="48"/>
         </container>
-        <container class="h-1-3 w-1-2">
+        <container class="h-1-3 w-1-2" title="特种设备作业人员情况">
             <ChartsBarLine :data="linesData" :legend="['持证人数']"
                            :type="['line']"
                            :two-axis="false"
@@ -24,7 +24,7 @@
                            :colors="['#61EADF']"
                            :dimensions="['name','value']"/>
         </container>
-        <container class="h-1-3 w-1-1">
+        <container class="h-1-3 w-1-1" title="特种设备检验情况">
             <div class="w-2-10 full-height">
                 <tab class="full" :data="tabData"/>
             </div>

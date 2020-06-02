@@ -8,6 +8,9 @@
             <img src="./compontes/img/河北监管系统.png" alt="" class="img_width">
         </div>
         <Page4R v-if="selectName ==='特种设备监管'" class="full"/>
+        <div v-if="selectName==='产品质量监管'">
+            开发中
+        </div>
     </div>
 </template>
 

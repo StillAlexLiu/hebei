@@ -27,6 +27,10 @@ export default {
       default: () => {
         return ['#FF997D', '#4A90E2', '#FFD86D']
       }
+    },
+    showValue: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -127,7 +131,7 @@ export default {
           {
             label: {
               normal: {
-                show: true,
+                show: this.showValue,
                 position: 'top'
               }
             },
