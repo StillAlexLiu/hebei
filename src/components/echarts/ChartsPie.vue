@@ -39,6 +39,10 @@ export default {
       type: Boolean,
       default: true
     },
+    legendPosition: {
+      type: String,
+      default: 'top'
+    },
     img: {
       type: String,
       default: ''
@@ -100,14 +104,33 @@ export default {
         elements.push(text)
       }
       const series = []
-
+      let left = 0
+      const center = ['50%', '50%']
+      const legend = {
+        show: this.showLegend
+      }
+      switch (this.legendPosition) {
+        case 'top':
+          legend.orient = 'horizontal'
+          break
+        case 'left':
+          legend.orient = 'vertical'
+          legend.left = 10
+          legend.top = 'center'
+          legend.itemGap = 30
+          left = '20%'
+          break
+        default:
+          break
+      }
       if (this.doublePie) {
         series.push({
           name: '',
           type: 'pie',
           radius: [0, '35%'],
-          center: ['50%', '50%'],
+          center: center,
           top: 20,
+          left: left,
           label: {
             show: true,
             position: 'inside',
@@ -145,8 +168,9 @@ export default {
         name: '',
         type: 'pie',
         radius: this.isPie ? [0, '62%'] : ['40%', '62%'],
-        center: ['50%', '50%'],
+        center: center,
         top: 20,
+        left: left,
         label: {
           show: true,
           position: 'outside',
@@ -193,9 +217,7 @@ export default {
             fontSize: 200
           }
         },
-        legend: {
-          show: this.showLegend
-        },
+        legend: legend,
         series: series
       }
     }
