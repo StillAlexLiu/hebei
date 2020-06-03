@@ -31,7 +31,8 @@
                                     :img="chart6.img"></ChartsPiePiecewise>
             </container>
             <container class="w-1-2 full-height" title="老旧特种设备占比">
-                <ChartsPiePercentMode :data="pieDataPercent"/>
+                <chartsPie :data='hellowPie' :is-percent="true"/>
+                <!-- <ChartsPiePercentMode :data="pieDataPercent"/> -->
                 <!--                <echartsliqudfill :data='liquidfull[dimension]'></echartsliqudfill>-->
             </container>
         </div>
@@ -43,7 +44,7 @@ import Mock from 'mockjs'
 import echarts from 'echarts'
 import InfoCard from '../compontes/InfoCard'
 import ChartsPiePercentMode from '../compontes/ChartsPiePercentMode'
-
+import chartsPie from '../compontes/echartsPie'
 export default {
   name: 'Page4',
   props: {
@@ -55,10 +56,16 @@ export default {
   components: {
     ChartsPiePercentMode,
     InfoCard,
+    chartsPie,
     NumberElevator
   },
   data: () => {
     return {
+      hellowPie: {
+        name: ' ',
+        num: 8,
+        sum: 2380
+      },
       barColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
         {
           offset: 0,
