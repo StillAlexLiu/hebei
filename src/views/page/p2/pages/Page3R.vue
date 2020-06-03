@@ -32,31 +32,55 @@ export default {
         value: '52',
         unit: '家'
       }, {
-        name: '建筑用钢筋',
-        short: '筋',
+        name: '广播电视传输',
+        short: '设',
         img: 'skyBlue',
         value: '52',
         unit: '家'
       }, {
-        name: '建筑用钢筋',
-        short: '筋',
+        name: '水泥',
+        short: '泥',
         img: 'blue',
         value: '52',
         unit: '家'
       }, {
-        name: '建筑用钢筋',
-        short: '筋',
+        name: '预应力混凝土铁路桥简支梁',
+        short: '土',
         img: 'green',
         value: '52',
         unit: '家'
       }, {
-        name: '建筑用钢筋',
-        short: '筋',
+        name: '人民币鉴别仪',
+        short: '仪',
         img: 'orange',
         value: '52',
         unit: '家'
       }],
-      group2: []
+      group2: [{
+        name: '电线电缆',
+        short: '电',
+        img: 'skyBlue',
+        value: '52',
+        unit: '家'
+      }, {
+        name: '危险化学品',
+        short: '化',
+        img: 'pinkPurple',
+        value: '52',
+        unit: '家'
+      }, {
+        name: '危险化学品包装物',
+        short: '包',
+        img: 'yellow',
+        value: '52',
+        unit: '家'
+      }, {
+        name: '化肥',
+        short: '肥',
+        img: 'darkBlue',
+        value: '52',
+        unit: '家'
+      }]
     }
   }
 }

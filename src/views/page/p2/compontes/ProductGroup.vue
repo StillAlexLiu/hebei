@@ -4,8 +4,9 @@
             <div class="h-3-7 icon">
                 <short class="full" :text="item.short" :color="item.img" :size="59" :font-size="33"/>
             </div>
-            <div class="h-4-7">
-                {{ item.name }}
+            <div class="h-4-7 text">
+                <div class="name"> {{ item.name }}</div>
+                <div class="value number-font"> {{ item.value }} <span class="unit">{{ item.unit}}</span></div>
             </div>
         </div>
     </div>
@@ -33,16 +34,41 @@ export default {
     align-items: stretch;
     padding: 10px 0;
 
+    text-align: center;
+
     .item {
         flex: 1;
         background-image: url("./img/Pbg.png");
         background-repeat: no-repeat;
         background-size: calc(100% - 30px) calc(100% - 30px);
         background-position: center;
+        padding: 30px;
     }
 
     .icon {
-        padding-top: 30px;
+    }
+
+    .name {
+        font-size: 18px;
+    }
+
+    .value {
+        font-size: 40px;
+        color: #FF6142;
+        text-align: right;
+    }
+
+    .unit {
+        font-size: 16px;
+        color: #FF6142;
+    }
+
+    .text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+        padding: 5px 0 3px 0;
     }
 }
 </style>

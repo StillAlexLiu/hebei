@@ -27,6 +27,7 @@ export default {
     return {
       colorList: {
         blue: require('./img/blue.png'),
+        darkBlue: require('./img/dark-blue.png'),
         green: require('./img/green.png'),
         orange: require('./img/orange.png'),
         pinkPurple: require('./img/pink-purple.png'),
