@@ -19,5 +19,21 @@ export default {
       json: JSON.stringify(str)
     }
     return axios.post(url, qs.stringify(params), config)
+  },
+  checkRequest (name, password, devId, ip) {
+    const str = {
+      cmdId: 100,
+      user: name,
+      streamtype: 1,
+      channelid: 1,
+      password: md5(password),
+      devId: devId,
+      cmdId: 210,
+      ip: ip
+    }
+    const params = {
+      json: JSON.stringify(str)
+    }
+    return axios.post(url, qs.stringify(params), config)
   }
 }

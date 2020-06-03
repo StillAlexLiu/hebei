@@ -14,48 +14,54 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import videoHY from './js/huaye'
-=======
 import HuaYeVideo from './components/js/HuaYeVideo'
 
->>>>>>> a54855416ebcfdecaa38e4f2f8cce991923f20ad
 export default {
   name: 'MonitorCenter',
   data () {
     return {
-      videoUrl: this.$dataAll.videoUrl,
-      videoNames: []
-      // videoNames: [{
-      //   name: '注册大厅',
-      //   address: '河北省石家庄新华区'
-      // }, {
-      //   name: '注册大厅',
-      //   address: '河北省石家庄新华区'
-      // }, {
-      //   name: '注册大厅',
-      //   address: '河北省石家庄新华区'
-      // }, {
-      //   name: '注册大厅',
-      //   address: '河北省石家庄新华区'
-      // }, {
-      //   name: '注册大厅',
-      //   address: '河北省石家庄新华区'
-      // }, {
-      //   name: '注册大厅',
-      //   address: '河北省石家庄新华区'
-      // }
-      // ]
+      videoUrl: [],
+    //   videoNames: []
+      videoNames: [
+        {
+            name: '厨房',
+            address: '涿鹿县诚信小饭桌'
+        }, {
+            name: '厨房',
+            address: '涿鹿县诚信小饭桌'
+        },{
+            name: '厨房',
+            address: '涿鹿县诚信小饭桌'
+        },{
+            name: '厨房',
+            address: '涿鹿县诚信小饭桌'
+        },{
+            name: '厨房',
+            address: '涿鹿县诚信小饭桌'
+        },{
+            name: '厨房',
+            address: '涿鹿县诚信小饭桌'
+        }
+      ]
     }
   },
   mounted () {
-<<<<<<< HEAD
-    videoHY.getList('zlxjyxfz','hyjk123').then(res =>{
-      console.log(res, 'll22')
+    HuaYeVideo.getList('zlxgyxfz', 'hyjk123').then(res => {
+        const data = res.data.devlist
+        for (let i = 0 ; i < data.length; i++){
+            HuaYeVideo.checkRequest('zlxgyxfz', 'hyjk123', data[i].sn, data[i].hlsurl).then(flow => {
+                // this.videoNames.push({
+                //     name: data[i].name,
+                //     address: '涿鹿县诚信小饭桌'
+                // })
+                this.videoUrl.push({
+                    name: data[i].name,
+                    url: flow.data.hlsurl
+                })
+            })
+        }
     })
-=======
-    HuaYeVideo.getList('name', 'password')
->>>>>>> a54855416ebcfdecaa38e4f2f8cce991923f20ad
   }
 }
 </script>
