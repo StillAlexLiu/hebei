@@ -16,7 +16,7 @@
             <container class="w-1-2 full-height" title="特种设备类型分布">
                 <ChartsPie :data='hellowPie2' is-pie/>
             </container>
-            <container class="w-1-2 full-height" title="各市分布数量">
+            <container class="w-1-2 full-height" title="特种设备各地区分布">
                 <ChartsBarLine :data='chart3[dimension].data' :dimensions="['name','value']" :type="['bar']"
                                :colors="[barColor]"
                                :border-radius="true"
@@ -25,13 +25,13 @@
             </container>
         </div>
         <div class="h-1-3">
-            <container class="w-1-2 full-height" title="电梯二维码覆盖情况">
+            <container class="w-1-2 full-height" title="二维码覆盖情况">
                 <ChartsPiePiecewise :data='chart6.data'
                                     :show-value="true"
                                     :img="chart6.img"></ChartsPiePiecewise>
             </container>
-            <container class="w-1-2 full-height" title="计量基础">
-                <InfoCard :data="InfoCardData"/>
+            <container class="w-1-2 full-height" title="老旧特种设备占比">
+                <ChartsPiePercentMode :data="pieDataPercent"/>
                 <!--                <echartsliqudfill :data='liquidfull[dimension]'></echartsliqudfill>-->
             </container>
         </div>
@@ -42,6 +42,7 @@ import NumberElevator from '../compontes/Number-elevator'
 import Mock from 'mockjs'
 import echarts from 'echarts'
 import InfoCard from '../compontes/InfoCard'
+import ChartsPiePercentMode from '../compontes/ChartsPiePercentMode'
 
 export default {
   name: 'Page4',
@@ -52,6 +53,7 @@ export default {
     }
   },
   components: {
+    ChartsPiePercentMode,
     InfoCard,
     NumberElevator
   },
@@ -341,32 +343,11 @@ export default {
           name: '场(厂)内专用机动车辆'
         }
       ],
-      InfoCardData: {
-        data1: [
-          {
-            name: '全省强检计量器具',
-            value: '315807台/件'
-          },
-          {
-            name: '省外溯源计量器具',
-            value: '68台/件'
-          }
-        ],
-        data2: [
-          {
-            name: '全省社会公用计量标准考核',
-            value: '110项',
-            img: require('./../compontes/img/icon-全省@2x.png')
-          }, {
-            name: '发布实施地方计量标准',
-            value: '4项',
-            img: require('./../compontes/img/icon-地方@2x.png')
-          }, {
-            name: '省级法定计量检定考核机构',
-            value: '40家',
-            img: require('./../compontes/img/icon-省级@2x.png')
-          }
-        ]
+      pieDataPercent: {
+        name: '',
+        value: '2380',
+        percent: '5',
+        unit: '件'
       }
     }
   }

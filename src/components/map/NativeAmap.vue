@@ -272,7 +272,7 @@ export default {
         marker.on('click', this.clickHandler)
         this.markers.push(marker)
       }
-      console.log(this.markers)
+      // console.log(this.markers)
       this.map.add(this.markers)
     },
     removeMassMarks () {
@@ -289,8 +289,8 @@ export default {
       return new Promise(resolve => {
         districtSearch.search(adcode, (status, result) => {
           // console.log(result)
-          console.log(result.districtList[0].name)
-          console.log([result.districtList[0].center.lng, result.districtList[0].center.lat].toString())
+          // console.log(result.districtList[0].name)
+          // console.log([result.districtList[0].center.lng, result.districtList[0].center.lat].toString())
           resolve(result)
         })
       })

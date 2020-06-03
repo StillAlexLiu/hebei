@@ -14,32 +14,38 @@
 </template>
 
 <script>
+import HuaYeVideo from './components/js/HuaYeVideo'
+
 export default {
   name: 'MonitorCenter',
   data () {
     return {
       videoUrl: this.$dataAll.videoUrl,
-      videoNames: [{
-        name: '注册大厅',
-        address: '河北省石家庄新华区'
-      }, {
-        name: '注册大厅',
-        address: '河北省石家庄新华区'
-      }, {
-        name: '注册大厅',
-        address: '河北省石家庄新华区'
-      }, {
-        name: '注册大厅',
-        address: '河北省石家庄新华区'
-      }, {
-        name: '注册大厅',
-        address: '河北省石家庄新华区'
-      }, {
-        name: '注册大厅',
-        address: '河北省石家庄新华区'
-      }
-      ]
+      videoNames: []
+      // videoNames: [{
+      //   name: '注册大厅',
+      //   address: '河北省石家庄新华区'
+      // }, {
+      //   name: '注册大厅',
+      //   address: '河北省石家庄新华区'
+      // }, {
+      //   name: '注册大厅',
+      //   address: '河北省石家庄新华区'
+      // }, {
+      //   name: '注册大厅',
+      //   address: '河北省石家庄新华区'
+      // }, {
+      //   name: '注册大厅',
+      //   address: '河北省石家庄新华区'
+      // }, {
+      //   name: '注册大厅',
+      //   address: '河北省石家庄新华区'
+      // }
+      // ]
     }
+  },
+  mounted () {
+    HuaYeVideo.getList('name', 'password')
   }
 }
 </script>
@@ -47,6 +53,7 @@ export default {
 <style scoped lang="less">
 .MonitorCenter {
     padding-top: 60px;
+
     .video-container {
         padding: 10px;
 
