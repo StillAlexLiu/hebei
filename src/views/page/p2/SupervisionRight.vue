@@ -8,9 +8,7 @@
             <img src="./compontes/img/河北监管系统.png" alt="" class="img_width">
         </div>
         <Page4R v-if="selectName ==='特种设备监管'" class="full"/>
-        <div v-if="selectName==='产品质量监管'">
-            开发中
-        </div>
+        <Page3R v-if="selectName==='产品质量监管'" class="full"/>
     </div>
 </template>
 
@@ -18,10 +16,12 @@
 import { mapState } from 'vuex'
 import Page2R from './pages/page2R'
 import Page4R from './pages/Page4R'
+import Page3R from './pages/Page3R'
 
 export default {
   name: 'SupervisionRight',
   components: {
+    Page3R,
     Page4R,
     Page2R
   },
