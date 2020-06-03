@@ -18,11 +18,7 @@
     "echarts": "^4.7.0",
     "echarts-liquidfill": "^2.0.5",
     "echarts-wordcloud": "^1.1.3",
-<<<<<<< HEAD
     "js-md5": "^0.7.3",
-=======
-    "md5": "^2.2.1",
->>>>>>> a54855416ebcfdecaa38e4f2f8cce991923f20ad
     "mockjs": "^1.1.0",
     "moment": "^2.24.0",
     "mux.js": "^5.5.3",
