@@ -14,7 +14,7 @@ const data = {
   config, // 页面配置数据，静态数据
   common, // 大屏通用接口
   videoUrl,
-  p1,
+  // p1,
   // 获取值班人员信息
   getDutyInfo: () => {
     // 模拟数据,如果接口写完传true，否则传false

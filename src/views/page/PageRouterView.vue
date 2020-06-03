@@ -89,7 +89,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-@height: 20px;
+@height: 10px;
 @padding: 10px;
 @titleWidth: 100px;
 .PageRouterView {
@@ -103,7 +103,7 @@ export default {
     }
 
     .view {
-        height: calc(-@height + ~"100%");
+        height: calc(@height + ~"100%");
         box-sizing: border-box;
         padding: 0
     }

@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import videoHY from './js/huaye'
 export default {
   name: 'MonitorCenter',
   data () {
@@ -40,6 +41,11 @@ export default {
       }
       ]
     }
+  },
+  mounted () {
+    videoHY.getList('zlxjyxfz','hyjk123').then(res =>{
+      console.log(res, 'll22')
+    })
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div id="pnglist">
-        <div v-for="(item, index) in data" :key="index" class="item">
+          <div v-for="(item, index) in data.dataList" :key="index" class="item">
             <div class="img border-bottom h-2-5">
                 <img :src="item.imgurl" alt="">
             </div>
@@ -30,22 +30,20 @@ export default {
 #pnglist {
     width: 100%;
     height: 100%;
+    // align-items: stretch;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    align-items: stretch;
-    padding: 30px 0;
     text-align: center;
-
     .item {
         flex: 1;
+        float: left;
         padding: 0 10px;
     }
 
     .border-bottom {
         border-bottom: 1px solid #F45E41;
     }
-
     img {
         width: 84px;
         height: 84px;

@@ -1,259 +1,421 @@
 <template>
-    <!--    <container-calc type="tb" :number="50" class="AnalysisLeft full  block-padding">-->
-    <!--        <template slot="fix">-->
-    <!--            <RadioSimple :data="[{name:'市场准入'}]" class="w-1-4 full-height radio"/>-->
-    <!--        </template>-->
-    <!--        <div slot="calc" class="border full">-->
-    <div class="AnalysisLeft full page-style">
-        <div class="h-2-8">
-            <container class="full-height w-1-2" title="一网通办办理事项">
-                <pnglist :data='chart1'></pnglist>
+    <div class="full">
+          <div class="full-width h-1-3">
+            <container class="full-height full-width" title="监管基础">
+              <ContainerSmallTitle title="人员情况" class="full-height w-1-2">
+                <OtherBox :data='peopleCase'>
+                  <ChartsPie :data='hellowPie1' :show-all="true" slot="echarts"/>
+                </OtherBox>
+              </ContainerSmallTitle>
+               <ContainerSmallTitle title="主体情况" class="full-height w-1-2">
+                <OtherBox :data='mainCase'>
+                  <ChartsPie :data='hellowPie2' :show-all="true" slot="echarts"/>
+                </OtherBox>
+              </ContainerSmallTitle>
             </container>
-            <container class="full-height w-1-2" title="证照分离改革情况">
-                <pnglist :data='chart2'></pnglist>
-            </container>
-        </div>
-        <container class="h-3-8" title="监管基础">
-            <div class="w-1-6 full-height">
-                <charaterlist :data='charaterlist2'/>
-            </div>
-            <div class="w-2-6 full-height">
-                <ChartsPie :data='hellowPie2' :is-pie="true" :show-value="true"/>
-            </div>
-            <div class="w-1-6 full-height">
-                <charaterlist :data='charaterlist1'/>
-            </div>
-            <div class="w-2-6 full-height">
-                <ChartsPie :data='hellowPie' :show-all="true"/>
-            </div>
-        </container>
-        <div class="h-3-8">
-            <container class="full-height " title="质量强省">
-                <div class="w-5-10 full-height">
-                    <number-group :data="numberGroup"/>
-                </div>
-                <div class="w-1-10 full-height">
-                    <NumberGroup2 :data="pieData"/>
-                </div>
-                <div class="w-4-10 full-height">
+          </div>
+          <div class="full-width h-1-3">
+            <container class="full-height full-width" title="认证认可基础">
+              <ContainerSmallTitle title="认证证书情况" class="full-height w-1-2">
+                <OtherBox :data='certCase'>
                     <ChartsBarLine :data="data3" :type="['line']" :dimensions="['name','value']"
-                                   :units="['单位:项']"
-                                   :legend="['企业公开标准项数量']"/>
-                </div>
+                                   :units="['证书数量:张']"
+                                   :legend="['证书数']"  slot="echarts"/>
+                </OtherBox>
+              </ContainerSmallTitle>
+               <ContainerSmallTitle title="检测机构情况" class="full-height w-1-2">
+                <OtherBox :data='dateCase'>
+                  <ChartsPie :data='hellowPie4' :show-all="true" slot="echarts"/>
+                </OtherBox>
+              </ContainerSmallTitle>
             </container>
-        </div>
+          </div>
+          <div class="full-width h-1-3">
+            <container class="full-height w-1-2" title="计量基础">
+              <titleList :data='measureData1'></titleList>
+            </container>
+            <container class="full-height w-1-2" title="产权基础">
+              <titleList :data='measureData2'></titleList>
+            </container>
+          </div>
+            <!-- <container-calc type="tb" :number="53" class="AnalysisCenter full  page-style">
+            <template slot="fix">
+                <RadioSimple :data="[{name:'综合监管'}]" class="w-1-8 full-height radio"/>
+            </template>
+            <div slot="calc" class=" full">
+                <div class="h-1-7">
+                    <div class="full-height full-width">
+                        <numberList :data='numlist1' @key='endKey'/>
+                    </div>
+                </div>
+                <div class="h-3-7 bg-style">
+                    <div class="full-height w-1-3">
+                        <echartsAccrossBar :data='acrossBar1[key]'/>
+                    </div>
+                    <div class="full-height w-1-3">
+                        <echartsAccrossBar :data='acrossBar2[key]'/>
+                    </div>
+                    <div class="full-height w-1-3">
+                        <echartsAccrossBar :data='acrossBar3[key]'/>
+                    </div>
+                </div>
+                <div class="h-3-7 bg-style">
+                    <ContainerSmallTitle title="双随机监管次数趋势分析" class="full-height w-1-3">
+                        <ChartsBarLine :data='rightLine' :dimensions="['name','value']" :legend="['监管户次']"
+                                       :type="['line']" :colors="['#FE6941']" :units="['户']" is-area/>
+                    </ContainerSmallTitle>
+                    <ContainerSmallTitle title="双随机各市抽查情况" class="full-height w-1-3">
+                        <ChartsBarLine :data='rightLine2' :dimensions="['name','value']" :legend="['平均抽检率']"
+                                       :type="['bar']" :colors="[barColor]" :units="['户']" :border-radius="false"
+                                       :bar-width="43"/>
+                    </ContainerSmallTitle>
+                    <ContainerSmallTitle title="双随机监管发现问题类型占比" class="full-height w-1-3">
+                        <ChartsPie :data='hellowPie2' :title="'问题类型\n占比'"/>
+                    </ContainerSmallTitle>
+                </div>
+            </div>
+        </container-calc> -->
     </div>
-    <!--    </container-calc>-->
+
 </template>
 
 <script>
-import pnglist from './components/pnglist'
-import charaterlist from './components/charaterlist'
-import Mock from 'mockjs'
-import NumberGroup from './components/numberGroup'
-import NumberGroup2 from './components/NumberGroup2'
+// import numberList from './components/numberList'
+// import echartsAccrossBar from './components/echarts-accrossBar'
+import OtherBox from './components/otherBox'
 import ChartsBarLine from '../../../components/echarts/ChartsBarLine'
+import titleList from './components/titleList'
+import Mock from 'mockjs'
+// import echarts from 'echarts'
 
 export default {
-  name: 'AnalysisLeft',
+  name: 'AnalysisCenter',
   components: {
+    OtherBox,
     ChartsBarLine,
-    NumberGroup2,
-    NumberGroup,
-    pnglist,
-    charaterlist
+    titleList
+    // numberList,
+    // echartsAccrossBar
   },
   data () {
     return {
-      chart1: [
+      peopleCase: [
         {
-          imgurl: require('./components/img/1.png'),
-          name: '入网办理事项',
-          num: '25',
-          dw: '件',
-          gl: '5'
-        }, {
-          imgurl: require('./components/img/2.png'),
-          name: '网上收件数',
-          num: '10226',
-          dw: '件',
-          gl: '15'
-        }, {
-          imgurl: require('./components/img/3.png'),
-          name: '平均办结时间',
-          num: '1.5',
-          dw: '天',
-          gl: '25'
-        }, {
-          imgurl: require('./components/img/4.png'),
-          name: '一次办结率',
-          num: '100',
-          dw: '%',
-          gl: '35'
+          name: '总人数',
+          value: 1423,
+          unit: '人'
+        },
+        {
+          name: '新增',
+          value: 75,
+          unit: '人'
         }
       ],
-      chart2: [
+      hellowPie1: [
         {
-          imgurl: require('./components/img/5.png'),
-          name: '双告知数',
-          num: '1246',
-          dw: '件',
-          gl: '0'
-        }, {
-          imgurl: require('./components/img/6.png'),
-          name: '全程电子化数',
-          num: '3',
-          dw: '件',
-          gl: '15'
-        }, {
-          imgurl: require('./components/img/7.png'),
-          name: '食品许可告知承诺',
-          num: '2560',
-          dw: '件',
-          gl: '5'
-        }, {
-          imgurl: require('./components/img/8.png'),
-          name: '简易注销数',
-          num: '106',
-          dw: '户',
-          gl: '1'
-        }
-      ],
-      charaterlist1: {
-        name: '检测机构情况',
-        data: [
-          {
-            name: '总户数',
-            num: 97
-          }, {
-            name: '新增主体',
-            num: 3
-          }
-        ]
-      },
-      hellowPie: [
-        {
-          value: Mock.Random.natural(10, 70),
-          name: '计量标准'
-        },
-        {
-          value: Mock.Random.natural(10, 70),
-          name: '医疗器械'
-        },
-        {
-          value: Mock.Random.natural(10, 70),
-          name: '药品'
-        },
-        {
-          value: Mock.Random.natural(10, 70),
-          name: '食品'
-        },
-        {
-          value: Mock.Random.natural(10, 70),
-          name: '产品质量'
-        },
-        {
-          value: Mock.Random.natural(10, 70),
-          name: '特种设备'
-        }
-      ],
-      numberGroup: [
-        {
-          name: '产品品牌',
-          value: Mock.Random.natural(10, 70),
-          img: require('./components/img/icon／mhzhjg_icon_jgquanjing_quanjuguanjian_banjielv@2x.png')
-        },
-        {
-          name: '企业品牌',
-          value: Mock.Random.natural(10, 70),
-          img: require('./components/img/icon／mhzhjg_icon_jgquanjing_quanjuguanjian_banjielv@2x(1).png')
-        },
-        {
-          name: '区域品牌',
-          value: Mock.Random.natural(10, 70),
-          img: require('./components/img/icon／mhzhjg_icon_jgquanjing_quanjuguanjian_banjielv@2x(2).png')
-        }
-      ],
-      pieData: [{
-        name: '省地方标准',
-        value: 2763
-      }, {
-        name: '京津冀协同\n地方标准',
-        value: 54
-      }, {
-        name: '自我声明\n公开企业',
-        value: 14168
-      }],
-      data3: [{
-        name: '2019.6',
-        value: Mock.Random.natural(10, 70)
-      }, {
-        name: '2019.7',
-        value: Mock.Random.natural(10, 70)
-      }, {
-        name: '2019.8',
-        value: Mock.Random.natural(10, 70)
-      }, {
-        name: '2019.9',
-        value: Mock.Random.natural(10, 70)
-      }, {
-        name: '2019.10',
-        value: Mock.Random.natural(10, 70)
-      }, {
-        name: '2019.11',
-        value: Mock.Random.natural(10, 70)
-      }],
-      charaterlist2: {
-        name: '数量',
-        data: [
-          {
-            name: '总人数',
-            num: '7217人'
-          }, {
-            name: '新增',
-            num: '716人'
-          }
-        ]
-      },
-      hellowPie2: [
-        {
-          value: '1115',
+          value: '200',
           name: '执法人员'
         }, {
-          value: '1250',
-          name: '审查人员'
+          value: '120',
+          name: '检查人员'
         }, {
-          value: '1893',
+          value: '680',
           name: '雇员'
         }
       ],
-      dobulePie: [
+      mainCase: [
         {
-          color: '#AD5F53',
-          name: '注册数（户）',
-          num: 982
-        }, {
-          color: '#278499',
-          name: '注册资本（亿元）',
-          num: 1.2
+          name: '总户数',
+          value: 168767,
+          unit: ''
+        },
+        {
+          name: '新增',
+          value: 19767,
+          unit: ''
         }
       ],
-      lines: {
-        name: '本省',
-        name1: '外省',
-        name2: '外省2',
-        line1Name: '迁入',
-        line1Num: 1181,
-        line2Name: '迁出',
-        line2Num: 741
+      hellowPie2: [
+        {
+          value: '48344',
+          name: '私营企业'
+        }, {
+          value: '9360',
+          name: '外资企业'
+        }, {
+          value: '5504',
+          name: '公有制企业'
+        }, {
+          value: '50464',
+          name: '个体工商户'
+        }, {
+          value: '231',
+          name: '农村合作社'
+        }
+      ],
+      dateCase: [
+        {
+          name: '总户数',
+          value: 1423,
+          unit: '户'
+        },
+        {
+          name: '新增',
+          value: 75,
+          unit: '户'
+        }
+      ],
+      hellowPie4: [
+        {
+          value: '1800',
+          name: '特种设备'
+        }, {
+          value: '2500',
+          name: '食品'
+        }, {
+          value: '1100',
+          name: '私营企业'
+        }, {
+          value: '1100',
+          name: '计量标准'
+        }, {
+          value: '1100',
+          name: '医疗器械'
+        }, {
+          value: '1100',
+          name: '药品'
+        }
+      ],
+      certCase: [
+        {
+          name: '有效证书',
+          value: 83222,
+          unit: '张'
+        },
+        {
+          name: '涉及组织',
+          value: 28272,
+          unit: '张'
+        }
+      ],
+      data3: [
+        {
+          name: '1月',
+          value: Mock.Random.natural(10, 70)
+        }, {
+          name: '2月',
+          value: Mock.Random.natural(10, 70)
+        }, {
+          name: '3月',
+          value: Mock.Random.natural(10, 70)
+        }, {
+          name: '4月',
+          value: Mock.Random.natural(10, 70)
+        }, {
+          name: '5月',
+          value: Mock.Random.natural(10, 70)
+        }, {
+          name: '6月',
+          value: Mock.Random.natural(10, 70)
+        }
+      ],
+      measureData1: {
+        topData: [
+          {
+            name: '全省强检计量器具',
+            value: '315807',
+            unit: '台/件'
+          }, {
+            name: '省外溯源计量器具',
+            value: '68',
+            unit: '台/件'
+          }
+        ],
+        imgData: [
+          {
+            imgUrl: require('./components/img/she.png'),
+            title: '全省社会公用计量标准考核',
+            num: 110,
+            unit: '项'
+          }, {
+            imgUrl: require('./components/img/biao.png'),
+            title: '发布实施地方计量标准',
+            num: 4,
+            unit: '项'
+          }, {
+            imgUrl: require('./components/img/kao.png'),
+            title: '省级法定计量检定考核机构',
+            num: 40,
+            unit: '家'
+          }
+        ]
+      },
+      measureData2: {
+        topData: [
+          {
+            name: '动产抵押',
+            value: '1121',
+            unit: '份'
+          }, {
+            name: '股权出质',
+            value: '171.48',
+            unit: '亿份'
+          }
+        ],
+        imgData: [
+          {
+            imgUrl: require('./components/img/shang.png'),
+            title: '注册商标',
+            num: 717133,
+            unit: ''
+          }, {
+            imgUrl: require('./components/img/zhuan.png'),
+            title: '万人发明专利拥有量',
+            num: 3.9,
+            unit: ''
+          }, {
+            imgUrl: require('./components/img/di.png'),
+            title: '地理标志产品',
+            num: 70,
+            unit: ''
+          }
+        ]
       }
+      // key: 0,
+      // barColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
+      //   {
+      //     offset: 0,
+      //     color: 'rgba(79, 255, 148, 0.68)'
+      //   },
+      //   {
+      //     offset: 1,
+      //     color: 'rgba(79, 255, 245, 0.4)'
+      //   }
+      // ]),
+      // numlist1: [{
+      //   name: '日常监管',
+      //   num: '1311',
+      //   dw: '户次',
+      //   key: 0
+      // }, {
+      //   name: '监督抽检',
+      //   num: '1528',
+      //   dw: '户次',
+      //   key: 1
+      // }, {
+      //   name: '智慧监管',
+      //   num: '4893',
+      //   dw: '户次',
+      //   key: 2
+      // }],
+      // acrossBar1: [{
+      //   ydata: ['双随机发现问题数', '双随机平均抽查率', '双随机户次'],
+      //   xdata: [Mock.Random.natural(70, 1000), Mock.Random.natural(70, 100), Mock.Random.natural(70, 1000)],
+      //   name: '双随机'
+      // }, {
+      //   ydata: ['食品户次', '食品平均抽查率', '食品发现问题数'],
+      //   xdata: [Mock.Random.natural(70, 100), Mock.Random.natural(70, 100), Mock.Random.natural(70, 100)],
+      //   name: '食品'
+      // }, {
+      //   ydata: ['物联网感知户次', '物联网感知平均抽查率', '物联网感知发现问题数'],
+      //   xdata: [Mock.Random.natural(70, 100), Mock.Random.natural(70, 1000), Mock.Random.natural(70, 100)],
+      //   name: '物联网感知'
+      // }],
+      // acrossBar2: [{
+      //   ydata: ['专项户次', '专项平均抽查率', '专项发现问题数'],
+      //   xdata: [Mock.Random.natural(70, 100), Mock.Random.natural(70, 100), Mock.Random.natural(70, 100)],
+      //   name: '专项'
+      // }, {
+      //   ydata: ['药械户次', '药械合格率', '药械不合格件数'],
+      //   xdata: [Mock.Random.natural(70, 1000), Mock.Random.natural(70, 100), Mock.Random.natural(70, 100)],
+      //   name: '药械'
+      // }, {
+      //   ydata: ['智能识别户次', '智能识别合格率', '智能识别不合格件数'],
+      //   xdata: [Mock.Random.natural(70, 100), Mock.Random.natural(70, 100), Mock.Random.natural(70, 1000)],
+      //   name: '智能识别'
+      // }],
+      // acrossBar3: [{
+      //   ydata: ['全覆盖户次', '全覆盖平均抽查率', '全覆盖发现问题数'],
+      //   xdata: [Mock.Random.natural(70, 100), Mock.Random.natural(70, 100), Mock.Random.natural(70, 100)],
+      //   name: '全覆盖'
+      // }, {
+      //   ydata: ['产品质量户次', '产品质量合格率', '产品质量不合格件数'],
+      //   xdata: [Mock.Random.natural(70, 1000), Mock.Random.natural(70, 100), Mock.Random.natural(70, 100)],
+      //   name: '产品质量'
+      // }, {
+      //   ydata: ['数据分析户次', '数据分析合格率', '数据分析不合格件数'],
+      //   xdata: [Mock.Random.natural(70, 1000), Mock.Random.natural(70, 100), Mock.Random.natural(70, 100)],
+      //   name: '数据分析'
+      // }],
+      // rightLine: [{
+      //   name: '2015年',
+      //   value: Mock.Random.natural(70, 1000)
+      // }, {
+      //   name: '2016年',
+      //   value: Mock.Random.natural(70, 1000)
+      // }, {
+      //   name: '2017年',
+      //   value: Mock.Random.natural(70, 1000)
+      // }, {
+      //   name: '2018年',
+      //   value: Mock.Random.natural(70, 1000)
+      // }, {
+      //   name: '2019年',
+      //   value: Mock.Random.natural(70, 1000)
+      // }, {
+      //   name: '2020年',
+      //   value: Mock.Random.natural(70, 1000)
+      // }],
+      // rightLine2: [{ name: '石家庄', value: '1922' },
+      //   { name: '唐山', value: '1217' },
+      //   { name: '秦皇岛', value: '571' },
+      //   { name: '邯郸', value: '814' },
+      //   { name: '邢台', value: '601' },
+      //   { name: '保定', value: '1121' },
+      //   { name: '张家口', value: '601' },
+      //   { name: '承德', value: '462' },
+      //   { name: '沧州', value: '935' },
+      //   { name: '廊坊', value: '1088' },
+      //   { name: '衡水', value: '430' },
+      //   { name: '雄安新区', value: '96' }],
+      // hellowPie2: [
+      //   {
+      //     value: Mock.Random.natural(70, 1000),
+      //     name: '公式信息检查占比'
+      //   }, {
+      //     value: Mock.Random.natural(70, 1000),
+      //     name: '流通领域商品质量占比'
+      //   }, {
+      //     value: Mock.Random.natural(70, 1000),
+      //     name: '等级事项检查占比'
+      //   }, {
+      //     value: Mock.Random.natural(70, 1000),
+      //     name: '其他占比'
+      //   }, {
+      //     value: Mock.Random.natural(70, 1000),
+      //     name: '广告内容检查占比'
+      //   }, {
+      //     value: Mock.Random.natural(70, 1000),
+      //     name: '平台责任检查占比'
+      //   }
+      // ]
+    }
+  },
+  methods: {
+    endKey (data) {
+      this.key = data
     }
   }
 }
 </script>
 
 <style scoped lang="less">
-.AnalysisLeft {
-
+.AnalysisCenter {
+    .bg-style {
+        background: linear-gradient(360deg, rgba(15, 29, 98, 0.02) 0%, rgba(74, 75, 124, 0.4) 100%) no-repeat;
+        background-size: 100% 183px;
+        border-top: 1px solid #4199FE;
+        padding-top: 30px;
+    }
 }
 </style>
