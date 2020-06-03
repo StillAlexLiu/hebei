@@ -86,8 +86,6 @@ export default {
       const scaleX = bWidth / this.width
       const scaleY = bHeight / this.height
       this.$set(this.style, 'transform', 'scale(' + scaleX + ',' + scaleY + ')')
-      // this.$set(this.style, 'margin-top', -this.height * (1 - scaleY) / 2 + 'px')
-      // this.$set(this.style, 'margin-left', -this.width * (1 - scaleX) / 2 + 'px')
       this.$set(this.style, 'transform-origin', 'left top')
       this.$set(this.style, 'overflow', 'hidden')
       this.$set(this.style2, 'overflow', 'hidden')
