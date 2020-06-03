@@ -14,38 +14,48 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import videoHY from './js/huaye'
+=======
+import HuaYeVideo from './components/js/HuaYeVideo'
+
+>>>>>>> a54855416ebcfdecaa38e4f2f8cce991923f20ad
 export default {
   name: 'MonitorCenter',
   data () {
     return {
       videoUrl: this.$dataAll.videoUrl,
-      videoNames: [{
-        name: '注册大厅',
-        address: '河北省石家庄新华区'
-      }, {
-        name: '注册大厅',
-        address: '河北省石家庄新华区'
-      }, {
-        name: '注册大厅',
-        address: '河北省石家庄新华区'
-      }, {
-        name: '注册大厅',
-        address: '河北省石家庄新华区'
-      }, {
-        name: '注册大厅',
-        address: '河北省石家庄新华区'
-      }, {
-        name: '注册大厅',
-        address: '河北省石家庄新华区'
-      }
-      ]
+      videoNames: []
+      // videoNames: [{
+      //   name: '注册大厅',
+      //   address: '河北省石家庄新华区'
+      // }, {
+      //   name: '注册大厅',
+      //   address: '河北省石家庄新华区'
+      // }, {
+      //   name: '注册大厅',
+      //   address: '河北省石家庄新华区'
+      // }, {
+      //   name: '注册大厅',
+      //   address: '河北省石家庄新华区'
+      // }, {
+      //   name: '注册大厅',
+      //   address: '河北省石家庄新华区'
+      // }, {
+      //   name: '注册大厅',
+      //   address: '河北省石家庄新华区'
+      // }
+      // ]
     }
   },
   mounted () {
+<<<<<<< HEAD
     videoHY.getList('zlxjyxfz','hyjk123').then(res =>{
       console.log(res, 'll22')
     })
+=======
+    HuaYeVideo.getList('name', 'password')
+>>>>>>> a54855416ebcfdecaa38e4f2f8cce991923f20ad
   }
 }
 </script>
@@ -53,6 +63,7 @@ export default {
 <style scoped lang="less">
 .MonitorCenter {
     padding-top: 60px;
+
     .video-container {
         padding: 10px;
 
