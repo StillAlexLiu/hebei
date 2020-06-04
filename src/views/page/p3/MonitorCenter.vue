@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import videoHY from './js/huaye'
 import HuaYeVideo from './components/js/HuaYeVideo'
 
 export default {
@@ -22,45 +21,45 @@ export default {
   data () {
     return {
       videoUrl: [],
-    //   videoNames: []
+      //   videoNames: []
       videoNames: [
         {
-            name: '厨房',
-            address: '涿鹿县诚信小饭桌'
+          name: '厨房',
+          address: '涿鹿县诚信小饭桌'
         }, {
-            name: '厨房',
-            address: '涿鹿县诚信小饭桌'
-        },{
-            name: '厨房',
-            address: '涿鹿县诚信小饭桌'
-        },{
-            name: '厨房',
-            address: '涿鹿县诚信小饭桌'
-        },{
-            name: '厨房',
-            address: '涿鹿县诚信小饭桌'
-        },{
-            name: '厨房',
-            address: '涿鹿县诚信小饭桌'
+          name: '厨房',
+          address: '涿鹿县诚信小饭桌'
+        }, {
+          name: '厨房',
+          address: '涿鹿县诚信小饭桌'
+        }, {
+          name: '厨房',
+          address: '涿鹿县诚信小饭桌'
+        }, {
+          name: '厨房',
+          address: '涿鹿县诚信小饭桌'
+        }, {
+          name: '厨房',
+          address: '涿鹿县诚信小饭桌'
         }
       ]
     }
   },
   mounted () {
     HuaYeVideo.getList('zlxgyxfz', 'hyjk123').then(res => {
-        const data = res.data.devlist
-        for (let i = 0 ; i < data.length; i++){
-            HuaYeVideo.checkRequest('zlxgyxfz', 'hyjk123', data[i].sn, data[i].hlsurl).then(flow => {
+      const data = res.data.devlist
+      for ( let i = 0 ; i < data.length; i++ ) {
+          HuaYeVideo.checkRequest('zlxgyxfz', 'hyjk123', data[i].sn, data[i].hlsurl).then(flow => {
                 // this.videoNames.push({
                 //     name: data[i].name,
                 //     address: '涿鹿县诚信小饭桌'
                 // })
-                this.videoUrl.push({
-                    name: data[i].name,
-                    url: flow.data.hlsurl
-                })
-            })
-        }
+              this.videoUrl.push({
+                name: data[i].name,
+                url: flow.data.hlsurl
+              })
+          })
+       }
     })
   }
 }

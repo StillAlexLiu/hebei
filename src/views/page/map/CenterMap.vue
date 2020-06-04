@@ -258,7 +258,13 @@ export default {
       }
     },
     pointClickDispatch (item) {
-      console.log(item)
+      // console.log(item)
+      if(!item.points){
+        eventBus$on('getTarget', item => {  
+          console.log(item, 'lll');  
+        });  
+        // eventBus.$emit('eventPointName', item)
+      }
       switch (this.$route.name) {
         case '主体服务':
           this.p1Select()
