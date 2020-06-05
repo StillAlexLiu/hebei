@@ -49,7 +49,7 @@
         </div>
         <div class="dia" v-if="diaShow">
             <Table2 :data="data" :column="column"/>
-            <div class="close" @click="close">关闭</div>
+            <div class="close" @click="close">×</div>
         </div>
     </div>
 </template>
@@ -357,8 +357,8 @@ export default {
     .close {
         font-size: 30px;
         position: absolute;
-        right: 0;
-        top: 0;
+        right: 20px;
+        top: -10px;
         padding: 10px;
         font-weight: bold;
     }

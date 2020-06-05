@@ -42,7 +42,9 @@
               <number-group3 :data="numberGroup"/>
             </container-center-title2>
             <container-center-title2 title="全省消费者满意度报告"  class="full-height w-2-3" >
-              <div class="full-height w-1-3"></div>
+              <div class="full-height w-1-3">
+                <onlyOneBox :data='expenseGoal'></onlyOneBox>
+              </div>
               <div class="full-height w-2-3">
                   <ChartsBarLine :data="barData4" :dimensions="['name','value']" :units="['分数']"
                                :type="['bar']"
@@ -76,18 +78,20 @@
 import pnglist from './components/pnglist'
 import Mock from 'mockjs'
 import NumberGroup3 from './components/numberGroup3'
-import NumberGroup2 from './components/NumberGroup2'
+// import NumberGroup2 from './components/NumberGroup2'
 import ChartsBarLine from '../../../components/echarts/ChartsBarLine'
 import OtherBox from './components/otherBox'
+import onlyOneBox from './components/onlyOneBox'
 import echarts from 'echarts'
 export default {
   name: 'AnalysisLeft',
   components: {
     ChartsBarLine,
-    NumberGroup2,
+    // NumberGroup2,
     NumberGroup3,
     pnglist,
-    OtherBox
+    OtherBox,
+    onlyOneBox
   },
   data () {
     return {
@@ -275,11 +279,15 @@ export default {
         }, {
           name: '邯郸市',
           value: '74.98'
-        },  {
+        }, {
           name: '张家口市',
           value: '74.17'
         }
       ],
+      expenseGoal: {
+        name: '河北省主要城市消费者满意度指数平均得分',
+        num: '76.64'
+      },
       barColor2: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
         {
           offset: 0,

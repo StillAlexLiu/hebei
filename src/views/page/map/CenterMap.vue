@@ -262,7 +262,6 @@ export default {
       Bus.$emit("message") 
     },
     pointClickDispatch (item) {
-      // console.log(item)
       if(!item.points){
         Bus.$emit('message', item)
         // eventBus.$emit('eventPointName', item)

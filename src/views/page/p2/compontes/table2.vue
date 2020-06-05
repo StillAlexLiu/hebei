@@ -37,7 +37,8 @@ export default {
 
 <style lang="less" scoped>
 .table2 {
-    padding: 60px;
+    width: 100%;
+    height: 100%;
 
     .discharge_table {
         background: #242942;

@@ -50,17 +50,16 @@ export default {
   created () {
     Bus.$on('message', function (res) {
       console.log(res, this.videoIndex, 'rrr')
-      this.videoIndex + 1
-      if(this.videoIndex > 6) {
+      this.videoIndex++
+      if (this.videoIndex > 6) {
         this.videoIndex = 0
       }
-      console.log(this.videoIndex,'ll')
     })
   },
   mounted () {
     HuaYeVideo.getList('zlxgyxfz', 'hyjk123').then(res => {
       const data = res.data.devlist
-      for ( let i = 0 ; i < data.length; i++ ) {
+      for ( let i = 0; i < data.length; i++) {
           HuaYeVideo.checkRequest('zlxgyxfz', 'hyjk123', data[i].sn, data[i].hlsurl).then(flow => {
                 // this.videoNames.push({
                 //     name: data[i].name,

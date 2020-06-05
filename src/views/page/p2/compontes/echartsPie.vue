@@ -42,13 +42,13 @@ export default {
       } else {
         newName = data.num
       }
-      if(this.data.sum){
-          this.data.sum = this.data.sum + '件'
-      }
+      // if(this.data.sum){
+      //     this.data.sum = this.data.sum + '件'
+      // }
       return {
         title: {
           subtext: newName,
-          text: data.sum,
+          text: data.sum + '件',
           x: 'center',
           y: '37%',
           subtextStyle: {

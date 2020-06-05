@@ -1,5 +1,5 @@
 <template>
-    <container-info class="WarningMapInfo full-width" v-if="data.name">
+    <container-info class="WarningMapInfo full-width" v-if="item">
         <div class="title">{{data.name}}</div>
         <div class="full-width can">
             <div class="w-2-5 img">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="row">
                     <div class="name w-1-4">预警主体</div>
-                    <div class="value w-3-4">{{data.data.name}}</div>
+                    <div class="value w-3-4" v-if="data.data !== undefined">{{data.data.name}}</div>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@ export default {
   name: 'WarningMapInfo',
   data () {
     return {
-      item: null
+      item: false
     }
   },
   props: {
@@ -49,6 +49,9 @@ export default {
       deep: true,
       immediate: false,
       handler: function () {
+        if(this.data.name){
+          this.item = true
+        }
         // if (this.data && this.data.items && this.data.items.length > 0) {
         //   this.item = this.items[0]
         // }

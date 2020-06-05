@@ -162,37 +162,37 @@ export default [
       single: true,
       children: [
         {
-          name: '双随机检查',
+          name: '营业执照预警',
           icon: require('../assets/images/mapTabs/p0/t4/1.png'),
           active: false,
           number: 20
         },
         {
-          name: '专项检查',
+          name: '许可证预警',
           icon: require('../assets/images/mapTabs/p0/t4/2.png'),
           active: false,
           number: 0
         },
         {
-          name: '无证无照检查',
+          name: '电梯预警',
           icon: require('../assets/images/mapTabs/p0/t4/3.png'),
           active: false,
           number: 100
         },
         {
-          name: '异地经营检查',
+          name: '后厨识别预警',
           icon: require('../assets/images/mapTabs/p0/t4/4.png'),
           active: false,
           number: 200
         },
         {
-          name: '主体检查',
+          name: '冷链车辆预警',
           icon: require('../assets/images/mapTabs/p0/t4/5.png'),
           active: false,
           number: 200
         },
         {
-          name: '主体检查',
+          name: '疑似食物中毒',
           icon: require('../assets/images/mapTabs/p0/t4/6.png'),
           active: false,
           number: 200
