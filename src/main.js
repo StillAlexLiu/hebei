@@ -10,11 +10,13 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+
+
 import 'video.js/dist/video-js.css'
 library.add(fas)
 
 moment.locale('zh-cn')
-window.eventBus = new Vue()
+
 
 Vue.config.productionTip = false
 Vue.prototype.$moment = moment

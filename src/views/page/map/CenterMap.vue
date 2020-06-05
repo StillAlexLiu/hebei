@@ -36,6 +36,7 @@ import AuditMapInfo from '../p6/components/AuditMapInfo'
 import SupervisionMapInfo from '../p2/compontes/SupervisionMapInfo'
 import ComplaintMapInfo from '../p5/compontes/ComplaintMapInfo'
 import KeepOnRecordMapInfo from '../p10/components/KeepOnRecordMapInfo'
+import Bus from '@/assets/bus.js'
 
 export default {
   name: 'CenterMap',
@@ -257,12 +258,13 @@ export default {
           break
       }
     },
+    beforeDestroy () {
+      Bus.$emit("message") 
+    },
     pointClickDispatch (item) {
       // console.log(item)
       if(!item.points){
-        eventBus$on('getTarget', item => {  
-          console.log(item, 'lll');  
-        });  
+        Bus.$emit('message', item)
         // eventBus.$emit('eventPointName', item)
       }
       switch (this.$route.name) {

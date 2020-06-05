@@ -18,7 +18,7 @@
               <ChartsBarLine :data="barData3" :dimensions="['name','value']" :units="['抽查户次']"
                                :type="['bar']"
                                :border-radius="false"
-                               :bar-width="40"
+                               :bar-width="30"
                                :legend="['户次']"
                                :colors="[barColor2]"/>
             </container-center-title2>
@@ -37,21 +37,23 @@
               </OtherBox>
             </container-center-title2>
         </container>
-        <!-- <container class="h-2-8" title="监管基础">
-            <div class="w-1-6 full-height">
-                <charaterlist :data='charaterlist2'/>
-            </div>
-            <div class="w-2-6 full-height">
-                <ChartsPie :data='hellowPie2' :is-pie="true" :show-value="true"/>
-            </div>
-            <div class="w-1-6 full-height">
-                <charaterlist :data='charaterlist1'/>
-            </div>
-            <div class="w-2-6 full-height">
-                <ChartsPie :data='hellowPie' :show-all="true"/>
-            </div>
-        </container> -->
-        <div class="h-1-3">
+        <container class="h-1-3 full-width" title="消费环境">
+            <container-center-title2 title="投诉举报情况"  class="full-height w-1-3" >
+              <number-group3 :data="numberGroup"/>
+            </container-center-title2>
+            <container-center-title2 title="全省消费者满意度报告"  class="full-height w-2-3" >
+              <div class="full-height w-1-3"></div>
+              <div class="full-height w-2-3">
+                  <ChartsBarLine :data="barData4" :dimensions="['name','value']" :units="['分数']"
+                               :type="['bar']"
+                               :border-radius="false"
+                               :bar-width="40"
+                               :legend="['']"
+                               :colors="[barColor3]"/>
+              </div>
+            </container-center-title2>
+        </container>
+        <!-- <div class="h-1-3">
             <container class="full-height " title="质量强省">
                 <div class="w-5-10 full-height">
                     <number-group :data="numberGroup"/>
@@ -65,7 +67,7 @@
                                    :legend="['企业公开标准项数量']"/>
                 </div>
             </container>
-        </div>
+        </div> -->
     </div>
     <!--    </container-calc>-->
 </template>
@@ -73,7 +75,7 @@
 <script>
 import pnglist from './components/pnglist'
 import Mock from 'mockjs'
-import NumberGroup from './components/numberGroup'
+import NumberGroup3 from './components/numberGroup3'
 import NumberGroup2 from './components/NumberGroup2'
 import ChartsBarLine from '../../../components/echarts/ChartsBarLine'
 import OtherBox from './components/otherBox'
@@ -83,7 +85,7 @@ export default {
   components: {
     ChartsBarLine,
     NumberGroup2,
-    NumberGroup,
+    NumberGroup3,
     pnglist,
     OtherBox
   },
@@ -236,6 +238,48 @@ export default {
           value: '22'
         }
       ],
+      barData4: [
+        {
+          name: '唐山市',
+          value: '78.61'
+        }, {
+          name: '石家庄市',
+          value: '78.14'
+        }, {
+          name: '保定市',
+          value: '78.06'
+        }, {
+          name: '辛集市',
+          value: '78.06'
+        }, {
+          name: '定州市',
+          value: '78.03'
+        }, {
+          name: '秦皇岛市',
+          value: '78.03'
+        }, {
+          name: '廊坊市',
+          value: '76.35'
+        }, {
+          name: '承德市',
+          value: '76.35'
+        }, {
+          name: '沧州市',
+          value: '75.9'
+        }, {
+          name: '邢台市',
+          value: '75.52'
+        }, {
+          name: '衡水市',
+          value: '75.27'
+        }, {
+          name: '邯郸市',
+          value: '74.98'
+        },  {
+          name: '张家口市',
+          value: '74.17'
+        }
+      ],
       barColor2: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
         {
           offset: 0,
@@ -244,6 +288,16 @@ export default {
         {
           offset: 1,
           color: 'rgba(37, 67, 95, .3)'
+        }
+      ]),
+      barColor3: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
+        {
+          offset: 0,
+          color: 'rgba(79, 255, 148, 0.68)'
+        },
+        {
+          offset: 1,
+          color: 'rgba(79, 255, 245, 0.4)'
         }
       ]),
       data3: [
@@ -308,19 +362,22 @@ export default {
       ],
       numberGroup: [
         {
-          name: '产品品牌',
+          name: '投诉举报受理',
           value: Mock.Random.natural(10, 70),
-          img: require('./components/img/icon／mhzhjg_icon_jgquanjing_quanjuguanjian_banjielv@2x.png')
+          img: require('./components/img/su.png'),
+          unit: '万件'
         },
         {
-          name: '企业品牌',
+          name: '办结率',
           value: Mock.Random.natural(10, 70),
-          img: require('./components/img/icon／mhzhjg_icon_jgquanjing_quanjuguanjian_banjielv@2x(1).png')
+          img: require('./components/img/ban.png'),
+          unit: '%'
         },
         {
-          name: '区域品牌',
+          name: '挽回经济损失',
           value: Mock.Random.natural(10, 70),
-          img: require('./components/img/icon／mhzhjg_icon_jgquanjing_quanjuguanjian_banjielv@2x(2).png')
+          img: require('./components/img/sun.png'),
+          unit: '万元'
         }
       ],
       pieData: [{

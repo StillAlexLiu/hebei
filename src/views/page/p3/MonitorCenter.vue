@@ -15,6 +15,7 @@
 
 <script>
 import HuaYeVideo from './components/js/HuaYeVideo'
+import Bus from '@/assets/bus.js'
 
 export default {
   name: 'MonitorCenter',
@@ -42,8 +43,19 @@ export default {
           name: '厨房',
           address: '涿鹿县诚信小饭桌'
         }
-      ]
+      ],
+      videoIndex: 0
     }
+  },
+  created () {
+    Bus.$on('message', function (res) {
+      console.log(res, this.videoIndex, 'rrr')
+      this.videoIndex + 1
+      if(this.videoIndex > 6) {
+        this.videoIndex = 0
+      }
+      console.log(this.videoIndex,'ll')
+    })
   },
   mounted () {
     HuaYeVideo.getList('zlxgyxfz', 'hyjk123').then(res => {
