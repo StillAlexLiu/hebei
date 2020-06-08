@@ -29,21 +29,21 @@ export default {
     justify-content: space-around;
     flex-flow: nowrap;
     align-items: center;
-    padding: 20px;
 
     > .item {
         height: 100%;
-        margin: 0 10px;
+        // margin: 0 10px;
         flex: .3;
         background-image: url("./img/bg3.png");
         background-repeat: no-repeat;
         background-size: 100% 100%;
         background-position: center;
         text-align: center;
+        padding-top: 5%;
         // padding: 20px 0;
 
         img {
-            height: 100px;
+            height: 85%;
         }
 
         .name {

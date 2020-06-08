@@ -4,27 +4,21 @@
             <NumberGroup :data='numberData' class="full"/>
         </container>
         <div class="h-3-8">
-            <container class="full-height w-1-2" title="发现问题数量">
-                <ChartsPie class="full" :data="pieData" :show-value="true"/>
+            <container class="full-height w-1-2" title="接入类型分布">
+                <ChartsPie :data="pieData" :is-pie="true" :show-value="false" :showAll='false' />
             </container>
-            <container class="full-height w-1-2" title="各市监控覆盖情况">
-                <ChartsBarLine :data="barData" :dimensions="['name','value']" :type="['bar']" :legend="['监控数量']"
-                               :units="['台']"
-                               :colors="['#FF997D']"/>
+            <container class="full-height w-1-2" title="视频在线情况">
+                <div class="h-1-6 full-width">
+                </div>
+                <div class="h-2-3 full-width">
+                  <ChartsLiquidFill :data='liquidfill'/>
+                </div>
             </container>
         </div>
         <div class="h-3-8">
-            <container class="full-height w-1-2" title="问题解决情况">
-                <ChartsBarLine :data="barLineData" :dimensions="['name','value1','value2','value3']"
-                               :legend="['总量','已解决','解决率']"
-                               :type="['bar','bar','line']"
-                               :dataIndex="[0,0,1]"
-                />
-            </container>
-            <container class="full-height w-1-2" title="各市问题解决情况">
-                <ChartsBarLineHorizontal :data="barData" :type="['bar']" :legend="['']"
-                                         :colors="['#2EE1A2']"
-                                         :dimensions="['name','value']"/>
+            <container class="full-height full-width" title="接入地区分布">
+              <ChartsBarSimple :data="chart3" :dimensions="['name','value']" unit="单位：户" :barWidth='50' :barRadios='[0, 0, 0, 0]'
+                :colors="['#E8AA4A','#4FD0F1','#4A90E2','#29C6FF','#91D243','#50E3C2','#82A1FD','#FFD37C','#FF9841','#FF5C2E','#FF92A2', '#FF997D', '#00B1C8']"/>
             </container>
         </div>
     </div>
@@ -47,32 +41,20 @@ export default {
           name1: '接入总量',
           num1: Mock.Random.natural(100, 2000)
         }, {
-          imgUrl: require('./components/img/2.png'),
-          name1: '学校食堂',
+          imgUrl: require('./components/img/9.png'),
+          name1: '餐饮',
           num1: Mock.Random.natural(100, 2000)
         }, {
-          imgUrl: require('./components/img/3.png'),
-          name1: '中央厨房',
+          imgUrl: require('./components/img/jiu@2x.png'),
+          name1: '酒店',
           num1: Mock.Random.natural(100, 2000)
         }, {
-          imgUrl: require('./components/img/4.png'),
-          name1: '老年助餐点',
+          imgUrl: require('./components/img/youer@2x.png'),
+          name1: '幼儿园',
           num1: Mock.Random.natural(100, 2000)
         }, {
           imgUrl: require('./components/img/5.png'),
           name1: '煤检卡口',
-          num1: Mock.Random.natural(100, 2000)
-        }, {
-          imgUrl: require('./components/img/6.png'),
-          name1: '桶（盒）饭 生产企业',
-          num1: Mock.Random.natural(100, 2000)
-        }, {
-          imgUrl: require('./components/img/7.png'),
-          name1: '中型以上 餐饮企业',
-          num1: Mock.Random.natural(100, 2000)
-        }, {
-          imgUrl: require('./components/img/8.png'),
-          name1: '药店',
           num1: Mock.Random.natural(100, 2000)
         }
       ],
@@ -93,18 +75,65 @@ export default {
       barLineData: [],
       pieData: [
         {
-          name: '陌生人进入',
-          value: Mock.Random.natural(1600, 1800)
+          name: '煤检卡口',
+          value: Mock.Random.natural(160, 180)
         },
         {
-          name: '发现动物',
-          value: Mock.Random.natural(1600, 1800)
+          name: '餐饮',
+          value: Mock.Random.natural(160, 180)
         },
         {
-          name: '行为不规范',
-          value: Mock.Random.natural(1600, 1800)
+          name: '酒店',
+          value: Mock.Random.natural(160, 180)
+        },
+        {
+          name: '幼儿园',
+          value: Mock.Random.natural(160, 180)
         }
-      ]
+      ],
+      chart3: [
+        {
+          name: '唐山市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '石家庄市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '保定市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '辛集市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '定州市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '秦皇岛市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '廊坊市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '承德市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '沧州市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '邢台市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '衡水市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '邯郸市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '张家口市',
+          value: Mock.Random.natural(1, 20)
+        }
+      ],
+      liquidfill: ['维持', 70.13]
     }
   },
   mounted () {
@@ -126,9 +155,9 @@ export default {
       for (let i = 0; i < 12; i++) {
         this.barLineData.push({
           name: '2019-' + (i + 1),
-          value1: Mock.Random.natural(100, 2000),
-          value2: Mock.Random.natural(100, 2000),
-          value3: Mock.Random.natural(70, 100)
+          value1: Mock.Random.natural(100, 2000)
+          // value2: Mock.Random.natural(100, 2000),
+          // value3: Mock.Random.natural(70, 100)
         })
       }
     }

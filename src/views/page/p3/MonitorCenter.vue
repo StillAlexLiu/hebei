@@ -59,18 +59,15 @@ export default {
   mounted () {
     HuaYeVideo.getList('zlxgyxfz', 'hyjk123').then(res => {
       const data = res.data.devlist
-      for ( let i = 0; i < data.length; i++) {
-          HuaYeVideo.checkRequest('zlxgyxfz', 'hyjk123', data[i].sn, data[i].hlsurl).then(flow => {
-                // this.videoNames.push({
-                //     name: data[i].name,
-                //     address: '涿鹿县诚信小饭桌'
-                // })
-              this.videoUrl.push({
-                name: data[i].name,
-                url: flow.data.hlsurl
-              })
+      for (let i = 0; i < data.length; i++) {
+        HuaYeVideo.checkRequest('zlxgyxfz', 'hyjk123', data[i].sn, data[i].hlsurl).then(flow => {
+          this.videoUrl.push({
+            name: data[i].name,
+            // url: 'http://218.11.10.172:83/openUrl/NVAjJcs/live.m3u8'
+            url: flow.data.hlsurl
           })
-       }
+        })
+      }
     })
   }
 }

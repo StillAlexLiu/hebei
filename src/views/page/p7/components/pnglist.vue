@@ -60,7 +60,7 @@ export default {
 
     .list_p3 {
         color: #F45E41;
-        font-size: 14px;;
+        font-size: 30px;;
     }
 
     .list_zb {

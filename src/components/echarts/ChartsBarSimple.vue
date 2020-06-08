@@ -31,6 +31,16 @@ export default {
     showValue: {
       type: Boolean,
       default: true
+    },
+    barWidth: {
+      type: Number,
+      default: 20
+    },
+    barRadios: {
+      type: Array,
+      default: () => {
+        return [30, 30, 0, 0]
+      }
     }
   },
   data () {
@@ -137,10 +147,10 @@ export default {
             },
             name: '市场主体数量',
             type: 'bar',
-            barWidth: '20',
+            barWidth: this.barWidth,
             itemStyle: {
               normal: {
-                barBorderRadius: [30, 30, 0, 0],
+                barBorderRadius: this.barRadios,
                 color: function (params) {
                   return colors[params.dataIndex % colors.length]
                 }

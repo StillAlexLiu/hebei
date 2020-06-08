@@ -156,7 +156,6 @@ export default {
       'setPageData'
     ]),
     getSelect (data) { // 分发全局map select 事件
-      console.log(data)
       this.Dispatch(data)
       this.getSelectItem(data)
       this.setPageData({
@@ -165,10 +164,11 @@ export default {
       })
     },
     getSelectItem (data) {
+      console.log(data)
       this.clearInfo()
       const items = data.items
       this.point = []
-      for (let i = 0; i < items.length; i++) {
+      for (let i = 0; i < items.length; i++) {0
         // this.point = [...this.point, ...this.makePoint(items[i].number, items[i].icon)]
         this.point = [...this.point, ...this.makeTreePoint(items[i].number, items[i].icon)]
       }
@@ -197,6 +197,7 @@ export default {
       return rtn
     },
     makeTreePoint (number, icon) {
+      console.log(number, icon, this.city.length, 'iiiccconnnn')
       const list = []
       const len = this.city.length
       for (let i = 0; i < len; i++) {
@@ -259,13 +260,9 @@ export default {
       }
     },
     beforeDestroy () {
-      Bus.$emit("message") 
+      Bus.$emit('message')
     },
     pointClickDispatch (item) {
-      if(!item.points){
-        Bus.$emit('message', item)
-        // eventBus.$emit('eventPointName', item)
-      }
       switch (this.$route.name) {
         case '主体服务':
           this.p1Select()
@@ -307,6 +304,12 @@ export default {
           break
         case '稽查办案':
           this.p6Info = item.data
+          break
+        case '远程监控':
+          if (!item.points) {
+            Bus.$emit('message', item)
+            console.log(this.$route.name, 'mmmmmnnnn')
+          }
           break
         default:
           break
