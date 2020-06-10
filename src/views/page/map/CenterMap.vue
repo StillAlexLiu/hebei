@@ -37,6 +37,7 @@ import SupervisionMapInfo from '../p2/compontes/SupervisionMapInfo'
 import ComplaintMapInfo from '../p5/compontes/ComplaintMapInfo'
 import KeepOnRecordMapInfo from '../p10/components/KeepOnRecordMapInfo'
 import Bus from '@/assets/bus.js'
+import axios from 'axios'
 
 export default {
   name: 'CenterMap',
@@ -119,7 +120,8 @@ export default {
           name: '保定市',
           center: [115.482331, 38.867657]
         }
-      ]
+      ],
+      latPoint: []
     }
   },
   watch: {
@@ -150,12 +152,14 @@ export default {
     this.addGrid()
     this.makeP0Data()
     this.makeP2Data()
+    // http://localhost/blade-hyjkRegion/hyRegions/hyjk/getHyRegions
   },
   methods: {
     ...mapActions([
       'setPageData'
     ]),
     getSelect (data) { // 分发全局map select 事件
+      console.log(data, 'dddds')
       this.Dispatch(data)
       this.getSelectItem(data)
       this.setPageData({
@@ -164,13 +168,13 @@ export default {
       })
     },
     getSelectItem (data) {
-      console.log(data)
+      // console.log(data)
       this.clearInfo()
       const items = data.items
       this.point = []
-      for (let i = 0; i < items.length; i++) {0
+      for (let i = 0; i < items.length; i++) {
         // this.point = [...this.point, ...this.makePoint(items[i].number, items[i].icon)]
-        this.point = [...this.point, ...this.makeTreePoint(items[i].number, items[i].icon)]
+        this.point = [...this.point, ...this.makeTreePoint(items[i], items[i].icon)]
       }
     },
     clearInfo () {
@@ -197,26 +201,109 @@ export default {
       return rtn
     },
     makeTreePoint (number, icon) {
-      console.log(number, icon, this.city.length, 'iiiccconnnn')
+      // console.log(number, icon, 'iiiccconnnn')
+      const cliType = number.type
       const list = []
       const len = this.city.length
-      for (let i = 0; i < len; i++) {
-        const item = this.city[i]
-        list.push({
-          name: item.name,
-          icon: icon,
-          coordinate: item.center,
-          points: []
+      if (this.$route.name === '远程监控') {
+        for (let i = 0; i < len; i++) {
+          const item = this.city[i]
+          list.push({
+            name: item.name,
+            icon: require('../../../assets/images/mapTabs/p3/t1/mhzhjg_img_map_blue2备份 2@2x.png'),
+            coordinate: item.center,
+            points: [],
+            index: i
+          })
+        }
+      } else {
+        for (let i = 0; i < len; i++) {
+          const item = this.city[i]
+          list.push({
+            name: item.name,
+            icon: icon,
+            coordinate: item.center,
+            points: [],
+            index: i
+          })
+        }
+      }
+      console.log(list, 'lliisss')
+      this.latPoint = []
+      if (this.$route.name === '远程监控') {
+        // var newArray = []
+        axios.get('http://172.20.10.9/blade-hyjkRegion/hyRegions/hyjk/getHyRegions').then(res => {
+        // axios.get('http://192.168.1.103/blade-hyjkRegion/hyRegions/hyjk/getHyRegions').then(res => {
+          const data = res.data.data
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].latitude) {
+              this.latPoint.push(data[i])
+            }
+          }
+          console.log(res, 'rrrsss')
+          axios.get('http://172.20.10.9/blade-hikregions/regions/hik/getHikRegions').then(res => {
+          // axios.get('http://192.168.1.103/blade-hikregions/regions/hik/getHikRegions').then(res => {
+            // console.log(res, 'rrrsss222')
+            const data = res.data.data
+            for (let q = 0; q < data.length; q++) {
+              if (data[q].latitude) {
+                // console.log(data[q], 'qq')
+                this.latPoint.push(data[q])
+              }
+            }
+            for (let i = 0; i < this.latPoint.length; i++) {
+              if (this.latPoint[i].userName) {
+                if (cliType === Number(this.latPoint[i].enterpriseType)) {
+                  // console.log(this.latPoint[i].orgName.substring(0, 2), list)
+                  for (let l = 0; l < list.length; l++) {
+                    if (this.latPoint[i].orgName.substring(0, 2) === list[l].name.substring(0, 2)) {
+                      list[l].points.push({
+                        name: this.latPoint[i].enterpriseName,
+                        address: this.latPoint[i].address,
+                        icon: icon,
+                        coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
+                        userName: this.latPoint[i].userName,
+                        pwd: this.latPoint[i].userPwd
+                      })
+                    }
+                  }
+                }
+              } else if (this.latPoint[i].indexCode) {
+                if (cliType === 5) {
+                  for (let l = 0; l < list.length; l++) {
+                    if (this.latPoint[i].name.substring(0, 2) === list[l].name.substring(0, 2)) {
+                      list[l].points.push({
+                        address: this.latPoint[i].name,
+                        icon: icon,
+                        coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
+                        regionsIndexCode: this.latPoint[i].indexCode
+                      })
+                    }
+                  }
+                  // list[2].points.push({
+                  //   address: this.latPoint[i].name,
+                  //   icon: icon,
+                  //   coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
+                  //   regionsIndexCode: this.latPoint[i].indexCode
+                  // })
+                  // console.log(list[2], 'dsadas')
+                }
+              }
+            }
+            // console.log(newArray, list, 'klllll')
+          })
         })
       }
-      for (let i = 0; i < number; i++) {
-        list[i % len].points.push({
-          name: '河北' + Mock.mock('@cword(3)') + '有限责任公司',
-          icon: icon,
-          coordinate: [Mock.mock('@float(113.784594, 119.54143)'), Mock.mock('@float(36.359861, 42.578391)')]
-        })
-      }
-      console.log(list)
+      // console.log(this.latPoint, 'opppooo')
+      // for (let i = 0; i < number; i++) {
+      //   console.log(list[i % len], len, 'iiiiiooo')
+      //   list[i % len].points.push({
+      //     name: '河北2' + Mock.mock('@cword(3)') + '有限责任公司',
+      //     icon: icon,
+      //     coordinate: [Mock.mock('@float(113.784594, 119.54143)'), Mock.mock('@float(36.359861, 42.578391)')]
+      //   })
+      // }
+      // console.log(list, 'lliisstt')
       return list
       // city
     },
@@ -226,10 +313,10 @@ export default {
         return val.properties.name === '河北'
       })
       const coordinates = find.geometry.coordinates
-      console.log(coordinates)
+      // console.log(coordinates)
       for (let i = 0; i < coordinates.length; i++) {
         const item = coordinates[i]
-        console.log(item)
+        // console.log(item)
         this.grid.push({
           geo: item,
           border: 'rgba(0,0,0,0)',
@@ -238,7 +325,7 @@ export default {
       }
     },
     Dispatch (data) {
-      console.log(data)
+      // console.log(data)
       this.commandName = ''
       this.p2InfoDetail = {}
       this.p4Info = {}
@@ -263,6 +350,7 @@ export default {
       Bus.$emit('message')
     },
     pointClickDispatch (item) {
+      console.log(item, 'iii')
       switch (this.$route.name) {
         case '主体服务':
           this.p1Select()
@@ -300,7 +388,7 @@ export default {
           this.p5Info = item.data
           break
         case '备案许可':
-          this.p10Info = item.data
+          this.p10Info = item
           break
         case '稽查办案':
           this.p6Info = item.data
@@ -308,7 +396,6 @@ export default {
         case '远程监控':
           if (!item.points) {
             Bus.$emit('message', item)
-            console.log(this.$route.name, 'mmmmmnnnn')
           }
           break
         default:

@@ -41,6 +41,12 @@ export default {
       default: () => {
         return [30, 30, 0, 0]
       }
+    },
+    legend: {
+      type: Array,
+      default: () => {
+        return ['']
+      }
     }
   },
   data () {
@@ -63,6 +69,15 @@ export default {
         dataset: {
           dimensions: dimensions,
           source: data
+        },
+        legend: {
+          show: true,
+          data: this.legend,
+          right: 10,
+          top: 10,
+          textStyle: {
+            fontSize: 20
+          }
         },
         xAxis: {
           type: 'category',
@@ -145,7 +160,7 @@ export default {
                 position: 'top'
               }
             },
-            name: '市场主体数量',
+            name: this.legend[0],
             type: 'bar',
             barWidth: this.barWidth,
             itemStyle: {

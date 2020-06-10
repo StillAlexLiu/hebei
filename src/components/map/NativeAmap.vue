@@ -251,30 +251,101 @@ export default {
       }
     },
     contentMaker (data) {
-      const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
-      return '<div style="width: 36px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
+      if (data.userName) {
+        const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
+        return '<div style="width: 36px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
+      } else if (this.$route.name === '远程监控') {
+        const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
+        return '<div style="width: 70px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:70px;text-align:center;color:#000000;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
+      } else {
+        const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
+        return '<div style="width: 36px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
+      }
     },
     addMassMarks (data) { // 海量点
       console.log('海量点')
       console.log(data)
-      this.markers = []
-      for (let i = 0; i < data.length; i++) {
-        const item = data[i]
-        console.log(item)
-        const marker = new window.AMap.Marker({
-          content: this.contentMaker(item),
-          position: this.transCoordinate(item.coordinate),
-          zIndex: 101,
-          title: item.name,
-          extData: item
-        })
-        console.log(marker)
-        marker.on('click', this.clickHandler)
-        this.markers.push(marker)
+      var newArray = []
+      if (this.$route.name === '远程监控') {
+        if (data[0].points) {
+          for (let z = 0; z < data.length; z++) {
+            if (data[z].points.length) {
+              newArray.push(data[z])
+            }
+          }
+          this.markers = []
+          // console.log(newArray, 'oo')
+          for (let i = 0; i < newArray.length; i++) {
+            const item = newArray[i]
+            // console.log(item)
+            const marker = new window.AMap.Marker({
+              content: this.contentMaker(item),
+              position: this.transCoordinate(item.coordinate),
+              zIndex: 101,
+              title: item.name,
+              extData: item
+            })
+            console.log(marker)
+            marker.on('click', this.clickHandler)
+            this.markers.push(marker)
+          }
+          this.map.add(this.markers)
+        } else {
+          this.markers = []
+          for (let i = 0; i < data.length; i++) {
+            const item = data[i]
+            // console.log(item)
+            const marker = new window.AMap.Marker({
+              content: this.contentMaker(item),
+              position: this.transCoordinate(item.coordinate),
+              zIndex: 101,
+              title: item.name,
+              extData: item
+            })
+            // console.log(marker)
+            marker.on('click', this.clickHandler)
+            this.markers.push(marker)
+          }
+          this.map.add(this.markers)
+        }
+      } else {
+        this.markers = []
+        for (let i = 0; i < data.length; i++) {
+          const item = data[i]
+          // console.log(item)
+          const marker = new window.AMap.Marker({
+            content: this.contentMaker(item),
+            position: this.transCoordinate(item.coordinate),
+            zIndex: 101,
+            title: item.name,
+            extData: item
+          })
+          // console.log(marker)
+          marker.on('click', this.clickHandler)
+          this.markers.push(marker)
+        }
+        this.map.add(this.markers)
       }
-      // console.log(this.markers)
-      this.map.add(this.markers)
     },
+    // 整理的函数
+    // ponitMap (data) {
+    //   this.markers = []
+    //   for (let i = 0; i < data.length; i++) {
+    //     const item = data[i]
+    //     // console.log(item)
+    //     const marker = new window.AMap.Marker({
+    //       content: this.contentMaker(item),
+    //       position: this.transCoordinate(item.coordinate),
+    //       zIndex: 101,
+    //       title: item.name,
+    //       extData: item
+    //     })
+    //     // console.log(marker)
+    //     marker.on('click', this.clickHandler)
+    //     this.markers.push(marker)
+    //   }
+    //   this.map.add(this.markers)
+    // },
     removeMassMarks () {
       this.map.remove(this.markers)
     },

@@ -18,12 +18,12 @@
             <container class="h-1-3"  title="各市重点区域疫情防控情况">
                 <div class="full-height w-1-2">
                     <!-- <ChartsPie :data='hellowPie2' :centerValue="'2300'" :show-value="true" :unit="'户'"/> -->
-                  <ChartsBarSimple :data="leftImage.chart3" :dimensions="['name','value']" unit="万人" :barWidth='30' :barRadios='[0, 0, 0, 0]'
+                  <ChartsBarSimple :data="leftImage.chart3" :dimensions="['name','value']" unit="万人" :barWidth='30' :barRadios='[0, 0, 0, 0]' :legend="['出动人员']"
                   :colors="['#549AE6','#68CAFF','#9BD84C','#5AE7C9','#C0EC91','#92AAF7','#FFDA94','#FEA85F','#FE754A','#FFA2AE','#F7B74D', '#68CAFF', '#549AE6']"/>
                 </div>
                 <div class="full-height w-1-2">
                     <!-- <threePie :data='threePie'></threePie> -->
-                  <ChartsBarSimple :data="leftImage.chart4" :dimensions="['name','value']" unit="万户" :barWidth='30' :barRadios='[0, 0, 0, 0]'
+                  <ChartsBarSimple :data="leftImage.chart4" :dimensions="['name','value']" unit="万户" :barWidth='30' :barRadios='[0, 0, 0, 0]' :legend="['检查户次']"
                   :colors="['#549AE6','#68CAFF','#9BD84C','#5AE7C9','#C0EC91','#92AAF7','#FFDA94','#FEA85F','#FE754A','#FFA2AE','#F7B74D', '#68CAFF', '#549AE6']"/>
                 </div>
             </container>

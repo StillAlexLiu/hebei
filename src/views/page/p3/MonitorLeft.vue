@@ -39,23 +39,23 @@ export default {
         {
           imgUrl: require('./components/img/1.png'),
           name1: '接入总量',
-          num1: Mock.Random.natural(100, 2000)
+          num1: 303
         }, {
           imgUrl: require('./components/img/9.png'),
           name1: '餐饮',
-          num1: Mock.Random.natural(100, 2000)
+          num1: 12
         }, {
           imgUrl: require('./components/img/jiu@2x.png'),
           name1: '酒店',
-          num1: Mock.Random.natural(100, 2000)
+          num1: 1
         }, {
           imgUrl: require('./components/img/youer@2x.png'),
           name1: '幼儿园',
-          num1: Mock.Random.natural(100, 2000)
+          num1: 273
         }, {
           imgUrl: require('./components/img/5.png'),
           name1: '煤检卡口',
-          num1: Mock.Random.natural(100, 2000)
+          num1: 17
         }
       ],
       city: [
@@ -76,61 +76,46 @@ export default {
       pieData: [
         {
           name: '煤检卡口',
-          value: Mock.Random.natural(160, 180)
+          value: 17
         },
         {
           name: '餐饮',
-          value: Mock.Random.natural(160, 180)
+          value: 12
         },
         {
           name: '酒店',
-          value: Mock.Random.natural(160, 180)
+          value: 1
         },
         {
           name: '幼儿园',
-          value: Mock.Random.natural(160, 180)
+          value: 273
         }
       ],
       chart3: [
         {
           name: '唐山市',
-          value: Mock.Random.natural(1, 20)
-        }, {
-          name: '石家庄市',
-          value: Mock.Random.natural(1, 20)
+          value: 106
         }, {
           name: '保定市',
-          value: Mock.Random.natural(1, 20)
-        }, {
-          name: '辛集市',
-          value: Mock.Random.natural(1, 20)
-        }, {
-          name: '定州市',
-          value: Mock.Random.natural(1, 20)
+          value: 52
         }, {
           name: '秦皇岛市',
-          value: Mock.Random.natural(1, 20)
-        }, {
-          name: '廊坊市',
-          value: Mock.Random.natural(1, 20)
+          value: 38
         }, {
           name: '承德市',
-          value: Mock.Random.natural(1, 20)
+          value: 18
         }, {
           name: '沧州市',
-          value: Mock.Random.natural(1, 20)
-        }, {
-          name: '邢台市',
-          value: Mock.Random.natural(1, 20)
+          value: 3
         }, {
           name: '衡水市',
-          value: Mock.Random.natural(1, 20)
+          value: 11
         }, {
           name: '邯郸市',
-          value: Mock.Random.natural(1, 20)
+          value: 32
         }, {
           name: '张家口市',
-          value: Mock.Random.natural(1, 20)
+          value: 26
         }
       ],
       liquidfill: ['维持', 70.13]

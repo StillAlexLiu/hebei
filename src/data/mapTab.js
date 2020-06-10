@@ -742,53 +742,58 @@ export default [
       single: true,
       children: [
         {
-          name: '食品生产',
-          icon: require('../assets/images/mapTabs/p3/t1/1.png'),
+          name: '餐饮',
+          icon: require('../views/page/p3/components/img/9.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 0
         },
         {
-          name: '学校食堂',
-          icon: require('../assets/images/mapTabs/p3/t1/2.png'),
+          name: '酒店',
+          icon: require('../views/page/p3/components/img/jiu@2x.png'),
           active: false,
-          number: 15
+          number: 15,
+          type: 3
+        },
+        {
+          name: '幼儿园',
+          icon: require('../views/page/p3/components/img/youer@2x.png'),
+          active: false,
+          number: 100,
+          type: 4
         },
         {
           name: '煤检卡口',
-          icon: require('../assets/images/mapTabs/p3/t1/3.png'),
+          icon: require('../views/page/p3/components/img/5.png'),
           active: false,
-          number: 100
-        },
-        {
-          name: '盒桶饭生产企业',
-          icon: require('../assets/images/mapTabs/p3/t1/4.png'),
-          active: false,
-          number: 200
-        },
-        {
-          name: '中央厨房',
-          icon: require('../assets/images/mapTabs/p3/t1/5.png'),
-          active: false,
-          number: 20
-        },
-        {
-          name: '老年助餐点',
-          icon: require('../assets/images/mapTabs/p3/t1/6.png'),
-          active: false,
-          number: 20
-        },
-        {
-          name: '中型以上餐饮企业',
-          icon: require('../assets/images/mapTabs/p3/t1/7.png'),
-          active: false,
-          number: 100
-        },
-        {
-          name: '药店',
-          icon: require('../assets/images/mapTabs/p3/t1/8.png'),
-          active: false,
-          number: 200
-        }]
+          number: 200,
+          type: 5
+        }
+        // {
+        //   name: '中央厨房',
+        //   icon: require('../assets/images/mapTabs/p3/t1/5.png'),
+        //   active: false,
+        //   number: 20
+        // },
+        // {
+        //   name: '老年助餐点',
+        //   icon: require('../assets/images/mapTabs/p3/t1/6.png'),
+        //   active: false,
+        //   number: 20
+        // },
+        // {
+        //   name: '中型以上餐饮企业',
+        //   icon: require('../assets/images/mapTabs/p3/t1/7.png'),
+        //   active: false,
+        //   number: 100
+        // },
+        // {
+        //   name: '药店',
+        //   icon: require('../assets/images/mapTabs/p3/t1/8.png'),
+        //   active: false,
+        //   number: 200
+        // }
+      ]
     }]
   }, {
     name: '智能预警',

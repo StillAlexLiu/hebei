@@ -8,24 +8,32 @@ module.exports = {
   ],
   lintOnSave: true,
   devServer: {
-    // proxy: {
-    //   '/comet': {
-    //     // 目标 API 地址
-    //     target: ' http://172.10.0.3/',
-    //     // target: 'http://localhost:8000/',
-    //     pathRewrite: {
-    //       '^/comet/': '/' // 代理的路径
-    //     }
-    //   },
-    //   '/test': {
-    //     // 目标 API 地址
-    //     target: ' https://c324891d-478a-4bb0-8d5d-99055eba30f9.mock.pstmn.io/',
-    //     // target: 'http://localhost:8000/',
-    //     pathRewrite: {
-    //       '^/': '/' // 代理的路径
-    //     }
-    //   }
-    // }
+    proxy: {
+      // '/comet': {
+      //   // 目标 API 地址
+      //   target: ' http://172.10.0.3/',
+      //   // target: 'http://localhost:8000/',
+      //   pathRewrite: {
+      //     '^/comet/': '/' // 代理的路径
+      //   }
+      // },
+      // '/test': {
+      //   // 目标 API 地址
+      //   target: ' https://c324891d-478a-4bb0-8d5d-99055eba30f9.mock.pstmn.io/',
+      //   // target: 'http://localhost:8000/',
+      //   pathRewrite: {
+      //     '^/': '/' // 代理的路径
+      //   }
+      // }
+      '/HK': {
+        // 目标 API 地址
+        target: 'http://192.168.1.103/blade-hikregions',
+        // target: 'http://localhost:8000/',
+        pathRewrite: {
+          '^/': '/' // 代理的路径
+        }
+      }
+    }
   },
   configureWebpack: {
     plugins: [

@@ -1,6 +1,6 @@
 <template>
     <div class="Page2_1 full">
-        <container class="h-1-3" title="智慧食品生产监管">
+        <container class="h-1-3" title="智慧餐饮监管">
             <NumberTop :data='data2[dimension]'></NumberTop>
         </container>
         <div class="h-1-3">

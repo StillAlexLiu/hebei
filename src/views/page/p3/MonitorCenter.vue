@@ -6,8 +6,8 @@
                     <div class="name h-5-9">{{item.name}}</div>
                     <div class="address h-4-9">{{item.address}}</div>
                 </div>
-                <player slot="calc" class="full-height video" :index="index+99"
-                        :src="videoUrl[index%videoUrl.length].url"/>
+                <player slot="calc" class="full-height video" :index="index"
+                        :src="item.url"/>
             </container-calc>
         </div>
     </div>
@@ -16,6 +16,8 @@
 <script>
 import HuaYeVideo from './components/js/HuaYeVideo'
 import Bus from '@/assets/bus.js'
+import axios from 'axios'
+import Vue from 'vue'
 
 export default {
   name: 'MonitorCenter',
@@ -25,50 +27,89 @@ export default {
       //   videoNames: []
       videoNames: [
         {
-          name: '厨房',
-          address: '涿鹿县诚信小饭桌'
+          name: 'Camera',
+          address: '唐山玉田螺山站',
+          url: 'http://218.11.10.172:83/openUrl/3VhG04E/live.m3u8'
+        }, {
+          name: 'Camera',
+          address: '唐山玉田螺山站',
+          url: 'http://218.11.10.172:83/openUrl/3W2NpFm/live.m3u8'
+        }, {
+          name: '玉田煤质检查站',
+          address: '唐山玉田螺山站',
+          url: 'http://218.11.10.172:83/openUrl/3WBZFNm/live.m3u8'
+        }, {
+          name: '玉田煤质检查站办公',
+          address: '唐山玉田螺山站',
+          url: 'http://218.11.10.172:83/openUrl/3X9LWh2/live.m3u8'
         }, {
           name: '厨房',
-          address: '涿鹿县诚信小饭桌'
+          address: '河北省唐山市滦州市龙山帝景御园门市B区',
+          url: 'http://211.90.38.80:7020/hls/1275/1/1/1.m3u8'
         }, {
-          name: '厨房',
-          address: '涿鹿县诚信小饭桌'
-        }, {
-          name: '厨房',
-          address: '涿鹿县诚信小饭桌'
-        }, {
-          name: '厨房',
-          address: '涿鹿县诚信小饭桌'
-        }, {
-          name: '厨房',
-          address: '涿鹿县诚信小饭桌'
+          name: 'SD-IPC5380-IR-F20161101AACH664766081',
+          address: '河北省唐山市路北区果园乡凤凰世嘉(光明北路)',
+          url: 'http://211.90.38.80:7020/hls/907/1/1/1.m3u8'
         }
       ],
       videoIndex: 0
     }
   },
   created () {
-    Bus.$on('message', function (res) {
-      console.log(res, this.videoIndex, 'rrr')
-      this.videoIndex++
-      if (this.videoIndex > 6) {
-        this.videoIndex = 0
+    var that = this
+    Bus.$on('message', function (data2) {
+      // console.log(data2, 'rrww')
+      if (data2.regionsIndexCode) {
+        // 海康
+        axios.get('http://172.20.10.9/blade-camera/camera/hik/getHikCameraUrls?regionsIndexCode=' + data2.regionsIndexCode).then(res1 => {
+        // axios.get('http://192.168.1.103/blade-camera/camera/hik/getHikCameraUrls?regionsIndexCode=' + data2.regionsIndexCode).then(res1 => {
+          const data = res1.data.data
+          console.log(data, 'hkkk')
+          for (let i = 0; i < data.length; i++) {
+            if (that.videoIndex >= 6) {
+              that.videoIndex = 0
+            }
+            Vue.set(that.videoNames, that.videoIndex, {
+              name: data[i].cameraName,
+              address: data2.address,
+              url: data[i].cameraUrl
+            })
+            that.videoIndex++
+          }
+        })
+      } else {
+        // 华烨
+        // console.log(data2, '华烨')
+        HuaYeVideo.getList(data2.userName, data2.pwd).then(res2 => {
+          console.log(res2, 'rr22222')
+          if (res2.data.result === 0) {
+            const data = res2.data.devlist
+            // console.log(data, 'ff')
+            for (let i = 0; i < data.length; i++) {
+              HuaYeVideo.checkRequest(data2.userName, data2.pwd, data[i].sn, data[i].hlsurl).then(flow => {
+                console.log(flow, '23131')
+                // for (let a = 0; a < 6; a++) {x
+                if (that.videoIndex >= 6) {
+                  that.videoIndex = 0
+                }
+                Vue.set(that.videoNames, that.videoIndex, {
+                  // name: data[i].name,
+                  name: data[i].name,
+                  address: data2.address,
+                  // url: 'http://218.11.10.172:83/openUrl/NVAjJcs/live.m3u8'
+                  url: flow.data.hlsurl
+                })
+                // console.log(that.videoIndex, 'ffxxxxx')
+                that.videoIndex++
+              })
+            }
+          }
+        })
       }
+      console.log(that.videoNames, '6个视频')
     })
   },
   mounted () {
-    HuaYeVideo.getList('zlxgyxfz', 'hyjk123').then(res => {
-      const data = res.data.devlist
-      for (let i = 0; i < data.length; i++) {
-        HuaYeVideo.checkRequest('zlxgyxfz', 'hyjk123', data[i].sn, data[i].hlsurl).then(flow => {
-          this.videoUrl.push({
-            name: data[i].name,
-            // url: 'http://218.11.10.172:83/openUrl/NVAjJcs/live.m3u8'
-            url: flow.data.hlsurl
-          })
-        })
-      }
-    })
   }
 }
 </script>
