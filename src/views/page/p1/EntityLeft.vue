@@ -28,6 +28,7 @@
             </Container>
             <Container class="w-1-2 h-1-3" v-if="select.value===1" :title="'新增'+entityType+'行业TOP5'">
                 <ChartHalfPie :data="halfPieData"/>
+
             </Container>
             <Container class="w-1-2 h-1-3" :title="select.value===0?entityType+'区域分布':'新增'+entityType+'区域分布'">
                 <ChartsBarSimple :data="barData2" :dimensions="['name','value']" unit="户"
@@ -1568,6 +1569,7 @@ export default {
       deep: true,
       handler: function () {
         // this.dispatchSelect(this.data.all)
+        console.log(this.select, this.entityType, 'ttpppiii')
         this.showEntityData(this.entityType)
       }
     }
@@ -1583,6 +1585,8 @@ export default {
       }
     },
     getStock (data) {
+      console.log(data)
+      // 存量情况
       this.barData = data.block1.chart.data
       this.quantityData = data.block1.info
       this.pieData = data.block2.chart.data
@@ -1591,6 +1595,7 @@ export default {
       this.barGroupData2 = data.block5.chart.data
     },
     getNewly (data) {
+      // 增量情况
       this.barData = data.block1.chart.data
       this.quantityData = data.block1.info
       this.pieData = data.block2.chart.data

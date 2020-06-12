@@ -1,13 +1,13 @@
 <template>
-    <div class="MonitorCenter full">
-        <div class="w-1-3 h-1-2 video-container" v-for="(item,index) in videoNames" :key="index">
-            <container-calc type="tb" :number="90" class="full-height item border">
-                <div slot="fix" class="top full-height">
-                    <div class="name h-5-9">{{item.name}}</div>
-                    <div class="address h-4-9">{{item.address}}</div>
+    <div class='MonitorCenter full'>
+        <div class='w-1-3 h-1-2 video-container' v-for='(item,index) in videoNames' :key='index'>
+            <container-calc type='tb' :number='90' class='full-height item border'>
+                <div slot='fix' class='top full-height'>
+                    <div class='name h-5-9'>{{item.address}}</div>
+                    <div class='address h-4-9'>{{item.name}}</div>
                 </div>
-                <player slot="calc" class="full-height video" :index="index"
-                        :src="item.url"/>
+                <player slot='calc' class='full-height video' :index='index'
+                        :src='item.url'/>
             </container-calc>
         </div>
     </div>
@@ -27,29 +27,29 @@ export default {
       //   videoNames: []
       videoNames: [
         {
-          name: 'Camera',
-          address: '唐山玉田螺山站',
-          url: 'http://218.11.10.172:83/openUrl/3VhG04E/live.m3u8'
+          // name: 'Camera',
+          // address: '唐山玉田螺山站',
+          // url: 'http://218.11.10.172:83/openUrl/3VhG04E/live.m3u8'
         }, {
-          name: 'Camera',
-          address: '唐山玉田螺山站',
-          url: 'http://218.11.10.172:83/openUrl/3W2NpFm/live.m3u8'
+          // name: 'Camera',
+          // address: '唐山玉田螺山站',
+          // url: 'http://218.11.10.172:83/openUrl/3W2NpFm/live.m3u8'
         }, {
-          name: '玉田煤质检查站',
-          address: '唐山玉田螺山站',
-          url: 'http://218.11.10.172:83/openUrl/3WBZFNm/live.m3u8'
+          // name: '玉田煤质检查站',
+          // address: '唐山玉田螺山站',
+          // url: 'http://218.11.10.172:83/openUrl/3WBZFNm/live.m3u8'
         }, {
-          name: '玉田煤质检查站办公',
-          address: '唐山玉田螺山站',
-          url: 'http://218.11.10.172:83/openUrl/3X9LWh2/live.m3u8'
+          // name: '玉田煤质检查站办公',
+          // address: '唐山玉田螺山站',
+          // url: 'http://218.11.10.172:83/openUrl/3X9LWh2/live.m3u8'
         }, {
-          name: '厨房',
-          address: '河北省唐山市滦州市龙山帝景御园门市B区',
-          url: 'http://211.90.38.80:7020/hls/1275/1/1/1.m3u8'
+          // name: '厨房',
+          // address: '河北省唐山市滦州市龙山帝景御园门市B区',
+          // url: 'http://211.90.38.80:7020/hls/1275/1/1/1.m3u8'
         }, {
-          name: 'SD-IPC5380-IR-F20161101AACH664766081',
-          address: '河北省唐山市路北区果园乡凤凰世嘉(光明北路)',
-          url: 'http://211.90.38.80:7020/hls/907/1/1/1.m3u8'
+          // name: 'SD-IPC5380-IR-F20161101AACH664766081',
+          // address: '河北省唐山市路北区果园乡凤凰世嘉(光明北路)',
+          // url: 'http://211.90.38.80:7020/hls/907/1/1/1.m3u8'
         }
       ],
       videoIndex: 0
@@ -58,7 +58,35 @@ export default {
   created () {
     var that = this
     Bus.$on('message', function (data2) {
-      // console.log(data2, 'rrww')
+      that.setVideo(data2)
+    })
+  },
+  mounted () {
+    const data1 = {
+      address: '张家口阳原王府庄站',
+      icon: '/img/5.8914f095.png',
+      regionsIndexCode: 'd9e6d7cc-3b76-4a61-8338-0b9a05bc6b29'
+    }
+    this.setVideo(data1)
+    const data2 = {
+      address: '河北省张家口市涿鹿县涿鹿镇合符小区二期第17幢1号商铺',
+      icon: '/img/youer@2x.c70e028f.png',
+      name: '涿鹿县今跃小饭桌',
+      pwd: 'hyjk123',
+      userName: 'zlxjyxfz'
+    }
+    this.setVideo(data2)
+    const data3 = {
+      address: '承德围场御道口站',
+      icon: '/img/5.8914f095.png',
+      regionsIndexCode: 'fe0ccc86-fa00-48c0-aee1-978196a665eb'
+    }
+    this.setVideo(data3)
+  },
+  methods: {
+    setVideo (data2) {
+      var that = this
+      console.log(data2, 'rrww')
       if (data2.regionsIndexCode) {
         // 海康
         axios.get('http://172.20.10.9/blade-camera/camera/hik/getHikCameraUrls?regionsIndexCode=' + data2.regionsIndexCode).then(res1 => {
@@ -79,23 +107,23 @@ export default {
         })
       } else {
         // 华烨
-        // console.log(data2, '华烨')
+        console.log(data2, '华烨')
         HuaYeVideo.getList(data2.userName, data2.pwd).then(res2 => {
-          console.log(res2, 'rr22222')
+          console.log(res2, '华烨22222')
           if (res2.data.result === 0) {
             const data = res2.data.devlist
             // console.log(data, 'ff')
             for (let i = 0; i < data.length; i++) {
               HuaYeVideo.checkRequest(data2.userName, data2.pwd, data[i].sn, data[i].hlsurl).then(flow => {
-                console.log(flow, '23131')
-                // for (let a = 0; a < 6; a++) {x
+                console.log(flow, '华烨3333')
+                // for (let a = 0; a < 6; a++) {
                 if (that.videoIndex >= 6) {
                   that.videoIndex = 0
                 }
                 Vue.set(that.videoNames, that.videoIndex, {
                   // name: data[i].name,
                   name: data[i].name,
-                  address: data2.address,
+                  address: data2.name,
                   // url: 'http://218.11.10.172:83/openUrl/NVAjJcs/live.m3u8'
                   url: flow.data.hlsurl
                 })
@@ -107,14 +135,12 @@ export default {
         })
       }
       console.log(that.videoNames, '6个视频')
-    })
-  },
-  mounted () {
+    }
   }
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang='less'>
 .MonitorCenter {
     padding-top: 60px;
 

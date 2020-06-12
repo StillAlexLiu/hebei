@@ -107,7 +107,8 @@ export default {
       let left = 0
       const center = ['50%', '50%']
       const legend = {
-        show: this.showLegend
+        show: this.showLegend,
+        selectedMode: false
       }
       switch (this.legendPosition) {
         case 'top':

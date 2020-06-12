@@ -22,7 +22,6 @@ export default {
   },
   checkRequest (name, password, devId, ip) {
     const str = {
-      cmdId: 100,
       user: name,
       streamtype: 1,
       channelid: 1,

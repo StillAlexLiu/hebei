@@ -18,6 +18,10 @@ export default {
     isPercent: {
       type: Boolean,
       default: false
+    },
+    show: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -36,19 +40,17 @@ export default {
   },
   methods: {
     getOption (data) {
+      var title
       let newName = ''
       if (this.isPercent) {
         newName = data.num + '%'
       } else {
         newName = data.num
       }
-      // if(this.data.sum){
-      //     this.data.sum = this.data.sum + '件'
-      // }
-      return {
-        title: {
+      if (this.show) {
+        title = {
           subtext: newName,
-          text: data.sum + '件',
+          text: data.num + '件',
           x: 'center',
           y: '37%',
           subtextStyle: {
@@ -63,7 +65,29 @@ export default {
             fontWeight: 'normal',
             fontFamily: 'LESLIE'
           }
-        },
+        }
+      } else {
+        title = {
+          // subtext: data.name,
+          text: data.num,
+          x: 'center',
+          y: 'center',
+          subtextStyle: {
+            color: '#61EADF',
+            fontSize: 26,
+            fontWeight: 'normal',
+            fontFamily: 'LESLIE'
+          },
+          textStyle: {
+            color: '#61EADF',
+            fontSize: 30,
+            fontWeight: 'normal',
+            fontFamily: 'LESLIE'
+          }
+        }
+      }
+      return {
+        title: title,
         calculable: true,
         series: [
           {
@@ -152,6 +176,7 @@ export default {
         text-align: center;
         margin: 0;
         font-size: 30px;
+        color: #FFFFFF;
     }
 }
 </style>

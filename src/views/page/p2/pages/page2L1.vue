@@ -482,7 +482,7 @@ export default {
       }],
       data2: [
         [{
-          title: '监管检查',
+          title: '监督检查',
           short: '检',
           img: require('./../compontes/img/text-bg-red.png'),
           data: [{
@@ -497,7 +497,7 @@ export default {
           short: '抽',
           img: require('./../compontes/img/text-bg-purple.png'),
           data: [{
-            name: '检验件数',
+            name: '检验批次',
             value: '6274'
           }, {
             name: '合格率',

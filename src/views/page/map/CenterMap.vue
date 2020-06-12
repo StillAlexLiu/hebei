@@ -271,7 +271,7 @@ export default {
               } else if (this.latPoint[i].indexCode) {
                 if (cliType === 5) {
                   for (let l = 0; l < list.length; l++) {
-                    if (this.latPoint[i].name.substring(0, 2) === list[l].name.substring(0, 2)) {
+                    if (this.latPoint[i].address.substring(0, 2) === list[l].name.substring(0, 2)) {
                       list[l].points.push({
                         address: this.latPoint[i].name,
                         icon: icon,

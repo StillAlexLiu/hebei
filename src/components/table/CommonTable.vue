@@ -67,6 +67,7 @@ export default {
             display: table-cell;
             height: 50px;
             vertical-align: middle;
+            text-align: center;
         }
     }
 }

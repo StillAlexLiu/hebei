@@ -42,8 +42,8 @@
 import NumberElevator from '../compontes/Number-elevator'
 import Mock from 'mockjs'
 import echarts from 'echarts'
-import InfoCard from '../compontes/InfoCard'
-import ChartsPiePercentMode from '../compontes/ChartsPiePercentMode'
+// import InfoCard from '../compontes/InfoCard'
+// import ChartsPiePercentMode from '../compontes/ChartsPiePercentMode'
 import chartsPie from '../compontes/echartsPie'
 export default {
   name: 'Page4',
@@ -54,8 +54,8 @@ export default {
     }
   },
   components: {
-    ChartsPiePercentMode,
-    InfoCard,
+    // ChartsPiePercentMode,
+    // InfoCard,
     chartsPie,
     NumberElevator
   },

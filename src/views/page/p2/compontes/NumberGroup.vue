@@ -39,7 +39,7 @@ export default {
 
     > .item {
         flex-basis: 245px;
-        height: 232px;
+        height: 100%;
         text-align: center;
 
         .item-in {
@@ -47,18 +47,19 @@ export default {
 
             .b-line {
                 border-bottom: 2px solid rgba(74, 144, 226, 0.31);
+                padding-top: 25%;
             }
         }
 
         .title_img {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
         }
 
         .title_name {
             font-size: 24px;
-            height: 60px;
-            line-height: 60px;
+            height: 90px;
+            line-height: 90px;
         }
 
         .title_num {

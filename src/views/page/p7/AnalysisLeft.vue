@@ -19,7 +19,7 @@
               <ContainerSmallTitle title="认证证书情况" class="full-height w-1-2">
                 <OtherBox :data='certCase'>
                     <ChartsBarLine :data="data3" :type="['line']" :dimensions="['name','value']"
-                                   :units="['证书数量:张']"
+                                   :units="['证书数量:张']" :colors='["#61EADF"]'
                                    :legend="['证书数']"  slot="echarts"/>
                 </OtherBox>
               </ContainerSmallTitle>
