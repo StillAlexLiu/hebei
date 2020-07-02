@@ -344,7 +344,6 @@ export default {
       // 搜索所有省/直辖市信息
       this.searchFunc(adcode).then(result => {
         const list = result.districtList[0].districtList
-        console.log(list, '网格...................................')
         const polygons = []
         const promiseList = []
         console.log(list)
@@ -414,6 +413,7 @@ export default {
       return this.colors[adcode]
     },
     getSelect (list) { // 发送地图下方的选择器事件
+    console.log(list, 'listt')
       this.$emit('getSelect', list)
     }
   },

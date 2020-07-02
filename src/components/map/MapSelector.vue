@@ -79,7 +79,8 @@ export default {
       selectArray: [],
       active: 0,
       showBox: false,
-      shouBtn: []
+      shouBtn: [],
+      itemStatus: ''
     }
   },
   mounted () {
@@ -204,8 +205,17 @@ export default {
     },
     // tab切换
     pngClick (item, index, array) {
-      console.log(item, index, array, '点击图标')
-      this.shouBtn = item
+      console.log(item, this.shouBtn, '点击图标')
+      if(item === this.shouBtn) {
+        console.log('一样')
+        this.shouBtn = {
+          name: '市场主体',
+          type: 0
+        }
+      } else {
+        console.log('不一样')
+        this.shouBtn = item
+      }
       for (let i = 0; i < array.length; i++) {
         if (i === index) {
           item.active = !item.active

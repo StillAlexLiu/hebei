@@ -196,7 +196,7 @@ export default {
       })
     },
     getSelectItem (data) {
-      // console.log(data, '点击')
+      console.log(data, '点击')
       this.clearInfo()
       const items = data.items
       this.point = []
