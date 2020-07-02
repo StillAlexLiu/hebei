@@ -468,7 +468,7 @@ export default {
             }
           })
         }
-          
+
       }
     },
     //第三层地图打点
@@ -582,8 +582,8 @@ export default {
           this.mainMessage = res2.data.data
           this.getEntityById()
         })
-      
-      
+
+
     },
     getEntityById () {
       // 获取主体信息
@@ -636,7 +636,7 @@ export default {
             // '主体身份代码': this.mainMessage[i].UNISCID
           })
           console.log(this.mainMessage[i], this.p1Info['监管信息']['质量公告'])
-          
+
         }
         this.setPageData({
           key: 'p1',

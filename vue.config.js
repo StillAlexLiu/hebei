@@ -41,13 +41,13 @@ module.exports = {
         target: 'http://192.168.1.107:8080/blade-screen',
         changeOrigin: true,
         pathRewrite: {
-            '^/monitor': ''
+          '^/monitor': ''
         }
       }
     }
   },
   configureWebpack: {
-    plugins: [  
+    plugins: [
       new StatsPlugin('stats.json', {
         chunkModules: true,
         chunks: true,

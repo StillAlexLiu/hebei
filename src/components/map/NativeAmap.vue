@@ -260,7 +260,7 @@ export default {
           const count = data.baseCount ? '<div style="width: 100%;text-align: center">' + data.baseCount + '</div>' : ''
           return '<div style="width: 36px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
         }
-      }else {
+      } else {
         if (data.typeIndex === 0) {
           const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
           return '<div style="width: 70px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:70px;text-align:center;color:#000000;height:34px;line-height:34px;font-size:20px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
@@ -275,11 +275,11 @@ export default {
       console.log(data, '海量点')
       this.pointNumber = 0
       for (let i = 0; i < data.length; i++) {
-       if (data[i].baseCount) {
+        if (data[i].baseCount) {
           this.pointNumber += data[i].baseCount
         } else if (data[i].points) {
           this.pointNumber += data[i].points.length
-        }  else {
+        } else {
           this.pointNumber = data.length
         }
       }
@@ -296,7 +296,7 @@ export default {
         } else {
           this.ponitMap(data)
         }
-      }else {
+      } else {
         this.ponitMap(data)
       }
     },
@@ -360,29 +360,33 @@ export default {
           console.log(value)
           for (let i = 0; i < value.length; i++) {
             const item = value[i]
-            const bounds = item.districtList[0].boundaries
-            const name = item.districtList[0].name
-            const adcode = item.districtList[0].adcode
-            const polygon = new window.AMap.Polygon({
-              // map: this.map,
-              // strokeWeight: 1,
-              // path: bounds[i],
-              // fillOpacity: 0.7,
-              // fillColor: '#CCF3FF',
-              // strokeColor: '#CC66CC'
-              path: bounds,
-              strokeColor: '#fff',
-              strokeWeight: 1,
-              strokeOpacity: 0.2,
-              fillOpacity: 0.4,
-              fillColor: this.getColorByAdcode(adcode),
-              zIndex: 50,
-              extData: {
-                name, adcode, depth
-              }
-            })
-            polygon.on('click', this.layerClick)
-            polygons.push(polygon)
+            for (let j = 0; j < item.districtList[0].boundaries.length; j++) {
+              const bounds = item.districtList[0].boundaries[j]
+              const name = item.districtList[0].name
+              const adcode = item.districtList[0].adcode
+              const polygon = new window.AMap.Polygon({
+                // map: this.map,
+                // strokeWeight: 1,
+                // path: bounds[i],
+                // fillOpacity: 0.7,
+                // fillColor: '#CCF3FF',
+                // strokeColor: '#CC66CC'
+                path: bounds,
+                strokeColor: '#fff',
+                strokeWeight: 10,
+                strokeOpacity: 0.2,
+                fillOpacity: 0.4,
+                fillColor: this.getColorByAdcode(adcode),
+                zIndex: 50,
+                extData: {
+                  name,
+                  adcode,
+                  depth
+                }
+              })
+              polygon.on('click', this.layerClick)
+              polygons.push(polygon)
+            }
           }
           this.disProvinceLayer = new window.AMap.OverlayGroup(polygons)
           this.map.add(this.disProvinceLayer)
@@ -411,6 +415,7 @@ export default {
       if (!this.colors[adcode]) {
         this.colors[adcode] = Mock.mock('@color')
       }
+      console.error(this.colors[adcode])
       return this.colors[adcode]
     },
     getSelect (list) { // 发送地图下方的选择器事件
