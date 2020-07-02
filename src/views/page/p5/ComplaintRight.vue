@@ -18,14 +18,14 @@
                 </div>
             </container>
         </div>
-        <container title='市队举报线索处理情况' class='full-width h-3-8'>
+        <container title='各市举报线索处理情况' class='full-width h-3-8'>
             <comPlaintBarR :data='chart3' color="#41C8DE" :barWidth="80" legend="线索处理数量" unit="单位：件"></comPlaintBarR>
         </container>
         <div class='full-width h-3-8'>
-            <container title='案件类型分布' class='w-1-2 full-height'>
-                <ChartsPiePiecewise :data='chart4' :title="'案件类型分布'" :title-size="36"/>
+            <container title='投诉举报案件类型分布' class='w-1-2 full-height'>
+                <ChartsPiePiecewise :data='chart4' :title="'3289'" :title-size="50"/>
             </container>
-            <container title='市队投诉举报案件分布' class='w-1-2 full-height'>
+            <container title='各市投诉举报案件分布' class='w-1-2 full-height'>
                 <complaintBarRH :xdata='chart5.xdata' :ydata='chart5.ydata'></complaintBarRH>
             </container>
         </div>

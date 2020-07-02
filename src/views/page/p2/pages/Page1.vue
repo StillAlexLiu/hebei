@@ -7,47 +7,26 @@
             :units="['户次']" :colors='["#61EADF"]'
             :legend="['监管户次']" />
         </container-center-title2>
-      </container>9
+      </container>
       <div class="full-width h-1-3">
         <container class="w-1-2 full-height" title="监管主体类型分布">
           <ChartsPie :data="pieData" :is-pie="true" :show-value="true"/>
         </container>
         <container class="w-1-2 full-height" title="监管区域分布">
-          <ChartsBarSimple :data="chart3" :dimensions="['name','value']" unit="批次" :barWidth='30' :barRadios='[0, 0, 0, 0]' :legend="['抽查数量']"
+          <ChartsBarSimple :data="chart3" :dimensions="['name','value']" unit="单位：户" :barWidth='30' :barRadios='[0, 0, 0, 0]' :legend="['监管主体']"
             :colors="['#549AE6','#68CAFF','#9BD84C','#5AE7C9','#C0EC91','#92AAF7','#FFDA94','#FEA85F','#FE754A','#FFA2AE','#F7B74D', '#68CAFF', '#549AE6']"/>
         </container>
       </div>
       <container class="h-1-3 full-width" title="检查结果分析">
         <container-center-title2 title="检查合格情况"  class="full-height w-1-2" >
           <ChartsBarLine :data="data4" :type="['line']" :dimensions="['name','value']"
-            :units="['']"
+            :units="['单位: %']"
             :legend="['合格率']" />
         </container-center-title2>
         <container-center-title2 title="检查不合格因素分析"  class="full-height w-1-2" >
           <CommonTable :data="tableData" :headers="['检查项目','不合格次数']" :show-order="true"/>
         </container-center-title2>
       </container>
-        <!-- <container class="h-2-8" title="综合监管">
-            <NumberGroup :data='chart1[dimension]'></NumberGroup>
-        </container>
-        <div class="h-3-8">
-            <container class="w-1-2 full-height" title="智慧食品监管">
-                <NumberGroup2 :data='chart2[dimension]'></NumberGroup2>
-            </container>
-            <container class="w-1-2 full-height" title="智慧药械监管">
-                <NumberGroup2 :data='chart3[dimension]'></NumberGroup2>
-            </container>
-        </div>
-        <div class="h-3-8">
-            <container class="w-1-2 full-height" title="特种设备监管">
-                <NumberElevator :data='chart4[dimension]'></NumberElevator>
-            </container>
-            <container class="w-1-2 full-height" title="双随机监管">
-                <div class="w-1-2 full-height" v-for="(item, name,index) in chart5[dimension]" :key="index">
-                    <echartsPieGroup :data='item' :colors="colors[index]"></echartsPieGroup>
-                </div>
-            </container>
-        </div> -->
     </div>
 </template>
 
@@ -55,9 +34,7 @@
 import NumberGroup from '../compontes/NumberGroup'
 import ChartsBarLine from '../../../../components/echarts/ChartsBarLine'
 import Mock from 'mockjs'
-// import NumberGroup2 from '../compontes/NumberGroup2'
-// import NumberElevator from '../compontes/Number-elevator'
-// import echartsPieGroup from '../compontes/echarts-pieGroup'
+import axios from 'axios'
 
 export default {
   name: 'Page1',
@@ -70,9 +47,65 @@ export default {
   components: {
     NumberGroup,
     ChartsBarLine
-    // NumberGroup2,
-    // NumberElevator,
-    // echartsPieGroup
+  },
+  mounted () {
+    axios.get('/monitor/gird/getMain').then(res => {
+      const data= res.data.data[0]
+      this.chart1[0].value = data.regionType
+      this.chart1[1].value = data.yearNum
+      this.chart1[2].value = data.monthNum
+      this.chart1[3].value = data.weekNum
+    })
+    axios.get('/monitor/gird/getTrend').then(res => {
+      const data= res.data.data
+      this.data3 = []
+      for( let i = 0; i < data.length; i ++) {
+        this.data3.push({
+          value: data[i].totleNum,
+          name: data[i].monthDate
+        })
+      }
+    })
+    axios.get('/monitor/gird/getType').then(res => {
+      const data= res.data.data
+      this.pieData = []
+      for( let i = 0; i < data.length; i ++) {
+        this.pieData.push({
+          value: data[i].controlNum,
+          name: data[i].typeName
+        })
+      }
+    })
+    axios.get('/monitor/gird/getRegion').then(res => {
+      const data= res.data.data
+      this.chart3 = []
+      for( let i = 0; i < data.length; i ++) {
+        this.chart3.push({
+          value: data[i].gridNum,
+          name: data[i].regionAreaName
+        })
+      }
+    })
+    axios.get('/monitor/gird/getInspect').then(res => {
+      const data= res.data.data
+      this.data4 = []
+      for( let i = 0; i < data.length; i ++) {
+        this.data4.push({
+          value: data[i].inspectRate,
+          name: data[i].inspectMonth
+        })
+      }
+    })
+    axios.get('/monitor/gird/getAnalysis').then(res => {
+      const data= res.data.data
+      this.tableData = []
+      for( let i = 0; i < data.length; i ++) {
+        this.tableData.push({
+          num: data[i].factorName,
+          con: data[i].factorNum
+        })
+      }
+    })
   },
   data () {
     return {
@@ -314,158 +347,6 @@ export default {
           img: require('../compontes/img/text-bg-green.png')
         }
       ]],
-      // chart3: [[
-      //   {
-      //     name: '主体数量',
-      //     value: 843,
-      //     name1: '监管户数',
-      //     value1: 1237,
-      //     short: '药',
-      //     img: require('../compontes/img/text-bg-blue.png')
-      //   },
-      //   {
-      //     name: '主体数量',
-      //     value: 2179,
-      //     name1: '监管户数',
-      //     value1: 1270,
-      //     short: '妆',
-      //     img: require('../compontes/img/text-bg-pink.png')
-      //   },
-      //   {
-      //     name: '主体数量',
-      //     value: 1236,
-      //     name1: '监管户数',
-      //     value1: 79,
-      //     short: '械',
-      //     img: require('../compontes/img/text-bg-purple.png')
-      //   }
-      // ], [
-      //   {
-      //     name: '主体数量',
-      //     value: 783,
-      //     name1: '监管户数',
-      //     value1: 1987,
-      //     short: '药',
-      //     img: require('../compontes/img/text-bg-blue.png')
-      //   },
-      //   {
-      //     name: '主体数量',
-      //     value: 2239,
-      //     name1: '监管户数',
-      //     value1: 1180,
-      //     short: '妆',
-      //     img: require('../compontes/img/text-bg-pink.png')
-      //   },
-      //   {
-      //     name: '主体数量',
-      //     value: 1276,
-      //     name1: '监管户数',
-      //     value1: 16,
-      //     short: '械',
-      //     img: require('../compontes/img/text-bg-purple.png')
-      //   }
-      // ], [
-      //   {
-      //     name: '主体数量',
-      //     value: 923,
-      //     name1: '监管户数',
-      //     value1: 1117,
-      //     short: '药',
-      //     img: require('../compontes/img/text-bg-blue.png')
-      //   },
-      //   {
-      //     name: '主体数量',
-      //     value: 2299,
-      //     name1: '监管户数',
-      //     value1: 1230,
-      //     short: '妆',
-      //     img: require('../compontes/img/text-bg-pink.png')
-      //   },
-      //   {
-      //     name: '主体数量',
-      //     value: 1906,
-      //     name1: '监管户数',
-      //     value1: 90,
-      //     short: '械',
-      //     img: require('../compontes/img/text-bg-purple.png')
-      //   }
-      // ]],
-      chart4: [{
-        name: '全省特种设备总数',
-        value: 892
-      }, {
-        name: '全省特种设备总数',
-        value: 723
-      }, {
-        name: '全省特种设备总数',
-        value: 870
-      }],
-      chart5: [
-        {
-          chart1: {
-            data: [{
-              name: '已完成',
-              value: 116
-            }, {
-              name: '未完成',
-              value: 116
-            }],
-            img: require('../compontes/img/folder1.png')
-          },
-          chart2: {
-            data: [{
-              name: '完成率',
-              value: 75
-            }, {
-              name: '',
-              value: 25
-            }],
-            img: require('../compontes/img/folder2.png')
-          }
-        }, {
-          chart1: {
-            data: [{
-              name: '已完成',
-              value: 116
-            }, {
-              name: '未完成',
-              value: 116
-            }],
-            img: require('../compontes/img/folder1.png')
-          },
-          chart2: {
-            data: [{
-              name: '完成率',
-              value: 75
-            }, {
-              name: '',
-              value: 25
-            }],
-            img: require('../compontes/img/folder2.png')
-          }
-        }, {
-          chart1: {
-            data: [{
-              name: '已完成',
-              value: 116
-            }, {
-              name: '未完成',
-              value: 116
-            }],
-            img: require('../compontes/img/folder1.png')
-          },
-          chart2: {
-            data: [{
-              name: '完成率',
-              value: 75
-            }, {
-              name: '',
-              value: 25
-            }],
-            img: require('../compontes/img/folder2.png')
-          }
-        }
-      ]
     }
   },
   watch: {

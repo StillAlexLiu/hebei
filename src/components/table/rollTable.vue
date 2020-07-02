@@ -145,8 +145,8 @@ export default {
 
     .row {
         width: 100%;
-        height: 80px;
-
+        height: 120px;
+        overflow: hidden;
         .cell {
             height: 100%;
             float: left;

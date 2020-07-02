@@ -57,6 +57,16 @@ export default {
 
     },
     handler (...params) {
+      if (this.$route.name === '稽查办案') {
+        if(params[0].data.name === this.$store.state.pieDataTab.name) {
+          this.$store.state.pieDataTab = {
+            name: '',
+            type: ''
+          }
+        } else {
+          this.$store.state.pieDataTab = params[0].data
+        }
+      }
       this.$emit('click', params)
     }
   }

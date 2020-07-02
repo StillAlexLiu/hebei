@@ -46,6 +46,7 @@ import TabTable from './componets/tabTable'
 import numberPie from './componets/numberPie'
 import ChartMountain from './componets/ChartMountain'
 import BorderInOut from './componets/borderInOut'
+import axios from 'axios'
 
 export default {
   name: 'p1right',
@@ -77,73 +78,118 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$store.state)
+    // 市场主体年报情况
+    axios.get('/monitor/main/getCreditMainReportData').then(res => {
+      const data = res.data.data
+      this.dataTop[0].value = data[0].shouldReport
+      this.dataTop[1].value = data[0].alreadyReport
+      this.dataTop[2].value = data[0].publicityRate + '%'
+    })
+    axios.get('/monitor/main/getCreditClassReportData').then(res => {
+      const data = res.data.data
+      console.log(data, 'ddddd')
+      this.barLineData = []
+      for (let i = 0; i < data.length; i++) {
+        this.barLineData.push({
+          name: this.typeFun(data[i].mainClass),
+          value: data[i].alreadyReport,
+          value2: data[i].publicityRate
+        })
+      }
+    })
+    // 信用约束
+    axios.get('/monitor/main/getCreditConstraintData').then(res => {
+      const data = res.data.data
+      this.pieData.all.value = data[0].exceptionTotal
+      this.pieData.list[0].value = data[0].moveNum
+      this.pieData.list[1].value = data[0].exceptionNum
+      this.pieData.list[2].value = data[0].dishonestyNum
+    })
+    // 经营异常因素分析
+    axios.get('/monitor/main/getAbnormalFactorsData').then(res => {
+      const data = res.data.data
+      this.mountainData[0].value = data[0].zelingNum
+      this.mountainData[1].value = data[0].cheatNum
+      this.mountainData[2].value = data[0].outContactNum
+      this.mountainData[3].value = data[0].overdueNum
+    })
+    // 失信企业地区分布
+    axios.get('/monitor/main/getDishonestyScatterData').then(res => {
+      const data = res.data.data
+      this.barHorizontalData = []
+      for (let i = 0; i < data.length; i++) {
+        this.barHorizontalData.push({
+          name: data[i].orgName,
+          value: data[i].entepriseNum
+        })
+      }
+    })
   },
   data () {
     return {
       dataTop: [
         {
           name: '应报（户）',
-          value: 6041587,
+          value: 0,
           img: require('./componets/img/nianbao/1.png')
         },
         {
           name: '已报（户）',
-          value: 2319583,
+          value: 0,
           img: require('./componets/img/nianbao/2.png')
         },
         {
           name: '公示率',
-          value: '38.39%',
+          value: 0,
           img: require('./componets/img/nianbao/3.png')
         }
       ],
       barLineData: [
-        {
-          name: '公有制企业',
-          value: 62661,
-          value2: 53.44
-        },
-        {
-          name: '私营企业',
-          value: 842206,
-          value2: 54.75
-        },
-        {
-          name: '外资企业',
-          value: 6497,
-          value2: 66.72
-        },
-        {
-          name: '个体户',
-          value: 1352894,
-          value2: 31.75
-        },
-        {
-          name: '农专',
-          value: 51927,
-          value2: 45.27
-        }
+        // {
+        //   name: '公有制企业',
+        //   value: 62661,
+        //   value2: 53.44
+        // },
+        // {
+        //   name: '私营企业',
+        //   value: 842206,
+        //   value2: 54.75
+        // },
+        // {
+        //   name: '外资企业',
+        //   value: 6497,
+        //   value2: 66.72
+        // },
+        // {
+        //   name: '个体户',
+        //   value: 1352894,
+        //   value2: 31.75
+        // },
+        // {
+        //   name: '农专',
+        //   value: 51927,
+        //   value2: 45.27
+        // }
       ],
       pieData: {
         all: {
           name: '经营异常主体',
-          value: 1025552,
+          value: 0,
           img: require('./componets/img/yueshu/0.png')
         },
         list: [
           {
             name: '移出',
-            value: 458256,
+            value: 0,
             img: require('./componets/img/yueshu/1.png')
           },
           {
             name: '列异',
-            value: 1003764,
+            value: 0,
             img: require('./componets/img/yueshu/2.png')
           }, {
             name: '列严',
-            value: 21788,
+            value: 0,
             img: require('./componets/img/yueshu/3.png')
           }
         ]
@@ -151,38 +197,38 @@ export default {
       mountainData: [
         {
           name: '未在规定责令的期限内公示有关企业信息',
-          value: 1069,
+          value: 0,
           color: 'linear-gradient(180deg,rgba(79,255,148,1) 0%,rgba(56,167,120,1) 100%)'
         },
         {
           name: '公示企业信息隐瞒真实信息、弄虚作假',
-          value: 5530,
+          value: 0,
           color: 'linear-gradient(180deg,rgba(87,182,255,1) 0%,rgba(0,138,255,1) 100%)'
         },
         {
           name: '通过登记的住所(经营场所)无法联系',
-          value: 97748,
+          value: 0,
           color: 'linear-gradient(180deg,rgba(255,245,87,1) 0%,rgba(255,188,0,1) 100%)'
         },
         {
           name: '未按规定期限公示年度报告',
-          value: 1872436,
+          value: 0,
           color: 'linear-gradient(180deg,rgba(255,87,87,1) 0%,rgba(255,64,64,1) 100%)'
         }
       ],
 
       barHorizontalData: [
-        { name: '石家庄', value: '4315' },
-        { name: '唐山', value: '2366' },
-        { name: '秦皇岛', value: '1098' },
-        { name: '邯郸', value: '2711' },
-        { name: '邢台', value: '1736' },
-        { name: '保定', value: '1942' },
-        { name: '张家口', value: '1115' },
-        { name: '承德', value: '649' },
-        { name: '沧州', value: '2388' },
-        { name: '廊坊', value: '1927' },
-        { name: '衡水', value: '1512' }
+        // { name: '石家庄', value: '4315' },
+        // { name: '唐山', value: '2366' },
+        // { name: '秦皇岛', value: '1098' },
+        // { name: '邯郸', value: '2711' },
+        // { name: '邢台', value: '1736' },
+        // { name: '保定', value: '1942' },
+        // { name: '张家口', value: '1115' },
+        // { name: '承德', value: '649' },
+        // { name: '沧州', value: '2388' },
+        // { name: '廊坊', value: '1927' },
+        // { name: '衡水', value: '1512' }
       ]
     }
   },
@@ -195,6 +241,36 @@ export default {
         key: 'p1',
         data: null
       })
+    },
+    typeFun (type) {
+      switch (type) {
+        case '市场主体':
+          return 0
+        case '公有制企业':
+          return 'A'
+        case '外资企业':
+          return 'C'
+        case '私营企业':
+          return 'B'
+        case '个体工商户':
+          return 'AA'
+        case '农民合作社':
+          return 'D'
+        case 'A':
+          return '公有制企业'
+        case 'C':
+          return '外资企业'
+        case 'B':
+          return '私营企业'
+        case 'AA':
+          return '个体工商户'
+        case 'D':
+          return '农民合作社'
+        case '0':
+          return '其他'
+        case '':
+          return '市场主体'
+      }
     }
   }
 }

@@ -6,7 +6,8 @@
                 <img :src="item.imgUrl" alt="">
             </div>
             <div class="name_p1 h-1-4 cell  full-width">{{item.name1}}</div>
-            <div class="num_p1 h-1-4 cell  full-width">{{item.num1}}<span class="sub">户</span></div>
+            <div class="num_p1 h-1-4 cell  full-width" v-if="item.unit">{{item.num1}}<span class="sub">{{item.unit}}</span></div>
+            <div class="num_p1 h-1-4 cell  full-width" v-else>{{item.num1}}<span class="sub">家</span></div>
         </container-border3>
     </div>
 </template>

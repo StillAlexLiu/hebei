@@ -44,7 +44,7 @@ export default {
     },
     titleSize: {
       type: Number,
-      default: 22
+      default: 50
     }
   },
   computed: {

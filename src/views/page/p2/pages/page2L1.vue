@@ -1,26 +1,58 @@
 <template>
     <div class="Page2_1 full">
-        <container class="h-1-3" title="智慧食品生产监管">
-            <NumberTop :data='data2[dimension]'></NumberTop>
+        <container class="h-1-3" title="食品相关主体情况">
+            <!-- <NumberTop :data='data2[dimension]'></NumberTop> -->
+            <div class="w-1-2 full-height">
+              <NumberGroup :data='numberData' class="full"/>
+            </div>
+            <div class="w-1-2 full-height">
+              <container-center-title2 title="食品许可办理趋势"  class="full" >
+                <ChartsBarLine :data="linesData2" :legend="['食品生产','食品销售','食品经营(非销售)']"
+                               :type="['line','line','line']"
+                               :two-axis="false"
+                               :units="['单位：家']"
+                               :colors="['#FFD589','#FE6941','#61EADF']"
+                               :dimensions="['name','value','value1','value2']"/>
+              </container-center-title2>
+            </div>
         </container>
         <div class="h-1-3">
-            <container class="w-1-2 full-height" title="监督检查发现问题类型占比分析">
-                <ChartsPiePiecewise :data='hellowPie2[dimension].data'
+            <container class="w-1-2 full-height" title="主要生产食品类型">
+                <!-- <ChartsPiePiecewise :data='hellowPie2[dimension].data'
                                     :img="img"
                                     :img-size="[90,90]"
                                     :img-position="['center','30%']"
                                     :title-position="['center','55%']"
-                                    :title="hellowPie2[dimension].title"/>
+                                    :title="hellowPie2[dimension].title"/> -->
+              <ChartsScatter :dimensions="['name','value','size']" :data="scatterData" :base-size="1"
+                           :unit="'个'"
+                           :showX="false"  :showSize='true'
+                           :colors="['#F05561','#35D35D','#BF72F4','#8B7AF5','#27B14A','#E95F37','#E7C048','#FF9177','#E6AB03','#29B2F4','#5B8FF9','#14D2C6','#27B14A']"/>
             </container>
-            <container class="w-1-2 full-height" title="各市监督抽检情况统计">
-                <ChartsBarLine :data='chart3[dimension].data' :dimensions="['name','value']"
+            <container class="w-1-2 full-height" title="食品生产主体区域分布">
+                <!-- <ChartsBarLine :data='chart3[dimension].data' :dimensions="['name','value']"
                                :type="['bar']"
                                :units="['单位：户次']"
                                :colors="[barColor]"
-                               :legend="['监督检查数量']"></ChartsBarLine>
+                               :legend="['监督检查数量']"></ChartsBarLine> -->
+              <ChartsBarLine :data="barData3" :dimensions="['name','value']" :units="['单位：户']"
+                               :type="['bar']"
+                               :border-radius="false"
+                               :bar-width="30"
+                               :legend="['主体数量']"
+                               :colors="[barColor2]"/>
             </container>
         </div>
-        <div class="h-1-3">
+        <container class="h-1-3" title="食品生产监管情况">
+          <container-center-title2 title="食品生产检查需整改情况"  class="full-height w-1-4" >
+            <ChartsLiquidFill :data='liquidfill'/>
+          </container-center-title2>
+          <container-center-title2 title="食品生产监管趋势"  class="full-height w-3-4" >
+            <ChartsBarLine :data='chart10' :dimensions="['name','value']" :legend="['监管户次']"
+                               :type="['line']" :colors="['#5B8FF9']" smooth :units="['单位：户次']"/>
+          </container-center-title2>
+        </container>
+        <!-- <div class="h-1-3">
             <container class="w-1-2 full-height" title="食品抽检不合格情况分析">
                 <ChartsPie :data='hellowPie3[dimension].data'
                            :title="hellowPie3[dimension].title"></ChartsPie>
@@ -34,13 +66,15 @@
                                :smooth="true"
                                :legend="['抽查件数']"></ChartsBarLine>
             </container>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
 import echarts from 'echarts'
 import NumberTop from '../compontes/NumberTop'
+import Mock from 'mockjs'
+import NumberGroup from '../../p3/components/NumberGroup'
 export default {
   name: 'Page2_1',
   props: {
@@ -50,10 +84,193 @@ export default {
     }
   },
   components: {
-    NumberTop
+    NumberTop,
+    NumberGroup
   },
   data () {
     return {
+      numberData: [
+        {
+          imgUrl: require('../compontes/img/group/3.png'),
+          name1: '食品生产',
+          num1: 301,
+          unit: '户'
+        }, {
+          imgUrl: require('../compontes/img/group/4.png'),
+          name1: '食品经营(销售)',
+          num1: 12,
+          unit: '户'
+        }, {
+          imgUrl: require('../compontes/img/group/5.png'),
+          name1: '食品经营(非销售)',
+          num1: 1,
+          unit: '户'
+        }
+      ],
+      linesData2: [{
+        name: '2015',
+        value: Mock.Random.natural(10000, 50000),
+        value1: Mock.Random.natural(10000, 50000),
+        value2: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '2016',
+        value: Mock.Random.natural(10000, 50000),
+        value1: Mock.Random.natural(10000, 50000),
+        value2: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '2017',
+        value: Mock.Random.natural(10000, 50000),
+        value1: Mock.Random.natural(10000, 50000),
+        value2: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '2018',
+        value: Mock.Random.natural(10000, 50000),
+        value1: Mock.Random.natural(10000, 50000),
+        value2: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '2019',
+        value: Mock.Random.natural(10000, 50000),
+        value1: Mock.Random.natural(10000, 50000),
+        value2: Mock.Random.natural(10000, 50000)
+      }],
+      chart10: [{
+        name: '2019.06',
+        value: Mock.Random.natural(75, 100)
+      }, {
+        name: '2019.07',
+        value: Mock.Random.natural(75, 100)
+      }, {
+        name: '2019.08',
+        value: Mock.Random.natural(75, 100)
+      }, {
+        name: '2019.09',
+        value: Mock.Random.natural(75, 100)
+      }, {
+        name: '2019.10',
+        value: Mock.Random.natural(75, 100)
+      }, {
+        name: '2019.11',
+        value: Mock.Random.natural(75, 100)
+      }, {
+        name: '2019.12',
+        value: Mock.Random.natural(75, 100)
+      }, {
+        name: '2020.01',
+        value: Mock.Random.natural(75, 100)
+      }, {
+        name: '2020.02',
+        value: Mock.Random.natural(75, 100)
+      }, {
+        name: '2020.03',
+        value: Mock.Random.natural(75, 100)
+      }, {
+        name: '2020.04',
+        value: Mock.Random.natural(75, 100)
+      }, {
+        name: '2020.05',
+        value: Mock.Random.natural(75, 100)
+      }, {
+        name: '2020.06',
+        value: Mock.Random.natural(75, 100)
+      }],
+      liquidfill: ['维持', 92.2],
+      barData3: [
+        {
+            name: '石家庄市',
+            value: '23'
+          },
+          {
+            name: '唐山市',
+            value: '16'
+          },
+          {
+            name: '秦皇岛市',
+            value: '13'
+          },
+          {
+            name: '邯郸市',
+            value: '34'
+          },
+          {
+            name: '邢台市',
+            value: '13'
+          },
+          {
+            name: '保定市',
+            value: '42'
+          },
+          {
+            name: '张家口市',
+            value: '35'
+          },
+          {
+            name: '承德市',
+            value: '32'
+          },
+          {
+            name: '沧州市',
+            value: '21'
+          },
+          {
+            name: '廊坊市',
+            value: '12'
+          },
+          {
+            name: '衡水市',
+            value: '45'
+          }
+      ],
+      barColor2: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
+        {
+          offset: 0,
+          color: 'rgba(34, 174, 197, 1)'
+        },
+        {
+          offset: 1,
+          color: 'rgba(37, 67, 95, .3)'
+        }
+      ]),
+      scatterData: [{
+        name: '冷冻饮料',
+        value: 3061
+      }, {
+        name: '乳制品',
+        value: 2163
+        // size: Mock.Random.natural(10, 200)
+      }, {
+        name: '速冻食品',
+        value: 3963
+      }, {
+        name: '粗粮加工品',
+        value: 5963
+      }, {
+        name: '罐头',
+        value: 2963
+      }, {
+        name: '调味品',
+        value: 1163
+      }, {
+        name: '薯类和膨化食品',
+        value: 8063
+      }, {
+        name: '油脂及其制品',
+        value: 5863
+      }, {
+        name: '食用油',
+        value: 3803
+      }, {
+        name: '方便食品',
+        value: 2963
+      }, {
+        name: '饮料',
+        value: 5763
+      }, {
+        name: '肉制品',
+        value: 1763
+      }, {
+        name: '饼干',
+        value: 5063
+      }],
       img: require('./../compontes/img/info.png'),
       barColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
         {

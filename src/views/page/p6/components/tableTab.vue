@@ -18,10 +18,11 @@ export default {
         }, {
           name: '线索',
           key: 'clew'
-        }, {
-          name: '协查',
-          key: 'check'
         }
+        // , {
+        //   name: '协查',
+        //   key: 'check'
+        // }
       ],
       active: 0
     }

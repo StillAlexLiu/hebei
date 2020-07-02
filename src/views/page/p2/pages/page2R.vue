@@ -1,51 +1,59 @@
 <template>
     <div class="Page2 full " style="position: relative">
-        <div class="h-1-3">
-            <container class="full-height w-1-2" title="“三小”监管情况">
-                <FoodNumberGroup class="full-height w-1-3" :data="groupData"/>
-                <div class="full-height w-2-3">
-                    <ChartsBarLine :data="linesData" :legend="['小作坊','小餐饮','小摊点']" :type="['line','line','line']"
-                                   :two-axis="false"
-                                   :colors="['#FE6941','#FFD589','#B8E986']"
-                                   :dimensions="['name','value','value1','value2']"/>
-                </div>
-            </container>
-            <container class="full-height w-1-2" title="负面清单">
-                <ChartsWord :data="wordData"/>
-            </container>
-        </div>
-        <div class="h-1-3">
-            <container class="full-height w-1-2" title="食品安全重点场所监管">
-                <ChartsBarLine :data="barLinesData" :legend="['校园','食品生产集中区','食品交易市场','问题发现率']"
+      <container class="h-1-3 full-width" title="食品销售监管">
+        <container-center-title2 title="食品销售主体地区分布"  class="w-1-2 full-height">
+          <ChartsBarSimple :data="leftImage" :dimensions="['name','value']" unit="单位：户" :barWidth='30' :barRadios='[0, 0, 0, 0]' :legend="['主体数量']"
+                  :colors="['#549AE6','#68CAFF','#9BD84C','#5AE7C9','#C0EC91','#92AAF7','#FFDA94','#FEA85F','#FE754A','#FFA2AE','#F7B74D', '#68CAFF', '#549AE6']"/>
+        </container-center-title2>
+        <container-center-title2 title="食品销售检查趋势分析" class="w-1-2 full-height">
+          <ChartsBarLine :data="linesData3" :legend="['检查数量']"
+                               :type="['line']"
+                               :two-axis="false"
+                               :isArea="true"
+                               :units="['单位户次']"
+                               :colors="['#FC4A5F']"
+                               :dimensions="['name','value']"/>
+        </container-center-title2>
+      </container>
+      <container class="h-1-3 full-width" title="餐饮监管情况">
+        <container-center-title2 title="餐饮检查类型分布"  class="w-1-2 full-height">
+          <ChartsPie :data="pieData" :roseType="'radius'" :is-pie="true" :show-value="true"/>
+          <!-- <ChartsBarLine :data="barLinesData" :legend="['校园','食品生产集中区','食品交易市场','问题发现率']"
                                :type="['bar','bar','bar','line']"
                                :data-index="[0,0,0,1]"
                                :colors="['#FE6941','#4A90E2','#91D243','#FC4A5F']"
                                :units="['当月检查次数（户次）']"
-                               :dimensions="['name','value','value1','value2','value3']"/>
-            </container>
-            <container class="full-height w-1-2" title="特殊食品安全">
-                <ChartsBarLine :data="linesData2" :legend="['婴幼儿配方奶粉','保健食品','特殊医学用途配方食品']"
-                               :type="['line','line','line']"
+                               :dimensions="['name','value','value1','value2','value3']"/> -->
+        </container-center-title2>
+        <container-center-title2 title="餐饮检查趋势分析" class="w-1-2 full-height">
+          <ChartsBarLine :data="linesData2" :legend="['检查数量']"
+                               :type="['line']"
                                :two-axis="false"
-                               :units="['当月抽检合格率（%）']"
-                               :colors="['#FE6941','#FFD589','#B8E986']"
-                               :dimensions="['name','value','value1','value2']"/>
-            </container>
-        </div>
+                               :isArea="true"
+                               :units="['单位户次']"
+                               :colors="['#B8E986']"
+                               :dimensions="['name','value']"/>
+        </container-center-title2>
+      </container>
         <div class="h-1-3">
-            <container class="full-height w-1-2" title="网络餐饮安全">
-                <div slot="right" class="right-btn" @click="btnClick">网络餐饮报告</div>
-                <InfoBlock class="full-height w-2-5" :data="blockData"/>
-                <div class="full-height w-3-5">
-                    <ChartsPie :data="pieData" :show-legend="false" :title="'网络餐饮差评\n因素分析'"/>
-                </div>
-            </container>
-            <container class="full-height w-1-2" title="农产品安全">
-                <NumberGroupRight class="full-height w-2-5" :data="listData"/>
-                <div class="full-height w-3-5">
-                    <ChartsPieValueLegend :data="pieData2" :show-legend="false"/>
-                </div>
-            </container>
+          <container class="full-height w-1-2" title="“三小”监管情况">
+                <!-- <div slot="right" class="right-btn" @click="btnClick">网络餐饮报告</div> -->
+            <FoodNumberGroup class="full-height w-1-3" :data="groupData"/>
+            <div class="full-height w-2-3">
+                <ChartsBarLine :data="linesData" :legend="['小作坊','小餐饮','小摊点']" :type="['line','line','line']"
+                                :two-axis="false"
+                                :units="['单位：当月登记/备案数（户）']"
+                                :colors="['#FE6941','#FFD589','#B8E986']"
+                                :dimensions="['name','value','value1','value2']"/>
+            </div>
+          </container>
+          <container class="full-height w-1-2" title="特殊食品安全">
+            <ChartsBarLine :data="linesData5" :legend="['婴幼儿配方奶粉','保健食品','特殊医学用途配方食品']" :type="['line','line','line']"
+                                :two-axis="false"
+                                :units="['监管户次']"
+                                :colors="['#FE6941','#FFD589','#B8E986']"
+                                :dimensions="['name','value','value1','value2']"/>
+          </container>
         </div>
         <div class="dia" v-if="diaShow">
             <Table2 :data="data" :column="column"/>
@@ -58,16 +66,73 @@
 
 import FoodNumberGroup from '../compontes/FoodNumberGroup'
 import Mock from 'mockjs'
-import ChartsWord from '../compontes/ChartsWord'
-import InfoBlock from '../compontes/InfoBlock'
-import NumberGroupRight from '../compontes/NumberGroupRight'
+// import ChartsWord from '../compontes/ChartsWord'
+// import InfoBlock from '../compontes/InfoBlock'
+// import NumberGroupRight from '../compontes/NumberGroupRight'
 import Table2 from '../compontes/table2'
 
 export default {
   name: 'Page2R',
-  components: { Table2, NumberGroupRight, InfoBlock, ChartsWord, FoodNumberGroup },
+  components: { Table2, FoodNumberGroup },
   data () {
     return {
+      pieData: [
+        {
+          name: '重量检查',
+          value: Mock.Random.natural(500, 1300)
+        }, {
+          name: '日常检查',
+          value: Mock.Random.natural(500, 1300)
+        }, {
+          name: '检查要点',
+          value: Mock.Random.natural(500, 1300)
+        }, {
+          name: '现场执法',
+          value: Mock.Random.natural(500, 1300)
+        }
+      ],
+      leftImage: [
+        {
+          name: '唐山市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '石家庄市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '保定市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '辛集市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '定州市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '秦皇岛市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '廊坊市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '承德市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '沧州市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '邢台市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '衡水市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '邯郸市',
+          value: Mock.Random.natural(1, 20)
+        }, {
+          name: '张家口市',
+          value: Mock.Random.natural(1, 20)
+        }
+      ],
       diaShow: false,
       selected: '生产',
       groupData: [{
@@ -79,6 +144,37 @@ export default {
       }, {
         name: '小摊点备案卡/件',
         value: '134847'
+      }],
+      linesData5: [{
+        name: '2019-11',
+        value: Mock.Random.natural(10000, 50000),
+        value1: Mock.Random.natural(10000, 50000),
+        value2: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '2019-12',
+        value: Mock.Random.natural(10000, 50000),
+        value1: Mock.Random.natural(10000, 50000),
+        value2: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '2020-01',
+        value: Mock.Random.natural(10000, 50000),
+        value1: Mock.Random.natural(10000, 50000),
+        value2: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '2020-02',
+        value: Mock.Random.natural(10000, 50000),
+        value1: Mock.Random.natural(10000, 50000),
+        value2: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '2020-03',
+        value: Mock.Random.natural(10000, 50000),
+        value1: Mock.Random.natural(10000, 50000),
+        value2: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '2020-04',
+        value: Mock.Random.natural(10000, 50000),
+        value1: Mock.Random.natural(10000, 50000),
+        value2: Mock.Random.natural(10000, 50000)
       }],
       linesData: [{
         name: '2019-12',
@@ -149,35 +245,78 @@ export default {
         value3: Mock.Random.natural(10000, 50000)
       }],
       linesData2: [{
-        name: '2019-12',
-        value: Mock.Random.natural(10000, 50000),
-        value1: Mock.Random.natural(10000, 50000),
-        value2: Mock.Random.natural(10000, 50000)
+        name: '1月',
+        value: Mock.Random.natural(10000, 50000)
       }, {
-        name: '2020-01',
-        value: Mock.Random.natural(10000, 50000),
-        value1: Mock.Random.natural(10000, 50000),
-        value2: Mock.Random.natural(10000, 50000)
+        name: '2月',
+        value: Mock.Random.natural(10000, 50000)
       }, {
-        name: '2020-02',
-        value: Mock.Random.natural(10000, 50000),
-        value1: Mock.Random.natural(10000, 50000),
-        value2: Mock.Random.natural(10000, 50000)
+        name: '3月',
+        value: Mock.Random.natural(10000, 50000)
       }, {
-        name: '2020-03',
-        value: Mock.Random.natural(10000, 50000),
-        value1: Mock.Random.natural(10000, 50000),
-        value2: Mock.Random.natural(10000, 50000)
+        name: '4月',
+        value: Mock.Random.natural(10000, 50000)
       }, {
-        name: '2020-04',
-        value: Mock.Random.natural(10000, 50000),
-        value1: Mock.Random.natural(10000, 50000),
-        value2: Mock.Random.natural(10000, 50000)
+        name: '5月',
+        value: Mock.Random.natural(10000, 50000)
       }, {
-        name: '2020-05',
-        value: Mock.Random.natural(10000, 50000),
-        value1: Mock.Random.natural(10000, 50000),
-        value2: Mock.Random.natural(10000, 50000)
+        name: '6月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '7月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '8月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '9月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '10月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '11月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '12月',
+        value: Mock.Random.natural(10000, 50000)
+      }],
+      linesData3: [{
+        name: '1月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '2月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '3月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '4月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '5月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '6月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '7月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '8月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '9月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '10月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '11月',
+        value: Mock.Random.natural(10000, 50000)
+      }, {
+        name: '12月',
+        value: Mock.Random.natural(10000, 50000)
       }],
       wordData: [
         {
@@ -229,19 +368,6 @@ export default {
           value: Mock.Random.natural(10000, 50000)
         }
       ],
-      pieData: [{
-        name: '环境卫生',
-        value: '4545'
-      }, {
-        name: '吃出异物',
-        value: '1857'
-      }, {
-        name: '食物变质',
-        value: '3783'
-      }, {
-        name: '疑似事故',
-        value: '3868'
-      }],
       blockData: {
         title: '网络餐饮评价好评率',
         img: require('./../compontes/img/刀叉icon@2x.png'),
@@ -264,7 +390,7 @@ export default {
         name: '为改正',
         value: '7'
       }],
-      column: ['门店名', '品类名', '食安差评类型', '吃出异物', '食品变质', '环境卫生', '疑似事故', '评价内容'],
+      // column: ['门店名', '品类名', '食安差评类型', '吃出异物', '食品变质', '环境卫生', '疑似事故', '评价内容'],
       data: [
         ['云膳过桥米线(古美路旗舰', '小吃快餐', ' 食品变质', '0', ' 0', ' 0 ', '0 ', '点评上团的鸡汤米线加'],
         ['云膳过桥米线(古美路旗舰', '小吃快餐', ' 食品变质', '0', ' 0', ' 0 ', '0 ', '点评上团的鸡汤米线加'],

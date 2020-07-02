@@ -1,9 +1,9 @@
 <template>
     <div class="Page1 full">
-      <container class="h-1-3 full-width" title="网格化监管">
+      <container class="h-1-3 full-width" title="双随机监管">
         <container-center-title2 title="本局双随机监管概念"  class="full-height w-1-2" >
           <div class="w-1-3 full-height" v-for="(item, index) in threePieData" :key='index'>
-            <chartsPie :data='item' :is-percent="true" :show='false'/>
+            <chartsPie :data='item' :is-percent="true" :show='false' :pieColor='item.color'/>
           </div>
           <!-- <ChartsBarLine :data="data4" :type="['line']" :dimensions="['name','value']"
             :units="['']"
@@ -142,13 +142,16 @@ export default {
       threePieData: [
         {
           name: '任务数',
-          num: 41
+          num: 41,
+          color: '#FE6941'
         }, {
           name: '完成数',
-          num: 22
+          num: 22,
+          color: '#B8E986'
         }, {
           name: '完成率',
-          num: 23
+          num: 23,
+          color: '#4B8FE2'
         }
       ],
       tableData: [
@@ -230,19 +233,19 @@ export default {
       ],
       numberGroup: [
         {
-          name: '产业品牌',
+          name: '实地检查',
           value: 7938,
           img: require('../compontes/img/111.png'),
           unit: ''
         },
         {
-          name: '企业品牌',
+          name: '网络测试',
           value: 1511,
           img: require('../compontes/img/112.png'),
           unit: ''
         },
         {
-          name: '区域匹配',
+          name: '书面检查',
           value: 17075,
           img: require('../compontes/img/113.png'),
           unit: ''
@@ -295,7 +298,7 @@ export default {
         {
           name: '抽查户次',
           value: 23380,
-          unit: '户',
+          unit: '',
           img: require('../compontes/img/标@2x-4_wps图片.png')
         }
       ],

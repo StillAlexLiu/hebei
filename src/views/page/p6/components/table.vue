@@ -2,27 +2,24 @@
     <div id="table">
         <table border="0" cellspacing="0" cellpadding="0">
             <tr class="table_firstTR">
-                <th>预警级别</th>
-                <th>收件时间</th>
-                <th>剩余时间</th>
-                <th>当事人名称</th>
-                <th>经办机构</th>
-                <th>线索类型</th>
-                <th>当前状态</th>
+                <th v-for="(item, index) in header" :key="index">{{ item }}</th>
             </tr>
             <tr v-for="(item,index) in data" :key="index" class="row">
                 <td>
                     <div class="color-can">
                         <div class="color"></div>
-                        <div class="value">{{item.level}}</div>
+                         <div class="value" >{{item.warningName}}</div>
+                        <!-- <div class="value" v-if="item.warningLevel === '1'">红色预警</div>
+                        <div class="value" v-if="item.warningLevel === '2'">橙色预警</div>
+                        <div class="value" v-if="item.warningLevel === '3'">黄色预警</div> -->
                     </div>
                 </td>
-                <td>{{item.lnboxTime}}</td>
+                <td>{{item.regtime}}</td>
                 <td>{{item.surplusTime}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.institution}}</td>
-                <td>{{item.type}}</td>
-                <td>{{item.state}}</td>
+                <td>{{item.unitname}}</td>
+                <td>{{item.casedep}}</td>
+                <td>{{item.clueType}}</td>
+                <td>{{item.caseStatus}}</td>
             </tr>
         </table>
     </div>
@@ -31,7 +28,7 @@
 <script>
 export default {
   components: {},
-  props: ['data'],
+  props: ['data', 'header'],
   data () {
     return {}
   }

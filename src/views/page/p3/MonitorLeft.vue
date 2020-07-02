@@ -39,7 +39,7 @@ export default {
         {
           imgUrl: require('./components/img/1.png'),
           name1: '接入总量',
-          num1: 303
+          num1: 301
         }, {
           imgUrl: require('./components/img/9.png'),
           name1: '餐饮',
@@ -55,7 +55,7 @@ export default {
         }, {
           imgUrl: require('./components/img/5.png'),
           name1: '煤检卡口',
-          num1: 17
+          num1: 15
         }
       ],
       city: [
@@ -76,7 +76,7 @@ export default {
       pieData: [
         {
           name: '煤检卡口',
-          value: 17
+          value: 15
         },
         {
           name: '餐饮',
@@ -93,17 +93,25 @@ export default {
       ],
       chart3: [
         {
+          name: '石家庄市',
+          value: 3
+        },
+        {
+          name: '邢台市',
+          value: 1
+        },
+        {
           name: '唐山市',
-          value: 106
+          value: 108
         }, {
           name: '保定市',
-          value: 52
+          value: 54
         }, {
           name: '秦皇岛市',
-          value: 38
+          value: 39
         }, {
           name: '承德市',
-          value: 18
+          value: 19
         }, {
           name: '沧州市',
           value: 3
@@ -112,10 +120,10 @@ export default {
           value: 11
         }, {
           name: '邯郸市',
-          value: 32
+          value: 33
         }, {
           name: '张家口市',
-          value: 26
+          value: 30
         }
       ],
       liquidfill: ['维持', 70.13]

@@ -49,7 +49,7 @@ export default {
       deep: true,
       immediate: false,
       handler: function () {
-        if(this.data.name){
+        if (this.data.name) {
           this.item = true
         }
         // if (this.data && this.data.items && this.data.items.length > 0) {

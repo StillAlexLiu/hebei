@@ -6,7 +6,13 @@
                     <div class='name h-5-9'>{{item.address}}</div>
                     <div class='address h-4-9'>{{item.name}}</div>
                 </div>
-                <player slot='calc' class='full-height video' :index='index'
+                <div v-if="item.state === 50" slot='calc'  class='full-height video' :style="{'background-image': 'url(' + imgage + ')' ,'background-size':' 100% 100%', 'background-repeat':' no-repeat'}">
+                  <!-- <img src="./components/img/不在线图@2x_wps图片.png" class="full-height full-width" alt=""> -->
+                  <div class="full-width full-height" :style="{'text-align':'center','padding-top':'30%','font-size':'35px'}">
+                    该监控视频暂不在线...
+                  </div>
+                </div>
+                <player slot='calc' class='full-height video' v-else :index='index'
                         :src='item.url'/>
             </container-calc>
         </div>
@@ -23,6 +29,7 @@ export default {
   name: 'MonitorCenter',
   data () {
     return {
+      imgage: require('./components/img/不在线图@2x_wps图片.png'),
       videoUrl: [],
       //   videoNames: []
       videoNames: [
@@ -89,7 +96,7 @@ export default {
       console.log(data2, 'rrww')
       if (data2.regionsIndexCode) {
         // 海康
-        axios.get('http://172.20.10.9/blade-camera/camera/hik/getHikCameraUrls?regionsIndexCode=' + data2.regionsIndexCode).then(res1 => {
+        axios.get('/monitor/main/hik/getHikCameraUrls?regionsIndexCode=' + data2.regionsIndexCode).then(res1 => {
         // axios.get('http://192.168.1.103/blade-camera/camera/hik/getHikCameraUrls?regionsIndexCode=' + data2.regionsIndexCode).then(res1 => {
           const data = res1.data.data
           console.log(data, 'hkkk')
@@ -100,7 +107,8 @@ export default {
             Vue.set(that.videoNames, that.videoIndex, {
               name: data[i].cameraName,
               address: data2.address,
-              url: data[i].cameraUrl
+              url: data[i].cameraUrl,
+              state: 0
             })
             that.videoIndex++
           }
@@ -109,29 +117,30 @@ export default {
         // 华烨
         console.log(data2, '华烨')
         HuaYeVideo.getList(data2.userName, data2.pwd).then(res2 => {
-          console.log(res2, '华烨22222')
-          if (res2.data.result === 0) {
-            const data = res2.data.devlist
-            // console.log(data, 'ff')
-            for (let i = 0; i < data.length; i++) {
-              HuaYeVideo.checkRequest(data2.userName, data2.pwd, data[i].sn, data[i].hlsurl).then(flow => {
-                console.log(flow, '华烨3333')
-                // for (let a = 0; a < 6; a++) {
-                if (that.videoIndex >= 6) {
-                  that.videoIndex = 0
-                }
-                Vue.set(that.videoNames, that.videoIndex, {
-                  // name: data[i].name,
-                  name: data[i].name,
-                  address: data2.name,
-                  // url: 'http://218.11.10.172:83/openUrl/NVAjJcs/live.m3u8'
-                  url: flow.data.hlsurl
-                })
-                // console.log(that.videoIndex, 'ffxxxxx')
-                that.videoIndex++
+          console.log(res2.data, '华烨22222')
+          // if (res2.data.result === 0) {
+          const data = res2.data.devlist
+          // console.log(data, 'ff')
+          for (let i = 0; i < data.length; i++) {
+            HuaYeVideo.checkRequest(data2.userName, data2.pwd, data[i].sn, data[i].hlsurl).then(flow => {
+              console.log(flow, '华烨3333')
+              // for (let a = 0; a < 6; a++) {
+              if (that.videoIndex >= 6) {
+                that.videoIndex = 0
+              }
+              Vue.set(that.videoNames, that.videoIndex, {
+                // name: data[i].name,
+                name: data[i].name,
+                address: data2.name,
+                // url: 'http://218.11.10.172:83/openUrl/NVAjJcs/live.m3u8'
+                url: flow.data.hlsurl,
+                state: flow.data.result
               })
-            }
+              // console.log(that.videoIndex, 'ffxxxxx')
+              that.videoIndex++
+            })
           }
+          // }
         })
       }
       console.log(that.videoNames, '6个视频')

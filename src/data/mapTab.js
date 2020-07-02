@@ -214,42 +214,51 @@ export default [
       children: [
         {
           name: '公有制企业',
+          type: 'A',
           icon: require('../assets/images/mapTabs/p1/t1/1.png'),
           active: false,
           json: [],
           number: 290,
-          id: ''
+          id: '',
+          children: [{}]
         },
         {
           name: '外资企业',
+          type: 'C',
           icon: require('../assets/images/mapTabs/p1/t1/5.png'),
           active: false,
           json: [],
           number: 90,
-          id: ''
+          id: '',
+          children: [{}]
         },
         {
           name: '私营企业',
+          type: 'B',
           icon: require('../assets/images/mapTabs/p1/t1/2.png'),
           active: false,
           json: [],
           number: 930,
-          id: ''
-        },
-        {
-          name: '个体工商户',
-          icon: require('../assets/images/mapTabs/p1/t1/4.png'),
-          active: false,
-          json: [],
-          number: 1190,
-          id: ''
+          id: '',
+          children: [{}]
         },
         {
           name: '农民合作社',
+          type: 'D',
           icon: require('../assets/images/mapTabs/p1/t1/3.png'),
           active: false,
           json: [],
           number: 200,
+          id: '',
+          children: [{}]
+        },
+        {
+          name: '个体工商户',
+          type: 'AA',
+          icon: require('../assets/images/mapTabs/p1/t1/4.png'),
+          active: false,
+          json: [],
+          number: 1190,
           id: ''
         }
       ]
@@ -583,43 +592,61 @@ export default [
       name: '综合监管',
       active: true,
       single: true,
-      children: [{
-        name: '智能预警',
-        icon: require('./../assets/images/mapTabs/p2/t1/2.png'),
-        active: false,
-        number: 200,
-        json: [],
-        id: ''
-      }, {
-        name: '无证无照',
-        icon: require('./../assets/images/mapTabs/p2/t1/3.png'),
-        active: false,
-        number: 200,
-        json: [],
-        id: ''
-      }, {
-        name: '投诉举报',
-        icon: require('./../assets/images/mapTabs/p2/t1/4.png'),
-        active: false,
-        number: 200,
-        json: [],
-        id: ''
-      }, {
-        name: '场地查看',
-        icon: require('./../assets/images/mapTabs/p2/t1/5.png'),
-        active: false,
-        number: 200,
-        json: [],
-        id: ''
-      }, {
-        name: '案件管理',
-        icon: require('./../assets/images/mapTabs/p2/t1/6.png'),
-        active: false,
-        number: 200,
-        json: [],
-        id: ''
-      }]
-    }, {
+      children: [
+        {
+          name: '网格化监管',
+          icon: require('./../assets/images/mapTabs/p2/t1/7.png'),
+          active: false,
+          number: 200,
+          json: [],
+          id: ''
+        }, {
+          name: '双随机监管',
+          icon: require('./../assets/images/mapTabs/p2/t1/8.png'),
+          active: false,
+          number: 200,
+          json: [],
+          id: ''
+        }
+      // {
+      //   name: '智能预警',
+      //   icon: require('./../assets/images/mapTabs/p2/t1/2.png'),
+      //   active: false,
+      //   number: 200,
+      //   json: [],
+      //   id: ''
+      // }, {
+      //   name: '无证无照',
+      //   icon: require('./../assets/images/mapTabs/p2/t1/3.png'),
+      //   active: false,
+      //   number: 200,
+      //   json: [],
+      //   id: ''
+      // }, {
+      //   name: '投诉举报',
+      //   icon: require('./../assets/images/mapTabs/p2/t1/4.png'),
+      //   active: false,
+      //   number: 200,
+      //   json: [],
+      //   id: ''
+      // }, {
+      //   name: '场地查看',
+      //   icon: require('./../assets/images/mapTabs/p2/t1/5.png'),
+      //   active: false,
+      //   number: 200,
+      //   json: [],
+      //   id: ''
+      // }, {
+      //   name: '案件管理',
+      //   icon: require('./../assets/images/mapTabs/p2/t1/6.png'),
+      //   active: false,
+      //   number: 200,
+      //   json: [],
+      //   id: ''
+      // }
+      ]
+    },
+    {
       name: '智慧食品监管',
       active: false,
       single: true,
@@ -631,8 +658,8 @@ export default [
         json: [],
         id: ''
       }, {
-        name: '流通',
-        icon: require('./../assets/images/mapTabs/p2/t2/2.png'),
+        name: '销售',
+        icon: require('./../assets/images/mapTabs/p2/t2/4.png'),
         active: false,
         number: 200,
         json: [],
@@ -645,33 +672,35 @@ export default [
         json: [],
         id: ''
       }]
-    }, {
-      name: '产品质量监管',
-      active: false,
-      single: true,
-      children: [{
-        name: '生产',
-        icon: require('./../assets/images/mapTabs/p2/t2/1.png'),
-        active: false,
-        number: 200,
-        json: [],
-        id: ''
-      }, {
-        name: '流通',
-        icon: require('./../assets/images/mapTabs/p2/t2/2.png'),
-        active: false,
-        number: 200,
-        json: [],
-        id: ''
-      }, {
-        name: '餐饮',
-        icon: require('./../assets/images/mapTabs/p2/t2/3.png'),
-        active: false,
-        number: 200,
-        json: [],
-        id: ''
-      }]
-    }, {
+    },
+    // {
+    //   name: '产品质量监管',
+    //   active: false,
+    //   single: true,
+    //   children: [{
+    //     name: '生产',
+    //     icon: require('./../assets/images/mapTabs/p2/t2/1.png'),
+    //     active: false,
+    //     number: 200,
+    //     json: [],
+    //     id: ''
+    //   }, {
+    //     name: '流通',
+    //     icon: require('./../assets/images/mapTabs/p2/t2/2.png'),
+    //     active: false,
+    //     number: 200,
+    //     json: [],
+    //     id: ''
+    //   }, {
+    //     name: '餐饮',
+    //     icon: require('./../assets/images/mapTabs/p2/t2/3.png'),
+    //     active: false,
+    //     number: 200,
+    //     json: [],
+    //     id: ''
+    //   }]
+    // },
+    {
       name: '特种设备监管',
       active: false,
       single: true,
@@ -681,56 +710,64 @@ export default [
         active: false,
         json: [],
         number: 200,
-        id: ''
+        id: '',
+        type: 3
       }, {
         name: '锅炉',
         icon: require('./../assets/images/mapTabs/p2/t6/2.png'),
         active: false,
         number: 200,
         json: [],
-        id: ''
+        id: '',
+        type: 1
       }, {
         name: '压力容器',
         icon: require('./../assets/images/mapTabs/p2/t6/3.png'),
         active: false,
         number: 200,
         json: [],
-        id: ''
+        id: '',
+        type: 2
       }, {
         name: '压力管道',
         icon: require('./../assets/images/mapTabs/p2/t6/4.png'),
         active: false,
         number: 200,
         json: [],
-        id: ''
+        id: '',
+        type: 8
       }, {
         name: '起重机械',
         icon: require('./../assets/images/mapTabs/p2/t6/5.png'),
         active: false,
         number: 200,
         json: [],
-        id: ''
+        id: '',
+        type: 4
       }, {
         name: '客运索道',
         icon: require('./../assets/images/mapTabs/p2/t6/6.png'),
         active: false,
         number: 200,
         json: [],
-        id: ''
+        id: '',
+        type: 9
       }, {
         name: '大型游乐设施',
         icon: require('./../assets/images/mapTabs/p2/t6/7.png'),
         active: true,
         number: 200,
         json: [],
-        id: ''
+        id: '',
+        type: 6
       }, {
         name: '场（厂）内专用车辆',
         icon: require('./../assets/images/mapTabs/p2/t6/8.png'),
         active: false,
         number: 200,
         json: [],
-        id: ''
+        id: '',
+        type: 5
       }]
     }]
   }, {
@@ -1003,68 +1040,139 @@ export default [
       single: true,
       children: [
         {
-          name: '商标',
-          icon: require('../assets/images/mapTabs/p6/t1/1.png'),
+          name: '不正当竞争',
+          icon: require('../assets/images/mapTabs/p6/t1/不正当竞争@2x.png'),
+          active: false,
+          number: 20
+        },
+        {
+          name: '传销',
+          icon: require('../assets/images/mapTabs/p6/t1/传销@2x.png'),
+          active: false,
+          number: 20
+        },
+        {
+          name: '登记',
+          icon: require('../assets/images/mapTabs/p6/t1/登记@2x.png'),
+          active: false,
+          number: 20
+        },
+        {
+          name: '动产抵押',
+          icon: require('../assets/images/mapTabs/p6/t1/动产抵押@2x.png'),
           active: false,
           number: 20
         },
         {
           name: '广告',
-          icon: require('../assets/images/mapTabs/p6/t1/2.png'),
+          icon: require('../assets/images/mapTabs/p6/t1/广告@2x.png'),
           active: false,
           number: 20
         },
         {
-          name: '不正当竞争',
-          icon: require('../assets/images/mapTabs/p6/t1/3.png'),
+          name: '合同',
+          icon: require('../assets/images/mapTabs/p6/t1/合同@2x.png'),
           active: false,
           number: 20
         },
         {
-          name: '食品生产',
-          icon: require('../assets/images/mapTabs/p6/t1/4.png'),
+          name: '集中贸易',
+          icon: require('../assets/images/mapTabs/p6/t1/集中贸易@2x.png'),
           active: false,
           number: 20
         },
         {
-          name: '药械化',
-          icon: require('../assets/images/mapTabs/p6/t1/5.png'),
+          name: '经纪人',
+          icon: require('../assets/images/mapTabs/p6/t1/经纪人@2x.png'),
           active: false,
           number: 20
         },
         {
-          name: '特种设备',
-          icon: require('../assets/images/mapTabs/p6/t1/6.png'),
+          name: '农贸',
+          icon: require('../assets/images/mapTabs/p6/t1/农贸@2x.png'),
           active: false,
           number: 20
         },
         {
-          name: '产品质量',
-          icon: require('../assets/images/mapTabs/p6/t1/7.png'),
-          active: false,
-          number: 20
-        },
-        {
-          name: '认证认可',
-          icon: require('../assets/images/mapTabs/p6/t1/8.png'),
-          active: false,
-          number: 20
-        },
-        {
-          name: '价格',
-          icon: require('../assets/images/mapTabs/p6/t1/9.png'),
+          name: '拍卖',
+          icon: require('../assets/images/mapTabs/p6/t1/拍卖@2x.png'),
           active: false,
           number: 20
         },
         {
           name: '其他',
-          icon: require('../assets/images/mapTabs/p6/t1/10.png'),
+          icon: require('../assets/images/mapTabs/p6/t1/其他@2x.png'),
           active: false,
           number: 20
         },
         {
-          name: '计量',
-          icon: require('../assets/images/mapTabs/p6/t1/11.png'),
+          name: '人民币',
+          icon: require('../assets/images/mapTabs/p6/t1/人民币@2x.png'),
+          active: false,
+          number: 20
+        },
+        {
+          name: '商标',
+          icon: require('../assets/images/mapTabs/p6/t1/商标@2x.png'),
+          active: false,
+          number: 20
+        },
+        {
+          name: '食品',
+          icon: require('../assets/images/mapTabs/p6/t1/食品@2x.png'),
+          active: false,
+          number: 20
+        },
+        {
+          name: '投机倒把',
+          icon: require('../assets/images/mapTabs/p6/t1/投机倒把@2x.png'),
+          active: false,
+          number: 20
+        },
+        {
+          name: '限制竞争',
+          icon: require('../assets/images/mapTabs/p6/t1/限制竞争@2x.png'),
+          active: false,
+          number: 20
+        },
+        {
+          name: '消费者权益',
+          icon: require('../assets/images/mapTabs/p6/t1/消费者权益@2x.png'),
+          active: false,
+          number: 20
+        },
+        {
+          name: '招投标',
+          icon: require('../assets/images/mapTabs/p6/t1/招投标@2x.png'),
+          active: false,
+          number: 20
+        },
+        {
+          name: '直销',
+          icon: require('../assets/images/mapTabs/p6/t1/直销@2x.png'),
+          active: false,
+          number: 20
+        }]
+    }, {
+      name: '案件预警',
+      active: true,
+      single: true,
+      children: [
+        {
+          name: '红色预警',
+          icon: require('../assets/images/mapTabs/p6/t1/h.png'),
+          active: false,
+          number: 20
+        },
+        {
+          name: '橙色预警',
+          icon: require('../assets/images/mapTabs/p6/t1/c.png'),
+          active: false,
+          number: 20
+        },
+        {
+          name: '黄色预警',
+          icon: require('../assets/images/mapTabs/p6/t1/hh.png'),
           active: false,
           number: 20
         }]

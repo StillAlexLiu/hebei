@@ -4,38 +4,38 @@
             <RadioSimple :data="radioData" v-model="select" class="w-2-7 full-height radio "/>
         </template>
         <div slot="calc" class=" full-width full-height">
-            <Container class=" h-1-3" :title="select.value===0?entityType+'趋势':'新增'+entityType+'趋势'">
+            <!-- <button  @click="tab">切换</button> -->
+            <Container class=" h-1-3" :title="select.value===0?entityType.name+'趋势':'新增'+entityType.name+'趋势'">
                 <div class="w-1-2 full-height">
                     <ChartBar :data="barData" :dimensions="['name','value']"
                               :unit="'户'"/>
                 </div>
                 <NumberGroup class="w-1-2 full-height" :data="quantityData" v-if="false"/>
-                <NumberGroup3 class="w-1-2 full-height" :data="quantityData" v-if="entityType==='市场主体'"/>
+                <NumberGroup3 class="w-1-2 full-height" :data="quantityData" v-if="entityType.name==='1'"/>
                 <NumberGroup2 class="w-1-2 full-height" :data="quantityData" v-else/>
             </Container>
-            <Container class="w-1-2 h-1-3" :title="select.value===0?entityType+'产业占比':'新增'+entityType+'产业占比'">
+            <Container class="w-1-2 h-1-3" :title="select.value===0?entityType.name+'产业占比':'新增'+entityType.name+'产业占比'">
                 <div class="full-height w-1-3" v-for="(item,index) in pieData" :key="index">
                     <ChartPie3 :data="item" :max="getMax(pieData)"/>
                 </div>
             </Container>
             <Container class="w-1-2 h-1-3"
-                       :title="select.value===0?entityType+'规模情况（1000万以上）':'新增'+entityType+'规模情况（1000万以上）'">
+                       :title="select.value===0?entityType.name+'规模情况（1000万以上）':'新增'+entityType.name+'规模情况（1000万以上）'">
                 <ChartsBarLine :data="barGroupData" :dimensions="['year','step1','step2','step3']"
                                :legend="['1000-5000万元','5000-1亿元','1亿元以上']"
                                :type="['bar','bar','bar']"
                                :twoAxis="false"
                                :colors="['#FFD589', '#4A90E2', '#B8E986']" :units="['户']"/>
             </Container>
-            <Container class="w-1-2 h-1-3" v-if="select.value===1" :title="'新增'+entityType+'行业TOP5'">
+            <Container class="w-1-2 h-1-3" v-if="select.value===1" :title="'新增'+entityType.name+'行业TOP5'">
                 <ChartHalfPie :data="halfPieData"/>
-
             </Container>
-            <Container class="w-1-2 h-1-3" :title="select.value===0?entityType+'区域分布':'新增'+entityType+'区域分布'">
+            <Container class="w-1-2 h-1-3" :title="select.value===0?entityType.name+'区域分布':'新增'+entityType.name+'区域分布'">
                 <ChartsBarSimple :data="barData2" :dimensions="['name','value']" unit="户"
                                  :colors="['#4A90E2','#5DC3FF','#91D243','#50E3C2','#B8E986','#87A0F6','#FFD589','#FE9E55','#FE6941','#FF98A4','#22AEC5']"/>
             </Container>
             <Container class="w-1-2 h-1-3" v-if="select.value===0"
-                       :title="select.value===0?entityType+'生命周期分析':'新增'+entityType+'生命周期分析'">
+                       :title="select.value===0?entityType.name+'生命周期分析':'新增'+entityType.name+'生命周期分析'">
                 <ChartsBarLine v-if="select.value===0" :data="barGroupData2"
                                :dimensions="['year','step1','step2','step3']"
                                :legend="['10年以下','10-20年','20年以上']"
@@ -55,6 +55,8 @@ import ChartHalfPie from './componets/ChartHalfPie'
 import NumberGroup from './componets/NumberGroup'
 import NumberGroup2 from './componets/NumberGroup2'
 import NumberGroup3 from './componets/NumberGroup3'
+import axios from 'axios'
+import Bus from '@/assets/bus.js'
 
 export default {
   name: 'EntityLeft',
@@ -69,7 +71,7 @@ export default {
   data: function () {
     return {
       select: {},
-      entityType: '市场主体',
+      entityType: { name :'市场主体' , type: 0},
       radioData: [
         {
           name: '存量情况',
@@ -1535,12 +1537,15 @@ export default {
                   { name: '批发和零售业', value: '4' },
                   { name: '电力、热力、燃气及水生产和供应业', value: '5' },
                   { name: '科学研究和技术服务业', value: '12' },
-                  { name: '农、林、牧、渔业', value: '1085' }
+                  { name: '农、林、牧、渔业', value: '1025' }
                 ]
               }
             }
           }
-        }
+        },
+        mainType: '',
+        activeShow: '',
+        selectName: ''
       }
     }
   },
@@ -1556,83 +1561,637 @@ export default {
       immediate: false,
       deep: true,
       handler: function () {
-        if (this.globalMapSelect && this.globalMapSelect.items.length > 0 && this.globalMapSelect.tab.name === '市场主体') {
-          this.entityType = this.globalMapSelect.items[0].name
-        } else {
-          this.entityType = '市场主体'
+        const firstType = this.globalMapSelect.tab.children
+        for ( let i = 0; i < firstType.length; i++) {
+          if (firstType[i].active) {
+            this.activeShow = firstType[i].type
+          }
         }
-        this.showEntityData(this.entityType)
+        if (this.globalMapSelect && this.globalMapSelect.items.length > 0 && this.globalMapSelect.tab.name === '市场主体') {
+          this.entityType = this.globalMapSelect.items[0]
+          this.mainType = ''
+          if (this.globalMapSelect.items.length > 0) {
+            this.mainType = this.globalMapSelect.items[0].type
+          }else {
+            this.mainType = ''
+          }
+        } else {
+          this.entityType.name = '市场主体'
+          this.entityType.type = '0'
+          if (this.globalMapSelect.items.length > 0) {
+            this.mainType = this.globalMapSelect.items[0].type
+          }else {
+            this.mainType = ''
+          }
+        }
+        // console.log(111)
+        
+        console.log(this.globalMapSelect, '1561')
+        this.showEntityData(this.entityType, this.globalMapSelect)
       }
     },
     select: {
       immediate: true,
       deep: true,
       handler: function () {
-        // this.dispatchSelect(this.data.all)
-        console.log(this.select, this.entityType, 'ttpppiii')
-        this.showEntityData(this.entityType)
+        // console.log(222)
+        this.showEntityData(this.entityType, this.globalMapSelect)
       }
     }
   },
   methods: {
-    dispatchSelect (data) {
-      console.log(data)
+    tabCenter () {
+      Bus.$emit('getTarget', true)
+    },
+    dispatchSelect (data, topType) {
+      console.log(data, topType)
       if (this.select.value === 0) {
-        this.getStock(data.stock)
+        this.getStock(data.stock, topType)
       }
       if (this.select.value === 1) {
-        this.getNewly(data.newly)
+        this.getNewly(data.newly, topType)
       }
     },
-    getStock (data) {
-      console.log(data)
-      // 存量情况
-      this.barData = data.block1.chart.data
-      this.quantityData = data.block1.info
-      this.pieData = data.block2.chart.data
-      this.barGroupData = data.block3.chart.data
-      this.barData2 = data.block4.chart.data
-      this.barGroupData2 = data.block5.chart.data
+    getStock (data2, topType) {
+      this.barData = []
+      this.quantityData = {
+            name: '总数',
+            img: require('./componets/img/entity/entity-zong.png'),
+            data: []
+          }
+      this.pieData = []
+      this.barGroupData = []
+      this.barData2 = []
+      this.halfPieData = []
+      this.barGroupData2 = []
+      // console.log(data2, topType, typeof(topType), 'klklkl')
+      console.log(data2, topType, topType>0, 'klklkl')
+      if (topType>0) {
+        //主体子类型
+        // 市场主体趋势柱图
+        axios.get('/monitor/main/getTrendData?mainClass=' + this.activeShow + '&type=1' + '&subClass=' + this.mainType).then(res => {
+          const data = res.data.data
+          this.barData = []
+          for (let i = 0; i < data.length; i++) {
+            this.barData.push({
+              name: data[i].year,
+              value: data[i].entepriseNum
+            })
+          }
+        })
+        // 市场主体趋势图表
+        axios.get('/monitor/main/getMainEnNumData?mainClass=' + this.activeShow + '&type=1' + '&subClass=' + this.mainType).then(res => {
+          const data = res.data.data
+          console.log(data, '市场主体趋势图表')
+          this.quantityData = {
+            name: '总数',
+            img: require('./componets/img/entity/entity-zong.png'),
+            data: []
+          }
+          if(data.length === 1) {
+              this.quantityData.data = [
+                {
+                  name: '户数(个)',
+                  value: data[0].newUserNum
+                }, {
+                  name: '同比上涨',
+                  value: data[0].userYoy + '%'
+                }, {
+                  name: '资本(亿元)',
+                  value: data[0].newCapitalNum.toFixed(2)
+                }, {
+                  name: '同比上涨',
+                  value: data[0].capitalYoy + '%'
+                }
+              ]
+          } else {
+            for (let i = 0; i < data.length; i++) {
+              this.quantityData.data.push({
+                name: this.typeFun(data[i].subClass),
+                value: data[i].newUserNum
+              })
+            }
+          }
+        })
+        // 市场主体产业占比
+        axios.get('/monitor/main/getMainIdsRatioData?mainClass=' + this.activeShow + '&type=1' + '&subClass=' + this.mainType).then(res => {
+          const data = res.data.data
+          this.pieData = [
+            {
+              name: '第一产业',
+              value: data[0].entepriseNum,
+              icon: require('./componets/img/pie/pie1.png'),
+              color: '#22AEC5'
+            },
+            {
+              name: '第二产业',
+              value: data[1].entepriseNum,
+              icon: require('./componets/img/pie/pie2.png'),
+              color: '#35A3FF'
+            },
+            {
+              name: '第三产业',
+              value: data[2].entepriseNum,
+              icon: require('./componets/img/pie/pie3.png'),
+              color: '#FE6941'
+            }
+          ]
+        })
+        // 私营企业规模情况
+        axios.get('/monitor/main/getMainScaleData?mainClass=' + this.activeShow + '&type=1' + '&subClass=' + this.mainType).then(res => {
+          const data = res.data.data
+          this.barGroupData = []
+          for (let i = 0; i < data.length; i++) {
+            this.barGroupData.push({
+              year: data[i].year,
+              step1: data[i].scaleOne,
+              step2: data[i].scaleTwo,
+              step3: data[i].scaleThree
+            })
+          }
+        })
+        // 市场主体区域分布
+        axios.get('/monitor/main/getMainScatterData?mainClass=' + this.activeShow + '&type=1' + '&subClass=' + this.mainType).then(res => {
+          const data = res.data.data
+          this.barData2 = []
+          for (let i = 0; i < data.length; i++) {
+            this.barData2.push({
+              name: data[i].orgName,
+              value: data[i].entepriseNum
+            })
+          }
+        })
+        // 市场主体生命周期分析
+        axios.get('/monitor/main/getMainLifecycleData?mainClass=' + this.activeShow + '&type=1' + '&subClass=' + this.mainType).then(res => {
+          const data = res.data.data
+          this.barGroupData2 = []
+          for (let i = 0; i < data.length; i++) {
+            this.barGroupData2.push({
+              year: data[i].year,
+              step1: data[i].cycleOne,
+              step2: data[i].cycleTwo,
+              step3: data[i].cycleThree
+            })
+          }
+        })
+      } else {
+        // 存量情况
+        // 主体大类型
+        // 市场主体趋势柱图
+        axios.get('/monitor/main/getTrendData?mainClass=' + topType + '&type=1' + '&subClass=' + '').then(res => {
+          const data = res.data.data
+          this.barData = []
+          for (let i = 0; i < data.length; i++) {
+            this.barData.push({
+              name: data[i].year,
+              value: data[i].entepriseNum
+            })
+          }
+        })
+        // 市场主体趋势图表
+        axios.get('/monitor/main/getMainEnNumData?mainClass=' + topType + '&type=1' + '&subClass=' + '').then(res => {
+          const data = res.data.data
+          console.log(data, '市场主体趋势图表')
+          this.quantityData = {
+            name: '总数',
+            img: require('./componets/img/entity/entity-zong.png'),
+            data: []
+          }
+          if(data.length === 1) {
+              this.quantityData.data = [
+                {
+                  name: '户数(个)',
+                  value: data[0].newUserNum
+                }, {
+                  name: '同比上涨',
+                  value: data[0].userYoy + '%'
+                }, {
+                  name: '资本(亿元)',
+                  value: data[0].newCapitalNum.toFixed(2)
+                }, {
+                  name: '同比上涨',
+                  value: data[0].capitalYoy + '%'
+                }
+              ]
+          } else {
+            for (let i = 0; i < data.length; i++) {
+              this.quantityData.data.push({
+                name: this.typeFun(data[i].subClass),
+                value: data[i].newUserNum
+              })
+            }
+          }
+        })
+        // 市场主体产业占比
+        axios.get('/monitor/main/getMainIdsRatioData?mainClass=' + topType + '&type=1' + '&subClass=' + '').then(res => {
+          const data = res.data.data
+          this.pieData = [
+            {
+              name: '第一产业',
+              value: data[0].entepriseNum,
+              icon: require('./componets/img/pie/pie1.png'),
+              color: '#22AEC5'
+            },
+            {
+              name: '第二产业',
+              value: data[1].entepriseNum,
+              icon: require('./componets/img/pie/pie2.png'),
+              color: '#35A3FF'
+            },
+            {
+              name: '第三产业',
+              value: data[2].entepriseNum,
+              icon: require('./componets/img/pie/pie3.png'),
+              color: '#FE6941'
+            }
+          ]
+        })
+        // 私营企业规模情况
+        axios.get('/monitor/main/getMainScaleData?mainClass=' + topType + '&type=1' + '&subClass=' + '').then(res => {
+          const data = res.data.data
+          this.barGroupData = []
+          for (let i = 0; i < data.length; i++) {
+            this.barGroupData.push({
+              year: data[i].year,
+              step1: data[i].scaleOne,
+              step2: data[i].scaleTwo,
+              step3: data[i].scaleThree
+            })
+          }
+        })
+        // 市场主体区域分布
+        axios.get('/monitor/main/getMainScatterData?mainClass=' + topType + '&type=1' + '&subClass=' + '').then(res => {
+          const data = res.data.data
+          this.barData2 = []
+          for (let i = 0; i < data.length; i++) {
+            this.barData2.push({
+              name: data[i].orgName,
+              value: data[i].entepriseNum
+            })
+          }
+        })
+        // 市场主体生命周期分析
+        axios.get('/monitor/main/getMainLifecycleData?mainClass=' + topType + '&type=1' + '&subClass=' + '').then(res => {
+          const data = res.data.data
+          this.barGroupData2 = []
+          for (let i = 0; i < data.length; i++) {
+            this.barGroupData2.push({
+              year: data[i].year,
+              step1: data[i].cycleOne,
+              step2: data[i].cycleTwo,
+              step3: data[i].cycleThree
+            })
+          }
+        })
+      }
+      // this.barData = data.block1.chart.data
+      // this.quantityData = data.block1.info
+      // this.pieData = data.block2.chart.data
+      // this.barGroupData = data.block3.chart.data
+      // this.barData2 = data.block4.chart.data
+      // console.log(this.barData2, 'ggg')
+      // this.barGroupData2 = data.block5.chart.data
     },
-    getNewly (data) {
+    getNewly (data, topType) {
+      this.barData = []
+      this.quantityData = {
+            name: '总数',
+            img: require('./componets/img/entity/entity-zong.png'),
+            data: []
+          }
+      this.pieData = []
+      this.barGroupData = []
+      this.barData2 = []
+      this.halfPieData = []
+      this.barGroupData2 = []
       // 增量情况
-      this.barData = data.block1.chart.data
-      this.quantityData = data.block1.info
-      this.pieData = data.block2.chart.data
-      this.barGroupData = data.block3.chart.data
-      this.barData2 = data.block4.chart.data
-      this.halfPieData = data.block5.chart.data
-      console.log(this.halfPieData)
+      // 市场主体趋势柱图
+       console.log(topType, 'lplp')
+      console.log(topType, typeof(topType), 'lplp')
+      if(topType>0) {
+        //主体子类型
+        // 市场主体趋势柱图
+        axios.get('/monitor/main/getTrendData?mainClass=' + this.activeShow + '&type=2' + '&subClass=' + this.mainType).then(res => {
+          const data = res.data.data
+          this.barData = []
+          for (let i = 0; i < data.length; i++) {
+            this.barData.push({
+              name: data[i].year,
+              value: data[i].entepriseNum
+            })
+          }
+        })
+        // 市场主体趋势图表
+        axios.get('/monitor/main/getMainEnNumData?mainClass=' + this.activeShow + '&type=2' + '&subClass=' + this.mainType).then(res => {
+          const data = res.data.data
+          console.log(data, '市场主体趋势图表')
+          this.quantityData = {
+            name: '总数',
+            img: require('./componets/img/entity/entity-zong.png'),
+            data: []
+          }
+          if(data.length === 1) {
+              this.quantityData.data = [
+                {
+                  name: '户数(个)',
+                  value: data[0].newUserNum
+                }, {
+                  name: '同比上涨',
+                  value: data[0].userYoy + '%'
+                }, {
+                  name: '资本(亿元)',
+                  value: data[0].newCapitalNum.toFixed(2)
+                }, {
+                  name: '同比上涨',
+                  value: data[0].capitalYoy + '%'
+                }
+              ]
+          } else {
+            for (let i = 0; i < data.length; i++) {
+              this.quantityData.data.push({
+                name: this.typeFun(data[i].subClass),
+                value: data[i].newUserNum
+              })
+            }
+          }
+        })
+        // 市场主体产业占比
+        axios.get('/monitor/main/getMainIdsRatioData?mainClass=' + this.activeShow + '&type=2' + '&subClass=' + this.mainType).then(res => {
+          const data = res.data.data
+          this.pieData = [
+            {
+              name: '第一产业',
+              value: data[0].entepriseNum,
+              icon: require('./componets/img/pie/pie1.png'),
+              color: '#22AEC5'
+            },
+            {
+              name: '第二产业',
+              value: data[1].entepriseNum,
+              icon: require('./componets/img/pie/pie2.png'),
+              color: '#35A3FF'
+            },
+            {
+              name: '第三产业',
+              value: data[2].entepriseNum,
+              icon: require('./componets/img/pie/pie3.png'),
+              color: '#FE6941'
+            }
+          ]
+        })
+        // 私营企业规模情况
+        axios.get('/monitor/main/getMainScaleData?mainClass=' + this.activeShow + '&type=2' + '&subClass=' + this.mainType).then(res => {
+          const data = res.data.data
+          this.barGroupData = []
+          for (let i = 0; i < data.length; i++) {
+            this.barGroupData.push({
+              year: data[i].year,
+              step1: data[i].scaleOne,
+              step2: data[i].scaleTwo,
+              step3: data[i].scaleThree
+            })
+          }
+        })
+        // 市场主体区域分布
+        axios.get('/monitor/main/getMainScatterData?mainClass=' + this.activeShow + '&type=2' + '&subClass=' + this.mainType).then(res => {
+          const data = res.data.data
+          this.barData2 = []
+          for (let i = 0; i < data.length; i++) {
+            this.barData2.push({
+              name: data[i].orgName,
+              value: data[i].entepriseNum
+            })
+          }
+        })
+        // 市场主体生命周期分析
+        axios.get('/monitor/main/getMainLifecycleData?mainClass=' + this.activeShow + '&type=2' + '&subClass=' + this.mainType).then(res => {
+          const data = res.data.data
+          this.barGroupData2 = []
+          for (let i = 0; i < data.length; i++) {
+            this.barGroupData2.push({
+              year: data[i].year,
+              step1: data[i].cycleOne,
+              step2: data[i].cycleTwo,
+              step3: data[i].cycleThree
+            })
+          }
+        })
+        // 新增市场主体行业TOP5
+        axios.get('/monitor/main/getMainIndRankData?mainClass=' + this.activeShow + '&type=2' + '&subClass=' + this.mainType).then(res => {
+          const data = res.data.data
+          this.halfPieData = []
+          for (let i = 0; i < data.length; i++) {
+            this.halfPieData.push({
+              name: data[i].industryName,
+              value: data[i].entepriseNum
+            })
+          }
+        })
+      } else {
+        // 存量情况
+        // 主体大类型
+        // 市场主体趋势柱图
+        axios.get('/monitor/main/getTrendData?mainClass=' + topType + '&type=2' + '&subClass=' + '').then(res => {
+          const data = res.data.data
+          this.barData = []
+          for (let i = 0; i < data.length; i++) {
+            this.barData.push({
+              name: data[i].year,
+              value: data[i].entepriseNum
+            })
+          }
+        })
+        // 市场主体趋势图表
+        axios.get('/monitor/main/getMainEnNumData?mainClass=' + topType + '&type=2' + '&subClass=' + '').then(res => {
+          const data = res.data.data
+          console.log(data, '市场主体趋势图表')
+          this.quantityData = {
+            name: '总数',
+            img: require('./componets/img/entity/entity-zong.png'),
+            data: []
+          }
+          if(data.length === 1) {
+              this.quantityData.data = [
+                {
+                  name: '户数(个)',
+                  value: data[0].newUserNum
+                }, {
+                  name: '同比上涨',
+                  value: data[0].userYoy + '%'
+                }, {
+                  name: '资本(亿元)',
+                  value: data[0].newCapitalNum.toFixed(2)
+                }, {
+                  name: '同比上涨',
+                  value: data[0].capitalYoy + '%'
+                }
+              ]
+          } else {
+            for (let i = 0; i < data.length; i++) {
+              this.quantityData.data.push({
+                name: this.typeFun(data[i].subClass),
+                value: data[i].newUserNum
+              })
+            }
+          }
+        })
+        // 市场主体产业占比
+        axios.get('/monitor/main/getMainIdsRatioData?mainClass=' + topType + '&type=2' + '&subClass=' + '').then(res => {
+          const data = res.data.data
+          this.pieData = [
+            {
+              name: '第一产业',
+              value: data[0].entepriseNum,
+              icon: require('./componets/img/pie/pie1.png'),
+              color: '#22AEC5'
+            },
+            {
+              name: '第二产业',
+              value: data[1].entepriseNum,
+              icon: require('./componets/img/pie/pie2.png'),
+              color: '#35A3FF'
+            },
+            {
+              name: '第三产业',
+              value: data[2].entepriseNum,
+              icon: require('./componets/img/pie/pie3.png'),
+              color: '#FE6941'
+            }
+          ]
+        })
+        // 私营企业规模情况
+        axios.get('/monitor/main/getMainScaleData?mainClass=' + topType + '&type=2' + '&subClass=' + '').then(res => {
+          const data = res.data.data
+          this.barGroupData = []
+          for (let i = 0; i < data.length; i++) {
+            this.barGroupData.push({
+              year: data[i].year,
+              step1: data[i].scaleOne,
+              step2: data[i].scaleTwo,
+              step3: data[i].scaleThree
+            })
+          }
+        })
+        // 市场主体区域分布
+        axios.get('/monitor/main/getMainScatterData?mainClass=' + topType + '&type=2' + '&subClass=' + '').then(res => {
+          const data = res.data.data
+          console.log(data, 'ssss')
+          this.barData2 = []
+          for (let i = 0; i < data.length; i++) {
+            this.barData2.push({
+              name: data[i].orgName,
+              value: data[i].entepriseNum
+            })
+          }
+        })
+        // 市场主体生命周期分析
+        axios.get('/monitor/main/getMainLifecycleData?mainClass=' + topType + '&type=2' + '&subClass=' + '').then(res => {
+          const data = res.data.data
+          this.barGroupData2 = []
+          for (let i = 0; i < data.length; i++) {
+            this.barGroupData2.push({
+              year: data[i].year,
+              step1: data[i].cycleOne,
+              step2: data[i].cycleTwo,
+              step3: data[i].cycleThree
+            })
+          }
+        })
+        // 新增市场主体行业TOP5
+        axios.get('/monitor/main/getMainIndRankData?mainClass=' + topType + '&type=2' + '&subClass=' + '').then(res => {
+          const data = res.data.data
+          this.halfPieData = []
+          for (let i = 0; i < data.length; i++) {
+            this.halfPieData.push({
+              name: data[i].industryName,
+              value: data[i].entepriseNum
+            })
+          }
+        })
+      }
+      // this.barData = data.block1.chart.data
+      // this.quantityData = data.block1.info
+      // this.pieData = data.block2.chart.data
+      // this.barGroupData = data.block3.chart.data
+      // this.barData2 = data.block4.chart.data
+      // this.halfPieData = data.block5.chart.data
+      // console.log(this.halfPieData)
     },
-    showEntityData (type) {
-      console.log(type)
+    typeFun (type) {
+      switch (type) {
+        case '市场主体':
+          return 0
+        case '公有制企业':
+          return 'A'
+        case '外资企业':
+          return 'C'
+        case '私营企业':
+          return 'B'
+        case '个体工商户':
+          return 'AA'
+        case '农民合作社':
+          return 'D'
+        case 'A':
+          return '公有制企业'
+        case 'C':
+          return '外资企业'
+        case 'B':
+          return '私营企业'
+        case 'AA':
+          return '个体工商户'
+        case 'D':
+          return '农民合作社'
+        case '0':
+          return '其他'
+        case '':
+          return '市场主体'
+      }
+    },
+    showEntityData (type, data) {
+      console.log(type, data, 'llll')
+      if (data.items) {
+        if (data.items.length === 0) {
+          this.sendType(type.type)
+        } else {
+          if (data.items[0].icon) {
+            console.log(type, 'tttpp')
+            this.sendType(type.type)
+          } else {
+            console.log(this.data, data, 'mmllll')
+            this.dispatchSelect(type.type, data.items[0].type)
+          }
+        }
+      }
+    },
+    sendType (type) {
+      console.log(type, 'tttt')
       switch (type) {
         case '市场主体':
           console.error(0)
-          this.dispatchSelect(this.data.all)
+          this.dispatchSelect(this.data.all, type)
           break
         case '公有制企业':
           console.error(1)
-          this.dispatchSelect(this.data.gongyou)
+          this.dispatchSelect(this.data.gongyou, type)
           break
         case '外资企业':
           console.error(2)
-          this.dispatchSelect(this.data.waizi)
+          this.dispatchSelect(this.data.waizi, type)
           break
         case '私营企业':
           console.error(3)
-          this.dispatchSelect(this.data.siying)
+          this.dispatchSelect(this.data.siying, type)
           break
         case '个体工商户':
           console.error(4)
-          this.dispatchSelect(this.data.geti)
+          this.dispatchSelect(this.data.geti, type)
           break
-        case '农民合作社':
+        case '农村合作社':
           console.error(5)
-          this.dispatchSelect(this.data.nongcun)
+          this.dispatchSelect(this.data.nongcun, type)
           break
         default:
-          this.dispatchSelect(this.data.all)
+          this.dispatchSelect(this.data.all, type)
           break
       }
     },

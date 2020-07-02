@@ -70,6 +70,14 @@ export default {
       default: () => {
         return []
       }
+    },
+    roseType: {
+      type: String,
+      default: ''
+    },
+    showLegend: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -105,10 +113,13 @@ export default {
       }
       const series = []
       let left = 0
+      let right = 0
       const center = ['50%', '50%']
       const legend = {
         show: this.showLegend,
-        selectedMode: false
+        selectedMode: false,
+        // width:40,
+        height:480
       }
       switch (this.legendPosition) {
         case 'top':
@@ -121,6 +132,14 @@ export default {
           legend.itemGap = 30
           left = '20%'
           break
+        case 'right':
+          legend.orient = 'vertical'
+          legend.right = 10
+          legend.top = 'center'
+          legend.itemGap = 30
+          left = '0%'
+          right = '30%'
+          break
         default:
           break
       }
@@ -129,15 +148,17 @@ export default {
           name: '',
           type: 'pie',
           radius: [0, '35%'],
+          roseType: this.roseType,
           center: center,
           top: 20,
           left: left,
+          right: right,
           label: {
             show: true,
             position: 'inside',
             color: '#ddd',
-            fontSize: 22,
-            align: 'left',
+            align: 'right',
+            width: 80,
             alignTo: 'edge',
             margin: 10,
             formatter: (params) => {
@@ -168,20 +189,30 @@ export default {
       series.push({
         name: '',
         type: 'pie',
-        radius: this.isPie ? [0, '62%'] : ['40%', '62%'],
+        roseType: this.roseType,
+        radius: this.isPie ? [0, '62%'] : ['45%', '63%'],
         center: center,
         top: 20,
         left: left,
+        right: right,
+        labelLine:{
+          show: true,
+          length: 0,
+          length2: 0
+        },
         label: {
           show: true,
           position: 'outside',
           color: '#ddd',
           fontSize: 22,
-          align: 'left',
+          align: 'right',
+          width: 40,
           alignTo: 'edge',
           margin: 10,
           formatter: (params) => {
-            if (params.name !== '') {
+            if (this.legendPosition === 'right') {
+              return params.name + '\n{white|' + params.value + this.unit + '}'
+            }else if (params.name !== '') {
               if (this.showAll) {
                 return params.name + '\n{white|' + params.value + this.unit + '}' + '\n{white|' + params.percent + '%}'
               } else if (this.showValue) {
@@ -197,7 +228,7 @@ export default {
           rich: {
             white: {
               color: '#79DFEF',
-              fontSize: 22,
+              fontSize: 20,
               align: 'left'
             }
           }

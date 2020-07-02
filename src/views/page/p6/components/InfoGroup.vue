@@ -7,7 +7,7 @@
                 </ContainerOnlyTitle>
                 <div class="text">
                     <div class="w-1-2 full-height">
-                        <div class="name">本年</div>
+                        <div class="name">{{name.name}}</div>
                         <div class="value number-font">{{item.yearData}}</div>
                     </div>
                     <div class="w-1-2 full-height">
@@ -24,7 +24,7 @@
 
 export default {
   name: 'InfoGroup',
-  props: ['data'],
+  props: ['data', 'name'],
   data: () => {
     return {}
   }

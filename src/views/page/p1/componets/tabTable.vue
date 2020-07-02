@@ -35,12 +35,18 @@ export default {
       activeKey: null
     }
   },
+  watch: {
+    data () {
+      console.log(this.data[this.activeKey],'右下角')
+    }
+  },
   mounted () {
     for (const key in this.data) {
       if (this.activeKey === '' || this.activeKey === null) {
         this.activeKey = key
       }
     }
+    console.log(this.data, 'ddd')
   },
   methods: {
     itemClick (index) {
@@ -84,6 +90,8 @@ export default {
     font-size: 2rem;
     float: left;
     display: inline-block;
+    width: 16.5%;
+    text-align: center;
 }
 
 .sub-title {

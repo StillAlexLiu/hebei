@@ -35,6 +35,14 @@ export default {
     showX: {
       type: Boolean,
       default: true
+    },
+    showSize: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: String,
+      default: '5e1'
     }
   },
   computed: {
@@ -56,12 +64,23 @@ export default {
         },
         series: [{
           symbolSize: (data) => {
-            return Math.sqrt(data[this.dimensions[2]]) * this.baseSize
+            if (this.showSize) {
+              return 120
+              // return data.value / this.size
+            } else {
+              return Math.sqrt(data[this.dimensions[2]]) * this.baseSize
+            }
           },
           label: {
             show: true,
             formatter: (params) => {
-              return params.name + '\n' + params.data[this.dimensions[2]] + this.unit
+              const data = params.data
+              if (this.showSize) {
+                return params.name + '\n' + data.value
+              } else {
+                return params.name + '\n' + params.data[this.dimensions[2]] + this.unit
+              }
+              // return params.name + '\n' + params.data[this.dimensions[2]] + this.unit
             },
             fontSize: 14,
             color: '#FFFFFF'

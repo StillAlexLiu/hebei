@@ -421,11 +421,11 @@ export default [
   {
     name: '获取主体信息',
     component: null,
-    data: (id) => {
+    data: () => {
       // 模拟数据,如果接口写完传true，否则传false
       if (isApiDone(false)) {
         Mock.mock('/screen/entity/getById', 'post', {
-          data: entities[id]
+          data: entities
         })
       }
       return http.post('/screen/entity/getById')

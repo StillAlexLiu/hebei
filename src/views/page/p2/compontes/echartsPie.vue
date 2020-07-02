@@ -22,6 +22,10 @@ export default {
     show: {
       type: Boolean,
       default: true
+    },
+    pieColor: {
+      type: String,
+      default: 'transparent'
     }
   },
   data () {
@@ -142,7 +146,7 @@ export default {
               {
                 value: this.data.num,
                 itemStyle: {
-                  color: 'transparent'
+                  color: this.pieColor
                 }
               },
               {

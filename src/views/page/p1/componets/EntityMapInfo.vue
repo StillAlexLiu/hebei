@@ -8,18 +8,18 @@
                 </div>
             </div>
         </Container>
-        <container title="企业五官图" class="sub">
+        <!-- <container title="企业五官图" class="sub">
             <ChartRadar :data="radarData" class="full"/>
-        </container>
+        </container> -->
     </div>
 </template>
 <script>
-import ChartRadar from './ChartRadar'
+// import ChartRadar from './ChartRadar'
 import Mock from 'mockjs'
 
 export default {
   name: 'EntityMapInfo',
-  components: { ChartRadar },
+  // components: { ChartRadar },
   data () {
     return {
       radarData: [{
@@ -44,6 +44,15 @@ export default {
         max: 100
       }]
     }
+  },
+  watch: {
+    data: {
+      immediate: false,
+      deep: true,
+      handler: function () {
+        console.log(this.data, '右上角')
+      }
+    },
   },
   props: {
     data: {

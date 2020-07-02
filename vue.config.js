@@ -1,6 +1,8 @@
 const StatsPlugin = require('stats-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 module.exports = {
+  // 输出文件目录
+  outputDir: 'dist',
   runtimeCompiler: true,
   transpileDependencies: [
     'vue-echarts',
@@ -8,6 +10,7 @@ module.exports = {
   ],
   lintOnSave: true,
   devServer: {
+    open: true,
     proxy: {
       // '/comet': {
       //   // 目标 API 地址
@@ -32,11 +35,19 @@ module.exports = {
         pathRewrite: {
           '^/': '/' // 代理的路径
         }
+      },
+      '/monitor': {
+        // target: 'http://192.168.105.38:8080/blade-screen',
+        target: 'http://192.168.1.107:8080/blade-screen',
+        changeOrigin: true,
+        pathRewrite: {
+            '^/monitor': ''
+        }
       }
     }
   },
   configureWebpack: {
-    plugins: [
+    plugins: [  
       new StatsPlugin('stats.json', {
         chunkModules: true,
         chunks: true,

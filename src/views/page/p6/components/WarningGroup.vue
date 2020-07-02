@@ -1,10 +1,12 @@
 <template>
     <div class="number-group full-height  full-width">
         <ContainerWarning v-for="(item,index) in data" :key="index" class="item" :level="index">
-            <div class="value number-font" :style="{'color':item.color}">{{item.num}}</div>
-            <div class="name-div">
-                <div class="item_color" :style="{'background':item.color}"></div>
-                <div class="name">{{item.colorName}}</div>
+            <div class="full" @click="cli(item)">
+                <div class="value number-font" :style="{'color':item.color}" >{{item.num}}</div>
+                <div class="name-div">
+                    <div class="item_color" :style="{'background':item.color}"></div>
+                    <div class="name">{{item.colorName}}</div>
+                </div>
             </div>
         </ContainerWarning>
     </div>
@@ -17,6 +19,11 @@ export default {
   props: ['data'],
   data: () => {
     return {}
+  },
+  methods: {
+    cli (item) {
+        this.$emit('cliBox', item)
+    }
   }
 }
 </script>

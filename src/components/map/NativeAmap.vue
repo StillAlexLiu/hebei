@@ -5,7 +5,7 @@
         <MapInfoBlock>
             <slot name="info"></slot>
         </MapInfoBlock>
-        <search-box :number="pointNumber"/>
+        <SearchBox :number="pointNumber"/>
     </div>
 </template>
 
@@ -100,7 +100,7 @@ export default {
               console.log(e)
             }
             this.map.setZoomAndCenter(9, this.center)
-            this.pointNumber = 0
+            // this.pointNumber = 0
             if (this.point.length > 0) {
               this.addMassMarks(this.point)
             }
@@ -154,13 +154,13 @@ export default {
   methods: {
     loadAMap (callback) {
       if (!window.AMap) {
-        console.log('地图未加载')
+        // console.log('地图未加载')
         this.$AMapBus.$on('onAMapLoad', () => {
-          console.log('地图加载完毕')
+          // console.log('地图加载完毕')
           callback()
         })
       } else {
-        console.log('地图已加载')
+        // console.log('地图已加载')
         callback()
       }
     },
@@ -251,20 +251,39 @@ export default {
       }
     },
     contentMaker (data) {
-      if (data.userName) {
-        const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
-        return '<div style="width: 36px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
-      } else if (this.$route.name === '远程监控') {
-        const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
-        return '<div style="width: 70px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:70px;text-align:center;color:#000000;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
-      } else {
-        const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
-        return '<div style="width: 36px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
+      // console.log(data, '地图打点')
+      if (data.baseCount) {
+        if (data.typeIndex === 0) {
+          const count = data.baseCount ? '<div style="width: 100%;text-align: center">' + data.baseCount + '</div>' : ''
+          return '<div style="width: 70px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:70px;text-align:center;color:#000000;height:34px;line-height:34px;font-size:20px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
+        } else {
+          const count = data.baseCount ? '<div style="width: 100%;text-align: center">' + data.baseCount + '</div>' : ''
+          return '<div style="width: 36px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
+        }
+      }else {
+        if (data.typeIndex === 0) {
+          const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
+          return '<div style="width: 70px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:70px;text-align:center;color:#000000;height:34px;line-height:34px;font-size:20px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
+        } else {
+          const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
+          return '<div style="width: 36px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
+        }
       }
     },
     addMassMarks (data) { // 海量点
-      console.log('海量点')
-      console.log(data)
+      // console.log('海量点')
+      console.log(data, '海量点')
+      this.pointNumber = 0
+      for (let i = 0; i < data.length; i++) {
+       if (data[i].baseCount) {
+          this.pointNumber += data[i].baseCount
+        } else if (data[i].points) {
+          this.pointNumber += data[i].points.length
+        }  else {
+          this.pointNumber = data.length
+        }
+      }
+      console.log(this.pointNumber, '海量点')
       var newArray = []
       if (this.$route.name === '远程监控') {
         if (data[0].points) {
@@ -273,83 +292,35 @@ export default {
               newArray.push(data[z])
             }
           }
-          this.markers = []
-          // console.log(newArray, 'oo')
-          for (let i = 0; i < newArray.length; i++) {
-            const item = newArray[i]
-            // console.log(item)
-            const marker = new window.AMap.Marker({
-              content: this.contentMaker(item),
-              position: this.transCoordinate(item.coordinate),
-              zIndex: 101,
-              title: item.name,
-              extData: item
-            })
-            console.log(marker)
-            marker.on('click', this.clickHandler)
-            this.markers.push(marker)
-          }
-          this.map.add(this.markers)
+          this.ponitMap(newArray)
         } else {
-          this.markers = []
-          for (let i = 0; i < data.length; i++) {
-            const item = data[i]
-            // console.log(item)
-            const marker = new window.AMap.Marker({
-              content: this.contentMaker(item),
-              position: this.transCoordinate(item.coordinate),
-              zIndex: 101,
-              title: item.name,
-              extData: item
-            })
-            // console.log(marker)
-            marker.on('click', this.clickHandler)
-            this.markers.push(marker)
-          }
-          this.map.add(this.markers)
+          this.ponitMap(data)
         }
-      } else {
-        this.markers = []
-        for (let i = 0; i < data.length; i++) {
-          const item = data[i]
-          // console.log(item)
-          const marker = new window.AMap.Marker({
-            content: this.contentMaker(item),
-            position: this.transCoordinate(item.coordinate),
-            zIndex: 101,
-            title: item.name,
-            extData: item
-          })
-          // console.log(marker)
-          marker.on('click', this.clickHandler)
-          this.markers.push(marker)
-        }
-        this.map.add(this.markers)
+      }else {
+        this.ponitMap(data)
       }
     },
-    // 整理的函数
-    // ponitMap (data) {
-    //   this.markers = []
-    //   for (let i = 0; i < data.length; i++) {
-    //     const item = data[i]
-    //     // console.log(item)
-    //     const marker = new window.AMap.Marker({
-    //       content: this.contentMaker(item),
-    //       position: this.transCoordinate(item.coordinate),
-    //       zIndex: 101,
-    //       title: item.name,
-    //       extData: item
-    //     })
-    //     // console.log(marker)
-    //     marker.on('click', this.clickHandler)
-    //     this.markers.push(marker)
-    //   }
-    //   this.map.add(this.markers)
-    // },
+    ponitMap (data) {
+      this.markers = []
+      for (let i = 0; i < data.length; i++) {
+        const item = data[i]
+        const marker = new window.AMap.Marker({
+          content: this.contentMaker(item),
+          position: this.transCoordinate(item.coordinate),
+          zIndex: 101,
+          title: item.name,
+          extData: item
+        })
+        marker.on('click', this.clickHandler)
+        this.markers.push(marker)
+      }
+      this.map.add(this.markers)
+    },
     removeMassMarks () {
       this.map.remove(this.markers)
     },
     searchFunc (adcode) {
+      console.log(adcode, 'adddd')
       const districtSearch = new window.AMap.DistrictSearch({
         // 关键字对应的行政区级别，country表示国家
         level: 'district',
@@ -359,19 +330,21 @@ export default {
       })
       return new Promise(resolve => {
         districtSearch.search(adcode, (status, result) => {
-          // console.log(result)
-          // console.log(result.districtList[0].name)
-          // console.log([result.districtList[0].center.lng, result.districtList[0].center.lat].toString())
+          console.log(result)
+          console.log(result.districtList[0].name)
+          console.log([result.districtList[0].center.lng, result.districtList[0].center.lat].toString())
           resolve(result)
         })
       })
     },
     SearchDistrict (adcode, depth) {
+      console.log(adcode, depth)
       this.proDepth = depth
 
       // 搜索所有省/直辖市信息
       this.searchFunc(adcode).then(result => {
         const list = result.districtList[0].districtList
+        console.log(list, '网格...................................')
         const polygons = []
         const promiseList = []
         console.log(list)
@@ -434,6 +407,7 @@ export default {
       this.map.remove(this.disProvinceLayer)
     },
     getColorByAdcode (adcode) {
+      console.log(adcode, 'aaddss')
       if (!this.colors[adcode]) {
         this.colors[adcode] = Mock.mock('@color')
       }

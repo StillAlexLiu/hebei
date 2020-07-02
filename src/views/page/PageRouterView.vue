@@ -11,7 +11,10 @@
         <div class="w-3-7 full-height" style="position: relative">
             <div class="view">
                 <router-view name="center"/>
-                <CenterMap class="full-height full-width" v-if="centerFlag"/>
+                <CenterMap class="full-height full-width" v-show="centerFlag && !personageBox"/>
+                <div class="full"  v-show="personageBox">
+                  <EntityCenter />
+                </div>
             </div>
             <HeaderTab class="tab" :data="headerData" v-model="selectIndex" @change="routeTo"/>
         </div>
@@ -24,19 +27,23 @@
 <script>
 import CenterMap from './map/CenterMap'
 import LeftTitle from './PageRouterView/LeftTitle'
+import EntityCenter from './p1/EntityCenter.vue'
+import Bus from '@/assets/bus.js'
 
 export default {
   name: 'PageRouterView',
   components: {
     LeftTitle,
-    CenterMap
+    CenterMap,
+    EntityCenter
   },
   data () {
     return {
       headerData: [],
       selectIndex: null,
       leftTitle: this.$dataAll.config.leftTitle,
-      centerFlag: false
+      centerFlag: false,
+      personageBox: false
     }
   },
   mounted () {
@@ -63,8 +70,12 @@ export default {
       }
     }
   },
+  created() {  
+    Bus.$on('getTarget', target => {  
+      this.personageBox = target
+    });  
+  },
   methods: {
-
     initTab () {
       // 加载tab数据
       this.headerData = this.$router.options.routes[0].children

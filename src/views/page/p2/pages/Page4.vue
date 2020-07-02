@@ -1,10 +1,10 @@
 <template>
     <div class="Page4 full">
         <div class="h-1-3">
-            <container class="w-1-2 full-height" title="特种设备监管">
+            <container class="w-1-2 full-height" :title="TypeName.name + '监管'">
                 <NumberElevator :data='chart4[dimension]'></NumberElevator>
             </container>
-            <container class="w-1-2 full-height" title="全省特种设备增长趋势">
+            <container class="w-1-2 full-height" :title="'全省' + TypeName.name + '增长趋势'">
                 <ChartsBarLine :data='chart5' :dimensions="['name','value']"
                                :type="['line']"
                                :colors="['#61EADF']"
@@ -13,10 +13,10 @@
             </container>
         </div>
         <div class="h-1-3">
-            <container class="w-1-2 full-height" title="特种设备类型分布">
-                <ChartsPie :data='hellowPie2' is-pie/>
+            <container class="w-1-2 full-height" :title="TypeName.name + '类型分布'">
+                <ChartsPie :data='hellowPie2' :showLegend='false' :showValue='true' is-pie/>
             </container>
-            <container class="w-1-2 full-height" title="特种设备各地区分布">
+            <container class="w-1-2 full-height" :title="TypeName.name + '各地区分布'">
                 <ChartsBarLine :data='chart3[dimension].data' :dimensions="['name','value']" :type="['bar']"
                                :colors="[barColor]"
                                :border-radius="true"
@@ -25,15 +25,17 @@
             </container>
         </div>
         <div class="h-1-3">
-            <container class="w-1-2 full-height" title="二维码覆盖情况">
-                <ChartsPiePiecewise :data='chart6.data'
-                                    :show-value="true"
-                                    :img="chart6.img"></ChartsPiePiecewise>
+            <container class="w-1-2 full-height" :title="TypeName.name + '主要行业分析'">
+              <!-- <ChartsScatter :dimensions="['name','value','size']" :data="scatterData" :base-size="1"
+                           :unit="'个'"
+                           :size="'4e2'"
+                           :showX="false"  :showSize='true'
+                           :colors="['#50E3C2','#FF9177','#00B1FA','#8A7CEF','#FFE17D','#00E138','#FF7B83']"/> -->
+              <ChartsPie :double-pie="true" :data="pieData4" :center-data="pieCenterData" :showLegend='false'
+                           :color="['#FFBF24','#FE6941','#55B0EE','#8A7CEF','#25DD54','#5FE7DC']" :show-value="true"/>
             </container>
-            <container class="w-1-2 full-height" title="老旧特种设备占比">
-                <chartsPie :data='hellowPie' :is-percent="true"/>
-                <!-- <ChartsPiePercentMode :data="pieDataPercent"/> -->
-                <!--                <echartsliqudfill :data='liquidfull[dimension]'></echartsliqudfill>-->
+            <container class="w-1-2 full-height" :title="TypeName.name + '场所分析'">
+                <ChartsPie :data="pieData" :is-pie="false" :show-value="true"/>
             </container>
         </div>
     </div>
@@ -45,6 +47,8 @@ import echarts from 'echarts'
 // import InfoCard from '../compontes/InfoCard'
 // import ChartsPiePercentMode from '../compontes/ChartsPiePercentMode'
 import chartsPie from '../compontes/echartsPie'
+// import ChartMountain from '../../p1/componets/ChartMountain'
+import axios from 'axios'
 export default {
   name: 'Page4',
   props: {
@@ -58,14 +62,232 @@ export default {
     // InfoCard,
     chartsPie,
     NumberElevator
+    // ChartMountain
+  },
+  computed: {
+    TabType () {
+      return this.$store.state.facilityTab
+    }
+  },
+  watch: {
+    TabType (data) {
+      this.TypeName =data
+      this.typeTab()
+    }
+  },
+  mounted () {
+    this.typeTab()
+  },
+  methods: {
+    typeTab () {
+      // 特种设备监控总数
+      this.chart4[0].value = ''
+      this.chart5 = []
+      this.hellowPie2 = []
+      this.chart3[0].data = []
+      this.pieData4 = []
+      this.pieData = []
+      this.pieCenterData[0].value = ''
+      this.pieCenterData[1].value = ''
+      axios.get('/monitor/equpMent/getTotalSum?equpType=' + this.TypeName.type).then(res => {
+        const data= res.data.data
+        this.chart4[0].value = data.totleSum
+      })
+      // 特种设备增长
+      axios.get('/monitor/equpMent/getSpread?equpType=' + this.TypeName.type).then(res => {
+        const data= res.data.data
+        this.chart5 = []
+        for (let i = 0; i < data.length; i++) {
+          this.chart5.push({
+            name: data[i].year,
+            value: data[i].equpNum
+          })
+        }
+      })
+      // 特种设备类型分布
+      axios.get('/monitor/equpMent/getMold?equpType=' + this.TypeName.type).then(res => {
+        const data= res.data.data
+        console.log(data,'特种设备类型分布')
+        this.hellowPie2 = []
+        for (let i = 0; i < data.length; i++) {
+          this.hellowPie2.push({
+            name: data[i].equpName,
+            value: data[i].equpNum
+          })
+        }
+      })
+      // 特种设备地区分布
+      axios.get('/monitor/equpMent/getRegions?equpType=' + this.TypeName.type).then(res => {
+        const data= res.data.data
+        this.chart3[0].data = []
+        for (let i = 0; i < data.length; i++) {
+          this.chart3[0].data.push({
+            name: data[i].areaName,
+            value: data[i].equpAreaNum
+          })
+        }
+      })
+      // 特种设备行业分布
+      axios.get('/monitor/equpMent/getMajor?equpType=' + this.TypeName.type).then(res => {
+        const data= res.data.data
+        console.log(data, '特种设备行业分布')
+        this.pieData4 = []
+        let count = 0
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].industryName !== '制造业') {
+            this.pieData4.push({
+              name: data[i].industryName,
+              value: data[i].industryNum
+            })
+            count += data[i].industryNum
+          } else {
+            console.log(data[i], '制造业')
+            this.pieCenterData[0].value = data[i].industryNum
+          }
+        }
+        console.log(count)
+        this.pieCenterData[1].value = count
+      //   this.pieCenterData = [
+      //   {
+      //     name: '制造业',
+      //     value: Mock.Random.natural(500, 1300),
+      //     selected:true
+      //   }, {
+      //     name: '非制造业',
+      //     value: Mock.Random.natural(500, 1300)
+      //   }
+      // ],
+        //   this.scatterData.push({
+        //     name: data[i].industryName,
+        //     value: data[i].industryNum
+        //   })
+      })
+      // 特种设备场所分析
+      axios.get('/monitor/equpMent/getSecurity?equpType=' + this.TypeName.type).then(res => {
+        const data= res.data.data
+        this.pieData = []
+        for (let i = 0; i < data.length; i++) {
+          this.pieData.push({
+            name: data[i].typeName,
+            value: data[i].riskNum
+          })
+        }
+      })
+    },
+    typeName (name) {
+      switch (name) {
+        case 1:
+            return '锅炉'
+        case 3:
+            return '电梯'
+        case 2:
+            return '压力容器'
+        case 8:
+            return '压力管道'
+        case 4:
+            return '起重机械'
+        case 9:
+            return '客运索道'
+        case 6:
+            return '大型游乐'
+        case 5:
+            return '场（厂）内专用机动车辆'
+        } 
+    }
   },
   data: () => {
     return {
+      pieCenterData: [
+        {
+          name: '制造业',
+          value: Mock.Random.natural(500, 1300),
+          selected:true
+        }, {
+          name: '非制造业',
+          value: Mock.Random.natural(500, 1300)
+        }
+      ],
+      pieData4: [
+        {
+          name: '国家级',
+          value: Mock.Random.natural(500, 1300)
+        }, {
+          name: '省级',
+          value: Mock.Random.natural(500, 1300)
+        }, {
+          name: '地市级',
+          value: Mock.Random.natural(500, 1300)
+        }, {
+          name: '区县级',
+          value: Mock.Random.natural(500, 1300)
+        }
+      ],
+      TypeName: {
+        name: '特种设备',
+        type: ''
+      },
+      scatterData: [{
+        name: '石油',
+        value: 3061
+      }, {
+        name: '电力',
+        value: 2163
+        // size: Mock.Random.natural(10, 200)
+      }, {
+        name: '宾馆',
+        value: 3963
+      }, {
+        name: '食品生产',
+        value: 5963
+      }, {
+        name: '化工',
+        value: 2963
+      }, {
+        name: '化肥',
+        value: 1163
+      }, {
+        name: '住宅小区及公园',
+        value: 8063
+      }, {
+        name: '机械制造',
+        value: 5863
+      }, {
+        name: '制药',
+        value: 3803
+      }, {
+        name: '商场',
+        value: 2963
+      }, {
+        name: '景区',
+        value: 5763
+      }],
       hellowPie: {
         name: ' ',
         num: 8,
         sum: 2380
       },
+      mountainData: [
+        {
+          name: '重大风险',
+          value: 980,
+          color: 'linear-gradient(180deg,rgba(255,87,87,1) 0%,rgba(255,64,64,1) 100%)'
+        },
+        {
+          name: '较大风险',
+          value: 1020,
+          color: 'linear-gradient(180deg,rgba(255,245,87,1) 0%,rgba(255,188,0,1) 100%)'
+        },
+        {
+          name: '一般风险',
+          value: 2046,
+          color: 'linear-gradient(180deg,rgba(79,255,148,1) 0%,rgba(56,167,120,1) 100%)'
+        },
+        {
+          name: '低风险',
+          value: 3868,
+          color: 'linear-gradient(180deg,rgba(87,182,255,1) 0%,rgba(0,138,255,1) 100%)'
+        }
+      ],
       barColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
         {
           offset: 0,
@@ -77,13 +299,13 @@ export default {
         }
       ]),
       chart4: [{
-        name: '全省特种设备总量',
+        name: '全省总量',
         value: 31106
       }, {
-        name: '全省特种设备总量',
+        name: '全省总量',
         value: 38106
       }, {
-        name: '全省特种设备总量',
+        name: '全省总量',
         value: 47106
       }],
       chart5: [
@@ -348,6 +570,36 @@ export default {
         }, {
           value: Mock.Random.natural(30, 200),
           name: '场(厂)内专用机动车辆'
+        }
+      ],
+      pieData: [
+        {
+          name: '学校',
+          value: Mock.Random.natural(500, 1300)
+        }, {
+          name: '机场车站',
+          value: Mock.Random.natural(500, 1300)
+        }, {
+          name: '医院',
+          value: Mock.Random.natural(500, 1300)
+        }, {
+          name: '宾馆饭店',
+          value: Mock.Random.natural(500, 1300)
+        }, {
+          name: '商场',
+          value: Mock.Random.natural(500, 1300)
+        }, {
+          name: '住宅',
+          value: Mock.Random.natural(500, 1300)
+        }, {
+          name: '其他',
+          value: Mock.Random.natural(500, 1300)
+        }, {
+          name: '娱乐',
+          value: Mock.Random.natural(500, 1300)
+        }, {
+          name: '企业',
+          value: Mock.Random.natural(500, 1300)
         }
       ],
       pieDataPercent: {

@@ -1,10 +1,10 @@
 <template>
     <container-calc type="tb" :number="53" class="SupervisionLeft full-width full-height page-style">
-        <template slot="fix">
+        <!-- <template slot="fix"  v-if="selectName ==='综合监管'">
             <RadioSimple :data="radioData" v-model="select" class="w-3-7 full-height radio"/>
-        </template>
+        </template> -->
         <div slot="calc" class=" full-width full-height sub" v-if="globalMapSelect.tab">
-            <Page1 v-if="selectName ==='综合监管'||selectName ==='综合监管'" :dimension="select.value"/>
+            <Page1 v-if="selectName ==='综合监管'|| selectName ==='综合监管'" :dimension="select.value"/>
             <Page2 v-if="selectName ==='智慧食品监管'" :dimension="select.value" :name="selectItem.name"/>
             <Page3 v-if="selectName ==='产品质量监管'" :dimension="select.value"/>
             <Page4 v-if="selectName ==='特种设备监管'" :dimension="select.value"/>

@@ -3,8 +3,8 @@
         <label>
             <input v-model="text" @focus="onFocus">
         </label>
-        <i @click="click"/>
-        <div>总数：{{number}}</div>
+        <i />
+        <div class="num">总数：{{number}}</div>
     </div>
 </template>
 
@@ -24,9 +24,6 @@ export default {
   methods: {
     onFocus () {
 
-    },
-    click () {
-
     }
   }
 }
@@ -38,8 +35,13 @@ export default {
     top: 80px;
     left: 40px;
     height: 36px;
-    width: 400px;
-
+    width: 500px;
+    .num {
+      min-width: 200px;
+      height: 36px;
+      display: inline-block;
+      // text-align: left;
+    }
     input {
         width: 300px;
         height: 100%;
@@ -71,7 +73,7 @@ export default {
         position: absolute;
         background: url("./img/search.png");
         background-size: 100% 100%;
-        right: 110px;
+        right: 210px;
         top: 6px;
         cursor: pointer;
     }

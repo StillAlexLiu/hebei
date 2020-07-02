@@ -14,6 +14,7 @@
 
 <script>
 import Mock from 'mockjs'
+import axios from 'axios'
 
 export default {
   name: 'AuditMapInfo',
@@ -42,11 +43,11 @@ export default {
         }
       ], [
         {
-          name: '等级时间',
+          name: '登记时间',
           value: 'time'
         },
         {
-          name: '当事人名称',
+          name: '线索名称',
           value: 'name'
         },
         {
@@ -90,18 +91,43 @@ export default {
   mounted () {
     const arr1 = []
     const arr2 = []
-    for (let i = 0; i < 20; i++) {
-      arr1.push({
-        status: '调查取证',
-        name: '河北' + Mock.mock('@cword(3,6)') + '有限责任公司',
-        time: '2020-02-02 23:00:00'
-      })
-      arr2.push({
-        status: '线索核查',
-        name: '河北' + Mock.mock('@cword(3,6)') + '有限责任公司',
-        time: '2020-02-02 23:00:00'
-      })
-    }
+    // 案件
+    axios.get('/monitor/check/getCasesProcessData').then(res => {
+      const data= res.data.data
+      console.log(data, '案件')
+      this.radio[0].name = '处理中案件' + data.length + '件'
+      for (let i = 0; i  < data.length; i++) {
+        arr1.push({
+          status: data[i].caseStaus,
+          name: data[i].caseName,
+          time: data[i].caseTime
+        })
+      }
+    })
+    // 线索
+    axios.get('/monitor/check/getCluesProcessData').then(res => {
+      const data= res.data.data
+      this.radio[1].name = '处理中线索' + data.length + '件'
+      for (let i = 0; i  < data.length; i++) {
+        arr2.push({
+          status: data[i].clueStaus,
+          name: data[i].clueName,
+          time: data[i].clueTime
+        })
+      }
+    })
+    // for (let i = 0; i < 20; i++) {
+    //   arr1.push({
+    //     status: '调查取证',
+    //     name: '河北' + Mock.mock('@cword(3,6)') + '有限责任公1司',
+    //     time: '2020-02-02 23:00:00'
+    //   })
+    //   arr2.push({
+    //     status: '线索核查',
+    //     name: '河北' + Mock.mock('@cword(3,6)') + '有限责任公2司',
+    //     time: '2020-02-02 23:00:00'
+    //   })
+    // }
     this.table = [arr1, arr2]
   }
 }
