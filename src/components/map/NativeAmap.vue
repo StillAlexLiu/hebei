@@ -373,7 +373,7 @@ export default {
                 // strokeColor: '#CC66CC'
                 path: bounds,
                 strokeColor: '#fff',
-                strokeWeight: 10,
+                strokeWeight: 1,
                 strokeOpacity: 0.2,
                 fillOpacity: 0.4,
                 fillColor: this.getColorByAdcode(adcode),
@@ -415,7 +415,6 @@ export default {
       if (!this.colors[adcode]) {
         this.colors[adcode] = Mock.mock('@color')
       }
-      console.error(this.colors[adcode])
       return this.colors[adcode]
     },
     getSelect (list) { // 发送地图下方的选择器事件
