@@ -1,22 +1,22 @@
 <template>
-    <div class="rollTable " style="position: relative">
-        <div style="overflow:hidden;margin-top:60px;">
-            <transition-group name="list" tag='div' ref="table" style="width: 100%" class="table">
-                <div class="row  body  list-item full-width" v-for="(item,index) in showData"
-                     :key="item.__index+'m'"
-                     @click="click(item,index)">
-                    <div class="cell" v-for="(itemd,indexd) in dimension" :key="indexd+'&'+item.__index"
-                         :style="{width:widths.length>0?widths[index]/wc*100 +'%':(100/dimension.length)+'%'}">
-                        <span>     {{item[itemd.value]}}</span>
-                    </div>
-                </div>
-            </transition-group>
-        </div>
-        <div class="header " :key="-1" style="position: absolute;top:0">
+    <div class="rollTable" style="position: relative">
+      <div class="header " :key="-1" style="position: absolute;top:0">
             <div class="cell" v-for="(item,index) in dimension" :key="index"
                  :style="{width:widths.length>0?widths[index]/wc*100 +'%':(100/dimension.length)+'%'}">
                 {{item.name}}
             </div>
+        </div>
+        <div style="overflow:hidden;margin-top:60px;max-height:1200px">
+              <transition-group name="list" tag='ul' ref="table" style="width: 100%;" class="table">
+                <li class="row  body  list-item full-width h-1-10" v-for="(item,index) in demo"
+                     :key="item.key"
+                     @click="click(item,index)">
+                    <div class="cell" v-for="(itemd,indexd) in dimension" :key="indexd+'&'+item.key"
+                         :style="{width:widths.length>0?widths[index]/wc*100 +'%':(100/dimension.length)+'%'}">
+                        <span>{{item[itemd.value]}}</span>
+                    </div>
+                </li>
+            </transition-group>
         </div>
     </div>
 </template>
@@ -25,10 +25,11 @@
 export default {
   name: 'rollTable',
   props: {
-    data: {
+    tableData: {
       type: Array,
       default: () => {
-        return []
+        return [
+        ]
       }
     },
     dimension: {
@@ -49,7 +50,9 @@ export default {
       selectIndex: 0,
       showData: [],
       timer: 0,
-      wc: 0
+      wc: 0,
+      tableIndex: 0,
+      demo: []
     }
   },
   watch: {
@@ -57,15 +60,21 @@ export default {
       deep: true,
       immediate: true,
       handler: function () {
-        this.$emit('input', this.data[this.selectIndex])
+        this.$emit('input', this.tableData[this.selectIndex])
       }
     },
-    data: {
+    tableData: {
       deep: true,
       immediate: true,
       handler: function () {
-        if (this.data.length > 0) {
-          this.startRoll()
+        clearInterval(this.timer)
+        var data = this.tableData
+        this.demo = []
+        if (data.length > 0) {
+          this.demo = this.initData(data)
+          if (data.length >= 10) {
+            this.timer = setInterval(this.add, 4000)
+          }
         }
       }
     }
@@ -80,30 +89,20 @@ export default {
     click (item, index) {
       this.selectIndex = index
     },
-    startRoll () {
-      try {
-        clearInterval(this.timer)
-      } catch (e) {
-
-      }
-      let len = this.data.length
-      for (let i = 0; i < len; i++) {
-        this.$set(this.data[i], '__index', i)
-      }
-      if (len > 10) {
-        len = 10
-      }
-      this.showData = this.data.slice(0, len)
-      console.log(this.showData)
-      let i = len
-      this.timer = setInterval(() => {
-        this.showData.shift()
-        this.showData.push(this.data[i])
-        i++
-        if (i === this.data.length) {
-          i = 0
-        }
-      }, 2000)
+    initData (data) {
+      const rtn = []
+      this.tableIndex = data.length
+      data.forEach((item, index, arr) => {
+        item.key = index
+        rtn.push(item)
+      })
+      return rtn
+    },
+    add () {
+      const item = this.demo.shift()
+      item.key = this.tableIndex
+      this.demo.push(item)
+      this.tableIndex++
     }
   },
   beforeDestroy () {
@@ -120,13 +119,16 @@ export default {
     position: relative;
     background-color: rgba(17, 17, 23, .7);
     overflow: hidden;
-
     > div {
         width: 100%;
     }
 
     .table {
         /*display: table;*/
+        max-height: 1200px;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
     }
 
     .header {
@@ -135,14 +137,13 @@ export default {
         width: 100%;
         height: 60px;
         line-height: 60px;
-
+        position: relative;
+        z-index: 10;
         > div {
             height: 100%;
             float: left;
         }
-
     }
-
     .row {
         width: 100%;
         height: 120px;
@@ -155,7 +156,6 @@ export default {
 
     .body {
         cursor: pointer;
-
         .cell {
             border: 1px solid #37adc3;
             display: table;
@@ -172,40 +172,26 @@ export default {
     }
 
 }
-
-/*.list-item {*/
-/*    !*transition: all 2s linear;*!*/
-
-/*    > div {*/
-
-/*    }*/
-/*}*/
-
-.list-move {
-    transition: all 2s linear;
-}
+  .list-move {
+        transition: all 1s linear;
+    }
 
 .list-enter {
     /*transition: transform 2s linear;*/
     /*transition: all .1s linear;*/
     transform: translateY(80px);
 }
-
 .list-enter-active, .list-leave-active {
-    transition: all 2s linear;
+    transition: all 1s linear;
 }
-
 .list-leave-to {
-    /*background-color: red;*/
     /*opacity: 30%;*/
     /*top:-20px;*/
     /*transform: translateY(-30px);*/
-    transform: translateY(-80px);
-    transition: all 2s linear;
+   display: none;
 }
-
 .list-leave-active {
-    transition: transform 2s linear;
+    transition: transform 1s linear;
     position: absolute;
 }
 </style>
