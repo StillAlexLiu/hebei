@@ -584,6 +584,10 @@ export default [
           id: ''
         }
       ]
+    }, {
+      name: '一日办',
+      active: false,
+      fingle: true
     }]
   }, {
     name: '综合监管',

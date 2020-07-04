@@ -7,7 +7,7 @@
             <div class="h-2-8">
                 <info-group :data='data1[select.value - 1]' :name='select'/>
             </div>
-            <container title="当前预警数量" class="h-3-8">
+            <container :title="select.name + '当前预警数量'" class="h-3-8">
                 <div class="w-2-10 full-height">
                     <tableTab v-model="tabData" @active='clickActive'/>
                 </div>
@@ -70,7 +70,8 @@ export default {
         clew: ['预警级别', '登记时间', '剩余时间', '线索名称', '登记机构', '线索类型', '当前状态']
       },
       tabData: 'case',
-      select: {},
+      select: {
+      },
       data1: [[
         {
           name: '线索',

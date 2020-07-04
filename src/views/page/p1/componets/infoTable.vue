@@ -30,6 +30,7 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    overflow: auto;
 }
 
 .item {

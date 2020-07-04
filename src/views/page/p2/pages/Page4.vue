@@ -9,19 +9,19 @@
                                :type="['line']"
                                :colors="['#61EADF']"
                                :units="['单位：台']"
-                               :legend="['特种设备数量']"></ChartsBarLine>
+                               :legend="[TypeName.name + '数量']"></ChartsBarLine>
             </container>
         </div>
         <div class="h-1-3">
-            <container class="w-1-2 full-height" :title="TypeName.name + '类型分布'">
-                <ChartsPie :data='hellowPie2' :showLegend='false' :showValue='true' is-pie/>
+            <container class="w-1-2 full-height" :title="TypeName.name + '主要类型分布'">
+                <ChartsPie :data='hellowPie2' :showLegend='true' :showValue='true' is-pie/>
             </container>
             <container class="w-1-2 full-height" :title="TypeName.name + '各地区分布'">
                 <ChartsBarLine :data='chart3[dimension].data' :dimensions="['name','value']" :type="['bar']"
                                :colors="[barColor]"
                                :border-radius="true"
                                :units="['单位：台']"
-                               :legend="['特种设备数量']"></ChartsBarLine>
+                               :legend="[TypeName.name + '数量']"></ChartsBarLine>
             </container>
         </div>
         <div class="h-1-3">
@@ -31,7 +31,7 @@
                            :size="'4e2'"
                            :showX="false"  :showSize='true'
                            :colors="['#50E3C2','#FF9177','#00B1FA','#8A7CEF','#FFE17D','#00E138','#FF7B83']"/> -->
-              <ChartsPie :double-pie="true" :data="pieData4" :center-data="pieCenterData" :showLegend='false'
+              <ChartsPie :double-pie="true" :data="pieData4" :center-data="pieCenterData" :showLegend='true'
                            :color="['#FFBF24','#FE6941','#55B0EE','#8A7CEF','#25DD54','#5FE7DC']" :show-value="true"/>
             </container>
             <container class="w-1-2 full-height" :title="TypeName.name + '场所分析'">

@@ -196,19 +196,20 @@ export default {
         left: left,
         right: right,
         labelLine:{
-          show: true,
-          length: 0,
-          length2: 0
+          show: false,
+          length: 20,
+          length2: 0,
+          smooth: false
         },
         label: {
-          show: true,
+          show: false,
           position: 'outside',
           color: '#ddd',
           fontSize: 22,
           align: 'right',
-          width: 40,
-          alignTo: 'edge',
-          margin: 10,
+          width: 30,
+          // alignTo: 'edge',
+          margin: 0,
           formatter: (params) => {
             if (this.legendPosition === 'right') {
               return params.name + '\n{white|' + params.value + this.unit + '}'
@@ -218,7 +219,7 @@ export default {
               } else if (this.showValue) {
                 return params.name + '\n{white|' + params.value + this.unit + '}'
               } else {
-                return params.name + '\n{white|' + params.percent + '%}'
+                return 'white|' + params.name + '\n{white|' + params.percent + '%}'
               }
             } else {
               return ''
@@ -228,7 +229,7 @@ export default {
           rich: {
             white: {
               color: '#79DFEF',
-              fontSize: 20,
+              fontSize: 18,
               align: 'left'
             }
           }
@@ -248,6 +249,16 @@ export default {
             color: 'red',
             fontSize: 200
           }
+        },
+        tooltip: {
+          trigger: 'item',
+          // formatter: '{a}{b} : <br/>{c} ({d}%)'
+          formatter: function(params) {
+      　　　　let str = ``;
+      // 　　　　params.forEach((item) => {
+      　　　　　return　str += `<span style="font-size: 22px;">${params.name}<span style="font-size: 22px;">：${params.value}<br />`
+      // 　　　　})
+      　　}
         },
         legend: legend,
         series: series

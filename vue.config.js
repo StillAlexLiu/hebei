@@ -38,16 +38,16 @@ module.exports = {
       },
       '/monitor': {
         // target: 'http://192.168.105.38:8080/blade-screen',
-        target: 'http://192.168.1.107:8080/blade-screen',
+        target: 'http://192.168.1.103:8080/blade-screen',
         changeOrigin: true,
         pathRewrite: {
-            '^/monitor': ''
+          '^/monitor': ''
         }
       }
     }
   },
   configureWebpack: {
-    plugins: [  
+    plugins: [
       new StatsPlugin('stats.json', {
         chunkModules: true,
         chunks: true,

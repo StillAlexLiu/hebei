@@ -103,7 +103,7 @@ export default {
 
                 &:nth-child(1) {
                     color: #fff;
-                    width: 8rem;
+                    width: 11rem;
                     /*text-align: right;*/
                     text-align: justify;
                     text-align-last: justify;
@@ -118,7 +118,7 @@ export default {
                 &:nth-child(2) {
                     text-align: left;
                     padding-left: 2rem;
-                    width: calc(~"100% - 8rem");
+                    width: calc(~"100% - 11rem");
                 }
             }
         }

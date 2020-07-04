@@ -57,6 +57,7 @@ export default {
       deep: true,
       immediate: true,
       handler: function () {
+        console.log(this.data[this.selectIndex], '获取的数据')
         this.$emit('input', this.data[this.selectIndex])
       }
     },
@@ -78,9 +79,11 @@ export default {
   },
   methods: {
     click (item, index) {
+      // console.log(itme, '稽查点击')
       this.selectIndex = index
     },
     startRoll () {
+      this.showData = []
       try {
         clearInterval(this.timer)
       } catch (e) {

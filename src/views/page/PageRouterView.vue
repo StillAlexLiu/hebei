@@ -11,12 +11,18 @@
         <div class="w-3-7 full-height" style="position: relative">
             <div class="view">
                 <router-view name="center"/>
-                <CenterMap class="full-height full-width" v-show="centerFlag && !personageBox"/>
+                <CenterMap class="full-height full-width" v-show="centerFlag && !personageBox && !zhduTab"/>
                 <div class="full"  v-show="personageBox">
                   <EntityCenter />
                 </div>
+                <div class="full" v-if="zhduTab" style="position: relative">
+                    <div class="cuohao" @click="zhduTab = false">
+                      ×
+                    </div>
+                    <iframe src="http://60.205.208.38/vdis/?user=4580000&passwd=4580000&auto=2" frameborder="0" width="100%" height="100%"></iframe>
+                </div>
             </div>
-            <HeaderTab class="tab" :data="headerData" v-model="selectIndex" @change="routeTo"/>
+            <HeaderTab class="tab" :data="headerData" v-model="selectIndex" @change="routeTo" v-if="!zhduTab"/>
         </div>
         <div class="w-2-7 full-height">
             <router-view name="right"/>
@@ -43,7 +49,8 @@ export default {
       selectIndex: null,
       leftTitle: this.$dataAll.config.leftTitle,
       centerFlag: false,
-      personageBox: false
+      personageBox: false,
+      zhduTab: false
     }
   },
   mounted () {
@@ -66,14 +73,25 @@ export default {
         this.$nextTick(() => {
           // 用于判断是否显示中间地图
           this.centerFlag = !this.$route.matched[this.$route.matched.length - 1].instances.center
+          if (this.personageBox) {
+            if (this.$route.name !== '主体服务') {
+              this.personageBox = false
+            }
+          }
         })
       }
     }
   },
   created() {  
-    Bus.$on('getTarget', target => {  
+    Bus.$on('getTarget', target => {
       this.personageBox = target
-    });  
+    })
+    Bus.$on('zhduTab', target => {
+      this.zhduTab = target
+    })
+    Bus.$on('oneDay', target => {
+      this.personageBox = target
+    })
   },
   methods: {
     initTab () {
@@ -127,6 +145,12 @@ export default {
     .right-container {
 
         width: calc(-@titleWidth + ~"100%");
+    }
+    .cuohao {
+      font-size: 40px;
+      position: absolute;
+      right: 20px;
+      cursor: pointer;
     }
 }
 </style>

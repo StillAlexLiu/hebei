@@ -5,7 +5,7 @@
         <MapInfoBlock>
             <slot name="info"></slot>
         </MapInfoBlock>
-        <SearchBox :number="pointNumber"/>
+        <SearchBox :number="pointNumber" :zoom="zoom2"/>
     </div>
 </template>
 
@@ -32,7 +32,8 @@ export default {
       disProvinceLayer: {},
       proDepth: 0,
       mapZoom: 10,
-      markers: []
+      markers: [],
+      zoom2: 0
     }
   },
   props: {
@@ -129,9 +130,10 @@ export default {
       }
     },
     mapZoom (newZoom, oldZoom) { // 缩放复位
-      console.log('zoom:' + newZoom)
+      console.log('zoom:' + newZoom, oldZoom)
       console.log(this.proDepth)
-      if (oldZoom > newZoom && newZoom === 8 && this.proDepth > 0) {
+      this.zoom2 = newZoom
+      if (oldZoom > newZoom && newZoom > 8  && newZoom < 8.1  && this.proDepth > 0) {
         const layers = this.map.getLayers()
         console.log(layers)
         this.removeDisProvinceLayer()
@@ -181,21 +183,31 @@ export default {
 
       this.map.on('zoomend', this.zoomListener)
       // this.map.on('click', this.clickListener)
-
-      window.AMap.plugin(['AMap.DistrictLayer', 'AMap.DistrictSearch'], function () { // 异步加载插件
+      window.AMap.plugin(['AMap.DistrictLayer', 'AMap.DistrictSearch', 'AMap.MarkerClusterer'], function () { // 异步加载插件
         // self.disProvince(self.adcode, self.depth)
         self.SearchDistrict(self.adcode[0], self.depth)
       })
     },
     clickHandler (e) {
       const data = e.target.getExtData()
-      if (data.points && data.points.length > 0) {
+      // console.log(data.baseCount, this.proDepth, '移除图层3')
+      if (data.baseCount > 0 & this.$route.name === '主体服务') {
         this.removeDisProvinceLayer()
-        console.log(this.proDepth++)
+        // console.log(this.proDepth++)
         this.SearchDistrict(data.name, this.proDepth)
         this.map.setZoomAndCenter(9, [e.lnglat.lng, e.lnglat.lat])
         this.removeMassMarks()
-        this.addMassMarks(data.points)
+        this.addMassMarks(data)
+      } else if (this.$route.name === '远程监控'){
+        if (data.points && data.points.length > 0) {
+          //移除图层
+          this.removeDisProvinceLayer()
+          // console.log(this.proDepth++)
+          this.SearchDistrict(data.name, this.proDepth)
+          this.map.setZoomAndCenter(9, [e.lnglat.lng, e.lnglat.lat])
+          this.removeMassMarks()
+          this.addMassMarks(data.points)
+        }
       }
       this.$emit('pointClick', data)
     },
@@ -230,7 +242,7 @@ export default {
       }
     },
     addGrid (data) {
-      console.log(data)
+      // console.log(data)
       if (data) {
         const grids = []
         for (let i = 0; i < data.length; i++) {
@@ -260,7 +272,7 @@ export default {
           const count = data.baseCount ? '<div style="width: 100%;text-align: center">' + data.baseCount + '</div>' : ''
           return '<div style="width: 36px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
         }
-      }else {
+      } else {
         if (data.typeIndex === 0) {
           const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
           return '<div style="width: 70px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:70px;text-align:center;color:#000000;height:34px;line-height:34px;font-size:20px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
@@ -271,19 +283,18 @@ export default {
       }
     },
     addMassMarks (data) { // 海量点
-      // console.log('海量点')
       console.log(data, '海量点')
       this.pointNumber = 0
       for (let i = 0; i < data.length; i++) {
-       if (data[i].baseCount) {
+        if (data[i].baseCount) {
           this.pointNumber += data[i].baseCount
         } else if (data[i].points) {
           this.pointNumber += data[i].points.length
-        }  else {
+        } else {
           this.pointNumber = data.length
         }
       }
-      console.log(this.pointNumber, '海量点')
+      // console.log(this.pointNumber, '海量点')
       var newArray = []
       if (this.$route.name === '远程监控') {
         if (data[0].points) {
@@ -296,11 +307,21 @@ export default {
         } else {
           this.ponitMap(data)
         }
+      } else if(this.$route.name === '主体服务') {
+        const data2 = []
+        console.log(data, '主体服务打点')
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].baseCount > 0) {
+              data2.push(data[i])
+          }
+        }
+        this.ponitMap(data2)
       }else {
         this.ponitMap(data)
       }
     },
     ponitMap (data) {
+      console.log(data, '视频')
       this.markers = []
       for (let i = 0; i < data.length; i++) {
         const item = data[i]
@@ -314,13 +335,23 @@ export default {
         marker.on('click', this.clickHandler)
         this.markers.push(marker)
       }
-      this.map.add(this.markers)
+      if (this.$route.name === '主体服务') {
+        this.cluster = new window.AMap.MarkerClusterer(this.map, this.markers, {
+          gridSize: 1
+        })
+      }  else if (this.$route.name === '远程监控') {
+        this.cluster = new window.AMap.MarkerClusterer(this.map, this.markers, {
+          gridSize: -1
+        })
+      }
+      // this.map.add(this.markers)
     },
     removeMassMarks () {
+      this.cluster.setMap(null)
       this.map.remove(this.markers)
     },
     searchFunc (adcode) {
-      console.log(adcode, 'adddd')
+      // console.log(adcode, 'adddd')
       const districtSearch = new window.AMap.DistrictSearch({
         // 关键字对应的行政区级别，country表示国家
         level: 'district',
@@ -330,9 +361,9 @@ export default {
       })
       return new Promise(resolve => {
         districtSearch.search(adcode, (status, result) => {
-          console.log(result)
-          console.log(result.districtList[0].name)
-          console.log([result.districtList[0].center.lng, result.districtList[0].center.lat].toString())
+          // console.log(result)
+          // console.log(result.districtList[0].name)
+          // console.log([result.districtList[0].center.lng, result.districtList[0].center.lat].toString())
           resolve(result)
         })
       })
@@ -359,29 +390,33 @@ export default {
           console.log(value)
           for (let i = 0; i < value.length; i++) {
             const item = value[i]
-            const bounds = item.districtList[0].boundaries
-            const name = item.districtList[0].name
-            const adcode = item.districtList[0].adcode
-            const polygon = new window.AMap.Polygon({
-              // map: this.map,
-              // strokeWeight: 1,
-              // path: bounds[i],
-              // fillOpacity: 0.7,
-              // fillColor: '#CCF3FF',
-              // strokeColor: '#CC66CC'
-              path: bounds,
-              strokeColor: '#fff',
-              strokeWeight: 1,
-              strokeOpacity: 0.2,
-              fillOpacity: 0.4,
-              fillColor: this.getColorByAdcode(adcode),
-              zIndex: 50,
-              extData: {
-                name, adcode, depth
-              }
-            })
-            polygon.on('click', this.layerClick)
-            polygons.push(polygon)
+            for (let j = 0; j < item.districtList[0].boundaries.length; j++) {
+              const bounds = item.districtList[0].boundaries[j]
+              const name = item.districtList[0].name
+              const adcode = item.districtList[0].adcode
+              const polygon = new window.AMap.Polygon({
+                // map: this.map,
+                // strokeWeight: 1,
+                // path: bounds[i],
+                // fillOpacity: 0.7,
+                // fillColor: '#CCF3FF',
+                // strokeColor: '#CC66CC'
+                path: bounds,
+                strokeColor: '#fff',
+                strokeWeight: 1,
+                strokeOpacity: 0.2,
+                fillOpacity: 0.4,
+                fillColor: this.getColorByAdcode(adcode),
+                zIndex: 50,
+                extData: {
+                  name,
+                  adcode,
+                  depth
+                }
+              })
+              polygon.on('click', this.layerClick)
+              polygons.push(polygon)
+            }
           }
           this.disProvinceLayer = new window.AMap.OverlayGroup(polygons)
           this.map.add(this.disProvinceLayer)
@@ -395,6 +430,7 @@ export default {
       const target = layer.target
       console.log(target)
       const data = target.getExtData()
+      console.log('移除图层111')
       this.removeDisProvinceLayer() // 先移除图层
       this.SearchDistrict(data.adcode, data.depth + 1)
       this.map.setZoomAndCenter(9, [layer.lnglat.lng, layer.lnglat.lat])
@@ -403,10 +439,11 @@ export default {
       this.mapZoom = this.map.getZoom()
     },
     removeDisProvinceLayer () {
+      console.log('移除图层')
       this.map.remove(this.disProvinceLayer)
     },
     getColorByAdcode (adcode) {
-      console.log(adcode, 'aaddss')
+      // console.log(adcode, 'aaddss')
       if (!this.colors[adcode]) {
         this.colors[adcode] = Mock.mock('@color')
       }

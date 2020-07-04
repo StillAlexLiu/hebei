@@ -66,7 +66,7 @@ export default {
         > p {
             display: table-cell;
             vertical-align: middle;
-            font-size: 32px;
+            font-size: 26px;
             color: #79dfef;
         }
     }
@@ -77,7 +77,7 @@ export default {
 
         > p {
             color: #fff;
-            font-size: 32px;
+            font-size: 26px;
         }
     }
 }

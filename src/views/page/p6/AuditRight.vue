@@ -25,7 +25,7 @@
                  <ChartsPie :data="pieData" :legend-position="'right'"  :show-all="true"/>
                 <!-- <ChartsPieValueLegend :data="pieData" :text="''" :text-size="28"/> -->
             </container>
-            <container class="w-1-2 full-height" title="案件地区分布">
+            <container class="w-1-2 full-height" :title="pieType.name + '案件地区分布'">
                  <ChartsBarSimple :data="chart4" :dimensions="['name','value']" unit="件" :barWidth='30' :barRadios='[0, 0, 0, 0]' :legend="['案件数量']"
                   :colors="['#549AE6','#68CAFF','#9BD84C','#5AE7C9','#C0EC91','#92AAF7','#FFDA94','#FEA85F','#FE754A','#FFA2AE','#F7B74D', '#68CAFF', '#549AE6']"/>
             </container>
@@ -167,7 +167,8 @@ export default {
   data () {
     return {
       pieType: {
-        name: ''
+        name: '',
+        className: ''
       },
       backList: [
         {
