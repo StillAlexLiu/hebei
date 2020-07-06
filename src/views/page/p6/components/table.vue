@@ -56,6 +56,8 @@ export default {
 
         td {
             border-bottom: 1px solid #3D94D5;
+            width: 10px;
+            height: 70px;
 
             .color-can {
                 display: flex;

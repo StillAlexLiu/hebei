@@ -5,7 +5,7 @@
         <MapInfoBlock>
             <slot name="info"></slot>
         </MapInfoBlock>
-        <SearchBox :number="pointNumber" :zoom="zoom2"/>
+        <SearchBox :number="pointNumber" @inputData='inputFocus' :zoom="zoom2"/>
     </div>
 </template>
 
@@ -14,6 +14,7 @@ import MapSelector from './MapSelector'
 import MapInfoBlock from './MapInfoBlock'
 import SearchBox from './searchBox'
 import Mock from 'mockjs'
+import axios from 'axios'
 
 export default {
   name: 'NativeAmap',
@@ -33,7 +34,8 @@ export default {
       proDepth: 0,
       mapZoom: 10,
       markers: [],
-      zoom2: 0
+      zoom2: 0,
+      inputData: []
     }
   },
   props: {
@@ -154,6 +156,29 @@ export default {
     })
   },
   methods: {
+    inputFocus (data) {
+      console.log(data, '搜索')
+      axios.get('/monitor/main/getMainBaseDataByCon?entName=' + data).then(res => {
+        const data = res.data.data
+        console.log(data, '搜索数据')
+        this.inputData = []
+        for (let i = 0; i < data.length; i++) {
+          console.log(data[i], 'iiiii')
+          this.inputData.push({
+            address: data[i].DOM,
+            cliType: data[i].ENTTYPE,
+            coordinate: [data[i].longitude, data[i].latitude],
+            icon: require('../../assets/images/mapTabs/p1/t1/2.png'),
+            name: data[i].ENTNAME,
+            pripId: data[i].PRIPID
+          })
+          console.log(this.inputData, '搜索data')
+        this.ponitMap(this.inputData)
+          // this.contentMaker()
+          // this.ponitMap(data2)
+        }
+      })
+    },
     loadAMap (callback) {
       if (!window.AMap) {
         // console.log('地图未加载')
@@ -263,7 +288,7 @@ export default {
       }
     },
     contentMaker (data) {
-      // console.log(data, '地图打点')
+      console.log(data, '地图打点')
       if (data.baseCount) {
         if (data.typeIndex === 0) {
           const count = data.baseCount ? '<div style="width: 100%;text-align: center">' + data.baseCount + '</div>' : ''
@@ -311,10 +336,14 @@ export default {
         const data2 = []
         console.log(data, '主体服务打点')
         for (let i = 0; i < data.length; i++) {
-          if (data[i].baseCount > 0) {
+          if (data[i].name === '河北雄安新区') {
+          }else if (data[i].baseCount > 0) {
+              data2.push(data[i])
+          } else if(data[i].cliType) {
               data2.push(data[i])
           }
         }
+        console.log(data2, 'data2')
         this.ponitMap(data2)
       }else {
         this.ponitMap(data)
@@ -347,7 +376,7 @@ export default {
       // this.map.add(this.markers)
     },
     removeMassMarks () {
-      this.cluster.setMap(null)
+      this.cluster.setMap()
       this.map.remove(this.markers)
     },
     searchFunc (adcode) {
@@ -405,7 +434,7 @@ export default {
                 strokeColor: '#fff',
                 strokeWeight: 1,
                 strokeOpacity: 0.2,
-                fillOpacity: 0.4,
+                fillOpacity: 0.3,
                 fillColor: this.getColorByAdcode(adcode),
                 zIndex: 50,
                 extData: {

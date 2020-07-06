@@ -117,7 +117,7 @@ export default {
       const center = ['50%', '50%']
       const legend = {
         show: this.showLegend,
-        selectedMode: false,
+        selectedMode: true,
         // width:40,
         height:480
       }
@@ -156,7 +156,7 @@ export default {
           label: {
             show: true,
             position: 'inside',
-            color: '#ddd',
+            color: 'white',
             align: 'right',
             width: 80,
             alignTo: 'edge',
@@ -177,7 +177,7 @@ export default {
             },
             rich: {
               white: {
-                color: '#fff',
+                color: 'white',
                 fontSize: 22,
                 align: 'left'
               }
@@ -190,6 +190,7 @@ export default {
         name: '',
         type: 'pie',
         roseType: this.roseType,
+        minAngle: 20,
         radius: this.isPie ? [0, '62%'] : ['45%', '63%'],
         center: center,
         top: 20,
@@ -247,7 +248,7 @@ export default {
           y: 'center',
           textStyle: {
             color: 'red',
-            fontSize: 200
+            fontSize: 20
           }
         },
         tooltip: {
@@ -256,7 +257,7 @@ export default {
           formatter: function(params) {
       　　　　let str = ``;
       // 　　　　params.forEach((item) => {
-      　　　　　return　str += `<span style="font-size: 22px;">${params.name}<span style="font-size: 22px;">：${params.value}<br />`
+      　　　　　return　str += `<span style="font-size: 20px;color: rgba(304, 304, 304, 0.9);">${params.name}<span style="font-size: 22px;">：${params.value}<br />`
       // 　　　　})
       　　}
         },

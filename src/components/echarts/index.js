@@ -13,8 +13,11 @@ import ChartsBarLineHorizontal from './ChartsBarLineHorizontal'
 import ChartsPieValueLegend from './ChartsPieValueLegend'
 import ChartsBarHorizontal from './ChartsBarHorizontal'
 import ChartsScatter from './ChartsScatter'
+import hebei from './hebei.json'
 
 ECharts.registerTheme('screen', screen)
+ECharts.registerMap('hebei', hebei)
+
 export default {
   install: (Vue) => {
     Vue.component('chart', charts)

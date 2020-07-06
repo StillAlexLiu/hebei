@@ -198,8 +198,10 @@ export default {
         const find = this.$dataAll.config.mapTab.find(value => {
           return value.name === this.$route.name
         })
+        if (this.$route.name !== '主体服务') {
+          this.selectInfoState = false
+        }
         this.point = []
-        console.log(find, 'cccuu')
         if (find) {
           this.routeName = find.name
           this.currentSelector = find.children
@@ -644,22 +646,23 @@ export default {
         console.log(this.basicData, 'bbss')
         if (this.basicData.COMPFORM_CN === '个人经营') {
           this.p1Info['注册信息']['基本信息']['名称'] = this.basicData.TRANAME
-          this.p1Info['注册信息']['基本信息']['统一社会信用代码'] = this.basicData.UNISCID
-          this.p1Info['注册信息']['基本信息']['经营场所'] = this.basicData.OPLOC
-          this.p1Info['注册信息']['基本信息']['注册日期'] = this.basicData.ESTDATE
-          // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
-          this.p1Info['注册信息']['基本信息']['经营者'] = this.basicData.NAME
-          // this.p1Info['注册信息']['基本信息']['所属网格'] = ''
-          this.p1Info['注册信息']['基本信息']['登记状态'] = this.basicData.REGSTATE_CN
           this.p1Info['注册信息']['基本信息']['类型'] = this.basicData.COMPFORM_CN
+          this.p1Info['注册信息']['基本信息']['统一社会信用代码'] = this.basicData.UNISCID
           this.p1Info['注册信息']['基本信息']['注册号'] = this.basicData.REGNO
           this.p1Info['注册信息']['基本信息']['登记机关'] = this.basicData.REGORG_CN
+          this.p1Info['注册信息']['基本信息']['注册日期'] = this.basicData.ESTDATE
+          this.p1Info['注册信息']['基本信息']['核准日期'] = this.basicData.APPRDATE
           this.p1Info['注册信息']['基本信息']['经营期限'] = this.basicData.OPFROM
+          this.p1Info['注册信息']['基本信息']['地址'] = this.basicData.OPLOC
           this.p1Info['注册信息']['基本信息']['注册资金'] = this.basicData.FUNDAM
+          this.p1Info['注册信息']['基本信息']['法定代表人(经营者)'] = this.basicData.NAME
+          this.p1Info['注册信息']['基本信息']['登记状态'] = this.basicData.REGSTATE_CN
           this.p1Info['注册信息']['基本信息']['所属监管所'] = this.basicData.LOCALADM
+          // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
+          // this.p1Info['注册信息']['基本信息']['所属网格'] = ''
           // this.p1Info['注册信息']['基本信息']['信用分类'] = ''
           // this.p1Info['注册信息']['基本信息']['经纬度'] = ''
-
+          // 右屏弹窗
           this.infoData['个人营业执照']['名称'] = this.basicData.TRANAME
           this.infoData['个人营业执照']['统一社会信用代码'] = this.basicData.UNISCID
           // this.p1Info['注册信息']['营业执照']['住所'] = this.basicData.DOM
@@ -681,23 +684,24 @@ export default {
           this.selectInfoState = true
           console.log(this.selectInfo, '个人营业执照2')
         } else {
-          this.p1Info['注册信息']['基本信息']['主体名称'] = this.basicData.ENTNAME
+          this.p1Info['注册信息']['基本信息']['名称'] = this.basicData.ENTNAME
+          this.p1Info['注册信息']['基本信息']['类型'] = this.basicData.ENTTYPE_CN
           this.p1Info['注册信息']['基本信息']['统一社会信用代码'] = this.basicData.UNISCID
-          this.p1Info['注册信息']['基本信息']['企业地址'] = this.basicData.DOM
-          this.p1Info['注册信息']['基本信息']['成立日期'] = this.basicData.ESTDATE
-          this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
-          this.p1Info['注册信息']['基本信息']['法定代表人(经营者)'] = this.basicData.NAME
-          this.p1Info['注册信息']['基本信息']['所属网格'] = ''
-          this.p1Info['注册信息']['基本信息']['企业状态'] = this.basicData.REGSTATE_CN
-          this.p1Info['注册信息']['基本信息']['主体类型'] = this.basicData.ENTTYPE_CN
           this.p1Info['注册信息']['基本信息']['注册号'] = this.basicData.REGNO
           this.p1Info['注册信息']['基本信息']['登记机关'] = this.basicData.REGORG_CN
+          this.p1Info['注册信息']['基本信息']['注册日期'] = this.basicData.ESTDATE
+          this.p1Info['注册信息']['基本信息']['核准日期'] = this.basicData.APPRDATE
           this.p1Info['注册信息']['基本信息']['经营期限'] = this.basicData.OPFROM
+          this.p1Info['注册信息']['基本信息']['地址'] = this.basicData.DOM
           this.p1Info['注册信息']['基本信息']['注册资金'] = this.basicData.REGCAP + this.basicData.REGCAPCUR_CN
+          this.p1Info['注册信息']['基本信息']['法定代表人(经营者)'] = this.basicData.NAME
+          this.p1Info['注册信息']['基本信息']['登记状态'] = this.basicData.REGSTATE_CN
           this.p1Info['注册信息']['基本信息']['所属监管所'] = ''
-          this.p1Info['注册信息']['基本信息']['信用分类'] = ''
-          this.p1Info['注册信息']['基本信息']['经纬度'] = ''
 
+          // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
+          // this.p1Info['注册信息']['基本信息']['所属网格'] = ''
+          // this.p1Info['注册信息']['基本信息']['信用分类'] = ''
+          // this.p1Info['注册信息']['基本信息']['经纬度'] = ''
           this.infoData['营业执照']['企业名称'] = this.basicData.ENTNAME
           this.infoData['营业执照']['统一社会信用代码'] = this.basicData.UNISCID
           this.infoData['营业执照']['住所'] = this.basicData.DOM

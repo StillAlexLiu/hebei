@@ -325,7 +325,7 @@ export default {
                   color: '#fff',
                   align: 'center',
                   width: 150,
-                  fontSize: 32
+                  fontSize: 30
                 },
                 value: {
                   color: '#79DFEF',
@@ -333,9 +333,9 @@ export default {
                   width: 110,
                   // backgroundColor: 'red',
                   verticalAlign: 'bottom',
-                  fontSize: 72,
+                  fontSize: 60,
                   fontFamily: 'LESLIE-Regular,LESLIE',
-                  width: 100
+                  width: 140
                 },
                 unit: {
                   color: '#fff',
@@ -364,8 +364,8 @@ export default {
                 },
                 value: {
                   color: '#79DFEF',
-                  fontSize: 72,
-                  width: 100,
+                  fontSize: 60,
+                  width: 140,
                   fontFamily: 'LESLIE-Regular,LESLIE',
                 },
                 unit: {

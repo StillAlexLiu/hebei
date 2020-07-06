@@ -27,6 +27,10 @@ export default {
     barBorderRadius: {
       type: Array,
       default: [0, 0, 0, 0]
+    },
+    unit: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -45,7 +49,7 @@ export default {
   },
   methods: {
     getOption (data) {
-      var spNum = 5,_max=200;
+      var spNum = 5,_max=2000;
       var fomatter_fn = function(v) {
           return v.value 
       }
@@ -132,6 +136,7 @@ export default {
         yAxis: [{
             data: data.xdata,
             // max: 1000,
+            name: this.unit,
             // min: 0,
             axisLabel: {
                 fontSize: 16,

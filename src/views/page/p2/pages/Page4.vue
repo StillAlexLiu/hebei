@@ -2,7 +2,7 @@
     <div class="Page4 full">
         <div class="h-1-3">
             <container class="w-1-2 full-height" :title="TypeName.name + '监管'">
-                <NumberElevator :data='chart4[dimension]'></NumberElevator>
+                <NumberElevator :data='chart4[dimension]' :type="TypeName.name"></NumberElevator>
             </container>
             <container class="w-1-2 full-height" :title="'全省' + TypeName.name + '增长趋势'">
                 <ChartsBarLine :data='chart5' :dimensions="['name','value']"

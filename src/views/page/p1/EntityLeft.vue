@@ -14,7 +14,7 @@
                 <NumberGroup3 class="w-1-2 full-height" :data="quantityData" v-if="entityType.name==='1'"/>
                 <NumberGroup2 class="w-1-2 full-height" :data="quantityData" v-else/>
             </Container>
-            <Container class="w-1-2 h-1-3" :title="select.value===0?entityType.name+'产业占比':'新增'+entityType.name+'产业占比'">s
+            <Container class="w-1-2 h-1-3" :title="select.value===0?entityType.name+'产业占比':'新增'+entityType.name+'产业占比'">
                 <div class="full-height w-1-3" v-for="(item,index) in pieData" :key="index">
                     <ChartPie3 :data="item" :max="getMax(pieData)"/>
                 </div>

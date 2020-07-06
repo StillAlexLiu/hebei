@@ -1,9 +1,9 @@
 <template>
     <div class="searchBox">
-        <!-- <label>
-            <input v-model="text" @focus="onFocus">
-        </label> -->
-        <!-- <i /> -->
+        <label v-if="$route.name === '主体服务'">
+            <input v-model="text2">
+        </label>
+        <i  v-if="$route.name === '主体服务'"/>
         <div class="num">总数：{{number}}</div>
         <div class="num2">地图缩放等级: {{zoom}}</div>
     </div>
@@ -26,9 +26,14 @@ export default {
       default: 0
     }
   },
-  methods: {
-    onFocus () {
-
+  data () {
+    return {
+      text2: ''
+    }
+  },
+  watch: {
+    text2 (data) {
+      this.$emit('inputData', data)
     }
   }
 }
@@ -42,6 +47,14 @@ export default {
     height: 106px;
     font-size: 30px;
     width: 500px;
+    input {
+      width: 350px;
+      height: 60px;
+      color: white;
+      font-size: 30px;
+      background: rgb(29, 96, 122);
+      border: 1px solid rgb(29, 96, 122);
+    }
     .num {
       width: 450px;
       height: 36px;
@@ -85,8 +98,8 @@ export default {
         position: absolute;
         background: url("./img/search.png");
         background-size: 100% 100%;
-        right: 210px;
-        top: 6px;
+        right: 180px;
+        top: 17px;
         cursor: pointer;
     }
 }

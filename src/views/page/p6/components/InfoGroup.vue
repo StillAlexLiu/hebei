@@ -44,7 +44,7 @@ export default {
 
     .title {
         height: 125px;
-        font-size: 56px;
+        font-size: 52px;
     }
 
     .text {

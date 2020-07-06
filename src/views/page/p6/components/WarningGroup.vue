@@ -41,7 +41,7 @@ export default {
     }
 
     .value {
-        font-size: 120px;
+        font-size: 90px;
         text-align: center;
     }
 

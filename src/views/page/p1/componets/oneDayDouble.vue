@@ -19,7 +19,7 @@
             <container-center-title2 title="一窗采集情况" class="full-height w-1-2">
               <NumberGroup :data='numberData' class="full-height w-1-3"></NumberGroup>
                 <div class="w-2-3 full-height">
-                    <comPlaintBarR :data='chart3' legend="受理数量"></comPlaintBarR>
+                    <comPlaintBarR :data='chart3' legend="受理数量" :unit="'单位: 件'"></comPlaintBarR>
                 </div>
             </container-center-title2>
             <container-center-title2 title="一日办结情况" class="full-height w-1-2">
@@ -41,7 +41,7 @@
         </container>
         <div class="full-height h-1-3">
             <container-center-title2 title="各局办理情况" class="full-height w-1-2">
-              <chartAcrossBar :data='acrossData' :legend="['市场监督管理局', '银行', '人社','税务', '公安']"  :barBorderRadius="[30, 30, 30, 30]" 
+              <chartAcrossBar :data='acrossData' :legend="['市场监督管理局', '银行', '人社','税务', '公安']"  :barBorderRadius="[30, 30, 30, 30]"  :unit="'单位：小时'"
                 :color="['#FE6941', '#EFC578', '#738CE2', '#22C492', '#4A90E2']"></chartAcrossBar>
             </container-center-title2>
             <container-center-title2 title="各市办理情况" class="full-height w-1-2">
@@ -49,11 +49,11 @@
                   <RadioSimple :data="radioData" v-model="select" class="w-2-7 full-height radio "  style="float: right" />
                 </div>
                 <div class="full-width h-8-9">
-                    <ChartsBarLine :data="barData2" :dimensions="['name','value']" :units="['办理数量']"
+                    <ChartsBarLine :data="barData2" :dimensions="['name','value']" :units="[barLineName]"
                                :type="['bar']"
                                :border-radius="false"
                                :bar-width="36"
-                               :legend="['通过率']"
+                               :legend="[barLineLegend]"
                                :colors="[barColor]"/>
                 </div>
             </container-center-title2>
@@ -91,6 +91,8 @@ export default {
       handler: function () {
         console.log(this.select)
         if (this.select.name === '办理量') {
+          this.barLineName = '单位： 件'
+          this.barLineLegend = '办理量'
           axios.get('/monitor/info/apply/zzData?indexCodes=BDBLL,TSBLL,DZBLL,LFBLL,ZJKBLL,CDBLL,CZBLL,SJZBLL,QHDBLL,HSBLL,XJBLL,XTBLL,HDBLL').then(res => {
             const data = res.data.data.data
             this.barData2 = []
@@ -102,6 +104,8 @@ export default {
             }
           })
         } else if (this.select.name === '办理时长') {
+          this.barLineName = '单位： 小时'
+          this.barLineLegend = '平均时长'
           axios.get('/monitor/info/apply/zzData?indexCodes=BDBLSJ,TSBLSJ,DZBLSJ,LFBLSJ,ZJKBLSJ,CDBLSJ,CZBLSJ,SJZBLSJ,QHDBLSJ,HSBLSJ,XJBLSJ,XTBLSJ,HDBLSJ').then(res => {
             const data = res.data.data.data
             this.barData2 = []
@@ -118,6 +122,8 @@ export default {
   },
   data() {
     return {
+      barLineName: '单位：件',
+      barLineLegend: '办理量',
       acrossData: {
       },
       select: {
@@ -355,7 +361,7 @@ export default {
       }
     })
     // 一日办结情况左侧
-    axios.get('/monitor/info/detail?dataTime='+ other +'&indexCode=YRBJL').then(res => {
+    axios.get('/monitor/info/detail?dataTime='+ now +'&indexCode=YRBJL').then(res => {
       const data = res.data.data
       this.liquidfill = [data.indexName, data.indexValue]
     })

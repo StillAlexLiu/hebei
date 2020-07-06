@@ -72,7 +72,9 @@ export default {
           },
           axisLabel: {
             interval: 0,
-            rotate: 0
+            rotate: 0,
+            color: 'rgba(304, 304, 304, 0.9)',
+            fontSize: 20
           },
           splitLine: {
             show: false
@@ -95,7 +97,13 @@ export default {
             axisTick: {
               show: false
             },
+            nameTextStyle: {
+              color: 'rgba(304, 304, 304, 0.9)',
+              fontSize: 20
+            },
             axisLabel: {
+              color: 'rgba(304, 304, 304, 0.9)',
+              fontSize: 20
             },
             splitLine: {
               lineStyle: {
@@ -109,7 +117,9 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'top'
+                position: 'top',
+                color: 'rgba(304, 304, 304, 0.9)',
+                fontSize: 20
               }
             },
             name: '市场主体数量',

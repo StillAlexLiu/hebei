@@ -92,18 +92,11 @@ export default {
   mounted () {
     const arr1 = []
     const arr2 = []
-    this.radio = [{
-        name: '处理中案件 0 件',
-        value: 0
-      }, {
-        name: '处理中线索 0 件',
-        value: 1
-      }],
     // 案件
     axios.get('/monitor/check/getCasesProcessData').then(res => {
       const data= res.data.data
       console.log(data, '案件')
-      this.radio[0].name = '处理中案件' + data[0].caseSum + '件'
+      this.radio[0].name = '处理中案件' + data.length + '件'
       for (let i = 0; i  < data.length; i++) {
         arr1.push({
           status: data[i].caseStaus,
@@ -116,11 +109,7 @@ export default {
     axios.get('/monitor/check/getCluesProcessData').then(res => {
       const data= res.data.data
       console.log(data, '线索')
-      if (data) {
-        this.radio[1].name = '处理中线索' + data[0].clueSum + '件'
-      } else {
-        this.radio[1].name = '处理中线索' + 0 + '件'
-      }
+      this.radio[1].name = '处理中线索' + data.length + '件'
       for (let i = 0; i  < data.length; i++) {
         arr2.push({
           status: data[i].clueStaus,
