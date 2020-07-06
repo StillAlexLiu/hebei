@@ -38,7 +38,7 @@ module.exports = {
       },
       '/monitor': {
         // target: 'http://192.168.105.38:8080/blade-screen',
-        target: 'http://192.168.1.107:8080/blade-screen',
+        target: 'http://10.1.199.116:8080/blade-screen',
         changeOrigin: true,
         pathRewrite: {
           '^/monitor': ''
