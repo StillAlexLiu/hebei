@@ -32,7 +32,8 @@ export default {
       disProvinceLayer: {},
       proDepth: 0,
       mapZoom: 10,
-      markers: []
+      markers: [],
+      cluster: []
     }
   },
   props: {
@@ -182,7 +183,7 @@ export default {
       this.map.on('zoomend', this.zoomListener)
       // this.map.on('click', this.clickListener)
 
-      window.AMap.plugin(['AMap.DistrictLayer', 'AMap.DistrictSearch'], function () { // 异步加载插件
+      window.AMap.plugin(['AMap.DistrictLayer', 'AMap.DistrictSearch', 'AMap.MarkerClusterer'], function () { // 异步加载插件
         // self.disProvince(self.adcode, self.depth)
         self.SearchDistrict(self.adcode[0], self.depth)
       })
@@ -314,9 +315,13 @@ export default {
         marker.on('click', this.clickHandler)
         this.markers.push(marker)
       }
-      this.map.add(this.markers)
+      this.cluster = new window.AMap.MarkerClusterer(this.map, this.markers, {
+        gridSize: 800
+      })
+      // this.map.add(this.markers)
     },
     removeMassMarks () {
+      this.cluster.setMap(null)
       this.map.remove(this.markers)
     },
     searchFunc (adcode) {
@@ -402,9 +407,9 @@ export default {
       const data = target.getExtData()
       this.removeDisProvinceLayer() // 先移除图层
       this.SearchDistrict(data.adcode, data.depth + 1)
-      this.map.setZoomAndCenter(9, [layer.lnglat.lng, layer.lnglat.lat])
+      this.map.setAndCenter(9, [layer.lnglat.lng, layer.lnglat.lat])
     },
-    zoomListener () {
+    zoomListeZoomner () {
       this.mapZoom = this.map.getZoom()
     },
     removeDisProvinceLayer () {

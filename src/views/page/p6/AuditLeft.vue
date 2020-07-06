@@ -7,7 +7,7 @@
             <div class="h-2-8">
                 <info-group :data='data1[select.value - 1]' :name='select'/>
             </div>
-            <container title="当前预警数量" class="h-3-8">
+            <container :title="select.name + '当前预警数量'" class="h-3-8">
                 <div class="w-2-10 full-height">
                     <tableTab v-model="tabData" @active='clickActive'/>
                 </div>
@@ -38,7 +38,7 @@ export default {
     warningGroup,
     tableHeader
   },
-  watch : {
+  watch: {
     select: {
       immediate: true,
       deep: true,
@@ -70,7 +70,8 @@ export default {
         clew: ['预警级别', '登记时间', '剩余时间', '线索名称', '登记机构', '线索类型', '当前状态']
       },
       tabData: 'case',
-      select: {},
+      select: {
+      },
       data1: [[
         {
           name: '线索',
@@ -218,7 +219,7 @@ export default {
           value: 3
         }
       ],
-      warningLevel:1,
+      warningLevel: 1,
       caseState: 1
     }
   },
@@ -265,12 +266,12 @@ export default {
           this.data1[type - 1][1].addup = data.standCaseCumulative
           this.data1[type - 1][2].yearData = data.closeCase
           this.data1[type - 1][2].addup = data.closeCaseCumulative
-          this.data2.case[type -1][0].num = data.caseRed
-          this.data2.case[type -1][1].num = data.caseOrange
-          this.data2.case[type -1][2].num = data.caseYellow
-          this.data2.clew[type -1][0].num = data.clueRed
-          this.data2.clew[type -1][1].num = data.clueOrange
-          this.data2.clew[type -1][2].num = data.clueYellow
+          this.data2.case[type - 1][0].num = data.caseRed
+          this.data2.case[type - 1][1].num = data.caseOrange
+          this.data2.case[type - 1][2].num = data.caseYellow
+          this.data2.clew[type - 1][0].num = data.clueRed
+          this.data2.clew[type - 1][1].num = data.clueOrange
+          this.data2.clew[type - 1][2].num = data.clueYellow
         }
       })
     }

@@ -47,6 +47,7 @@ import numberPie from './componets/numberPie'
 import ChartMountain from './componets/ChartMountain'
 import BorderInOut from './componets/borderInOut'
 import axios from 'axios'
+import Bus from '@/assets/bus.js'
 
 export default {
   name: 'p1right',
@@ -198,25 +199,24 @@ export default {
         {
           name: '未在规定责令的期限内公示有关企业信息',
           value: 0,
-          color: 'linear-gradient(180deg,rgba(79,255,148,1) 0%,rgba(56,167,120,1) 100%)'
+          color: 'linear-gradient(180deg,rgba(255,87,87,1) 0%,rgba(255,64,64,1) 100%)'
         },
         {
           name: '公示企业信息隐瞒真实信息、弄虚作假',
           value: 0,
-          color: 'linear-gradient(180deg,rgba(87,182,255,1) 0%,rgba(0,138,255,1) 100%)'
+          color: 'linear-gradient(180deg,rgba(255,245,87,1) 0%,rgba(255,188,0,1) 100%)'
         },
         {
           name: '通过登记的住所(经营场所)无法联系',
           value: 0,
-          color: 'linear-gradient(180deg,rgba(255,245,87,1) 0%,rgba(255,188,0,1) 100%)'
+          color: 'linear-gradient(180deg,rgba(87,182,255,1) 0%,rgba(0,138,255,1) 100%)'
         },
         {
           name: '未按规定期限公示年度报告',
           value: 0,
-          color: 'linear-gradient(180deg,rgba(255,87,87,1) 0%,rgba(255,64,64,1) 100%)'
+          color: 'linear-gradient(180deg,rgba(79,255,148,1) 0%,rgba(56,167,120,1) 100%)'
         }
       ],
-
       barHorizontalData: [
         // { name: '石家庄', value: '4315' },
         // { name: '唐山', value: '2366' },
@@ -241,6 +241,7 @@ export default {
         key: 'p1',
         data: null
       })
+      Bus.$emit('closeMainBox', false)
     },
     typeFun (type) {
       switch (type) {

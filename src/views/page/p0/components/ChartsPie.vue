@@ -49,13 +49,18 @@ export default {
               margin: 10,
               formatter: function (params) {
                 if (params.name !== '') {
-                  return params.name + '\n{white|' + params.percent + '%}'
+                  return '{title|' + params.name + '}' + '\n{white|' + params.percent + '%}'
                 } else {
                   return ''
                 }
                 // return params.percent
               },
               rich: {
+                title: {
+                  color: 'rgba(304, 304, 304, 0.9)',
+                  fontSize: 20,
+                  align: 'left'
+                },
                 white: {
                   color: '#79DFEF',
                   fontSize: 22,

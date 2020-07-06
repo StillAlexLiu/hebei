@@ -71,7 +71,7 @@ export default {
   data: function () {
     return {
       select: {},
-      entityType: { name :'市场主体' , type: 0},
+      entityType: { name: '市场主体', type: 0 },
       radioData: [
         {
           name: '存量情况',
@@ -1562,30 +1562,32 @@ export default {
       deep: true,
       handler: function () {
         const firstType = this.globalMapSelect.tab.children
-        for ( let i = 0; i < firstType.length; i++) {
+        for (let i = 0; i < firstType.length; i++) {
           if (firstType[i].active) {
             this.activeShow = firstType[i].type
           }
         }
+        console.log(this.globalMapSelect, 'sssggggg')
         if (this.globalMapSelect && this.globalMapSelect.items.length > 0 && this.globalMapSelect.tab.name === '市场主体') {
+          console.log(1)
           this.entityType = this.globalMapSelect.items[0]
           this.mainType = ''
           if (this.globalMapSelect.items.length > 0) {
             this.mainType = this.globalMapSelect.items[0].type
-          }else {
+          } else {
             this.mainType = ''
           }
         } else {
-          this.entityType.name = '市场主体'
-          this.entityType.type = '0'
+          console.log(2)
+          this.entityType = { name: '市场主体', type: 0 }
           if (this.globalMapSelect.items.length > 0) {
             this.mainType = this.globalMapSelect.items[0].type
-          }else {
+          } else {
             this.mainType = ''
           }
         }
         // console.log(111)
-        
+
         console.log(this.globalMapSelect, '1561')
         this.showEntityData(this.entityType, this.globalMapSelect)
       }
@@ -1615,19 +1617,19 @@ export default {
     getStock (data2, topType) {
       this.barData = []
       this.quantityData = {
-            name: '总数',
-            img: require('./componets/img/entity/entity-zong.png'),
-            data: []
-          }
+        name: '总数',
+        img: require('./componets/img/entity/entity-zong.png'),
+        data: []
+      }
       this.pieData = []
       this.barGroupData = []
       this.barData2 = []
       this.halfPieData = []
       this.barGroupData2 = []
       // console.log(data2, topType, typeof(topType), 'klklkl')
-      console.log(data2, topType, topType>0, 'klklkl')
-      if (topType>0) {
-        //主体子类型
+      console.log(data2, topType, topType > 0, 'klklkl')
+      if (topType > 0) {
+        // 主体子类型
         // 市场主体趋势柱图
         axios.get('/monitor/main/getTrendData?mainClass=' + this.activeShow + '&type=1' + '&subClass=' + this.mainType).then(res => {
           const data = res.data.data
@@ -1648,22 +1650,22 @@ export default {
             img: require('./componets/img/entity/entity-zong.png'),
             data: []
           }
-          if(data.length === 1) {
-              this.quantityData.data = [
-                {
-                  name: '户数(个)',
-                  value: data[0].newUserNum
-                }, {
-                  name: '同比上涨',
-                  value: data[0].userYoy + '%'
-                }, {
-                  name: '资本(亿元)',
-                  value: data[0].newCapitalNum.toFixed(2)
-                }, {
-                  name: '同比上涨',
-                  value: data[0].capitalYoy + '%'
-                }
-              ]
+          if (data.length === 1) {
+            this.quantityData.data = [
+              {
+                name: '户数(个)',
+                value: data[0].newUserNum
+              }, {
+                name: '同比上涨',
+                value: data[0].userYoy + '%'
+              }, {
+                name: '资本(亿元)',
+                value: data[0].newCapitalNum.toFixed(2)
+              }, {
+                name: '同比上涨',
+                value: data[0].capitalYoy + '%'
+              }
+            ]
           } else {
             for (let i = 0; i < data.length; i++) {
               this.quantityData.data.push({
@@ -1757,22 +1759,22 @@ export default {
             img: require('./componets/img/entity/entity-zong.png'),
             data: []
           }
-          if(data.length === 1) {
-              this.quantityData.data = [
-                {
-                  name: '户数(个)',
-                  value: data[0].newUserNum
-                }, {
-                  name: '同比上涨',
-                  value: data[0].userYoy + '%'
-                }, {
-                  name: '资本(亿元)',
-                  value: data[0].newCapitalNum.toFixed(2)
-                }, {
-                  name: '同比上涨',
-                  value: data[0].capitalYoy + '%'
-                }
-              ]
+          if (data.length === 1) {
+            this.quantityData.data = [
+              {
+                name: '户数(个)',
+                value: data[0].newUserNum
+              }, {
+                name: '同比上涨',
+                value: data[0].userYoy + '%'
+              }, {
+                name: '资本(亿元)',
+                value: data[0].newCapitalNum.toFixed(2)
+              }, {
+                name: '同比上涨',
+                value: data[0].capitalYoy + '%'
+              }
+            ]
           } else {
             for (let i = 0; i < data.length; i++) {
               this.quantityData.data.push({
@@ -1855,10 +1857,10 @@ export default {
     getNewly (data, topType) {
       this.barData = []
       this.quantityData = {
-            name: '总数',
-            img: require('./componets/img/entity/entity-zong.png'),
-            data: []
-          }
+        name: '总数',
+        img: require('./componets/img/entity/entity-zong.png'),
+        data: []
+      }
       this.pieData = []
       this.barGroupData = []
       this.barData2 = []
@@ -1866,10 +1868,10 @@ export default {
       this.barGroupData2 = []
       // 增量情况
       // 市场主体趋势柱图
-       console.log(topType, 'lplp')
-      console.log(topType, typeof(topType), 'lplp')
-      if(topType>0) {
-        //主体子类型
+      console.log(topType, 'lplp')
+      console.log(topType, typeof (topType), 'lplp')
+      if (topType > 0) {
+        // 主体子类型
         // 市场主体趋势柱图
         axios.get('/monitor/main/getTrendData?mainClass=' + this.activeShow + '&type=2' + '&subClass=' + this.mainType).then(res => {
           const data = res.data.data
@@ -1890,22 +1892,22 @@ export default {
             img: require('./componets/img/entity/entity-zong.png'),
             data: []
           }
-          if(data.length === 1) {
-              this.quantityData.data = [
-                {
-                  name: '户数(个)',
-                  value: data[0].newUserNum
-                }, {
-                  name: '同比上涨',
-                  value: data[0].userYoy + '%'
-                }, {
-                  name: '资本(亿元)',
-                  value: data[0].newCapitalNum.toFixed(2)
-                }, {
-                  name: '同比上涨',
-                  value: data[0].capitalYoy + '%'
-                }
-              ]
+          if (data.length === 1) {
+            this.quantityData.data = [
+              {
+                name: '户数(个)',
+                value: data[0].newUserNum
+              }, {
+                name: '同比上涨',
+                value: data[0].userYoy + '%'
+              }, {
+                name: '资本(亿元)',
+                value: data[0].newCapitalNum.toFixed(2)
+              }, {
+                name: '同比上涨',
+                value: data[0].capitalYoy + '%'
+              }
+            ]
           } else {
             for (let i = 0; i < data.length; i++) {
               this.quantityData.data.push({
@@ -2010,22 +2012,22 @@ export default {
             img: require('./componets/img/entity/entity-zong.png'),
             data: []
           }
-          if(data.length === 1) {
-              this.quantityData.data = [
-                {
-                  name: '户数(个)',
-                  value: data[0].newUserNum
-                }, {
-                  name: '同比上涨',
-                  value: data[0].userYoy + '%'
-                }, {
-                  name: '资本(亿元)',
-                  value: data[0].newCapitalNum.toFixed(2)
-                }, {
-                  name: '同比上涨',
-                  value: data[0].capitalYoy + '%'
-                }
-              ]
+          if (data.length === 1) {
+            this.quantityData.data = [
+              {
+                name: '户数(个)',
+                value: data[0].newUserNum
+              }, {
+                name: '同比上涨',
+                value: data[0].userYoy + '%'
+              }, {
+                name: '资本(亿元)',
+                value: data[0].newCapitalNum.toFixed(2)
+              }, {
+                name: '同比上涨',
+                value: data[0].capitalYoy + '%'
+              }
+            ]
           } else {
             for (let i = 0; i < data.length; i++) {
               this.quantityData.data.push({
@@ -2148,8 +2150,8 @@ export default {
       }
     },
     showEntityData (type, data) {
-      console.log(type, data, 'llll')
-      if (data.items) {
+      console.log(type, data, data.items, 'llll')
+      if (data.items.length > 0) {
         if (data.items.length === 0) {
           this.sendType(type.type)
         } else {
@@ -2161,6 +2163,9 @@ export default {
             this.dispatchSelect(type.type, data.items[0].type)
           }
         }
+      } else {
+        console.log(3)
+        this.sendType(type.type)
       }
     },
     sendType (type) {

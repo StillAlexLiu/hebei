@@ -65,7 +65,10 @@ export default {
           axisLabel: {
             interval: 0,
             rotate: 0,
-            textStyle: {}
+            textStyle: {
+              color: 'rgba(304, 304, 304, 0.9)',
+              fontSize: 20
+            }
           },
           splitLine: {
             show: false
@@ -90,7 +93,8 @@ export default {
               show: false
             },
             axisLabel: {
-              // interval:0,
+              color: 'rgba(304, 304, 304, 0.9)',
+              fontSize: 20
             },
             splitLine: {
               lineStyle: {
@@ -113,7 +117,10 @@ export default {
             axisLabel: {
               // interval:0,
               formatter: '{value}%',
-              textStyle: {}
+              textStyle: {
+                color: 'rgba(304, 304, 304, 0.9)',
+                fontSize: 20
+              }
             },
             splitLine: {
               show: false,
@@ -129,7 +136,10 @@ export default {
               normal: {
                 show: true,
                 position: 'top',
-                textStyle: {}
+                textStyle: {
+                  color: 'rgba(304, 304, 304, 0.9)',
+                  fontSize: 20
+                }
               }
             },
             name: this.legend,
@@ -155,6 +165,8 @@ export default {
               normal: {
                 color: 'rgba(151,190,255,0.24)'
               }
+            },
+            label: {
             },
             symbolRepeat: true,
             symbolSize: [this.barWidth, 15],

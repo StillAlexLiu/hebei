@@ -37,13 +37,14 @@ export default {
     justify-content: space-around;
 
     > .item {
-        flex-grow: 1;
-        margin: 30px 40px;
+       width: 27%;
+       height: 90%;
+       margin: 1% 3%;
     }
 
     .title {
         height: 125px;
-        font-size: 56px;
+        font-size: 52px;
     }
 
     .text {

@@ -1,5 +1,5 @@
 <template>
-  <chart :options="options"/>
+    <chart :options="options"/>
 </template>
 
 <script>
@@ -9,31 +9,47 @@ const img3 = require('../componets/img/img3.png')
 const img4 = require('../componets/img/img4.png')
 export default {
   name: 'custom',
+  props: {
+    data: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    }
+  },
   data: () => {
     return {
       info1: {
         name: '企业申办',
-        value: '321',
+        value: '0',
         unit: '条'
       },
       info2: {
         title: '市场监管局',
         data: [
           {
-            name: '平均时常',
-            value: '3',
+            name: '平均用时',
+            value: '0',
             unit: 'h'
           },
           {
             name: '已处理',
-            value: '321',
+            value: '0',
             unit: '条'
           }
         ]
       },
       info3: [
         {
-          title: '公安',
+          title: '人社',
+          name: '平均用时',
+          value: '0',
+          unit: 'h',
+          name1: '已处理',
+          value1: '0',
+          unit1: '条'
+        }, {
+          title: '银行',
           name: '平均用时',
           value: '3',
           unit: 'h',
@@ -49,15 +65,7 @@ export default {
           value1: '321',
           unit1: '条'
         }, {
-          title: '银行',
-          name: '平均用时',
-          value: '3',
-          unit: 'h',
-          name1: '已处理',
-          value1: '321',
-          unit1: '条'
-        }, {
-          title: '人社',
+          title: '公安',
           name: '平均用时',
           value: '3',
           unit: 'h',
@@ -75,9 +83,22 @@ export default {
   },
   computed: {
     options () {
+      this.info1.value = this.data.entApply
+      this.info2.data[0].value = this.data.avgAppHours
+      this.info2.data[1].value = this.data.applyDone
+      this.info3[3].value1 = this.data.gaDone
+      this.info3[3].value = this.data.avggaHours
+      this.info3[2].value1 = this.data.ssDOne
+      this.info3[2].value = this.data.avgssHours
+      this.info3[1].value1 = this.data.yhdone
+      this.info3[1].value = this.data.avgyhHours
+      this.info3[0].value1 = this.data.rsdone
+      this.info3[0].value = this.data.avgrsHours
+      this.info4.value = this.data.entDone
+      // entDone
       const lineData = []
       const lineDataEffect = []
-      const colors = ['#89B557', '#89B557', '#FF7A8B']
+      const colors = ['#89B557', '#89B557', '#89B557']
       for (let i = -3; i < 4; i++) {
         const y = 50 + i * 3
         lineData.push({
@@ -88,7 +109,8 @@ export default {
             coords: [[12, y], [36, y]],
             lineStyle: {
               normal: {
-                color: 'red',
+                color: colors[j % 3],
+                // color: '#89B557',
                 width: 0
               }
             }
@@ -175,7 +197,7 @@ export default {
                 align: 'left',
                 lineHeight: 50,
                 padding: 40,
-                width: 100,
+                width: 80,
                 fontSize: 24
               },
               value: {
@@ -183,13 +205,15 @@ export default {
                 align: 'left',
                 lineHeight: 50,
                 verticalAlign: 'bottom',
-                fontSize: 48
+                fontFamily: 'LESLIE-Regular,LESLIE',
+                fontSize: 48,
+                width: 140
               },
               unit: {
                 color: '#fff',
                 lineHeight: 50,
                 align: 'left',
-                fontSize: 24
+                fontSize: 28
               }
             }
           }
@@ -269,11 +293,13 @@ export default {
                 },
                 value: {
                   color: '#79DFEF',
-                  fontSize: 72
+                  fontSize: 72,
+                  fontFamily: 'LESLIE-Regular,LESLIE',
+                  width: 160
                 },
                 unit: {
                   color: '#fff',
-                  fontSize: 24
+                  fontSize: 30
                 }
               }
             }
@@ -301,7 +327,7 @@ export default {
                   color: '#fff',
                   align: 'center',
                   width: 150,
-                  fontSize: 32
+                  fontSize: 30
                 },
                 value: {
                   color: '#79DFEF',
@@ -309,19 +335,21 @@ export default {
                   width: 110,
                   // backgroundColor: 'red',
                   verticalAlign: 'bottom',
-                  fontSize: 72
+                  fontSize: 60,
+                  fontFamily: 'LESLIE-Regular,LESLIE',
+                  width: 140
                 },
                 unit: {
                   color: '#fff',
                   align: 'center',
                   // backgroundColor: 'blue',
                   width: 30,
-                  fontSize: 24
+                  fontSize: 30
                 }
               }
             }
           }, {
-            name: '',
+            name: '开办成功',
             value: [86, 50],
             symbol: 'image://' + img4,
             symbolSize: [420, 420],
@@ -338,11 +366,13 @@ export default {
                 },
                 value: {
                   color: '#79DFEF',
-                  fontSize: 72
+                  fontSize: 60,
+                  width: 140,
+                  fontFamily: 'LESLIE-Regular,LESLIE'
                 },
                 unit: {
                   color: '#fff',
-                  fontSize: 24
+                  fontSize: 30
                 }
               }
             }
@@ -365,8 +395,8 @@ export default {
 
 </style>
 <style>
-  .echarts {
+.echarts {
     width: 100% !important;
     height: 100% !important;
-  }
+}
 </style>

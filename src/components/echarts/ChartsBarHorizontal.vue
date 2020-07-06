@@ -23,6 +23,18 @@ export default {
       default: () => {
         return []
       }
+    },
+    showLabel: {
+      type: Boolean,
+      default: true
+    },
+    barBorderRadius: {
+      type: Array,
+      default: [0, 0, 0, 0]
+    },
+    yName: {
+      type: String,
+      default: ''
     }
   },
   computed: {
@@ -40,7 +52,7 @@ export default {
       return {
         tooltip: {},
         grid: {
-          top: '1%',
+          top: '10%',
           left: '1%',
           right: '5%',
           bottom: '1%',
@@ -55,9 +67,10 @@ export default {
             type: 'category',
             boundaryGap: true,
             data: ydata,
+            name: this.yName,
             axisLine: {
               // 坐标轴轴线相关设置。数学上的x轴
-              show: true,
+              show: false,
               lineStyle: {
                 color: '#f9f9f9'
               }
@@ -90,6 +103,7 @@ export default {
               show: false
             },
             axisLabel: {
+              show: this.showLabel,
               margin: 20,
               textStyle: {
                 color: '#d1e6eb',
@@ -115,6 +129,7 @@ export default {
           },
           itemStyle: {
             normal: {
+              barBorderRadius: this.barBorderRadius
               // color: '#2EE1A2'
             }
           },

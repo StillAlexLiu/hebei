@@ -2,26 +2,26 @@
     <div class="Page4 full">
         <div class="h-1-3">
             <container class="w-1-2 full-height" :title="TypeName.name + '监管'">
-                <NumberElevator :data='chart4[dimension]'></NumberElevator>
+                <NumberElevator :data='chart4[dimension]' :type="TypeName.name"></NumberElevator>
             </container>
             <container class="w-1-2 full-height" :title="'全省' + TypeName.name + '增长趋势'">
                 <ChartsBarLine :data='chart5' :dimensions="['name','value']"
                                :type="['line']"
                                :colors="['#61EADF']"
                                :units="['单位：台']"
-                               :legend="['特种设备数量']"></ChartsBarLine>
+                               :legend="[TypeName.name + '数量']"></ChartsBarLine>
             </container>
         </div>
         <div class="h-1-3">
-            <container class="w-1-2 full-height" :title="TypeName.name + '类型分布'">
-                <ChartsPie :data='hellowPie2' :showLegend='false' :showValue='true' is-pie/>
+            <container class="w-1-2 full-height" :title="TypeName.name + '主要类型分布'">
+                <ChartsPie :data='hellowPie2' :showLegend='true' :showValue='true' is-pie/>
             </container>
             <container class="w-1-2 full-height" :title="TypeName.name + '各地区分布'">
                 <ChartsBarLine :data='chart3[dimension].data' :dimensions="['name','value']" :type="['bar']"
                                :colors="[barColor]"
                                :border-radius="true"
                                :units="['单位：台']"
-                               :legend="['特种设备数量']"></ChartsBarLine>
+                               :legend="[TypeName.name + '数量']"></ChartsBarLine>
             </container>
         </div>
         <div class="h-1-3">
@@ -31,7 +31,7 @@
                            :size="'4e2'"
                            :showX="false"  :showSize='true'
                            :colors="['#50E3C2','#FF9177','#00B1FA','#8A7CEF','#FFE17D','#00E138','#FF7B83']"/> -->
-              <ChartsPie :double-pie="true" :data="pieData4" :center-data="pieCenterData" :showLegend='false'
+              <ChartsPie :double-pie="true" :data="pieData4" :center-data="pieCenterData" :showLegend='true'
                            :color="['#FFBF24','#FE6941','#55B0EE','#8A7CEF','#25DD54','#5FE7DC']" :show-value="true"/>
             </container>
             <container class="w-1-2 full-height" :title="TypeName.name + '场所分析'">
@@ -71,7 +71,7 @@ export default {
   },
   watch: {
     TabType (data) {
-      this.TypeName =data
+      this.TypeName = data
       this.typeTab()
     }
   },
@@ -90,12 +90,12 @@ export default {
       this.pieCenterData[0].value = ''
       this.pieCenterData[1].value = ''
       axios.get('/monitor/equpMent/getTotalSum?equpType=' + this.TypeName.type).then(res => {
-        const data= res.data.data
+        const data = res.data.data
         this.chart4[0].value = data.totleSum
       })
       // 特种设备增长
       axios.get('/monitor/equpMent/getSpread?equpType=' + this.TypeName.type).then(res => {
-        const data= res.data.data
+        const data = res.data.data
         this.chart5 = []
         for (let i = 0; i < data.length; i++) {
           this.chart5.push({
@@ -106,8 +106,8 @@ export default {
       })
       // 特种设备类型分布
       axios.get('/monitor/equpMent/getMold?equpType=' + this.TypeName.type).then(res => {
-        const data= res.data.data
-        console.log(data,'特种设备类型分布')
+        const data = res.data.data
+        console.log(data, '特种设备类型分布')
         this.hellowPie2 = []
         for (let i = 0; i < data.length; i++) {
           this.hellowPie2.push({
@@ -118,7 +118,7 @@ export default {
       })
       // 特种设备地区分布
       axios.get('/monitor/equpMent/getRegions?equpType=' + this.TypeName.type).then(res => {
-        const data= res.data.data
+        const data = res.data.data
         this.chart3[0].data = []
         for (let i = 0; i < data.length; i++) {
           this.chart3[0].data.push({
@@ -129,7 +129,7 @@ export default {
       })
       // 特种设备行业分布
       axios.get('/monitor/equpMent/getMajor?equpType=' + this.TypeName.type).then(res => {
-        const data= res.data.data
+        const data = res.data.data
         console.log(data, '特种设备行业分布')
         this.pieData4 = []
         let count = 0
@@ -164,7 +164,7 @@ export default {
       })
       // 特种设备场所分析
       axios.get('/monitor/equpMent/getSecurity?equpType=' + this.TypeName.type).then(res => {
-        const data= res.data.data
+        const data = res.data.data
         this.pieData = []
         for (let i = 0; i < data.length; i++) {
           this.pieData.push({
@@ -177,22 +177,22 @@ export default {
     typeName (name) {
       switch (name) {
         case 1:
-            return '锅炉'
+          return '锅炉'
         case 3:
-            return '电梯'
+          return '电梯'
         case 2:
-            return '压力容器'
+          return '压力容器'
         case 8:
-            return '压力管道'
+          return '压力管道'
         case 4:
-            return '起重机械'
+          return '起重机械'
         case 9:
-            return '客运索道'
+          return '客运索道'
         case 6:
-            return '大型游乐'
+          return '大型游乐'
         case 5:
-            return '场（厂）内专用机动车辆'
-        } 
+          return '场（厂）内专用机动车辆'
+      }
     }
   },
   data: () => {
@@ -201,7 +201,7 @@ export default {
         {
           name: '制造业',
           value: Mock.Random.natural(500, 1300),
-          selected:true
+          selected: true
         }, {
           name: '非制造业',
           value: Mock.Random.natural(500, 1300)

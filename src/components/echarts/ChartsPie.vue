@@ -117,9 +117,9 @@ export default {
       const center = ['50%', '50%']
       const legend = {
         show: this.showLegend,
-        selectedMode: false,
+        selectedMode: true,
         // width:40,
-        height:480
+        height: 480
       }
       switch (this.legendPosition) {
         case 'top':
@@ -156,7 +156,7 @@ export default {
           label: {
             show: true,
             position: 'inside',
-            color: '#ddd',
+            color: 'white',
             align: 'right',
             width: 80,
             alignTo: 'edge',
@@ -177,7 +177,7 @@ export default {
             },
             rich: {
               white: {
-                color: '#fff',
+                color: 'white',
                 fontSize: 22,
                 align: 'left'
               }
@@ -190,35 +190,37 @@ export default {
         name: '',
         type: 'pie',
         roseType: this.roseType,
+        minAngle: 20,
         radius: this.isPie ? [0, '62%'] : ['45%', '63%'],
         center: center,
         top: 20,
         left: left,
         right: right,
-        labelLine:{
-          show: true,
-          length: 0,
-          length2: 0
+        labelLine: {
+          show: false,
+          length: 20,
+          length2: 0,
+          smooth: false
         },
         label: {
-          show: true,
+          show: false,
           position: 'outside',
           color: '#ddd',
           fontSize: 22,
           align: 'right',
-          width: 40,
-          alignTo: 'edge',
-          margin: 10,
+          width: 30,
+          // alignTo: 'edge',
+          margin: 0,
           formatter: (params) => {
             if (this.legendPosition === 'right') {
               return params.name + '\n{white|' + params.value + this.unit + '}'
-            }else if (params.name !== '') {
+            } else if (params.name !== '') {
               if (this.showAll) {
                 return params.name + '\n{white|' + params.value + this.unit + '}' + '\n{white|' + params.percent + '%}'
               } else if (this.showValue) {
                 return params.name + '\n{white|' + params.value + this.unit + '}'
               } else {
-                return params.name + '\n{white|' + params.percent + '%}'
+                return 'white|' + params.name + '\n{white|' + params.percent + '%}'
               }
             } else {
               return ''
@@ -228,7 +230,7 @@ export default {
           rich: {
             white: {
               color: '#79DFEF',
-              fontSize: 20,
+              fontSize: 18,
               align: 'left'
             }
           }
@@ -246,7 +248,17 @@ export default {
           y: 'center',
           textStyle: {
             color: 'red',
-            fontSize: 200
+            fontSize: 20
+          }
+        },
+        tooltip: {
+          trigger: 'item',
+          // formatter: '{a}{b} : <br/>{c} ({d}%)'
+          formatter: function (params) {
+            let str = ''
+            // 　　　　params.forEach((item) => {
+            return　str += `<span style="font-size: 20px;color: rgba(304, 304, 304, 0.9);">${params.name}<span style="font-size: 22px;">：${params.value}<br />`
+            // 　　　　})
           }
         },
         legend: legend,

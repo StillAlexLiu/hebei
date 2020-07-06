@@ -3,7 +3,7 @@
         <!--        1级分类-->
         <div class="tab-group full-width">
             <div class="tab-item" v-for="(item,index) in data" :class="index===activeIndex?'active':''" :key="index"
-                 @click="tabClick(index)">{{item.name}}
+                 @click="tabClick(item, index)">{{item.name}}
             </div>
         </div>
         <div class="btn-group full-width" v-if="$route.name === '主体服务' & activeIndex === 0">
@@ -48,7 +48,7 @@
                 <div class="sub-btn-group full-width" :key="'s'+index" v-if="item.children&&item.active">
                     <div class="btn" v-for="(item2,index) in item.children"
                          :key="index" @click="itemClick(item2,index,item.children)">
-                        <img class="img" alt :src="item2.icon"/>                
+                        <img class="img" alt :src="item2.icon"/>
                         <img class="icon" v-if="item2.active" alt src="./img/item_select.png"/>
                         <div>{{item2.name}}</div>
                     </div>
@@ -62,6 +62,7 @@
 import { linkSync } from 'fs'
 import axios from 'axios'
 import { type } from 'os'
+import Bus from '@/assets/bus.js'
 export default {
   name: 'MapSelector',
   props: {
@@ -79,7 +80,8 @@ export default {
       selectArray: [],
       active: 0,
       showBox: false,
-      shouBtn: []
+      shouBtn: [],
+      itemStatus: ''
     }
   },
   mounted () {
@@ -105,15 +107,22 @@ export default {
       this.single = this.data[this.activeIndex].single
       this.send()
     },
-    tabClick (index) {
-      this.showBox = false
-      this.active = 0
-      this.activeIndex = index
-      this.init()
-      this.removeActive(this.data)
+    tabClick (item, index) {
+      // 关闭营业执照
+      Bus.$emit('closeMainBox', false)
+      if (item.name === '指挥调度') {
+        Bus.$emit('zhduTab', true)
+      } else if (item.name === '一日办') {
+        Bus.$emit('oneDay', true)
+      } else {
+        this.showBox = false
+        this.active = 0
+        this.activeIndex = index
+        this.init()
+        this.removeActive(this.data)
+      }
     },
     pullDown (item, all) {
-      console.log(item.type, all, '下拉')
       axios.get('/monitor/main/getSubClassByMain?mainClass=' + item.type).then(res => {
         // this.$dataAll.config.mapTab[1].children[0].children[0].children = []
         const pull = this.$dataAll.config.mapTab[1].children[0].children
@@ -168,8 +177,9 @@ export default {
       })
     },
     itemClick (item, index, array) {
-      console.log(item, array, this.data[this.activeIndex], '点击下拉图标')
-      this.pullDown(item, array)
+      // 关闭营业执照
+      Bus.$emit('closeMainBox', false)
+      // console.log(item, array, this.data[this.activeIndex], '点击图标')
       this.shouBtn = item
       if (this.single) {
         for (let i = 0; i < array.length; i++) {
@@ -178,16 +188,29 @@ export default {
           }
         }
       }
-      if (!item.children) {
-        item.active = true
-        this.send()
+      console.log(item, array, '点击')
+      if (this.$route.name === '主体服务') {
+        if (item.name === '个体工商户') {
+          console.log(111)
+          item.active = !item.active
+          this.send()
+        } else if (!item.children) {
+          console.log(333)
+          item.active = true
+          this.send()
+        } else {
+          console.log(222)
+          item.active = true
+        }
       } else {
-        item.active = true
+        item.active = !item.active
       }
+
       console.log(item, array, 'aayy')
       if (item.name === '个体工商户' || !item.children) {
         this.send()
       } else {
+        this.pullDown(item, array)
         this.showBox = true
       }
       if (this.data[this.activeIndex].name === '特种设备监管') {
@@ -204,8 +227,19 @@ export default {
     },
     // tab切换
     pngClick (item, index, array) {
-      console.log(item, index, array, '点击图标')
-      this.shouBtn = item
+      // 关闭营业执照
+      Bus.$emit('closeMainBox', false)
+      console.log(item, this.shouBtn, '点击图标')
+      if (item === this.shouBtn) {
+        console.log('一样')
+        this.shouBtn = {
+          name: '市场主体',
+          type: 0
+        }
+      } else {
+        console.log('不一样')
+        this.shouBtn = item
+      }
       for (let i = 0; i < array.length; i++) {
         if (i === index) {
           item.active = !item.active
@@ -239,46 +273,46 @@ export default {
       //   this.selectArray.push(this.shouBtn)
       // }
       // }else{
-        for (let i = 0; i < this.data[this.activeIndex].children.length; i++) {
-          const item = this.data[this.activeIndex].children[i]
-          if (item.active) {
-            console.log(item, 'lllllllllllllllk')
-            if (this.shouBtn.name === '公有制企业' || this.shouBtn.name === '外资企业' || this.shouBtn.name === '私营企业' || this.shouBtn.name === '农民合作社') {
-              this.selectArray = []
-              const listName = item.children
-              console.log(listName, 'nnnn')
-              for (let i = 0; i < listName.length; i++) {
-                if (listName[i].active) {
-                  // console.log(listName[i], '1')
-                  this.selectArray.push(listName[i])
-                  // console.log(this.selectArray, '2')
-                  return this.selectArray
-                } else {
-                  this.selectArray.push(item)
-                  return this.selectArray
-                }
+      for (let i = 0; i < this.data[this.activeIndex].children.length; i++) {
+        const item = this.data[this.activeIndex].children[i]
+        if (item.active) {
+          console.log(item, 'lllllllllllllllk')
+          if (this.shouBtn.name === '公有制企业' || this.shouBtn.name === '外资企业' || this.shouBtn.name === '私营企业' || this.shouBtn.name === '农民合作社') {
+            this.selectArray = []
+            const listName = item.children
+            console.log(listName, 'nnnn')
+            for (let i = 0; i < listName.length; i++) {
+              if (listName[i].active) {
+                // console.log(listName[i], '1')
+                this.selectArray.push(listName[i])
+                // console.log(this.selectArray, '2')
+                return this.selectArray
+              } else {
+                this.selectArray.push(item)
+                return this.selectArray
               }
-            } else {
-              this.selectArray.push(this.shouBtn)
             }
+          } else {
+            this.selectArray.push(this.shouBtn)
           }
-          // if (item.children) {
-          //   console.log(item, 'iii')
-          //   item.children.forEach((v) => {
-          //     console.log(v, 'vvv')
-          //     if (v.name === this.shouBtn.name) {
-          //         console.log(listName[i], '1')
-          //       this.selectArray.push(v)
-          //     }
-          //     // console.log(this.selectArray, v, 'sssssss')
-          //   })
-          // } else {
-          //   if (item.active) {
-          //     this.selectArray.push(item)
-          //   }
-          //     // console.log(this.selectArray, '11aaaaaa')
-          // }
         }
+        // if (item.children) {
+        //   console.log(item, 'iii')
+        //   item.children.forEach((v) => {
+        //     console.log(v, 'vvv')
+        //     if (v.name === this.shouBtn.name) {
+        //         console.log(listName[i], '1')
+        //       this.selectArray.push(v)
+        //     }
+        //     // console.log(this.selectArray, v, 'sssssss')
+        //   })
+        // } else {
+        //   if (item.active) {
+        //     this.selectArray.push(item)
+        //   }
+        //     // console.log(this.selectArray, '11aaaaaa')
+        // }
+      }
       // }
       console.log(this.selectArray, 'sssaa')
       return this.selectArray

@@ -15,10 +15,10 @@
             <div slot="info">
                 <roll-table v-if="routeName==='综合指挥'" :data="p0Info" :dimension="p0Dimension" class="full-width"/>
                 <!-- <roll-table :data="p0Info" :dimension="p0Dimension" class="full-width"/> -->
-                <EntityMapInfo v-if="p1Info" :data="p1Info['注册信息']['营业执照']"/>
+                <EntityMapInfo v-if="selectInfoState" :data="selectInfo"/>
                 <KeepOnRecordMapInfo v-if="routeName==='备案许可'" :data="p10Info"/>
-                <SupervisionMapInfo v-if="routeName==='综合监管'" :data="p2InfoDetail" :table="p2Info"
-                                    :dimension="p2Dimension" class="full-width"/>
+                <!-- <SupervisionMapInfo v-if="routeName==='综合监管'" :data="p2InfoDetail" :table="p2Info"
+                                    :dimension="p2Dimension" class="full-width"/> -->
                 <WarningMapInfo v-if="routeName==='智能预警'" :data="p4Info"/>
                 <AuditMapInfo v-if="routeName==='稽查办案'" :data="p6Info"/>
                 <ComplaintMapInfo v-if="routeName==='投诉举报'" :data="p5Info"/>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import Mock from 'mockjs'
 import EntityMapInfo from '../p1/componets/EntityMapInfo'
 import WarningMapInfo from '../p4/components/WarningMapInfo'
@@ -38,7 +38,7 @@ import ComplaintMapInfo from '../p5/compontes/ComplaintMapInfo'
 import KeepOnRecordMapInfo from '../p10/components/KeepOnRecordMapInfo'
 import Bus from '@/assets/bus.js'
 import axios from 'axios'
-import { mapState } from 'vuex'
+
 import { stat } from 'fs'
 
 export default {
@@ -50,6 +50,13 @@ export default {
     AuditMapInfo,
     WarningMapInfo,
     EntityMapInfo
+  },
+  created () {
+    Bus.$on('closeMainBox', target => {
+      if (target === false) {
+        this.selectInfoState = false
+      }
+    })
   },
   props: {
     idKey: {
@@ -127,7 +134,7 @@ export default {
           center: [115.217451, 37.92904]
         }, {
           name: '河北雄安新区',
-          center: [115.867238,39.043152]
+          center: [115.867238, 39.043152]
         }
       ],
       latPoint: [],
@@ -135,7 +142,38 @@ export default {
       icon: '',
       mainType: '',
       basicData: '',
-      mainMessage: ''
+      mainMessage: '',
+      infoData: {
+        营业执照: {
+          企业名称: '',
+          类型: '',
+          统一社会信用代码: '',
+          住所: '',
+          登记机关: '',
+          成立日期: '',
+          经营期限自: '',
+          经营期限至: '',
+          注册资本: '',
+          法定代表人: '',
+          登记状态: '',
+          经营范围: ''
+        },
+        个人营业执照: {
+          统一社会信用代码: '',
+          名称: '',
+          类型: '',
+          经营者: '',
+          组成形式: '',
+          登记机关: '',
+          登记状态: '',
+          经营场所: '',
+          经营范围: '',
+          注册日期: '',
+          核准日期: ''
+        }
+      },
+      selectInfo: '',
+      selectInfoState: false
     }
   },
   computed: {
@@ -160,8 +198,10 @@ export default {
         const find = this.$dataAll.config.mapTab.find(value => {
           return value.name === this.$route.name
         })
+        if (this.$route.name !== '主体服务') {
+          this.selectInfoState = false
+        }
         this.point = []
-        console.log(find, 'cccuu')
         if (find) {
           this.routeName = find.name
           this.currentSelector = find.children
@@ -196,7 +236,7 @@ export default {
       })
     },
     getSelectItem (data) {
-      // console.log(data, '点击')
+      console.log(data, '点击')
       this.clearInfo()
       const items = data.items
       this.point = []
@@ -314,16 +354,17 @@ export default {
           })
         }
         if (number.mainClass) {
-          axios.get('/monitor/main/getDistrictCount?adCode=130000&reportType=' + number.mainClass + '&entType =' + number.type).then(res => {
+          axios.get('/monitor/main/getDistrictCount?adCode=130000&reportType=' + number.mainClass + '&entType=' + number.type).then(res => {
             const data = res.data.data
-            console.log(data, '地图1层打点')
+            console.log(data, '地图1层打点2')
             for (let i = 0; i < data.length; i++) {
               for (let o = 0; o < list.length; o++) {
                 if (list[o].name === data[i].name) {
                   list[o].baseCount = data[i].baseCount
                   list[o].level = data[i].level
                   list[o].ad_code = data[i].ad_code
-                  list[o].mainClass = number.mainClass
+                  list[o].mainClass = number.mainClass,
+                  list[o].cliType = cliType
                 }
               }
             }
@@ -331,13 +372,14 @@ export default {
         } else {
           axios.get('/monitor/main/getDistrictCount?adCode=130000&reportType=' + cliType).then(res => {
             const data = res.data.data
-            console.log(data, '地图1层打点')
+            console.log(data, '地图1层打点2')
             for (let i = 0; i < data.length; i++) {
               for (let o = 0; o < list.length; o++) {
                 if (list[o].name === data[i].name) {
                   list[o].baseCount = data[i].baseCount
                   list[o].level = data[i].level
-                  list[o].ad_code = data[i].ad_code
+                  list[o].ad_code = data[i].ad_code,
+                  list[o].cliType = cliType
                 }
               }
             }
@@ -345,7 +387,7 @@ export default {
         }
         console.log(list)
         return list
-      } else if (this.$route.name === '稽查办案'){
+      } else if (this.$route.name === '稽查办案') {
         const list = []
         for (let i = 0; i < len; i++) {
           const item = this.city[i]
@@ -375,15 +417,15 @@ export default {
         return list
       }
     },
-    getCaption(obj,state) {
-      console.log(obj, state)
-      var index=obj.lastIndexOf("\,");
-      if(state==0){
-        obj=obj.substring(0,index);
-      }else {
-        obj=obj.substring(index+1,obj.length);
+    getCaption (obj, state) {
+      // console.log(obj, state)
+      var index = obj.lastIndexOf('\,')
+      if (state == 0) {
+        obj = obj.substring(0, index)
+      } else {
+        obj = obj.substring(index + 1, obj.length)
       }
-      return obj;
+      return obj
     },
     addGrid () {
       // 初始化网格 用于限制点位置坐标用，可不写
@@ -401,6 +443,7 @@ export default {
       }
     },
     Dispatch (data) {
+      console.log(data, '点击title')
       this.commandName = ''
       this.p2InfoDetail = {}
       this.p4Info = {}
@@ -424,16 +467,16 @@ export default {
     beforeDestroy () {
       Bus.$emit('message')
     },
-    //第二层地图打点
+    // 第二层地图打点
     returnQu (item) {
       console.log(item, '第二层')
       if (item.ad_code) {
         if (item.mainClass) {
-          axios.get('/monitor/main/getDistrictCount?adCode='+ item.ad_code +'&reportType=' + item.mainClass).then(res => {
+          axios.get('/monitor/main/getDistrictCount?adCode=' + item.ad_code + '&reportType=' + item.mainClass + '&entType=' + item.cliType).then(res => {
             console.log(res.data.data, '第二层')
             this.point = []
             const data = res.data.data
-            for (let i = 0; i< data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
               if (data[i].center) {
                 this.point.push({
                   name: data[i].name,
@@ -443,17 +486,18 @@ export default {
                   level: data[i].level,
                   ad_code: data[i].ad_code,
                   typeIndex: 0,
-                  mainClass: item.mainClass
+                  mainClass: item.mainClass,
+                  cliType: item.cliType
                 })
               }
             }
           })
         } else {
-          axios.get('/monitor/main/getDistrictCount?adCode='+ item.ad_code +'&reportType=' + this.mainType).then(res => {
+          axios.get('/monitor/main/getDistrictCount?adCode=' + item.ad_code + '&reportType=' + this.mainType).then(res => {
             console.log(res.data.data, '第二层')
             this.point = []
             const data = res.data.data
-            for (let i = 0; i< data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
               if (data[i].center) {
                 this.point.push({
                   name: data[i].name,
@@ -462,48 +506,51 @@ export default {
                   baseCount: data[i].baseCount,
                   level: data[i].level,
                   ad_code: data[i].ad_code,
-                  typeIndex: 0
+                  typeIndex: 0,
+                  cliType: item.cliType
                 })
               }
             }
           })
         }
-
       }
     },
-    //第三层地图打点
+    // 第三层地图打点
     returnList (item) {
       console.log(item, this.icon, '第三层')
       if (item.ad_code) {
         if (item.mainClass) {
-          axios.get('/monitor/main/getDistrictEntList?adCode='+ item.ad_code + '&reportType=' + item.mainClass).then(res => {
+          axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + item.mainClass + '&entType=' + item.cliType).then(res => {
             console.log(this.point, res.data.data, '第三层1')
             this.point = []
             const data = res.data.data
-            for (let i = 0; i< data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
               this.point.push({
                 name: data[i].entName,
                 coordinate: [data[i].longitude, data[i].latitude],
                 icon: this.icon,
                 address: data[i].dom,
-                pripId: data[i].PRIPID
+                pripId: data[i].PRIPID,
+                cliType: item.cliType
               })
             }
             console.log(this.point, 'ppp11')
             // this.p1Select()
           })
         } else {
-          axios.get('/monitor/main/getDistrictEntList?adCode='+ item.ad_code + '&reportType=' + this.mainType).then(res => {
+          // 11错误
+          axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + this.mainType).then(res => {
             console.log(this.point, res.data.data, '第三层2')
             this.point = []
             const data = res.data.data
-            for (let i = 0; i< data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
               this.point.push({
                 name: data[i].entName,
                 coordinate: [data[i].longitude, data[i].latitude],
                 icon: this.icon,
                 address: data[i].dom,
-                pripId: data[i].PRIPID
+                pripId: data[i].PRIPID,
+                cliType: item.cliType
               })
             }
             // this.p1Select()
@@ -512,7 +559,7 @@ export default {
       }
     },
     pointClickDispatch (item) {
-      console.log(item, '主体服务')
+      console.log(item, item.cliType, '主体服务')
       switch (this.$route.name) {
         case '主体服务':
           if (item.level === '1' || item.level === '2') {
@@ -520,7 +567,8 @@ export default {
           } else if (item.level === '3' || item.level === '4') {
             this.returnList(item)
           } else if (item.pripId) {
-            this.p1Select(item.pripId)
+            console.log('第三')
+            this.p1Select(item.pripId, item.cliType)
           }
           break
         case '智能预警':
@@ -562,6 +610,7 @@ export default {
           this.p6Info = item.data
           break
         case '远程监控':
+          console.log('远程监控')
           if (!item.points) {
             Bus.$emit('message', item)
           }
@@ -570,20 +619,24 @@ export default {
           break
       }
     },
-    p1Select (pripId) {
-      console.log(pripId, 'pp')
-      axios.get('/monitor/main/getMainBaseInfoData?pripId=' + pripId).then(res => {
+    p1Select (pripId, cliType) {
+      console.log(pripId, cliType, 'pp')
+      let url
+      if (cliType === 'AA') {
+        url = 'getMainBaseGtData'
+      } else {
+        url = 'getMainBaseInfoData'
+      }
+      axios.get('/monitor/main/' + url + '?pripId=' + pripId).then(res => {
         console.log(res.data.data, '第一')
         this.basicData = res.data.data
         console.log(this.basicData, 'zz')
-        })
         axios.get('/monitor/main/getBaseZlggData?pripId=' + pripId).then(res2 => {
           console.log(res2.data.data, '右屏接口')
           this.mainMessage = res2.data.data
           this.getEntityById()
         })
-
-
+      })
     },
     getEntityById () {
       // 获取主体信息
@@ -591,52 +644,94 @@ export default {
         this.p1Info = value.data
         // 右屏一企一档
         console.log(this.basicData, 'bbss')
-        this.p1Info['注册信息']['基本信息']['主体名称'] = this.basicData.ENTNAME
-        this.p1Info['注册信息']['基本信息']['统一社会信用代码'] = this.basicData.UNISCID
-        this.p1Info['注册信息']['基本信息']['企业地址'] = this.basicData.DOM
-        this.p1Info['注册信息']['基本信息']['成立日期'] = this.basicData.ESTDATE
-        this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
-        this.p1Info['注册信息']['基本信息']['法定代表人(经营者)'] = this.basicData.NAME
-        this.p1Info['注册信息']['基本信息']['所属网格'] = ''
-        this.p1Info['注册信息']['基本信息']['企业状态'] = this.basicData.REGSTATE_CN
-        this.p1Info['注册信息']['基本信息']['主体类型'] = this.basicData.ENTTYPE_CN
-        this.p1Info['注册信息']['基本信息']['注册号'] = this.basicData.REGNO
-        this.p1Info['注册信息']['基本信息']['登记机关'] = this.basicData.REGORG_CN
-        this.p1Info['注册信息']['基本信息']['经营期限'] = this.basicData.OPFROM
-        this.p1Info['注册信息']['基本信息']['注册资金'] = this.basicData.REGCAP + this.basicData.REGCAPCUR_CN
-        this.p1Info['注册信息']['基本信息']['所属监管所'] = ''
-        this.p1Info['注册信息']['基本信息']['信用分类'] = ''
-        this.p1Info['注册信息']['基本信息']['经纬度'] = ''
+        if (this.basicData.COMPFORM_CN === '个人经营') {
+          this.p1Info['注册信息']['基本信息']['名称'] = this.basicData.TRANAME
+          this.p1Info['注册信息']['基本信息']['类型'] = this.basicData.COMPFORM_CN
+          this.p1Info['注册信息']['基本信息']['统一社会信用代码'] = this.basicData.UNISCID
+          this.p1Info['注册信息']['基本信息']['注册号'] = this.basicData.REGNO
+          this.p1Info['注册信息']['基本信息']['登记机关'] = this.basicData.REGORG_CN
+          this.p1Info['注册信息']['基本信息']['注册日期'] = this.basicData.ESTDATE
+          this.p1Info['注册信息']['基本信息']['核准日期'] = this.basicData.APPRDATE
+          this.p1Info['注册信息']['基本信息']['经营期限'] = this.basicData.OPFROM
+          this.p1Info['注册信息']['基本信息']['地址'] = this.basicData.OPLOC
+          this.p1Info['注册信息']['基本信息']['注册资金'] = this.basicData.FUNDAM
+          this.p1Info['注册信息']['基本信息']['法定代表人(经营者)'] = this.basicData.NAME
+          this.p1Info['注册信息']['基本信息']['登记状态'] = this.basicData.REGSTATE_CN
+          this.p1Info['注册信息']['基本信息']['所属监管所'] = this.basicData.LOCALADM
+          // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
+          // this.p1Info['注册信息']['基本信息']['所属网格'] = ''
+          // this.p1Info['注册信息']['基本信息']['信用分类'] = ''
+          // this.p1Info['注册信息']['基本信息']['经纬度'] = ''
+          // 右屏弹窗
+          this.infoData['个人营业执照']['名称'] = this.basicData.TRANAME
+          this.infoData['个人营业执照']['统一社会信用代码'] = this.basicData.UNISCID
+          // this.p1Info['注册信息']['营业执照']['住所'] = this.basicData.DOM
+          this.infoData['个人营业执照']['经营者'] = this.basicData.NAME
+          this.infoData['个人营业执照']['登记状态'] = this.basicData.REGSTATE_CN
+          this.infoData['个人营业执照']['类型'] = this.basicData.COMPFORM_CN
+          this.infoData['个人营业执照']['登记机关'] = this.basicData.REGORG_CN
+          this.infoData['个人营业执照']['组成形式'] = '个人经营'
+          this.infoData['个人营业执照']['注册日期'] = this.basicData.ESTDATE
+          this.infoData['个人营业执照']['核准日期'] = this.basicData.APPRDATE
+          // this.p1Info['注册信息']['营业执照']['经营期限自'] = this.basicData.OPFROM
+          // this.p1Info['注册信息']['营业执照']['经营期限至'] = this.basicData.OPTO
+          // this.p1Info['注册信息']['营业执照']['组成形式'] = this.basicData.COMPFORM_CN
+          // this.p1Info['注册信息']['营业执照']['注册资本'] = this.basicData.REGCAP + this.basicData.REGCAPCUR_CN
+          console.log(this.selectInfo, '个人营业执照1')
+          this.infoData['个人营业执照']['经营范围'] = this.basicData.OPSCOPE
+          this.infoData['个人营业执照']['经营场所'] = this.basicData.OPLOC
+          this.selectInfo = this.infoData['个人营业执照']
+          this.selectInfoState = true
+          console.log(this.selectInfo, '个人营业执照2')
+        } else {
+          this.p1Info['注册信息']['基本信息']['名称'] = this.basicData.ENTNAME
+          this.p1Info['注册信息']['基本信息']['类型'] = this.basicData.ENTTYPE_CN
+          this.p1Info['注册信息']['基本信息']['统一社会信用代码'] = this.basicData.UNISCID
+          this.p1Info['注册信息']['基本信息']['注册号'] = this.basicData.REGNO
+          this.p1Info['注册信息']['基本信息']['登记机关'] = this.basicData.REGORG_CN
+          this.p1Info['注册信息']['基本信息']['注册日期'] = this.basicData.ESTDATE
+          this.p1Info['注册信息']['基本信息']['核准日期'] = this.basicData.APPRDATE
+          this.p1Info['注册信息']['基本信息']['经营期限'] = this.basicData.OPFROM
+          this.p1Info['注册信息']['基本信息']['地址'] = this.basicData.DOM
+          this.p1Info['注册信息']['基本信息']['注册资金'] = this.basicData.REGCAP + this.basicData.REGCAPCUR_CN
+          this.p1Info['注册信息']['基本信息']['法定代表人(经营者)'] = this.basicData.NAME
+          this.p1Info['注册信息']['基本信息']['登记状态'] = this.basicData.REGSTATE_CN
+          this.p1Info['注册信息']['基本信息']['所属监管所'] = ''
 
-        this.p1Info['注册信息']['营业执照']['企业名称'] = this.basicData.ENTNAME
-        this.p1Info['注册信息']['营业执照']['统一社会信用代码'] = this.basicData.UNISCID
-        this.p1Info['注册信息']['营业执照']['住所'] = this.basicData.DOM
-        this.p1Info['注册信息']['营业执照']['法定代表人'] = this.basicData.NAME
-        this.p1Info['注册信息']['营业执照']['审核日期'] = this.basicData.APPRDATE
-        this.p1Info['注册信息']['营业执照']['登记状态'] = this.basicData.REGSTATE_CN
-        this.p1Info['注册信息']['营业执照']['类型'] = this.basicData.ENTTYPE_CN
-        this.p1Info['注册信息']['营业执照']['登记机关'] = this.basicData.REGORG_CN
-        this.p1Info['注册信息']['营业执照']['成立日期'] = this.basicData.ESTDATE
-        this.p1Info['注册信息']['营业执照']['经营期限自'] = this.basicData.OPFROM
-        this.p1Info['注册信息']['营业执照']['经营期限至'] = this.basicData.OPTO
-        this.p1Info['注册信息']['营业执照']['注册资本'] = this.basicData.REGCAP + this.basicData.REGCAPCUR_CN
-        this.p1Info['注册信息']['营业执照']['经营范围'] = this.basicData.OPSCOPE
-        // 右上角弹窗
+          // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
+          // this.p1Info['注册信息']['基本信息']['所属网格'] = ''
+          // this.p1Info['注册信息']['基本信息']['信用分类'] = ''
+          // this.p1Info['注册信息']['基本信息']['经纬度'] = ''
+          this.infoData['营业执照']['企业名称'] = this.basicData.ENTNAME
+          this.infoData['营业执照']['统一社会信用代码'] = this.basicData.UNISCID
+          this.infoData['营业执照']['住所'] = this.basicData.DOM
+          this.infoData['营业执照']['法定代表人'] = this.basicData.NAME
+          this.infoData['营业执照']['登记状态'] = this.basicData.REGSTATE_CN
+          this.infoData['营业执照']['类型'] = this.basicData.ENTTYPE_CN
+          this.infoData['营业执照']['登记机关'] = this.basicData.REGORG_CN
+          this.infoData['营业执照']['成立日期'] = this.basicData.ESTDATE
+          this.infoData['营业执照']['经营期限自'] = this.basicData.OPFROM
+          this.infoData['营业执照']['经营期限至'] = this.basicData.OPTO
+          this.infoData['营业执照']['注册资本'] = this.basicData.REGCAP + this.basicData.REGCAPCUR_CN
+          this.infoData['营业执照']['经营范围'] = this.basicData.OPSCOPE
+          this.selectInfo = this.infoData['营业执照']
+          // 右上角弹窗
+          this.selectInfoState = true
+        }
         for (let i = 0; i < this.mainMessage.length; i++) {
           this.p1Info['监管信息']['质量公告'].push({
             // '生产企业': this.mainMessage[i].SCQY,
-            '产品名称': this.mainMessage[i].CPMC,
-            '规格': this.mainMessage[i].GG,
-            '结果': this.mainMessage[i].JG,
-            '批号': this.mainMessage[i].PH,
-            '类型': this.mainMessage[i].LX,
-            '年度': this.mainMessage[i].ND,
-            '被检单位': this.mainMessage[i].BJDW
+            产品名称: this.mainMessage[i].CPMC,
+            规格: this.mainMessage[i].GG,
+            结果: this.mainMessage[i].JG,
+            批号: this.mainMessage[i].PH,
+            类型: this.mainMessage[i].LX,
+            年度: this.mainMessage[i].ND,
+            被检单位: this.mainMessage[i].BJDW
             // '不合格项': this.mainMessage[i].BHG
             // '主体身份代码': this.mainMessage[i].UNISCID
           })
-          console.log(this.mainMessage[i], this.p1Info['监管信息']['质量公告'])
-
+          console.log(this.mainMessage[i], this.p1Info['监管信息']['质量公告'], '非个体')
         }
         this.setPageData({
           key: 'p1',

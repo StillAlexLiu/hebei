@@ -82,6 +82,8 @@ export default {
           label: {
             show: true,
             position: 'right',
+            fontSize: 20,
+            color: 'rgba(304, 304, 304, 0.9)',
             formatter: (value) => {
               return value.value.value + this.units[i]
             }
@@ -123,10 +125,17 @@ export default {
             nameLocation: 'end',
             nameGap: 6,
             nameTextStyle: {
-              fontSize: 14
+              fontSize: 20,
+              color: 'rgba(304, 304, 304, 0.9)'
             },
             splitLine: {
               show: i === 0
+            },
+            axisLabel: {
+              interval: 0,
+              fontSize: 20,
+              color: 'rgba(304, 304, 304, 0.9)'
+              // rotate: -12
             },
             show: true,
             // x: 'center',
@@ -140,10 +149,17 @@ export default {
               nameLocation: 'end',
               nameGap: 6,
               nameTextStyle: {
-                fontSize: 14
+                fontSize: 20,
+                color: 'rgba(304, 304, 304, 0.9)'
               },
               splitLine: {
                 show: i === 0
+              },
+              axisLabel: {
+                interval: 0,
+                fontSize: 20,
+                color: 'rgba(304, 304, 304, 0.9)'
+                // rotate: -12
               },
               show: true,
               // x: 'center',
@@ -180,7 +196,9 @@ export default {
           type: 'category',
           boundaryGap: true,
           axisLabel: {
-            interval: 0
+            interval: 0,
+            fontSize: 20,
+            color: 'rgba(304, 304, 304, 0.9)'
             // rotate: -12
           }
         },

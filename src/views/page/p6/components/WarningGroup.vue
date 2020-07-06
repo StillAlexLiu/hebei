@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     cli (item) {
-        this.$emit('cliBox', item)
+      this.$emit('cliBox', item)
     }
   }
 }
@@ -41,7 +41,7 @@ export default {
     }
 
     .value {
-        font-size: 120px;
+        font-size: 90px;
         text-align: center;
     }
 

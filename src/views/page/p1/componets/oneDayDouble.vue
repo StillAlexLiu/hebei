@@ -1,5 +1,6 @@
 <template>
-    <div class='oneDayDouble'>
+    <div class='oneDayDouble2'>
+        <div class="cuo" @click="back">✖</div>
         <div class="full-width h-1-3">
            <container class="w-1-2 full-height" :title="'一日办注册工作开展情况'">
                <NumberGroup4 :data='numberData2' class="full-height w-1-4"></NumberGroup4>
@@ -12,41 +13,47 @@
                 <div class="w-1-4 full-height" v-for="(item, index) in expenseGoal" :key="index">
                     <onlyOneBox :data='item'></onlyOneBox>
                 </div>
-            </container> 
+            </container>
         </div>
         <container class="full-width h-1-3" :title="'一日办工作开展情况'">
             <container-center-title2 title="一窗采集情况" class="full-height w-1-2">
-                <NumberGroup :data='numberData' class="full-height w-1-3"></NumberGroup>
+              <NumberGroup :data='numberData' class="full-height w-1-3"></NumberGroup>
                 <div class="w-2-3 full-height">
-                    <comPlaintBarR :data='chart3' legend="受理数量"></comPlaintBarR>
+                    <comPlaintBarR :data='chart3' legend="受理数量" :unit="'单位: 件'"></comPlaintBarR>
                 </div>
             </container-center-title2>
             <container-center-title2 title="一日办结情况" class="full-height w-1-2">
-                <NumberGroup4 :data='numberData2' class="full-height w-1-3"></NumberGroup4>
+                <div  class="full-height w-1-3">
+                  <div class="full-width h-8-10 ">
+                    <ChartsLiquidFill  :data='liquidfill'/>
+                  </div>
+                  <p class="full-width h-2-10 oneDayName">一日办结率</p>
+                </div>
                 <div class="w-2-3 full-height">
                     <ChartsBarLine :data='rightLine' :dimensions="['name','value']"
-                               :legend="['执法办案趋势']"
+                               :legend="['平均办理时长']"
                                :colors="['#55B0EE']"
                                :is-area="true"
-                               :units="['数量(件)']"
+                               :units="['单位：小时']"
                                :type="['line']"/>
                 </div>
             </container-center-title2>
         </container>
         <div class="full-height h-1-3">
             <container-center-title2 title="各局办理情况" class="full-height w-1-2">
-
+              <chartAcrossBar :data='acrossData' :legend="['市场监督管理局', '银行', '人社','税务', '公安']"  :barBorderRadius="[30, 30, 30, 30]"  :unit="'单位：小时'"
+                :color="['#FE6941', '#EFC578', '#738CE2', '#22C492', '#4A90E2']"></chartAcrossBar>
             </container-center-title2>
             <container-center-title2 title="各市办理情况" class="full-height w-1-2">
-                <div class="full-width h-1-5">
-
+                <div class="full-width h-1-9">
+                  <RadioSimple :data="radioData" v-model="select" class="w-2-7 full-height radio "  style="float: right" />
                 </div>
-                <div class="full-width h-4-5">
-                    <ChartsBarLine :data="barData2" :dimensions="['name','value']" :units="['%']"
+                <div class="full-width h-8-9">
+                    <ChartsBarLine :data="barData2" :dimensions="['name','value']" :units="[barLineName]"
                                :type="['bar']"
                                :border-radius="false"
-                               :bar-width="56"
-                               :legend="['通过率']"
+                               :bar-width="36"
+                               :legend="[barLineLegend]"
                                :colors="[barColor]"/>
                 </div>
             </container-center-title2>
@@ -61,47 +68,110 @@ import NumberGroup from '../../p0/components/NumberGroup'
 import comPlaintBarR from '../../p5/compontes/comPlaintBarR'
 import NumberGroup4 from '../componets/NumberGroup4'
 import echarts from 'echarts'
+import axios from 'axios'
+import chartAcrossBar from './ChartAcrossBar'
+import Bus from '@/assets/bus.js'
 export default {
   components: {
     onlyOneBox,
     NumberGroup,
     comPlaintBarR,
-    NumberGroup4
+    NumberGroup4,
+    chartAcrossBar
   },
-  data() {
+  methods: {
+    back () {
+      Bus.$emit('toTwo', false)
+    }
+  },
+  watch: {
+    select: {
+      immediate: true,
+      deep: true,
+      handler: function () {
+        console.log(this.select)
+        if (this.select.name === '办理量') {
+          this.barLineName = '单位： 件'
+          this.barLineLegend = '办理量'
+          axios.get('/monitor/info/apply/zzData?indexCodes=BDBLL,TSBLL,DZBLL,LFBLL,ZJKBLL,CDBLL,CZBLL,SJZBLL,QHDBLL,HSBLL,XJBLL,XTBLL,HDBLL').then(res => {
+            const data = res.data.data.data
+            this.barData2 = []
+            for (let i = 0; i < data.length; i++) {
+              this.barData2.push({
+                name: data[i].indexName.substring(0, data[i].indexName.indexOf('市')),
+                value: data[i].indexValue
+              })
+            }
+          })
+        } else if (this.select.name === '办理时长') {
+          this.barLineName = '单位： 小时'
+          this.barLineLegend = '平均时长'
+          axios.get('/monitor/info/apply/zzData?indexCodes=BDBLSJ,TSBLSJ,DZBLSJ,LFBLSJ,ZJKBLSJ,CDBLSJ,CZBLSJ,SJZBLSJ,QHDBLSJ,HSBLSJ,XJBLSJ,XTBLSJ,HDBLSJ').then(res => {
+            const data = res.data.data.data
+            this.barData2 = []
+            for (let i = 0; i < data.length; i++) {
+              this.barData2.push({
+                name: data[i].indexName.substring(0, data[i].indexName.indexOf('市')),
+                value: data[i].indexValue
+              })
+            }
+          })
+        }
+      }
+    }
+  },
+  data () {
     return {
+      barLineName: '单位：件',
+      barLineLegend: '办理量',
+      acrossData: {
+      },
+      select: {
+        name: '办理量'
+      },
+      radioData: [
+        {
+          name: '办理量',
+          value: 0
+        },
+        {
+          name: '办理时长',
+          value: 1
+        }
+      ],
+      liquidfill: ['维持', 98],
       expenseGoal: [
         {
-            name: '减少材料提交',
-            num: '1.2',
-            unit: '份'
+          name: '减少材料提交',
+          num: '1.2',
+          unit: '份'
         }, {
-            name: '节约办理时长',
-            num: '3',
-            unit: '小时'
+          name: '节约办理时长',
+          num: '3',
+          unit: '小时'
         }, {
-            name: '减少办理环节',
-            num: '3083',
-            unit: '个'
+          name: '减少办理环节',
+          num: '3083',
+          unit: '个'
         }, {
-            name: '减少办理费用',
-            num: '523',
-            unit: '元'
+          name: '减少办理费用',
+          num: '523',
+          unit: '元'
         }
       ],
       numberData: [
         {
           name: '今日受理/件',
-          value: Mock.Random.natural(100, 2000)
+          value: 0
         }, {
           name: '累计受理/件',
-          value: Mock.Random.natural(100, 2000)
+          value: 0
         }
       ],
       numberData2: [
         {
           name: '一日办主体/家',
-          value: Mock.Random.natural(100, 2000)
+          value: 0
         }
       ],
       chart3: {
@@ -113,49 +183,49 @@ export default {
           '2020'
         ],
         ydata: [
-          Mock.Random.natural(100, 2000),
-          Mock.Random.natural(100, 2000),
-          Mock.Random.natural(100, 2000),
-          Mock.Random.natural(100, 2000),
-          Mock.Random.natural(100, 2000)
+          0,
+          0,
+          0,
+          0,
+          0
         ]
       },
       chart10: [{
         name: '1月',
-        value: Mock.Random.natural(75, 100)
+        value: 0
       }, {
         name: '2月',
-        value: Mock.Random.natural(75, 100)
+        value: 0
       }, {
         name: '3月',
-        value: Mock.Random.natural(75, 100)
+        value: 0
       }, {
         name: '4月',
-        value: Mock.Random.natural(75, 100)
+        value: 0
       }, {
         name: '5月',
-        value: Mock.Random.natural(75, 100)
+        value: 0
       }, {
         name: '6月',
-        value: Mock.Random.natural(75, 100)
+        value: 0
       }, {
         name: '7月',
-        value: Mock.Random.natural(75, 100)
+        value: 0
       }, {
         name: '8月',
-        value: Mock.Random.natural(75, 100)
+        value: 0
       }, {
         name: '9月',
-        value: Mock.Random.natural(75, 100)
+        value: 0
       }, {
         name: '10月',
-        value: Mock.Random.natural(75, 100)
+        value: 0
       }, {
         name: '11月',
-        value: Mock.Random.natural(75, 100)
+        value: 0
       }, {
         name: '12月',
-        value: Mock.Random.natural(75, 100)
+        value: 0
       }],
       rightLine: [
         {
@@ -199,28 +269,28 @@ export default {
       barData2: [
         {
           name: '食品',
-          value: Mock.Random.natural(0, 100)
+          value: 0
         }, {
           name: '药械',
-          value: Mock.Random.natural(0, 100)
+          value: 0
         }, {
           name: '特种设备',
-          value: Mock.Random.natural(0, 100)
+          value: 0
         }, {
           name: '计量',
-          value: Mock.Random.natural(0, 100)
+          value: 0
         }, {
           name: '广告',
-          value: Mock.Random.natural(0, 100)
+          value: 0
         }, {
           name: '实验室',
-          value: Mock.Random.natural(0, 100)
+          value: 0
         }, {
           name: '工业产量',
-          value: Mock.Random.natural(0, 100)
+          value: 0
         }, {
           name: '化妆品',
-          value: Mock.Random.natural(0, 100)
+          value: 0
         }
       ],
       barColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
@@ -234,15 +304,105 @@ export default {
         }
       ])
     }
+  },
+  mounted () {
+    const date = new Date()
+    const h = date.getFullYear()
+    let m = date.getMonth() + 1
+    let nowm = date.getDate() - 1
+    let day = date.getDate()
+    if (m < 10) {
+      m = '0' + m
+    }
+    if (nowm < 10) {
+      nowm = '0' + nowm
+    }
+    if (day < 10) {
+      day = '0' + day
+    }
+    const other = `${h}-${m}-${nowm} 00:00:00`
+    const now = `${h}-${m}-${day} 00:00:00`
+    console.log(other, now, '当前日期')
+    // 一日办注册工作开展情况左屏
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=applyDone').then(res => {
+      console.log(res.data.data, '一日办注册工作开展情况左屏')
+      this.numberData2[0].value = res.data.data.indexValue
+    })
+    // 一日办注册工作开展情况右屏趋势图
+    axios.get('/monitor/info/apply/qushi?&indexCode=applyDone').then(res => {
+      const data = res.data.data.infoList
+      this.chart10 = []
+      for (let i = 0; i < data.length; i++) {
+        this.chart10.push({
+          name: data[i].dataTime.slice(0, 10),
+          value: data[i].indexValue
+        })
+      }
+    })
+    // 一日办工作开展情况
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=DRSLL').then(res => {
+      this.numberData[0].value = res.data.data.indexValue
+    })
+    // 一日办工作开展情况
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=entApply').then(res => {
+      this.numberData[1].value = res.data.data.indexValue
+    })
+    // 一窗采集情况柱状图
+    axios.get('/monitor/info/apply/zzData?indexCodes=entApply,GAKZSLL,FPSLSLL,YHKHSLL,CBYGDJSLL').then(res => {
+      console.log(res.data.data.data, '一窗采集情况柱状图')
+      const data = res.data.data.data
+      this.chart3 = {
+        xdata: [],
+        ydata: []
+      }
+      for (let i = 0; i < data.length; i++) {
+        this.chart3.xdata.push(data[i].indexName)
+        this.chart3.ydata.push(data[i].indexValue)
+      }
+    })
+    // 一日办结情况左侧
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=YRBJL').then(res => {
+      const data = res.data.data
+      this.liquidfill = [data.indexName, data.indexValue]
+    })
+    // 一日办结情况右屏趋势图
+    axios.get('/monitor/info/apply/qushi?&indexCode=BJPJSC').then(res => {
+      const data = res.data.data.infoList
+      this.rightLine = []
+      for (let i = 0; i < data.length; i++) {
+        this.rightLine.push({
+          name: data[i].dataTime.slice(0, 10),
+          value: data[i].indexValue
+        })
+      }
+    })
+    // 各局办理情况
+    axios.get('/monitor/info/apply/orgAvg').then(res => {
+      const data = res.data.data
+      this.acrossData = data
+    })
   }
 }
 </script>
 
 <style scoped lang="less">
- .oneDayDouble {
+ .oneDayDouble2 {
     width: 100%;
     height: 100%;
     background:rgba(35,37,57,0.75);
-    border:2px solid rgba(57,131,197,0.69)
+    position: relative;
+    border:2px solid rgba(57,131,197,0.69);
+    .cuo{
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+    .oneDayName{
+      font-size:26px;
+      font-family:MicrosoftYaHei;
+      color:rgba(255,255,255,1);
+    }
  }
 </style>

@@ -146,10 +146,15 @@ export default {
             nameLocation: 'end',
             nameGap: 6,
             nameTextStyle: {
-              fontSize: 12
+              fontSize: 20,
+              color: 'rgba(304, 304, 304, 0.9)'
             },
             splitLine: {
               show: i === 0
+            },
+            axisLabel: {
+              color: 'rgba(304, 304, 304, 0.9)',
+              fontSize: 20
             },
             show: true,
             // x: 'center',
@@ -163,10 +168,15 @@ export default {
               nameLocation: 'end',
               nameGap: 6,
               nameTextStyle: {
-                fontSize: 12
+                fontSize: 20,
+                color: 'rgba(304, 304, 304, 0.9)'
               },
               splitLine: {
                 show: i === 0
+              },
+              axisLabel: {
+                color: 'rgba(304, 304, 304, 0.9)',
+                fontSize: 20
               },
               show: true,
               // x: 'center',
@@ -184,9 +194,13 @@ export default {
           show: true,
           left: 'right',
           selectedMode: false,
-          itemWidth: 13,
-          itemHeight: 7,
-          data: this.legend
+          itemWidth: 15,
+          itemHeight: 15,
+          data: this.legend,
+          textStyle: {
+            color: 'rgba(304, 304, 304, 0.9)',
+            fontSize: 20
+          }
         },
         dataset: {
           dimensions: this.dimensions,
@@ -196,7 +210,9 @@ export default {
           type: 'category',
           boundaryGap: true,
           axisLabel: {
-            interval: 0
+            interval: 0,
+            color: 'rgba(304, 304, 304, 0.9)',
+            fontSize: 14
             // rotate: -12
           }
         },

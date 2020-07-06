@@ -65,6 +65,7 @@ export default {
   created () {
     var that = this
     Bus.$on('message', function (data2) {
+      console.log(data2, '远程')
       that.setVideo(data2)
     })
   },

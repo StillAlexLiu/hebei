@@ -13,7 +13,8 @@ export default {
     const str = {
       cmdId: 100,
       user: name,
-      password: md5(password)
+      password: md5(password),
+      autostart: false
     }
     const params = {
       json: JSON.stringify(str)

@@ -7,8 +7,10 @@
             <tr v-for="(item,index) in data" :key="index" class="row">
                 <td>
                     <div class="color-can">
-                        <div class="color"></div>
-                         <div class="value" >{{item.warningName}}</div>
+                        <div class="color" :style="{'background': 'red'}" v-if="item.warningName === '红色预警'"></div>
+                        <div class="color" :style="{'background': 'yellow'}" v-if="item.warningName === '黄色预警'"></div>
+                        <div class="color" :style="{'background': 'orange'}" v-if="item.warningName === '橙色预警'"></div>
+                        <div class="value" >{{item.warningName}}</div>
                         <!-- <div class="value" v-if="item.warningLevel === '1'">红色预警</div>
                         <div class="value" v-if="item.warningLevel === '2'">橙色预警</div>
                         <div class="value" v-if="item.warningLevel === '3'">黄色预警</div> -->
@@ -37,7 +39,7 @@ export default {
 <style scoped lang='less'>
 #table, table {
     width: 100%;
-    height: 100%;
+    max-height: 475px;
     font-size: 2rem;
     text-align: center;
     overflow-y: auto;
@@ -54,6 +56,8 @@ export default {
 
         td {
             border-bottom: 1px solid #3D94D5;
+            width: 10px;
+            height: 70px;
 
             .color-can {
                 display: flex;
@@ -62,7 +66,7 @@ export default {
                 align-items: center;
 
                 .color {
-                    background-color: #FFE43F;
+                    // background-color: #FFE43F;
                     width: 23px;
                     height: 23px;
                     border-radius: 50%;

@@ -29,7 +29,7 @@
                 <NumberGroup :data='chart1' ></NumberGroup>
             </div>
             <div class="w-3-4 full-height">
-                <ChartsBarHorizontal :data="barData"
+                <ChartsBarHorizontal :data="barData"  :barBorderRadius="[0, 0, 0, 0]"
                                          :color="['#FFD37C','#FF9841','#FF997D','#29C6FF','#6A94FF','#45A4F5']"/>
             </div>
           <!-- <ChartsBarSimple :data="chart3" :dimensions="['name','value']" unit="批次" :barWidth='30' :barRadios='[0, 0, 0, 0]' :legend="['抽查数量']"

@@ -76,6 +76,7 @@ export default {
           right: 10,
           top: 10,
           textStyle: {
+            color: 'rgba(304, 304, 304, 0.9)',
             fontSize: 20
           }
         },
@@ -90,7 +91,9 @@ export default {
           },
           axisLabel: {
             interval: 0,
-            rotate: 0
+            rotate: 0,
+            color: 'rgba(304, 304, 304, 0.9)',
+            fontSize: 16
           },
           splitLine: {
             show: false
@@ -119,6 +122,8 @@ export default {
             },
             axisLabel: {
               // interval:0,
+              color: 'rgba(304, 304, 304, 0.9)',
+              fontSize: 20
             },
             splitLine: {
               lineStyle: {
@@ -142,6 +147,8 @@ export default {
             },
             axisLabel: {
               // interval:0,
+              color: 'rgba(304, 304, 304, 0.9)',
+              fontSize: 20,
               formatter: '{value}%'
             },
             splitLine: {

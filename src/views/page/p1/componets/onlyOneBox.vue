@@ -55,7 +55,7 @@ export default {
           font-size:22px;
           font-family:PingFangSC-Regular,PingFang SC;
           font-weight:400;
-          color:rgba(97,234,223,1);
+          color: white;
         }
       }
       .sonName {
