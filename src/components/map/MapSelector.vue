@@ -7,30 +7,40 @@
             </div>
         </div>
         <div class="btn-group full-width" v-if="$route.name === '主体服务' & activeIndex === 0">
-          <template v-for="(item,index) in data[activeIndex].children">
-            <div class="btn"  v-if="!showBox"
+            <template v-for="(item,index) in data[activeIndex].children">
+                <div class="btn" v-if="!showBox"
                      :key="index">
-                    <img class="img" alt :src="item.icon"  @click="itemClick(item,index,data[activeIndex].children)" v-if="!item.children || index === 4"/>
-                    <img class="img" alt :src="item.icon" @click="pngClick(item,index,data[activeIndex].children)" v-else>
+                    <img class="img" alt :src="item.icon" @click="itemClick(item,index,data[activeIndex].children)"
+                         v-if="!item.children || index === 4"/>
+                    <img class="img" alt :src="item.icon" @click="pngClick(item,index,data[activeIndex].children)"
+                         v-else>
                     <div>{{item.name}}</div>
                     <img class="icon" v-if="item.active" alt src="./img/item_select.png"/>
-                    <font-awesome-icon v-if="item.children" :class="item.active?'rotate-up':'rotate-down'"  @click="itemClick(item,index,data[activeIndex].children)"
+                    <font-awesome-icon v-if="item.children" :class="item.active?'rotate-up':'rotate-down'"
+                                       @click="itemClick(item,index,data[activeIndex].children)"
                                        class="more"
                                        icon="angle-double-up"/>
-            </div>
-            <!--                3级分类-->
-            <div class="sub-btn-group full-width padding" :key="'s'+index" v-if="item.children&&item.active&&showBox">
-                <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-公有制企业@2x.png" v-if="item.name === '公有制企业'" @click="showBoxCli(item)"/>
-                <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-农民合作社@2x.png" v-if="item.name === '农民合作社'" @click="showBoxCli(item)"/>
-                <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-外资企业@2x.png" v-if="item.name === '外资企业'" @click="showBoxCli(item)"/>
-                <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-私营企业@2x.png" v-if="item.name === '私营企业'" @click="showBoxCli(item)"/>
-                <div class="btn2" v-for="(item2,index) in item.children"
-                      :key="index">
-                    <!-- <img class="icon" v-if="item2.active" alt src="./img/item_select.png"/> -->
-                    <div class="icon_box"  @click="itemClick(item2,index,item.children)" :class="{Tab_background : item2.active === true}">{{item2.name}}</div>
                 </div>
-            </div>
-          </template>
+                <!--                3级分类-->
+                <div class="sub-btn-group full-width padding" :key="'s'+index"
+                     v-if="item.children&&item.active&&showBox">
+                    <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-公有制企业@2x.png"
+                         v-if="item.name === '公有制企业'" @click="showBoxCli(item)"/>
+                    <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-农民合作社@2x.png"
+                         v-if="item.name === '农民合作社'" @click="showBoxCli(item)"/>
+                    <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-外资企业@2x.png"
+                         v-if="item.name === '外资企业'" @click="showBoxCli(item)"/>
+                    <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-私营企业@2x.png"
+                         v-if="item.name === '私营企业'" @click="showBoxCli(item)"/>
+                    <div class="btn2" v-for="(item2,index) in item.children"
+                         :key="index">
+                        <!-- <img class="icon" v-if="item2.active" alt src="./img/item_select.png"/> -->
+                        <div class="icon_box" @click="itemClick(item2,index,item.children)"
+                             :class="{Tab_background : item2.active === true}">{{item2.name}}
+                        </div>
+                    </div>
+                </div>
+            </template>
         </div>
         <!--        2级分类-->
         <div class="btn-group full-width" v-else>
@@ -63,6 +73,7 @@ import { linkSync } from 'fs'
 import axios from 'axios'
 import { type } from 'os'
 import Bus from '@/assets/bus.js'
+
 export default {
   name: 'MapSelector',
   props: {
@@ -177,6 +188,7 @@ export default {
       })
     },
     itemClick (item, index, array) {
+      console.log('itemClick')
       // 关闭营业执照
       Bus.$emit('closeMainBox', false)
       // console.log(item, array, this.data[this.activeIndex], '点击图标')
@@ -208,7 +220,8 @@ export default {
 
       console.log(item, array, 'aayy')
       if (item.name === '个体工商户' || !item.children) {
-        this.send()
+        // ????这里send干啥，上面不是send了吗？
+        // this.send()
       } else {
         this.pullDown(item, array)
         this.showBox = true
@@ -329,9 +342,11 @@ export default {
     height: 510px;
     width: 940px;
     text-align: center;
-    .Tab_background{
-      background: #41C8DE;
+
+    .Tab_background {
+        background: #41C8DE;
     }
+
     .tab-group {
         height: 50px;
         display: flex;
@@ -352,15 +367,18 @@ export default {
             background-image: url("./img/select_active.png");
         }
     }
-    .padding{
-      padding: 20px 60px;
+
+    .padding {
+        padding: 20px 60px;
     }
-    .imgIcon{
-      height: 80px;
-      align-self: center;
-      width: 32%;
-      cursor: pointer;
+
+    .imgIcon {
+        height: 80px;
+        align-self: center;
+        width: 32%;
+        cursor: pointer;
     }
+
     .btn-group {
         height: calc(~"100% - 50px");
         display: flex;
@@ -375,6 +393,7 @@ export default {
         overflow-y: auto;
         border: 1px dashed #4294D2;
     }
+
     .btn2 {
         align-self: flex-start;
         width: calc(~"100% / 6");
@@ -390,16 +409,18 @@ export default {
         // flex-direction: column;
         // justify-content: center;
         text-align: center;
-        .icon_box{
-          min-width: 50%;
-          height: 60px;
-          line-height: 60px;
-          border-radius: 20px;
-          border: 1px solid #41C8DE;
-          cursor: pointer;
-          padding:0 50px;
+
+        .icon_box {
+            min-width: 50%;
+            height: 60px;
+            line-height: 60px;
+            border-radius: 20px;
+            border: 1px solid #41C8DE;
+            cursor: pointer;
+            padding: 0 50px;
         }
     }
+
     .btn {
         align-self: flex-start;
         width: calc(~"100% / 6");
@@ -413,11 +434,13 @@ export default {
         flex-direction: column;
         justify-content: center;
         text-align: center;
-        >div{
+
+        > div {
             height: 60px;
             margin-top: 10px;
             line-height: 30px;
         }
+
         > .img {
             height: 84px;
             align-self: center;
@@ -430,6 +453,7 @@ export default {
             width: 30px;
             height: 30px;
         }
+
         > .more {
             position: absolute;
             right: 25px;
