@@ -1,5 +1,5 @@
 <template>
-    <div class="AuditMapInfo full-width">
+    <div class="AuditMapInfo full">
         <radio-simple :data="radio" v-model="select" style="height: 60px"/>
         <roll-table :tableData="table[0]" :dimension="dimensions[select.value]" class="full-width" v-show="select.value === 0"/>
         <roll-table :tableData="table[1]" :dimension="dimensions[select.value]" class="full-width" v-show="select.value === 1"/>
