@@ -31,35 +31,35 @@ import MapHebeiWithClick from './componets/MapHebeiWithClick'
 
 export default {
   name: 'SupervisionCenter',
-    data() {
-      return {
-        totwoP: false,
-        entApplyData: {
-          //企业申报总数
-          entApply: '',
-          applyDone: '',
-          avgAppHours: '',
-          gaDone: '',
-          avggaHours: '',
-          ssDOne: '',
-          avgssHours: '',
-          yhdone: '',
-          avgyhHours: '',
-          rsdone: '',
-          avgrsHours: '',
-          entDone: ''
-        },
-        barData: [],
-        mapList: [],
-        interval: ''
-      }
+  data () {
+    return {
+      totwoP: false,
+      entApplyData: {
+        // 企业申报总数
+        entApply: '',
+        applyDone: '',
+        avgAppHours: '',
+        gaDone: '',
+        avggaHours: '',
+        ssDOne: '',
+        avgssHours: '',
+        yhdone: '',
+        avgyhHours: '',
+        rsdone: '',
+        avgrsHours: '',
+        entDone: ''
+      },
+      barData: [],
+      mapList: [],
+      interval: ''
+    }
   },
   components: {
     oneDayTour,
     oneDayDouble,
     MapHebeiWithClick
   },
-  created() {
+  created () {
     Bus.$on('toTwo', target => {
       this.totwoP = target
     })
@@ -67,7 +67,7 @@ export default {
   beforeDestroy () {
     clearInterval(this.interval)
   },
-  mounted() {
+  mounted () {
     this.mapTimeOut()
     this.interval = setInterval(() => {
       this.mapTimeOut()
@@ -75,7 +75,7 @@ export default {
     const date = new Date()
     const h = date.getFullYear()
     let m = date.getMonth() + 1
-    let nowm = date.getDate() -1
+    let nowm = date.getDate() - 1
     let day = date.getDate()
     if (m < 10) {
       m = '0' + m
@@ -90,67 +90,67 @@ export default {
     const now = `${h}-${m}-${day} 00:00:00`
     console.log(other, now, '当前日期')
     // 企业申办总数
-    axios.get('/monitor/info/detail?dataTime='+ now +'&indexCode=entApply').then(res => {
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=entApply').then(res => {
       // console.log(res.data.data, '企业申办总数')
       this.entApplyData.entApply = res.data.data.indexValue
     })
     // 市场监管成功总数
-    axios.get('/monitor/info/detail?dataTime='+ now +'&indexCode=applyDone').then(res => {
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=applyDone').then(res => {
       // console.log(res.data.data, '市场监管成功总数')
       this.entApplyData.applyDone = res.data.data.indexValue
     })
     // 市场监管平均时长
-    axios.get('/monitor/info/detail?dataTime='+ other +'&indexCode=avgAppHours').then(res => {
+    axios.get('/monitor/info/detail?dataTime=' + other + '&indexCode=avgAppHours').then(res => {
       // console.log(res.data.data, '市场监管平均时长')
       this.entApplyData.avgAppHours = res.data.data.indexValue
     })
     // 公安办理总数
-    axios.get('/monitor/info/detail?dataTime='+ now +'&indexCode=gaDone').then(res => {
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=gaDone').then(res => {
       // console.log(res.data.data, '公安办理总数')
       this.entApplyData.gaDone = res.data.data.indexValue
     })
-     // 公安办理时长
-    axios.get('/monitor/info/detail?dataTime='+ other +'&indexCode=avggaHours').then(res => {
+    // 公安办理时长
+    axios.get('/monitor/info/detail?dataTime=' + other + '&indexCode=avggaHours').then(res => {
       // console.log(res.data.data, '公安办理时长')
       this.entApplyData.avggaHours = res.data.data.indexValue
     })
     // 税收办理总数
-    axios.get('/monitor/info/detail?dataTime='+ now +'&indexCode=ssDOne').then(res => {
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=ssDOne').then(res => {
       // console.log(res.data.data, '税收办理总数')
       this.entApplyData.ssDOne = res.data.data.indexValue
     })
-     // 税收办理时长
-    axios.get('/monitor/info/detail?' + other+'&indexCode=avgssHours').then(res => {
+    // 税收办理时长
+    axios.get('/monitor/info/detail?' + other + '&indexCode=avgssHours').then(res => {
       // console.log(res.data.data, '税收办理时长')
       this.entApplyData.avgssHours = res.data.data.indexValue
     })
     // 银行办理总数
-    axios.get('/monitor/info/detail?dataTime='+ now +'&indexCode=yhdone').then(res => {
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=yhdone').then(res => {
       // console.log(res.data.data, '银行办理总数')
       this.entApplyData.yhdone = res.data.data.indexValue
     })
-     // 银行办理时长
-    axios.get('/monitor/info/detail?dataTime='+ other +'&indexCode=avgyhHours').then(res => {
+    // 银行办理时长
+    axios.get('/monitor/info/detail?dataTime=' + other + '&indexCode=avgyhHours').then(res => {
       // console.log(res.data.data, '银行办理时长')
       this.entApplyData.avgyhHours = res.data.data.indexValue
     })
     // 人社办理总数
-    axios.get('/monitor/info/detail?dataTime='+ now +'&indexCode=rsdone').then(res => {
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=rsdone').then(res => {
       // console.log(res.data.data, '人社办理总数')
       this.entApplyData.rsdone = res.data.data.indexValue
     })
-     // 人社办理时长
-    axios.get('/monitor/info/detail?dataTime='+ other +'&indexCode=avgrsHours').then(res => {
+    // 人社办理时长
+    axios.get('/monitor/info/detail?dataTime=' + other + '&indexCode=avgrsHours').then(res => {
       // console.log(res.data.data, '人社办理时长')
       this.entApplyData.avgrsHours = res.data.data.indexValue
     })
-     // 开办成功数
-    axios.get('/monitor/info/detail?dataTime='+ now +'&indexCode=entDone').then(res => {
+    // 开办成功数
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=entDone').then(res => {
       // console.log(res.data.data, '开办成功数')
       // this.entApplyData.applyDone = res.data.data.indexValue
       this.entApplyData.entDone = res.data.data.indexValue
     })
-     // 数据对接监控柱状图
+    // 数据对接监控柱状图
     axios.get('/monitor/info/apply/zzData?indexCodes=GAFF,RSFF,SWFF,YHFF,GAFK,SWFK,YHFK,RSFK').then(res => {
       // console.log(res.data.data.data, '数据对接监控柱状图')
       const data = res.data.data.data
@@ -159,7 +159,7 @@ export default {
         this.barData.push({
           name: data[i].indexName,
           value: data[i].indexValue
-        }) 
+        })
       }
     })
   },
@@ -173,8 +173,8 @@ export default {
       let m = date.getMonth() + 1
       let day = date.getDate()
       let h = date.getHours()
-      let f =date.getMinutes()
-      let otherF =date.getMinutes() - 5
+      let f = date.getMinutes()
+      let otherF = date.getMinutes() - 5
       if (m < 10) {
         m = '0' + m
       }
@@ -194,7 +194,7 @@ export default {
       const other = `${n}-${m}-${day} ${h}:${otherF}:00`
       console.log(now, other, '接口日期')
       // 一日办地图
-      axios.get('/monitor/info/apply/onedayMap?beginTime='+ other +'&endTime=' + now).then(res => {
+      axios.get('/monitor/info/apply/onedayMap?beginTime=' + other + '&endTime=' + now).then(res => {
         console.log(res.data.data.mapList, '一日办地图')
         this.mapList = res.data.data.mapList
       })

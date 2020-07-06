@@ -126,7 +126,7 @@ export default {
       ]
       const data2 = res.data.data
       this.backList = []
-      for (let i = 0; i< data2.length; i++) {
+      for (let i = 0; i < data2.length; i++) {
         this.backList.push({
           title: data2[i].sourceName,
           num: data2[i].number,

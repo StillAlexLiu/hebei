@@ -15,7 +15,7 @@
             <div class="val">{{value}}</div>
         </div>
       </div>
-      
+
     </div>
 </template>
 

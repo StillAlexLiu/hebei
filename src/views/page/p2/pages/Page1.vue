@@ -50,16 +50,16 @@ export default {
   },
   mounted () {
     axios.get('/monitor/gird/getMain').then(res => {
-      const data= res.data.data[0]
+      const data = res.data.data[0]
       this.chart1[0].value = data.regionType
       this.chart1[1].value = data.yearNum
       this.chart1[2].value = data.monthNum
       this.chart1[3].value = data.weekNum
     })
     axios.get('/monitor/gird/getTrend').then(res => {
-      const data= res.data.data
+      const data = res.data.data
       this.data3 = []
-      for( let i = 0; i < data.length; i ++) {
+      for (let i = 0; i < data.length; i++) {
         this.data3.push({
           value: data[i].totleNum,
           name: data[i].monthDate
@@ -67,9 +67,9 @@ export default {
       }
     })
     axios.get('/monitor/gird/getType').then(res => {
-      const data= res.data.data
+      const data = res.data.data
       this.pieData = []
-      for( let i = 0; i < data.length; i ++) {
+      for (let i = 0; i < data.length; i++) {
         this.pieData.push({
           value: data[i].controlNum,
           name: data[i].typeName
@@ -77,9 +77,9 @@ export default {
       }
     })
     axios.get('/monitor/gird/getRegion').then(res => {
-      const data= res.data.data
+      const data = res.data.data
       this.chart3 = []
-      for( let i = 0; i < data.length; i ++) {
+      for (let i = 0; i < data.length; i++) {
         this.chart3.push({
           value: data[i].gridNum,
           name: data[i].regionAreaName
@@ -87,9 +87,9 @@ export default {
       }
     })
     axios.get('/monitor/gird/getInspect').then(res => {
-      const data= res.data.data
+      const data = res.data.data
       this.data4 = []
-      for( let i = 0; i < data.length; i ++) {
+      for (let i = 0; i < data.length; i++) {
         this.data4.push({
           value: data[i].inspectRate,
           name: data[i].inspectMonth
@@ -97,9 +97,9 @@ export default {
       }
     })
     axios.get('/monitor/gird/getAnalysis').then(res => {
-      const data= res.data.data
+      const data = res.data.data
       this.tableData = []
-      for( let i = 0; i < data.length; i ++) {
+      for (let i = 0; i < data.length; i++) {
         this.tableData.push({
           num: data[i].factorName,
           con: data[i].factorNum
@@ -346,7 +346,7 @@ export default {
           short: '餐',
           img: require('../compontes/img/text-bg-green.png')
         }
-      ]],
+      ]]
     }
   },
   watch: {

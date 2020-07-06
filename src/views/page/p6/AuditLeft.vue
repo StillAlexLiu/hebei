@@ -38,7 +38,7 @@ export default {
     warningGroup,
     tableHeader
   },
-  watch : {
+  watch: {
     select: {
       immediate: true,
       deep: true,
@@ -219,7 +219,7 @@ export default {
           value: 3
         }
       ],
-      warningLevel:1,
+      warningLevel: 1,
       caseState: 1
     }
   },
@@ -266,12 +266,12 @@ export default {
           this.data1[type - 1][1].addup = data.standCaseCumulative
           this.data1[type - 1][2].yearData = data.closeCase
           this.data1[type - 1][2].addup = data.closeCaseCumulative
-          this.data2.case[type -1][0].num = data.caseRed
-          this.data2.case[type -1][1].num = data.caseOrange
-          this.data2.case[type -1][2].num = data.caseYellow
-          this.data2.clew[type -1][0].num = data.clueRed
-          this.data2.clew[type -1][1].num = data.clueOrange
-          this.data2.clew[type -1][2].num = data.clueYellow
+          this.data2.case[type - 1][0].num = data.caseRed
+          this.data2.case[type - 1][1].num = data.caseOrange
+          this.data2.case[type - 1][2].num = data.caseYellow
+          this.data2.clew[type - 1][0].num = data.clueRed
+          this.data2.clew[type - 1][1].num = data.clueOrange
+          this.data2.clew[type - 1][2].num = data.clueYellow
         }
       })
     }

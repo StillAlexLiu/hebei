@@ -138,7 +138,8 @@ export default {
                 position: 'top',
                 textStyle: {
                   color: 'rgba(304, 304, 304, 0.9)',
-                  fontSize: 20}
+                  fontSize: 20
+                }
               }
             },
             name: this.legend,

@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     cli (item) {
-        this.$emit('cliBox', item)
+      this.$emit('cliBox', item)
     }
   }
 }

@@ -82,7 +82,7 @@ export default {
       }
     }
   },
-  created() {  
+  created () {
     Bus.$on('getTarget', target => {
       this.personageBox = target
     })

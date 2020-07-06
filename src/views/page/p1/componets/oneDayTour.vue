@@ -1,5 +1,5 @@
 <template>
-  <chart :options="options"/>
+    <chart :options="options"/>
 </template>
 
 <script>
@@ -12,7 +12,9 @@ export default {
   props: {
     data: {
       type: Object,
-      default: {}
+      default: () => {
+        return {}
+      }
     }
   },
   data: () => {
@@ -293,11 +295,11 @@ export default {
                   color: '#79DFEF',
                   fontSize: 72,
                   fontFamily: 'LESLIE-Regular,LESLIE',
-                  width:160
+                  width: 160
                 },
                 unit: {
                   color: '#fff',
-                  fontSize:30
+                  fontSize: 30
                 }
               }
             }
@@ -366,7 +368,7 @@ export default {
                   color: '#79DFEF',
                   fontSize: 60,
                   width: 140,
-                  fontFamily: 'LESLIE-Regular,LESLIE',
+                  fontFamily: 'LESLIE-Regular,LESLIE'
                 },
                 unit: {
                   color: '#fff',
@@ -393,8 +395,8 @@ export default {
 
 </style>
 <style>
-  .echarts {
+.echarts {
     width: 100% !important;
     height: 100% !important;
-  }
+}
 </style>
