@@ -119,7 +119,11 @@ export default {
         show: this.showLegend,
         selectedMode: true,
         // width:40,
-        height:480
+        height:480,
+        textStyle: {
+          color: 'rgba(304, 304, 304, 0.9)',
+          fontSize: 20
+        }
       }
       switch (this.legendPosition) {
         case 'top':

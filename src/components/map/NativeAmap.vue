@@ -135,7 +135,8 @@ export default {
       console.log('zoom:' + newZoom, oldZoom)
       console.log(this.proDepth)
       this.zoom2 = newZoom
-      if (oldZoom > newZoom && newZoom > 8  && newZoom < 8.1  && this.proDepth > 0) {
+        // && this.proDepth > 0
+      if (oldZoom > newZoom && newZoom > 8  && newZoom < 8.1) {
         const layers = this.map.getLayers()
         console.log(layers)
         this.removeDisProvinceLayer()

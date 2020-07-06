@@ -202,6 +202,13 @@ export default {
             fontSize: 20
           }
         },
+        tooltip: {
+          show: true,
+          textStyle: {
+            color: 'rgba(304, 304, 304, 0.9)',
+            fontSize: 20
+          }
+        },
         dataset: {
           dimensions: this.dimensions,
           source: this.data

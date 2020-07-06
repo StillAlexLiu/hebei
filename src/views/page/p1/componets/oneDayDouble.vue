@@ -6,7 +6,7 @@
                <NumberGroup4 :data='numberData2' class="full-height w-1-4"></NumberGroup4>
                 <div class="w-3-4 full-height">
                     <ChartsBarLine :data='chart10' :dimensions="['name','value']" :legend="['一日办主体数量']"
-                               :type="['line']" :colors="['#61EADF']"  :units="['单位：家']"/>
+                               :type="['line']" :colors="['#61EADF']"  :units="['单位：户']"/>
                 </div>
             </container>
             <container class="w-1-2 full-height" :title="'一日办成效'">
@@ -170,7 +170,7 @@ export default {
       ],
       numberData2: [
         {
-          name: '一日办主体/家',
+          name: '一日办主体/户',
           value: 0
         }
       ],
