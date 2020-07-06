@@ -1,7 +1,8 @@
 <template>
     <div class="AuditMapInfo full">
         <radio-simple :data="radio" v-model="select" style="height: 60px"/>
-        <roll-table :tableData="table[0]" :dimension="dimensions[select.value]" class="full-width" v-show="select.value === 0"/>
+        <roll-table :tableData="table[0]"
+        :dimension="dimensions[select.value]" class="full-width" v-show="select.value === 0"/>
         <roll-table :tableData="table[1]" :dimension="dimensions[select.value]" class="full-width" v-show="select.value === 1"/>
         <div class="full-width table" v-if="data.name" style="text-align: center">
             <div v-for="(item,index) in info" :key="index">
