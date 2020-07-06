@@ -48,7 +48,7 @@
                 <div class="sub-btn-group full-width" :key="'s'+index" v-if="item.children&&item.active">
                     <div class="btn" v-for="(item2,index) in item.children"
                          :key="index" @click="itemClick(item2,index,item.children)">
-                        <img class="img" alt :src="item2.icon"/>                
+                        <img class="img" alt :src="item2.icon"/>
                         <img class="icon" v-if="item2.active" alt src="./img/item_select.png"/>
                         <div>{{item2.name}}</div>
                     </div>
@@ -108,13 +108,13 @@ export default {
       this.send()
     },
     tabClick (item, index) {
-        //关闭营业执照
-        Bus.$emit('closeMainBox', false)
-      if(item.name === '指挥调度') {
+      // 关闭营业执照
+      Bus.$emit('closeMainBox', false)
+      if (item.name === '指挥调度') {
         Bus.$emit('zhduTab', true)
       } else if (item.name === '一日办') {
         Bus.$emit('oneDay', true)
-      }else {
+      } else {
         this.showBox = false
         this.active = 0
         this.activeIndex = index
@@ -176,10 +176,10 @@ export default {
         // console.log(res.data.data, this.$dataAll.config.mapTab[1].children[0].children, '下拉数据')
       })
     },
-      itemClick (item, index, array) {
-        //关闭营业执照
-        Bus.$emit('closeMainBox', false)
-        // console.log(item, array, this.data[this.activeIndex], '点击图标')
+    itemClick (item, index, array) {
+      // 关闭营业执照
+      Bus.$emit('closeMainBox', false)
+      // console.log(item, array, this.data[this.activeIndex], '点击图标')
       this.shouBtn = item
       if (this.single) {
         for (let i = 0; i < array.length; i++) {
@@ -191,21 +191,21 @@ export default {
       console.log(item, array, '点击')
       if (this.$route.name === '主体服务') {
         if (item.name === '个体工商户') {
-          console.log (111)
+          console.log(111)
           item.active = !item.active
           this.send()
         } else if (!item.children) {
-          console.log (333)
+          console.log(333)
           item.active = true
           this.send()
-        }else {
-          console.log (222)
+        } else {
+          console.log(222)
           item.active = true
         }
       } else {
         item.active = !item.active
       }
-      
+
       console.log(item, array, 'aayy')
       if (item.name === '个体工商户' || !item.children) {
         this.send()
@@ -227,10 +227,10 @@ export default {
     },
     // tab切换
     pngClick (item, index, array) {
-        //关闭营业执照
-        Bus.$emit('closeMainBox', false)
+      // 关闭营业执照
+      Bus.$emit('closeMainBox', false)
       console.log(item, this.shouBtn, '点击图标')
-      if(item === this.shouBtn) {
+      if (item === this.shouBtn) {
         console.log('一样')
         this.shouBtn = {
           name: '市场主体',
@@ -273,46 +273,46 @@ export default {
       //   this.selectArray.push(this.shouBtn)
       // }
       // }else{
-        for (let i = 0; i < this.data[this.activeIndex].children.length; i++) {
-          const item = this.data[this.activeIndex].children[i]
-          if (item.active) {
-            console.log(item, 'lllllllllllllllk')
-            if (this.shouBtn.name === '公有制企业' || this.shouBtn.name === '外资企业' || this.shouBtn.name === '私营企业' || this.shouBtn.name === '农民合作社') {
-              this.selectArray = []
-              const listName = item.children
-              console.log(listName, 'nnnn')
-              for (let i = 0; i < listName.length; i++) {
-                if (listName[i].active) {
-                  // console.log(listName[i], '1')
-                  this.selectArray.push(listName[i])
-                  // console.log(this.selectArray, '2')
-                  return this.selectArray
-                } else {
-                  this.selectArray.push(item)
-                  return this.selectArray
-                }
+      for (let i = 0; i < this.data[this.activeIndex].children.length; i++) {
+        const item = this.data[this.activeIndex].children[i]
+        if (item.active) {
+          console.log(item, 'lllllllllllllllk')
+          if (this.shouBtn.name === '公有制企业' || this.shouBtn.name === '外资企业' || this.shouBtn.name === '私营企业' || this.shouBtn.name === '农民合作社') {
+            this.selectArray = []
+            const listName = item.children
+            console.log(listName, 'nnnn')
+            for (let i = 0; i < listName.length; i++) {
+              if (listName[i].active) {
+                // console.log(listName[i], '1')
+                this.selectArray.push(listName[i])
+                // console.log(this.selectArray, '2')
+                return this.selectArray
+              } else {
+                this.selectArray.push(item)
+                return this.selectArray
               }
-            } else {
-              this.selectArray.push(this.shouBtn)
             }
+          } else {
+            this.selectArray.push(this.shouBtn)
           }
-          // if (item.children) {
-          //   console.log(item, 'iii')
-          //   item.children.forEach((v) => {
-          //     console.log(v, 'vvv')
-          //     if (v.name === this.shouBtn.name) {
-          //         console.log(listName[i], '1')
-          //       this.selectArray.push(v)
-          //     }
-          //     // console.log(this.selectArray, v, 'sssssss')
-          //   })
-          // } else {
-          //   if (item.active) {
-          //     this.selectArray.push(item)
-          //   }
-          //     // console.log(this.selectArray, '11aaaaaa')
-          // }
         }
+        // if (item.children) {
+        //   console.log(item, 'iii')
+        //   item.children.forEach((v) => {
+        //     console.log(v, 'vvv')
+        //     if (v.name === this.shouBtn.name) {
+        //         console.log(listName[i], '1')
+        //       this.selectArray.push(v)
+        //     }
+        //     // console.log(this.selectArray, v, 'sssssss')
+        //   })
+        // } else {
+        //   if (item.active) {
+        //     this.selectArray.push(item)
+        //   }
+        //     // console.log(this.selectArray, '11aaaaaa')
+        // }
+      }
       // }
       console.log(this.selectArray, 'sssaa')
       return this.selectArray

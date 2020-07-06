@@ -52,7 +52,7 @@ export default {
       handler: function () {
         console.log(this.data, '右上角')
       }
-    },
+    }
   },
   props: {
     data: {

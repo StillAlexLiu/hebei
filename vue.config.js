@@ -30,6 +30,7 @@ module.exports = {
       // }
       '/HK': {
         // 目标 API 地址
+        // target: 'http://222.222.44.206:8000',
         target: 'http://192.168.1.103/blade-hikregions',
         // target: 'http://localhost:8000/',
         pathRewrite: {
@@ -38,7 +39,8 @@ module.exports = {
       },
       '/monitor': {
         // target: 'http://192.168.105.38:8080/blade-screen',
-        target: 'http://192.168.1.105:8080/blade-screen',
+        target: 'http://222.222.44.206:8000/monitor',
+        // target: 'http://192.168.1.107:8080/blade-screen',
         changeOrigin: true,
         pathRewrite: {
           '^/monitor': ''

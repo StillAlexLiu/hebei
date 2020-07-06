@@ -176,49 +176,49 @@ export default {
       liquidfill: ['维持', 92.2],
       barData3: [
         {
-            name: '石家庄市',
-            value: '23'
-          },
-          {
-            name: '唐山市',
-            value: '16'
-          },
-          {
-            name: '秦皇岛市',
-            value: '13'
-          },
-          {
-            name: '邯郸市',
-            value: '34'
-          },
-          {
-            name: '邢台市',
-            value: '13'
-          },
-          {
-            name: '保定市',
-            value: '42'
-          },
-          {
-            name: '张家口市',
-            value: '35'
-          },
-          {
-            name: '承德市',
-            value: '32'
-          },
-          {
-            name: '沧州市',
-            value: '21'
-          },
-          {
-            name: '廊坊市',
-            value: '12'
-          },
-          {
-            name: '衡水市',
-            value: '45'
-          }
+          name: '石家庄市',
+          value: '23'
+        },
+        {
+          name: '唐山市',
+          value: '16'
+        },
+        {
+          name: '秦皇岛市',
+          value: '13'
+        },
+        {
+          name: '邯郸市',
+          value: '34'
+        },
+        {
+          name: '邢台市',
+          value: '13'
+        },
+        {
+          name: '保定市',
+          value: '42'
+        },
+        {
+          name: '张家口市',
+          value: '35'
+        },
+        {
+          name: '承德市',
+          value: '32'
+        },
+        {
+          name: '沧州市',
+          value: '21'
+        },
+        {
+          name: '廊坊市',
+          value: '12'
+        },
+        {
+          name: '衡水市',
+          value: '45'
+        }
       ],
       barColor2: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
         {

@@ -200,7 +200,7 @@ export default {
         top: 20,
         left: left,
         right: right,
-        labelLine:{
+        labelLine: {
           show: false,
           length: 20,
           length2: 0,
@@ -218,7 +218,7 @@ export default {
           formatter: (params) => {
             if (this.legendPosition === 'right') {
               return params.name + '\n{white|' + params.value + this.unit + '}'
-            }else if (params.name !== '') {
+            } else if (params.name !== '') {
               if (this.showAll) {
                 return params.name + '\n{white|' + params.value + this.unit + '}' + '\n{white|' + params.percent + '%}'
               } else if (this.showValue) {
@@ -258,12 +258,12 @@ export default {
         tooltip: {
           trigger: 'item',
           // formatter: '{a}{b} : <br/>{c} ({d}%)'
-          formatter: function(params) {
-      　　　　let str = ``;
-      // 　　　　params.forEach((item) => {
-      　　　　　return　str += `<span style="font-size: 20px;color: rgba(304, 304, 304, 0.9);">${params.name}<span style="font-size: 22px;">：${params.value}<br />`
-      // 　　　　})
-      　　}
+          formatter: function (params) {
+            let str = ''
+            // 　　　　params.forEach((item) => {
+            return　str += `<span style="font-size: 20px;color: rgba(304, 304, 304, 0.9);">${params.name}<span style="font-size: 22px;">：${params.value}<br />`
+            // 　　　　})
+          }
         },
         legend: legend,
         series: series

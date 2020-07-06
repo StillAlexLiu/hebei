@@ -3,7 +3,7 @@
         <container class="h-1-3 w-1-2" title="特种设备安全监察力量">
             <NumberGroupPage4 class="w-1-3 full-height" :data="listData"/>
             <ContainerCenterTitle2 class="w-2-3 full-height" title="安全监察人员情况">
-                <ChartsPie :double-pie="true" :data="pieData4" 
+                <ChartsPie :double-pie="true" :data="pieData4"
                            :color="['#FFBF24','#FE6941','#55B0EE','#8A7CEF','#25DD54','#5FE7DC']" :show-value="true"/>
             </ContainerCenterTitle2>
         </container>
@@ -59,7 +59,7 @@ export default {
     this.barData = []
     // 特种设备安全监察力量
     axios.get('/monitor/equpMent/getCheck').then(res => {
-      const data= res.data.data[0]
+      const data = res.data.data[0]
       this.listData[0].value = data.fullOrganNum
       this.listData[1].value = data.partOrganNum
       this.pieData4[0].value = data.equpProvincialNum
@@ -69,7 +69,7 @@ export default {
     })
     // 特种设备检验检测力量
     axios.get('/monitor/equpMent/getAbility').then(res => {
-      const data= res.data.data
+      const data = res.data.data
       // console.log(data, '特种设备检验检测力量11')
       this.pieData = []
       for (let i = 0; i < data.length; i++) {
@@ -81,34 +81,34 @@ export default {
     })
     // // 特种设备生产和充装单位情况
     axios.get('/monitor/equpMent/getProduce').then(res => {
-      const data= res.data.data[0]
+      const data = res.data.data[0]
       this.pieData2 = []
       this.dataNum = 0
-      this.dataNum = data.bigPlayNum + data.carUseNum +data.airBottleNum + data.movePressureNum + data.pressureTunnelNum
-      this.pieData2[0]={
+      this.dataNum = data.bigPlayNum + data.carUseNum + data.airBottleNum + data.movePressureNum + data.pressureTunnelNum
+      this.pieData2[0] = {
         name: '设计单位',
         value: data.bigPlayNum
       }
-      this.pieData2[1]={
+      this.pieData2[1] = {
         name: '制造单位',
         value: data.carUseNum
       }
-      this.pieData2[2]={
+      this.pieData2[2] = {
         name: '维保单位',
         value: data.airBottleNum
       }
-      this.pieData2[3]={
+      this.pieData2[3] = {
         name: '安装维修改造',
         value: data.movePressureNum
       }
-      this.pieData2[4]={
+      this.pieData2[4] = {
         name: '气瓶充装',
         value: data.pressureTunnelNum
       }
     })
-     // 特种设备人员情况
+    // 特种设备人员情况
     axios.get('/monitor/equpMent/getWorks').then(res => {
-      const data= res.data.data
+      const data = res.data.data
       this.linesData = []
       for (let i = 0; i < data.length; i++) {
         this.linesData.push({
@@ -119,13 +119,13 @@ export default {
         })
       }
     })
-     // 特种设备检查情况
+    // 特种设备检查情况
     axios.get('/monitor/equpMent/getProblem?checkType=' + 1).then(res => {
-      const data= res.data.data
+      const data = res.data.data
       // console.log(data, '检验对象分布')
       this.pieData3 = []
       for (let i = 0; i < data.length; i++) {
-        if(data[i].typeNum) {
+        if (data[i].typeNum) {
           this.pieData3.push({
             name: data[i].typeName,
             value: data[i].typeNum
@@ -146,9 +146,9 @@ export default {
     //     value: data.materialNum
     //   }]
     })
-     // 检验数量趋势
+    // 检验数量趋势
     axios.get('/monitor/equpMent/getNumber?checkType=' + 1).then(res => {
-      const data= res.data.data
+      const data = res.data.data
       this.barData = []
       for (let i = 0; i < data.length; i++) {
         this.barData.push({
@@ -162,10 +162,10 @@ export default {
     select (data) {
       // 特种设备检查情况
       axios.get('/monitor/equpMent/getProblem?checkType=' + data).then(res => {
-        const data= res.data.data
+        const data = res.data.data
         this.pieData3 = []
         for (let i = 0; i < data.length; i++) {
-          if(data[i].typeNum) {
+          if (data[i].typeNum) {
             this.pieData3.push({
               name: data[i].typeName,
               value: data[i].typeNum
@@ -186,17 +186,17 @@ export default {
         //   value: data.materialNum
         // }]
       })
-       // 检验数量趋势
-    axios.get('/monitor/equpMent/getNumber?checkType=' + data).then(res => {
-      const data= res.data.data
-      this.barData = []
-      for (let i = 0; i < data.length; i++) {
-        this.barData.push({
-          name: data[i].checkDate,
-          value: data[i].checkNum
-        })
-      }
-    })
+      // 检验数量趋势
+      axios.get('/monitor/equpMent/getNumber?checkType=' + data).then(res => {
+        const data = res.data.data
+        this.barData = []
+        for (let i = 0; i < data.length; i++) {
+          this.barData.push({
+            name: data[i].checkDate,
+            value: data[i].checkNum
+          })
+        }
+      })
     }
   },
   data () {

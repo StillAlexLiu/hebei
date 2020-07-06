@@ -26,7 +26,9 @@ export default {
     },
     barBorderRadius: {
       type: Array,
-      default: [0, 0, 0, 0]
+      default: () => {
+        return [0, 0, 0, 0]
+      }
     },
     unit: {
       type: String,
@@ -49,21 +51,22 @@ export default {
   },
   methods: {
     getOption (data) {
-      var spNum = 5,_max=2000;
-      var fomatter_fn = function(v) {
-          return v.value 
+      var spNum = 5
+      var _max = 2000
+      var fomatter_fn = function (v) {
+        return v.value
       }
       var _label = {
-          normal: {
-              show: true,
-              position: 'inside',
-              formatter: fomatter_fn,
-              textStyle: {
-                  color: '#fff',
-                  fontSize: 16
-              }
+        normal: {
+          show: true,
+          position: 'inside',
+          formatter: fomatter_fn,
+          textStyle: {
+            color: '#fff',
+            fontSize: 16
           }
-      };
+        }
+      }
       var series = []
       var color = this.color
       for (let i = 0; i < this.legend.length; i++) {
@@ -86,7 +89,7 @@ export default {
             },
             data: eval('data.ydata' + (i + 1))
           }
-        )   
+        )
       }
       return {
         legend: {
@@ -97,7 +100,7 @@ export default {
           itemWidth: 13,
           itemHeight: 7,
           textStyle: {
-              color: '#ccc'
+            color: '#ccc'
           }
         },
         grid: {
@@ -110,48 +113,48 @@ export default {
           show: false
         },
         xAxis: {
-            splitNumber: spNum,
-            interval: _max / spNum,
-            // max: 1000,
-            // min: 0,
-            max: _max,
-            axisLabel: {
-                show: false,
-                formatter: function(v) {
-                    var _v = (v / _max * 100).toFixed(0);
-                    return _v == 0 ? _v : _v + '%';
-                }
-            },
-            axisLine: {
-                show: false
-            },
-            axisTick: {
-                show: false
-            },
-            splitLine: {
-                show: false
+          splitNumber: spNum,
+          interval: _max / spNum,
+          // max: 1000,
+          // min: 0,
+          max: _max,
+          axisLabel: {
+            show: false,
+            formatter: function (v) {
+              var _v = (v / _max * 100).toFixed(0)
+              return _v == 0 ? _v : _v + '%'
             }
+          },
+          axisLine: {
+            show: false
+          },
+          axisTick: {
+            show: false
+          },
+          splitLine: {
+            show: false
+          }
 
         },
         yAxis: [{
-            data: data.xdata,
-            // max: 1000,
-            name: this.unit,
-            // min: 0,
-            axisLabel: {
-                fontSize: 16,
-                color: '#fff'
+          data: data.xdata,
+          // max: 1000,
+          name: this.unit,
+          // min: 0,
+          axisLabel: {
+            fontSize: 16,
+            color: '#fff'
 
-            },
-            axisLine: {
-                show: false
-            },
-            axisTick: {
-                show: false
-            },
-            splitLine: {
-                show: false
-            }
+          },
+          axisLine: {
+            show: false
+          },
+          axisTick: {
+            show: false
+          },
+          splitLine: {
+            show: false
+          }
         }],
         series: series
       }

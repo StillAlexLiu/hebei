@@ -49,7 +49,7 @@ export default {
               margin: 10,
               formatter: function (params) {
                 if (params.name !== '') {
-                  return  '{title|' + params.name +'}'+ '\n{white|' + params.percent + '%}'
+                  return '{title|' + params.name + '}' + '\n{white|' + params.percent + '%}'
                 } else {
                   return ''
                 }

@@ -13,7 +13,7 @@
                 <div class="w-1-4 full-height" v-for="(item, index) in expenseGoal" :key="index">
                     <onlyOneBox :data='item'></onlyOneBox>
                 </div>
-            </container> 
+            </container>
         </div>
         <container class="full-width h-1-3" :title="'一日办工作开展情况'">
             <container-center-title2 title="一窗采集情况" class="full-height w-1-2">
@@ -120,7 +120,7 @@ export default {
       }
     }
   },
-  data() {
+  data () {
     return {
       barLineName: '单位：件',
       barLineLegend: '办理量',
@@ -142,21 +142,21 @@ export default {
       liquidfill: ['维持', 98],
       expenseGoal: [
         {
-            name: '减少材料提交',
-            num: '1.2',
-            unit: '份'
+          name: '减少材料提交',
+          num: '1.2',
+          unit: '份'
         }, {
-            name: '节约办理时长',
-            num: '3',
-            unit: '小时'
+          name: '节约办理时长',
+          num: '3',
+          unit: '小时'
         }, {
-            name: '减少办理环节',
-            num: '3083',
-            unit: '个'
+          name: '减少办理环节',
+          num: '3083',
+          unit: '个'
         }, {
-            name: '减少办理费用',
-            num: '523',
-            unit: '元'
+          name: '减少办理费用',
+          num: '523',
+          unit: '元'
         }
       ],
       numberData: [
@@ -309,7 +309,7 @@ export default {
     const date = new Date()
     const h = date.getFullYear()
     let m = date.getMonth() + 1
-    let nowm = date.getDate() -1
+    let nowm = date.getDate() - 1
     let day = date.getDate()
     if (m < 10) {
       m = '0' + m
@@ -324,7 +324,7 @@ export default {
     const now = `${h}-${m}-${day} 00:00:00`
     console.log(other, now, '当前日期')
     // 一日办注册工作开展情况左屏
-    axios.get('/monitor/info/detail?dataTime='+ now +'&indexCode=applyDone').then(res => {
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=applyDone').then(res => {
       console.log(res.data.data, '一日办注册工作开展情况左屏')
       this.numberData2[0].value = res.data.data.indexValue
     })
@@ -334,17 +334,17 @@ export default {
       this.chart10 = []
       for (let i = 0; i < data.length; i++) {
         this.chart10.push({
-          name: data[i].dataTime.slice(0,10),
+          name: data[i].dataTime.slice(0, 10),
           value: data[i].indexValue
-        }) 
+        })
       }
     })
     // 一日办工作开展情况
-    axios.get('/monitor/info/detail?dataTime='+ now +'&indexCode=DRSLL').then(res => {
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=DRSLL').then(res => {
       this.numberData[0].value = res.data.data.indexValue
     })
     // 一日办工作开展情况
-    axios.get('/monitor/info/detail?dataTime='+ now +'&indexCode=entApply').then(res => {
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=entApply').then(res => {
       this.numberData[1].value = res.data.data.indexValue
     })
     // 一窗采集情况柱状图
@@ -361,7 +361,7 @@ export default {
       }
     })
     // 一日办结情况左侧
-    axios.get('/monitor/info/detail?dataTime='+ now +'&indexCode=YRBJL').then(res => {
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=YRBJL').then(res => {
       const data = res.data.data
       this.liquidfill = [data.indexName, data.indexValue]
     })
@@ -371,9 +371,9 @@ export default {
       this.rightLine = []
       for (let i = 0; i < data.length; i++) {
         this.rightLine.push({
-          name: data[i].dataTime.slice(0,10),
+          name: data[i].dataTime.slice(0, 10),
           value: data[i].indexValue
-        }) 
+        })
       }
     })
     // 各局办理情况

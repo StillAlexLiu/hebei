@@ -37,7 +37,7 @@ export default {
   },
   watch: {
     data () {
-      console.log(this.data[this.activeKey],'右下角')
+      console.log(this.data[this.activeKey], '右下角')
     }
   },
   mounted () {
@@ -84,7 +84,6 @@ export default {
 }
 
 .item {
-    width: auto;
     padding: 0 2rem;
     line-height: 4rem;
     font-size: 2rem;

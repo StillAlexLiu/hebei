@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import Mock from 'mockjs'
 import EntityMapInfo from '../p1/componets/EntityMapInfo'
 import WarningMapInfo from '../p4/components/WarningMapInfo'
@@ -38,7 +38,7 @@ import ComplaintMapInfo from '../p5/compontes/ComplaintMapInfo'
 import KeepOnRecordMapInfo from '../p10/components/KeepOnRecordMapInfo'
 import Bus from '@/assets/bus.js'
 import axios from 'axios'
-import { mapState } from 'vuex'
+
 import { stat } from 'fs'
 
 export default {
@@ -51,7 +51,7 @@ export default {
     WarningMapInfo,
     EntityMapInfo
   },
-  created() {
+  created () {
     Bus.$on('closeMainBox', target => {
       if (target === false) {
         this.selectInfoState = false
@@ -134,7 +134,7 @@ export default {
           center: [115.217451, 37.92904]
         }, {
           name: '河北雄安新区',
-          center: [115.867238,39.043152]
+          center: [115.867238, 39.043152]
         }
       ],
       latPoint: [],
@@ -144,10 +144,10 @@ export default {
       basicData: '',
       mainMessage: '',
       infoData: {
-        '营业执照' : {
-          企业名称: '', 
-          类型: '', 
-          统一社会信用代码: '', 
+        营业执照: {
+          企业名称: '',
+          类型: '',
+          统一社会信用代码: '',
           住所: '',
           登记机关: '',
           成立日期: '',
@@ -158,10 +158,10 @@ export default {
           登记状态: '',
           经营范围: ''
         },
-        '个人营业执照' : {
-          统一社会信用代码: '', 
-          名称: '', 
-          类型: '', 
+        个人营业执照: {
+          统一社会信用代码: '',
+          名称: '',
+          类型: '',
           经营者: '',
           组成形式: '',
           登记机关: '',
@@ -387,7 +387,7 @@ export default {
         }
         console.log(list)
         return list
-      } else if (this.$route.name === '稽查办案'){
+      } else if (this.$route.name === '稽查办案') {
         const list = []
         for (let i = 0; i < len; i++) {
           const item = this.city[i]
@@ -417,15 +417,15 @@ export default {
         return list
       }
     },
-    getCaption(obj,state) {
+    getCaption (obj, state) {
       // console.log(obj, state)
-      var index=obj.lastIndexOf("\,");
-      if(state==0){
-        obj=obj.substring(0,index);
-      }else {
-        obj=obj.substring(index+1,obj.length);
+      var index = obj.lastIndexOf('\,')
+      if (state == 0) {
+        obj = obj.substring(0, index)
+      } else {
+        obj = obj.substring(index + 1, obj.length)
       }
-      return obj;
+      return obj
     },
     addGrid () {
       // 初始化网格 用于限制点位置坐标用，可不写
@@ -467,16 +467,16 @@ export default {
     beforeDestroy () {
       Bus.$emit('message')
     },
-    //第二层地图打点
+    // 第二层地图打点
     returnQu (item) {
       console.log(item, '第二层')
       if (item.ad_code) {
         if (item.mainClass) {
-          axios.get('/monitor/main/getDistrictCount?adCode='+ item.ad_code +'&reportType=' + item.mainClass + '&entType=' + item.cliType).then(res => {
+          axios.get('/monitor/main/getDistrictCount?adCode=' + item.ad_code + '&reportType=' + item.mainClass + '&entType=' + item.cliType).then(res => {
             console.log(res.data.data, '第二层')
             this.point = []
             const data = res.data.data
-            for (let i = 0; i< data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
               if (data[i].center) {
                 this.point.push({
                   name: data[i].name,
@@ -493,11 +493,11 @@ export default {
             }
           })
         } else {
-          axios.get('/monitor/main/getDistrictCount?adCode='+ item.ad_code +'&reportType=' + this.mainType).then(res => {
+          axios.get('/monitor/main/getDistrictCount?adCode=' + item.ad_code + '&reportType=' + this.mainType).then(res => {
             console.log(res.data.data, '第二层')
             this.point = []
             const data = res.data.data
-            for (let i = 0; i< data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
               if (data[i].center) {
                 this.point.push({
                   name: data[i].name,
@@ -515,42 +515,42 @@ export default {
         }
       }
     },
-    //第三层地图打点
+    // 第三层地图打点
     returnList (item) {
       console.log(item, this.icon, '第三层')
       if (item.ad_code) {
         if (item.mainClass) {
-          axios.get('/monitor/main/getDistrictEntList?adCode='+ item.ad_code + '&reportType=' + item.mainClass  + '&entType=' + item.cliType).then(res => {
+          axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + item.mainClass + '&entType=' + item.cliType).then(res => {
             console.log(this.point, res.data.data, '第三层1')
             this.point = []
             const data = res.data.data
-            for (let i = 0; i< data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
               this.point.push({
                 name: data[i].entName,
                 coordinate: [data[i].longitude, data[i].latitude],
                 icon: this.icon,
                 address: data[i].dom,
                 pripId: data[i].PRIPID,
-                  cliType: item.cliType
+                cliType: item.cliType
               })
             }
             console.log(this.point, 'ppp11')
             // this.p1Select()
           })
         } else {
-          //11错误
-          axios.get('/monitor/main/getDistrictEntList?adCode='+ item.ad_code + '&reportType=' + this.mainType).then(res => {
+          // 11错误
+          axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + this.mainType).then(res => {
             console.log(this.point, res.data.data, '第三层2')
             this.point = []
             const data = res.data.data
-            for (let i = 0; i< data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
               this.point.push({
                 name: data[i].entName,
                 coordinate: [data[i].longitude, data[i].latitude],
                 icon: this.icon,
                 address: data[i].dom,
                 pripId: data[i].PRIPID,
-                  cliType: item.cliType
+                cliType: item.cliType
               })
             }
             // this.p1Select()
@@ -627,7 +627,7 @@ export default {
       } else {
         url = 'getMainBaseInfoData'
       }
-      axios.get('/monitor/main/'+ url +'?pripId=' + pripId).then(res => {
+      axios.get('/monitor/main/' + url + '?pripId=' + pripId).then(res => {
         console.log(res.data.data, '第一')
         this.basicData = res.data.data
         console.log(this.basicData, 'zz')
@@ -721,17 +721,17 @@ export default {
         for (let i = 0; i < this.mainMessage.length; i++) {
           this.p1Info['监管信息']['质量公告'].push({
             // '生产企业': this.mainMessage[i].SCQY,
-            '产品名称': this.mainMessage[i].CPMC,
-            '规格': this.mainMessage[i].GG,
-            '结果': this.mainMessage[i].JG,
-            '批号': this.mainMessage[i].PH,
-            '类型': this.mainMessage[i].LX,
-            '年度': this.mainMessage[i].ND,
-            '被检单位': this.mainMessage[i].BJDW
+            产品名称: this.mainMessage[i].CPMC,
+            规格: this.mainMessage[i].GG,
+            结果: this.mainMessage[i].JG,
+            批号: this.mainMessage[i].PH,
+            类型: this.mainMessage[i].LX,
+            年度: this.mainMessage[i].ND,
+            被检单位: this.mainMessage[i].BJDW
             // '不合格项': this.mainMessage[i].BHG
             // '主体身份代码': this.mainMessage[i].UNISCID
           })
-        console.log(this.mainMessage[i], this.p1Info['监管信息']['质量公告'], '非个体')
+          console.log(this.mainMessage[i], this.p1Info['监管信息']['质量公告'], '非个体')
         }
         this.setPageData({
           key: 'p1',

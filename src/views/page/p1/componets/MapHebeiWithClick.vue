@@ -1,5 +1,5 @@
 <template>
-  <chart :options="options" @click="click"/>
+    <chart :options="options" @click="click"/>
 </template>
 
 <script>
@@ -8,7 +8,9 @@ export default {
   props: {
     data: {
       type: Array,
-      default: []
+      default: () => {
+        return []
+      }
     }
   },
   computed: {
@@ -57,12 +59,12 @@ export default {
       deep: true,
       immediate: true,
       handler: function () {
-        if(this.data.length > 0) {
+        if (this.data.length > 0) {
           this.start()
           this.timesPoint = this.data.length * 500
         }
       }
-    },
+    }
   },
   mounted () {
     // this.start()
@@ -95,12 +97,12 @@ export default {
       if (data.data.mapList.length > 0) {
         this.showPoint(data.data.mapList, this.arrayIndex, step)
         this.timerPoint = setInterval(() => {
-            this.arrayIndex++
-            if (this.arrayIndex < this.data.length) {
-              this.showPoint(data.data.mapList, this.arrayIndex, step)
-            }
-          }, this.timesPoint)
-        }
+          this.arrayIndex++
+          if (this.arrayIndex < this.data.length) {
+            this.showPoint(data.data.mapList, this.arrayIndex, step)
+          }
+        }, this.timesPoint)
+      }
       // 异步结束
     },
     stopAnimation () { // 停止动画
@@ -128,6 +130,7 @@ export default {
     },
     click (params) {
       const name = params[0].name
+      console.log(name)
     },
     getMapData (startTime, times) { // 接口返回数据，这里改为return promise，实现异步
       return {
@@ -144,6 +147,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-  .MapHebeiWithClick {
-  }
+.MapHebeiWithClick {
+}
 </style>

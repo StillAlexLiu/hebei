@@ -1,4 +1,4 @@
-<template>
+·<template>
     <div class="charts">
         <v-chart :options='computedOptions' ref="ec" :autoresize='true' theme="screen" @click="this.handler"/>
         <!--        {{computedOptions}}-->
@@ -60,7 +60,7 @@ export default {
     handler (...params) {
       console.log(params, 'pp')
       if (this.$route.name === '稽查办案' & params[0].seriesType === 'pie') {
-        if(params[0].data.name === this.$store.state.pieDataTab.name) {
+        if (params[0].data.name === this.$store.state.pieDataTab.name) {
           this.$store.state.pieDataTab = {
             name: '',
             type: ''
@@ -68,7 +68,7 @@ export default {
         } else {
           this.$store.state.pieDataTab = params[0].data
         }
-      } else if (this.$route.name === '主体服务' & params[0].data.name === '开办成功') {
+      } else if (this.$route.name === '主体服务' && params[0].data.name === '开办成功') {
         Bus.$emit('toTwo', true)
       }
       this.$emit('click', params)
