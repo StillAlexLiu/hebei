@@ -47,7 +47,10 @@ export default {
           unit: 'h',
           name1: '已处理',
           value1: '0',
-          unit1: '条'
+          unit1: '条',
+          // name2: '已处理',
+          // value2: '0',
+          // unit2: '条'
         }, {
           title: '银行',
           name: '平均用时',
@@ -183,7 +186,8 @@ export default {
             formatter: () => {
               return '{title|' + this.info3[i].title + '}\n' +
                 '{name|' + this.info3[i].name + '}' + '{value|' + this.info3[i].value + '}' + '{unit|' + this.info3[i].unit + '}\n' +
-                '{name|' + this.info3[i].name1 + '}' + '{value|' + this.info3[i].value1 + '}' + '{unit|' + this.info3[i].unit1 + '}'
+                '{name|' + this.info3[i].name1 + '}' + '{value|' + this.info3[i].value1 + '}' + '{unit|' + this.info3[i].unit1 + '}\n'
+                // '{name|' + this.info3[i].name2 + '}' + '{value|' + this.info3[i].value2 + '}' + '{unit|' + this.info3[i].unit2 + '}'
             },
             rich: {
               title: {

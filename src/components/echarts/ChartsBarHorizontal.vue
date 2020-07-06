@@ -53,7 +53,7 @@ export default {
         tooltip: {},
         grid: {
           top: '10%',
-          left: '1%',
+          left: '5%',
           right: '5%',
           bottom: '1%',
           containLabel: true
