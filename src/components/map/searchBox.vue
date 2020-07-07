@@ -3,7 +3,7 @@
         <label v-if="$route.name === '主体服务'">
             <input v-model="text2">
         </label>
-        <i  v-if="$route.name === '主体服务'"/>
+        <i  v-if="$route.name === '主体服务'" @click="inputCli"/>
         <div class="num">总数：{{number}}</div>
         <div class="num2">地图缩放等级: {{zoom}}</div>
     </div>
@@ -31,9 +31,11 @@ export default {
       text2: ''
     }
   },
-  watch: {
-    text2 (data) {
-      this.$emit('inputData', data)
+  methods: {
+    inputCli () {
+      if (this.text2) {
+        this.$emit('inputData', this.text2)
+      }
     }
   }
 }

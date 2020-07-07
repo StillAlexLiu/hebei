@@ -13,7 +13,7 @@
         >
 
             <div slot="info">
-                <roll-table v-if="routeName==='综合指挥'" :data="p0Info" :dimension="p0Dimension" class="full-width"/>
+                <!-- <roll-table v-if="routeName==='综合指挥'" :data="p0Info" :dimension="p0Dimension" class="full-width"/> -->
                 <!-- <roll-table :data="p0Info" :dimension="p0Dimension" class="full-width"/> -->
                 <EntityMapInfo v-if="selectInfoState" :data="selectInfo"/>
                 <KeepOnRecordMapInfo v-if="routeName==='备案许可'" :data="p10Info"/>

@@ -53,7 +53,7 @@ export default {
         tooltip: {},
         grid: {
           top: '10%',
-          left: '5%',
+          left: '1%',
           right: '5%',
           bottom: '1%',
           containLabel: true
@@ -76,9 +76,13 @@ export default {
                 fontSize: 20
               }
             },
+            nameTextStyle: {
+              color: 'rgba(304, 304, 304, 0.9)',
+              fontSize: 20
+            },
             axisLabel: {
-              show: this.showLabel,
-              margin: 20,
+              // 坐标轴刻度标签的相关设置
+              interval: 0,
               textStyle: {
                 color: 'rgba(304, 304, 304, 0.9)',
                 fontSize: 20
@@ -131,8 +135,8 @@ export default {
           label: {
             show: true,
             position: 'right',
-            color: 'rgba(304, 304, 304, 0.9)',
-            fontSize: 20
+                color: 'rgba(304, 304, 304, 0.9)',
+                fontSize: 20
           },
           itemStyle: {
             normal: {
