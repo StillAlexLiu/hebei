@@ -5,11 +5,12 @@
         </label>
         <i  v-if="$route.name === '主体服务'" @click="inputCli"/>
         <div class="num">总数：{{number}}</div>
-        <div class="num2">地图缩放等级: {{zoom}}</div>
+        <!-- <div class="num2">地图缩放等级: {{zoom}}</div> -->
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'searchBox',
   props: {

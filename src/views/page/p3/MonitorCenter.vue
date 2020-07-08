@@ -64,9 +64,13 @@ export default {
   },
   created () {
     var that = this
-    Bus.$on('message', function (data2) {
-      console.log(data2, '远程')
-      that.setVideo(data2)
+    // Bus.$on('message', function (data2) {
+    //   console.log(data2, '远程')
+    //   that.setVideo(data2)
+    // })
+    Bus.$on('message', target => {
+      console.log(target, '点击视频')
+      that.setVideo(target)
     })
   },
   mounted () {
@@ -111,6 +115,7 @@ export default {
               url: data[i].cameraUrl,
               state: 0
             })
+            console.log(that.videoNames, '视频')
             that.videoIndex++
           }
         })

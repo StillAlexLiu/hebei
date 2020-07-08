@@ -6,7 +6,7 @@
                :center="center"
                :adcode="adcode"
                :depth="depth"
-               :grid="grid"
+               :leafNodePoint="leafNodePoint"
                :isInGrid="true"
                :point="point"
                :id-key="idKey"
@@ -71,6 +71,7 @@ export default {
       center: this.$dataAll.config.map.center,
       adcode: this.$dataAll.config.map.adcode,
       depth: this.$dataAll.config.map.depth,
+      leafNodePoint: false,
       selectorData: this.$dataAll.config.mapTab,
       currentSelector: [],
       geo: this.$dataAll.geo,
@@ -202,6 +203,7 @@ export default {
           this.selectInfoState = false
         }
         this.point = []
+        this.leafNodePoint = false
         if (find) {
           this.routeName = find.name
           this.currentSelector = find.children
@@ -228,6 +230,7 @@ export default {
     ]),
     getSelect (data) { // 分发全局map select 事件
       console.log(data, 'ssddd')
+      this.point = []
       this.Dispatch(data)
       this.getSelectItem(data)
       this.setPageData({
@@ -240,6 +243,7 @@ export default {
       this.clearInfo()
       const items = data.items
       this.point = []
+      this.leafNodePoint = false
       for (let i = 0; i < items.length; i++) {
         this.point = [...this.point, ...this.makeTreePoint(items[i], items[i].icon)]
       }
@@ -252,20 +256,6 @@ export default {
         data: null
       })
     },
-    addPoints (name, number, icon) {
-      this.point = this.makePoint(30)
-    },
-    makePoint (number, icon) {
-      const rtn = []
-      for (let i = 0; i < number; i++) {
-        rtn.push({
-          name: '河北' + Mock.mock('@cword(3)') + '有限责任公司',
-          icon: icon,
-          coordinate: [Mock.mock('@float(113.784594, 119.54143)'), Mock.mock('@float(36.359861, 42.578391)')]
-        })
-      }
-      return rtn
-    },
     makeTreePoint (number, icon) {
       const cliType = number.type
       console.log(cliType, 'clitype')
@@ -277,7 +267,7 @@ export default {
           const item = this.city[i]
           list.push({
             name: item.name,
-            icon: require('../../../assets/images/mapTabs/p3/t1/mhzhjg_img_map_blue2备份 2@2x.png'),
+            icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
             coordinate: item.center,
             points: [],
             index: i,
@@ -287,6 +277,7 @@ export default {
         // var newArray = []
         axios.get('/monitor/main/hyjk/getHyRegions').then(res => {
           const data = res.data.data
+          console.log('海康', data)
           for (let i = 0; i < data.length; i++) {
             if (data[i].latitude) {
               this.latPoint.push(data[i])
@@ -294,6 +285,7 @@ export default {
           }
           axios.get('/monitor/main/hik/getHikRegions').then(res => {
             const data = res.data.data
+            console.log('华烨', data)
             for (let q = 0; q < data.length; q++) {
               if (data[q].latitude) {
                 this.latPoint.push(data[q])
@@ -322,6 +314,7 @@ export default {
                     if (this.latPoint[i].address.substring(0, 2) === list[l].name.substring(0, 2)) {
                       list[l].points.push({
                         address: this.latPoint[i].name,
+                        name: this.latPoint[i].name,
                         icon: icon,
                         coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
                         regionsIndexCode: this.latPoint[i].indexCode
@@ -342,7 +335,7 @@ export default {
           const item = this.city[i]
           list.push({
             name: item.name,
-            icon: require('../../../assets/images/mapTabs/p3/t1/mhzhjg_img_map_blue2备份 2@2x.png'),
+            icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
             coordinate: item.center,
             points: [],
             index: i,
@@ -363,7 +356,7 @@ export default {
                   list[o].baseCount = data[i].baseCount
                   list[o].level = data[i].level
                   list[o].ad_code = data[i].ad_code
-                  list[o].mainClass = number.mainClass,
+                  list[o].mainClass = number.mainClass
                   list[o].cliType = cliType
                 }
               }
@@ -378,7 +371,7 @@ export default {
                 if (list[o].name === data[i].name) {
                   list[o].baseCount = data[i].baseCount
                   list[o].level = data[i].level
-                  list[o].ad_code = data[i].ad_code,
+                  list[o].ad_code = data[i].ad_code
                   list[o].cliType = cliType
                 }
               }
@@ -393,7 +386,7 @@ export default {
           const item = this.city[i]
           list.push({
             name: item.name,
-            icon: require('../../../assets/images/mapTabs/p3/t1/mhzhjg_img_map_blue2备份 2@2x.png'),
+            icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
             coordinate: item.center,
             points: [],
             index: i,
@@ -407,7 +400,7 @@ export default {
           const item = this.city[i]
           list.push({
             name: item.name,
-            icon: require('../../../assets/images/mapTabs/p3/t1/mhzhjg_img_map_blue2备份 2@2x.png'),
+            icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
             coordinate: item.center,
             points: [],
             index: i,
@@ -475,13 +468,14 @@ export default {
           axios.get('/monitor/main/getDistrictCount?adCode=' + item.ad_code + '&reportType=' + item.mainClass + '&entType=' + item.cliType).then(res => {
             console.log(res.data.data, '第二层')
             this.point = []
+            this.leafNodePoint = false
             const data = res.data.data
             for (let i = 0; i < data.length; i++) {
               if (data[i].center) {
                 this.point.push({
                   name: data[i].name,
                   coordinate: [this.getCaption(data[i].center, 0), this.getCaption(data[i].center, 1)],
-                  icon: require('../../../assets/images/mapTabs/p3/t1/mhzhjg_img_map_blue2备份 2@2x.png'),
+                  icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
                   baseCount: data[i].baseCount,
                   level: data[i].level,
                   ad_code: data[i].ad_code,
@@ -496,13 +490,14 @@ export default {
           axios.get('/monitor/main/getDistrictCount?adCode=' + item.ad_code + '&reportType=' + this.mainType).then(res => {
             console.log(res.data.data, '第二层')
             this.point = []
+            this.leafNodePoint = false
             const data = res.data.data
             for (let i = 0; i < data.length; i++) {
               if (data[i].center) {
                 this.point.push({
                   name: data[i].name,
                   coordinate: [this.getCaption(data[i].center, 0), this.getCaption(data[i].center, 1)],
-                  icon: require('../../../assets/images/mapTabs/p3/t1/mhzhjg_img_map_blue2备份 2@2x.png'),
+                  icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
                   baseCount: data[i].baseCount,
                   level: data[i].level,
                   ad_code: data[i].ad_code,
@@ -523,6 +518,7 @@ export default {
           axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + item.mainClass + '&entType=' + item.cliType).then(res => {
             console.log(this.point, res.data.data, '第三层1')
             this.point = []
+            this.leafNodePoint = true
             const data = res.data.data
             for (let i = 0; i < data.length; i++) {
               this.point.push({
@@ -542,6 +538,7 @@ export default {
           axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + this.mainType).then(res => {
             console.log(this.point, res.data.data, '第三层2')
             this.point = []
+            this.leafNodePoint = true
             const data = res.data.data
             for (let i = 0; i < data.length; i++) {
               this.point.push({
@@ -610,8 +607,10 @@ export default {
           this.p6Info = item.data
           break
         case '远程监控':
-          console.log('远程监控')
-          if (!item.points) {
+          console.log('远程监控', item)
+          if (item.points) {
+            this.point = item.points
+          }else if (!item.points) {
             Bus.$emit('message', item)
           }
           break

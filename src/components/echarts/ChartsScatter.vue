@@ -65,8 +65,8 @@ export default {
         series: [{
           symbolSize: (data) => {
             if (this.showSize) {
-              return 120
-              // return data.value / this.size
+              // return 120
+              return data.value * 0.015 + 10
             } else {
               return Math.sqrt(data[this.dimensions[2]]) * this.baseSize
             }

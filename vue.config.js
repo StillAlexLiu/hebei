@@ -38,8 +38,8 @@ module.exports = {
         }
       },
       '/monitor': {
-        target: 'http://192.168.105.38:8080/blade-screen',
-        // target: 'http://192.168.1.101:8080/blade-screen',
+        // target: 'http://192.168.105.38:8080/blade-screen',
+        target: 'http://192.168.1.102:8080/blade-screen',
         changeOrigin: true,
         pathRewrite: {
           '^/monitor': ''

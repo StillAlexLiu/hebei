@@ -30,9 +30,13 @@ export default {
       paths: [],
       colors: {},
       pointNumber: 0,
+      tempData: {},
       disProvinceLayer: {},
       proDepth: 0,
-      mapZoom: 10,
+      mapZoom: {
+        type: '',
+        zoom: 0
+      },
       markers: [],
       zoom2: 0,
       inputData: []
@@ -65,13 +69,11 @@ export default {
         return []
       }
     },
-    grid: { // 网格集合
-      type: Array,
-      default: () => {
-        return []
-      }
-    },
     isInGrid: {
+      type: Boolean,
+      default: false
+    },
+    leafNodePoint: {
       type: Boolean,
       default: false
     },
@@ -93,7 +95,7 @@ export default {
   watch: {
     point: {
       deep: true,
-      immediate: true,
+      immediate: false,
       handler: function () {
         this.$nextTick(() => {
           this.loadAMap(() => {
@@ -104,52 +106,80 @@ export default {
             }
             this.map.setZoomAndCenter(9, this.center)
             // this.pointNumber = 0
-            if (this.point.length > 0) {
-              this.addMassMarks(this.point)
+            console.log(this.point,'ppooo')
+            if(this.point.length > 0) {
+              const areaName = this.point[0].name.charAt(this.point[0].name.length-1)
+              console.log(areaName, 'area')
+              if (areaName !== '市') {
+                this.addMassMarks(this.point)
+              } else if(areaName === '市'){
+                // this.removeDisProvinceLayer()
+                this.SearchDistrict(this.adcode[0], 0)
+                this.addMassMarks(this.point)
+              } 
+            } else {
+              // this.removeDisProvinceLayer()
+              this.SearchDistrict(this.adcode[0], 0)
             }
+            
           })
         })
-      }
-    },
-    grid: {
-      deep: true,
-      immediate: true,
-      handler: function () {
-        if (this.grid.length > 0) {
-          this.paths = []
-          for (let i = 0; i < this.grid.length; i++) {
-            this.paths.push([...this.grid[i].geo])
-          }
-          console.log(this.paths)
-          this.$nextTick(() => {
-            this.loadAMap(() => {
-              // this.initMap()
-              // 先注释掉
-              // this.addGrid(this.grid)
-            })
-          })
-        }
-      }
-    },
-    mapZoom (newZoom, oldZoom) { // 缩放复位
-      console.log('zoom:' + newZoom, oldZoom)
-      console.log(this.proDepth)
-      this.zoom2 = newZoom
-        // && this.proDepth > 0
-      if (oldZoom > newZoom && newZoom > 6  && newZoom < 8.1) {
-        const layers = this.map.getLayers()
-        console.log(layers)
-        this.removeDisProvinceLayer()
-        // for (let i = 0; i < layers.length; i++) {
-        //   // if (layers[i].CLASS_NAME === 'AMap.DistrictLayer.Province') {
-        //   //   this.map.remove(layers[i])
-        //   // }
-        // }
-        this.removeMassMarks()
-        this.addMassMarks(this.point)
-        this.SearchDistrict(this.adcode[0], 0)
+        // this.$nextTick(() => {
+        //   this.loadAMap(() => {
+        //     try {
+        //       this.removeMassMarks()
+        //     } catch (e) {
+        //       console.log(e)
+        //     }
+        //     // this.map.setZoomAndCenter(9, this.center)
+        //     // this.pointNumber = 0
+        //       console.log('监听point', this.point)
+        //     // if (this.point.length > 0) {
+        //     //   if (this.point[0].level === '1' || this.point[0].level === '2') {
+        //     //     console.log('切换')
+        //     //     this.removeDisProvinceLayer()
+        //     //     // this.SearchDistrict(this.adcode[0], 0)
+        //     //     // this.map.setZoomAndCenter(this.zoom, this.center)
+        //     //     this.addMassMarks(this.point)
+        //     //   } else {
+        //     //     this.addMassMarks(this.point)
+        //     //   }
+        //     // } else if (this.point.length === 0) {
+        //     //   console.log('空的')
+        //     //     this.removeDisProvinceLayer()
+        //     //     // this.SearchDistrict(this.adcode[0], 0)
+        //     //     this.map.setZoomAndCenter(this.zoom, this.center)
+        //     //     this.addMassMarks(this.point)
+        //     // }else {
+        //       console.log('初始化清空')
+        //       this.removeDisProvinceLayer()
+        //         this.SearchDistrict(this.adcode[0], 0)
+        //         this.map.setZoomAndCenter(this.zoom, this.center)
+        //         this.addMassMarks(this.point)
+        //       // this.SearchDistrict(this.adcode[0], 0)
+        //     // }
+        //   })
+        // })
       }
     }
+    // mapZoom (newZoom, oldZoom) { // 缩放复位
+    //   // 暂时去掉缩放的watch
+    //   // console.log('zoom:' + newZoom)
+    //   // console.log(this.proDepth)
+    //   // if (oldZoom > newZoom && newZoom === 8 && this.proDepth > 0) {
+    //   //   const layers = this.map.getLayers()
+    //   //   console.log(layers)
+    //   //   this.removeDisProvinceLayer()
+    //   //   // for (let i = 0; i < layers.length; i++) {
+    //   //   //   // if (layers[i].CLASS_NAME === 'AMap.DistrictLayer.Province') {
+    //   //   //   //   this.map.remove(layers[i])
+    //   //   //   // }
+    //   //   // }
+    //   //   this.removeMassMarks()
+    //   //   this.addMassMarks(this.point)
+    //   //   this.SearchDistrict(this.adcode[0], 0)
+    //   // }
+    // }
   },
   mounted () {
     this.loadAMap(() => {
@@ -159,26 +189,29 @@ export default {
   methods: {
     inputFocus (data) {
       console.log(data, '搜索')
-      axios.get('/monitor/main/getMainBaseDataByCon?entName=' + data).then(res => {
-        const data = res.data.data
-        console.log(data, '搜索数据')
-        this.inputData = []
-        for (let i = 0; i < data.length; i++) {
-          console.log(data[i], 'iiiii')
-          this.inputData.push({
-            address: data[i].DOM,
-            cliType: data[i].ENTTYPE,
-            coordinate: [data[i].longitude, data[i].latitude],
-            icon: require('../../assets/images/mapTabs/p1/t1/2.png'),
-            name: data[i].ENTNAME,
-            pripId: data[i].PRIPID
-          })
-          console.log(this.inputData, '搜索data')
-        this.ponitMap(this.inputData)
-          // this.contentMaker()
-          // this.ponitMap(data2)
-        }
-      })
+      this.point = []
+        // axios.get('/monitor/main/getMainBaseDataByCon?entName=' + data).then(res => {
+        //   const data = res.data.data
+        //   console.log(data, '搜索数据')
+        //   this.inputData = []
+        //   for (let i = 0; i < data.length; i++) {
+        //     console.log(data[i], 'iiiii')
+        //     this.inputData.push({
+        //       address: data[i].DOM,
+        //       cliType: data[i].ENTTYPE,
+        //       coordinate: [data[i].longitude, data[i].latitude],
+        //       icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
+        //       name: data[i].ENTNAME,
+        //       pripId: data[i].PRIPID,
+        //       level: 5
+        //     })
+        //     console.log(this.inputData, '搜索data')
+        //     // 打点
+        //     this.addMassMarks(this.inputData)
+        //     // 调整中心视角
+        //     this.map.setZoomAndCenter(17, [data[i].longitude, data[i].latitude])
+        //   }
+        // })
     },
     loadAMap (callback) {
       if (!window.AMap) {
@@ -199,97 +232,91 @@ export default {
         rotateEnable: true,
         pitchEnable: true,
         zoom: this.zoom,
+        draggable: true,
+        zoomEnable: true,
         viewMode: '3D',
+        // 滚轮开关
+        scrollWheel: true,
         autoRotation: true,
         center: this.center,
         mapStyle: 'amap://styles/grey'
         // mapStyle: 'amap://styles/7ac2f867a34cdfd376071d2c69b126bd'
       })
       const self = this
-
-      this.map.on('zoomend', this.zoomListener)
+      // this.map.on('zoomend', this.zoomListener)
       // this.map.on('click', this.clickListener)
-      window.AMap.plugin(['AMap.DistrictLayer', 'AMap.DistrictSearch', 'AMap.MarkerClusterer'], function () { // 异步加载插件
+      window.AMap.plugin(['AMap.DistrictLayer', 'AMap.DistrictSearch', 'AMap.MarkerClusterer', 'AMap.ToolBar'], function () { // 异步加载插件
         // self.disProvince(self.adcode, self.depth)
-        self.SearchDistrict(self.adcode[0], self.depth)
+        const toolbar = new window.AMap.ToolBar({
+          position: 'RB',
+          offset: new AMap.Pixel(30, 10)
+        })
+        toolbar.on('zoomchanged', self.zoomchanged)
+        self.map.addControl(toolbar)
+        // self.SearchDistrict(self.adcode[0], self.depth)
       })
     },
-    clickHandler (e) {
-      const data = e.target.getExtData()
-      // console.log(data.baseCount, this.proDepth, '移除图层3')
-      if (data.baseCount > 0 & this.$route.name === '主体服务') {
-        this.removeDisProvinceLayer()
-        // console.log(this.proDepth++)
-        this.SearchDistrict(data.name, this.proDepth)
-        this.map.setZoomAndCenter(9, [e.lnglat.lng, e.lnglat.lat])
-        this.removeMassMarks()
-        this.addMassMarks(data)
-      } else if (this.$route.name === '远程监控'){
-        if (data.points && data.points.length > 0) {
-          //移除图层
-          this.removeDisProvinceLayer()
-          // console.log(this.proDepth++)
-          this.SearchDistrict(data.name, this.proDepth)
-          this.map.setZoomAndCenter(9, [e.lnglat.lng, e.lnglat.lat])
-          this.removeMassMarks()
-          this.addMassMarks(data.points)
+    zoomchanged (zoomObject) {
+      console.log(zoomObject)
+      const zoom = this.map.getZoom()
+      console.log(zoom)
+      console.log(this.proDepth)
+      if (zoomObject.type === 'zoomout' && zoom <= 9 && this.proDepth > 0) {
+        this.removeDisProvinceLayer() // 删除网格
+        // this.removeMassMarks() // 删除点
+        // this.addMassMarks(this.point) // 添加点
+        if (zoom === 9) {
+          console.log(this.tempData)
+          this.clickAction(this.tempData, this.tempData.coordinate)
+        } else {
+          this.SearchDistrict(this.adcode[0], 0)
+          this.map.setZoomAndCenter(this.zoom, this.center)
+          this.removeMassMarks() // 删除点
+          this.$emit('pointClick', {
+            mainClass: 'AA',
+            level: '1',
+            ad_code: this.adcode
+          })
         }
       }
+    },
+    // zoomListener () {
+    //   console.log(arguments)
+    // },
+    clickHandler (e) {
+      console.log('clickHandler')
+      const data = e.target.getExtData()
+      // this.tempData = adcode
+      const center = [e.lnglat.lng, e.lnglat.lat]
+      this.clickAction(data, center)
+    },
+    clickAction (data, center) {
+      console.log(data, center, center[0], center[1], 'lll')
+      if (this.$route.name === '远程监控') {
+        if (data.points) {
+          console.log('最后一层')
+          this.removeDisProvinceLayer()
+          this.SearchDistrict(data.name, this.proDepth)
+          this.map.setZoomAndCenter(this.zoom, center)
+          this.removeMassMarks()
+        }
+      } else if (this.$route.name === '主体服务' & !data.pripId){
+        this.removeDisProvinceLayer()
+        this.SearchDistrict(data.name, this.proDepth)
+        this.map.setZoomAndCenter(this.zoom, center)
+        this.removeMassMarks()
+      }
+      if (data.level === '2') {
+        this.tempData = data
+      }
+      // this.removeDisProvinceLayer()
+      this.proDepth++
+      console.log(data.name, this.proDepth)
+      // this.addMassMarks(data.points)
       this.$emit('pointClick', data)
     },
-    isPointInRing (point) {
-      let find = false
-      for (let i = 0; i < this.paths.length; i++) {
-        const path = this.paths[i]
-        const check = window.AMap.GeometryUtil.isPointInRing(point, path)
-        if (check) {
-          find = point
-        }
-      }
-      return find
-    },
-    isPointInPolygon (point) {
-      const check = window.AMap.GeometryUtil.isPointInPolygon(point, this.paths)
-      if (check) {
-        return point
-      } else {
-        return false
-      }
-    },
-    transCoordinate (str) {
-      if (str && str.length === 2 && str[0] > 0 && str[1] > 0) {
-        if (this.isInGrid) {
-          return this.isPointInRing(str)
-        } else {
-          return str
-        }
-      } else {
-        return false
-      }
-    },
-    addGrid (data) {
-      // console.log(data)
-      if (data) {
-        const grids = []
-        for (let i = 0; i < data.length; i++) {
-          const item = data[i]
-          const polygon = new window.AMap.Polygon({
-            path: item.geo,
-            strokeColor: item.border ? item.border : '#fff',
-            strokeWeight: 1,
-            strokeOpacity: 0.2,
-            fillOpacity: 0.4,
-            fillColor: item.fill ? item.fill : '#eee',
-            zIndex: 50
-          })
-          grids.push(polygon)
-        }
-        const overlayGroups = new window.AMap.OverlayGroup(grids)
-        this.map.add(overlayGroups)
-      }
-    },
     contentMaker (data) {
-      console.log(data, '地图打点')
+      // console.log(data, '地图打点')
       if (data.baseCount) {
         if (data.typeIndex === 0) {
           const count = data.baseCount ? '<div style="width: 100%;text-align: center">' + data.baseCount + '</div>' : ''
@@ -320,8 +347,7 @@ export default {
           this.pointNumber = data.length
         }
       }
-      // console.log(this.pointNumber, '海量点')
-      var newArray = []
+      const newArray = []
       if (this.$route.name === '远程监控') {
         if (data[0].points) {
           for (let z = 0; z < data.length; z++) {
@@ -329,35 +355,29 @@ export default {
               newArray.push(data[z])
             }
           }
-          this.ponitMap(newArray)
+          this.pointMap(newArray)
         } else {
-          this.ponitMap(data)
+          this.pointMap(data)
         }
-      } else if(this.$route.name === '主体服务') {
-        const data2 = []
-        console.log(data, '主体服务打点')
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].name === '河北雄安新区') {
-          }else if (data[i].baseCount > 0) {
-              data2.push(data[i])
-          } else if(data[i].cliType) {
-              data2.push(data[i])
+      } else if (this.$route.name === '主体服务') {
+        var newPoint = []
+        for (let i = 0; i < data.length; i++){
+          if (data[i].name !== '河北雄安新区') {
+            newPoint.push(data[i])
           }
         }
-        console.log(data2, 'data2')
-        this.ponitMap(data2)
-      }else {
-        this.ponitMap(data)
+        this.pointMap(newPoint)
+      } else {
+        this.pointMap(data)
       }
     },
-    ponitMap (data) {
-      console.log(data, '视频')
+    pointMap (data) {
       this.markers = []
       for (let i = 0; i < data.length; i++) {
         const item = data[i]
         const marker = new window.AMap.Marker({
           content: this.contentMaker(item),
-          position: this.transCoordinate(item.coordinate),
+          position: item.coordinate,
           zIndex: 101,
           title: item.name,
           extData: item
@@ -365,29 +385,75 @@ export default {
         marker.on('click', this.clickHandler)
         this.markers.push(marker)
       }
-      if (this.$route.name === '主体服务') {
+      if (this.leafNodePoint) { // 判断是否是最后的叶子节点，即主体
         this.cluster = new window.AMap.MarkerClusterer(this.map, this.markers, {
-          gridSize: 1
+          gridSize: 300
         })
-      }  else if (this.$route.name === '远程监控') {
-        this.cluster = new window.AMap.MarkerClusterer(this.map, this.markers, {
-          gridSize: -1
-        })
+        // var mass = new AMap.MassMarks(citys, {
+        //   opacity: 0.8,
+        //   zIndex: 111,
+        //   cursor: 'pointer',
+        //   style: style
+        // });
+        // console.log('海量点')
+        // const style = [{
+        //   // url: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
+        //   url: data[0].icon ? data[0].icon : 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
+        //   anchor: new AMap.Pixel(0, 0),
+        //   size: data[0].icon ? new AMap.Size(36, 36) : new AMap.Size(36, 20)
+        // }]
+        // console.log(style)
+        // const points = []
+        // for (let i = 0; i < data.length; i++) {
+        //   const marker = data[i]
+        //   marker.lnglat = marker.coordinate
+        //   points.push(marker)
+        // }
+        // this.pointNumber = points.length
+        // if (points.length > 0) {
+        //   this.mass = new window.AMap.MassMarks(points, {
+        //     opacity: 0.8,
+        //     zIndex: 111,
+        //     cursor: 'pointer',
+        //     style: style
+        //   })
+        //   this.cluster = new window.AMap.MarkerClusterer(this.map, this.markers, {
+        //     gridSize: 800
+        //   })
+        // this.mass.on('click', this.clickHandler)
+        // this.mass.setMap(this.map)
+        // }
+      } else {
+        this.map.add(this.markers)
       }
       // this.map.add(this.markers)
     },
     removeMassMarks () {
-      this.cluster.setMap(null)
-      this.map.remove(this.markers)
+      try {
+        this.cluster.setMap(null)
+      } catch (e) {
+
+      }
+      try {
+        this.mass.clear()
+      } catch (e) {
+
+      }
+      try {
+        this.map.remove(this.markers)
+      } catch (e) {
+
+      }
     },
-    searchFunc (adcode) {
+    searchFunc (adcode) { // 网格搜索方法，调用amap的api，无需修改
       // console.log(adcode, 'adddd')
       const districtSearch = new window.AMap.DistrictSearch({
         // 关键字对应的行政区级别，country表示国家
-        level: 'district',
+        level: 'street',
         //  显示下级行政区级数，1表示返回下一级行政区
         extensions: 'all',
-        subdistrict: '2'
+        showbiz: true,
+        subdistrict: 1
       })
       return new Promise(resolve => {
         districtSearch.search(adcode, (status, result) => {
@@ -398,14 +464,14 @@ export default {
         })
       })
     },
-    SearchDistrict (adcode, depth) {
+    SearchDistrict (adcode, depth) { // 搜索adcode下所有网格
       console.log(adcode, depth)
       this.proDepth = depth
-
       // 搜索所有省/直辖市信息
       this.searchFunc(adcode).then(result => {
+        console.log(result, 'rr')
         const list = result.districtList[0].districtList
-        const polygons = []
+        var polygons = []
         const promiseList = []
         console.log(list)
 
@@ -413,7 +479,13 @@ export default {
           //     console.log(1)
           for (let j = 0; j < list.length; j++) {
             const item = list[j]
-            promiseList.push(this.searchFunc(item.adcode))
+            if (item.level === 'street') {
+              if (j === 0) {
+                promiseList.push(this.searchFunc(item.adcode))
+              }
+            } else {
+              promiseList.push(this.searchFunc(item.adcode))
+            }
           }
         }
         Promise.all(promiseList).then(value => {
@@ -448,6 +520,8 @@ export default {
               polygons.push(polygon)
             }
           }
+          
+        this.removeDisProvinceLayer()
           this.disProvinceLayer = new window.AMap.OverlayGroup(polygons)
           this.map.add(this.disProvinceLayer)
           // 地图自适应
@@ -456,20 +530,18 @@ export default {
       })
     },
     layerClick (layer) {
-      console.log(layer)
-      const target = layer.target
-      console.log(target)
-      const data = target.getExtData()
-      console.log('移除图层111')
-      this.removeDisProvinceLayer() // 先移除图层
-      this.SearchDistrict(data.adcode, data.depth + 1)
-      this.map.setZoomAndCenter(9, [layer.lnglat.lng, layer.lnglat.lat])
-    },
-    zoomListener () {
-      this.mapZoom = this.map.getZoom()
+      console.log('移除图层点击')
+      // 暂时移除图层点击
+      // console.log(layer)
+      // const target = layer.target
+      // console.log(target)
+      // const data = target.getExtData()
+      // this.removeDisProvinceLayer() // 先移除图层
+      // this.SearchDistrict(data.adcode, data.depth + 1)
+      // this.map.setAndCenter(9, [layer.lnglat.lng, layer.lnglat.lat])
     },
     removeDisProvinceLayer () {
-      console.log('移除图层')
+      console.log('removeDisProvinceLayer')
       this.map.remove(this.disProvinceLayer)
     },
     getColorByAdcode (adcode) {
@@ -480,7 +552,7 @@ export default {
       return this.colors[adcode]
     },
     getSelect (list) { // 发送地图下方的选择器事件
-    console.log(list, 'listt')
+      console.log('selector click')
       this.$emit('getSelect', list)
     }
   },
@@ -503,5 +575,11 @@ export default {
     > .a-map {
         position: absolute;
     }
+}
+</style>
+
+<style lang="less">
+.amap-toolbar {
+    zoom: 2;
 }
 </style>
