@@ -189,29 +189,31 @@ export default {
   methods: {
     inputFocus (data) {
       console.log(data, '搜索')
-      this.point = []
-        // axios.get('/monitor/main/getMainBaseDataByCon?entName=' + data).then(res => {
-        //   const data = res.data.data
-        //   console.log(data, '搜索数据')
-        //   this.inputData = []
-        //   for (let i = 0; i < data.length; i++) {
-        //     console.log(data[i], 'iiiii')
-        //     this.inputData.push({
-        //       address: data[i].DOM,
-        //       cliType: data[i].ENTTYPE,
-        //       coordinate: [data[i].longitude, data[i].latitude],
-        //       icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
-        //       name: data[i].ENTNAME,
-        //       pripId: data[i].PRIPID,
-        //       level: 5
-        //     })
-        //     console.log(this.inputData, '搜索data')
-        //     // 打点
-        //     this.addMassMarks(this.inputData)
-        //     // 调整中心视角
-        //     this.map.setZoomAndCenter(17, [data[i].longitude, data[i].latitude])
-        //   }
-        // })
+      // this.point = []
+        axios.get('/monitor/main/getMainBaseDataByCon?entName=' + data).then(res => {
+          const data = res.data.data
+          console.log(data, '搜索数据')
+          this.inputData = []
+          for (let i = 0; i < data.length; i++) {
+            console.log(data[i], 'iiiii')
+            this.inputData.push({
+              address: data[i].DOM,
+              cliType: data[i].ENTTYPE,
+              coordinate: [data[i].longitude, data[i].latitude],
+              icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
+              name: data[i].ENTNAME,
+              pripId: data[i].PRIPID,
+              level: 5
+            })
+            console.log(this.inputData, '搜索data')
+            // 打点
+            this.addMassMarks(this.inputData)
+            // 调整中心视角
+            this.map.setZoomAndCenter(17, [data[i].longitude, data[i].latitude])
+            // 给父组件传值
+            this.$emit('sendPripId',  this.inputData[0])
+          }
+        })
     },
     loadAMap (callback) {
       if (!window.AMap) {
@@ -292,20 +294,20 @@ export default {
     },
     clickAction (data, center) {
       console.log(data, center, center[0], center[1], 'lll')
-      if (this.$route.name === '远程监控') {
-        if (data.points) {
-          console.log('最后一层')
-          this.removeDisProvinceLayer()
-          this.SearchDistrict(data.name, this.proDepth)
-          this.map.setZoomAndCenter(this.zoom, center)
-          this.removeMassMarks()
-        }
-      } else if (this.$route.name === '主体服务' & !data.pripId){
-        this.removeDisProvinceLayer()
-        this.SearchDistrict(data.name, this.proDepth)
-        this.map.setZoomAndCenter(this.zoom, center)
-        this.removeMassMarks()
-      }
+      // if (this.$route.name === '远程监控') {
+      //   if (data.points) {
+      //     console.log('最后一层')
+      //     this.removeDisProvinceLayer()
+      //     this.SearchDistrict(data.name, this.proDepth)
+      //     this.map.setZoomAndCenter(this.zoom, center)
+      //     this.removeMassMarks()
+      //   }
+      // } else if (this.$route.name === '主体服务' & !data.pripId){
+      //   this.removeDisProvinceLayer()
+      //   this.SearchDistrict(data.name, this.proDepth)
+      //   this.map.setZoomAndCenter(this.zoom, center)
+      //   this.removeMassMarks()
+      // }
       if (data.level === '2') {
         this.tempData = data
       }
@@ -520,8 +522,7 @@ export default {
               polygons.push(polygon)
             }
           }
-          
-        this.removeDisProvinceLayer()
+          this.removeDisProvinceLayer()
           this.disProvinceLayer = new window.AMap.OverlayGroup(polygons)
           this.map.add(this.disProvinceLayer)
           // 地图自适应

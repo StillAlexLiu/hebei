@@ -3,6 +3,7 @@
         <a-map class="full-height full-width" selector :selector-data="currentSelector" :zoom="zoom"
                @getSelect="getSelect"
                @pointClick="pointClickDispatch"
+               @sendPripId="sendPripIdFun"
                :center="center"
                :adcode="adcode"
                :depth="depth"
@@ -12,7 +13,7 @@
                :id-key="idKey"
         >
 
-            <div slot="info">
+            <div class="full" slot="info">
                 <!-- <roll-table v-if="routeName==='综合指挥'" :data="p0Info" :dimension="p0Dimension" class="full-width"/> -->
                 <!-- <roll-table :data="p0Info" :dimension="p0Dimension" class="full-width"/> -->
                 <EntityMapInfo v-if="selectInfoState" :data="selectInfo"/>
@@ -228,6 +229,10 @@ export default {
     ...mapActions([
       'setPageData'
     ]),
+    sendPripIdFun (data) {
+      console.log('接收到的id', data)
+      this.p1Select(data.pripId, data.cliType)
+    },
     getSelect (data) { // 分发全局map select 事件
       console.log(data, 'ssddd')
       this.point = []
@@ -518,7 +523,11 @@ export default {
           axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + item.mainClass + '&entType=' + item.cliType).then(res => {
             console.log(this.point, res.data.data, '第三层1')
             this.point = []
-            this.leafNodePoint = true
+            if (item.cliType === 'AA') {
+              this.leafNodePoint = true
+            } else {
+              this.leafNodePoint = false
+            }
             const data = res.data.data
             for (let i = 0; i < data.length; i++) {
               this.point.push({
@@ -538,7 +547,11 @@ export default {
           axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + this.mainType).then(res => {
             console.log(this.point, res.data.data, '第三层2')
             this.point = []
-            this.leafNodePoint = true
+            if (item.cliType === 'AA') {
+              this.leafNodePoint = true
+            } else {
+              this.leafNodePoint = false
+            }
             const data = res.data.data
             for (let i = 0; i < data.length; i++) {
               this.point.push({

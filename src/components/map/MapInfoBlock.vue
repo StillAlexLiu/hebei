@@ -16,7 +16,7 @@ export default {
     top: 60px;
     right: -15px;
     width: 800px;
-    height: 95%;
+    // height: 95%;
     overflow-y: auto;
     >div{
         height: 100%;

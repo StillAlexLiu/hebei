@@ -3,6 +3,11 @@
         <label v-if="$route.name === '主体服务'">
             <input v-model="text2">
         </label>
+        <div class="pullBox">
+          <div class="pullBox_li" v-for="(item, index) in rollList" :key="index" @click="clickItem(item)">
+            {{index + 1}}、{{item.name}}
+          </div>
+        </div>
         <i  v-if="$route.name === '主体服务'" @click="inputCli"/>
         <div class="num">总数：{{number}}</div>
         <!-- <div class="num2">地图缩放等级: {{zoom}}</div> -->
@@ -29,7 +34,18 @@ export default {
   },
   data () {
     return {
-      text2: ''
+      text2: '',
+      rollList: [
+        {
+          name: '测试1'
+        }, {
+          name: '测试2'
+        }, {
+          name: '测试3'
+        }, {
+          name: '测试4'
+        }
+      ]
     }
   },
   methods: {
@@ -37,6 +53,9 @@ export default {
       if (this.text2) {
         this.$emit('inputData', this.text2)
       }
+    },
+    clickItem (data) {
+      console.log(data)
     }
   }
 }
@@ -50,8 +69,22 @@ export default {
     height: 106px;
     font-size: 30px;
     width: 500px;
+    .pullBox{
+      width: 450px;
+      height: 500px;
+      background: rgba(1, 1, 1, 0.5);
+      position: absolute;
+      top: 60px;
+      .pullBox_li{
+        width: 100%;
+        height: 70px;
+        line-height: 60px;
+        cursor: pointer;
+        padding: 5px 10px;
+      }
+    }
     input {
-      width: 350px;
+      width: 450px;
       height: 60px;
       color: white;
       font-size: 30px;
@@ -101,7 +134,7 @@ export default {
         position: absolute;
         background: url("./img/search.png");
         background-size: 100% 100%;
-        right: 180px;
+        right: 80px;
         top: 17px;
         cursor: pointer;
     }
