@@ -10,6 +10,7 @@
                :isInGrid="true"
                :point="point"
                :id-key="idKey"
+               :pointName="pointName"
         >
 
             <div slot="info">
@@ -71,6 +72,7 @@ export default {
       center: this.$dataAll.config.map.center,
       adcode: this.$dataAll.config.map.adcode,
       depth: this.$dataAll.config.map.depth,
+      pointName: [],
       leafNodePoint: false,
       selectorData: this.$dataAll.config.mapTab,
       currentSelector: [],
@@ -244,8 +246,14 @@ export default {
       const items = data.items
       this.point = []
       this.leafNodePoint = false
-      for (let i = 0; i < items.length; i++) {
-        this.point = [...this.point, ...this.makeTreePoint(items[i], items[i].icon)]
+      if (items.length === 0) {
+        this.pointName = []
+      } else {
+        this.pointName = []
+        for (let i = 0; i < items.length; i++) {
+          this.pointName.push(items[i].name)
+          this.point = [...this.point, ...this.makeTreePoint(items[i], items[i].icon)]
+        }
       }
     },
     clearInfo () {
@@ -610,7 +618,7 @@ export default {
           console.log('远程监控', item)
           if (item.points) {
             this.point = item.points
-          }else if (!item.points) {
+          } else if (!item.points) {
             Bus.$emit('message', item)
           }
           break
