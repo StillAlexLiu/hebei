@@ -3,7 +3,7 @@
         <label v-if="$route.name === '主体服务'">
             <input v-model="text2">
         </label>
-        <div class="pullBox">
+        <div class="pullBox" v-if="rollList">
           <div class="pullBox_li" v-for="(item, index) in rollList" :key="index" @click="clickItem(item)">
             {{index + 1}}、{{item.name}}
           </div>
@@ -36,26 +36,36 @@ export default {
     return {
       text2: '',
       rollList: [
-        {
-          name: '测试1'
-        }, {
-          name: '测试2'
-        }, {
-          name: '测试3'
-        }, {
-          name: '测试4'
-        }
       ]
     }
   },
   methods: {
     inputCli () {
       if (this.text2) {
-        this.$emit('inputData', this.text2)
+        axios.get('/monitor/main/getMainBaseDataByCon?entName=' + this.text2).then(res => {
+          const data = res.data.data
+          console.log(data, '搜索数据')
+          this.rollList = []
+          for (let i = 0; i < data.length; i++) {
+            console.log(data[i], 'iiiii')
+            this.rollList.push({
+              address: data[i].DOM,
+              cliType: data[i].ENTTYPE,
+              longitude: data[i].longitude,
+              latitude: data[i].latitude,
+              coordinate: [data[i].longitude, data[i].latitude],
+              icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
+              name: data[i].ENTNAME,
+              pripId: data[i].PRIPID,
+              level: 5
+            })
+            console.log(this.rollList, '搜索data')
+          }
+        })
       }
     },
     clickItem (data) {
-      console.log(data)
+      this.$emit('inputData', data)
     }
   }
 }
@@ -71,7 +81,8 @@ export default {
     width: 500px;
     .pullBox{
       width: 450px;
-      height: 500px;
+      max-height: 500px;
+      overflow-y: auto;
       background: rgba(1, 1, 1, 0.5);
       position: absolute;
       top: 60px;
