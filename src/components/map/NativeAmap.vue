@@ -242,7 +242,7 @@ export default {
     //   console.log(arguments)
     // },
     clickHandler (e) {
-      console.log('clickHandler')
+      console.log('clickHandler', e)
       const data = e.target.getExtData()
       // this.tempData = adcode
       console.log(data)
