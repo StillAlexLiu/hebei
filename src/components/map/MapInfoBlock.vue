@@ -1,5 +1,5 @@
 <template>
-    <div class="info">
+    <div class="info full-height">
         <slot></slot>
     </div>
 </template>
@@ -15,7 +15,7 @@ export default {
     position: absolute;
     top: 60px;
     right: -15px;
-    width: 800px;
+    width: 1000px;
     // height: 95%;
     overflow-y: auto;
     >div{
