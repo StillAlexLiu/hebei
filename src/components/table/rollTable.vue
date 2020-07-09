@@ -6,10 +6,10 @@
                 {{item.name}}
             </div>
         </div>
-        <div style="overflow:hidden;margin-top:60px;" class="h-4-5">
+        <div style="overflow:hidden;margin-top:60px;height:52%">
               <transition-group name="list" tag='ul' ref="table"
-              style="width: 100%;height:100%!important" class="table">
-                <li class="row  body  list-item full-width h-1-10" v-for="(item,index) in demo"
+              style="width: 98.7%;height:100%!important" class="table">
+                <li class="row  body  list-item full-width h-1-9" v-for="(item,index) in demo"
                      :key="item.key"
                      @click="click(item,index)">
                     <div class="cell" v-for="(itemd,indexd) in dimension" :key="indexd+'&'+item.key"
