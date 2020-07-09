@@ -31,7 +31,7 @@ export default {
       pointNumber: 0,
       tempData: {},
       disProvinceLayer: {},
-      proDepth: 1,
+      proDepth: 0,
       mapZoom: {
         type: '',
         zoom: 0
@@ -54,7 +54,7 @@ export default {
     },
     depth: { // 缩放
       type: Number,
-      default: 0
+      default: 1
     },
     center: { // 中心点
       type: Array,
@@ -128,8 +128,10 @@ export default {
             }
             // this.map.setZoomAndCenter(9, this.center)
             // this.pointNumber = 0
+            console.log(this.point, 'ppooo')
             if (this.point.length > 0) {
               const areaName = this.point[0].name.charAt(this.point[0].name.length - 1)
+              console.log(areaName, 'area')
               if (areaName !== '市') {
                 this.addMassMarks(this.point)
               } else if (areaName === '市') {
@@ -217,7 +219,7 @@ export default {
         })
         toolbar.on('zoomchanged', self.zoomchanged)
         self.map.addControl(toolbar)
-        // self.SearchDistrict(self.adcode[0], self.depth)
+        self.SearchDistrict(self.adcode[0], self.depth)
       })
     },
     zoomchanged (zoomObject) {
@@ -264,8 +266,7 @@ export default {
       }
       console.log(this.zoom)
       console.log(zoom)
-      console.log(data)
-      this.SearchDistrict(data.ad_code, this.proDepth)
+      this.SearchDistrict(data.name, this.proDepth)
       this.map.setZoomAndCenter(zoom, center)
       this.removeMassMarks()
       this.$emit('pointClick', data)
@@ -290,11 +291,18 @@ export default {
         }
       }
     },
-    getPointNumber (data) {
-
-    },
     addMassMarks (data) { // 海量点
-      console.log('海量点')
+      console.log(data, '海量点')
+      this.pointNumber = 0
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].baseCount) {
+          this.pointNumber += data[i].baseCount
+        } else if (data[i].points) {
+          this.pointNumber += data[i].points.length
+        } else {
+          this.pointNumber = data.length
+        }
+      }
       const newArray = []
       if (this.$route.name === '远程监控') {
         if (data[0].points) {
@@ -308,71 +316,64 @@ export default {
           this.pointMap(data)
         }
       } else if (this.$route.name === '主体服务') {
-        this.pointMap(data)
+        var newPoint = []
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].name !== '河北雄安新区') {
+            newPoint.push(data[i])
+          }
+        }
+        this.pointMap(newPoint)
       } else {
         this.pointMap(data)
       }
     },
     pointMap (data) {
       this.markers = []
-      this.pointNumber = 0
-
-      console.log('开始')
-      console.log(new Date())
       for (let i = 0; i < data.length; i++) {
         const item = data[i]
-        if (item.baseCount) {
-          this.pointNumber += item.baseCount
-        } else if (item.points) {
-          this.pointNumber += item.points.length
-        } else {
-          this.pointNumber = data.length
-        }
-        if (item.name !== '河北雄安新区') {
-          const marker = new window.AMap.Marker({
-            content: this.contentMaker(item),
-            position: item.coordinate,
-            zIndex: 101,
-            title: item.name,
-            extData: item
-          })
-          marker.on('click', this.clickHandler)
-          this.markers.push(marker)
-        }
+        const marker = new window.AMap.Marker({
+          content: this.contentMaker(item),
+          position: item.coordinate,
+          zIndex: 101,
+          title: item.name,
+          extData: item
+        })
+        marker.on('click', this.clickHandler)
+        this.markers.push(marker)
       }
-      console.log('结束')
-      console.log(new Date())
       if (this.leafNodePoint) { // 判断是否是最后的叶子节点，即主体
-        // this.cluster = new window.AMap.MarkerClusterer(this.map, this.markers, {
-        //   gridSize: 300
-        // })
-        const style = [{
-          // url: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
-          url: data[0].icon ? data[0].icon : 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
-          anchor: new AMap.Pixel(0, 0),
-          size: data[0].icon ? new AMap.Size(36, 36) : new AMap.Size(36, 20)
-        }]
-        console.log(style)
-        const points = []
-        for (let i = 0; i < data.length; i++) {
-          const marker = data[i]
-          marker.lnglat = marker.coordinate
-          points.push(marker)
-        }
-        this.pointNumber = points.length
-        if (points.length > 0) {
-          this.mass = new window.AMap.MassMarks(points, {
-            opacity: 0.8,
-            zIndex: 111,
-            cursor: 'pointer',
-            style: style
-          })
-          this.mass.on('click', this.clickHandler)
-          this.mass.setMap(this.map)
-        }
+        this.cluster = new window.AMap.MarkerClusterer(this.map, this.markers, {
+          gridSize: 300
+        })
+        // console.log('海量点')
+        // const style = [{
+        //   // url: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
+        //   url: data[0].icon ? data[0].icon : 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
+        //   anchor: new AMap.Pixel(0, 0),
+        //   size: data[0].icon ? new AMap.Size(36, 36) : new AMap.Size(36, 20)
+        // }]
+        // console.log(style)
+        // const points = []
+        // for (let i = 0; i < data.length; i++) {
+        //   const marker = data[i]
+        //   marker.lnglat = marker.coordinate
+        //   points.push(marker)
+        // }
+        // this.pointNumber = points.length
+        // if (points.length > 0) {
+        //   this.mass = new window.AMap.MassMarks(points, {
+        //     opacity: 0.8,
+        //     zIndex: 111,
+        //     cursor: 'pointer',
+        //     style: style
+        //   })
+        //   this.mass.on('click', this.clickHandler)
+        //   this.mass.setMap(this.map)
+        // }
       } else {
         this.map.add(this.markers)
       }
+      // this.map.add(this.markers)
     },
     removeMassMarks () {
       try {
@@ -391,58 +392,99 @@ export default {
 
       }
     },
-    makePolygon (path, data) {
-      const polygon = new window.AMap.Polygon({
-        path: path,
-        strokeColor: '#fff',
-        strokeWeight: 1,
-        strokeOpacity: 0.2,
-        fillOpacity: 0.3,
-        fillColor: this.getColorByAdcode(data.adcode),
-        zIndex: 50,
-        extData: data
+    searchFunc (adcode) { // 网格搜索方法，调用amap的api，无需修改
+      // console.log(adcode, 'adddd')
+      const districtSearch = new window.AMap.DistrictSearch({
+        // 关键字对应的行政区级别，country表示国家
+        level: 'street',
+        //  显示下级行政区级数，1表示返回下一级行政区
+        extensions: 'all',
+        showbiz: true,
+        subdistrict: 1
       })
-      return polygon
-    },
-    geoFeaturesToOverlayGroup (features, depth) {
-      const polygons = []
-      for (let k = 0; k < features.length; k++) {
-        for (let i = 0; i < features[k].geometry.coordinates.length; i++) {
-          const geometry = features[k].geometry
-          const data = {
-            name: features[k].properties.name,
-            adcode: features[k].properties.code,
-            depth: depth
-          }
-          if (geometry.type === 'MultiPolygon') {
-            for (let j = 0; j < geometry.coordinates[i].length; j++) {
-              const path = features[k].geometry.coordinates[i][j]
-              polygons.push(this.makePolygon(path, data))
-            }
-          } else if (geometry.type === 'Polygon') {
-            const path = features[k].geometry.coordinates[i]
-            polygons.push(this.makePolygon(path, data))
-          }
-        }
-      }
-      this.removeDisProvinceLayer()
-      this.disProvinceLayer = new window.AMap.OverlayGroup(polygons)
-      this.map.add(this.disProvinceLayer)
-    },
-    SearchDistrict (adcode, depth) { // pCode为指定父节点搜索方式
-      this.proDepth = depth
-      // 搜索所有省/直辖市信息
-      this.$geoLoader(adcode).then(result => {
-        this.geoFeaturesToOverlayGroup(result.features, depth)
-      }).catch(e => {
-        // catch里面执行子元素查询
-        this.$geoLoader(this.tempData.ad_code).then(result => {
-          const features = result.features.filter(value => {
-            return value.properties.code === adcode
-          })
-          this.geoFeaturesToOverlayGroup(features, depth)
+      return new Promise(resolve => {
+        districtSearch.search(adcode, (status, result) => {
+          // console.log(result)
+          // console.log(result.districtList[0].name)
+          // console.log([result.districtList[0].center.lng, result.districtList[0].center.lat].toString())
+          resolve(result)
         })
       })
+    },
+    SearchDistrict (adcode, depth) { // 搜索adcode下所有网格
+      console.log(adcode, depth)
+      this.proDepth = depth
+      // 搜索所有省/直辖市信息
+      this.searchFunc(adcode).then(result => {
+        const list = result.districtList[0].districtList
+        const polygons = []
+        const promiseList = []
+
+        if (list.length > 0) {
+          //     console.log(1)
+          for (let j = 0; j < list.length; j++) {
+            const item = list[j]
+            if (item.level === 'street') {
+              if (j === 0) {
+                promiseList.push(this.searchFunc(item.adcode))
+              }
+            } else {
+              promiseList.push(this.searchFunc(item.adcode))
+            }
+          }
+        }
+        Promise.all(promiseList).then(value => {
+          for (let i = 0; i < value.length; i++) {
+            const item = value[i]
+            for (let j = 0; j < item.districtList[0].boundaries.length; j++) {
+              const bounds = item.districtList[0].boundaries[j]
+              const name = item.districtList[0].name
+              const adcode = item.districtList[0].adcode
+              const polygon = new window.AMap.Polygon({
+                // map: this.map,
+                // strokeWeight: 1,
+                // path: bounds[i],
+                // fillOpacity: 0.7,
+                // fillColor: '#CCF3FF',
+                // strokeColor: '#CC66CC'
+                path: bounds,
+                strokeColor: '#fff',
+                strokeWeight: 1,
+                strokeOpacity: 0.2,
+                fillOpacity: 0.3,
+                fillColor: this.getColorByAdcode(adcode),
+                zIndex: 50,
+                extData: {
+                  name,
+                  adcode,
+                  depth
+                }
+              })
+              polygon.on('click', this.layerClick)
+              polygons.push(polygon)
+            }
+          }
+          this.removeDisProvinceLayer()
+          this.disProvinceLayer = new window.AMap.OverlayGroup(polygons)
+          this.map.add(this.disProvinceLayer)
+          // 地图自适应
+          // this.map.setFitView()
+        })
+      })
+    },
+    layerClick (layer) {
+      console.log('移除图层点击')
+      // 暂时移除图层点击
+      // console.log(layer)
+      // const target = layer.target
+      // console.log(target)
+      // const data = target.getExtData()
+      // this.removeDisProvinceLayer() // 先移除图层
+      // this.SearchDistrict(data.adcode, data.depth + 1)
+      // this.map.setAndCenter(9, [layer.lnglat.lng, layer.lnglat.lat])
+    },
+    refreshDisProvinceLayer () {
+
     },
     removeDisProvinceLayer () {
       console.log('removeDisProvinceLayer')
@@ -453,12 +495,14 @@ export default {
       }
     },
     getColorByAdcode (adcode) {
+      // console.log(adcode, 'aaddss')
       if (!this.colors[adcode]) {
         this.colors[adcode] = Mock.mock('@color')
       }
       return this.colors[adcode]
     },
     getSelect (list) { // 发送地图下方的选择器事件
+      console.log('selector click')
       this.$emit('getSelect', list)
     }
   },

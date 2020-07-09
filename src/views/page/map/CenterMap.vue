@@ -524,7 +524,7 @@ export default {
       if (item.ad_code) {
         if (item.mainClass) {
           axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + item.mainClass + '&entType=' + item.cliType).then(res => {
-            console.log(this.point, res.data.data, '第三层1')
+            console.log('第三层1')
             this.point = []
             this.leafNodePoint = true
             const data = res.data.data
@@ -544,7 +544,9 @@ export default {
         } else {
           // 11错误
           axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + this.mainType).then(res => {
-            console.log(this.point, res.data.data, '第三层2')
+            console.log('第三层2')
+            console.log('开始')
+            console.log(new Date())
             this.point = []
             this.leafNodePoint = true
             const data = res.data.data
@@ -558,6 +560,9 @@ export default {
                 cliType: item.cliType
               })
             }
+
+            console.log('结束')
+            console.log(new Date())
             // this.p1Select()
           })
         }
