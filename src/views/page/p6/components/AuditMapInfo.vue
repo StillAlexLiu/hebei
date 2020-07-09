@@ -25,10 +25,12 @@ export default {
       radio: [{
         name: '处理中案件 552 件',
         value: 0
-      }, {
-        name: '处理中线索 142 件',
-        value: 1
-      }],
+      }
+      // , {
+      //   name: '处理中线索 142 件',
+      //   value: 1
+      // }
+      ],
       select: {},
       dimensions: [[
         {

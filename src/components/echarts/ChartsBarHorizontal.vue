@@ -72,12 +72,21 @@ export default {
               // 坐标轴轴线相关设置。数学上的x轴
               show: false,
               lineStyle: {
-                color: '#f9f9f9'
+                color: 'rgba(304, 304, 304, 0.9)',
+                fontSize: 20
               }
+            },
+            nameTextStyle: {
+              color: 'rgba(304, 304, 304, 0.9)',
+              fontSize: 20
             },
             axisLabel: {
               // 坐标轴刻度标签的相关设置
-              interval: 0
+              interval: 0,
+              textStyle: {
+                color: 'rgba(304, 304, 304, 0.9)',
+                fontSize: 20
+              }
             },
             axisTick: {
               show: false
@@ -106,7 +115,7 @@ export default {
               show: this.showLabel,
               margin: 20,
               textStyle: {
-                color: '#d1e6eb',
+                color: 'rgba(304, 304, 304, 0.9)',
                 fontSize: 20
               }
             },
@@ -125,7 +134,9 @@ export default {
           },
           label: {
             show: true,
-            position: 'right'
+            position: 'right',
+                color: 'rgba(304, 304, 304, 0.9)',
+                fontSize: 20
           },
           itemStyle: {
             normal: {

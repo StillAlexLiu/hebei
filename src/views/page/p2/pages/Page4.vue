@@ -26,13 +26,13 @@
         </div>
         <div class="h-1-3">
             <container class="w-1-2 full-height" :title="TypeName.name + '主要行业分析'">
-              <!-- <ChartsScatter :dimensions="['name','value','size']" :data="scatterData" :base-size="1"
+              <ChartsScatter :dimensions="['name','value','size']" :data="scatterData" :base-size="1"
                            :unit="'个'"
                            :size="'4e2'"
                            :showX="false"  :showSize='true'
-                           :colors="['#50E3C2','#FF9177','#00B1FA','#8A7CEF','#FFE17D','#00E138','#FF7B83']"/> -->
-              <ChartsPie :double-pie="true" :data="pieData4" :center-data="pieCenterData" :showLegend='true'
-                           :color="['#FFBF24','#FE6941','#55B0EE','#8A7CEF','#25DD54','#5FE7DC']" :show-value="true"/>
+                           :colors="['#50E3C2','#FF9177','#00B1FA','#8A7CEF','#FFE17D','#00E138','#FF7B83']"/>
+              <!-- <ChartsPie :double-pie="true" :data="pieData4" :center-data="pieCenterData" :showLegend='true'
+                           :color="['#FFBF24','#FE6941','#55B0EE','#8A7CEF','#25DD54','#5FE7DC']" :show-value="true"/> -->
             </container>
             <container class="w-1-2 full-height" :title="TypeName.name + '场所分析'">
                 <ChartsPie :data="pieData" :is-pie="false" :show-value="true"/>

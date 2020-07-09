@@ -125,6 +125,10 @@ export default {
               color: 'rgba(304, 304, 304, 0.9)',
               fontSize: 20
             },
+            nameTextStyle: {
+              color: 'rgba(304, 304, 304, 0.9)',
+              fontSize: 20
+            },
             splitLine: {
               lineStyle: {
                 color: 'rgba(51,75,115,0.4)'
@@ -164,6 +168,8 @@ export default {
             label: {
               normal: {
                 show: this.showValue,
+                color: 'rgba(304, 304, 304, 0.9)',
+                fontSize: 20,
                 position: 'top'
               }
             },

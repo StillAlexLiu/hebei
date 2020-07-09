@@ -3,13 +3,19 @@
         <label v-if="$route.name === '主体服务'">
             <input v-model="text2">
         </label>
-        <i  v-if="$route.name === '主体服务'"/>
+        <div class="pullBox" v-if="rollList">
+          <div class="pullBox_li" v-for="(item, index) in rollList" :key="index" @click="clickItem(item)">
+            {{index + 1}}、{{item.name}}
+          </div>
+        </div>
+        <i  v-if="$route.name === '主体服务'" @click="inputCli"/>
         <div class="num">总数：{{number}}</div>
-        <div class="num2">地图缩放等级: {{zoom}}</div>
+        <!-- <div class="num2">地图缩放等级: {{zoom}}</div> -->
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'searchBox',
   props: {
@@ -28,11 +34,37 @@ export default {
   },
   data () {
     return {
-      text2: ''
+      text2: '',
+      rollList: [
+      ]
     }
   },
-  watch: {
-    text2 (data) {
+  methods: {
+    inputCli () {
+      if (this.text2) {
+        axios.get('/monitor/main/getMainBaseDataByCon?entName=' + this.text2).then(res => {
+          const data = res.data.data
+          console.log(data, '搜索数据')
+          this.rollList = []
+          for (let i = 0; i < data.length; i++) {
+            console.log(data[i], 'iiiii')
+            this.rollList.push({
+              address: data[i].DOM,
+              cliType: data[i].ENTTYPE,
+              longitude: data[i].longitude,
+              latitude: data[i].latitude,
+              coordinate: [data[i].longitude, data[i].latitude],
+              icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
+              name: data[i].ENTNAME,
+              pripId: data[i].PRIPID,
+              level: 5
+            })
+            console.log(this.rollList, '搜索data')
+          }
+        })
+      }
+    },
+    clickItem (data) {
       this.$emit('inputData', data)
     }
   }
@@ -47,8 +79,23 @@ export default {
     height: 106px;
     font-size: 30px;
     width: 500px;
+    .pullBox{
+      width: 450px;
+      max-height: 500px;
+      overflow-y: auto;
+      background: rgba(1, 1, 1, 0.5);
+      position: absolute;
+      top: 60px;
+      .pullBox_li{
+        width: 100%;
+        height: 70px;
+        line-height: 60px;
+        cursor: pointer;
+        padding: 5px 10px;
+      }
+    }
     input {
-      width: 350px;
+      width: 450px;
       height: 60px;
       color: white;
       font-size: 30px;
@@ -98,7 +145,7 @@ export default {
         position: absolute;
         background: url("./img/search.png");
         background-size: 100% 100%;
-        right: 180px;
+        right: 80px;
         top: 17px;
         cursor: pointer;
     }

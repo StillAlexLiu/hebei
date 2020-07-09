@@ -109,7 +109,7 @@ export default {
   },
   methods: {
     showBoxCli (item) {
-      console.log(item, 'iii')
+      // console.log(item, 'iii')
       item.active = false
       this.showBox = false
       this.send()
@@ -188,10 +188,9 @@ export default {
       })
     },
     itemClick (item, index, array) {
-      console.log('itemClick')
+      console.log('itemClick', itemClick)
       // 关闭营业执照
       Bus.$emit('closeMainBox', false)
-      // console.log(item, array, this.data[this.activeIndex], '点击图标')
       this.shouBtn = item
       if (this.single) {
         for (let i = 0; i < array.length; i++) {
@@ -200,25 +199,20 @@ export default {
           }
         }
       }
-      console.log(item, array, '点击')
+      // console.log(item, array, '点击')
       if (this.$route.name === '主体服务') {
         if (item.name === '个体工商户') {
-          console.log(111)
           item.active = !item.active
           this.send()
         } else if (!item.children) {
-          console.log(333)
           item.active = true
           this.send()
         } else {
-          console.log(222)
           item.active = true
         }
       } else {
         item.active = !item.active
       }
-
-      console.log(item, array, 'aayy')
       if (item.name === '个体工商户' || !item.children) {
         // ????这里send干啥，上面不是send了吗？
         // this.send()
@@ -237,6 +231,9 @@ export default {
           }
         }
       }
+      if(this.$route.name === '远程监控') {
+        this.send()
+      } 
     },
     // tab切换
     pngClick (item, index, array) {
@@ -244,13 +241,11 @@ export default {
       Bus.$emit('closeMainBox', false)
       console.log(item, this.shouBtn, '点击图标')
       if (item === this.shouBtn) {
-        console.log('一样')
         this.shouBtn = {
           name: '市场主体',
           type: 0
         }
       } else {
-        console.log('不一样')
         this.shouBtn = item
       }
       for (let i = 0; i < array.length; i++) {
@@ -273,14 +268,14 @@ export default {
       }
     },
     send () {
-      console.log(this.data, this.activeIndex, 'aaaaaaaaaaaaaaaaaaa')
+      // console.log(this.data, this.activeIndex, 'aaaaaaaaaaaaaaaaaaa')
       this.$emit('getSelect', {
         tab: this.data[this.activeIndex],
         items: this.findActive()
       })
     },
     findActive () {
-      console.log(this.shouBtn, this.data, 'find')
+      // console.log(this.shouBtn, this.data, 'find')
       this.selectArray = []
       // if (!this.shouBtn.icon) {
       //   this.selectArray.push(this.shouBtn)
@@ -289,11 +284,11 @@ export default {
       for (let i = 0; i < this.data[this.activeIndex].children.length; i++) {
         const item = this.data[this.activeIndex].children[i]
         if (item.active) {
-          console.log(item, 'lllllllllllllllk')
+          // console.log(item, 'lllllllllllllllk')
           if (this.shouBtn.name === '公有制企业' || this.shouBtn.name === '外资企业' || this.shouBtn.name === '私营企业' || this.shouBtn.name === '农民合作社') {
             this.selectArray = []
             const listName = item.children
-            console.log(listName, 'nnnn')
+            // console.log(listName, 'nnnn')
             for (let i = 0; i < listName.length; i++) {
               if (listName[i].active) {
                 // console.log(listName[i], '1')
@@ -327,7 +322,7 @@ export default {
         // }
       }
       // }
-      console.log(this.selectArray, 'sssaa')
+      // console.log(this.selectArray, 'sssaa')
       return this.selectArray
     }
   }
