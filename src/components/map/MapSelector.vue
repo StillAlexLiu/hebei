@@ -11,7 +11,7 @@
                 <div class="btn" v-if="!showBox"
                      :key="index">
                     <img class="img" alt :src="item.icon" @click="itemClick(item,index,data[activeIndex].children)"
-                         v-if="!item.children || index === 4"/>
+                         v-if="!item.children || index === 3"/>
                     <img class="img" alt :src="item.icon" @click="pngClick(item,index,data[activeIndex].children)"
                          v-else>
                     <div>{{item.name}}</div>
@@ -25,7 +25,7 @@
                 <div class="sub-btn-group full-width padding" :key="'s'+index"
                      v-if="item.children&&item.active&&showBox">
                     <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-公有制企业@2x.png"
-                         v-if="item.name === '公有制企业'" @click="showBoxCli(item)"/>
+                         v-if="item.name === '国有、集体及其控股企业'" @click="showBoxCli(item)"/>
                     <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-农民合作社@2x.png"
                          v-if="item.name === '农民合作社'" @click="showBoxCli(item)"/>
                     <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-外资企业@2x.png"
@@ -104,12 +104,17 @@ export default {
       deep: true,
       handler: function () {
         this.activeIndex = 0
+        const pull = this.$dataAll.config.mapTab[1].children[0].children
+        for (let i = 0; i < pull.length; i++) {
+          pull[i].active = false
+        }
+        // console.log(pull, 'pulll')
       }
     }
   },
   methods: {
     showBoxCli (item) {
-      // console.log(item, 'iii')
+      console.log(item, 'iii')
       item.active = false
       this.showBox = false
       this.send()
@@ -188,7 +193,7 @@ export default {
       })
     },
     itemClick (item, index, array) {
-      console.log('itemClick', itemClick)
+      console.log('itemClick', item)
       // 关闭营业执照
       Bus.$emit('closeMainBox', false)
       this.shouBtn = item
@@ -246,6 +251,7 @@ export default {
           type: 0
         }
       } else {
+        console.log('不一样')
         this.shouBtn = item
       }
       for (let i = 0; i < array.length; i++) {
@@ -268,14 +274,14 @@ export default {
       }
     },
     send () {
-      // console.log(this.data, this.activeIndex, 'aaaaaaaaaaaaaaaaaaa')
+      console.log(this.data, this.activeIndex, 'aaaaaaaaaaaaaaaaaaa')
       this.$emit('getSelect', {
         tab: this.data[this.activeIndex],
         items: this.findActive()
       })
     },
     findActive () {
-      // console.log(this.shouBtn, this.data, 'find')
+      console.log(this.shouBtn, this.data, 'find')
       this.selectArray = []
       // if (!this.shouBtn.icon) {
       //   this.selectArray.push(this.shouBtn)
@@ -284,11 +290,11 @@ export default {
       for (let i = 0; i < this.data[this.activeIndex].children.length; i++) {
         const item = this.data[this.activeIndex].children[i]
         if (item.active) {
-          // console.log(item, 'lllllllllllllllk')
-          if (this.shouBtn.name === '公有制企业' || this.shouBtn.name === '外资企业' || this.shouBtn.name === '私营企业' || this.shouBtn.name === '农民合作社') {
+          console.log(item, 'lllllllllllllllk')
+          if (this.shouBtn.name === '国有、集体及其控股企业' || this.shouBtn.name === '外资企业' || this.shouBtn.name === '私营企业' || this.shouBtn.name === '农民合作社') {
             this.selectArray = []
             const listName = item.children
-            // console.log(listName, 'nnnn')
+            console.log(listName, 'nnnn')
             for (let i = 0; i < listName.length; i++) {
               if (listName[i].active) {
                 // console.log(listName[i], '1')
@@ -322,7 +328,7 @@ export default {
         // }
       }
       // }
-      // console.log(this.selectArray, 'sssaa')
+      console.log(this.selectArray, 'sssaa')
       return this.selectArray
     }
   }
