@@ -2,6 +2,7 @@ import map from './NativeAmap'
 // import listener from './listener'
 // import MapSelector from './MapSelector'
 import Vue from 'vue'
+import jsonLoader from './jsonLoader'
 
 const bus = new Vue()
 // 该文件响应public下的index.html中的onAMapLoad方法，当高德地图加载完毕后，发送onAMapLoad事件，在地图引用部分进行接收
@@ -23,6 +24,7 @@ export default {
       loadJs(options.map)
       Vue.component('a-map', map)
       Vue.prototype.$AMapBus = bus
+      Vue.prototype.$geoLoader = jsonLoader
     }
     // Vue.component('MapSelector', MapSelector)
   }

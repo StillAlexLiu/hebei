@@ -3,7 +3,6 @@
         <a-map class="full-height full-width" selector :selector-data="currentSelector" :zoom="zoom"
                @getSelect="getSelect"
                @pointClick="pointClickDispatch"
-               @sendPripId="sendPripIdFun"
                :center="center"
                :adcode="adcode"
                :depth="depth"
@@ -13,6 +12,7 @@
                :id-key="idKey"
                :pointName="pointName"
         >
+
             <div slot="info">
                 <!-- <roll-table v-if="routeName==='综合指挥'" :data="p0Info" :dimension="p0Dimension" class="full-width"/> -->
                 <!-- <roll-table :data="p0Info" :dimension="p0Dimension" class="full-width"/> -->
@@ -34,18 +34,20 @@ import Mock from 'mockjs'
 import EntityMapInfo from '../p1/componets/EntityMapInfo'
 import WarningMapInfo from '../p4/components/WarningMapInfo'
 import AuditMapInfo from '../p6/components/AuditMapInfo'
-// import SupervisionMapInfo from '../p2/compontes/SupervisionMapInfo'
+import SupervisionMapInfo from '../p2/compontes/SupervisionMapInfo'
 import ComplaintMapInfo from '../p5/compontes/ComplaintMapInfo'
 import KeepOnRecordMapInfo from '../p10/components/KeepOnRecordMapInfo'
 import Bus from '@/assets/bus.js'
 import axios from 'axios'
-// import { stat } from 'fs'
+
+import { stat } from 'fs'
+
 export default {
   name: 'CenterMap',
   components: {
     KeepOnRecordMapInfo,
     ComplaintMapInfo,
-    // SupervisionMapInfo,
+    SupervisionMapInfo,
     AuditMapInfo,
     WarningMapInfo,
     EntityMapInfo
@@ -228,13 +230,8 @@ export default {
     ...mapActions([
       'setPageData'
     ]),
-    sendPripIdFun (data) {
-      // console.log('接收到的id', data)
-      // 打点
-      this.p1Select(data.pripId, data.cliType)
-    },
     getSelect (data) { // 分发全局map select 事件
-      // console.log(data, 'ssddd')
+      console.log(data, 'ssddd')
       this.point = []
       this.Dispatch(data)
       this.getSelectItem(data)
@@ -244,7 +241,7 @@ export default {
       })
     },
     getSelectItem (data) {
-      // console.log(data, '点击')
+      console.log(data, '点击')
       this.clearInfo()
       const items = data.items
       this.point = []
@@ -269,7 +266,7 @@ export default {
     },
     makeTreePoint (number, icon) {
       const cliType = number.type
-      // console.log(cliType, 'clitype')
+      console.log(cliType, 'clitype')
       const len = this.city.length
       this.latPoint = []
       if (this.$route.name === '远程监控') {
@@ -288,7 +285,7 @@ export default {
         // var newArray = []
         axios.get('/monitor/main/hyjk/getHyRegions').then(res => {
           const data = res.data.data
-          // console.log('海康', data)
+          console.log('海康', data)
           for (let i = 0; i < data.length; i++) {
             if (data[i].latitude) {
               this.latPoint.push(data[i])
@@ -296,7 +293,7 @@ export default {
           }
           axios.get('/monitor/main/hik/getHikRegions').then(res => {
             const data = res.data.data
-            // console.log('华烨', data)
+            console.log('华烨', data)
             for (let q = 0; q < data.length; q++) {
               if (data[q].latitude) {
                 this.latPoint.push(data[q])
@@ -339,7 +336,7 @@ export default {
         })
         return list
       } else if (this.$route.name === '主体服务') {
-        // console.log('主体服务', number, icon)
+        console.log('主体服务', number, icon)
         this.icon = icon
         const list = []
         for (let i = 0; i < len; i++) {
@@ -360,7 +357,7 @@ export default {
         if (number.mainClass) {
           axios.get('/monitor/main/getDistrictCount?adCode=130000&reportType=' + number.mainClass + '&entType=' + number.type).then(res => {
             const data = res.data.data
-            // console.log(data, '地图1层打点2')
+            console.log(data, '地图1层打点2')
             for (let i = 0; i < data.length; i++) {
               for (let o = 0; o < list.length; o++) {
                 if (list[o].name === data[i].name) {
@@ -376,7 +373,7 @@ export default {
         } else {
           axios.get('/monitor/main/getDistrictCount?adCode=130000&reportType=' + cliType).then(res => {
             const data = res.data.data
-            // console.log(data, '地图1层打点2')
+            console.log(data, '地图1层打点2')
             for (let i = 0; i < data.length; i++) {
               for (let o = 0; o < list.length; o++) {
                 if (list[o].name === data[i].name) {
@@ -389,7 +386,7 @@ export default {
             }
           })
         }
-        // console.log(list)
+        console.log(list)
         return list
       } else if (this.$route.name === '稽查办案') {
         const list = []
@@ -424,7 +421,7 @@ export default {
     getCaption (obj, state) {
       // console.log(obj, state)
       var index = obj.lastIndexOf('\,')
-      if (state === 0) {
+      if (state == 0) {
         obj = obj.substring(0, index)
       } else {
         obj = obj.substring(index + 1, obj.length)
@@ -447,7 +444,7 @@ export default {
       }
     },
     Dispatch (data) {
-      // console.log(data, '点击title')
+      console.log(data, '点击title')
       this.commandName = ''
       this.p2InfoDetail = {}
       this.p4Info = {}
@@ -473,11 +470,11 @@ export default {
     },
     // 第二层地图打点
     returnQu (item) {
-      // console.log(item, '第二层')
+      console.log(item, '第二层')
       if (item.ad_code) {
         if (item.mainClass) {
           axios.get('/monitor/main/getDistrictCount?adCode=' + item.ad_code + '&reportType=' + item.mainClass + '&entType=' + item.cliType).then(res => {
-            // console.log(res.data.data, '第二层')
+            console.log(res.data.data, '第二层')
             this.point = []
             this.leafNodePoint = false
             const data = res.data.data
@@ -499,7 +496,7 @@ export default {
           })
         } else {
           axios.get('/monitor/main/getDistrictCount?adCode=' + item.ad_code + '&reportType=' + this.mainType).then(res => {
-            // console.log(res.data.data, '第二层')
+            console.log(res.data.data, '第二层')
             this.point = []
             this.leafNodePoint = false
             const data = res.data.data
@@ -523,17 +520,13 @@ export default {
     },
     // 第三层地图打点
     returnList (item) {
-      // console.log(item, this.icon, '第三层')
+      console.log(item, this.icon, '第三层')
       if (item.ad_code) {
         if (item.mainClass) {
           axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + item.mainClass + '&entType=' + item.cliType).then(res => {
-            // console.log(this.point, res.data.data, '第三层1')
+            console.log('第三层1')
             this.point = []
-            if (item.cliType === 'AA') {
-              this.leafNodePoint = true
-            } else {
-              this.leafNodePoint = false
-            }
+            this.leafNodePoint = true
             const data = res.data.data
             for (let i = 0; i < data.length; i++) {
               this.point.push({
@@ -545,19 +538,17 @@ export default {
                 cliType: item.cliType
               })
             }
-            // console.log(this.point, 'ppp11')
+            console.log(this.point, 'ppp11')
             // this.p1Select()
           })
         } else {
           // 11错误
           axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + this.mainType).then(res => {
-            // console.log(this.point, res.data.data, '第三层2')
+            console.log('第三层2')
+            console.log('开始')
+            console.log(new Date())
             this.point = []
-            if (item.cliType === 'AA') {
-              this.leafNodePoint = true
-            } else {
-              this.leafNodePoint = false
-            }
+            this.leafNodePoint = true
             const data = res.data.data
             for (let i = 0; i < data.length; i++) {
               this.point.push({
@@ -569,13 +560,16 @@ export default {
                 cliType: item.cliType
               })
             }
+
+            console.log('结束')
+            console.log(new Date())
             // this.p1Select()
           })
         }
       }
     },
     pointClickDispatch (item) {
-      // console.log(item, item.cliType, '主体服务')
+      console.log(item, item.cliType, '主体服务')
       switch (this.$route.name) {
         case '主体服务':
           if (item.level === '1' || item.level === '2') {
@@ -583,7 +577,7 @@ export default {
           } else if (item.level === '3' || item.level === '4') {
             this.returnList(item)
           } else if (item.pripId) {
-            // console.log('第三')
+            console.log('第三')
             this.p1Select(item.pripId, item.cliType)
           }
           break
@@ -626,7 +620,7 @@ export default {
           this.p6Info = item.data
           break
         case '远程监控':
-          // console.log('远程监控', item)
+          console.log('远程监控', item)
           if (item.points) {
             this.point = item.points
           } else if (!item.points) {
@@ -638,7 +632,7 @@ export default {
       }
     },
     p1Select (pripId, cliType) {
-      // console.log(pripId, cliType, 'pp')
+      console.log(pripId, cliType, 'pp')
       let url
       if (cliType === 'AA') {
         url = 'getMainBaseGtData'
@@ -646,11 +640,11 @@ export default {
         url = 'getMainBaseInfoData'
       }
       axios.get('/monitor/main/' + url + '?pripId=' + pripId).then(res => {
-        // console.log(res.data.data, '第一')
+        console.log(res.data.data, '第一')
         this.basicData = res.data.data
         console.log(this.basicData, 'zz')
         axios.get('/monitor/main/getBaseZlggData?pripId=' + pripId).then(res2 => {
-          // console.log(res2.data.data, '右屏接口')
+          console.log(res2.data.data, '右屏接口')
           this.mainMessage = res2.data.data
           this.getEntityById()
         })
@@ -676,9 +670,6 @@ export default {
           this.p1Info['注册信息']['基本信息']['法定代表人(经营者)'] = this.basicData.NAME
           this.p1Info['注册信息']['基本信息']['登记状态'] = this.basicData.REGSTATE_CN
           this.p1Info['注册信息']['基本信息']['所属监管所'] = this.basicData.LOCALADM
-          this.p1Info['注册信息']['经营范围信息']['行业类别'] = this.basicData.INDUSTRYPHY
-          this.p1Info['注册信息']['经营范围信息']['经营范围'] = this.basicData.OPSCOPE
-          this.p1Info['注册信息']['法定代表人信息']['法定代表人'] = this.basicData.NAME
           // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
           // this.p1Info['注册信息']['基本信息']['所属网格'] = ''
           // this.p1Info['注册信息']['基本信息']['信用分类'] = ''
@@ -698,12 +689,12 @@ export default {
           // this.p1Info['注册信息']['营业执照']['经营期限至'] = this.basicData.OPTO
           // this.p1Info['注册信息']['营业执照']['组成形式'] = this.basicData.COMPFORM_CN
           // this.p1Info['注册信息']['营业执照']['注册资本'] = this.basicData.REGCAP + this.basicData.REGCAPCUR_CN
-          // console.log(this.selectInfo, '个人营业执照1')
+          console.log(this.selectInfo, '个人营业执照1')
           this.infoData['个人营业执照']['经营范围'] = this.basicData.OPSCOPE
           this.infoData['个人营业执照']['经营场所'] = this.basicData.OPLOC
           this.selectInfo = this.infoData['个人营业执照']
           this.selectInfoState = true
-          // console.log(this.selectInfo, '个人营业执照2')
+          console.log(this.selectInfo, '个人营业执照2')
         } else {
           this.p1Info['注册信息']['基本信息']['名称'] = this.basicData.ENTNAME
           this.p1Info['注册信息']['基本信息']['类型'] = this.basicData.ENTTYPE_CN
@@ -718,9 +709,7 @@ export default {
           this.p1Info['注册信息']['基本信息']['法定代表人(经营者)'] = this.basicData.NAME
           this.p1Info['注册信息']['基本信息']['登记状态'] = this.basicData.REGSTATE_CN
           this.p1Info['注册信息']['基本信息']['所属监管所'] = ''
-          this.p1Info['注册信息']['经营范围信息']['行业类别'] = this.basicData.INDUSTRYPHY
-          this.p1Info['注册信息']['经营范围信息']['经营范围'] = this.basicData.OPSCOPE
-          this.p1Info['注册信息']['法定代表人信息']['法定代表人'] = this.basicData.NAME
+
           // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
           // this.p1Info['注册信息']['基本信息']['所属网格'] = ''
           // this.p1Info['注册信息']['基本信息']['信用分类'] = ''
@@ -754,6 +743,7 @@ export default {
             // '不合格项': this.mainMessage[i].BHG
             // '主体身份代码': this.mainMessage[i].UNISCID
           })
+          console.log(this.mainMessage[i], this.p1Info['监管信息']['质量公告'], '非个体')
         }
         this.setPageData({
           key: 'p1',
@@ -821,5 +811,6 @@ export default {
 
 <style scoped lang="less">
 .CenterMap {
+
 }
 </style>
