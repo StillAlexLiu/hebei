@@ -73,7 +73,7 @@ export default {
         color: '#fff',
         formatter: (p) => {
           // '{b}\n\n{c}件',
-          console.log(p)
+          // console.log(p)
           return '{name|' + p.data.name + '}' + '\n\n' + '{value|' + p.data.value + '件}' + ''
         },
 

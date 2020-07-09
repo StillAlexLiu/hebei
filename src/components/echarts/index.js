@@ -13,6 +13,7 @@ import ChartsBarLineHorizontal from './ChartsBarLineHorizontal'
 import ChartsPieValueLegend from './ChartsPieValueLegend'
 import ChartsBarHorizontal from './ChartsBarHorizontal'
 import ChartsScatter from './ChartsScatter'
+import ChartsGraph from './ChartsGraph.vue'
 import hebei from './hebei.json'
 
 ECharts.registerTheme('screen', screen)
@@ -31,5 +32,6 @@ export default {
     Vue.component('ChartsPieValueLegend', ChartsPieValueLegend)
     Vue.component('ChartsBarHorizontal', ChartsBarHorizontal)
     Vue.component('ChartsScatter', ChartsScatter)
+    Vue.component('ChartsGraph', ChartsGraph)
   }
 }

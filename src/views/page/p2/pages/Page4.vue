@@ -31,6 +31,7 @@
                            :size="'4e2'"
                            :showX="false"  :showSize='true'
                            :colors="['#50E3C2','#FF9177','#00B1FA','#8A7CEF','#FFE17D','#00E138','#FF7B83']"/>
+              <!-- <ChartsGraph :color="['#FFBF24','#FE6941','#55B0EE','#8A7CEF','#25DD54','#5FE7DC', '#29B2F4', '#8B7AF5', '#FF9177', '#2DACE9']" :data='scatterData'></ChartsGraph> -->
               <!-- <ChartsPie :double-pie="true" :data="pieData4" :center-data="pieCenterData" :showLegend='true'
                            :color="['#FFBF24','#FE6941','#55B0EE','#8A7CEF','#25DD54','#5FE7DC']" :show-value="true"/> -->
             </container>
@@ -152,17 +153,6 @@ export default {
         }
         console.log(count)
         this.pieCenterData[1].value = count
-      //   this.pieCenterData = [
-      //   {
-      //     name: '制造业',
-      //     value: Mock.Random.natural(500, 1300),
-      //     selected:true
-      //   }, {
-      //     name: '非制造业',
-      //     value: Mock.Random.natural(500, 1300)
-      //   }
-      // ],
-          
       })
       // 特种设备场所分析
       axios.get('/monitor/equpMent/getSecurity?equpType=' + this.TypeName.type).then(res => {

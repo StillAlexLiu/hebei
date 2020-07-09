@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Mock from 'mockjs'
+// import Mock from 'mockjs'
 import axios from 'axios'
 
 export default {
@@ -98,7 +98,7 @@ export default {
     // 案件
     axios.get('/monitor/check/getCasesProcessData').then(res => {
       const data = res.data.data
-      console.log(data, '案件')
+      // console.log(data, '案件')
       this.radio[0].name = '处理中案件' + data[0].caseSum + '件'
       for (let i = 0; i < data.length; i++) {
         arr1.push({
@@ -111,7 +111,7 @@ export default {
     // 线索
     axios.get('/monitor/check/getCluesProcessData').then(res => {
       const data = res.data.data
-      console.log(data, '线索')
+      // console.log(data, '线索')
       this.radio[1].name = '处理中线索' + data.length + '件'
       for (let i = 0; i < data.length; i++) {
         arr2.push({
