@@ -48,6 +48,21 @@ export default {
   computed: {
     options () {
       return {
+        tooltip: {
+          show: true,
+          formatter: (params) => {
+              const data = params.data
+              if (this.showSize) {
+                return params.name + '\n' + data.value
+              } else {
+                return params.name + '\n' + params.data[this.dimensions[2]] + this.unit
+              }
+              // return params.name + '\n' + params.data[this.dimensions[2]] + this.unit
+            },
+          textStyle: {
+            fontSize: 28
+          }
+        },
         xAxis: {
           type: 'category',
           boundaryGap: true,
@@ -66,7 +81,11 @@ export default {
           symbolSize: (data) => {
             if (this.showSize) {
               // return 120
-              return data.value * 0.015 + 10
+              if (data.value < 5000) {
+                return data.value * 0.01 + 50
+              } else {
+                return data.value * 0.005 + 50
+              }
             } else {
               return Math.sqrt(data[this.dimensions[2]]) * this.baseSize
             }

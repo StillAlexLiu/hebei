@@ -11,7 +11,7 @@
                 <div class="btn" v-if="!showBox"
                      :key="index">
                     <img class="img" alt :src="item.icon" @click="itemClick(item,index,data[activeIndex].children)"
-                         v-if="!item.children || index === 4"/>
+                         v-if="!item.children || index === 3"/>
                     <img class="img" alt :src="item.icon" @click="pngClick(item,index,data[activeIndex].children)"
                          v-else>
                     <div>{{item.name}}</div>
@@ -25,7 +25,7 @@
                 <div class="sub-btn-group full-width padding" :key="'s'+index"
                      v-if="item.children&&item.active&&showBox">
                     <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-公有制企业@2x.png"
-                         v-if="item.name === '公有制企业'" @click="showBoxCli(item)"/>
+                         v-if="item.name === '国有、集体及其控股企业'" @click="showBoxCli(item)"/>
                     <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-农民合作社@2x.png"
                          v-if="item.name === '农民合作社'" @click="showBoxCli(item)"/>
                     <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-外资企业@2x.png"
@@ -104,12 +104,17 @@ export default {
       deep: true,
       handler: function () {
         this.activeIndex = 0
+        const pull = this.$dataAll.config.mapTab[1].children[0].children
+        for (let i = 0; i < pull.length; i++) {
+          pull[i].active = false
+        }
+        // //  console.log(pull, 'pulll')
       }
     }
   },
   methods: {
     showBoxCli (item) {
-      console.log(item, 'iii')
+      //  console.log(item, 'iii')
       item.active = false
       this.showBox = false
       this.send()
@@ -184,11 +189,11 @@ export default {
             }
           }
         }
-        // console.log(res.data.data, this.$dataAll.config.mapTab[1].children[0].children, '下拉数据')
+        // //  console.log(res.data.data, this.$dataAll.config.mapTab[1].children[0].children, '下拉数据')
       })
     },
     itemClick (item, index, array) {
-      console.log('itemClick')
+      //  console.log('itemClick', item)
       // 关闭营业执照
       Bus.$emit('closeMainBox', false)
       this.shouBtn = item
@@ -199,25 +204,20 @@ export default {
           }
         }
       }
-      console.log(item, array, '点击')
+      // //  console.log(item, array, '点击')
       if (this.$route.name === '主体服务') {
         if (item.name === '个体工商户') {
-          console.log(111)
           item.active = !item.active
           this.send()
         } else if (!item.children) {
-          console.log(333)
           item.active = true
           this.send()
         } else {
-          console.log(222)
           item.active = true
         }
       } else {
         item.active = !item.active
       }
-
-      console.log(item, array, 'aayy')
       if (item.name === '个体工商户' || !item.children) {
         // ????这里send干啥，上面不是send了吗？
         // this.send()
@@ -237,7 +237,6 @@ export default {
         }
       }
       if(this.$route.name === '远程监控') {
-        console.log('远程监控')
         this.send()
       } 
     },
@@ -245,15 +244,14 @@ export default {
     pngClick (item, index, array) {
       // 关闭营业执照
       Bus.$emit('closeMainBox', false)
-      console.log(item, this.shouBtn, '点击图标')
+      //  console.log(item, this.shouBtn, '点击图标')
       if (item === this.shouBtn) {
-        console.log('一样')
         this.shouBtn = {
           name: '市场主体',
           type: 0
         }
       } else {
-        console.log('不一样')
+        //  console.log('不一样')
         this.shouBtn = item
       }
       for (let i = 0; i < array.length; i++) {
@@ -276,14 +274,14 @@ export default {
       }
     },
     send () {
-      console.log(this.data, this.activeIndex, 'aaaaaaaaaaaaaaaaaaa')
+      //  console.log(this.data, this.activeIndex, 'aaaaaaaaaaaaaaaaaaa')
       this.$emit('getSelect', {
         tab: this.data[this.activeIndex],
         items: this.findActive()
       })
     },
     findActive () {
-      console.log(this.shouBtn, this.data, 'find')
+      //  console.log(this.shouBtn, this.data, 'find')
       this.selectArray = []
       // if (!this.shouBtn.icon) {
       //   this.selectArray.push(this.shouBtn)
@@ -292,16 +290,16 @@ export default {
       for (let i = 0; i < this.data[this.activeIndex].children.length; i++) {
         const item = this.data[this.activeIndex].children[i]
         if (item.active) {
-          console.log(item, 'lllllllllllllllk')
-          if (this.shouBtn.name === '公有制企业' || this.shouBtn.name === '外资企业' || this.shouBtn.name === '私营企业' || this.shouBtn.name === '农民合作社') {
+          //  console.log(item, 'lllllllllllllllk')
+          if (this.shouBtn.name === '国有、集体及其控股企业' || this.shouBtn.name === '外资企业' || this.shouBtn.name === '私营企业' || this.shouBtn.name === '农民合作社') {
             this.selectArray = []
             const listName = item.children
-            console.log(listName, 'nnnn')
+            //  console.log(listName, 'nnnn')
             for (let i = 0; i < listName.length; i++) {
               if (listName[i].active) {
-                // console.log(listName[i], '1')
+                // //  console.log(listName[i], '1')
                 this.selectArray.push(listName[i])
-                // console.log(this.selectArray, '2')
+                // //  console.log(this.selectArray, '2')
                 return this.selectArray
               } else {
                 this.selectArray.push(item)
@@ -313,24 +311,24 @@ export default {
           }
         }
         // if (item.children) {
-        //   console.log(item, 'iii')
+        //   //  console.log(item, 'iii')
         //   item.children.forEach((v) => {
-        //     console.log(v, 'vvv')
+        //     //  console.log(v, 'vvv')
         //     if (v.name === this.shouBtn.name) {
-        //         console.log(listName[i], '1')
+        //         //  console.log(listName[i], '1')
         //       this.selectArray.push(v)
         //     }
-        //     // console.log(this.selectArray, v, 'sssssss')
+        //     // //  console.log(this.selectArray, v, 'sssssss')
         //   })
         // } else {
         //   if (item.active) {
         //     this.selectArray.push(item)
         //   }
-        //     // console.log(this.selectArray, '11aaaaaa')
+        //     // //  console.log(this.selectArray, '11aaaaaa')
         // }
       }
       // }
-      console.log(this.selectArray, 'sssaa')
+      //  console.log(this.selectArray, 'sssaa')
       return this.selectArray
     }
   }

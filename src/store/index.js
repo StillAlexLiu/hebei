@@ -5,10 +5,6 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    pieDataTab: {
-      name: '',
-      type: ''
-    },
     facilityTab: '',
     p1: null,
     p2: {},

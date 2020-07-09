@@ -213,22 +213,12 @@ export default [
       single: true,
       children: [
         {
-          name: '公有制企业',
+          name: '国有、集体及其控股企业',
           type: 'A',
           icon: require('../assets/images/mapTabs/p1/t1/1.png'),
           active: false,
           json: [],
           number: 290,
-          id: '',
-          children: [{}]
-        },
-        {
-          name: '外资企业',
-          type: 'C',
-          icon: require('../assets/images/mapTabs/p1/t1/5.png'),
-          active: false,
-          json: [],
-          number: 90,
           id: '',
           children: [{}]
         },
@@ -243,12 +233,12 @@ export default [
           children: [{}]
         },
         {
-          name: '农民合作社',
-          type: 'D',
-          icon: require('../assets/images/mapTabs/p1/t1/3.png'),
+          name: '外资企业',
+          type: 'C',
+          icon: require('../assets/images/mapTabs/p1/t1/5.png'),
           active: false,
           json: [],
-          number: 200,
+          number: 90,
           id: '',
           children: [{}]
         },
@@ -260,6 +250,16 @@ export default [
           json: [],
           number: 1190,
           id: ''
+        },
+        {
+          name: '农民合作社',
+          type: 'D',
+          icon: require('../assets/images/mapTabs/p1/t1/3.png'),
+          active: false,
+          json: [],
+          number: 200,
+          id: '',
+          children: [{}]
         }
       ]
     }, {

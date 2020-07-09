@@ -1,5 +1,5 @@
 <template>
-    <chart :options='options'/>
+    <chart :options='options' @click="echartsC"/>
 </template>
 
 <script>
@@ -64,6 +64,9 @@ export default {
     }
   },
   methods: {
+    echartsC (data) {
+      this.$emit('click', data[0])
+    },
     getOption (data, dimensions, unit, colors) {
       return {
         dataset: {

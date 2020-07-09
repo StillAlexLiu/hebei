@@ -1,5 +1,5 @@
 <template>
-    <chart :options="options" @click="click"/>
+    <chart :options="options"/>
 </template>
 
 <script>
@@ -85,7 +85,7 @@ export default {
       try {
         clearInterval(this.timer)
       } catch (e) {
-        console.log(e)
+        //  console.log(e)
       }
     },
     startAnimation () { // 开始动画
@@ -110,11 +110,11 @@ export default {
       try {
         clearInterval(this.timerPoint)
       } catch (e) {
-        console.log(e)
+        //  console.log(e)
       }
     },
     showPoint (data, index, step) {
-      console.log(data, index, step, '切换')
+      //  console.log(data, index, step, '切换')
       const len = data.length
       const startI = Math.floor(len * (index / step))
       const endI = Math.floor(len * ((index + 1) / step))
@@ -127,10 +127,6 @@ export default {
         const item = list[i]
         this.showPointList.push([item.longitude, item.latitude])
       }
-    },
-    click (params) {
-      const name = params[0].name
-      console.log(name)
     },
     getMapData (startTime, times) { // 接口返回数据，这里改为return promise，实现异步
       return {

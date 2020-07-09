@@ -11,8 +11,8 @@
         <div class="w-3-7 full-height" style="position: relative">
             <div class="view">
                 <router-view name="center"/>
-                <CenterMap class="full-height full-width" v-if="centerFlag && !personageBox && !zhduTab"/>
-                <div class="full"  v-if="personageBox">
+                <CenterMap class="full-height full-width" v-show="centerFlag && !personageBox && !zhduTab"/>
+                <div class="full"  v-show="personageBox">
                   <EntityCenter />
                 </div>
                 <div class="full" v-if="zhduTab" style="position: relative">

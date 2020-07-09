@@ -61,13 +61,13 @@ export default {
         height: this.height,
         width: this.width
       })
-      console.log(this.height)
-      console.log(this.width)
-      console.log(this.player)
+      //  console.log(this.height)
+      //  console.log(this.width)
+      //  console.log(this.player)
     },
     play (src) {
-      console.log(src)
-      console.log(this.player)
+      //  console.log(src)
+      //  console.log(this.player)
       this.$nextTick(() => {
         this.player.src({ src: src, type: 'application/x-mpegURL' })
         this.player.play()

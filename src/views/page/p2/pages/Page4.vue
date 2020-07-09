@@ -132,6 +132,7 @@ export default {
         const data = res.data.data
         console.log(data, '特种设备行业分布')
         this.pieData4 = []
+        this.scatterData = []
         let count = 0
         for (let i = 0; i < data.length; i++) {
           if (data[i].industryName !== '制造业') {
@@ -144,6 +145,10 @@ export default {
             console.log(data[i], '制造业')
             this.pieCenterData[0].value = data[i].industryNum
           }
+          this.scatterData.push({
+            name: data[i].industryName,
+            value: data[i].industryNum
+          })
         }
         console.log(count)
         this.pieCenterData[1].value = count
@@ -157,10 +162,7 @@ export default {
       //     value: Mock.Random.natural(500, 1300)
       //   }
       // ],
-        //   this.scatterData.push({
-        //     name: data[i].industryName,
-        //     value: data[i].industryNum
-        //   })
+          
       })
       // 特种设备场所分析
       axios.get('/monitor/equpMent/getSecurity?equpType=' + this.TypeName.type).then(res => {
