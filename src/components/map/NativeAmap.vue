@@ -243,10 +243,18 @@ export default {
     // },
     clickHandler (e) {
       console.log('clickHandler')
-      const data = e.target.getExtData()
+      console.log(e)
+      let data = {}
+      let center = []
+      if (e.data) {
+        data = e.data
+        center = data.coordinate
+      } else {
+        data = e.target.getExtData()
+        center = [e.lnglat.lng, e.lnglat.lat]
+      }
       // this.tempData = adcode
       console.log(data)
-      const center = [e.lnglat.lng, e.lnglat.lat]
       this.clickAction(data, center)
     },
     clickAction (data, center) {
