@@ -1,5 +1,5 @@
 <template>
-    <chart :options='options'/>
+    <chart :options='options' @click="cli"/>
 </template>
 
 <script>
@@ -78,6 +78,11 @@ export default {
     showLegend: {
       type: Boolean,
       default: true
+    }
+  },
+  methods: {
+    cli (data) {
+      this.$emit('pieCli', data[0])
     }
   },
   computed: {

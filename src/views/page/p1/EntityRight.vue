@@ -88,7 +88,7 @@ export default {
     })
     axios.get('/monitor/main/getCreditClassReportData').then(res => {
       const data = res.data.data
-      console.log(data, 'ddddd')
+      // console.log(data, 'ddddd')
       this.barLineData = []
       for (let i = 0; i < data.length; i++) {
         this.barLineData.push({

@@ -66,6 +66,8 @@ export default {
     },
     clickItem (data) {
       this.$emit('inputData', data)
+      this.rollList = []
+      this.text2 = ''
     }
   }
 }

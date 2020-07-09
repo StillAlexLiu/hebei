@@ -22,7 +22,7 @@
         <div class="h-3-8">
             <container class="w-1-2 full-height" title="案件主要违法行为类型分布">
                 <!-- <NameOnly :data="nameOnlyData" class="full"/> -->
-                 <ChartsPie :data="pieData" :legend-position="'right'"  :show-all="true"/>
+                 <ChartsPie :data="pieData" :legend-position="'right'"  @pieCli='pieCli' :show-all="true"/>
                 <!-- <ChartsPieValueLegend :data="pieData" :text="''" :text-size="28"/> -->
             </container>
             <container class="w-1-2 full-height" :title="pieType.name + '案件地区分布'">
@@ -56,11 +56,27 @@ export default {
     OtherBox
   },
   computed: {
-    PieData () {
-      return this.$store.state.pieDataTab
-    }
   },
   watch: {
+  },
+  methods: {
+    pieCli (data) {
+      console.log(data.data, this.pieTypeData, '点击')
+      // this.pieTypeData = data.data
+      // console.log(this.pieTypeData)
+      if (data.data === this.pieTypeData) {
+        console.log('一样')
+        this.pieTypeData = {
+          name: '',
+          type: ''
+        }
+        this.PieData(this.pieTypeData)
+      } else {
+        console.log('不一样')
+        this.pieTypeData = data.data
+        this.PieData(this.pieTypeData)
+      }
+    },
     PieData (data) {
       console.log(data, 'dsss')
       this.pieType = data
@@ -166,6 +182,10 @@ export default {
   },
   data () {
     return {
+      pieTypeData: {
+        name: '',
+        type: ''
+      },
       pieType: {
         name: '',
         className: ''

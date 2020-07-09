@@ -65,11 +65,11 @@ export default {
   created () {
     var that = this
     // Bus.$on('message', function (data2) {
-    //   console.log(data2, '远程')
+    //   //  console.log(data2, '远程')
     //   that.setVideo(data2)
     // })
     Bus.$on('message', target => {
-      console.log(target, '点击视频')
+      //  console.log(target, '点击视频')
       that.setVideo(target)
     })
   },
@@ -98,13 +98,13 @@ export default {
   methods: {
     setVideo (data2) {
       var that = this
-      console.log(data2, 'rrww')
+      //  console.log(data2, 'rrww')
       if (data2.regionsIndexCode) {
         // 海康
         axios.get('/monitor/main/hik/getHikCameraUrls?regionsIndexCode=' + data2.regionsIndexCode).then(res1 => {
         // axios.get('http://192.168.1.103/blade-camera/camera/hik/getHikCameraUrls?regionsIndexCode=' + data2.regionsIndexCode).then(res1 => {
           const data = res1.data.data
-          console.log(data, 'hkkk')
+          //  console.log(data, 'hkkk')
           for (let i = 0; i < data.length; i++) {
             if (that.videoIndex >= 6) {
               that.videoIndex = 0
@@ -115,21 +115,21 @@ export default {
               url: data[i].cameraUrl,
               state: 0
             })
-            console.log(that.videoNames, '视频')
+            //  console.log(that.videoNames, '视频')
             that.videoIndex++
           }
         })
       } else {
         // 华烨
-        console.log(data2, '华烨')
+        //  console.log(data2, '华烨')
         HuaYeVideo.getList(data2.userName, data2.pwd).then(res2 => {
-          console.log(res2.data, '华烨22222')
+          //  console.log(res2.data, '华烨22222')
           // if (res2.data.result === 0) {
           const data = res2.data.devlist
-          // console.log(data, 'ff')
+          // //  console.log(data, 'ff')
           for (let i = 0; i < data.length; i++) {
             HuaYeVideo.checkRequest(data2.userName, data2.pwd, data[i].sn, data[i].hlsurl).then(flow => {
-              console.log(flow, '华烨3333')
+              //  console.log(flow, '华烨3333')
               // for (let a = 0; a < 6; a++) {
               if (that.videoIndex >= 6) {
                 that.videoIndex = 0
@@ -142,14 +142,14 @@ export default {
                 url: flow.data.hlsurl,
                 state: flow.data.result
               })
-              // console.log(that.videoIndex, 'ffxxxxx')
+              // //  console.log(that.videoIndex, 'ffxxxxx')
               that.videoIndex++
             })
           }
           // }
         })
       }
-      console.log(that.videoNames, '6个视频')
+      //  console.log(that.videoNames, '6个视频')
     }
   }
 }

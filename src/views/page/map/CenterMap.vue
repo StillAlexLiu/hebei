@@ -34,18 +34,18 @@ import Mock from 'mockjs'
 import EntityMapInfo from '../p1/componets/EntityMapInfo'
 import WarningMapInfo from '../p4/components/WarningMapInfo'
 import AuditMapInfo from '../p6/components/AuditMapInfo'
-import SupervisionMapInfo from '../p2/compontes/SupervisionMapInfo'
+// import SupervisionMapInfo from '../p2/compontes/SupervisionMapInfo'
 import ComplaintMapInfo from '../p5/compontes/ComplaintMapInfo'
 import KeepOnRecordMapInfo from '../p10/components/KeepOnRecordMapInfo'
 import Bus from '@/assets/bus.js'
 import axios from 'axios'
-import { stat } from 'fs'
+// import { stat } from 'fs'
 export default {
   name: 'CenterMap',
   components: {
     KeepOnRecordMapInfo,
     ComplaintMapInfo,
-    SupervisionMapInfo,
+    // SupervisionMapInfo,
     AuditMapInfo,
     WarningMapInfo,
     EntityMapInfo
@@ -231,10 +231,6 @@ export default {
     sendPripIdFun (data) {
       // console.log('接收到的id', data)
       // 打点
-      var inputData = [data]
-      this.addMassMarks(inputData)
-      // 调整中心视角
-      this.map.setZoomAndCenter(17, [data.longitude, data.latitude])
       this.p1Select(data.pripId, data.cliType)
     },
     getSelect (data) { // 分发全局map select 事件
@@ -428,7 +424,7 @@ export default {
     getCaption (obj, state) {
       // console.log(obj, state)
       var index = obj.lastIndexOf('\,')
-      if (state == 0) {
+      if (state === 0) {
         obj = obj.substring(0, index)
       } else {
         obj = obj.substring(index + 1, obj.length)
@@ -680,6 +676,9 @@ export default {
           this.p1Info['注册信息']['基本信息']['法定代表人(经营者)'] = this.basicData.NAME
           this.p1Info['注册信息']['基本信息']['登记状态'] = this.basicData.REGSTATE_CN
           this.p1Info['注册信息']['基本信息']['所属监管所'] = this.basicData.LOCALADM
+          this.p1Info['注册信息']['经营范围信息']['行业类别'] = this.basicData.INDUSTRYPHY
+          this.p1Info['注册信息']['经营范围信息']['经营范围'] = this.basicData.OPSCOPE
+          this.p1Info['注册信息']['法定代表人信息']['法定代表人'] = this.basicData.NAME
           // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
           // this.p1Info['注册信息']['基本信息']['所属网格'] = ''
           // this.p1Info['注册信息']['基本信息']['信用分类'] = ''
@@ -719,6 +718,9 @@ export default {
           this.p1Info['注册信息']['基本信息']['法定代表人(经营者)'] = this.basicData.NAME
           this.p1Info['注册信息']['基本信息']['登记状态'] = this.basicData.REGSTATE_CN
           this.p1Info['注册信息']['基本信息']['所属监管所'] = ''
+          this.p1Info['注册信息']['经营范围信息']['行业类别'] = this.basicData.INDUSTRYPHY
+          this.p1Info['注册信息']['经营范围信息']['经营范围'] = this.basicData.OPSCOPE
+          this.p1Info['注册信息']['法定代表人信息']['法定代表人'] = this.basicData.NAME
           // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
           // this.p1Info['注册信息']['基本信息']['所属网格'] = ''
           // this.p1Info['注册信息']['基本信息']['信用分类'] = ''
