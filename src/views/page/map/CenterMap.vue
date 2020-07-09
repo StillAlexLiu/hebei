@@ -101,43 +101,56 @@ export default {
       city: [
         {
           name: '秦皇岛市',
-          center: [119.586579, 39.942531]
+          center: [119.586579, 39.942531],
+          ad_code: 130300
         }, {
           name: '廊坊市',
-          center: [116.704441, 39.523927]
+          center: [116.704441, 39.523927],
+          ad_code: 131000
         }, {
           name: '张家口市',
-          center: [114.884091, 40.811901]
+          center: [114.884091, 40.811901],
+          ad_code: 130700
         }, {
           name: '唐山市',
-          center: [118.175393, 39.635113]
+          center: [118.175393, 39.635113],
+          ad_code: 130200
         }, {
           name: '沧州市',
-          center: [116.857461, 38.310582]
+          center: [116.857461, 38.310582],
+          ad_code: 130900
         }, {
           name: '承德市',
-          center: [117.939152, 40.976204]
+          center: [117.939152, 40.976204],
+          ad_code: 130800
         }, {
           name: '邯郸市',
-          center: [114.490686, 36.612273]
+          center: [114.490686, 36.612273],
+          ad_code: 130400
         }, {
           name: '石家庄市',
-          center: [114.502461, 38.045474]
+          center: [114.502461, 38.045474],
+          ad_code: 130100
         }, {
           name: '邢台市',
-          center: [114.508851, 37.0682]
+          center: [114.508851, 37.0682],
+          ad_code: 130500
         }, {
           name: '衡水市',
-          center: [115.665993, 37.735097]
+          center: [115.665993, 37.735097],
+          ad_code: 131100
         }, {
           name: '保定市',
-          center: [115.482331, 38.867657]
+          center: [115.482331, 38.867657],
+          ad_code: 130600
         }, {
           name: '辛集市',
-          center: [115.217451, 37.92904]
+          center: [115.217451, 37.92904],
+          ad_code: 130181
         }, {
           name: '河北雄安新区',
-          center: [115.867238, 39.043152]
+          center: [115.867238, 39.043152],
+          ad_code: 133100
         }
       ],
       latPoint: [],
@@ -279,7 +292,10 @@ export default {
             coordinate: item.center,
             points: [],
             index: i,
-            typeIndex: 0
+            typeIndex: 0,
+            leafNodePoint: false,
+            ad_code: item.ad_code,
+            level: 1
           })
         }
         // var newArray = []
@@ -311,7 +327,9 @@ export default {
                         icon: icon,
                         coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
                         userName: this.latPoint[i].userName,
-                        pwd: this.latPoint[i].userPwd
+                        pwd: this.latPoint[i].userPwd,
+                        leafNodePoint: true,
+                        ad_code: this.latPoint[i].orgCode
                       })
                     }
                   }
@@ -325,7 +343,9 @@ export default {
                         name: this.latPoint[i].name,
                         icon: icon,
                         coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
-                        regionsIndexCode: this.latPoint[i].indexCode
+                        regionsIndexCode: this.latPoint[i].indexCode,
+                        leafNodePoint: true,
+                        ad_code: this.latPoint[i].name
                       })
                     }
                   }
@@ -670,6 +690,9 @@ export default {
           this.p1Info['注册信息']['基本信息']['法定代表人(经营者)'] = this.basicData.NAME
           this.p1Info['注册信息']['基本信息']['登记状态'] = this.basicData.REGSTATE_CN
           this.p1Info['注册信息']['基本信息']['所属监管所'] = this.basicData.LOCALADM
+          this.p1Info['注册信息']['经营范围信息']['行业类别'] = this.basicData.INDUSTRYPHY
+          this.p1Info['注册信息']['经营范围信息']['经营范围'] = this.basicData.OPSCOPE
+          this.p1Info['注册信息']['法定代表人信息']['法定代表人'] = this.basicData.NAME
           // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
           // this.p1Info['注册信息']['基本信息']['所属网格'] = ''
           // this.p1Info['注册信息']['基本信息']['信用分类'] = ''
@@ -709,6 +732,9 @@ export default {
           this.p1Info['注册信息']['基本信息']['法定代表人(经营者)'] = this.basicData.NAME
           this.p1Info['注册信息']['基本信息']['登记状态'] = this.basicData.REGSTATE_CN
           this.p1Info['注册信息']['基本信息']['所属监管所'] = ''
+          this.p1Info['注册信息']['经营范围信息']['行业类别'] = this.basicData.INDUSTRYPHY
+          this.p1Info['注册信息']['经营范围信息']['经营范围'] = this.basicData.OPSCOPE
+          this.p1Info['注册信息']['法定代表人信息']['法定代表人'] = this.basicData.NAME
 
           // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
           // this.p1Info['注册信息']['基本信息']['所属网格'] = ''

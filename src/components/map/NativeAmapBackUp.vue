@@ -2,7 +2,7 @@
     <div class="NativeAmap">
         <div class="a-map full-width full-height" :id="'container'+idKey"></div>
         <MapSelector v-if="selector&&selectorData.length>0" :data="selectorData" @getSelect="getSelect"/>
-        <MapInfoBlock>p
+        <MapInfoBlock>
             <slot name="info"></slot>
         </MapInfoBlock>
         <SearchBox :number="pointNumber" @inputData='inputFocus' :zoom="zoom2"/>

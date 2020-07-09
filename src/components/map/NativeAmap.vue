@@ -2,7 +2,7 @@
     <div class="NativeAmap">
         <div class="a-map full-width full-height" :id="'container'+idKey"></div>
         <MapSelector v-if="selector&&selectorData.length>0" :data="selectorData" @getSelect="getSelect"/>
-        <MapInfoBlock>p
+        <MapInfoBlock>
             <slot name="info"></slot>
         </MapInfoBlock>
         <SearchBox :number="pointNumber" @inputData='inputFocus' :zoom="zoom2"/>
@@ -242,33 +242,48 @@ export default {
     //   console.log(arguments)
     // },
     clickHandler (e) {
-      console.log('clickHandler', e)
-      const data = e.target.getExtData()
+      let data = {}
+      let center = []
+      if (e.data) {
+        data = e.data
+        center = data.coordinate
+      } else {
+        data = e.target.getExtData()
+        center = [e.lnglat.lng, e.lnglat.lat]
+      }
       // this.tempData = adcode
       console.log(data)
-      const center = [e.lnglat.lng, e.lnglat.lat]
       this.clickAction(data, center)
     },
     clickAction (data, center) {
+      if (this.$route.name === '远程监控') {
+        if (data.points) {
+          this.action (data, center)
+        }
+      } else if (this.$route.name === '主体服务' & !data.pripId){
+        this.action (data, center)
+      }
+      // 判断是不是第三层打点
+      // if (!this.leafNodePoint || data.leafNodePoint) {
+      //   this.action()
+      // }
+      this.$emit('pointClick', data)
+    },
+    action (data, center) {
       if (data.level === '2') {
         this.tempData = data
       }
       this.proDepth++
-      console.log(data.name, this.proDepth)
-      // this.addMassMarks(data.points)
+      console.log(data, data.name, this.proDepth)
       let zoom = 0
       if (data.level) {
         zoom = data.level * 1 + this.zoom - 1
       } else {
         zoom = this.map.getZoom() + 1
       }
-      console.log(this.zoom)
-      console.log(zoom)
-      console.log(data)
       this.SearchDistrict(data.ad_code, this.proDepth)
       this.map.setZoomAndCenter(zoom, center)
       this.removeMassMarks()
-      this.$emit('pointClick', data)
     },
     contentMaker (data) {
       // console.log(data, '地图打点')
