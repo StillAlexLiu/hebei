@@ -140,6 +140,7 @@ export default {
 
 <style scoped lang="less">
 .AuditMapInfo {
+  width: 1000px;
     .table {
         display: block;
         overflow: hidden;
