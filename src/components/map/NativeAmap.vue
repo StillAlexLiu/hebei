@@ -119,6 +119,7 @@ export default {
       deep: true,
       immediate: false,
       handler: function () {
+        console.log(this.point)
         this.$nextTick(() => {
           this.loadAMap(() => {
             try {
@@ -154,7 +155,7 @@ export default {
   methods: {
     inputFocus (data) {
       console.log(data, '搜索')
-      this.point = []
+      this.point = data
       // axios.get('/monitor/main/getMainBaseDataByCon?entName=' + data).then(res => {
       //   const data = res.data.data
       //   console.log(data, '搜索数据')

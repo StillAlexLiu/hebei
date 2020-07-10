@@ -13,7 +13,7 @@
                :pointName="pointName"
         >
 
-            <div slot="info">
+            <div slot="info" :class="{full: routeName==='稽查办案'}">
                 <!-- <roll-table v-if="routeName==='综合指挥'" :data="p0Info" :dimension="p0Dimension" class="full-width"/> -->
                 <!-- <roll-table :data="p0Info" :dimension="p0Dimension" class="full-width"/> -->
                 <EntityMapInfo v-if="selectInfoState" :data="selectInfo"/>
