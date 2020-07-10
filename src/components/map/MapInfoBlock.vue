@@ -15,7 +15,7 @@ export default {
     position: absolute;
     top: 60px;
     right: -15px;
-    width: 1000px;
+    // width: 1000px;
     // height: 95%;
     overflow-y: auto;
     >div{
