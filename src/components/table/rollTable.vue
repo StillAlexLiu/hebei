@@ -6,7 +6,7 @@
                 {{item.name}}
             </div>
         </div>
-        <div style="overflow:hidden;margin-top:60px;height:52%">
+        <div style="overflow:hidden;margin-top:60px;height:90%">
               <transition-group name="list" tag='ul' ref="table"
               style="width: 98.7%;height:100%!important" class="table">
                 <li class="row  body  list-item full-width h-1-9" v-for="(item,index) in demo"
