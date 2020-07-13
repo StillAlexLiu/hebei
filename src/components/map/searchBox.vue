@@ -57,7 +57,8 @@ export default {
               icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
               name: data[i].ENTNAME,
               pripId: data[i].PRIPID,
-              level: 5
+              level: 5,
+              sousuo: true
             })
             console.log(this.rollList, '搜索data')
           }
@@ -65,7 +66,7 @@ export default {
       }
     },
     clickItem (data) {
-      var points = [data]
+      var points = data
       this.$emit('inputData', points)
       this.rollList = []
       this.text2 = ''

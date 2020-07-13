@@ -1,41 +1,56 @@
 <template>
-    <div class="full-width full-height page-style">
-        <container title="一企一档" v-if="JSON.stringify(p1)!=='null'" class="info full" style="position: relative">
-            <font-awesome-icon class="fa" icon='times'
-                               style="position: absolute;right: 30px;font-size: 30px;top: 20px" @click="close"/>
-            <table-base-info class="h-4-11" v-if="p1" :data="p1"/>
-            <tab-table class="h-7-11" :data="p1"/>
-        </container>
-        <template v-else>
-            <container title="市场主体年报情况" class="h-1-3">
-                <div class="w-1-2 full-height">
-                    <BorderInOut class="full" :data="dataTop"/>
-                </div>
-                <div class="w-1-2 full-height">
-                    <ChartsBarLine :data="barLineData" :type="['bar','line']"
-                                   :legend="['公示数','公示率']"
-                                   :colors="['#4A90E2','#FE6941']"
-                                   :units="['户','%']"
-                                   :dimensions="['name','value','value2']"/>
-                </div>
-            </container>
-            <container class="h-1-3 full-width" title="信用约束">
-                <numberPie :data='pieData'/>
-            </container>
-            <div class="h-1-3 full-width">
-                <container title="经营异常因素分析" class="full-height w-1-2">
-                    <chart-mountain :data="mountainData"/>
-                    <!--                    <ChartPie :data="mountainData"/>-->
-                </container>
-                <container title="失信企业地区分布" class="full-height w-1-2">
-                    <ChartsBarLineHorizontal :data="barHorizontalData" :type="['bar']" :legend="['']"
-                                             :units="['户']"
-                                             :colors="['#FFBB70']"
-                                             :dimensions="['name','value']"/>
-                </container>
-            </div>
+      <container-calc type="tb" :number="53" class="EntityLeft full page-style">
+        <template slot="fix">
+            <RadioSimple :data="radioData" v-model="select" class="w-2-7 full-height radio "/>
         </template>
-    </div>
+        <div slot="calc" class=" full-width full-height">
+          <container title="一企一档" v-if="JSON.stringify(p1)!=='null'" class="info full" style="position: relative">
+              <font-awesome-icon class="fa" icon='times'
+                                style="position: absolute;right: 30px;font-size: 30px;top: 20px" @click="close"/>
+              <table-base-info class="h-4-11" v-if="p1" :data="p1"/>
+              <tab-table class="h-7-11" :data="p1"/>
+          </container>
+          <template v-else>
+              <container :title="select.name + '年报情况'" class="h-1-3">
+                  <div class="w-1-2 full-height">
+                      <BorderInOut class="full" :data="dataTop"/>
+                  </div>
+                  <div class="w-1-2 full-height">
+                      <ChartsBarLine :data="barLineData" :type="['bar','line']"
+                                    :legend="['公示数','公示率']"
+                                    :colors="['#4A90E2','#FE6941']"
+                                    :units="['户','%']"
+                                    :dimensions="['name','value','value2']"/>
+                  </div>
+              </container>
+              <container class="h-1-3 full-width" title="信用约束">
+                  <!-- <numberPie :data='pieData'/> -->
+                  <div class="w-1-5 full-height">
+                    <boxList :data='expenseGoal'>></boxList>
+                  </div>
+                  <div class="w-4-5 full-height">
+                    <ChartsBarLine :data="barGroupData" :dimensions="['name','step1','step2']"
+                               :legend="['列异', '列严']"
+                               :type="['bar','bar']"
+                               :twoAxis="false"
+                               :colors="['#4A90E2', '#FFD589']" :units="['户次']"/>
+                  </div>
+              </container>
+              <div class="h-1-3 full-width">
+                  <container title="经营异常因素分析" class="full-height w-1-2">
+                      <chart-mountain :data="mountainData"/>
+                      <!--                    <ChartPie :data="mountainData"/>-->
+                  </container>
+                  <container title="失信企业地区分布" class="full-height w-1-2">
+                      <ChartsBarLineHorizontal :data="barHorizontalData" :type="['bar']" :legend="['']"
+                                              :units="['户']"
+                                              :colors="['#FFBB70']"
+                                              :dimensions="['name','value']"/>
+                  </container>
+              </div>
+          </template>
+        </div>
+    </container-calc>
 </template>
 
 <script>
@@ -43,11 +58,13 @@
 import { mapActions, mapState } from 'vuex'
 import TableBaseInfo from './componets/TableBaseInfo'
 import TabTable from './componets/tabTable'
-import numberPie from './componets/numberPie'
+// import numberPie from './componets/numberPie'
 import ChartMountain from './componets/ChartMountain'
 import BorderInOut from './componets/borderInOut'
 import axios from 'axios'
 import Bus from '@/assets/bus.js'
+import boxList from './componets/boxList'
+import Mock from 'mockjs'
 
 export default {
   name: 'p1right',
@@ -56,7 +73,8 @@ export default {
     ChartMountain,
     TabTable,
     TableBaseInfo,
-    numberPie
+    // numberPie,
+    boxList
   },
   computed: {
     ...mapState({
@@ -69,6 +87,21 @@ export default {
       deep: true,
       handler: function () {
         // this.getTableData(this.p1)
+      }
+    },
+    select: {
+      immediate: true,
+      deep: true,
+      handler: function () {
+        this.expenseGoal = [{
+          name: '经营异常' + this.select.name,
+          num: '14.03',
+          unit: '万户'
+        }, {
+          name: '严重违法失信' + this.select.name,
+          num: '2.02',
+          unit: '万户'
+        }]
       }
     }
   },
@@ -128,6 +161,78 @@ export default {
   },
   data () {
     return {
+      barGroupData: [
+        {
+          name: '1月',
+          step1: Mock.Random.natural(1000, 2000),
+          step2: Mock.Random.natural(1000, 2000)
+        }, {
+          name: '2月',
+          step1: Mock.Random.natural(1000, 2000),
+          step2: Mock.Random.natural(1000, 2000)
+        }, {
+          name: '3月',
+          step1: Mock.Random.natural(1000, 2000),
+          step2: Mock.Random.natural(1000, 2000)
+        }, {
+          name: '4月',
+          step1: Mock.Random.natural(1000, 2000),
+          step2: Mock.Random.natural(1000, 2000)
+        }, {
+          name: '5月',
+          step1: Mock.Random.natural(1000, 2000),
+          step2: Mock.Random.natural(1000, 2000)
+        }, {
+          name: '6月',
+          step1: Mock.Random.natural(1000, 2000),
+          step2: Mock.Random.natural(1000, 2000)
+        }, {
+          name: '7月',
+          step1: Mock.Random.natural(1000, 2000),
+          step2: Mock.Random.natural(1000, 2000)
+        }, {
+          name: '8月',
+          step1: Mock.Random.natural(1000, 2000),
+          step2: Mock.Random.natural(1000, 2000)
+        }, {
+          name: '9月',
+          step1: Mock.Random.natural(1000, 2000),
+          step2: Mock.Random.natural(1000, 2000)
+        }, {
+          name: '10月',
+          step1: Mock.Random.natural(1000, 2000),
+          step2: Mock.Random.natural(1000, 2000)
+        }, {
+          name: '11月',
+          step1: Mock.Random.natural(1000, 2000),
+          step2: Mock.Random.natural(1000, 2000)
+        }, {
+          name: '12月',
+          step1: Mock.Random.natural(1000, 2000),
+          step2: Mock.Random.natural(1000, 2000)
+        }
+      ],
+      select: {
+        name: '企业',
+        value: 0
+      },
+      radioData: [
+        {
+          name: '主体',
+          value: 0
+        }, {
+          name: '企业',
+          value: 1
+        },
+        {
+          name: '农专',
+          value: 2
+        },
+        {
+          name: '个体',
+          value: 3
+        }
+      ],
       dataTop: [
         {
           name: '应报（户）',
@@ -172,6 +277,15 @@ export default {
         //   value2: 45.27
         // }
       ],
+      expenseGoal: [{
+        name: '经营异常个体',
+        num: '14.03',
+        unit: '万户'
+      }, {
+        name: '严重违法失信',
+        num: '2.02',
+        unit: '万户'
+      }],
       pieData: {
         all: {
           name: '经营异常主体',

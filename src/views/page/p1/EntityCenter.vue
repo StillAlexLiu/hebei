@@ -6,14 +6,14 @@
       <div class="centerBox">
         <div class="w-4-5 full-height">
           <oneDayTour :data='entApplyData' v-if='!totwoP' @toTwo="toTwo2"></oneDayTour>
-          <oneDayDouble v-else></oneDayDouble>
+          <oneDayDouble @toOne='toOneFun' v-else></oneDayDouble>
         </div>
         <div class="w-1-5 full-height">
           <Container class="full-width h-3-5" :title="'一日办地图'">
             <MapHebeiWithClick :data='mapList'></MapHebeiWithClick>
           </Container>
-          <Container class="full-width h-2-5" :title="'数据对接监控'">
-             <ChartsBarHorizontal :data="barData" :showLabel='false'  :yName="'单位：分'"
+          <Container class="full-width h-2-5" :title="'数据对接监控'"  v-if='totwoP'>
+             <ChartsBarHorizontal :data="barData" :showLabel='false'  :yName="'单位：分'" 
                 :barBorderRadius="[20, 20, 20, 20]"
                 :color="['#FE6941','#50E3C2','#FFD589','#4A90E2','#FE6941','#50E3C2','#FFD589','#4A90E2']"/>
           </Container>
@@ -47,7 +47,10 @@ export default {
         avgyhHours: '',
         rsdone: '',
         avgrsHours: '',
-        entDone: ''
+        entDone: '',
+        ssUnDOne: '',
+        gaUnDone: '',
+        rsUndone: ''
       },
       barData: [],
       mapList: [],
@@ -86,6 +89,21 @@ export default {
     const other = `${h}-${m}-${nowm} 00:00:00`
     const now = `${h}-${m}-${day} 00:00:00`
     //  console.log(other, now, '当前日期')
+    // 税收已处理
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=ssUnDOne').then(res => {
+      // console.log(res.data, '税收已处理')
+      this.entApplyData.ssUnDOne = res.data.data.indexValue
+    })
+    // 公安已处理
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=gaUnDone').then(res => {
+      // console.log(res.data, '公安已处理')
+      this.entApplyData.gaUnDone = res.data.data.indexValue
+    })
+    // 人社已处理
+    axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=rsUndone').then(res => {
+      // console.log(res.data, '人社已处理')
+      this.entApplyData.rsUndone = res.data.data.indexValue
+    })
     // 企业申办总数
     axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=entApply').then(res => {
       // //  console.log(res.data.data, '企业申办总数')
@@ -162,6 +180,12 @@ export default {
   },
   methods: {
     toTwo2 (data) {
+      if (data[0].data.name === '开办成功') {
+        this.totwoP = true
+      }
+    },
+    toOneFun (data) {
+      console.log(data)
       this.totwoP = data
     },
     closeBox () {
@@ -187,7 +211,9 @@ export default {
       if (day < 10) {
         day = '0' + day
       }
-      if (otherF < 10) {
+      if (otherF < 0) {
+        otherF = 60 + otherF
+      } else if (otherF < 10) {
         otherF = '0' + otherF
       }
       const now = `${n}-${m}-${day} ${h}:${f}:00`

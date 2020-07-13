@@ -104,8 +104,8 @@ export default {
       handler: function () {
         this.$nextTick(() => {
           this.loadAMap(() => {
-            console.log(this.proDepth)
-            console.log(this.pointName)
+           // console.log(this.proDepth)
+           // console.log(this.pointName)
             if (this.proDepth === 0) {
             } else {
               this.map.setZoomAndCenter(this.zoom, this.center)
@@ -119,13 +119,13 @@ export default {
       deep: true,
       immediate: false,
       handler: function () {
-        console.log(this.point)
+       // console.log(this.point)
         this.$nextTick(() => {
           this.loadAMap(() => {
             try {
               this.removeMassMarks()
             } catch (e) {
-              console.log(e)
+             // console.log(e)
             }
             // this.map.setZoomAndCenter(9, this.center)
             // this.pointNumber = 0
@@ -154,45 +154,31 @@ export default {
   },
   methods: {
     inputFocus (data) {
-      console.log(data, '搜索')
-      this.point = data
-      // axios.get('/monitor/main/getMainBaseDataByCon?entName=' + data).then(res => {
-      //   const data = res.data.data
-      //   console.log(data, '搜索数据')
-      //   this.inputData = []
-      //   for (let i = 0; i < data.length; i++) {
-      //     console.log(data[i], 'iiiii')
-      //     this.inputData.push({
-      //       address: data[i].DOM,
-      //       cliType: data[i].ENTTYPE,
-      //       coordinate: [data[i].longitude, data[i].latitude],
-      //       icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
-      //       name: data[i].ENTNAME,
-      //       pripId: data[i].PRIPID,
-      //       level: 5
-      //     })
-      //     console.log(this.inputData, '搜索data')
-      //     // 打点
-      //     this.addMassMarks(this.inputData)
-      //     // 调整中心视角
-      //     this.map.setZoomAndCenter(17, [data[i].longitude, data[i].latitude])
-      //   }
-      // })
+      // // console.log(data, '搜索')
+      this.$emit('sendPripId', data)
+      // 清除所有图层包括网格
+      this.map.clearMap();
+      //重画网格
+      this.SearchDistrict(this.adcode[0], 0)
+      var list = []
+      list.push(data)
+      this.addMassMarks(list)
+      this.map.setZoomAndCenter(17, [data.longitude, data.latitude])
     },
     loadAMap (callback) {
       if (!window.AMap) {
-        // console.log('地图未加载')
+        //// console.log('地图未加载')
         this.$AMapBus.$on('onAMapLoad', () => {
-          // console.log('地图加载完毕')
+          //// console.log('地图加载完毕')
           callback()
         })
       } else {
-        // console.log('地图已加载')
+        //// console.log('地图已加载')
         callback()
       }
     },
     initMap () {
-      console.log('初始化地图')
+     // console.log('初始化地图')
       this.map = new window.AMap.Map('container' + this.idKey, {
         resizeEnable: true,
         rotateEnable: true,
@@ -225,7 +211,7 @@ export default {
       const zoom = this.map.getZoom()
       if (zoomObject.type === 'zoomout' && zoom <= this.zoom + 1 && this.proDepth > 0) {
         if (zoom === this.zoom + 1) {
-          console.log(this.tempData)
+         // console.log(this.tempData)
           this.clickAction(this.tempData, this.tempData.coordinate)
         } else {
           this.SearchDistrict(this.adcode[0], 0)
@@ -240,7 +226,7 @@ export default {
       }
     },
     // zoomListener () {
-    //   console.log(arguments)
+    //  // console.log(arguments)
     // },
     clickHandler (e) {
       let data = {}
@@ -253,7 +239,7 @@ export default {
         center = [e.lnglat.lng, e.lnglat.lat]
       }
       // this.tempData = adcode
-      console.log(data)
+     // console.log(data)
       this.clickAction(data, center)
     },
     clickAction (data, center) {
@@ -275,7 +261,7 @@ export default {
         this.tempData = data
       }
       this.proDepth++
-      console.log(data, data.name, this.proDepth)
+     // console.log(data, data.name, this.proDepth)
       let zoom = 0
       if (data.level) {
         zoom = data.level * 1 + this.zoom - 1
@@ -287,7 +273,7 @@ export default {
       this.removeMassMarks()
     },
     contentMaker (data) {
-      // console.log(data, '地图打点')
+      //// console.log(data, '地图打点')
       if (data.baseCount) {
         if (data.typeIndex === 0) {
           const count = data.baseCount ? '<div style="width: 100%;text-align: center">' + data.baseCount + '</div>' : ''
@@ -310,7 +296,7 @@ export default {
 
     },
     addMassMarks (data) { // 海量点
-      console.log('海量点')
+     // console.log('海量点')
       const newArray = []
       if (this.$route.name === '远程监控') {
         if (data[0].points) {
@@ -332,9 +318,6 @@ export default {
     pointMap (data) {
       this.markers = []
       this.pointNumber = 0
-
-      console.log('开始')
-      console.log(new Date())
       for (let i = 0; i < data.length; i++) {
         const item = data[i]
         if (item.baseCount) {
@@ -356,8 +339,6 @@ export default {
           this.markers.push(marker)
         }
       }
-      console.log('结束')
-      console.log(new Date())
       if (this.leafNodePoint) { // 判断是否是最后的叶子节点，即主体
         // this.cluster = new window.AMap.MarkerClusterer(this.map, this.markers, {
         //   gridSize: 300
@@ -368,7 +349,7 @@ export default {
           anchor: new AMap.Pixel(0, 0),
           size: data[0].icon ? new AMap.Size(36, 36) : new AMap.Size(36, 20)
         }]
-        console.log(style)
+       // console.log(style)
         const points = []
         for (let i = 0; i < data.length; i++) {
           const marker = data[i]
@@ -461,11 +442,11 @@ export default {
       })
     },
     removeDisProvinceLayer () {
-      console.log('removeDisProvinceLayer')
+     // console.log('removeDisProvinceLayer')
       try {
         this.map.remove(this.disProvinceLayer)
       } catch (e) {
-        console.log(e)
+       // console.log(e)
       }
     },
     getColorByAdcode (adcode) {

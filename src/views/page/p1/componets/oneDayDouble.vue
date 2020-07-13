@@ -70,7 +70,7 @@ import NumberGroup4 from '../componets/NumberGroup4'
 import echarts from 'echarts'
 import axios from 'axios'
 import chartAcrossBar from './ChartAcrossBar'
-import Bus from '@/assets/bus.js'
+// import Bus from '@/assets/bus.js'
 export default {
   components: {
     onlyOneBox,
@@ -81,7 +81,8 @@ export default {
   },
   methods: {
     back () {
-      Bus.$emit('toTwo', false)
+      console.log('back')
+      this.$emit('toOne', false)
     }
   },
   watch: {
