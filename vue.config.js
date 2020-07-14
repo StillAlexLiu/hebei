@@ -30,8 +30,8 @@ module.exports = {
       // }
       '/HK': {
         // 目标 API 地址
-        // target: 'http://222.222.44.206:8000',
-        target: 'http://192.168.1.103/blade-hikregions',
+        target: 'http://222.222.44.206:8000',
+        // target: 'http://192.168.1.103/blade-hikregions',
         // target: 'http://localhost:8000/',
         pathRewrite: {
           '^/': '/' // 代理的路径
