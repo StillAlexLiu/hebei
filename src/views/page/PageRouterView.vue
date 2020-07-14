@@ -12,7 +12,7 @@
             <div class="view">
                 <router-view name="center"/>
                 <CenterMap class="full-height full-width" v-show="centerFlag && !personageBox && !zhduTab"/>
-                <div class="full"  v-show="personageBox">
+                <div class="full"  v-if="personageBox">
                   <EntityCenter />
                 </div>
                 <div class="full" v-if="zhduTab" style="position: relative">

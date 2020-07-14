@@ -47,26 +47,31 @@ export default {
           unit: 'h',
           name1: '已处理',
           value1: '0',
-          unit1: '条'
-          // name2: '已处理',
-          // value2: '0',
-          // unit2: '条'
-        }, {
-          title: '银行',
-          name: '平均用时',
-          value: '3',
-          unit: 'h',
-          name1: '已处理',
-          value1: '321',
-          unit1: '条'
-        }, {
+          unit1: '条',
+          name2: '处理中',
+          value2: '0',
+          unit2: '户'
+        },
+        // {
+        //   title: '银行',
+        //   name: '平均用时',
+        //   value: '3',
+        //   unit: 'h',
+        //   name1: '已处理',
+        //   value1: '321',
+        //   unit1: '条'
+        // },
+        {
           title: '税收',
           name: '平均用时',
           value: '3',
           unit: 'h',
           name1: '已处理',
           value1: '321',
-          unit1: '条'
+          unit1: '条',
+          name2: '处理中',
+          value2: '0',
+          unit2: '户'
         }, {
           title: '公安',
           name: '平均用时',
@@ -74,7 +79,10 @@ export default {
           unit: 'h',
           name1: '已处理',
           value1: '321',
-          unit1: '条'
+          unit1: '条',
+          name2: '处理中',
+          value2: '0',
+          unit2: '户'
         }
       ],
       info4: {
@@ -86,19 +94,7 @@ export default {
   },
   computed: {
     options () {
-      this.info1.value = this.data.entApply
-      this.info2.data[0].value = this.data.avgAppHours
-      this.info2.data[1].value = this.data.applyDone
-      this.info3[3].value1 = this.data.gaDone
-      this.info3[3].value = this.data.avggaHours
-      this.info3[2].value1 = this.data.ssDOne
-      this.info3[2].value = this.data.avgssHours
-      this.info3[1].value1 = this.data.yhdone
-      this.info3[1].value = this.data.avgyhHours
-      this.info3[0].value1 = this.data.rsdone
-      this.info3[0].value = this.data.avgrsHours
-      this.info4.value = this.data.entDone
-      // entDone
+      this.sendData()
       const lineData = []
       const lineDataEffect = []
       const colors = ['#89B557', '#89B557', '#89B557']
@@ -173,7 +169,7 @@ export default {
         }
       }
       const Group = []
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 3; i++) {
         Group.push({
           name: '',
           value: [61, i * 25 + 12.5],
@@ -186,8 +182,8 @@ export default {
             formatter: () => {
               return '{title|' + this.info3[i].title + '}\n' +
                 '{name|' + this.info3[i].name + '}' + '{value|' + this.info3[i].value + '}' + '{unit|' + this.info3[i].unit + '}\n' +
-                '{name|' + this.info3[i].name1 + '}' + '{value|' + this.info3[i].value1 + '}' + '{unit|' + this.info3[i].unit1 + '}\n'
-              // '{name|' + this.info3[i].name2 + '}' + '{value|' + this.info3[i].value2 + '}' + '{unit|' + this.info3[i].unit2 + '}'
+                '{name|' + this.info3[i].name1 + '}' + '{value|' + this.info3[i].value1 + '}' + '{unit|' + this.info3[i].unit1 + '}\n' +
+                '{name|' + this.info3[i].name2 + '}' + '{value|' + this.info3[i].value2 + '}' + '{unit|' + this.info3[i].unit2 + '}'
             },
             rich: {
               title: {
@@ -390,8 +386,25 @@ export default {
       const k = i * i * i / 8000
       return k
     },
+    sendData () {
+      this.info1.value = this.data.entApply
+      this.info2.data[0].value = this.data.avgAppHours
+      this.info2.data[1].value = this.data.applyDone
+      this.info3[2].value2 = this.data.gaUnDone
+      this.info3[2].value1 = this.data.gaDone
+      this.info3[2].value = this.data.avggaHours
+      this.info3[1].value2 = this.data.ssUnDOne
+      this.info3[1].value1 = this.data.ssDOne
+      this.info3[1].value = this.data.avgssHours
+      // this.info3[1].value1 = this.data.yhdone
+      // this.info3[1].value = this.data.avgyhHours
+      this.info3[0].value2 = this.data.rsUndone
+      this.info3[0].value1 = this.data.rsdone
+      this.info3[0].value = this.data.avgrsHours
+      this.info4.value = this.data.entDone
+    },
     tabCli (data) {
-      this.$emit('toTwo', true)
+      this.$emit('toTwo', data)
     }
   }
 }
