@@ -6,6 +6,8 @@
             <slot name="info"></slot>
         </MapInfoBlock>
         <SearchBox :number="pointNumber" @inputData='inputFocus' :zoom="zoom2"/>
+        <warningBox @close='close' v-if="warning" :id='warningId'/>
+        <overBox @closeOverBox='closeOverBox' v-if="over" :type='overType'/>
     </div>
 </template>
 
@@ -13,14 +15,19 @@
 import MapSelector from './MapSelector'
 import MapInfoBlock from './MapInfoBlock'
 import SearchBox from './searchBox'
+import warningBox from './warningBox'
+import overBox from './overBox'
 import Mock from 'mockjs'
+import Bus from '@/assets/bus.js'
 
 export default {
   name: 'NativeAmap',
   components: {
     SearchBox,
     MapInfoBlock,
-    MapSelector
+    MapSelector,
+    warningBox,
+    overBox
   },
   data: () => {
     return {
@@ -38,7 +45,11 @@ export default {
       },
       markers: [],
       zoom2: 0,
-      inputData: []
+      inputData: [],
+      warning: false,
+      warningId: '',
+      over: false,
+      overType: ''
     }
   },
   props: {
@@ -151,8 +162,30 @@ export default {
     this.loadAMap(() => {
       this.initMap()
     })
+    // 预警列表弹框
+    Bus.$on('waringData', data => {
+      if (data) {
+        this.warningId = data.id
+        this.warning = true
+        this.over = false
+      }
+    })
+    // 累计结案弹框
+     Bus.$on('overBox', data => {
+      if (data) {
+        this.overType = data
+        this.over = true
+        this.warning = false
+      }
+    })
   },
   methods: {
+    close (data) {
+      this.warning = data
+    },
+    closeOverBox (data) {
+      this.over = data
+    },
     inputFocus (data) {
       console.log(data, '搜索')
       this.point = data
