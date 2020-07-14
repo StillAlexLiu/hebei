@@ -63,6 +63,7 @@ export default {
     z-index: 101;
     background: url('img/close.png') no-repeat;
     background-size: 100% 100%;
+    cursor: pointer;
   }
   .title{
     font-size: 60px;

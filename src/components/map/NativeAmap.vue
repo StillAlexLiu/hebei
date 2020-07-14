@@ -6,7 +6,7 @@
             <slot name="info"></slot>
         </MapInfoBlock>
         <SearchBox :number="pointNumber" @inputData='inputFocus' :zoom="zoom2"/>
-        <warningBox @close='close' v-if="warning" :id='warningId'/>
+        <warningBox @close='close' v-if="warning" :wData='warningData'/>
         <overBox @closeOverBox='closeOverBox' v-if="over" :type='overType'/>
     </div>
 </template>
@@ -47,7 +47,7 @@ export default {
       zoom2: 0,
       inputData: [],
       warning: false,
-      warningId: '',
+      warningData: '',
       over: false,
       overType: ''
     }
@@ -161,7 +161,16 @@ export default {
           })
         })
       }
+    },
+    $route(to,from){
+    if (to.path !== '/audit') {
+        this.warning = false
+        this.over = false
+    } else {
+        this.warning = false
+        this.over = false
     }
+  }
   },
   mounted () {
     this.loadAMap(() => {
@@ -170,9 +179,13 @@ export default {
     // 预警列表弹框
     Bus.$on('waringData', data => {
       if (data) {
-        this.warningId = data.id
-        this.warning = true
+        this.$get('/monitor/check/detailCase?caseId='+data.caseId).then(data => {
+        this.warningData = data.data
+         this.warning = true
         this.over = false
+      }).catch(err =>{
+        console.log(err)
+      })
       }
     })
     // 累计结案弹框
