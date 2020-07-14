@@ -37,6 +37,7 @@ export default {
   },
   methods: {
       warningBox (data) {
+          console.log(data)
         Bus.$emit('waringData', data)
       }
   }
