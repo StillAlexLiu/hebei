@@ -24,7 +24,7 @@
                 <!--                3级分类-->
                 <div class="sub-btn-group full-width padding" :key="'s'+index"
                      v-if="item.children&&item.active&&showBox">
-                    <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-公有制企业@2x.png"
+                    <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-公有制企业备份 6@2x.png"
                          v-if="item.name === '国有、集体及其控股企业'" @click="showBoxCli(item)"/>
                     <img class="imgIcon" alt src="../../assets/images/mapTabs/p1/t2/icon-农民合作社@2x.png"
                          v-if="item.name === '农民合作社'" @click="showBoxCli(item)"/>
@@ -376,7 +376,7 @@ export default {
     .imgIcon {
         height: 80px;
         align-self: center;
-        width: 32%;
+        width: 35%;
         cursor: pointer;
     }
 

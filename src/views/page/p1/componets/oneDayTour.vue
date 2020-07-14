@@ -22,7 +22,7 @@ export default {
       info1: {
         name: '企业申办',
         value: '0',
-        unit: '条'
+        unit: '户'
       },
       info2: {
         title: '市场监管局',
@@ -35,7 +35,7 @@ export default {
           {
             name: '已处理',
             value: '0',
-            unit: '条'
+            unit: '户'
           }
         ]
       },
@@ -47,7 +47,7 @@ export default {
           unit: 'h',
           name1: '已处理',
           value1: '0',
-          unit1: '条',
+          unit1: '户',
           name2: '处理中',
           value2: '0',
           unit2: '户'
@@ -59,16 +59,16 @@ export default {
         //   unit: 'h',
         //   name1: '已处理',
         //   value1: '321',
-        //   unit1: '条'
+        //   unit1: '户'
         // },
         {
-          title: '税收',
+          title: '税务',
           name: '平均用时',
           value: '3',
           unit: 'h',
           name1: '已处理',
           value1: '321',
-          unit1: '条',
+          unit1: '户',
           name2: '处理中',
           value2: '0',
           unit2: '户'
@@ -79,7 +79,7 @@ export default {
           unit: 'h',
           name1: '已处理',
           value1: '321',
-          unit1: '条',
+          unit1: '户',
           name2: '处理中',
           value2: '0',
           unit2: '户'
@@ -88,7 +88,7 @@ export default {
       info4: {
         name: '开办成功',
         value: '321',
-        unit: '条'
+        unit: '户'
       }
     }
   },
@@ -117,8 +117,9 @@ export default {
         }
       }
 
-      for (let i = -15; i < 16; i++) {
-        const y = 50 + i * 3
+      for (let i = -9; i < 16; i++) {
+        const y = 40 + i * 4
+          // console.log(y)
         if ([9, 8, 7, 1, 0, -1, -7, -8, -9].indexOf(i) < 0) {
           lineData.push({
             coords: [[36, 50], [47, y]],
@@ -172,13 +173,13 @@ export default {
       for (let i = 0; i < 3; i++) {
         Group.push({
           name: '',
-          value: [61, i * 25 + 12.5],
+          value: [61, i * 33 + 25 ],
           symbol: 'image://' + img3,
-          symbolSize: [374, 226],
+          symbolSize: [374, 256],
           label: {
             show: true,
             width: '374',
-            height: '226',
+            height: '256',
             formatter: () => {
               return '{title|' + this.info3[i].title + '}\n' +
                 '{name|' + this.info3[i].name + '}' + '{value|' + this.info3[i].value + '}' + '{unit|' + this.info3[i].unit + '}\n' +
@@ -349,7 +350,7 @@ export default {
             }
           }, {
             name: '开办成功',
-            value: [86, 50],
+            value: [90, 50],
             symbol: 'image://' + img4,
             symbolSize: [420, 420],
             label: {

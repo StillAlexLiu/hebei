@@ -12,8 +12,8 @@
           <Container class="full-width h-3-5" :title="'一日办地图'">
             <MapHebeiWithClick :data='mapList'></MapHebeiWithClick>
           </Container>
-          <Container class="full-width h-2-5" :title="'数据对接监控'"  v-if='totwoP'>
-             <ChartsBarHorizontal :data="barData" :showLabel='false'  :yName="'单位：分'" 
+          <Container class="full-width h-2-5" :title="'数据对接监控'">
+             <ChartsBarHorizontal :data="barData" :showLabel='false'  :yName="'单位：分'"
                 :barBorderRadius="[20, 20, 20, 20]"
                 :color="['#FE6941','#50E3C2','#FFD589','#4A90E2','#FE6941','#50E3C2','#FFD589','#4A90E2']"/>
           </Container>

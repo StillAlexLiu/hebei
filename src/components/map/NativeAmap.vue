@@ -109,14 +109,21 @@ export default {
     }
   },
   watch: {
+    $route: {
+      deep: true,
+      immediate: false,
+      handler: function () {
+        // console.log(this.$route, 'popop')
+        this.warning = false
+        this.over = false
+      }
+    },
     pointName: {
       deep: true,
       immediate: false,
       handler: function () {
         this.$nextTick(() => {
           this.loadAMap(() => {
-           // console.log(this.proDepth)
-           // console.log(this.pointName)
             if (this.proDepth === 0) {
             } else {
               this.map.setZoomAndCenter(this.zoom, this.center)
@@ -130,13 +137,11 @@ export default {
       deep: true,
       immediate: false,
       handler: function () {
-       // console.log(this.point)
         this.$nextTick(() => {
           this.loadAMap(() => {
             try {
-              this.removeMassMarks()
+              this.removeMassMarks ()
             } catch (e) {
-             // console.log(e)
             }
             // this.map.setZoomAndCenter(9, this.center)
             // this.pointNumber = 0

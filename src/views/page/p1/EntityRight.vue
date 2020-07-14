@@ -1,16 +1,17 @@
 <template>
-      <container-calc type="tb" :number="53" class="EntityLeft full page-style">
+  <div class="full">
+        <container title="一企一档" v-if="JSON.stringify(p1)!=='null'" class="info full" style="position: relative">
+          <font-awesome-icon class="fa" icon='times'
+                                style="position: absolute;right: 30px;font-size: 30px;top: 20px" @click="close"/>
+          <table-base-info class="h-4-11" v-if="p1" :data="p1"/>
+          <tab-table class="h-7-11" :data="p1"/>
+        </container>
+        <container-calc type="tb" :number="53" class="EntityLeft full page-style"  v-else>
         <template slot="fix">
             <RadioSimple :data="radioData" v-model="select" class="w-2-7 full-height radio "/>
         </template>
         <div slot="calc" class=" full-width full-height">
-          <container title="一企一档" v-if="JSON.stringify(p1)!=='null'" class="info full" style="position: relative">
-              <font-awesome-icon class="fa" icon='times'
-                                style="position: absolute;right: 30px;font-size: 30px;top: 20px" @click="close"/>
-              <table-base-info class="h-4-11" v-if="p1" :data="p1"/>
-              <tab-table class="h-7-11" :data="p1"/>
-          </container>
-          <template v-else>
+          <template>
               <container :title="select.name + '年报情况'" class="h-1-3">
                   <div class="w-1-2 full-height">
                       <BorderInOut class="full" :data="dataTop"/>
@@ -51,6 +52,7 @@
           </template>
         </div>
     </container-calc>
+</div>
 </template>
 
 <script>

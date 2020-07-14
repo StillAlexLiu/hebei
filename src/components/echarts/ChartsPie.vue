@@ -47,6 +47,10 @@ export default {
       type: String,
       default: ''
     },
+    showLine: {
+      type: Boolean,
+      default: false
+    },
     imgSize: {
       type: Array,
       default: () => {
@@ -206,10 +210,10 @@ export default {
         left: left,
         right: right,
         labelLine: {
-          show: false,
+          show: this.showLine,
           length: 20,
           length2: 0,
-          smooth: false
+          // smooth: false
         },
         label: {
           show: false,
