@@ -12,7 +12,7 @@
                            :unit="'个'"
                            :showX="false"
                            :colors="['#50E3C2','#FF9177','#00B1FA','#8A7CEF','#FFE17D','#00E138','#FF7B83']"/> -->
-          <ChartsPie :data="pieData" :roseType="'radius'" :is-pie="true" :show-value="true"/>
+          <ChartsPie :data="pieData" :showLine="true"   :is-pie="true" :show-value="true"/>
         </container>
         <container class="h-1-3 w-1-2" title="特种设备生产和充装单位情况">
             <ChartsPiePiecewise :showValue='true' :data="pieData2" :title="'总数\n' + dataNum" :titleSize="48"/>
@@ -30,7 +30,7 @@
                 <tab class="full" @active="select" :data="tabData"/>
             </div>
             <container-center-title2 class="w-3-10 full-height" title="检验对象分布">
-                <ChartsPie :data="pieData3" :roseType="'radius'" :is-pie="true" :show-legend="true" show-value unit="条"/>
+                <ChartsPie :data="pieData3"  :is-pie="true" :show-legend="true" show-value unit="条"/>
             </container-center-title2>
             <container-center-title2 class="w-5-10 full-height" title="检验数量趋势">
                 <ChartBar :data="barData" :dimensions="['name','value']"

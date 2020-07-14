@@ -18,7 +18,7 @@
           <p><span>办案期限：</span></p>
         </div>
         <div class="right w-1-2">
-          <p><span>案发地所在行政区划：</span></p>          
+          <p><span>案发地所在行政区划：</span></p>
           <p><span>案发时间：</span></p>
           <p><span>案值：</span></p>
           <p><span>是否利用网络：</span></p>

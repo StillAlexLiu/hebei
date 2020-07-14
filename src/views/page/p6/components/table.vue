@@ -36,9 +36,9 @@ export default {
     return {}
   },
   methods: {
-      warningBox (data) {
-        Bus.$emit('waringData', data)
-      }
+    warningBox (data) {
+      Bus.$emit('waringData', data)
+    }
   }
 }
 </script>

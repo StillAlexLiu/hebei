@@ -29,11 +29,11 @@ export default {
     return {}
   },
   methods: {
-      overBox (data) {
-        if (data.name === '结案') {
-          Bus.$emit('overBox', data.type)
-        }
+    overBox (data) {
+      if (data.name === '结案') {
+        Bus.$emit('overBox', data.type)
       }
+    }
   }
 }
 </script>
