@@ -268,6 +268,7 @@ export default {
       // 稽查办案预警数量
       axios.get('/monitor/check/getAlertQuantityData?type=' + type).then(res => {
         const data = res.data.data[0]
+        console.log(res.data.data, 'dds')
         if (data) {
           this.data1[type - 1][0].yearData = data.clue
           this.data1[type - 1][0].addup = data.clueCumulative
