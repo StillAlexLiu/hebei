@@ -4,7 +4,7 @@
             <tr class="table_firstTR">
                 <th v-for="(item, index) in header" :key="index">{{ item }}</th>
             </tr>
-            <tr v-for="(item,index) in data" :key="index" class="row">
+            <tr v-for="(item,index) in data" :key="index" class="row" @click="warningBox(item)">
                 <td>
                     <div class="color-can">
                         <div class="color" :style="{'background': 'red'}" v-if="item.warningName === '红色预警'"></div>
@@ -28,11 +28,17 @@
 </template>
 
 <script>
+import Bus from '@/assets/bus.js'
 export default {
   components: {},
   props: ['data', 'header'],
   data () {
     return {}
+  },
+  methods: {
+      warningBox (data) {
+        Bus.$emit('waringData', data)
+      }
   }
 }
 </script>

@@ -7,12 +7,12 @@
                 </ContainerOnlyTitle>
                 <div class="text">
                     <div class="w-1-2 full-height">
-                        <div class="name">{{name.name}}</div>
-                        <div class="value number-font">{{item.yearData}}</div>
+                        <div class="name">{{item.name}}</div>
+                        <div class="value number-font">{{item.num}}</div>
                     </div>
                     <div class="w-1-2 full-height">
                         <div class="name">累计</div>
-                        <div class="value number-font">{{item.addup}}</div>
+                        <div class="value number-font" @click="overBox(item)">{{item.addup}}</div>
                     </div>
                 </div>
             </div>
@@ -21,12 +21,19 @@
 </template>
 
 <script>
-
+import Bus from '@/assets/bus.js'
 export default {
   name: 'InfoGroup',
   props: ['data', 'name'],
   data: () => {
     return {}
+  },
+  methods: {
+      overBox (data) {
+        if (data.name === '结案') {
+          Bus.$emit('overBox', data.type)
+        }
+      }
   }
 }
 </script>

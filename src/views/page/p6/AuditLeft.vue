@@ -75,44 +75,53 @@ export default {
       data1: [[
         {
           name: '线索',
-          yearData: Mock.Random.natural(100, 300),
-          addup: Mock.Random.natural(300, 700)
+          num: Mock.Random.natural(100, 300),
+          addup: Mock.Random.natural(300, 700),
+          type: 'year'
         }, {
           name: '立案',
-          yearData: 1,
-          addup: 2
+          num: 1,
+          addup: 2,
+          type: 'year'
         }, {
           name: '结案',
-          yearData: 3,
-          addup: 4
+          num: 3,
+          addup: 4,
+          type: 'year'
         }
       ], [
         {
           name: '线索',
-          yearData: Mock.Random.natural(100, 300),
-          addup: Mock.Random.natural(300, 700)
+          num: Mock.Random.natural(100, 300),
+          addup: Mock.Random.natural(300, 700),
+          type: 'month'
         }, {
           name: '立案',
-          yearData: 5,
-          addup: 6
+          num: 5,
+          addup: 6,
+          type: 'month'
         }, {
           name: '结案',
-          yearData: 7,
-          addup: 8
+          num: 7,
+          addup: 8,
+          type: 'month'
         }
       ], [
         {
           name: '线索',
-          yearData: Mock.Random.natural(100, 300),
-          addup: Mock.Random.natural(300, 700)
+          num: Mock.Random.natural(100, 300),
+          addup: Mock.Random.natural(300, 700),
+          type: 'week'
         }, {
           name: '立案',
-          yearData: 9,
-          addup: 10
+          num: 9,
+          addup: 10,
+          type: 'week'
         }, {
           name: '结案',
-          yearData: 11,
-          addup: 12
+          num: 11,
+          addup: 12,
+          type: 'week'
         }
       ]],
       data2: {
