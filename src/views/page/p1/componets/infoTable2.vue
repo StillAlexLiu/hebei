@@ -1,7 +1,7 @@
 <template>
     <div class="table full-width">
       <div v-if="data[0]">
-        <CommonTable :data="data" :headers="['产品名称','规格','结果','批号','类型','年度','被检单位']" :show-order="false"/>
+        <CommonTable :data="data" :headers="dataKey" :show-order="false"/>
         <!-- <div v-for="(value,index) in data" :key="index" class="item2">
           <div class="item"  v-for="(item,key) in value" :key="key">
             <div class="key">{{key}}：</div>
@@ -22,11 +22,23 @@
 <script>
 export default {
   name: 'infoTable2',
-  props: {
+  props: ['data'],
+  data () {
+    return {
+      dataKey: []
+    }
+  },
+  watch: {
     data: {
-      type: Object,
-      return: () => {
-        return {}
+      immediate: true,
+      deep: true,
+      handler: function () {
+        if (this.data[0]) {
+          this.dataKey = []
+          for (var i in this.data[0]) {
+            this.dataKey.push(i)
+          }
+        }
       }
     }
   }

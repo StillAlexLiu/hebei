@@ -33,6 +33,12 @@ export default {
     unit: {
       type: String,
       default: ''
+    },
+    max: {
+      type: Number,
+      default: () => {
+        return 2000
+      }
     }
   },
   data () {
@@ -52,7 +58,7 @@ export default {
   methods: {
     getOption (data) {
       var spNum = 5
-      var _max = 2000
+      var _max = this.max
       var fomatter_fn = function (v) {
         return v.value
       }

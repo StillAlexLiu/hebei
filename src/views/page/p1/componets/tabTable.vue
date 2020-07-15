@@ -46,7 +46,7 @@ export default {
         this.activeKey = key
       }
     }
-    console.log(this.data, 'ddd')
+    // console.log(this.data, 'ddd')
   },
   methods: {
     itemClick (index) {
@@ -89,7 +89,7 @@ export default {
     font-size: 2rem;
     float: left;
     display: inline-block;
-    width: 16.5%;
+    width: 14.2%;
     text-align: center;
 }
 

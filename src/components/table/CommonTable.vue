@@ -35,6 +35,11 @@ export default {
       type: Boolean,
       default: true
     }
+  },
+  watch: {
+    headers (data) {
+      console.log(data, 'dsdsdsaaa')
+    }
   }
 }
 </script>

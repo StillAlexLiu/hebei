@@ -31,8 +31,13 @@
                 <ChartHalfPie :data="halfPieData"/>
             </Container>
             <Container class="w-1-2 h-1-3" :title="select.value===0?entityType.name+'区域分布':'新增'+entityType.name+'区域分布'">
-                <ChartsBarSimple :data="barData2" :dimensions="['name','value']" unit="户" @click="clickEch"
+                <div class="cuo full-width h-1-12">
+                  <span class="close_back" @click="back_parameter">×</span>
+                </div>
+                <div class="full-width h-11-12">
+                  <ChartsBarSimple :data="barData2" :dimensions="['name','value']" unit="户" @click="clickEch"
                                  :colors="['#4A90E2','#5DC3FF','#91D243','#50E3C2','#B8E986','#87A0F6','#FFD589','#FE9E55','#FE6941','#FF98A4','#22AEC5']"/>
+                </div>
             </Container>
             <Container class="w-1-2 h-1-3" v-if="select.value===0"
                        :title="select.value===0?entityType.name+'生命周期分析':'新增'+entityType.name+'生命周期分析'">
@@ -1604,6 +1609,9 @@ export default {
     clickEch (data) {
       //  console.log(data, '区域分布echarts下钻')
     },
+    back_parameter () {
+      // 返回区域分布下钻
+    },
     tabCenter () {
       Bus.$emit('getTarget', true)
     },
@@ -2217,6 +2225,12 @@ export default {
 .EntityLeft {
     .border {
         border: 1px solid #22aec5;
+    }
+    .close_back{
+      float: right;
+      font-size: 30px;
+      cursor: pointer;
+      padding-right: 3%;
     }
 }
 </style>

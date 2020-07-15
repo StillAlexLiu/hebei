@@ -27,7 +27,7 @@ import infoGroup from './components/InfoGroup'
 import tableTab from './components/tableTab'
 import warningGroup from './components/WarningGroup'
 import tableHeader from './components/table'
-import Mock from 'mockjs'
+// import Mock from 'mockjs'
 import axios from 'axios'
 
 export default {
@@ -75,52 +75,52 @@ export default {
       data1: [[
         {
           name: '线索',
-          num: Mock.Random.natural(100, 300),
-          addup: Mock.Random.natural(300, 700),
+          num: 0,
+          addup: 0,
           type: 'year'
         }, {
           name: '立案',
-          num: 1,
-          addup: 2,
+          num: 0,
+          addup: 0,
           type: 'year'
         }, {
           name: '结案',
-          num: 3,
-          addup: 4,
+          num: 0,
+          addup: 0,
           type: 'year'
         }
       ], [
         {
           name: '线索',
-          num: Mock.Random.natural(100, 300),
-          addup: Mock.Random.natural(300, 700),
+          num: 0,
+          addup: 0,
           type: 'month'
         }, {
           name: '立案',
-          num: 5,
-          addup: 6,
+          num: 0,
+          addup: 0,
           type: 'month'
         }, {
           name: '结案',
-          num: 7,
-          addup: 8,
+          num: 0,
+          addup: 0,
           type: 'month'
         }
       ], [
         {
           name: '线索',
-          num: Mock.Random.natural(100, 300),
-          addup: Mock.Random.natural(300, 700),
+          num: 0,
+          addup: 0,
           type: 'week'
         }, {
           name: '立案',
-          num: 9,
-          addup: 10,
+          num: 0,
+          addup: 0,
           type: 'week'
         }, {
           name: '结案',
-          num: 11,
-          addup: 12,
+          num: 0,
+          addup: 0,
           type: 'week'
         }
       ]],
@@ -264,18 +264,17 @@ export default {
       })
     },
     TabType (type) {
-      // console.log(type, 'tttss')
       // 稽查办案预警数量
       axios.get('/monitor/check/getAlertQuantityData?type=' + type).then(res => {
         const data = res.data.data[0]
-        console.log(res.data.data, 'dds')
         if (data) {
-          this.data1[type - 1][0].yearData = data.clue
+          this.data1[type - 1][0].num = data.clue
           this.data1[type - 1][0].addup = data.clueCumulative
-          this.data1[type - 1][1].yearData = data.standCase
+          this.data1[type - 1][1].num = data.standCase
           this.data1[type - 1][1].addup = data.standCaseCumulative
-          this.data1[type - 1][2].yearData = data.closeCase
+          this.data1[type - 1][2].num = data.closeCase
           this.data1[type - 1][2].addup = data.closeCaseCumulative
+
           this.data2.case[type - 1][0].num = data.caseRed
           this.data2.case[type - 1][1].num = data.caseOrange
           this.data2.case[type - 1][2].num = data.caseYellow

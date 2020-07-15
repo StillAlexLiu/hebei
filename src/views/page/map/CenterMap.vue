@@ -35,20 +35,19 @@ import Mock from 'mockjs'
 import EntityMapInfo from '../p1/componets/EntityMapInfo'
 import WarningMapInfo from '../p4/components/WarningMapInfo'
 import AuditMapInfo from '../p6/components/AuditMapInfo'
-import SupervisionMapInfo from '../p2/compontes/SupervisionMapInfo'
+// import SupervisionMapInfo from '../p2/compontes/SupervisionMapInfo'
 import ComplaintMapInfo from '../p5/compontes/ComplaintMapInfo'
 import KeepOnRecordMapInfo from '../p10/components/KeepOnRecordMapInfo'
 import Bus from '@/assets/bus.js'
 import axios from 'axios'
-
-import { stat } from 'fs'
+// import { stat } from 'fs'
 
 export default {
   name: 'CenterMap',
   components: {
     KeepOnRecordMapInfo,
     ComplaintMapInfo,
-    SupervisionMapInfo,
+    // SupervisionMapInfo,
     AuditMapInfo,
     WarningMapInfo,
     EntityMapInfo
@@ -446,8 +445,9 @@ export default {
     },
     getCaption (obj, state) {
       // // console.log(obj, state)
-      var index = obj.lastIndexOf('\,')
-      if (state == 0) {
+      // var index = obj.lastIndexOf('\,')
+      var index = obj.lastIndexOf(',')
+      if (state === 0) {
         obj = obj.substring(0, index)
       } else {
         obj = obj.substring(index + 1, obj.length)
@@ -777,6 +777,16 @@ export default {
           })
           // console.log(this.mainMessage[i], this.p1Info['监管信息']['质量公告'], '非个体')
         }
+        // 特种设备许可列表
+        this.p1Info['许可信息']['特种设备许可'].push({
+          证书编号: '',
+          申请类别: '',
+          许可名称: '',
+          发证机关: '',
+          发证日期: '',
+          有效期至: ''
+        })
+        Bus.$emit('centerMap', ['产品名称', '规格', '结果', '批号', '类型', '年度', '被检单位'])
         this.setPageData({
           key: 'p1',
           data: this.p1Info

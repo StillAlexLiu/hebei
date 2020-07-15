@@ -88,6 +88,7 @@ export default {
       immediate: true,
       deep: true,
       handler: function () {
+        // console.log(this.p1, 'oppppp')
         // this.getTableData(this.p1)
       }
     },

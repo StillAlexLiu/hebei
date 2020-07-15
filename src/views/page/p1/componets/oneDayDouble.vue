@@ -41,8 +41,13 @@
         </container>
         <div class="full-height h-1-3">
             <container-center-title2 title="各局办理情况" class="full-height w-1-2">
-              <chartAcrossBar :data='acrossData' :legend="['市场监督管理局', '银行', '人社','税务', '公安']"  :barBorderRadius="[30, 30, 30, 30]"  :unit="'单位：小时'"
-                :color="['#FE6941', '#EFC578', '#738CE2', '#22C492', '#4A90E2']"></chartAcrossBar>
+              <div class="full-width h-1-9">
+                <RadioSimple :data="radioTab" v-model="select2" class="w-2-7 full-height radio "  style="float: right"/>
+              </div>
+              <div class="full-width h-8-9">
+                <chartAcrossBar :data='acrossData' :max="maxNum" :legend="['市场监督管理局', '银行', '人社','税务', '公安']"  :barBorderRadius="[30, 30, 30, 30]"  :unit="'单位：小时'"
+                  :color="['#FE6941', '#EFC578', '#738CE2', '#22C492', '#4A90E2']"></chartAcrossBar>
+              </div>
             </container-center-title2>
             <container-center-title2 title="各市办理情况" class="full-height w-1-2">
                 <div class="full-width h-1-9">
@@ -119,10 +124,37 @@ export default {
           })
         }
       }
+    },
+    select2: {
+      immediate: true,
+      deep: true,
+      handler: function () {
+        console.log(this.select2)
+        this.maxNum = this.select2.time
+        // 各局办理情况
+        axios.get('/monitor/info/apply/' + this.select2.value).then(res => {
+          const data = res.data.data
+          this.acrossData = data
+        })
+      }
     }
   },
   data () {
     return {
+      maxNum: '',
+      select2: {},
+      radioTab: [
+        {
+          name: '办理量',
+          value: 'orgAvg',
+          time: 1500
+        },
+        {
+          name: '办理时长',
+          value: 'orgHours',
+          time: 8
+        }
+      ],
       barLineName: '单位：件',
       barLineLegend: '办理量',
       acrossData: {
@@ -144,19 +176,19 @@ export default {
       expenseGoal: [
         {
           name: '减少材料提交',
-          num: '1.2',
+          num: '10',
           unit: '份'
         }, {
           name: '节约办理时长',
-          num: '3',
+          num: '27',
           unit: '小时'
         }, {
           name: '减少办理环节',
-          num: '3083',
+          num: '4',
           unit: '个'
         }, {
           name: '减少办理费用',
-          num: '523',
+          num: '8',
           unit: '元'
         }
       ],
