@@ -199,7 +199,9 @@ export default {
     })
     Bus.$on('zoom', data => {
       const zoom = 1 / data
-      this.$set(this.style, 'transform', 'scale(' + zoom + ',' + zoom + ')')
+      // this.$set(this.style, 'transform', 'scale(' + zoom + ',' + zoom + ')')
+      var map = document.getElementsByClassName('amap-maps')[0]
+      map.style.transform = 'scale(' + zoom + ',' + zoom + ')'
     })
   },
   methods: {
