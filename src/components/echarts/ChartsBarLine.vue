@@ -147,7 +147,7 @@ export default {
             nameGap: 6,
             nameTextStyle: {
               fontSize: 20,
-              color: 'rgba(304, 304, 304, 0.9)'
+              color: 'white'
             },
             splitLine: {
               show: i === 0
@@ -189,6 +189,12 @@ export default {
         color: this.colors,
         title: {
           text: this.title
+        },
+        grid: {
+          left: '7%',
+          top: '10%',
+          right: '2%',
+          bottom: '10%'
         },
         legend: {
           show: true,

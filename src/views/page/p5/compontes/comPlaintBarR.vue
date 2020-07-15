@@ -89,6 +89,10 @@ export default {
             axisLine: {
               show: false
             },
+            nameTextStyle: {
+              fontSize: 20,
+              color: 'white'
+            },
             axisTick: {
               show: false
             },

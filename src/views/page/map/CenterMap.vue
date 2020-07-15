@@ -159,6 +159,9 @@ export default {
       mainType: '',
       basicData: '',
       mainMessage: '',
+      getQtxkByPripId: '',
+      getZfInfoByPripId: '',
+      getTzsbxkByPripId: '',
       infoData: {
         营业执照: {
           企业名称: '',
@@ -550,7 +553,7 @@ export default {
       if (item.ad_code) {
         if (item.mainClass) {
           axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + item.mainClass + '&entType=' + item.cliType).then(res => {
-            // console.log('第三层1')
+            console.log('第三层1', res,data.data)
             this.point = []
             this.leafNodePoint = true
             const data = res.data.data
@@ -570,7 +573,7 @@ export default {
         } else {
           // 11错误
           axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + this.mainType).then(res => {
-            // console.log('第三层2')
+            console.log('第三层2', res.data.data)
             // console.log('开始')
             // console.log(new Date())
             this.point = []
@@ -658,7 +661,7 @@ export default {
       }
     },
     p1Select (pripId, cliType) {
-      // console.log(pripId, cliType, 'pp')
+      console.log(pripId, cliType, 'pp')
       let url
       if (cliType === 'AA') {
         url = 'getMainBaseGtData'
@@ -672,7 +675,19 @@ export default {
         axios.get('/monitor/main/getBaseZlggData?pripId=' + pripId).then(res2 => {
           // console.log(res2.data.data, '右屏接口')
           this.mainMessage = res2.data.data
-          this.getEntityById()
+          axios.get('/monitor/main/getQtxkByPripId?pripId=' + pripId).then(res3 => {
+            this.getQtxkByPripId = res3.data.data
+            console.log(res3.data.data, '水水水水')
+            axios.get('/monitor/main/getZfInfoByPripId?pripId=' + pripId).then(res4 => {
+              console.log(res4.data.data)
+              this.getZfInfoByPripId = res4.data.data
+              axios.get('/monitor/main/getTzsbxkByPripId?pripId=' + pripId + '&reportType=' + cliType).then(res5 => {
+                console.log(res5.data.data, '555')
+                this.getTzsbxkByPripId = res5.data.data
+                this.getEntityById()
+              })
+            })
+          })
         })
       })
     },
@@ -775,18 +790,43 @@ export default {
             // '不合格项': this.mainMessage[i].BHG
             // '主体身份代码': this.mainMessage[i].UNISCID
           })
-          // console.log(this.mainMessage[i], this.p1Info['监管信息']['质量公告'], '非个体')
         }
         // 特种设备许可列表
-        this.p1Info['许可信息']['特种设备许可'].push({
-          证书编号: '',
-          申请类别: '',
-          许可名称: '',
-          发证机关: '',
-          发证日期: '',
-          有效期至: ''
-        })
-        Bus.$emit('centerMap', ['产品名称', '规格', '结果', '批号', '类型', '年度', '被检单位'])
+        for (let i = 0; i < this.getTzsbxkByPripId.length; i++) {
+          this.p1Info['许可信息']['特种设备许可'].push({
+            证书编号: this.getTzsbxkByPripId[i].CERTIFICATENO,
+            申请类别: this.getTzsbxkByPripId[i].APPLICATECATEGORY,
+            许可名称: this.getTzsbxkByPripId[i].XZXKNAME,
+            发证机关: this.getTzsbxkByPripId[i].ISSUEORGAN,
+            发证日期: this.getTzsbxkByPripId[i].ISSUEDATE,
+            有效期至: this.getTzsbxkByPripId[i].EFFECTIVEDATE
+          })
+        }
+        
+        for (let i = 0; i < this.getQtxkByPripId.length; i++) {
+          this.p1Info['许可信息']['其他部门许可'].push({
+            许可编号: this.getQtxkByPripId[i].LICNO,
+            许可名称: this.getQtxkByPripId[i].LICNAME,
+            有效期自: this.getQtxkByPripId[i].VALFROM,
+            有效期至: this.getQtxkByPripId[i].VALTO,
+            许可机关: this.getQtxkByPripId[i].LICANTH,
+            许可内容: this.getQtxkByPripId[i].LICITEM,
+            状态: this.getQtxkByPripId[i].TYPE
+          })
+        }
+        for (let i = 0; i < this.getZfInfoByPripId.length; i++) {
+          this.p1Info['执法信息']['行政处罚信息'].push({
+            案件编号: this.getZfInfoByPripId[i].CASENO,
+            案件名称: this.getZfInfoByPripId[i].CASENAME,
+            立案日期: this.getZfInfoByPripId[i].CASEFIDATE,
+            处罚机关: this.getZfInfoByPripId[i].PENAUTH_CN,
+            处罚结果: this.getZfInfoByPripId[i].PENRESULT,
+            没款金额: this.getZfInfoByPripId[i].FORFAM,
+            罚款金额: this.getZfInfoByPripId[i].PENAM,
+            违法行为: this.getZfInfoByPripId[i].LLEGACT,
+            处罚类型: this.getZfInfoByPripId[i].PENTYPE
+          })
+        }
         this.setPageData({
           key: 'p1',
           data: this.p1Info

@@ -59,14 +59,14 @@ export default {
     getOption (data) {
       var spNum = 5
       var _max = this.max
-      var fomatter_fn = function (v) {
+      var fomatterFn = function (v) {
         return v.value
       }
       var _label = {
         normal: {
           show: true,
           position: 'inside',
-          formatter: fomatter_fn,
+          formatter: fomatterFn,
           textStyle: {
             color: '#fff',
             fontSize: 16
@@ -103,10 +103,11 @@ export default {
           right: 10,
           top: 10,
           selectedMode: false,
-          itemWidth: 13,
-          itemHeight: 7,
+          itemWidth: 15,
+          itemHeight: 15,
           textStyle: {
-            color: '#ccc'
+            color: '#ccc',
+            fontSize: 23
           }
         },
         grid: {
@@ -128,7 +129,7 @@ export default {
             show: false,
             formatter: function (v) {
               var _v = (v / _max * 100).toFixed(0)
-              return _v == 0 ? _v : _v + '%'
+              return _v === 0 ? _v : _v + '%'
             }
           },
           axisLine: {
@@ -148,9 +149,12 @@ export default {
           name: this.unit,
           // min: 0,
           axisLabel: {
-            fontSize: 16,
+            fontSize: 20,
             color: '#fff'
-
+          },
+          nameTextStyle: {
+            fontSize: 20,
+            color: 'white'
           },
           axisLine: {
             show: false

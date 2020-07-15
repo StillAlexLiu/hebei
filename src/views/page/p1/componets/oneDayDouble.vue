@@ -34,7 +34,7 @@
                                :legend="['平均办理时长']"
                                :colors="['#55B0EE']"
                                :is-area="true"
-                               :units="['单位：小时']"
+                               :units="['单位:小时']"
                                :type="['line']"/>
                 </div>
             </container-center-title2>
@@ -45,7 +45,7 @@
                 <RadioSimple :data="radioTab" v-model="select2" class="w-2-7 full-height radio "  style="float: right"/>
               </div>
               <div class="full-width h-8-9">
-                <chartAcrossBar :data='acrossData' :max="maxNum" :legend="['市场监督管理局', '银行', '人社','税务', '公安']"  :barBorderRadius="[30, 30, 30, 30]"  :unit="'单位：小时'"
+                <chartAcrossBar :data='acrossData' :max="maxNum" :legend="['市场监督管理局', '银行', '人社','税务', '公安']"  :barBorderRadius="[30, 30, 30, 30]"  :unit="select2Legend"
                   :color="['#FE6941', '#EFC578', '#738CE2', '#22C492', '#4A90E2']"></chartAcrossBar>
               </div>
             </container-center-title2>
@@ -97,7 +97,7 @@ export default {
       handler: function () {
         console.log(this.select)
         if (this.select.name === '办理量') {
-          this.barLineName = '单位： 件'
+          this.barLineName = '单位:件'
           this.barLineLegend = '办理量'
           axios.get('/monitor/info/apply/zzData?indexCodes=BDBLL,TSBLL,DZBLL,LFBLL,ZJKBLL,CDBLL,CZBLL,SJZBLL,QHDBLL,HSBLL,XJBLL,XTBLL,HDBLL').then(res => {
             const data = res.data.data.data
@@ -110,7 +110,7 @@ export default {
             }
           })
         } else if (this.select.name === '办理时长') {
-          this.barLineName = '单位： 小时'
+          this.barLineName = '单位:小时'
           this.barLineLegend = '平均时长'
           axios.get('/monitor/info/apply/zzData?indexCodes=BDBLSJ,TSBLSJ,DZBLSJ,LFBLSJ,ZJKBLSJ,CDBLSJ,CZBLSJ,SJZBLSJ,QHDBLSJ,HSBLSJ,XJBLSJ,XTBLSJ,HDBLSJ').then(res => {
             const data = res.data.data.data
@@ -131,6 +131,7 @@ export default {
       handler: function () {
         console.log(this.select2)
         this.maxNum = this.select2.time
+        this.select2Legend = this.select2.legend
         // 各局办理情况
         axios.get('/monitor/info/apply/' + this.select2.value).then(res => {
           const data = res.data.data
@@ -143,16 +144,19 @@ export default {
     return {
       maxNum: '',
       select2: {},
+      select2Legend: '',
       radioTab: [
         {
           name: '办理量',
           value: 'orgAvg',
-          time: 1500
+          time: 1500,
+          legend: '单位:件'
         },
         {
           name: '办理时长',
           value: 'orgHours',
-          time: 8
+          time: 8,
+          legend: '单位:小时'
         }
       ],
       barLineName: '单位：件',
