@@ -17,6 +17,7 @@
     </div>
 </template>
 <script>
+import Bus from '@/assets/bus.js'
 export default {
   data () {
     return {
@@ -77,6 +78,7 @@ export default {
       this.$set(this.style, 'transform', 'scale(' + zoom + ',' + zoom + ')')
       this.$set(this.style2, 'overflow-y', 'hidden')
       this.$set(this.style, 'transform-origin', 'left top')
+      Bus.$emit('zoom', (bHeight / this.height))
     },
     setCover () {
       const bHeight = window.innerHeight

@@ -1,6 +1,6 @@
 <template>
     <div class="NativeAmap">
-        <div class="a-map full-width full-height" :id="'container'+idKey"></div>
+        <div class="a-map full-width full-height" :id="'container'+idKey" :style="style"></div>
         <MapSelector v-if="selector&&selectorData.length>0" :data="selectorData" @getSelect="getSelect"/>
         <MapInfoBlock>
             <slot name="info"></slot>
@@ -49,7 +49,8 @@ export default {
       warning: false,
       warningData: '',
       over: false,
-      overType: ''
+      overType: '',
+      style: {}
     }
   },
   props: {
@@ -195,6 +196,12 @@ export default {
         this.over = true
         this.warning = false
       }
+    })
+    Bus.$on('zoom', data => {
+      const zoom = 1 / data
+      // this.$set(this.style, 'transform', 'scale(' + zoom + ',' + zoom + ')')
+      var map = document.getElementsByClassName('amap-maps')[0]
+      map.style.transform = 'scale(' + zoom + ',' + zoom + ')'
     })
   },
   methods: {
