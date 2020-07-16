@@ -7,7 +7,7 @@
         </MapInfoBlock>
         <SearchBox :number="pointNumber" @inputData='inputFocus' :zoom="zoom2"/>
         <warningBox @close='close' v-if="warning" :wData='warningData'/>
-        <overBox @closeOverBox='closeOverBox' v-if="over" :type='overType'/>
+        <overBox @closeOverBox='closeOverBox' v-if="over"/>
     </div>
 </template>
 
@@ -49,7 +49,6 @@ export default {
       warning: false,
       warningData: '',
       over: false,
-      overType: '',
       style: {}
     }
   },
@@ -192,7 +191,6 @@ export default {
     // 累计结案弹框
      Bus.$on('overBox', data => {
       if (data) {
-        this.overType = data
         this.over = true
         this.warning = false
       }

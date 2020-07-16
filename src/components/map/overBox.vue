@@ -1,44 +1,72 @@
 <template>
     <div class="overBox">
       <span class="close" @click="close"></span>
-      <p class="title">已办结案件</p>
-      <div class="table h-4-5">
-        <div class="thead h-1-12">
-          <span class="w-1-12">序号</span>
-          <span class="w-5-12">案件名称</span>
-          <span class="w-1-8">办案机关</span>
-          <span class="w-1-8">案件类型</span>
-          <span class="w-1-8">立案时间</span>
-          <span class="w-1-8">结案时间</span>
-        </div>
-        <div class="tbody h-11-12">
-          <ul class="full">
-            <li v-for="item in 10" :key="item" class="h-1-7">
-              <span class="w-1-12">序号</span>
-              <span class="w-5-12">案件名称</span>
-              <span class="w-1-8">办案机关</span>
-              <span class="w-1-8">案件类型</span>
-              <span class="w-1-8">立案时间</span>
-              <span class="w-1-8">结案时间</span>
-            </li>
-          </ul>
+      <div class="full" v-if='flag'>
+        <p class="title">已办结案件</p>
+        <div class="table h-4-5">
+          <div class="thead h-1-12">
+            <span class="w-1-12">序号</span>
+            <span class="w-5-12">案件名称</span>
+            <span class="w-1-8">办案机关</span>
+            <span class="w-1-8">案件类型</span>
+            <span class="w-1-8">立案时间</span>
+            <span class="w-1-8">结案时间</span>
+          </div>
+          <div class="tbody h-11-12">
+            <ul class="full">
+              <li v-for="(item, index) in list" :key="index" class="h-1-7" @click="detail(item)">
+                <span class="w-1-12">{{index+1}}</span>
+                <span class="w-5-12 active" :style="{'line-height': 132/Math.ceil(item.caseName.length/26) +'px'}">{{item.caseName}}</span>
+                <span class="w-1-8 active" :style="{'line-height': 132/Math.ceil(item.casedep.length/6) +'px'}">{{item.casedep}}</span>
+                <span class="w-1-8">{{item.clueType}}</span>
+                <span class="w-1-8">{{item.caseFidate}}</span>
+                <span class="w-1-8">{{item.endDate}}</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+      <overDetails :listData='overData' @back='flag = !flag' v-else/>
     </div>
 </template>
 
 <script>
+import overDetails from './overDetails'
 export default {
   name: 'overBox',
-  props: ['type'],
+  components: {
+    overDetails
+  },
   data () {
     return {
-      list: ''
+      list: '',
+      flag: true,
+      overData: ''
     }
+  },
+  mounted () {
+    this.getData()
   },
   methods: {
     close () {
       this.$emit('closeOverBox', false)
+    },
+    getData () {
+      this.$get('monitor/check/getPlaceHomeData').then(res =>{
+        console.log(res)
+        this.list = res.data
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    detail (item) {
+      console.log(item)
+      this.overData = item
+    }
+  },
+  watch: {
+    overData: function () {
+      this.flag = !this.flag
     }
   }
 }
@@ -90,6 +118,11 @@ export default {
           line-height: 132px;
           list-style: none;
           text-align: center;
+          // vertical-align: middle;
+          .active{
+            text-align: left;
+            padding: 0 20px;
+          }
         }
         li:nth-child(2n){
           background:rgba(52,140,166,.1);
