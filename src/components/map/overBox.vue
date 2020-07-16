@@ -118,6 +118,7 @@ export default {
           line-height: 132px;
           list-style: none;
           text-align: center;
+          cursor: pointer;
           // vertical-align: middle;
           .active{
             text-align: left;
