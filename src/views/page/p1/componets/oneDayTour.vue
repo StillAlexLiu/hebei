@@ -116,10 +116,9 @@ export default {
           })
         }
       }
-
-      for (let i = -9; i < 16; i++) {
+      for (let i = -13; i < 15; i++) {
         const y = 40 + i * 4
-        if ([9, 8, 7, 1, 0, -1, -7, -8, -9].indexOf(i) < 0) {
+        if ([9, 8, 7, 1, 0, -1, -2,  -8, -9,-10, -11, -12, -13].indexOf(i) < 0) {
           lineData.push({
             coords: [[36, 50], [47, y]],
             lineStyle: {
@@ -127,14 +126,16 @@ export default {
             }
           })
           lineData.push({
-            coords: [[76, y], [86, 50]],
+            coords: [[76, y], [90, 50]],
             lineStyle: {
               curveness: this.getCurveness(i)
             }
           })
+          // 中间层
           lineData.push({
             coords: [[47, y], [76, y]]
           })
+          // 流动灯光
           for (let j = 0; j < Math.ceil(Math.random() * 4); j++) {
             lineDataEffect.push({
               coords: [[36, 50], [47, y]],
@@ -147,7 +148,7 @@ export default {
               }
             })
             lineDataEffect.push({
-              coords: [[76, y], [86, 50]],
+              coords: [[76, y], [90, 50]],
               lineStyle: {
                 normal: {
                   color: colors[j % 3],
@@ -172,7 +173,7 @@ export default {
       for (let i = 0; i < 3; i++) {
         Group.push({
           name: '',
-          value: [61, i * 33 + 25],
+          value: [61, i * 33 + 21],
           symbol: 'image://' + img3,
           symbolSize: [374, 256],
           label: {

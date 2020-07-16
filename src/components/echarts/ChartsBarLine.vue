@@ -79,6 +79,12 @@ export default {
       default: () => {
         return []
       }
+    },
+    selectedMode: {
+      type: Boolean,
+      default: () => {
+        return false
+      }
     }
   },
   computed: {
@@ -199,7 +205,7 @@ export default {
         legend: {
           show: true,
           left: 'right',
-          selectedMode: false,
+          selectedMode: this.selectedMode,
           itemWidth: 15,
           itemHeight: 15,
           data: this.legend,

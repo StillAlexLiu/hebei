@@ -17,11 +17,13 @@
                       <BorderInOut class="full" :data="dataTop"/>
                   </div>
                   <div class="w-1-2 full-height">
-                      <ChartsBarLine :data="barLineData" :type="['bar','line', 'bar']"
-                                    :legend="['公示数','公示率', '应报数']"
-                                    :colors="['#4A90E2','#FE6941']"
-                                    :units="['户','%']"
-                                    :dimensions="['name','value','value2', 'value3']"/>
+                      <ChartsBarLine :data="barLineData" :type="['bar', 'bar','line']"
+                                    :legend="['公示数', '应报数','公示率']"
+                                    :colors="['green', '#4A90E2','#FE6941']"
+                                    :units="['户']"
+                                    :twoAxis="true"
+                                    :dataIndex='[0, 0, 1]'
+                                    :dimensions="['name','value', 'value3','value2']"/>
                   </div>
               </container>
               <container class="h-1-3 full-width" title="信用约束">
@@ -34,6 +36,8 @@
                                :legend="['列异', '列严']"
                                :type="['bar','bar']"
                                :twoAxis="false"
+                               :selectedMode='true'
+                               :barWidth='40'
                                :colors="['#4A90E2', '#FFD589']" :units="['户次']"/>
                   </div>
               </container>
@@ -96,15 +100,47 @@ export default {
       immediate: true,
       deep: true,
       handler: function () {
-        this.expenseGoal = [{
-          name: '经营异常' + this.select.name,
-          num: '14.03',
-          unit: '万户'
-        }, {
-          name: '严重违法失信' + this.select.name,
-          num: '2.02',
-          unit: '万户'
-        }]
+        // 市场主体年报情况
+        axios.get('/monitor/main/getCreditMainReportData?mainClass=' + this.select.value).then(res => {
+          const data = res.data.data
+          this.dataTop[0].value = data[0].shouldReport
+          this.dataTop[1].value = data[0].alreadyReport
+          this.dataTop[2].value = data[0].publicityRate + '%'
+        })
+        // 信用约束
+        axios.get('/monitor/main/getCreditConstraintData?mainClass=' + this.select.value + '&type=1').then(res => {
+          const data = res.data.data[0]
+          this.expenseGoal = [{
+            name: '经营异常' + this.select.name,
+            num: data.exceptionNum,
+            unit: '户'
+          }, {
+            name: '严重违法失信' + this.select.name,
+            num: data.dishonestyNum,
+            unit: '户'
+          }]
+        })
+        // 信用约束2
+        axios.get('/monitor/main/getCreditConstraintData?mainClass=' + this.select.value + '&type=2').then(res => {
+          const data = res.data.data
+          // console.log(data, '信用约束2')
+          this.barGroupData = []
+          for (let i = 0; i < data.length; i++) {
+            this.barGroupData.push({
+              name: data[i].year,
+              step1: data[i].exceptionNum,
+              step2: data[i].dishonestyNum
+            })
+          }
+        })
+        // 经营异常因素分析
+        axios.get('/monitor/main/getAbnormalFactorsData?mainClass=' + this.select.value).then(res => {
+          const data = res.data.data
+          this.mountainData[0].value = data[0].zelingNum
+          this.mountainData[1].value = data[0].cheatNum
+          this.mountainData[2].value = data[0].outContactNum
+          this.mountainData[3].value = data[0].overdueNum
+        })
       }
     }
   },
@@ -115,16 +151,9 @@ export default {
     }
   },
   mounted () {
-    // 市场主体年报情况
-    axios.get('/monitor/main/getCreditMainReportData').then(res => {
-      const data = res.data.data
-      this.dataTop[0].value = data[0].shouldReport
-      this.dataTop[1].value = data[0].alreadyReport
-      this.dataTop[2].value = data[0].publicityRate + '%'
-    })
     axios.get('/monitor/main/getCreditClassReportData').then(res => {
       const data = res.data.data
-      // console.log(data, 'ddddd')
+      console.log(data, 'ddddd')
       this.barLineData = []
       for (let i = 0; i < data.length; i++) {
         this.barLineData.push({
@@ -134,22 +163,6 @@ export default {
           value3: data[i].shouldReport
         })
       }
-    })
-    // 信用约束
-    axios.get('/monitor/main/getCreditConstraintData').then(res => {
-      const data = res.data.data
-      this.pieData.all.value = data[0].exceptionTotal
-      this.pieData.list[0].value = data[0].moveNum
-      this.pieData.list[1].value = data[0].exceptionNum
-      this.pieData.list[2].value = data[0].dishonestyNum
-    })
-    // 经营异常因素分析
-    axios.get('/monitor/main/getAbnormalFactorsData').then(res => {
-      const data = res.data.data
-      this.mountainData[0].value = data[0].zelingNum
-      this.mountainData[1].value = data[0].cheatNum
-      this.mountainData[2].value = data[0].outContactNum
-      this.mountainData[3].value = data[0].overdueNum
     })
     // 失信企业地区分布
     axios.get('/monitor/main/getDishonestyScatterData').then(res => {

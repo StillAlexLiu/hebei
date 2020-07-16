@@ -42,11 +42,11 @@
             <Container class="w-1-2 h-1-3" v-if="select.value===0"
                        :title="select.value===0?entityType.name+'生命周期分析':'新增'+entityType.name+'生命周期分析'">
                 <ChartsBarLine v-if="select.value===0" :data="barGroupData2"
-                               :dimensions="['year','step1','step2','step3']"
-                               :legend="['10年以下','10-20年','20年以上']"
-                               :type="['bar','bar','bar']"
+                               :dimensions="['year','step1','step2','step3', 'step4', 'step5']"
+                               :legend="['3年以下','3-5年','5-10年', '10-20年', '20年以上']"
+                               :type="['bar','bar','bar','bar','bar']"
                                :twoAxis="false"
-                               :colors="['#B8E986', '#FF98A4', '#4A90E2']" :units="['户']"/>
+                               :colors="['#B8E986', '#FF98A4', '#4A90E2', 'rgb(34,174,197)', 'rgb(135,160,246)']" :units="['户']"/>
             </Container>
         </div>
     </container-calc>
@@ -1713,6 +1713,7 @@ export default {
         axios.get('/monitor/main/getMainScaleData?mainClass=' + this.activeShow + '&type=1' + '&subClass=' + this.mainType).then(res => {
           const data = res.data.data
           this.barGroupData = []
+          console.log(data, '私营企业规模情况')
           for (let i = 0; i < data.length; i++) {
             this.barGroupData.push({
               year: data[i].year,
@@ -1736,13 +1737,16 @@ export default {
         // 市场主体生命周期分析
         axios.get('/monitor/main/getMainLifecycleData?mainClass=' + this.activeShow + '&type=1' + '&subClass=' + this.mainType).then(res => {
           const data = res.data.data
+          console.log(data, '市场主体生命周期分析')
           this.barGroupData2 = []
           for (let i = 0; i < data.length; i++) {
             this.barGroupData2.push({
               year: data[i].year,
-              step1: data[i].cycleOne,
-              step2: data[i].cycleTwo,
-              step3: data[i].cycleThree
+              step1: data[i].cycleSix,
+              step2: data[i].cycleFive,
+              step3: data[i].cycleFour,
+              step4: data[i].cycleTwo,
+              step5: data[i].cycleThree
             })
           }
         })
@@ -1821,6 +1825,7 @@ export default {
         // 私营企业规模情况
         axios.get('/monitor/main/getMainScaleData?mainClass=' + topType + '&type=1' + '&subClass=' + '').then(res => {
           const data = res.data.data
+          console.log(data, '私营企业规模情况')
           this.barGroupData = []
           for (let i = 0; i < data.length; i++) {
             this.barGroupData.push({
@@ -1845,13 +1850,16 @@ export default {
         // 市场主体生命周期分析
         axios.get('/monitor/main/getMainLifecycleData?mainClass=' + topType + '&type=1' + '&subClass=' + '').then(res => {
           const data = res.data.data
+          console.log(data, '市场主体生命周期分析2')
           this.barGroupData2 = []
           for (let i = 0; i < data.length; i++) {
             this.barGroupData2.push({
               year: data[i].year,
-              step1: data[i].cycleOne,
-              step2: data[i].cycleTwo,
-              step3: data[i].cycleThree
+              step1: data[i].cycleSix,
+              step2: data[i].cycleFive,
+              step3: data[i].cycleFour,
+              step4: data[i].cycleTwo,
+              step5: data[i].cycleThree
             })
           }
         })
@@ -1978,13 +1986,16 @@ export default {
         // 市场主体生命周期分析
         axios.get('/monitor/main/getMainLifecycleData?mainClass=' + this.activeShow + '&type=2' + '&subClass=' + this.mainType).then(res => {
           const data = res.data.data
+          console.log(data, '市场主体生命周期分析3')
           this.barGroupData2 = []
           for (let i = 0; i < data.length; i++) {
             this.barGroupData2.push({
               year: data[i].year,
-              step1: data[i].cycleOne,
-              step2: data[i].cycleTwo,
-              step3: data[i].cycleThree
+              step1: data[i].cycleSix,
+              step2: data[i].cycleFive,
+              step3: data[i].cycleFour,
+              step4: data[i].cycleTwo,
+              step5: data[i].cycleThree
             })
           }
         })
@@ -2075,6 +2086,7 @@ export default {
         axios.get('/monitor/main/getMainScaleData?mainClass=' + topType + '&type=2' + '&subClass=' + '').then(res => {
           const data = res.data.data
           this.barGroupData = []
+          console.log(data, '私营企业规模情况')
           for (let i = 0; i < data.length; i++) {
             this.barGroupData.push({
               year: data[i].year,
@@ -2099,13 +2111,16 @@ export default {
         // 市场主体生命周期分析
         axios.get('/monitor/main/getMainLifecycleData?mainClass=' + topType + '&type=2' + '&subClass=' + '').then(res => {
           const data = res.data.data
+          console.log(data, '市场主体生命周期分析4')
           this.barGroupData2 = []
           for (let i = 0; i < data.length; i++) {
             this.barGroupData2.push({
               year: data[i].year,
-              step1: data[i].cycleOne,
-              step2: data[i].cycleTwo,
-              step3: data[i].cycleThree
+              step1: data[i].cycleSix,
+              step2: data[i].cycleFive,
+              step3: data[i].cycleFour,
+              step4: data[i].cycleTwo,
+              step5: data[i].cycleThree
             })
           }
         })

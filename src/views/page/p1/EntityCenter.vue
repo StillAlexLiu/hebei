@@ -166,7 +166,7 @@ export default {
       this.entApplyData.entDone = res.data.data.indexValue
     })
     // 数据对接监控柱状图
-    axios.get('/monitor/info/apply/zzData?indexCodes=GAFF,RSFF,SWFF,YHFF,GAFK,SWFK,YHFK,RSFK').then(res => {
+    axios.get('/monitor/info/apply/zzData?indexCodes=GAFF,RSFF,SWFF,GAFK,SWFK,RSFK').then(res => {
       // //  console.log(res.data.data.data, '数据对接监控柱状图')
       const data = res.data.data.data
       this.barData = []

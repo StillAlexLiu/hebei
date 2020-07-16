@@ -45,7 +45,7 @@
                 <RadioSimple :data="radioTab" v-model="select2" class="w-2-7 full-height radio "  style="float: right"/>
               </div>
               <div class="full-width h-8-9">
-                <chartAcrossBar :data='acrossData' :max="maxNum" :legend="['市场监督管理局', '银行', '人社','税务', '公安']"  :barBorderRadius="[30, 30, 30, 30]"  :unit="select2Legend"
+                <chartAcrossBar :data='acrossData' :max="maxNum" :legend="['市场监督管理局', '人社','税务', '公安']"  :barBorderRadius="[30, 30, 30, 30]"  :unit="select2Legend"
                   :color="['#FE6941', '#EFC578', '#738CE2', '#22C492', '#4A90E2']"></chartAcrossBar>
               </div>
             </container-center-title2>
@@ -135,6 +135,7 @@ export default {
         // 各局办理情况
         axios.get('/monitor/info/apply/' + this.select2.value).then(res => {
           const data = res.data.data
+          // console.log(data, d)
           this.acrossData = data
         })
       }
@@ -385,7 +386,7 @@ export default {
       this.numberData[1].value = res.data.data.indexValue
     })
     // 一窗采集情况柱状图
-    axios.get('/monitor/info/apply/zzData?indexCodes=entApply,GAKZSLL,FPSLSLL,YHKHSLL,CBYGDJSLL').then(res => {
+    axios.get('/monitor/info/apply/zzData?indexCodes=entApply,GAKZSLL,FPSLSLL,CBYGDJSLL').then(res => {
       console.log(res.data.data.data, '一窗采集情况柱状图')
       const data = res.data.data.data
       this.chart3 = {
