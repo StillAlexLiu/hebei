@@ -5,30 +5,30 @@
       <div class="main h-4-5">
         <p>{{wData.caseName}}</p>
         <div class="left w-1-2">
-          <p><span>案件编号：</span>{{wData.caseNo}}</p>
-          <p><span>案发地：</span>{{wData.caseSpot}}</p>
-          <p :title='wData.caseReason'><span>案由：</span>{{wData.caseReason}}</p>
-          <p><span>适用程序：</span>{{wData.appprRocedure}}</p>
-          <p><span>是否涉外案件：</span>{{wData.caseForsign}}</p>
-          <p><span>立案机关：</span>{{wData.caseFiauth}}</p>
-          <p><span>执行日期：</span>{{wData.exeDate}}</p>
+          <p><span>案件编号</span>{{wData.caseNo}}</p>
+          <p><span>案发地</span>{{wData.caseSpot}}</p>
+          <p :title='wData.caseReason'><span>案由</span>{{wData.caseReason}}</p>
+          <p><span>适用程序</span>{{wData.appprRocedure}}</p>
+          <p><span>是否涉外案件</span>{{wData.caseForsign}}</p>
+          <p><span>立案机关</span>{{wData.caseFiauth}}</p>
+          <p><span>执行日期</span>{{wData.exeDate}}</p>
           <p><span>未执行原因类别：</span>{{wData.unexeReaSort}}</p>
-          <p><span>罚没金额：</span>{{wData.punIsham}}</p>
-          <p><span>办案机构：</span>{{wData.casedep}}</p>
-          <p><span>办案期限：</span>{{wData.deadLine}}</p>
+          <p><span>罚没金额</span>{{wData.punIsham}}</p>
+          <p><span>办案机构</span>{{wData.casedep}}</p>
+          <p><span>办案期限</span>{{wData.deadLine}}</p>
         </div>
         <div class="right w-1-2">
-          <p><span>案发地所在行政区划：</span>{{wData.casesceDistrict}}</p>
-          <p><span>案发时间：</span>{{wData.caseTime}}</p>
-          <p><span>案值：</span>{{wData.caseVal}}</p>
-          <p><span>是否利用网络：</span>{{wData.caseInterneTsign}}</p>
-          <p><span>登记时间:</span>{{wData.regtime}}</p>
-          <p><span>立案日期：</span>{{wData.caseFidate}}</p>
-          <p><span>执行类别：</span>{{wData.exeSort}}</p>
-          <p><span>案件状态：</span>{{wData.caseState}}</p>
-          <p><span>案件结果：</span>{{wData.caseResult}}</p>
-          <p><span>结案日期：</span>{{wData.endDate}}</p>
-          <p><span>预警级别：</span>{{wData.warningName}}</p>
+          <p><span>案发地所在行政区划</span>{{wData.casesceDistrict}}</p>
+          <p><span>案发时间</span>{{wData.caseTime}}</p>
+          <p><span>案值</span>{{wData.caseVal}}</p>
+          <p><span>是否利用网络</span>{{wData.caseInterneTsign}}</p>
+          <p><span>案件类别</span>{{wData.clueType}}</p>
+          <p><span>立案日期</span>{{wData.caseFidate}}</p>
+          <p><span>执行类别</span>{{wData.exeSort}}</p>
+          <p><span>案件状态</span>{{wData.caseState}}</p>
+          <p><span>案件结果</span>{{wData.caseResult}}</p>
+          <p><span>结案日期</span>{{wData.endDate}}</p>
+          <p><span>预警级别</span>{{wData.warningName}}</p>
         </div>
       </div>
     </div>
@@ -93,12 +93,14 @@ export default {
     text-align: center;
     line-height: 164px;
     margin: 20px auto;
+    color: #92B9FF;
+    font-weight:600;
   }
   .main{
     >p{
       text-align: center;
       font-size: 50px;
-      margin: 20px auto;
+      margin: 40px auto;
     }
     .left,.right{
       p{
@@ -109,11 +111,29 @@ export default {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        background:rgba(16,88,148,0.2);
+        line-height: 60px;
+        margin: 15px 0;
         span:first-child{
           display: inline-block;
           width: 35%;
           text-align: right;
+          background:rgba(16,88,148,0.2);
+          padding-right: 20px;
+          margin-right: 20px;
         }
+      }
+    }
+    .right{
+      p{
+        width: 94%;
+        margin-left: 3%;
+      }
+    }
+    .left{
+      p{
+        width: 97%;
+        margin-left: 3%;
       }
     }
   }
