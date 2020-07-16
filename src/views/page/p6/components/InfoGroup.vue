@@ -10,9 +10,13 @@
                         <div class="name">{{item.name}}</div>
                         <div class="value number-font">{{item.num}}</div>
                     </div>
-                    <div class="w-1-2 full-height">
+                    <div class="w-1-2 full-height" style="cursor: pointer" v-if="item.name === '结案'">
                         <div class="name">累计</div>
                         <div class="value number-font" @click="overBox(item)">{{item.addup}}</div>
+                    </div>
+                    <div class="w-1-2 full-height" v-else>
+                        <div class="name">累计</div>
+                        <div class="value number-font">{{item.addup}}</div>
                     </div>
                 </div>
             </div>

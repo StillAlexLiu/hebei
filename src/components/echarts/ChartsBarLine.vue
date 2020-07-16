@@ -191,7 +191,7 @@ export default {
           text: this.title
         },
         grid: {
-          left: '7%',
+          left: '13%',
           top: '10%',
           right: '2%',
           bottom: '10%'

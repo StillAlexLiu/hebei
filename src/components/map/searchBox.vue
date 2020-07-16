@@ -39,28 +39,53 @@ export default {
       ]
     }
   },
+  watch: {
+    $route: {
+      deep: true,
+      immediate: false,
+      handler: function () {
+        this.rollList = []
+        this.text2 = ''
+      }
+    }
+  },
   methods: {
     inputCli () {
       if (this.text2) {
         axios.get('/monitor/main/getMainBaseDataByCon?entName=' + this.text2).then(res => {
           const data = res.data.data
-          console.log(data, '搜索数据')
+          // console.log(data, '搜索数据')
           this.rollList = []
           for (let i = 0; i < data.length; i++) {
-            console.log(data[i], 'iiiii')
-            this.rollList.push({
-              address: data[i].DOM,
-              cliType: data[i].ENTTYPE,
-              longitude: data[i].longitude,
-              latitude: data[i].latitude,
-              coordinate: [data[i].longitude, data[i].latitude],
-              icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
-              name: data[i].ENTNAME,
-              pripId: data[i].PRIPID,
-              level: 5,
-              sousuo: true
-            })
-            console.log(this.rollList, '搜索data')
+            // console.log(data[i], 'iiiii')
+            if (data[i].type === 'AA') {
+              this.rollList.push({
+                address: data[i].OPLOC,
+                cliType: data[i].type,
+                longitude: data[i].longitude,
+                latitude: data[i].latitude,
+                coordinate: [data[i].longitude, data[i].latitude],
+                icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
+                name: data[i].TRANAME,
+                pripId: data[i].S_EXT_SEQUENCE,
+                level: 5,
+                sousuo: true
+              })
+            } else {
+              this.rollList.push({
+                address: data[i].DOM,
+                cliType: data[i].ENTTYPE,
+                longitude: data[i].longitude,
+                latitude: data[i].latitude,
+                coordinate: [data[i].longitude, data[i].latitude],
+                icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
+                name: data[i].ENTNAME,
+                pripId: data[i].PRIPID,
+                level: 5,
+                sousuo: true
+              })
+            }
+            // console.log(this.rollList, '搜索data')
           }
         })
       }

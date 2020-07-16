@@ -119,7 +119,6 @@ export default {
 
       for (let i = -9; i < 16; i++) {
         const y = 40 + i * 4
-          // console.log(y)
         if ([9, 8, 7, 1, 0, -1, -7, -8, -9].indexOf(i) < 0) {
           lineData.push({
             coords: [[36, 50], [47, y]],
@@ -173,7 +172,7 @@ export default {
       for (let i = 0; i < 3; i++) {
         Group.push({
           name: '',
-          value: [61, i * 33 + 25 ],
+          value: [61, i * 33 + 25],
           symbol: 'image://' + img3,
           symbolSize: [374, 256],
           label: {

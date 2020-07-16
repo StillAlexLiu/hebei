@@ -36,10 +36,10 @@ export default {
     return {}
   },
   methods: {
-      warningBox (data) {
-          console.log(data)
-        Bus.$emit('waringData', data)
-      }
+    warningBox (data) {
+      console.log(data)
+      Bus.$emit('waringData', data)
+    }
   }
 }
 </script>
@@ -50,7 +50,6 @@ export default {
     font-size: 2rem;
     text-align: center;
     overflow-y: auto;
-
     .table_firstTR {
         height: 50px;
         font-size: 22px;
@@ -60,7 +59,7 @@ export default {
 
     .row {
         font-size: 24px;
-
+        cursor: pointer;
         td {
             border-bottom: 1px solid #3D94D5;
             width: 10px;

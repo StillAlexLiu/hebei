@@ -553,7 +553,7 @@ export default {
       if (item.ad_code) {
         if (item.mainClass) {
           axios.get('/monitor/main/getDistrictEntList?adCode=' + item.ad_code + '&reportType=' + item.mainClass + '&entType=' + item.cliType).then(res => {
-            console.log('第三层1', res,data.data)
+            console.log('第三层1', res.data.data)
             this.point = []
             this.leafNodePoint = true
             const data = res.data.data
@@ -677,7 +677,7 @@ export default {
           this.mainMessage = res2.data.data
           axios.get('/monitor/main/getQtxkByPripId?pripId=' + pripId).then(res3 => {
             this.getQtxkByPripId = res3.data.data
-            console.log(res3.data.data, '水水水水')
+            // console.log(res3.data.data, '水水水水')
             axios.get('/monitor/main/getZfInfoByPripId?pripId=' + pripId).then(res4 => {
               console.log(res4.data.data)
               this.getZfInfoByPripId = res4.data.data
@@ -802,7 +802,6 @@ export default {
             有效期至: this.getTzsbxkByPripId[i].EFFECTIVEDATE
           })
         }
-        
         for (let i = 0; i < this.getQtxkByPripId.length; i++) {
           this.p1Info['许可信息']['其他部门许可'].push({
             许可编号: this.getQtxkByPripId[i].LICNO,

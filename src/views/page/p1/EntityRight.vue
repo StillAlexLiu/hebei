@@ -17,11 +17,11 @@
                       <BorderInOut class="full" :data="dataTop"/>
                   </div>
                   <div class="w-1-2 full-height">
-                      <ChartsBarLine :data="barLineData" :type="['bar','line']"
-                                    :legend="['公示数','公示率']"
+                      <ChartsBarLine :data="barLineData" :type="['bar','line', 'bar']"
+                                    :legend="['公示数','公示率', '应报数']"
                                     :colors="['#4A90E2','#FE6941']"
                                     :units="['户','%']"
-                                    :dimensions="['name','value','value2']"/>
+                                    :dimensions="['name','value','value2', 'value3']"/>
                   </div>
               </container>
               <container class="h-1-3 full-width" title="信用约束">
@@ -38,7 +38,7 @@
                   </div>
               </container>
               <div class="h-1-3 full-width">
-                  <container title="经营异常因素分析" class="full-height w-1-2">
+                  <container :title="select.name + '经营异常因素分析'" class="full-height w-1-2">
                       <chart-mountain :data="mountainData"/>
                       <!--                    <ChartPie :data="mountainData"/>-->
                   </container>
@@ -130,7 +130,8 @@ export default {
         this.barLineData.push({
           name: this.typeFun(data[i].mainClass),
           value: data[i].alreadyReport,
-          value2: data[i].publicityRate
+          value2: data[i].publicityRate,
+          value3: data[i].shouldReport
         })
       }
     })
