@@ -21,12 +21,32 @@
         </div>
         <div class="h-3-8">
             <container class="w-1-2 full-height" title="案件主要违法行为类型分布">
-                <!-- <NameOnly :data="nameOnlyData" class="full"/> -->
-                 <ChartsPie :data="pieData" :legend-position="'right'"  @pieCli='pieCli' :show-all="true"/>
-                <!-- <ChartsPieValueLegend :data="pieData" :text="''" :text-size="28"/> -->
+                 <chartPie :data="pieData" :legend-position="'left'"  @pieCli='pieCli' :show-all="true" style="width:80%;float:left"/>
+                 <div class="w-1-5 full-height">
+                   <div class="text">
+                     <p>查处案件/件</p>
+                     <span>{{pieRight.caseNumber}}</span>
+                   </div>
+                   <div class="text">
+                     <p>案值/万元</p>
+                     <span>{{pieRight.caseVal}}</span>
+                   </div>
+                   <div class="text">
+                     <p>罚没款/万元</p>
+                     <span>{{pieRight.punIsham}}</span>
+                   </div>
+                   <div class="text">
+                     <p>移送公安/件</p>
+                     <span>{{pieRight.gaslNum}}</span>
+                   </div>
+                 </div>
             </container>
-            <container class="w-1-2 full-height" :title="pieType.name + '案件地区分布'">
-                 <ChartsBarSimple :data="chart4" :dimensions="['name','value']" unit="件" :barWidth='30' :barRadios='[0, 0, 0, 0]' :legend="['案件数量']"
+            <container class="w-1-2 full-height" :title="pieType.caseName + '案件地区分布'" style="position: relative;">
+                    <div class="areaType">
+                      <p class="w-1-2" v-for="(item) in areaType" :key="item.name" @click="changeType(item)" :class="{active: activeName === item.name}">
+                        {{item.name}}</p>
+                    </div>
+                 <ChartsBarSimple :data="chart4" :dimensions="['name','value']" unit="件" :barWidth='30' :barRadios='[0, 0, 0, 0]'
                   :colors="['#549AE6','#68CAFF','#9BD84C','#5AE7C9','#C0EC91','#92AAF7','#FFDA94','#FEA85F','#FE754A','#FFA2AE','#F7B74D', '#68CAFF', '#549AE6']"/>
             </container>
         </div>
@@ -42,6 +62,7 @@ import ChartsGraph from './components/ChartsGraph'
 import ImageData from './components/ImageData'
 import OtherBox from './components/otherBox'
 import backList from './components/backList'
+import chartPie from './components/ChartsPie'
 import axios from 'axios'
 
 export default {
@@ -53,48 +74,90 @@ export default {
     // NumberGroup,
     ChartTree,
     ImageData,
-    OtherBox
+    OtherBox,
+    chartPie
   },
   computed: {
   },
-  watch: {
-  },
   methods: {
     pieCli (data) {
-      console.log(data.data, this.pieTypeData, '点击')
-      // this.pieTypeData = data.data
-      // console.log(this.pieTypeData)
-      if (data.data === this.pieTypeData) {
-        console.log('一样')
-        this.pieTypeData = {
-          name: '',
-          type: ''
-        }
-        this.PieData(this.pieTypeData)
-      } else {
-        console.log('不一样')
-        this.pieTypeData = data.data
-        this.PieData(this.pieTypeData)
+      console.log(data.data)
+      if (data.data.caseNumber === 'null'){
+        data.data.caseNumber = 0
       }
+      if (data.data.caseVal === 'null'){
+        data.data.caseVal = 0
+      }
+      if (data.data.punIsham === 'null'){
+        data.data.punIsham = 0
+      }
+      if (data.data.gaslNum === 'null'){
+        data.data.gaslNum = 0
+      }
+      this.pieRight = {
+        caseNumber:data.data.caseNumber,
+        caseVal:data.data.caseVal,
+        punIsham:data.data.punIsham,
+        gaslNum:data.data.gaslNum
+      }
+      this.pieType = {
+        name:data.data.type,
+        caseName:data.data.name
+      }
+      this.activeType = 1
+      this.activeName = '案发地'
+      this.getType()
     },
-    PieData (data) {
-      console.log(data, 'dsss')
-      this.pieType = data
-      // 稽查办案案件地区
-      axios.get('/monitor/check/getregionalDistributionData?type=' + this.pieType.type).then(res => {
-        const data = res.data.data
-        this.chart4 = []
-        for (let i = 0; i < data.length; i++) {
-          this.chart4.push({
-            name: data[i].cityName,
-            value: data[i].cityNumber,
-            type: data[i].caseType
-          })
+    getData () {
+      this.$get('/monitor/check/getCaseTypeData').then(res=>{
+        this.pieData = []
+        console.log(res.data)
+      for(var i in this.pieRight){
+        if (this.pieRight[i] === 'null') {
+          this.pieRight[i] = '0'
         }
+      }
+      for (var j=0; j<res.data.length; j++){
+          this.pieData.push({
+            name:res.data[j].caseName,
+            value:res.data[j].caseNumber,
+            type:res.data[j].caseType,
+            caseNumber:res.data[j].caseNumber,
+            caseVal:res.data[j].caseVal,
+            punIsham:res.data[j].punIsham,
+            gaslNum:res.data[j].gaslNum
+          })
+          if(res.data[j].gaslNum === 'null'){
+            res.data[j].gaslNum = 0
+          }
+          this.pieRight.caseNumber += Number(res.data[j].caseNumber)
+          this.pieRight.caseVal += Number(res.data[j].caseVal)
+          this.pieRight.punIsham += Number(res.data[j].punIsham)
+          this.pieRight.gaslNum += Number(res.data[j].gaslNum)
+      }
       })
+    },
+    changeType(item) {
+      this.activeName = item.name
+      this.activeType = item.value
+      this.getType()
+    },
+    getType(){
+       axios.get('/monitor/check/getregionalDistributionData?type=' + this.pieType.name + '&regionType=' + this.activeType).then(res => {
+      const data = res.data.data
+      this.chart4 = []
+      for (let i = 0; i < data.length; i++) {
+        this.chart4.push({
+          name: data[i].cityName,
+          value: data[i].cityNumber,
+          type: data[i].caseType
+        })
+      }
+    })
     }
   },
   mounted () {
+    this.getData()
     // 稽查办案案件处理流程跟踪
     axios.get('/monitor/check/getCaseProcessData').then(res => {
       const data = res.data.data[0]
@@ -155,40 +218,36 @@ export default {
       const data = res.data.data[0]
       this.imgData.con = data.number
     })
-    // 稽查办案案件主要类型分布
-    axios.get('/monitor/check/getCaseTypeData').then(res => {
-      const data = res.data.data
-      this.pieData = []
-      for (let i = 0; i < data.length; i++) {
-        this.pieData.push({
-          name: data[i].caseName,
-          value: data[i].caseNumber,
-          type: data[i].caseType
-        })
-      }
-    })
+   
     // 稽查办案案件地区
-    axios.get('/monitor/check/getregionalDistributionData?type=' + this.pieType.name).then(res => {
-      const data = res.data.data
-      this.chart4 = []
-      for (let i = 0; i < data.length; i++) {
-        this.chart4.push({
-          name: data[i].cityName,
-          value: data[i].cityNumber,
-          type: data[i].caseType
-        })
-      }
-    })
+    this.getType()
   },
   data () {
     return {
+      pieRight:{
+        caseNumber:0,
+        caseVal:0,
+        gaslNum:0,
+        punIsham:0
+      },
       pieTypeData: {
         name: '',
         type: ''
       },
+      areaType:[
+        {
+          name:'案发地',
+          value:1,
+        }, {
+          name:'办案机关',
+          value:2
+        }
+      ],
+      activeName:'案发地',
+      activeType:'1',
       pieType: {
         name: '',
-        className: ''
+        caseName: ''
       },
       backList: [
         {
@@ -368,75 +427,7 @@ export default {
           }
         ]
       }],
-      pieData: [{
-        name: '登记',
-        value: Mock.Random.natural(100, 1000)
-      }, {
-        name: '不正当竞争',
-        value: Mock.Random.natural(100, 1000)
-      }, {
-        name: '消费者权益',
-        value: Mock.Random.natural(100, 1000)
-      }, {
-        name: '产品质量',
-        value: Mock.Random.natural(100, 1000)
-      }, {
-        name: '投机倒把',
-        value: Mock.Random.natural(100, 1000)
-      }, {
-        name: '集中贸易',
-        value: Mock.Random.natural(100, 1000)
-      }, {
-        name: '合同',
-        value: Mock.Random.natural(100, 1000)
-      }, {
-        name: '拍卖',
-        value: Mock.Random.natural(100, 1000)
-      }, {
-        name: '招投标',
-        value: Mock.Random.natural(100, 1000)
-      }, {
-        name: '动产抵押',
-        value: Mock.Random.natural(100, 1000)
-      }
-      // {
-      //   name: '商标',
-      //   value: Mock.Random.natural(100, 1000)
-      // }, {
-      //   name: '广告',
-      //   value: Mock.Random.natural(100, 1000)
-      // }, {
-      //   name: '直销',
-      //   value: Mock.Random.natural(100, 1000)
-      // }, {
-      //   name: '传销',
-      //   value: Mock.Random.natural(100, 1000)
-      // }, {
-      //   name: '限制竞争',
-      //   value: Mock.Random.natural(100, 1000)
-      // }, {
-      //   name: '人民币',
-      //   value: Mock.Random.natural(100, 1000)
-      // }, {
-      //   name: '垄断',
-      //   value: Mock.Random.natural(100, 1000)
-      // }, {
-      //   name: '食品',
-      //   value: Mock.Random.natural(100, 1000)
-      // }, {
-      //   name: '网络',
-      //   value: Mock.Random.natural(100, 1000)
-      // }, {
-      //   name: '经纪人',
-      //   value: Mock.Random.natural(100, 1000)
-      // }, {
-      //   name: '农贸',
-      //   value: Mock.Random.natural(100, 1000)
-      // }, {
-      //   name: '其他',
-      //   value: Mock.Random.natural(100, 1000)
-      // }
-      ],
+      pieData: [],
       pieData1: [
         {
           name: '广告',
@@ -507,5 +498,42 @@ export default {
 <style scoped lang="less">
 .AuditRight {
 
+}
+.text{
+  height: 23.5%;
+  margin-top: 1%;
+  font-size: 24px;
+  text-align: center;
+  background-size: 100% 100%;
+  // background-image: ;
+  background:url('./components/img/text.png') no-repeat;
+  p{
+    margin: 0;
+    line-height: 50px;
+  }
+  span{
+    color: #79DFEF;
+    font-size: 42px;
+    font-family:LESLIE-Regular,LESLIE;
+  }
+}
+.areaType{
+  position: absolute;
+  right: 5%;
+  top: 6%;
+  font-size: 22px;
+  width: 30%;
+  z-index: 999;
+  p{
+    background: url('./components/img/ac1.png') no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+  }
+  .active{
+    background: url('./components/img/ac2.png') no-repeat;
+    background-size: 100% 100%;
+  }
 }
 </style>
