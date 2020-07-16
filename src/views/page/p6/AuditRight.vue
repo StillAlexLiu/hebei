@@ -1,6 +1,6 @@
 <template>
     <div class="AuditRight full page-style">
-        <container title="案件处理流程跟踪" class="h-2-8 full-width">
+        <container title="本年案件处理流程跟踪" class="h-2-8 full-width">
             <ChartTree :data="treeData" v-if="false"/>
             <ChartsGraph :data="graphData" :link="graphData"/>
         </container>
