@@ -81,8 +81,17 @@ export default {
   },
   methods: {
     pieCli (data) {
-      console.log(data.data)
-      if (data.data.caseNumber === 'null'){
+     if (this.pieType.name === data.data.type) {
+       console.log(123)
+       this.pieType = {
+        name:'',
+        caseName:''
+      }
+      this.activeType = 1
+      this.activeName = '案发地'
+      this.getType()
+     } else {
+        if (data.data.caseNumber === 'null'){
         data.data.caseNumber = 0
       }
       if (data.data.caseVal === 'null'){
@@ -107,6 +116,7 @@ export default {
       this.activeType = 1
       this.activeName = '案发地'
       this.getType()
+     }
     },
     getData () {
       this.$get('/monitor/check/getCaseTypeData').then(res=>{
