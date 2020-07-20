@@ -34,6 +34,7 @@
                                :legend="['平均办理时长']"
                                :colors="['#55B0EE']"
                                :is-area="true"
+                               :markLine='true'
                                :units="['单位:小时']"
                                :type="['line']"/>
                 </div>

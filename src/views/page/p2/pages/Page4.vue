@@ -108,7 +108,7 @@ export default {
       // 特种设备类型分布
       axios.get('/monitor/equpMent/getMold?equpType=' + this.TypeName.type).then(res => {
         const data = res.data.data
-        console.log(data, '特种设备类型分布')
+        // console.log(data, '特种设备类型分布')
         this.hellowPie2 = []
         for (let i = 0; i < data.length; i++) {
           this.hellowPie2.push({
@@ -131,7 +131,7 @@ export default {
       // 特种设备行业分布
       axios.get('/monitor/equpMent/getMajor?equpType=' + this.TypeName.type).then(res => {
         const data = res.data.data
-        console.log(data, '特种设备行业分布')
+        // console.log(data, '特种设备行业分布')
         this.pieData4 = []
         this.scatterData = []
         let count = 0
@@ -143,7 +143,7 @@ export default {
             })
             count += data[i].industryNum
           } else {
-            console.log(data[i], '制造业')
+            // console.log(data[i], '制造业')
             this.pieCenterData[0].value = data[i].industryNum
           }
           this.scatterData.push({
@@ -151,7 +151,7 @@ export default {
             value: data[i].industryNum
           })
         }
-        console.log(count)
+        // console.log(count)
         this.pieCenterData[1].value = count
       })
       // 特种设备场所分析

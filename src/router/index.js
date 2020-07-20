@@ -62,7 +62,7 @@ const routes = [
       },
       {
         path: 'keepOnRecord',
-        name: '备案许可',
+        name: '许可备案',
         components: {
           left: KeepOnRecordLeft,
           right: KeepOnRecordRight

@@ -1973,7 +1973,7 @@ export default {
         // 私营企业规模情况
         axios.get('/monitor/main/getMainScaleData?mainClass=' + topType + '&type=1' + '&subClass=' + '').then(res => {
           const data = res.data.data
-          console.log(data, '私营企业规模情况')
+          // console.log(data, '私营企业规模情况')
           this.barGroupData = []
           for (let i = 0; i < data.length; i++) {
             this.barGroupData.push({
@@ -2004,7 +2004,7 @@ export default {
         // 市场主体生命周期分析
         axios.get('/monitor/main/getMainLifecycleData?mainClass=' + topType + '&type=1' + '&subClass=' + '').then(res => {
           const data = res.data.data
-          console.log(data, '市场主体生命周期分析2')
+          // console.log(data, '市场主体生命周期分析2')
           this.barGroupData2 = []
           for (let i = 0; i < data.length; i++) {
             this.barGroupData2.push({
