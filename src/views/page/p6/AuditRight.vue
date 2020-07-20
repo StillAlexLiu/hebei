@@ -90,6 +90,7 @@ export default {
       this.activeType = 1
       this.activeName = '案发地'
       this.getType()
+      this.getData()
      } else {
         if (data.data.caseNumber === 'null'){
         data.data.caseNumber = 0
@@ -121,6 +122,12 @@ export default {
     getData () {
       this.$get('/monitor/check/getCaseTypeData').then(res=>{
         this.pieData = []
+        this.pieRight = {
+          caseNumber:0,
+          caseVal:0,
+          gaslNum:0,
+          punIsham:0
+        },
         console.log(res.data)
       for(var i in this.pieRight){
         if (this.pieRight[i] === 'null') {
