@@ -97,7 +97,25 @@ export default {
           name: this.legend[i],
           itemStyle: {
             normal: {}
-          }
+          },
+          // markLine: {
+          //   silent: false,
+          //   precision: 4,
+          //   label: {
+          //     position: 'end'
+          //   },
+          //   lineStyle: {
+          //     color: 'red',
+          //     width: 5,
+          //     type: 'solid'
+          //   },
+            // data: [
+            //   {
+            //     name: '警戒线',
+            //     type: 'average'
+            //   }
+            // ]
+          // }
         }
         if (this.twoAxis) {
           if (this.dataIndex.length > 0) {
@@ -197,9 +215,9 @@ export default {
           text: this.title
         },
         grid: {
-          left: '13%',
-          top: '10%',
-          right: '2%',
+          left: '12%',
+          top: '15%',
+          right: '3%',
           bottom: '10%'
         },
         legend: {

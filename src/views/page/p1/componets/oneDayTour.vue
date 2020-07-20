@@ -289,14 +289,15 @@ export default {
               },
               rich: {
                 name: {
+                  padding: [0, 0, 40, 30],
                   color: '#fff',
                   fontSize: 32
                 },
                 value: {
                   color: '#79DFEF',
-                  fontSize: 72,
+                  fontSize: 60,
                   fontFamily: 'LESLIE-Regular,LESLIE',
-                  width: 160
+                  width: 170
                 },
                 unit: {
                   color: '#fff',
@@ -327,7 +328,7 @@ export default {
                 name: {
                   color: '#fff',
                   align: 'center',
-                  width: 150,
+                  width: 140,
                   fontSize: 30
                 },
                 value: {
@@ -335,9 +336,9 @@ export default {
                   align: 'center',
                   // backgroundColor: 'red',
                   verticalAlign: 'bottom',
-                  fontSize: 60,
+                  fontSize: 55,
                   fontFamily: 'LESLIE-Regular,LESLIE',
-                  width: 140
+                  width: 150
                 },
                 unit: {
                   color: '#fff',
@@ -361,12 +362,12 @@ export default {
               rich: {
                 name: {
                   color: '#fff',
-                  padding: [0, 0, 40, 0],
+                  padding: [0, 0, 40, 30],
                   fontSize: 32
                 },
                 value: {
                   color: '#79DFEF',
-                  fontSize: 60,
+                  fontSize: 50,
                   width: 140,
                   fontFamily: 'LESLIE-Regular,LESLIE'
                 },

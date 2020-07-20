@@ -162,6 +162,7 @@ export default {
       getQtxkByPripId: '',
       getZfInfoByPripId: '',
       getTzsbxkByPripId: '',
+      getCjInfoByPid: '',
       infoData: {
         营业执照: {
           企业名称: '',
@@ -325,6 +326,7 @@ export default {
             }
             for (let i = 0; i < this.latPoint.length; i++) {
               if (this.latPoint[i].userName) {
+                console.log(cliType, this.latPoint[i].enterpriseType)
                 if (cliType === Number(this.latPoint[i].enterpriseType)) {
                   // // console.log(this.latPoint[i].orgName.substring(0, 2), list)
                   for (let l = 0; l < list.length; l++) {
@@ -679,12 +681,16 @@ export default {
             this.getQtxkByPripId = res3.data.data
             // console.log(res3.data.data, '水水水水')
             axios.get('/monitor/main/getZfInfoByPripId?pripId=' + pripId).then(res4 => {
-              console.log(res4.data.data)
+              // console.log(res4.data.data)
               this.getZfInfoByPripId = res4.data.data
               axios.get('/monitor/main/getTzsbxkByPripId?pripId=' + pripId + '&reportType=' + cliType).then(res5 => {
-                console.log(res5.data.data, '555')
+                // console.log(res5.data.data, '555')
                 this.getTzsbxkByPripId = res5.data.data
-                this.getEntityById()
+                axios.get('/monitor/main/getCjInfoByPid?pripId=' + pripId + '&reportType=' + cliType).then(res6 => {
+                  // console.log(res5.data.data, '555')
+                  this.getCjInfoByPid = res6.data.data
+                  this.getEntityById()
+                })
               })
             })
           })
@@ -787,6 +793,21 @@ export default {
             类型: this.mainMessage[i].LX,
             年度: this.mainMessage[i].ND,
             被检单位: this.mainMessage[i].BJDW
+            // '不合格项': this.mainMessage[i].BHG
+            // '主体身份代码': this.mainMessage[i].UNISCID
+          })
+        }
+        for (let i = 0; i < this.getCjInfoByPid.length; i++) {
+          this.p1Info['监管信息']['食品抽检'].push({
+            // '生产企业': this.mainMessage[i].SCQY,
+            食品名称: this.getCjInfoByPid[i].SPMC,
+            分类: this.getCjInfoByPid[i].EL,
+            '生产日期/批号': this.getCjInfoByPid[i].SCRQ,
+            规格型号: this.getCjInfoByPid[i].GGXH,
+            '任务来源/项目名称': this.getCjInfoByPid[i].RWLY,
+            检验机构名称: this.getCjInfoByPid[i].JYJGMC,
+            生产单位: this.getCjInfoByPid[i].BSSCQYMC,
+            被检单位: this.getCjInfoByPid[i].BCYDWMC
             // '不合格项': this.mainMessage[i].BHG
             // '主体身份代码': this.mainMessage[i].UNISCID
           })
