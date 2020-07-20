@@ -30,7 +30,7 @@
                 <tab class="full" @active="select" :data="tabData"/>
             </div>
             <container-center-title2 class="w-3-10 full-height" title="检验对象分布">
-                <ChartsPie :data="pieData3"  :is-pie="true" :show-legend="true" show-value unit="条"/>
+                <ChartsPie :data="pieData3"  :is-pie="true" :show-legend="true" show-value unit="条" />
             </container-center-title2>
             <container-center-title2 class="w-5-10 full-height" title="检验数量趋势">
                 <ChartBar :data="barData" :dimensions="['name','value']"

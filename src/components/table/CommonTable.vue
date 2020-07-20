@@ -37,9 +37,9 @@ export default {
     }
   },
   watch: {
-    headers (data) {
-      console.log(data, 'dsdsdsaaa')
-    }
+    // headers (data) {
+    //   console.log(data, 'dsdsdsaaa')
+    // }
   }
 }
 </script>

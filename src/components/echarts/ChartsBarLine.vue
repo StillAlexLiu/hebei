@@ -85,6 +85,12 @@ export default {
       default: () => {
         return false
       }
+    },
+    markLine: {
+      type: Boolean,
+      default: ()=> {
+        return false
+      }
     }
   },
   computed: {
@@ -97,25 +103,7 @@ export default {
           name: this.legend[i],
           itemStyle: {
             normal: {}
-          },
-          // markLine: {
-          //   silent: false,
-          //   precision: 4,
-          //   label: {
-          //     position: 'end'
-          //   },
-          //   lineStyle: {
-          //     color: 'red',
-          //     width: 5,
-          //     type: 'solid'
-          //   },
-            // data: [
-            //   {
-            //     name: '警戒线',
-            //     type: 'average'
-            //   }
-            // ]
-          // }
+          }
         }
         if (this.twoAxis) {
           if (this.dataIndex.length > 0) {
@@ -160,6 +148,25 @@ export default {
                 global: false
               }
             }
+          }
+        }
+        if (this.markLine) {
+            item.markLine = {
+              silent: false,
+              precision: 4,
+              label: {
+                position: 'end'
+              },
+              lineStyle: {
+                color: 'red',
+                width: 5,
+                type: 'solid'
+              },
+              data: [
+                {
+                  yAxis: 8
+                }
+              ]
           }
         }
         series.push(item)
