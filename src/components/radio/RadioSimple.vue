@@ -62,7 +62,7 @@ export default {
         display: table;
         height: 100%;
         flex-basis: auto;
-
+        cursor: pointer;
         > p {
             display: table-cell;
             vertical-align: middle;

@@ -15,6 +15,7 @@ import ChartsBarHorizontal from './ChartsBarHorizontal'
 import ChartsScatter from './ChartsScatter'
 import ChartsGraph from './ChartsGraph.vue'
 import hebei from './hebei.json'
+import autoChart from './auto-charts.vue'
 
 ECharts.registerTheme('screen', screen)
 ECharts.registerMap('hebei', hebei)
@@ -22,6 +23,7 @@ ECharts.registerMap('hebei', hebei)
 export default {
   install: (Vue) => {
     Vue.component('chart', charts)
+    Vue.component('autoChart', autoChart)
     Vue.component('v-chart', ECharts)
     Vue.component('ChartsBarLine', ChartsBarLine)
     Vue.component('ChartsBarSimple', ChartsBarSimple)

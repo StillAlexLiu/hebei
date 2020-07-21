@@ -797,7 +797,7 @@ export default [
           type: 3
         },
         {
-          name: '幼儿园',
+          name: '学校',
           icon: require('../views/page/p3/components/img/youer@2x.png'),
           active: false,
           number: 100,
@@ -1259,10 +1259,10 @@ export default [
     }]
   },
   {
-    name: '备案许可',
+    name: '许可备案',
     path: 'keepOnRecord',
     children: [{
-      name: '备案许可',
+      name: '许可备案',
       active: true,
       single: true,
       children: [

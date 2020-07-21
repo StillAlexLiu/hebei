@@ -2,7 +2,7 @@
   <div class="full">
         <container title="一企一档" v-if="JSON.stringify(p1)!=='null'" class="info full" style="position: relative">
           <font-awesome-icon class="fa" icon='times'
-                                style="position: absolute;right: 30px;font-size: 30px;top: 20px" @click="close"/>
+                                style="position: absolute;right: 30px;font-size: 30px;top: 20px; cursor: pointer;" @click="close"/>
           <table-base-info class="h-4-11" v-if="p1" :data="p1"/>
           <tab-table class="h-7-11" :data="p1"/>
         </container>

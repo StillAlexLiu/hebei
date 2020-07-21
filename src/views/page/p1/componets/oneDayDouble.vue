@@ -69,7 +69,7 @@
 
 <script>
 import onlyOneBox from './onlyOneBox'
-import Mock from 'mockjs'
+// import Mock from 'mockjs'
 import NumberGroup from '../../p0/components/NumberGroup'
 import comPlaintBarR from '../../p5/compontes/comPlaintBarR'
 import NumberGroup4 from '../componets/NumberGroup4'
@@ -229,108 +229,10 @@ export default {
           0
         ]
       },
-      chart10: [{
-        name: '1月',
-        value: 0
-      }, {
-        name: '2月',
-        value: 0
-      }, {
-        name: '3月',
-        value: 0
-      }, {
-        name: '4月',
-        value: 0
-      }, {
-        name: '5月',
-        value: 0
-      }, {
-        name: '6月',
-        value: 0
-      }, {
-        name: '7月',
-        value: 0
-      }, {
-        name: '8月',
-        value: 0
-      }, {
-        name: '9月',
-        value: 0
-      }, {
-        name: '10月',
-        value: 0
-      }, {
-        name: '11月',
-        value: 0
-      }, {
-        name: '12月',
-        value: 0
-      }],
+      chart10: [],
       rightLine: [
-        {
-          name: '1月',
-          value: Mock.Random.natural(500, 1000)
-        }, {
-          name: '2月',
-          value: Mock.Random.natural(500, 1000)
-        }, {
-          name: '3月',
-          value: Mock.Random.natural(500, 1000)
-        }, {
-          name: '4月',
-          value: Mock.Random.natural(500, 1000)
-        }, {
-          name: '5月',
-          value: Mock.Random.natural(500, 1000)
-        }, {
-          name: '6月',
-          value: Mock.Random.natural(500, 1000)
-        }, {
-          name: '7月',
-          value: Mock.Random.natural(500, 1000)
-        }, {
-          name: '8月',
-          value: Mock.Random.natural(500, 1000)
-        }, {
-          name: '9月',
-          value: Mock.Random.natural(500, 1000)
-        }, {
-          name: '10月',
-          value: Mock.Random.natural(500, 1000)
-        }, {
-          name: '11月',
-          value: Mock.Random.natural(500, 1000)
-        }, {
-          name: '12月',
-          value: Mock.Random.natural(500, 1000)
-        }
       ],
       barData2: [
-        {
-          name: '食品',
-          value: 0
-        }, {
-          name: '药械',
-          value: 0
-        }, {
-          name: '特种设备',
-          value: 0
-        }, {
-          name: '计量',
-          value: 0
-        }, {
-          name: '广告',
-          value: 0
-        }, {
-          name: '实验室',
-          value: 0
-        }, {
-          name: '工业产量',
-          value: 0
-        }, {
-          name: '化妆品',
-          value: 0
-        }
       ],
       barColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [
         {
