@@ -46,7 +46,7 @@
                       <p class="w-1-2" v-for="(item) in areaType" :key="item.name" @click="changeType(item)" :class="{active: activeName === item.name}">
                         {{item.name}}</p>
                     </div>
-                 <ChartsBarSimple :data="chart4" :dimensions="['name','value']" unit="件" :barWidth='30' :barRadios='[0, 0, 0, 0]'
+                 <ChartsBarSimple :data="chart4" :dimensions="['name','value']" unit="件" :barWidth='30' :barRadios='[0, 0, 0, 0]' :sort='true'
                   :colors="['#549AE6','#68CAFF','#9BD84C','#5AE7C9','#C0EC91','#92AAF7','#FFDA94','#FEA85F','#FE754A','#FFA2AE','#F7B74D', '#68CAFF', '#549AE6']"/>
             </container>
         </div>
@@ -82,7 +82,7 @@ export default {
   methods: {
     pieCli (data) {
      if (this.pieType.name === data.data.type) {
-       console.log(123)
+      //  console.log(123)
        this.pieType = {
         name:'',
         caseName:''
@@ -127,9 +127,9 @@ export default {
           caseVal:0,
           gaslNum:0,
           punIsham:0
-        },
-        console.log(res.data)
-      for(var i in this.pieRight){
+        }
+        // console.log(res.data)
+      for (var i in this.pieRight){
         if (this.pieRight[i] === 'null') {
           this.pieRight[i] = '0'
         }
@@ -170,8 +170,12 @@ export default {
           type: data[i].caseType
         })
       }
+      this.chart4.sort(this.sortId)
     })
-    }
+    },
+    sortId (a,b){  
+      return b.value-a.value  
+    },
   },
   mounted () {
     this.getData()

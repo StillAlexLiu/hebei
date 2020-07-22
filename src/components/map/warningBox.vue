@@ -49,6 +49,7 @@ export default {
     }
   },
   mounted () {
+    console.log(this.wData)
     for (let i in this.wData) {
       if (this.wData[i] === 'null') {
         this.wData[i] = ''
