@@ -97,11 +97,11 @@ export default {
   },
   methods: {
     setVideo (data2) {
+      // console.log(data2, 'daadss')
       var that = this
       if (data2.regionsIndexCode) {
         // 海康
         axios.get('/monitor/main/hik/getHikCameraUrls?regionsIndexCode=' + data2.regionsIndexCode).then(res1 => {
-        // axios.get('http://192.168.1.103/blade-camera/camera/hik/getHikCameraUrls?regionsIndexCode=' + data2.regionsIndexCode).then(res1 => {
           const data = res1.data.data
           //  console.log(data, 'hkkk')
           for (let i = 0; i < data.length; i++) {
@@ -120,16 +120,11 @@ export default {
         })
       } else if (data2.userName) {
         // 华烨
-        //  console.log(data2, '华烨')
         HuaYeVideo.getList(data2.userName, data2.pwd).then(res2 => {
-          //  console.log(res2.data, '华烨22222')
-          // if (res2.data.result === 0) {
           const data = res2.data.devlist
           // //  console.log(data, 'ff')
           for (let i = 0; i < data.length; i++) {
             HuaYeVideo.checkRequest(data2.userName, data2.pwd, data[i].sn, data[i].hlsurl).then(flow => {
-              //  console.log(flow, '华烨3333')
-              // for (let a = 0; a < 6; a++) {
               if (that.videoIndex >= 6) {
                 that.videoIndex = 0
               }
@@ -141,16 +136,13 @@ export default {
                 url: flow.data.hlsurl,
                 state: flow.data.result
               })
-              // //  console.log(that.videoIndex, 'ffxxxxx')
               that.videoIndex++
             })
           }
-          // }
         })
-      } else if (data2.jcf) {
-        // console.log(data2, 'rrww')
+      } else if (data2.typeCode) {
+        // 九次方
         axios.get('/monitor/main/yug/getYugCameralist?entId=' + data2.entId).then(res1 => {
-        // axios.get('http://192.168.1.103/blade-camera/camera/hik/getHikCameraUrls?regionsIndexCode=' + data2.regionsIndexCode).then(res1 => {
           const data = res1.data.data
           console.log(data)
           for (let i = 0; i < data.length; i++) {
@@ -167,7 +159,6 @@ export default {
           }
         })
       }
-      //  console.log(that.videoNames, '6个视频')
     }
   }
 }

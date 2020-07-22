@@ -203,8 +203,13 @@ export default {
       this.over = data
     },
     inputFocus (data) {
-      // // console.log(data, '搜索')
-      this.$emit('sendPripId', data)
+      console.log(data, '搜索')
+      // 一企一档
+      if (this.$route.name === '主体服务') {
+        this.$emit('sendPripId', data)
+      } else if (this.$route.name === '远程监控') {
+        Bus.$emit('message', data)
+      }
       // 清除所有图层包括网格
       this.map.clearMap()
       // 重画网格
@@ -212,7 +217,9 @@ export default {
       var list = []
       list.push(data)
       this.addMassMarks(list)
-      this.map.setZoomAndCenter(17, [data.longitude, data.latitude])
+      this.map.setZoomAndCenter(16, [data.longitude, data.latitude])
+      // 第三层点击获取视频
+      // this.$emit('pointClick', list)
     },
     loadAMap (callback) {
       if (!window.AMap) {
@@ -345,7 +352,6 @@ export default {
 
     },
     addMassMarks (data) { // 海量点
-      // console.log('海量点')
       const newArray = []
       if (this.$route.name === '远程监控') {
         if (data[0].points) {
@@ -365,6 +371,7 @@ export default {
       }
     },
     pointMap (data) {
+      console.log('海量点', data)
       this.markers = []
       this.pointNumber = 0
       for (let i = 0; i < data.length; i++) {

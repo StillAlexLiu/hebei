@@ -88,7 +88,7 @@ export default {
     },
     markLine: {
       type: Boolean,
-      default: ()=> {
+      default: () => {
         return false
       }
     }
@@ -151,22 +151,22 @@ export default {
           }
         }
         if (this.markLine) {
-            item.markLine = {
-              silent: false,
-              precision: 4,
-              label: {
-                position: 'end'
-              },
-              lineStyle: {
-                color: 'red',
-                width: 5,
-                type: 'solid'
-              },
-              data: [
-                {
-                  yAxis: 8
-                }
-              ]
+          item.markLine = {
+            silent: false,
+            precision: 4,
+            label: {
+              position: 'end'
+            },
+            lineStyle: {
+              color: 'red',
+              width: 5,
+              type: 'solid'
+            },
+            data: [
+              {
+                yAxis: 8
+              }
+            ]
           }
         }
         series.push(item)
@@ -224,7 +224,7 @@ export default {
         grid: {
           left: '12%',
           top: '15%',
-          right: '3%',
+          right: '4%',
           bottom: '10%'
         },
         legend: {

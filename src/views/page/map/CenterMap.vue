@@ -248,8 +248,7 @@ export default {
       'setPageData'
     ]),
     sendPripIdFun (data) {
-      // console.log('接收到的id', data)
-      // 打点
+      // 搜索企业弹出一企一档
       this.p1Select(data.pripId, data.cliType)
     },
     getSelect (data) { // 分发全局map select 事件
@@ -375,7 +374,7 @@ export default {
                         leafNodePoint: true,
                         ad_code: this.latPoint[i].countyCode,
                         entId: this.latPoint[i].entId,
-                        jcf: true
+                        typeCode: this.latPoint[i].typeCode
                       })
                     }
                   }
@@ -672,7 +671,7 @@ export default {
           this.p6Info = item.data
           break
         case '远程监控':
-          console.log('远程监控', item.points)
+          console.log('远程监控', item)
           if (item.points) {
             this.point = item.points
           } else if (!item.points) {
@@ -687,7 +686,7 @@ export default {
       axios.get('/monitor/main/getBaseZlggData?pripId=' + pripId).then(res2 => {
         this.mainMessage = res2.data.data
         for (let i = 0; i < this.mainMessage.length; i++) {
-          this.p1Info['监管信息']['质量公告'].push({
+          this.p1Info['抽查信息']['质量公告'].push({
             // '生产企业': this.mainMessage[i].SCQY,
             产品名称: this.mainMessage[i].CPMC,
             规格: this.mainMessage[i].GG,
@@ -850,7 +849,7 @@ export default {
       axios.get('/monitor/main/getCjInfoByPid?pripId=' + pripId + '&reportType=' + cliType).then(res6 => {
         this.getCjInfoByPid = res6.data.data
         for (let i = 0; i < this.getCjInfoByPid.length; i++) {
-          this.p1Info['监管信息']['食品抽检'].push({
+          this.p1Info['抽查信息']['食品抽检'].push({
             // '生产企业': this.mainMessage[i].SCQY,
             食品名称: this.getCjInfoByPid[i].SPMC,
             分类: this.getCjInfoByPid[i].EL,

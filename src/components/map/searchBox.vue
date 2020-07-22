@@ -1,6 +1,6 @@
 <template>
     <div class="searchBox">
-        <label v-if="$route.name === '主体服务'">
+        <label v-if="$route.name === '主体服务' || $route.name === '远程监控'">
             <input v-model="text2">
         </label>
         <div class="pullBox" v-if="rollList">
@@ -8,7 +8,7 @@
             {{index + 1}}、{{item.name}}
           </div>
         </div>
-        <i  v-if="$route.name === '主体服务'" @click="inputCli"/>
+        <i  v-if="$route.name === '主体服务' || $route.name === '远程监控'" @click="inputCli"/>
         <div class="num">总数：{{number}}</div>
         <!-- <div class="num2">地图缩放等级: {{zoom}}</div> -->
     </div>
@@ -50,44 +50,79 @@ export default {
     }
   },
   methods: {
+    main () {
+      axios.get('/monitor/main/getMainBaseDataByCon?entName=' + this.text2).then(res => {
+        const data = res.data.data
+        // console.log(data, '搜索数据')
+        this.rollList = []
+        for (let i = 0; i < data.length; i++) {
+          // console.log(data[i], 'iiiii')
+          if (data[i].type === 'AA') {
+            this.rollList.push({
+              address: data[i].OPLOC,
+              cliType: data[i].type,
+              longitude: data[i].longitude,
+              latitude: data[i].latitude,
+              coordinate: [data[i].longitude, data[i].latitude],
+              icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
+              name: data[i].TRANAME,
+              pripId: data[i].S_EXT_SEQUENCE,
+              level: 5,
+              sousuo: true
+            })
+          } else {
+            this.rollList.push({
+              address: data[i].DOM,
+              cliType: data[i].ENTTYPE,
+              longitude: data[i].longitude,
+              latitude: data[i].latitude,
+              coordinate: [data[i].longitude, data[i].latitude],
+              icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
+              name: data[i].ENTNAME,
+              pripId: data[i].PRIPID,
+              level: 5,
+              sousuo: true
+            })
+          }
+          // console.log(this.rollList, '搜索data')
+        }
+      })
+    },
+    serchVideo () {
+      axios.get('/monitor/main/cmeras/getAllEntlist?entName=' + this.text2).then(res => {
+        // console.log(res.data.data)
+        const data = res.data.data
+        this.rollList = []
+        for (let i = 0; i < data.length; i++) {
+          this.rollList.push({
+            address: data[i].name,
+            name: data[i].address,
+            latitude: data[i].latitude,
+            longitude: data[i].longitude,
+            indexCode: data[i].indexCode,
+            // 海康
+            regionsIndexCode: data[i].indexCode,
+            level: 5,
+            coordinate: [data[i].longitude, data[i].latitude],
+            sousuo: true,
+            icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
+            // 华烨
+            userName: data[i].userName,
+            pwd: data[i].userPwd,
+            // 九次方
+            typeCode: data[i].typeCode,
+            entId: data[i].entId
+          })
+        }
+      })
+    },
     inputCli () {
       if (this.text2) {
-        axios.get('/monitor/main/getMainBaseDataByCon?entName=' + this.text2).then(res => {
-          const data = res.data.data
-          // console.log(data, '搜索数据')
-          this.rollList = []
-          for (let i = 0; i < data.length; i++) {
-            // console.log(data[i], 'iiiii')
-            if (data[i].type === 'AA') {
-              this.rollList.push({
-                address: data[i].OPLOC,
-                cliType: data[i].type,
-                longitude: data[i].longitude,
-                latitude: data[i].latitude,
-                coordinate: [data[i].longitude, data[i].latitude],
-                icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
-                name: data[i].TRANAME,
-                pripId: data[i].S_EXT_SEQUENCE,
-                level: 5,
-                sousuo: true
-              })
-            } else {
-              this.rollList.push({
-                address: data[i].DOM,
-                cliType: data[i].ENTTYPE,
-                longitude: data[i].longitude,
-                latitude: data[i].latitude,
-                coordinate: [data[i].longitude, data[i].latitude],
-                icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
-                name: data[i].ENTNAME,
-                pripId: data[i].PRIPID,
-                level: 5,
-                sousuo: true
-              })
-            }
-            // console.log(this.rollList, '搜索data')
-          }
-        })
+        if (this.$route.name === '主体服务') {
+          this.main()
+        } else if (this.$route.name === '远程监控') {
+          this.serchVideo()
+        }
       }
     },
     clickItem (data) {
