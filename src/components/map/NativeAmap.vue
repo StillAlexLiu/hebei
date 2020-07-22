@@ -333,7 +333,7 @@ export default {
       if (data.baseCount) {
         if (data.typeIndex === 0) {
           const count = data.baseCount ? '<div style="width: 100%;text-align: center">' + data.baseCount + '</div>' : ''
-          return '<div style="width: 50px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:50px;text-align:center;color:#000000;height:34px;line-height:26px;font-size:18px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
+          return '<div style="width: 55px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:50px;text-align:center;color:#000000;height:34px;line-height:26px;font-size:18px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
         } else {
           const count = data.baseCount ? '<div style="width: 100%;text-align: center">' + data.baseCount + '</div>' : ''
           return '<div style="width: 25px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
@@ -341,7 +341,7 @@ export default {
       } else {
         if (data.typeIndex === 0) {
           const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
-          return '<div style="width: 50px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:50px;text-align:center;color:#000000;height:34px;line-height:26px;font-size:18px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
+          return '<div style="width: 55px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:50px;text-align:center;color:#000000;height:34px;line-height:26px;font-size:18px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
         } else {
           const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
           return '<div style="width: 25px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'

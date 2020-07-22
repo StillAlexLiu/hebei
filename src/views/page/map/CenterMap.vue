@@ -865,6 +865,20 @@ export default {
         }
       })
     },
+    queryByPripid(pripId, cliType) {
+      axios.get('/monitorn/unqualified/queryByPripid?pripId=' + pripId + '&reportType=' + cliType).then(res => {
+        const data = res.data.data
+        for (let i = 0; i < data.length; i++) {
+          this.p1Info['抽查信息']['产品质量抽检'].push({
+            // '生产企业': this.mainMessage[i].SCQY,
+            样品名称: data[i].ypmc,
+            规格型号: data[i].ggxh,
+            判定结果: data[i].pdjg,
+            不合格项目: data[i].bhgxm
+          })
+        }
+      })
+    },
     p1Select (pripId, cliType) {
       console.log(pripId, cliType, 'pp')
       this.p1Config[12].data().then(value => {
@@ -877,6 +891,7 @@ export default {
         this.getZf(pripId, cliType)
         this.tzsbxk(pripId, cliType)
         this.CjInfo(pripId, cliType)
+        this.queryByPripid(pripId, cliType)
         this.setPageData({
           key: 'p1',
           data: this.p1Info

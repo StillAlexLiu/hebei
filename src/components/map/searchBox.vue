@@ -4,7 +4,7 @@
             <input v-model="text2">
         </label>
         <div class="pullBox" v-if="rollList">
-          <div class="pullBox_li" v-for="(item, index) in rollList" :key="index" @click="clickItem(item)">
+          <div class="pullBox_li" v-for="(item, index) in rollList" :title="item.name" :key="index" @click="clickItem(item)">
             {{index + 1}}、{{item.name}}
           </div>
         </div>
@@ -90,29 +90,31 @@ export default {
     },
     serchVideo () {
       axios.get('/monitor/main/cmeras/getAllEntlist?entName=' + this.text2).then(res => {
-        // console.log(res.data.data)
         const data = res.data.data
         this.rollList = []
+        // if (data.)
         for (let i = 0; i < data.length; i++) {
-          this.rollList.push({
-            address: data[i].name,
-            name: data[i].address,
-            latitude: data[i].latitude,
-            longitude: data[i].longitude,
-            indexCode: data[i].indexCode,
-            // 海康
-            regionsIndexCode: data[i].indexCode,
-            level: 5,
-            coordinate: [data[i].longitude, data[i].latitude],
-            sousuo: true,
-            icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
-            // 华烨
-            userName: data[i].userName,
-            pwd: data[i].userPwd,
-            // 九次方
-            typeCode: data[i].typeCode,
-            entId: data[i].entId
-          })
+            if (data[i].latitude) {
+              this.rollList.push({
+              address: data[i].name,
+              name: data[i].address,
+              latitude: data[i].latitude,
+              longitude: data[i].longitude,
+              indexCode: data[i].indexCode,
+              // 海康
+              regionsIndexCode: data[i].indexCode,
+              level: 5,
+              coordinate: [data[i].longitude, data[i].latitude],
+              sousuo: true,
+              icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
+              // 华烨
+              userName: data[i].userName,
+              pwd: data[i].userPwd,
+              // 九次方
+              typeCode: data[i].typeCode,
+              entId: data[i].entId
+            })
+          }
         }
       })
     },
@@ -156,6 +158,10 @@ export default {
         line-height: 60px;
         cursor: pointer;
         padding: 5px 10px;
+        white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
       }
     }
     input {
