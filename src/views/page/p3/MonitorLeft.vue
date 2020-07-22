@@ -50,7 +50,7 @@ export default {
           num1: 1
         }, {
           imgUrl: require('./components/img/youer@2x.png'),
-          name1: '幼儿园',
+          name1: '学校',
           num1: 273
         }, {
           imgUrl: require('./components/img/5.png'),
@@ -87,7 +87,7 @@ export default {
           value: 1
         },
         {
-          name: '幼儿园',
+          name: '学校',
           value: 273
         }
       ],

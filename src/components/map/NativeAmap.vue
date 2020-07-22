@@ -109,15 +109,6 @@ export default {
     }
   },
   watch: {
-    $route: {
-      deep: true,
-      immediate: false,
-      handler: function () {
-        // console.log(this.$route, 'popop')
-        this.warning = false
-        this.over = false
-      }
-    },
     pointName: {
       deep: true,
       immediate: false,
@@ -137,10 +128,12 @@ export default {
       deep: true,
       immediate: false,
       handler: function () {
+        this.warning = false
+        this.over = false
         this.$nextTick(() => {
           this.loadAMap(() => {
             try {
-              this.removeMassMarks ()
+              this.removeMassMarks()
             } catch (e) {
             }
             // this.map.setZoomAndCenter(9, this.center)
@@ -162,15 +155,15 @@ export default {
         })
       }
     },
-    $route(to,from){
-    if (to.path !== '/audit') {
+    $route (to, from) {
+      if (to.path !== '/audit') {
         this.warning = false
         this.over = false
-    } else {
+      } else {
         this.warning = false
         this.over = false
+      }
     }
-  }
   },
   mounted () {
     this.loadAMap(() => {
@@ -179,17 +172,17 @@ export default {
     // 预警列表弹框
     Bus.$on('waringData', data => {
       if (data) {
-        this.$get('/monitor/check/detailCase?caseId='+data.caseId).then(data => {
-        this.warningData = data.data
-         this.warning = true
-        this.over = false
-      }).catch(err =>{
-        console.log(err)
-      })
+        this.$get('/monitor/check/detailCase?caseId=' + data.caseId).then(data => {
+          this.warningData = data.data
+          this.warning = true
+          this.over = false
+        }).catch(err => {
+          console.log(err)
+        })
       }
     })
     // 累计结案弹框
-     Bus.$on('overBox', data => {
+    Bus.$on('overBox', data => {
       if (data) {
         this.over = true
         this.warning = false
@@ -210,31 +203,38 @@ export default {
       this.over = data
     },
     inputFocus (data) {
-      // // console.log(data, '搜索')
-      this.$emit('sendPripId', data)
+      console.log(data, '搜索')
+      // 一企一档
+      if (this.$route.name === '主体服务') {
+        this.$emit('sendPripId', data)
+      } else if (this.$route.name === '远程监控') {
+        Bus.$emit('message', data)
+      }
       // 清除所有图层包括网格
-      this.map.clearMap();
-      //重画网格
+      this.map.clearMap()
+      // 重画网格
       this.SearchDistrict(this.adcode[0], 0)
       var list = []
       list.push(data)
       this.addMassMarks(list)
-      this.map.setZoomAndCenter(17, [data.longitude, data.latitude])
+      this.map.setZoomAndCenter(16, [data.longitude, data.latitude])
+      // 第三层点击获取视频
+      // this.$emit('pointClick', list)
     },
     loadAMap (callback) {
       if (!window.AMap) {
-        //// console.log('地图未加载')
+        /// / console.log('地图未加载')
         this.$AMapBus.$on('onAMapLoad', () => {
-          //// console.log('地图加载完毕')
+          /// / console.log('地图加载完毕')
           callback()
         })
       } else {
-        //// console.log('地图已加载')
+        /// / console.log('地图已加载')
         callback()
       }
     },
     initMap () {
-     // console.log('初始化地图')
+      // console.log('初始化地图')
       this.map = new window.AMap.Map('container' + this.idKey, {
         resizeEnable: true,
         rotateEnable: true,
@@ -267,7 +267,7 @@ export default {
       const zoom = this.map.getZoom()
       if (zoomObject.type === 'zoomout' && zoom <= this.zoom + 1 && this.proDepth > 0) {
         if (zoom === this.zoom + 1) {
-         // console.log(this.tempData)
+          // console.log(this.tempData)
           this.clickAction(this.tempData, this.tempData.coordinate)
         } else {
           this.SearchDistrict(this.adcode[0], 0)
@@ -295,16 +295,16 @@ export default {
         center = [e.lnglat.lng, e.lnglat.lat]
       }
       // this.tempData = adcode
-     // console.log(data)
+      // console.log(data)
       this.clickAction(data, center)
     },
     clickAction (data, center) {
       if (this.$route.name === '远程监控') {
         if (data.points) {
-          this.action (data, center)
+          this.action(data, center)
         }
-      } else if (this.$route.name === '主体服务' & !data.pripId){
-        this.action (data, center)
+      } else if (this.$route.name === '主体服务' & !data.pripId) {
+        this.action(data, center)
       }
       // 判断是不是第三层打点
       // if (!this.leafNodePoint || data.leafNodePoint) {
@@ -317,7 +317,7 @@ export default {
         this.tempData = data
       }
       this.proDepth++
-     // console.log(data, data.name, this.proDepth)
+      // console.log(data, data.name, this.proDepth)
       let zoom = 0
       if (data.level) {
         zoom = data.level * 1 + this.zoom - 1
@@ -329,22 +329,22 @@ export default {
       this.removeMassMarks()
     },
     contentMaker (data) {
-      //// console.log(data, '地图打点')
+      /// / console.log(data, '地图打点')
       if (data.baseCount) {
         if (data.typeIndex === 0) {
           const count = data.baseCount ? '<div style="width: 100%;text-align: center">' + data.baseCount + '</div>' : ''
-          return '<div style="width: 70px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:70px;text-align:center;color:#000000;height:34px;line-height:34px;font-size:20px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
+          return '<div style="width: 50px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:50px;text-align:center;color:#000000;height:34px;line-height:26px;font-size:18px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
         } else {
           const count = data.baseCount ? '<div style="width: 100%;text-align: center">' + data.baseCount + '</div>' : ''
-          return '<div style="width: 36px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
+          return '<div style="width: 25px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
         }
       } else {
         if (data.typeIndex === 0) {
           const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
-          return '<div style="width: 70px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:70px;text-align:center;color:#000000;height:34px;line-height:34px;font-size:20px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
+          return '<div style="width: 50px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:50px;text-align:center;color:#000000;height:34px;line-height:26px;font-size:18px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
         } else {
           const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
-          return '<div style="width: 36px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
+          return '<div style="width: 25px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
         }
       }
     },
@@ -352,7 +352,6 @@ export default {
 
     },
     addMassMarks (data) { // 海量点
-     // console.log('海量点')
       const newArray = []
       if (this.$route.name === '远程监控') {
         if (data[0].points) {
@@ -372,6 +371,7 @@ export default {
       }
     },
     pointMap (data) {
+      console.log('海量点', data)
       this.markers = []
       this.pointNumber = 0
       for (let i = 0; i < data.length; i++) {
@@ -405,7 +405,7 @@ export default {
           anchor: new AMap.Pixel(0, 0),
           size: data[0].icon ? new AMap.Size(36, 36) : new AMap.Size(36, 20)
         }]
-       // console.log(style)
+        // console.log(style)
         const points = []
         for (let i = 0; i < data.length; i++) {
           const marker = data[i]
@@ -498,11 +498,11 @@ export default {
       })
     },
     removeDisProvinceLayer () {
-     // console.log('removeDisProvinceLayer')
+      // console.log('removeDisProvinceLayer')
       try {
         this.map.remove(this.disProvinceLayer)
       } catch (e) {
-       // console.log(e)
+        // console.log(e)
       }
     },
     getColorByAdcode (adcode) {
@@ -511,7 +511,16 @@ export default {
       }
       return this.colors[adcode]
     },
-    getSelect (list) { // 发送地图下方的选择器事件
+    getSelect (list) {
+      // 清除所有图层包括网格
+      // console.log(list.items[0], this.map)
+      if (this.map.CLASS_NAME) {
+        this.map.clearMap()
+        // 重画网格
+        this.SearchDistrict(this.adcode[0], 0)
+        this.map.setZoomAndCenter(this.zoom, this.center)
+      }
+      // 发送地图下方的选择器事件
       this.$emit('getSelect', list)
     }
   },

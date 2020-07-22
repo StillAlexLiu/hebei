@@ -7,27 +7,27 @@
 <script>
 export default {
   name: 'MapInfoBlock',
-  data() {
-      return {
-          flag: false
-      }
+  data () {
+    return {
+      flag: false
+    }
   },
   mounted () {
-     if (this.$route.fullPath === '/audit') {
-        this.flag = true
+    if (this.$route.fullPath === '/audit') {
+      this.flag = true
     } else {
-        this.flag = false
+      this.flag = false
     }
   },
-  watch:{
-  $route(to,from){
-    if (to.path === '/audit') {
+  watch: {
+    $route (to, from) {
+      if (to.path === '/audit') {
         this.flag = true
-    } else {
+      } else {
         this.flag = false
+      }
     }
   }
-},
 }
 </script>
 

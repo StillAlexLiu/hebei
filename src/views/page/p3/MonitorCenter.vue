@@ -6,7 +6,7 @@
                     <div class='name h-5-9'>{{item.address}}</div>
                     <div class='address h-4-9'>{{item.name}}</div>
                 </div>
-                <div v-if="item.state === 50" slot='calc'  class='full-height video' :style="{'background-image': 'url(' + imgage + ')' ,'background-size':' 100% 100%', 'background-repeat':' no-repeat'}">
+                <div v-if="item.state !== 0" slot='calc'  class='full-height video' :style="{'background-image': 'url(' + imgage + ')' ,'background-size':' 100% 100%', 'background-repeat':' no-repeat'}">
                   <!-- <img src="./components/img/不在线图@2x_wps图片.png" class="full-height full-width" alt=""> -->
                   <div class="full-width full-height" :style="{'text-align':'center','padding-top':'30%','font-size':'35px'}">
                     该监控视频暂不在线...
@@ -74,12 +74,12 @@ export default {
     })
   },
   mounted () {
-    const data1 = {
-      address: '张家口阳原王府庄站',
-      icon: '/img/5.8914f095.png',
-      regionsIndexCode: 'd9e6d7cc-3b76-4a61-8338-0b9a05bc6b29'
-    }
-    this.setVideo(data1)
+    // const data1 = {
+    //   address: '张家口阳原王府庄站',
+    //   icon: '/img/5.8914f095.png',
+    //   regionsIndexCode: 'd9e6d7cc-3b76-4a61-8338-0b9a05bc6b29'
+    // }
+    // this.setVideo(data1)
     const data2 = {
       address: '河北省张家口市涿鹿县涿鹿镇合符小区二期第17幢1号商铺',
       icon: '/img/youer@2x.c70e028f.png',
@@ -97,12 +97,11 @@ export default {
   },
   methods: {
     setVideo (data2) {
+      // console.log(data2, 'daadss')
       var that = this
-      //  console.log(data2, 'rrww')
       if (data2.regionsIndexCode) {
         // 海康
         axios.get('/monitor/main/hik/getHikCameraUrls?regionsIndexCode=' + data2.regionsIndexCode).then(res1 => {
-        // axios.get('http://192.168.1.103/blade-camera/camera/hik/getHikCameraUrls?regionsIndexCode=' + data2.regionsIndexCode).then(res1 => {
           const data = res1.data.data
           //  console.log(data, 'hkkk')
           for (let i = 0; i < data.length; i++) {
@@ -119,18 +118,13 @@ export default {
             that.videoIndex++
           }
         })
-      } else {
+      } else if (data2.userName) {
         // 华烨
-        //  console.log(data2, '华烨')
         HuaYeVideo.getList(data2.userName, data2.pwd).then(res2 => {
-          //  console.log(res2.data, '华烨22222')
-          // if (res2.data.result === 0) {
           const data = res2.data.devlist
           // //  console.log(data, 'ff')
           for (let i = 0; i < data.length; i++) {
             HuaYeVideo.checkRequest(data2.userName, data2.pwd, data[i].sn, data[i].hlsurl).then(flow => {
-              //  console.log(flow, '华烨3333')
-              // for (let a = 0; a < 6; a++) {
               if (that.videoIndex >= 6) {
                 that.videoIndex = 0
               }
@@ -142,14 +136,29 @@ export default {
                 url: flow.data.hlsurl,
                 state: flow.data.result
               })
-              // //  console.log(that.videoIndex, 'ffxxxxx')
               that.videoIndex++
             })
           }
-          // }
+        })
+      } else if (data2.typeCode) {
+        // 九次方
+        axios.get('/monitor/main/yug/getYugCameralist?entId=' + data2.entId).then(res1 => {
+          const data = res1.data.data
+          console.log(data)
+          for (let i = 0; i < data.length; i++) {
+            if (that.videoIndex >= 6) {
+              that.videoIndex = 0
+            }
+            Vue.set(that.videoNames, that.videoIndex, {
+              address: data[i].corpName,
+              name: data[i].cameraName,
+              url: data[i].hlsUrl,
+              state: Number(data[i].state)
+            })
+            that.videoIndex++
+          }
         })
       }
-      //  console.log(that.videoNames, '6个视频')
     }
   }
 }

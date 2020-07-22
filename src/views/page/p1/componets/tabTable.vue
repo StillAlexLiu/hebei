@@ -89,7 +89,7 @@ export default {
     font-size: 2rem;
     float: left;
     display: inline-block;
-    width: 16.5%;
+    width: 11%;
     text-align: center;
 }
 

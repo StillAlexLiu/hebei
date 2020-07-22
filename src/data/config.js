@@ -31,7 +31,7 @@ export default {
   ],
   map: {
     center: [115.088171, 39.3706],
-    zoom: 7,
+    zoom: 8,
     adcode: ['130000'],
     depth: 1
   },

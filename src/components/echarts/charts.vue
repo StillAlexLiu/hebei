@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import Bus from '@/assets/bus.js'
 export default {
   name: 'charts',
   props: {

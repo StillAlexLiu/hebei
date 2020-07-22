@@ -69,9 +69,9 @@
 </template>
 
 <script>
-import { linkSync } from 'fs'
+// import { linkSync } from 'fs'
 import axios from 'axios'
-import { type } from 'os'
+// import { type } from 'os'
 import Bus from '@/assets/bus.js'
 
 export default {
@@ -236,9 +236,9 @@ export default {
           }
         }
       }
-      if(this.$route.name === '远程监控') {
+      if (this.$route.name === '远程监控') {
         this.send()
-      } 
+      }
     },
     // tab切换
     pngClick (item, index, array) {

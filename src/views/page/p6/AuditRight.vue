@@ -114,13 +114,10 @@ export default {
         name:data.data.type,
         caseName:data.data.name
       }
-      this.activeType = 1
-      this.activeName = '案发地'
-      this.getType()
-     }
+    }
     },
     getData () {
-      this.$get('/monitor/check/getCaseTypeData').then(res=>{
+      this.$get('/monitor/check/getCaseTypeData').then(res => {
         this.pieData = []
         this.pieRight = {
           caseNumber:0,
@@ -134,27 +131,33 @@ export default {
           this.pieRight[i] = '0'
         }
       }
-      for (var j=0; j<res.data.length; j++){
+        // console.log(res.data)
+        for (var i in this.pieRight) {
+          if (this.pieRight[i] === 'null') {
+            this.pieRight[i] = '0'
+          }
+        }
+        for (var j = 0; j < res.data.length; j++) {
           this.pieData.push({
-            name:res.data[j].caseName,
-            value:res.data[j].caseNumber,
-            type:res.data[j].caseType,
-            caseNumber:res.data[j].caseNumber,
-            caseVal:res.data[j].caseVal,
-            punIsham:res.data[j].punIsham,
-            gaslNum:res.data[j].gaslNum
+            name: res.data[j].caseName,
+            value: res.data[j].caseNumber,
+            type: res.data[j].caseType,
+            caseNumber: res.data[j].caseNumber,
+            caseVal: res.data[j].caseVal,
+            punIsham: res.data[j].punIsham,
+            gaslNum: res.data[j].gaslNum
           })
-          if(res.data[j].gaslNum === 'null'){
+          if (res.data[j].gaslNum === 'null') {
             res.data[j].gaslNum = 0
           }
           this.pieRight.caseNumber += Number(res.data[j].caseNumber)
           this.pieRight.caseVal += Number(res.data[j].caseVal)
           this.pieRight.punIsham += Number(res.data[j].punIsham)
           this.pieRight.gaslNum += Number(res.data[j].gaslNum)
-      }
+        }
       })
     },
-    changeType(item) {
+    changeType (item) {
       this.activeName = item.name
       this.activeType = item.value
       this.getType()
@@ -175,7 +178,7 @@ export default {
     },
     sortId (a,b){  
       return b.value-a.value  
-    },
+    }
   },
   mounted () {
     this.getData()
@@ -239,33 +242,33 @@ export default {
       const data = res.data.data[0]
       this.imgData.con = data.number
     })
-   
+
     // 稽查办案案件地区
     this.getType()
   },
   data () {
     return {
-      pieRight:{
-        caseNumber:0,
-        caseVal:0,
-        gaslNum:0,
-        punIsham:0
+      pieRight: {
+        caseNumber: 0,
+        caseVal: 0,
+        gaslNum: 0,
+        punIsham: 0
       },
       pieTypeData: {
         name: '',
         type: ''
       },
-      areaType:[
+      areaType: [
         {
-          name:'案发地',
-          value:1,
+          name: '案发地',
+          value: 1
         }, {
-          name:'办案机关',
-          value:2
+          name: '办案机关',
+          value: 2
         }
       ],
-      activeName:'案发地',
-      activeType:'1',
+      activeName: '案发地',
+      activeType: '1',
       pieType: {
         name: '',
         caseName: ''

@@ -20,7 +20,8 @@
                 </div>
             </Container>
             <Container class="w-1-2 h-1-3"
-                       :title="select.value===0?entityType.name+'规模情况（1000万以上）':'新增'+entityType.name+'规模情况（1000万以上）'">
+                       :title="select.value===0?entityType.name+'规模情况':'新增'+entityType.name+'规模情况'">
+                    <!-- <autoChart></autoChart> -->
                 <ChartsBarLine :data="barGroupData" :dimensions="['year','step1','step2','step3', 'step4', 'step5']"
                                :legend="['500万以下', '500-1000万元', '1000-5000万元','5000-1亿元','1亿元以上']"
                                :type="['bar','bar','bar', 'bar', 'bar']"
@@ -1578,9 +1579,9 @@ export default {
             this.activeShow = firstType[i].type
           }
         }
-         //console.log(this.globalMapSelect, 'sssggggg')
+        // console.log(this.globalMapSelect, 'sssggggg')
         if (this.globalMapSelect && this.globalMapSelect.items.length > 0 && this.globalMapSelect.tab.name === '市场主体') {
-           //console.log(1)
+          // console.log(1)
           this.entityType = this.globalMapSelect.items[0]
           this.mainType = ''
           if (this.globalMapSelect.items.length > 0) {
@@ -1589,7 +1590,7 @@ export default {
             this.mainType = ''
           }
         } else {
-           //console.log(2)
+          // console.log(2)
           this.entityType = { name: '市场主体', type: 0 }
           if (this.globalMapSelect.items.length > 0) {
             this.mainType = this.globalMapSelect.items[0].type
@@ -1598,7 +1599,7 @@ export default {
           }
         }
         //  //console.log(111)
-         //console.log(this.globalMapSelect, '1561')
+        // console.log(this.globalMapSelect, '1561')
         this.showEntityData(this.entityType, this.globalMapSelect)
       }
     },
@@ -1620,7 +1621,7 @@ export default {
           const data3 = res.data.data
           this.chacha = true
           this.barData2 = []
-          for (let i =0; i < 10; i++) {
+          for (let i = 0; i < 10; i++) {
             this.barData2.push({
               name: data3[i].orgName,
               value: data3[i].entepriseNum,
@@ -1636,28 +1637,28 @@ export default {
     back_parameter () {
       // 返回区域分布下钻
       // 市场主体区域分布
-        // console.log(this.mainClass, this.subClass, this.type)
-        axios.get('/monitor/main/getMainScatterData?mainClass=' + this.mainClass + '&type=' + this.type + '&subClass=' + this.subClass).then(res => {
-          const data = res.data.data
-          this.chacha = false
-          this.barData2 = []
-          for (let i = 0; i < data.length; i++) {
-            this.barData2.push({
-              name: data[i].orgName,
-              value: data[i].entepriseNum,
-              orgCode: data[i].orgCode,
-              mainClass: this.mainClass,
-              subClass: this.subClass,
-              type: this.type
-            })
-          }
-        })
+      // console.log(this.mainClass, this.subClass, this.type)
+      axios.get('/monitor/main/getMainScatterData?mainClass=' + this.mainClass + '&type=' + this.type + '&subClass=' + this.subClass).then(res => {
+        const data = res.data.data
+        this.chacha = false
+        this.barData2 = []
+        for (let i = 0; i < data.length; i++) {
+          this.barData2.push({
+            name: data[i].orgName,
+            value: data[i].entepriseNum,
+            orgCode: data[i].orgCode,
+            mainClass: this.mainClass,
+            subClass: this.subClass,
+            type: this.type
+          })
+        }
+      })
     },
     tabCenter () {
       Bus.$emit('getTarget', true)
     },
     dispatchSelect (data, topType) {
-       //console.log(data, topType)
+      // console.log(data, topType)
       if (this.select.value === 0) {
         this.getStock(data.stock, topType)
       }
@@ -1678,7 +1679,7 @@ export default {
       this.halfPieData = []
       this.barGroupData2 = []
       //  //console.log(data2, topType, typeof(topType), 'klklkl')
-       //console.log(data2, topType, topType > 0, 'klklkl')
+      // console.log(data2, topType, topType > 0, 'klklkl')
       if (topType > 0) {
         // 主体子类型
         // 市场主体趋势柱图
@@ -1820,9 +1821,9 @@ export default {
               } else if (topType === 'C') {
                 data[i].entepriseNum = 9884
               } else if (topType === 'AA') {
-                data[i].entepriseNum =4637778
+                data[i].entepriseNum = 4637778
               } else if (topType === 'D') {
-                data[i].entepriseNum =115181
+                data[i].entepriseNum = 115181
               }
             }
             this.barData.push({
@@ -2041,8 +2042,8 @@ export default {
       this.barGroupData2 = []
       // 增量情况
       // 市场主体趋势柱图
-       //console.log(topType, 'lplp')
-       //console.log(topType, typeof (topType), 'lplp')
+      // console.log(topType, 'lplp')
+      // console.log(topType, typeof (topType), 'lplp')
       if (topType > 0) {
         // 主体子类型
         // 市场主体趋势柱图
@@ -2194,9 +2195,9 @@ export default {
               } else if (topType === 'C') {
                 data[i].entepriseNum = 237
               } else if (topType === 'AA') {
-                data[i].entepriseNum =403510
+                data[i].entepriseNum = 403510
               } else if (topType === 'D') {
-                data[i].entepriseNum =1877
+                data[i].entepriseNum = 1877
               }
             }
             this.barData.push({
@@ -2363,7 +2364,7 @@ export default {
         // 市场主体区域分布
         axios.get('/monitor/main/getMainScatterData?mainClass=' + topType + '&type=2' + '&subClass=' + '').then(res => {
           const data = res.data.data
-           //console.log(data, 'ssss')
+          // console.log(data, 'ssss')
           this.barData2 = []
           for (let i = 0; i < data.length; i++) {
             this.barData2.push({
@@ -2444,26 +2445,26 @@ export default {
       }
     },
     showEntityData (type, data) {
-       //console.log(type, data, data.items, 'llll')
+      // console.log(type, data, data.items, 'llll')
       if (data.items) {
         if (data.items.length === 0) {
           this.sendType(type.type)
         } else {
           if (data.items[0].icon) {
-             //console.log(type, 'tttpp')
+            // console.log(type, 'tttpp')
             this.sendType(type.type)
           } else {
-             //console.log(this.data, data, 'mmllll')
+            // console.log(this.data, data, 'mmllll')
             this.dispatchSelect(type.type, data.items[0].type)
           }
         }
       } else {
-         //console.log(3)
+        // console.log(3)
         this.sendType(type.type)
       }
     },
     sendType (type) {
-       //console.log(type, 'tttt')
+      // console.log(type, 'tttt')
       switch (type) {
         case '市场主体':
           console.error(0)

@@ -1,7 +1,7 @@
 <template>
     <div class="table full-width">
       <div v-if="data[0]">
-        <CommonTable :data="data" :headers="dataKey" :show-order="false"/>
+        <CommonTable :data="data" :headers="dataKey" :show-order="false" :show-border="true"/>
         <!-- <div v-for="(value,index) in data" :key="index" class="item2">
           <div class="item"  v-for="(item,key) in value" :key="key">
             <div class="key">{{key}}：</div>

@@ -5,7 +5,7 @@
                 <div class="logo"><img src="./img/logo.png" alt></div>
                 <div class="text" v-if="data['注册信息']['基本信息']['主体名称']"> {{data['注册信息']['基本信息']['主体名称']}}</div>
                 <div class="text" v-if="data['注册信息']['基本信息']['名称']"> {{data['注册信息']['基本信息']['名称']}}</div>
-                <div class="status">{{data['注册信息']['基本信息']['企业状态']}}</div>
+                <!-- <div class="status">{{data['注册信息']['基本信息']['企业状态']}}</div> -->
             </div>
             <info-table :data="data['注册信息']['基本信息']"/>
         </div>
