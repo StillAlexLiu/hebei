@@ -47,6 +47,10 @@ export default {
       default: () => {
         return ['']
       }
+    },
+    sort: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
