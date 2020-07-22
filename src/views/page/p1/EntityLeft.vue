@@ -17,11 +17,11 @@
             <Container class="w-1-2 h-1-3" :title="select.value===0?entityType.name+'产业占比':'新增'+entityType.name+'产业占比'">
                 <div class="full-height w-1-3" v-for="(item,index) in pieData" :key="index">
                     <ChartPie3 :data="item" :max="getMax(pieData)"/>
-                    <!-- <autoChart></autoChart> -->
                 </div>
             </Container>
             <Container class="w-1-2 h-1-3"
                        :title="select.value===0?entityType.name+'规模情况':'新增'+entityType.name+'规模情况'">
+                    <!-- <autoChart></autoChart> -->
                 <ChartsBarLine :data="barGroupData" :dimensions="['year','step1','step2','step3', 'step4', 'step5']"
                                :legend="['500万以下', '500-1000万元', '1000-5000万元','5000-1亿元','1亿元以上']"
                                :type="['bar','bar','bar', 'bar', 'bar']"

@@ -235,9 +235,9 @@ export default {
       if (data.colorName === '红色预警') {
         this.warningLevel = 1
         if (this.tabData === 'case') {
-          this.tableHead =['预警级别', '超期天数', '剩余时间', '案件名称', '经办机构', '案件类型', '当前状态']
+          this.tableHead = ['预警级别', '超期天数', '剩余时间', '案件名称', '经办机构', '案件类型', '当前状态']
         } else if (this.tabData === 'clew') {
-          this.tableHead =['预警级别', '超期天数', '剩余时间', '线索名称', '登记机构', '线索类型', '当前状态']
+          this.tableHead = ['预警级别', '超期天数', '剩余时间', '线索名称', '登记机构', '线索类型', '当前状态']
         }
       } else if (data.colorName === '橙色预警') {
         this.warningLevel = 2
@@ -251,10 +251,10 @@ export default {
       // console.log(data, '线索案件切换')
       if (data === 'case') {
         this.caseState = 1
-        this.tableHead =['预警级别', '立案级别', '剩余时间', '案件名称', '经办机构', '案件类型', '当前状态']
+        this.tableHead = ['预警级别', '立案级别', '剩余时间', '案件名称', '经办机构', '案件类型', '当前状态']
       } else if (data === 'clew') {
         this.caseState = 2
-        this.tableHead =['预警级别', '登记时间', '剩余时间', '线索名称', '登记机构', '线索类型', '当前状态']
+        this.tableHead = ['预警级别', '登记时间', '剩余时间', '线索名称', '登记机构', '线索类型', '当前状态']
       }
       this.warning(this.warningLevel, this.caseState)
     },
