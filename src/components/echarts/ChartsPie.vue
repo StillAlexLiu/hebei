@@ -78,10 +78,6 @@ export default {
     roseType: {
       type: String,
       default: ''
-    },
-    showLegend: {
-      type: Boolean,
-      default: true
     }
   },
   methods: {
@@ -266,12 +262,10 @@ export default {
         },
         tooltip: {
           trigger: 'item',
-          // formatter: '{a}{b} : <br/>{c} ({d}%)'
           formatter: function (params) {
             let str = ''
-            // 　　　　params.forEach((item) => {
-            return　str += `<span style="font-size: 20px;color: rgba(304, 304, 304, 0.9);">${params.name}<span style="font-size: 22px;">：${params.value}<br />`
-            // 　　　　})
+            str += `<span style="font-size: 20px;color: rgba(304, 304, 304, 0.9);">${params.name}<span style="font-size: 22px;">：${params.value}<br />`
+            return str
           }
         },
         legend: legend,

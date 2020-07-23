@@ -81,56 +81,55 @@ export default {
   },
   methods: {
     pieCli (data) {
-     if (this.pieType.name === data.data.type) {
-      //  console.log(123)
-       this.pieType = {
-        name:'',
-        caseName:''
+      if (this.pieType.name === data.data.type) {
+        this.pieType = {
+          name: '',
+          caseName: ''
+        }
+        this.activeType = 1
+        this.activeName = '案发地'
+        this.getType()
+        this.getData()
+      } else {
+        if (data.data.caseNumber === 'null') {
+          data.data.caseNumber = 0
+        }
+        if (data.data.caseVal === 'null') {
+          data.data.caseVal = 0
+        }
+        if (data.data.punIsham === 'null') {
+          data.data.punIsham = 0
+        }
+        if (data.data.gaslNum === 'null') {
+          data.data.gaslNum = 0
+        }
+        this.pieRight = {
+          caseNumber: data.data.caseNumber,
+          caseVal: data.data.caseVal,
+          punIsham: data.data.punIsham,
+          gaslNum: data.data.gaslNum
+        }
+        this.pieType = {
+          name: data.data.type,
+          caseName: data.data.name
+        }
       }
-      this.activeType = 1
-      this.activeName = '案发地'
-      this.getType()
-      this.getData()
-     } else {
-        if (data.data.caseNumber === 'null'){
-        data.data.caseNumber = 0
-      }
-      if (data.data.caseVal === 'null'){
-        data.data.caseVal = 0
-      }
-      if (data.data.punIsham === 'null'){
-        data.data.punIsham = 0
-      }
-      if (data.data.gaslNum === 'null'){
-        data.data.gaslNum = 0
-      }
-      this.pieRight = {
-        caseNumber:data.data.caseNumber,
-        caseVal:data.data.caseVal,
-        punIsham:data.data.punIsham,
-        gaslNum:data.data.gaslNum
-      }
-      this.pieType = {
-        name:data.data.type,
-        caseName:data.data.name
-      }
-    }
     },
     getData () {
       this.$get('/monitor/check/getCaseTypeData').then(res => {
         this.pieData = []
         this.pieRight = {
-          caseNumber:0,
-          caseVal:0,
-          gaslNum:0,
-          punIsham:0
+          caseNumber: 0,
+          caseVal: 0,
+          gaslNum: 0,
+          punIsham: 0
         }
         // console.log(res.data)
-      for (var i in this.pieRight){
-        if (this.pieRight[i] === 'null') {
-          this.pieRight[i] = '0'
+        for (var i in this.pieRight) {
+          if (this.pieRight[i] === 'null') {
+            this.pieRight[i] = '0'
+          }
         }
-      }
         // console.log(res.data)
         for (var i in this.pieRight) {
           if (this.pieRight[i] === 'null') {
@@ -162,22 +161,22 @@ export default {
       this.activeType = item.value
       this.getType()
     },
-    getType(){
-       axios.get('/monitor/check/getregionalDistributionData?type=' + this.pieType.name + '&regionType=' + this.activeType).then(res => {
-      const data = res.data.data
-      this.chart4 = []
-      for (let i = 0; i < data.length; i++) {
-        this.chart4.push({
-          name: data[i].cityName,
-          value: data[i].cityNumber,
-          type: data[i].caseType
-        })
-      }
-      this.chart4.sort(this.sortId)
-    })
+    getType () {
+      axios.get('/monitor/check/getregionalDistributionData?type=' + this.pieType.name + '&regionType=' + this.activeType).then(res => {
+        const data = res.data.data
+        this.chart4 = []
+        for (let i = 0; i < data.length; i++) {
+          this.chart4.push({
+            name: data[i].cityName,
+            value: data[i].cityNumber,
+            type: data[i].caseType
+          })
+        }
+        this.chart4.sort(this.sortId)
+      })
     },
-    sortId (a,b){  
-      return b.value-a.value  
+    sortId (a, b) {
+      return b.value - a.value
     }
   },
   mounted () {
