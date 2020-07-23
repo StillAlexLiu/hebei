@@ -5,30 +5,31 @@
       <div class="main h-4-5">
         <p>{{listData.caseName}}</p>
         <div class="left w-1-2">
-          <p><span>案件编号：</span>{{listData.caseNo}}</p>
-          <p><span>案发地：</span>{{listData.caseSpot}}</p>
-          <p :title='listData.caseReason'><span>案由：</span>{{listData.caseReason}}</p>
-          <p><span>适用程序：</span>{{listData.appprRocedure}}</p>
-          <p><span>是否涉外案件：</span>{{listData.caseForsign}}</p>
-          <p><span>立案机关：</span>{{listData.caseFiauth}}</p>
-          <p><span>执行日期：</span>{{listData.exeDate}}</p>
+         <p><span>案件编号</span>{{listData.caseNo}}</p>
+          <p><span>案发地</span>{{listData.caseSpot}}</p>
+          <p :title='listData.caseReason'><span>案由</span>{{listData.caseReason}}</p>
+          <p><span>适用程序</span>{{listData.appprRocedure}}</p>
+          <p><span>是否涉外案件</span>{{listData.caseForsign}}</p>
+          <p><span>立案机关</span>{{listData.caseFiauth}}</p>
+          <p><span>执行日期</span>{{listData.exeDate}}</p>
           <p><span>未执行原因类别：</span>{{listData.unexeReaSort}}</p>
-          <p><span>罚没金额：</span>{{listData.punIsham}}</p>
-          <p><span>办案机构：</span>{{listData.casedep}}</p>
-          <p><span>办案期限：</span>{{listData.deadLine}}</p>
+          <p><span>罚没金额</span>{{listData.punIsham}}</p>
+          <p><span>办案机构</span>{{listData.casedep}}</p>
+          <p><span>办案期限</span>{{listData.deadLine}}</p>
+          <p><span>结案日期</span>{{listData.endDate}}</p>
         </div>
         <div class="right w-1-2">
-          <p><span>案发地所在行政区划：</span>{{listData.casesceDistrict}}</p>
-          <p><span>案发时间：</span>{{listData.caseTime}}</p>
-          <p><span>案值：</span>{{listData.caseVal}}</p>
-          <p><span>是否利用网络：</span>{{listData.caseInterneTsign}}</p>
-          <p><span>案件类别:</span>{{listData.clueType}}</p>
-          <p><span>立案日期：</span>{{listData.caseFidate}}</p>
-          <p><span>执行类别：</span>{{listData.exeSort}}</p>
-          <p><span>案件状态：</span>{{listData.caseState}}</p>
-          <p><span>案件结果：</span>{{listData.caseResult}}</p>
-          <p><span>结案日期：</span>{{listData.endDate}}</p>
-          <p><span>预警级别：</span>{{listData.warningName}}</p>
+          <p><span>案发地所在行政区划</span>{{listData.casesceDistrict}}</p>
+          <p><span>案发时间</span>{{listData.caseTime}}</p>
+          <p><span>案值</span>{{listData.caseVal}}</p>
+          <p><span>是否利用网络</span>{{listData.caseInterneTsign}}</p>
+          <p><span>案件类别</span>{{listData.clueType}}</p>
+          <p><span>立案日期</span>{{listData.caseFidate}}</p>
+          <p><span>执行类别</span>{{listData.exeSort}}</p>
+          <p><span>案件状态</span>{{listData.caseState}}</p>
+          <p><span>案件结果</span>{{listData.caseResult}}</p>
+          <p><span>办案人员</span>{{listData.userNameMain}}</p>
+          <p><span>预警级别</span>{{listData.warningName}}</p>
         </div>
       </div>
     </div>
