@@ -309,6 +309,7 @@ export default {
         // var newArray = []
         axios.get('/monitor/main/cmeras/getAllEntlist').then(res => {
           this.latPoint = res.data.data
+          console.log(res.data.data, '列表')
           // console.log('all', this.latPoint)
           // for (let i = 0; i < data.length; i++) {
           //   if (data[i].latitude) {
@@ -325,61 +326,77 @@ export default {
           //   }
           for (let i = 0; i < this.latPoint.length; i++) {
             if (this.latPoint[i].latitude) {
-              if (this.latPoint[i].userName) {
-                // console.log(cliType, this.latPoint[i].enterpriseType)
-                if (cliType === Number(this.latPoint[i].enterpriseType)) {
-                  // console.log(this.latPoint[i], '华烨')
-                  // // console.log(this.latPoint[i].orgName.substring(0, 2), list)
-                  for (let l = 0; l < list.length; l++) {
-                    if (this.latPoint[i].orgName.substring(0, 2) === list[l].name.substring(0, 2)) {
-                      list[l].points.push({
-                        name: this.latPoint[i].enterpriseName,
-                        address: this.latPoint[i].address,
-                        icon: icon,
-                        coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
-                        userName: this.latPoint[i].userName,
-                        pwd: this.latPoint[i].userPwd,
-                        leafNodePoint: true,
-                        ad_code: this.latPoint[i].orgCode
-                      })
-                    }
-                  }
-                }
-              } else if (this.latPoint[i].indexCode) {
-                if (cliType === 5) {
-                  for (let l = 0; l < list.length; l++) {
-                    if (this.latPoint[i].address.substring(0, 2) === list[l].name.substring(0, 2)) {
-                      list[l].points.push({
-                        address: this.latPoint[i].name,
-                        name: this.latPoint[i].name,
-                        icon: icon,
-                        coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
-                        regionsIndexCode: this.latPoint[i].indexCode,
-                        leafNodePoint: true,
-                        ad_code: this.latPoint[i].name
-                      })
-                    }
-                  }
-                }
-              } else if (this.latPoint[i].entId) {
-                if (cliType === Number(this.latPoint[i].entType)) {
-                  // console.log(this.latPoint[i], '九次方')
-                  for (let l = 0; l < list.length; l++) {
-                    if (this.latPoint[i].name.substring(0, 2) === list[l].name.substring(0, 2)) {
-                      list[l].points.push({
-                        name: this.latPoint[i].name,
-                        address: this.latPoint[i].address,
-                        icon: icon,
-                        coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
-                        leafNodePoint: true,
-                        ad_code: this.latPoint[i].countyCode,
-                        entId: this.latPoint[i].entId,
-                        typeCode: this.latPoint[i].typeCode
-                      })
-                    }
+              if (cliType === Number(this.latPoint[i].entType)) {
+                for (let l = 0; l < list.length; l++) {
+                  if (this.latPoint[i].name.substring(0, 2) === list[l].name.substring(0, 2)) {
+                    list[l].points.push({
+                      name: this.latPoint[i].name,
+                      address: this.latPoint[i].address,
+                      icon: icon,
+                      coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
+                      leafNodePoint: true,
+                      ad_code: this.latPoint[i].countyCode,
+                      corpId: this.latPoint[i].corpId,
+                      firmType: this.latPoint[i].firmType
+                    })
                   }
                 }
               }
+              // if (this.latPoint[i].userName) {
+              //   // console.log(cliType, this.latPoint[i].enterpriseType)
+              //   if (cliType === Number(this.latPoint[i].enterpriseType)) {
+              //     // console.log(this.latPoint[i], '华烨')
+              //     // // console.log(this.latPoint[i].orgName.substring(0, 2), list)
+              //     for (let l = 0; l < list.length; l++) {
+              //       if (this.latPoint[i].orgName.substring(0, 2) === list[l].name.substring(0, 2)) {
+              //         list[l].points.push({
+              //           name: this.latPoint[i].enterpriseName,
+              //           address: this.latPoint[i].address,
+              //           icon: icon,
+              //           coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
+              //           userName: this.latPoint[i].userName,
+              //           pwd: this.latPoint[i].userPwd,
+              //           leafNodePoint: true,
+              //           ad_code: this.latPoint[i].orgCode
+              //         })
+              //       }
+              //     }
+              //   }
+              // } else if (this.latPoint[i].indexCode) {
+              //   if (cliType === 5) {
+              //     for (let l = 0; l < list.length; l++) {
+              //       if (this.latPoint[i].address.substring(0, 2) === list[l].name.substring(0, 2)) {
+              //         list[l].points.push({
+              //           address: this.latPoint[i].name,
+              //           name: this.latPoint[i].name,
+              //           icon: icon,
+              //           coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
+              //           regionsIndexCode: this.latPoint[i].indexCode,
+              //           leafNodePoint: true,
+              //           ad_code: this.latPoint[i].name
+              //         })
+              //       }
+              //     }
+              //   }
+              // } else if (this.latPoint[i].entId) {
+              //   if (cliType === Number(this.latPoint[i].entType)) {
+              //     // console.log(this.latPoint[i], '九次方')
+              //     for (let l = 0; l < list.length; l++) {
+              //       if (this.latPoint[i].name.substring(0, 2) === list[l].name.substring(0, 2)) {
+              //         list[l].points.push({
+              //           name: this.latPoint[i].name,
+              //           address: this.latPoint[i].address,
+              //           icon: icon,
+              //           coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
+              //           leafNodePoint: true,
+              //           ad_code: this.latPoint[i].countyCode,
+              //           entId: this.latPoint[i].entId,
+              //           typeCode: this.latPoint[i].typeCode
+              //         })
+              //       }
+              //     }
+              //   }
+              // }
             }
           }
           // })
@@ -865,8 +882,8 @@ export default {
         }
       })
     },
-    queryByPripid(pripId, cliType) {
-      axios.get('/monitorn/unqualified/queryByPripid?pripId=' + pripId + '&reportType=' + cliType).then(res => {
+    queryByPripid (pripId, cliType) {
+      axios.get('/monitor/unqualified/queryByPripid?pripid=' + pripId + '&reportType=' + cliType).then(res => {
         const data = res.data.data
         for (let i = 0; i < data.length; i++) {
           this.p1Info['抽查信息']['产品质量抽检'].push({

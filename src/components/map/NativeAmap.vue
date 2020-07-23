@@ -203,7 +203,7 @@ export default {
       this.over = data
     },
     inputFocus (data) {
-      console.log(data, '搜索')
+      // console.log(data, '搜索')
       // 一企一档
       if (this.$route.name === '主体服务') {
         this.$emit('sendPripId', data)
@@ -515,9 +515,9 @@ export default {
       // 清除所有图层包括网格
       // console.log(list.items[0], this.map)
       if (this.map.CLASS_NAME) {
-        this.map.clearMap()
+        // this.map.clearMap()
         // 重画网格
-        this.SearchDistrict(this.adcode[0], 0)
+        // this.SearchDistrict(this.adcode[0], 0)
         this.map.setZoomAndCenter(this.zoom, this.center)
       }
       // 发送地图下方的选择器事件

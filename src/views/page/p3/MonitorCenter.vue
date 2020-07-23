@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import HuaYeVideo from './components/js/HuaYeVideo'
+// import HuaYeVideo from './components/js/HuaYeVideo'
 import Bus from '@/assets/bus.js'
 import axios from 'axios'
 import Vue from 'vue'
@@ -74,91 +74,63 @@ export default {
     })
   },
   mounted () {
-    // const data1 = {
-    //   address: '张家口阳原王府庄站',
-    //   icon: '/img/5.8914f095.png',
-    //   regionsIndexCode: 'd9e6d7cc-3b76-4a61-8338-0b9a05bc6b29'
-    // }
-    // this.setVideo(data1)
-    const data2 = {
-      address: '河北省张家口市涿鹿县涿鹿镇合符小区二期第17幢1号商铺',
-      icon: '/img/youer@2x.c70e028f.png',
-      name: '涿鹿县今跃小饭桌',
-      pwd: 'hyjk123',
-      userName: 'zlxjyxfz'
-    }
-    this.setVideo(data2)
     const data3 = {
-      address: '承德围场御道口站',
-      icon: '/img/5.8914f095.png',
-      regionsIndexCode: 'fe0ccc86-fa00-48c0-aee1-978196a665eb'
+      address: '承德市围场县御道口镇',
+      firmType: '2',
+      corpId: 'fe0ccc86-fa00-48c0-aee1-978196a665eb',
+      name: '承德围场御道口站'
     }
     this.setVideo(data3)
   },
   methods: {
     setVideo (data2) {
-      // console.log(data2, 'daadss')
-      var that = this
-      if (data2.regionsIndexCode) {
-        // 海康
-        axios.get('/monitor/main/hik/getHikCameraUrls?regionsIndexCode=' + data2.regionsIndexCode).then(res1 => {
-          const data = res1.data.data
-          //  console.log(data, 'hkkk')
+      axios.get('/monitor/main/cmeras/gethuyCmeras?corpId=' + data2.corpId + '&firmType=' + data2.firmType).then(res => {
+        // const data = res.data.data
+        // console.log(data)
+        if (Number(data2.firmType) === 1) {
+          const data = res.data.data[0].devlist
           for (let i = 0; i < data.length; i++) {
-            if (that.videoIndex >= 6) {
-              that.videoIndex = 0
+            if (this.videoIndex >= 6) {
+              this.videoIndex = 0
             }
-            Vue.set(that.videoNames, that.videoIndex, {
-              name: data[i].cameraName,
-              address: data2.address,
-              url: data[i].cameraUrl,
-              state: 0
-            })
-            //  console.log(that.videoNames, '视频')
-            that.videoIndex++
-          }
-        })
-      } else if (data2.userName) {
-        // 华烨
-        HuaYeVideo.getList(data2.userName, data2.pwd).then(res2 => {
-          const data = res2.data.devlist
-          // //  console.log(data, 'ff')
-          for (let i = 0; i < data.length; i++) {
-            HuaYeVideo.checkRequest(data2.userName, data2.pwd, data[i].sn, data[i].hlsurl).then(flow => {
-              if (that.videoIndex >= 6) {
-                that.videoIndex = 0
-              }
-              Vue.set(that.videoNames, that.videoIndex, {
-                // name: data[i].name,
-                name: data[i].name,
-                address: data2.name,
-                // url: 'http://218.11.10.172:83/openUrl/NVAjJcs/live.m3u8'
-                url: flow.data.hlsurl,
-                state: flow.data.result
-              })
-              that.videoIndex++
-            })
-          }
-        })
-      } else if (data2.typeCode) {
-        // 九次方
-        axios.get('/monitor/main/yug/getYugCameralist?entId=' + data2.entId).then(res1 => {
-          const data = res1.data.data
-          console.log(data)
-          for (let i = 0; i < data.length; i++) {
-            if (that.videoIndex >= 6) {
-              that.videoIndex = 0
-            }
-            Vue.set(that.videoNames, that.videoIndex, {
-              address: data[i].corpName,
-              name: data[i].cameraName,
+            Vue.set(this.videoNames, this.videoIndex, {
+              name: data[i].name,
+              address: data2.corpId,
               url: data[i].hlsUrl,
               state: Number(data[i].state)
             })
-            that.videoIndex++
+            this.videoIndex++
           }
-        })
-      }
+        } else if (Number(data2.firmType) === 2) {
+          const data = res.data.data[0]
+          for (let i = 0; i < data.length; i++) {
+            if (this.videoIndex >= 6) {
+              this.videoIndex = 0
+            }
+            Vue.set(this.videoNames, this.videoIndex, {
+              name: data[i].cameraName,
+              address: data2.name,
+              url: data[i].cameraUrl,
+              state: 0
+            })
+            this.videoIndex++
+          }
+        } else if (Number(data2.firmType) === 3) {
+          const data = res.data.data[0]
+          for (let i = 0; i < data.length; i++) {
+            if (this.videoIndex >= 6) {
+              this.videoIndex = 0
+            }
+            Vue.set(this.videoNames, this.videoIndex, {
+              name: data[i].cameraName,
+              address: data2.name,
+              url: data[i].hlsUrl,
+              state: Number(data[i].state)
+            })
+            this.videoIndex++
+          }
+        }
+      })
     }
   }
 }

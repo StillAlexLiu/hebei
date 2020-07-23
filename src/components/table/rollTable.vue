@@ -77,11 +77,11 @@ export default {
       wc: 0,
       tableIndex: 0,
       demo: [],
-      flag:false,
-      scrollY:0,
-      scrollBox:'',
-      ul:'',
-      liHeight:0
+      flag: false,
+      scrollY: 0,
+      scrollBox: '',
+      ul: '',
+      liHeight: 0
     }
   },
   watch: {
@@ -119,11 +119,11 @@ export default {
       this.wc += this.widths[i] * 1
     }
     this.$nextTick(() => {
-       this.scrollBox = this.$refs.scroll
-        this.ul = this.$refs.ul
-        this.liHeight = this.scrollBox.offsetHeight/9
-        console.log(this.scrollBox.offsetHeight)
-        this.start()
+      this.scrollBox = this.$refs.scroll
+      this.ul = this.$refs.ul
+      this.liHeight = this.scrollBox.offsetHeight / 9
+      console.log(this.scrollBox.offsetHeight)
+      this.start()
     })
   },
   methods: {
@@ -138,7 +138,6 @@ export default {
         rtn.push(item)
       })
       return rtn
-      console.log(this.tableData)
     },
     // add () {
     //   const item = this.demo.shift()
@@ -146,24 +145,24 @@ export default {
     //   this.demo.push(item)
     //   this.tableIndex++
     // }
-    start() {
+    start () {
       this.flag = false
       window.clearInterval(this.timer)
-      this.timer = setInterval(this.scroll,30)
+      this.timer = setInterval(this.scroll, 30)
     },
-   scroll(){
-    this.scrollY++
-    if(this.scrollY === this.ul.offsetHeight){
-      this.scrollY = 0
+    scroll () {
+      this.scrollY++
+      if (this.scrollY === this.ul.offsetHeight) {
+        this.scrollY = 0
+      }
+      this.scrollBox.scrollTop = this.scrollY
+      if (this.flag) {
+        window.clearInterval(this.timer)
+      }
+    },
+    stop () {
+      this.flag = true
     }
-    this.scrollBox.scrollTop = this.scrollY
-    if (this.flag) {
-      window.clearInterval(this.timer)
-    }
-  },
-   stop () {
-    this.flag = true
-  }
   },
   beforeDestroy () {
     clearInterval(this.timer)

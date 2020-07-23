@@ -89,30 +89,25 @@ export default {
       })
     },
     serchVideo () {
-      axios.get('/monitor/main/cmeras/getAllEntlist?entName=' + this.text2).then(res => {
+      axios.get('/monitor/main/cmeras/getAllEntlist?name=' + this.text2).then(res => {
         const data = res.data.data
+        console.log(data)
         this.rollList = []
         // if (data.)
         for (let i = 0; i < data.length; i++) {
-            if (data[i].latitude) {
-              this.rollList.push({
-              address: data[i].name,
-              name: data[i].address,
+          if (data[i].latitude) {
+            this.rollList.push({
+              address: data[i].address,
+              name: data[i].name,
               latitude: data[i].latitude,
               longitude: data[i].longitude,
               indexCode: data[i].indexCode,
-              // 海康
-              regionsIndexCode: data[i].indexCode,
               level: 5,
               coordinate: [data[i].longitude, data[i].latitude],
               sousuo: true,
               icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
-              // 华烨
-              userName: data[i].userName,
-              pwd: data[i].userPwd,
-              // 九次方
-              typeCode: data[i].typeCode,
-              entId: data[i].entId
+              firmType: data[i].firmType,
+              corpId: data[i].corpId
             })
           }
         }
@@ -130,7 +125,7 @@ export default {
     clickItem (data) {
       var points = data
       this.$emit('inputData', points)
-      // this.rollList = []
+      this.rollList = []
       // this.text2 = ''
     }
   }
@@ -144,14 +139,14 @@ export default {
     left: 40px;
     height: 106px;
     font-size: 30px;
-    width: 500px;
+    width: 780px;
     .pullBox{
-      width: 450px;
+      width: 780px;
       max-height: 500px;
       overflow-y: auto;
       background: rgba(1, 1, 1, 0.5);
       position: absolute;
-      top: 60px;
+      top: 67px;
       .pullBox_li{
         width: 100%;
         height: 70px;
@@ -159,18 +154,19 @@ export default {
         cursor: pointer;
         padding: 5px 10px;
         white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    word-break: break-all;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        word-break: break-all;
       }
     }
     input {
-      width: 450px;
-      height: 60px;
+      width: 780px;
+      height: 70px;
       color: white;
       font-size: 30px;
       background: rgb(29, 96, 122);
       border: 1px solid rgb(29, 96, 122);
+      padding-left: 30px;
     }
     .num {
       width: 450px;
@@ -215,8 +211,8 @@ export default {
         position: absolute;
         background: url("./img/search.png");
         background-size: 100% 100%;
-        right: 80px;
-        top: 17px;
+        right: 30px;
+        top: 20px;
         cursor: pointer;
     }
 }

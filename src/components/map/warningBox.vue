@@ -50,7 +50,7 @@ export default {
   },
   mounted () {
     console.log(this.wData)
-    for (let i in this.wData) {
+    for (const i in this.wData) {
       if (this.wData[i] === 'null') {
         this.wData[i] = ''
       }
@@ -58,9 +58,9 @@ export default {
   },
   watch: {
     wData: function () {
-      for (let i in this.wData) {
-        if (this.wData[i] === 'null') {
-          this.wData[i] = ''
+      for (const ia in this.wData) {
+        if (this.wData[ia] === 'null') {
+          this.wData[ia] = ''
         }
       }
     }

@@ -116,7 +116,8 @@ export default {
             splitNumber: 7,
             nameLocation: 'end',
             nameTextStyle: {
-              fontSize: 14
+              color: 'rgba(304, 304, 304, 0.9)',
+              fontSize: 20
             },
             show: true,
             x: 'center',
@@ -129,10 +130,6 @@ export default {
             },
             axisLabel: {
               // interval:0,
-              color: 'rgba(304, 304, 304, 0.9)',
-              fontSize: 20
-            },
-            nameTextStyle: {
               color: 'rgba(304, 304, 304, 0.9)',
               fontSize: 20
             },

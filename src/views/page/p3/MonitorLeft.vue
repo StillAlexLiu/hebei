@@ -27,6 +27,7 @@
 <script>
 import Mock from 'mockjs'
 import NumberGroup from './components/NumberGroup'
+import axios from 'axios'
 
 export default {
   name: 'MonitorLeft',
@@ -35,29 +36,7 @@ export default {
   },
   data () {
     return {
-      numberData: [
-        {
-          imgUrl: require('./components/img/1.png'),
-          name1: '接入总量',
-          num1: 301
-        }, {
-          imgUrl: require('./components/img/9.png'),
-          name1: '餐饮',
-          num1: 12
-        }, {
-          imgUrl: require('./components/img/jiu@2x.png'),
-          name1: '酒店',
-          num1: 1
-        }, {
-          imgUrl: require('./components/img/youer@2x.png'),
-          name1: '学校',
-          num1: 273
-        }, {
-          imgUrl: require('./components/img/5.png'),
-          name1: '煤检卡口',
-          num1: 15
-        }
-      ],
+      numberData: [],
       city: [
         '石家庄市',
         '唐山市',
@@ -73,65 +52,68 @@ export default {
       ],
       barData: [],
       barLineData: [],
-      pieData: [
-        {
-          name: '煤检卡口',
-          value: 15
-        },
-        {
-          name: '餐饮',
-          value: 12
-        },
-        {
-          name: '酒店',
-          value: 1
-        },
-        {
-          name: '学校',
-          value: 273
-        }
-      ],
-      chart3: [
-        {
-          name: '石家庄市',
-          value: 3
-        },
-        {
-          name: '邢台市',
-          value: 1
-        },
-        {
-          name: '唐山市',
-          value: 108
-        }, {
-          name: '保定市',
-          value: 54
-        }, {
-          name: '秦皇岛市',
-          value: 39
-        }, {
-          name: '承德市',
-          value: 19
-        }, {
-          name: '沧州市',
-          value: 3
-        }, {
-          name: '衡水市',
-          value: 11
-        }, {
-          name: '邯郸市',
-          value: 33
-        }, {
-          name: '张家口市',
-          value: 30
-        }
-      ],
+      pieData: [],
+      chart3: [],
       liquidfill: ['维持', 70.13]
     }
   },
   mounted () {
     this.makeBarData()
     this.makeBarLineData()
+    axios.get('/monitor/main/getCmerasCount').then(res => {
+      const data = res.data.data
+      this.numberData = [
+        {
+          imgUrl: require('./components/img/1.png'),
+          name1: '接入总量',
+          num1: data[4].totle
+        }, {
+          imgUrl: require('./components/img/9.png'),
+          name1: '餐饮',
+          num1: data[0].cy
+        }, {
+          imgUrl: require('./components/img/jiu@2x.png'),
+          name1: '酒店',
+          num1: data[1].jd
+        }, {
+          imgUrl: require('./components/img/youer@2x.png'),
+          name1: '学校',
+          num1: data[2].xx
+        }, {
+          imgUrl: require('./components/img/5.png'),
+          name1: '煤检卡口',
+          num1: data[3].ck
+        }
+      ]
+      this.pieData = [
+        {
+          name: '煤检卡口',
+          value: data[3].ck
+        },
+        {
+          name: '餐饮',
+          value: data[0].cy
+        },
+        {
+          name: '酒店',
+          value: data[1].jd
+        },
+        {
+          name: '学校',
+          value: data[2].xx
+        }
+      ]
+    })
+    axios.get('/monitor/main/getCmerasRgion').then(res => {
+      const data = res.data.data
+      this.chart3 = []
+      for (let i = 0; i < data.length; i++) {
+        this.chart3.push({
+          name: data[i].cityname,
+          value: data[i].citynum
+        })
+      }
+    })
   },
   methods: {
     makeBarData () {
