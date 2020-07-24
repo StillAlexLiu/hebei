@@ -173,7 +173,7 @@ export default {
         const data = res.data.data
         this.chart4 = this.chart5
         for (let i = 0; i < data.length; i++) {
-          for(let j = 0; j < this.chart4.length; j++) {
+          for (let j = 0; j < this.chart4.length; j++) {
             if (data[i].cityName === this.chart4[j].name) {
               this.chart4[j].value = data[i].cityNumber
             }
@@ -330,7 +330,7 @@ export default {
       },
       chart4: [],
       chart5: [
-         {
+        {
           name: '省级',
           value: 0
         }, {
