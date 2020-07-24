@@ -64,7 +64,6 @@ import NumberGroup from './componets/NumberGroup'
 import NumberGroup2 from './componets/NumberGroup2'
 import NumberGroup3 from './componets/NumberGroup3'
 import axios from 'axios'
-import Bus from '@/assets/bus.js'
 
 export default {
   name: 'EntityLeft',
@@ -1636,8 +1635,6 @@ export default {
     },
     back_parameter () {
       // 返回区域分布下钻
-      // 市场主体区域分布
-      // console.log(this.mainClass, this.subClass, this.type)
       axios.get('/monitor/main/getMainScatterData?mainClass=' + this.mainClass + '&type=' + this.type + '&subClass=' + this.subClass).then(res => {
         const data = res.data.data
         this.chacha = false
@@ -1654,9 +1651,6 @@ export default {
         }
       })
     },
-    tabCenter () {
-      Bus.$emit('getTarget', true)
-    },
     dispatchSelect (data, topType) {
       // console.log(data, topType)
       if (this.select.value === 0) {
@@ -1666,6 +1660,7 @@ export default {
         this.getNewly(data.newly, topType)
       }
     },
+    // 存量
     getStock (data2, topType) {
       this.barData = []
       this.quantityData = {
@@ -1678,8 +1673,6 @@ export default {
       this.barData2 = []
       this.halfPieData = []
       this.barGroupData2 = []
-      //  //console.log(data2, topType, typeof(topType), 'klklkl')
-      // console.log(data2, topType, topType > 0, 'klklkl')
       if (topType > 0) {
         // 主体子类型
         // 市场主体趋势柱图
@@ -2020,14 +2013,8 @@ export default {
           }
         })
       }
-      // this.barData = data.block1.chart.data
-      // this.quantityData = data.block1.info
-      // this.pieData = data.block2.chart.data
-      // this.barGroupData = data.block3.chart.data
-      // this.barData2 = data.block4.chart.data
-      //  //console.log(this.barData2, 'ggg')
-      // this.barGroupData2 = data.block5.chart.data
     },
+    // 增量
     getNewly (data, topType) {
       this.barData = []
       this.quantityData = {
@@ -2414,6 +2401,7 @@ export default {
       // this.halfPieData = data.block5.chart.data
       //  //console.log(this.halfPieData)
     },
+    // 类型转换
     typeFun (type) {
       switch (type) {
         case '市场主体':

@@ -16,6 +16,7 @@ import ChartsScatter from './ChartsScatter'
 import ChartsGraph from './ChartsGraph.vue'
 import hebei from './hebei.json'
 import autoChart from './auto-charts.vue'
+import backliquid from './ChartsLiquidFillBackground.vue'
 
 ECharts.registerTheme('screen', screen)
 ECharts.registerMap('hebei', hebei)
@@ -35,5 +36,6 @@ export default {
     Vue.component('ChartsBarHorizontal', ChartsBarHorizontal)
     Vue.component('ChartsScatter', ChartsScatter)
     Vue.component('ChartsGraph', ChartsGraph)
+    Vue.component('backliquid', backliquid)
   }
 }

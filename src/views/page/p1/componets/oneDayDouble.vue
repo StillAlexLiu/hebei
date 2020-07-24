@@ -25,7 +25,7 @@
             <container-center-title2 title="一日办结情况" class="full-height w-1-2">
                 <div  class="full-height w-1-3">
                   <div class="full-width h-8-10 ">
-                    <ChartsLiquidFill  :data='liquidfill'/>
+                    <backliquid  :data='liquidfill' :url='require("@/assets/images/mapTabs/p1/t1/dashboard@2x.png")' />
                   </div>
                   <p class="full-width h-2-10 oneDayName">一日办结率</p>
                 </div>
@@ -96,13 +96,13 @@ export default {
       immediate: true,
       deep: true,
       handler: function () {
-        console.log(this.select)
+        // console.log(this.select)
         if (this.select.name === '办理量') {
           this.barLineName = '单位:件'
           this.barLineLegend = '办理量'
           axios.get('/monitor/info/apply/zzData?indexCodes=BDBLL,TSBLL,DZBLL,LFBLL,ZJKBLL,CDBLL,CZBLL,SJZBLL,QHDBLL,HSBLL,XJBLL,XTBLL,HDBLL').then(res => {
             const data = res.data.data.data
-            this.barData2 = []
+            // this.barData2 = []
             for (let i = 0; i < data.length; i++) {
               this.barData2.push({
                 name: data[i].indexName.substring(0, data[i].indexName.indexOf('市')),
@@ -115,7 +115,7 @@ export default {
           this.barLineLegend = '平均时长'
           axios.get('/monitor/info/apply/zzData?indexCodes=BDBLSJ,TSBLSJ,DZBLSJ,LFBLSJ,ZJKBLSJ,CDBLSJ,CZBLSJ,SJZBLSJ,QHDBLSJ,HSBLSJ,XJBLSJ,XTBLSJ,HDBLSJ').then(res => {
             const data = res.data.data.data
-            this.barData2 = []
+            // this.barData2 = []
             for (let i = 0; i < data.length; i++) {
               this.barData2.push({
                 name: data[i].indexName.substring(0, data[i].indexName.indexOf('市')),

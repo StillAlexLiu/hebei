@@ -2,7 +2,7 @@
  * Created by chengwb on 2016/9/3.
  */
 (function (global) {
-  global.tools = global.tools || {};
+  global.tools = global.tools || {}
 
   /**
    * echarts tooltip轮播

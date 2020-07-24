@@ -66,41 +66,41 @@ export default {
         {
           imgUrl: require('./components/img/1.png'),
           name1: '接入总量',
-          num1: data[4].totle
+          num1: data.jrzs
         }, {
           imgUrl: require('./components/img/9.png'),
           name1: '餐饮',
-          num1: data[0].cy
+          num1: data.cy
         }, {
           imgUrl: require('./components/img/jiu@2x.png'),
           name1: '酒店',
-          num1: data[1].jd
+          num1: data.jd
         }, {
           imgUrl: require('./components/img/youer@2x.png'),
           name1: '学校',
-          num1: data[2].xx
+          num1: data.xx
         }, {
           imgUrl: require('./components/img/5.png'),
           name1: '煤检卡口',
-          num1: data[3].ck
+          num1: data.mjkk
         }
       ]
       this.pieData = [
         {
           name: '煤检卡口',
-          value: data[3].ck
+          value: data.mjkk
         },
         {
           name: '餐饮',
-          value: data[0].cy
+          value: data.cy
         },
         {
           name: '酒店',
-          value: data[1].jd
+          value: data.jd
         },
         {
           name: '学校',
-          value: data[2].xx
+          value: data.xx
         }
       ]
     })

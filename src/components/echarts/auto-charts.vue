@@ -1,4 +1,4 @@
-·<template>
+<template>
     <div id="chart">
         <!-- <v-chart :options='computedOptions' ref="ec" :autoresize='true' theme="screen" @click="this.handler"/> -->
         <!--        {{computedOptions}}-->

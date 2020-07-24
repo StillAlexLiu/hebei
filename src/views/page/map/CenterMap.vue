@@ -309,7 +309,7 @@ export default {
         // var newArray = []
         axios.get('/monitor/main/cmeras/getAllEntlist').then(res => {
           this.latPoint = res.data.data
-          console.log(res.data.data, '列表')
+          // console.log(res.data.data, '列表')
           // console.log('all', this.latPoint)
           // for (let i = 0; i < data.length; i++) {
           //   if (data[i].latitude) {
@@ -328,17 +328,33 @@ export default {
             if (this.latPoint[i].latitude) {
               if (cliType === Number(this.latPoint[i].entType)) {
                 for (let l = 0; l < list.length; l++) {
-                  if (this.latPoint[i].name.substring(0, 2) === list[l].name.substring(0, 2)) {
-                    list[l].points.push({
-                      name: this.latPoint[i].name,
-                      address: this.latPoint[i].address,
-                      icon: icon,
-                      coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
-                      leafNodePoint: true,
-                      ad_code: this.latPoint[i].countyCode,
-                      corpId: this.latPoint[i].corpId,
-                      firmType: this.latPoint[i].firmType
-                    })
+                  // console.log(this.latPoint[i].address.substring(2, 3), this.latPoint[i].address.substring(3, 5), this.latPoint[i])
+                  if (this.latPoint[i].address.substring(2, 3) === '省') {
+                    if (this.latPoint[i].address.substring(3, 5) === list[l].name.substring(0, 2)) {
+                      list[l].points.push({
+                        name: this.latPoint[i].name,
+                        address: this.latPoint[i].address,
+                        icon: icon,
+                        coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
+                        leafNodePoint: true,
+                        ad_code: this.latPoint[i].countyCode,
+                        corpId: this.latPoint[i].corpId,
+                        firmType: this.latPoint[i].firmType
+                      })
+                    }
+                  } else {
+                    if (this.latPoint[i].address.substring(0, 2) === list[l].name.substring(0, 2)) {
+                      list[l].points.push({
+                        name: this.latPoint[i].name,
+                        address: this.latPoint[i].address,
+                        icon: icon,
+                        coordinate: [this.latPoint[i].longitude, this.latPoint[i].latitude],
+                        leafNodePoint: true,
+                        ad_code: this.latPoint[i].countyCode,
+                        corpId: this.latPoint[i].corpId,
+                        firmType: this.latPoint[i].firmType
+                      })
+                    }
                   }
                 }
               }
@@ -485,6 +501,7 @@ export default {
         return list
       }
     },
+    // 经纬度转换
     getCaption (obj, state) {
       // // console.log(obj, state)
       // var index = obj.lastIndexOf('\,')
@@ -896,6 +913,26 @@ export default {
         }
       })
     },
+    getDetails(pripId, cliType) {
+      axios.get('/monitor/equpMent/getDetails?pripid=' + pripId + '&reportType=' + cliType).then(res => {
+        const data = res.data.data
+        this.p1Info['特种设备']['特种设备使用单位信息']['锅炉在用'] = data.GLZY
+        this.p1Info['特种设备']['特种设备使用单位信息']['锅炉停用'] = data.GLTY
+        this.p1Info['特种设备']['特种设备使用单位信息']['容器在用'] = data.RQZY
+        this.p1Info['特种设备']['特种设备使用单位信息']['容器停用'] = data.RQTY
+        this.p1Info['特种设备']['特种设备使用单位信息']['电梯在用'] = data.DTZY
+        this.p1Info['特种设备']['特种设备使用单位信息']['电梯停用'] = data.DTTY
+        this.p1Info['特种设备']['特种设备使用单位信息']['起重机在用'] = data.QZJZY
+        this.p1Info['特种设备']['特种设备使用单位信息']['起重机停用'] = data.QZJTY
+        this.p1Info['特种设备']['特种设备使用单位信息']['厂车在用'] = data.CCZY
+        this.p1Info['特种设备']['特种设备使用单位信息']['厂车停用'] = data.CCTY
+        this.p1Info['特种设备']['特种设备使用单位信息']['游乐在用'] = data.YLZY
+        this.p1Info['特种设备']['特种设备使用单位信息']['游乐停用'] = data.YLTY
+        this.p1Info['特种设备']['特种设备使用单位信息']['索道在用'] = data.SDZY
+        this.p1Info['特种设备']['特种设备使用单位信息']['索道停用'] = data.SDTY
+
+      })
+    },
     p1Select (pripId, cliType) {
       console.log(pripId, cliType, 'pp')
       this.p1Config[12].data().then(value => {
@@ -909,188 +946,7 @@ export default {
         this.tzsbxk(pripId, cliType)
         this.CjInfo(pripId, cliType)
         this.queryByPripid(pripId, cliType)
-        this.setPageData({
-          key: 'p1',
-          data: this.p1Info
-        })
-      })
-      // axios.get('/monitor/main/' + url + '?pripId=' + pripId).then(res => {
-      //   // console.log(res.data.data, '第一')
-      //   this.basicData = res.data.data
-      //   // console.log(this.basicData, 'zz')
-      //   axios.get('/monitor/main/getBaseZlggData?pripId=' + pripId).then(res2 => {
-      //     // console.log(res2.data.data, '右屏接口')
-      //     this.mainMessage = res2.data.data
-      //     axios.get('/monitor/main/getQtxkByPripId?pripId=' + pripId).then(res3 => {
-      //       this.getQtxkByPripId = res3.data.data
-      //       // console.log(res3.data.data, '水水水水')
-      //       axios.get('/monitor/main/getZfInfoByPripId?pripId=' + pripId).then(res4 => {
-      //         // console.log(res4.data.data)
-      //         this.getZfInfoByPripId = res4.data.data
-      // axios.get('/monitor/main/getTzsbxkByPripId?pripId=' + pripId + '&reportType=' + cliType).then(res5 => {
-      //   // console.log(res5.data.data, '555')
-      //   this.getTzsbxkByPripId = res5.data.data
-      //   axios.get('/monitor/main/getCjInfoByPid?pripId=' + pripId + '&reportType=' + cliType).then(res6 => {
-      //     // console.log(res5.data.data, '555')
-      //     this.getCjInfoByPid = res6.data.data
-      //     this.getEntityById()
-      //   })
-      // })
-      //       })
-      //     })
-      //   })
-      // })
-    },
-    getEntityById () {
-      // 获取主体信息
-      this.p1Config[12].data().then(value => {
-        this.p1Info = value.data
-        // 右屏一企一档
-        // console.log(this.basicData, 'bbss')
-        if (this.basicData.COMPFORM_CN === '个人经营') {
-          this.p1Info['注册信息']['基本信息']['名称'] = this.basicData.TRANAME
-          this.p1Info['注册信息']['基本信息']['类型'] = this.basicData.COMPFORM_CN
-          this.p1Info['注册信息']['基本信息']['统一社会信用代码'] = this.basicData.UNISCID
-          this.p1Info['注册信息']['基本信息']['注册号'] = this.basicData.REGNO
-          this.p1Info['注册信息']['基本信息']['登记机关'] = this.basicData.REGORG_CN
-          this.p1Info['注册信息']['基本信息']['注册日期'] = this.basicData.ESTDATE
-          this.p1Info['注册信息']['基本信息']['核准日期'] = this.basicData.APPRDATE
-          this.p1Info['注册信息']['基本信息']['经营期限'] = this.basicData.OPFROM
-          this.p1Info['注册信息']['基本信息']['地址'] = this.basicData.OPLOC
-          this.p1Info['注册信息']['基本信息']['注册资金'] = this.basicData.FUNDAM
-          this.p1Info['注册信息']['基本信息']['法定代表人(经营者)'] = this.basicData.NAME
-          this.p1Info['注册信息']['基本信息']['登记状态'] = this.basicData.REGSTATE_CN
-          this.p1Info['注册信息']['基本信息']['所属监管所'] = this.basicData.LOCALADM
-          this.p1Info['注册信息']['经营范围信息']['行业类别'] = this.basicData.INDUSTRYPHY
-          this.p1Info['注册信息']['经营范围信息']['经营范围'] = this.basicData.OPSCOPE
-          this.p1Info['注册信息']['法定代表人信息']['法定代表人'] = this.basicData.NAME
-          // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
-          // this.p1Info['注册信息']['基本信息']['所属网格'] = ''
-          // this.p1Info['注册信息']['基本信息']['信用分类'] = ''
-          // this.p1Info['注册信息']['基本信息']['经纬度'] = ''
-          // 右屏弹窗
-          this.infoData['个人营业执照']['名称'] = this.basicData.TRANAME
-          this.infoData['个人营业执照']['统一社会信用代码'] = this.basicData.UNISCID
-          // this.p1Info['注册信息']['营业执照']['住所'] = this.basicData.DOM
-          this.infoData['个人营业执照']['经营者'] = this.basicData.NAME
-          this.infoData['个人营业执照']['登记状态'] = this.basicData.REGSTATE_CN
-          this.infoData['个人营业执照']['类型'] = this.basicData.COMPFORM_CN
-          this.infoData['个人营业执照']['登记机关'] = this.basicData.REGORG_CN
-          this.infoData['个人营业执照']['组成形式'] = '个人经营'
-          this.infoData['个人营业执照']['注册日期'] = this.basicData.ESTDATE
-          this.infoData['个人营业执照']['核准日期'] = this.basicData.APPRDATE
-          // this.p1Info['注册信息']['营业执照']['经营期限自'] = this.basicData.OPFROM
-          // this.p1Info['注册信息']['营业执照']['经营期限至'] = this.basicData.OPTO
-          // this.p1Info['注册信息']['营业执照']['组成形式'] = this.basicData.COMPFORM_CN
-          // this.p1Info['注册信息']['营业执照']['注册资本'] = this.basicData.REGCAP + this.basicData.REGCAPCUR_CN
-          // console.log(this.selectInfo, '个人营业执照1')
-          this.infoData['个人营业执照']['经营范围'] = this.basicData.OPSCOPE
-          this.infoData['个人营业执照']['经营场所'] = this.basicData.OPLOC
-          this.selectInfo = this.infoData['个人营业执照']
-          this.selectInfoState = true
-          // console.log(this.selectInfo, '个人营业执照2')
-        } else {
-          this.p1Info['注册信息']['基本信息']['名称'] = this.basicData.ENTNAME
-          this.p1Info['注册信息']['基本信息']['类型'] = this.basicData.ENTTYPE_CN
-          this.p1Info['注册信息']['基本信息']['统一社会信用代码'] = this.basicData.UNISCID
-          this.p1Info['注册信息']['基本信息']['注册号'] = this.basicData.REGNO
-          this.p1Info['注册信息']['基本信息']['登记机关'] = this.basicData.REGORG_CN
-          this.p1Info['注册信息']['基本信息']['注册日期'] = this.basicData.ESTDATE
-          this.p1Info['注册信息']['基本信息']['核准日期'] = this.basicData.APPRDATE
-          this.p1Info['注册信息']['基本信息']['经营期限'] = this.basicData.OPFROM
-          this.p1Info['注册信息']['基本信息']['地址'] = this.basicData.DOM
-          this.p1Info['注册信息']['基本信息']['注册资金'] = this.basicData.REGCAP + this.basicData.REGCAPCUR_CN
-          this.p1Info['注册信息']['基本信息']['法定代表人(经营者)'] = this.basicData.NAME
-          this.p1Info['注册信息']['基本信息']['登记状态'] = this.basicData.REGSTATE_CN
-          this.p1Info['注册信息']['基本信息']['所属监管所'] = ''
-          this.p1Info['注册信息']['经营范围信息']['行业类别'] = this.basicData.INDUSTRYPHY
-          this.p1Info['注册信息']['经营范围信息']['经营范围'] = this.basicData.OPSCOPE
-          this.p1Info['注册信息']['法定代表人信息']['法定代表人'] = this.basicData.NAME
-
-          // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
-          // this.p1Info['注册信息']['基本信息']['所属网格'] = ''
-          // this.p1Info['注册信息']['基本信息']['信用分类'] = ''
-          // this.p1Info['注册信息']['基本信息']['经纬度'] = ''
-          this.infoData['营业执照']['企业名称'] = this.basicData.ENTNAME
-          this.infoData['营业执照']['统一社会信用代码'] = this.basicData.UNISCID
-          this.infoData['营业执照']['住所'] = this.basicData.DOM
-          this.infoData['营业执照']['法定代表人'] = this.basicData.NAME
-          this.infoData['营业执照']['登记状态'] = this.basicData.REGSTATE_CN
-          this.infoData['营业执照']['类型'] = this.basicData.ENTTYPE_CN
-          this.infoData['营业执照']['登记机关'] = this.basicData.REGORG_CN
-          this.infoData['营业执照']['成立日期'] = this.basicData.ESTDATE
-          this.infoData['营业执照']['经营期限自'] = this.basicData.OPFROM
-          this.infoData['营业执照']['经营期限至'] = this.basicData.OPTO
-          this.infoData['营业执照']['注册资本'] = this.basicData.REGCAP + this.basicData.REGCAPCUR_CN
-          this.infoData['营业执照']['经营范围'] = this.basicData.OPSCOPE
-          this.selectInfo = this.infoData['营业执照']
-          // 右上角弹窗
-          this.selectInfoState = true
-        }
-        for (let i = 0; i < this.mainMessage.length; i++) {
-          this.p1Info['监管信息']['质量公告'].push({
-            // '生产企业': this.mainMessage[i].SCQY,
-            产品名称: this.mainMessage[i].CPMC,
-            规格: this.mainMessage[i].GG,
-            结果: this.mainMessage[i].JG,
-            批号: this.mainMessage[i].PH,
-            类型: this.mainMessage[i].LX,
-            年度: this.mainMessage[i].ND,
-            被检单位: this.mainMessage[i].BJDW
-            // '不合格项': this.mainMessage[i].BHG
-            // '主体身份代码': this.mainMessage[i].UNISCID
-          })
-        }
-        for (let i = 0; i < this.getCjInfoByPid.length; i++) {
-          this.p1Info['监管信息']['食品抽检'].push({
-            // '生产企业': this.mainMessage[i].SCQY,
-            食品名称: this.getCjInfoByPid[i].SPMC,
-            分类: this.getCjInfoByPid[i].EL,
-            '生产日期/批号': this.getCjInfoByPid[i].SCRQ,
-            规格型号: this.getCjInfoByPid[i].GGXH,
-            '任务来源/项目名称': this.getCjInfoByPid[i].RWLY,
-            检验机构名称: this.getCjInfoByPid[i].JYJGMC,
-            生产单位: this.getCjInfoByPid[i].BSSCQYMC,
-            被检单位: this.getCjInfoByPid[i].BCYDWMC
-            // '不合格项': this.mainMessage[i].BHG
-            // '主体身份代码': this.mainMessage[i].UNISCID
-          })
-        }
-        // 特种设备许可列表
-        for (let i = 0; i < this.getTzsbxkByPripId.length; i++) {
-          this.p1Info['许可备案']['特种设备许可'].push({
-            证书编号: this.getTzsbxkByPripId[i].CERTIFICATENO,
-            申请类别: this.getTzsbxkByPripId[i].APPLICATECATEGORY,
-            许可名称: this.getTzsbxkByPripId[i].XZXKNAME,
-            发证机关: this.getTzsbxkByPripId[i].ISSUEORGAN,
-            发证日期: this.getTzsbxkByPripId[i].ISSUEDATE,
-            有效期至: this.getTzsbxkByPripId[i].EFFECTIVEDATE
-          })
-        }
-        for (let i = 0; i < this.getQtxkByPripId.length; i++) {
-          this.p1Info['许可备案']['其他部门许可'].push({
-            许可编号: this.getQtxkByPripId[i].LICNO,
-            许可名称: this.getQtxkByPripId[i].LICNAME,
-            有效期自: this.getQtxkByPripId[i].VALFROM,
-            有效期至: this.getQtxkByPripId[i].VALTO,
-            许可机关: this.getQtxkByPripId[i].LICANTH,
-            许可内容: this.getQtxkByPripId[i].LICITEM,
-            状态: this.getQtxkByPripId[i].TYPE
-          })
-        }
-        for (let i = 0; i < this.getZfInfoByPripId.length; i++) {
-          this.p1Info['执法信息']['行政处罚信息'].push({
-            案件编号: this.getZfInfoByPripId[i].CASENO,
-            案件名称: this.getZfInfoByPripId[i].CASENAME,
-            立案日期: this.getZfInfoByPripId[i].CASEFIDATE,
-            处罚机关: this.getZfInfoByPripId[i].PENAUTH_CN,
-            处罚结果: this.getZfInfoByPripId[i].PENRESULT,
-            没款金额: this.getZfInfoByPripId[i].FORFAM,
-            罚款金额: this.getZfInfoByPripId[i].PENAM,
-            违法行为: this.getZfInfoByPripId[i].LLEGACT,
-            处罚类型: this.getZfInfoByPripId[i].PENTYPE
-          })
-        }
+        this.getDetails(pripId, cliType)
         this.setPageData({
           key: 'p1',
           data: this.p1Info

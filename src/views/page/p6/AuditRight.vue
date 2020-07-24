@@ -82,7 +82,6 @@ export default {
   methods: {
     pieCli (data) {
       if (this.pieType.name === data.data.type) {
-      //  console.log(123)
         this.pieType = {
           name: '',
           caseName: ''
@@ -129,6 +128,12 @@ export default {
         for (var i in this.pieRight) {
           if (this.pieRight[i] === 'null') {
             this.pieRight[i] = '0'
+          }
+        }
+        // console.log(res.data)
+        for (var iv in this.pieRight) {
+          if (this.pieRight[iv] === 'null') {
+            this.pieRight[iv] = '0'
           }
         }
         // console.log(res.data)

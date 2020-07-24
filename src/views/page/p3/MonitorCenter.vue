@@ -96,10 +96,11 @@ export default {
             Vue.set(this.videoNames, this.videoIndex, {
               name: data[i].name,
               address: data2.corpId,
-              url: data[i].hlsUrl,
+              url: data[i].hlsurl,
               state: Number(data[i].state)
             })
             this.videoIndex++
+            console.log(data[i].hlsurl)
           }
         } else if (Number(data2.firmType) === 2) {
           const data = res.data.data[0]
@@ -114,6 +115,7 @@ export default {
               state: 0
             })
             this.videoIndex++
+            console.log(data[i].hlsUrl)
           }
         } else if (Number(data2.firmType) === 3) {
           const data = res.data.data[0]
@@ -128,6 +130,7 @@ export default {
               state: Number(data[i].state)
             })
             this.videoIndex++
+            console.log(data[i].hlsUrl)
           }
         }
       })

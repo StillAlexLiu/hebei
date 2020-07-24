@@ -1,8 +1,8 @@
 <template>
     <div class="rollTable full-height" style="position: relative">
       <div class="header " :key="-1" style="position: absolute;top:0">
-            <div class="cell" v-for="(item,index) in dimension" :key="index"
-                 :style="{width:widths.length>0?widths[index]/wc*100 +'%':(100/dimension.length)+'%'}">
+            <div class="cell w-1-4" v-for="(item,index) in dimension" :key="index"
+                 :class="{middle: index === 1}">
                 {{item.name}}
             </div>
         </div>
@@ -205,6 +205,7 @@ export default {
        width: 100%;
         overflow: hidden;
         cursor: pointer;
+        background-color: rgba(0,0,0,.5);
         .cell {
             border: 1px solid #37adc3;
             display: table;

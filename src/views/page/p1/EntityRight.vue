@@ -70,7 +70,7 @@ import BorderInOut from './componets/borderInOut'
 import axios from 'axios'
 import Bus from '@/assets/bus.js'
 import boxList from './componets/boxList'
-import Mock from 'mockjs'
+// import Mock from 'mockjs'
 
 export default {
   name: 'p1right',
@@ -178,57 +178,7 @@ export default {
   },
   data () {
     return {
-      barGroupData: [
-        {
-          name: '1月',
-          step1: Mock.Random.natural(1000, 2000),
-          step2: Mock.Random.natural(1000, 2000)
-        }, {
-          name: '2月',
-          step1: Mock.Random.natural(1000, 2000),
-          step2: Mock.Random.natural(1000, 2000)
-        }, {
-          name: '3月',
-          step1: Mock.Random.natural(1000, 2000),
-          step2: Mock.Random.natural(1000, 2000)
-        }, {
-          name: '4月',
-          step1: Mock.Random.natural(1000, 2000),
-          step2: Mock.Random.natural(1000, 2000)
-        }, {
-          name: '5月',
-          step1: Mock.Random.natural(1000, 2000),
-          step2: Mock.Random.natural(1000, 2000)
-        }, {
-          name: '6月',
-          step1: Mock.Random.natural(1000, 2000),
-          step2: Mock.Random.natural(1000, 2000)
-        }, {
-          name: '7月',
-          step1: Mock.Random.natural(1000, 2000),
-          step2: Mock.Random.natural(1000, 2000)
-        }, {
-          name: '8月',
-          step1: Mock.Random.natural(1000, 2000),
-          step2: Mock.Random.natural(1000, 2000)
-        }, {
-          name: '9月',
-          step1: Mock.Random.natural(1000, 2000),
-          step2: Mock.Random.natural(1000, 2000)
-        }, {
-          name: '10月',
-          step1: Mock.Random.natural(1000, 2000),
-          step2: Mock.Random.natural(1000, 2000)
-        }, {
-          name: '11月',
-          step1: Mock.Random.natural(1000, 2000),
-          step2: Mock.Random.natural(1000, 2000)
-        }, {
-          name: '12月',
-          step1: Mock.Random.natural(1000, 2000),
-          step2: Mock.Random.natural(1000, 2000)
-        }
-      ],
+      barGroupData: [],
       select: {
         name: '企业',
         value: 0
@@ -267,65 +217,8 @@ export default {
           img: require('./componets/img/nianbao/3.png')
         }
       ],
-      barLineData: [
-        // {
-        //   name: '公有制企业',
-        //   value: 62661,
-        //   value2: 53.44
-        // },
-        // {
-        //   name: '私营企业',
-        //   value: 842206,
-        //   value2: 54.75
-        // },
-        // {
-        //   name: '外资企业',
-        //   value: 6497,
-        //   value2: 66.72
-        // },
-        // {
-        //   name: '个体户',
-        //   value: 1352894,
-        //   value2: 31.75
-        // },
-        // {
-        //   name: '农专',
-        //   value: 51927,
-        //   value2: 45.27
-        // }
-      ],
-      expenseGoal: [{
-        name: '经营异常个体',
-        num: '14.03',
-        unit: '万户'
-      }, {
-        name: '严重违法失信',
-        num: '2.02',
-        unit: '万户'
-      }],
-      pieData: {
-        all: {
-          name: '经营异常主体',
-          value: 0,
-          img: require('./componets/img/yueshu/0.png')
-        },
-        list: [
-          {
-            name: '移出',
-            value: 0,
-            img: require('./componets/img/yueshu/1.png')
-          },
-          {
-            name: '列异',
-            value: 0,
-            img: require('./componets/img/yueshu/2.png')
-          }, {
-            name: '列严',
-            value: 0,
-            img: require('./componets/img/yueshu/3.png')
-          }
-        ]
-      },
+      barLineData: [],
+      expenseGoal: [],
       mountainData: [
         {
           name: '未在规定责令的期限内公示有关企业信息',
@@ -348,19 +241,7 @@ export default {
           color: 'linear-gradient(180deg,rgba(79,255,148,1) 0%,rgba(56,167,120,1) 100%)'
         }
       ],
-      barHorizontalData: [
-        // { name: '石家庄', value: '4315' },
-        // { name: '唐山', value: '2366' },
-        // { name: '秦皇岛', value: '1098' },
-        // { name: '邯郸', value: '2711' },
-        // { name: '邢台', value: '1736' },
-        // { name: '保定', value: '1942' },
-        // { name: '张家口', value: '1115' },
-        // { name: '承德', value: '649' },
-        // { name: '沧州', value: '2388' },
-        // { name: '廊坊', value: '1927' },
-        // { name: '衡水', value: '1512' }
-      ]
+      barHorizontalData: []
     }
   },
   methods: {
