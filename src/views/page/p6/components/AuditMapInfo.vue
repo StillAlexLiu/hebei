@@ -98,11 +98,11 @@ export default {
     // 案件
     axios.get('/monitor/check/getCasesProcessData').then(res => {
       const data = res.data.data
-      // console.log(data, '案件')
-      this.radio[0].name = '处理中案件' + data[0].caseSum + '件'
+      console.log(data, '案件')
+      this.radio[0].name = '处理中案件'
       for (let i = 0; i < data.length; i++) {
         arr1.push({
-          status: data[i].caseStaus,
+          status: data[i].caseState,
           name: data[i].caseName,
           time: data[i].caseTime
         })
