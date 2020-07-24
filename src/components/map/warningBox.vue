@@ -16,6 +16,7 @@
           <p><span>罚没金额</span>{{wData.punIsham}}</p>
           <p><span>办案机构</span>{{wData.casedep}}</p>
           <p><span>办案期限</span>{{wData.deadLine}}</p>
+          <p><span>结案日期</span>{{wData.endDate}}</p>
         </div>
         <div class="right w-1-2">
           <p><span>案发地所在行政区划</span>{{wData.casesceDistrict}}</p>
@@ -27,7 +28,7 @@
           <p><span>执行类别</span>{{wData.exeSort}}</p>
           <p><span>案件状态</span>{{wData.caseState}}</p>
           <p><span>案件结果</span>{{wData.caseResult}}</p>
-          <p><span>结案日期</span>{{wData.endDate}}</p>
+          <p><span>办案人员</span>{{wData.userNameMain}}</p>
           <p><span>预警级别</span>{{wData.warningName}}</p>
         </div>
       </div>
@@ -98,6 +99,13 @@ export default {
     font-weight:600;
   }
   .main{
+     .people{
+    font-size: 35px;
+    text-align: left;
+    span{
+      margin-left: 5%;
+    }
+  }
     >p{
       text-align: center;
       font-size: 50px;
@@ -138,5 +146,6 @@ export default {
       }
     }
   }
+ 
 }
 </style>

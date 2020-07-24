@@ -113,6 +113,7 @@ export default {
           name: data.data.type,
           caseName: data.data.name
         }
+        this.getType()
       }
     },
     getData () {
@@ -170,19 +171,22 @@ export default {
     getType () {
       axios.get('/monitor/check/getregionalDistributionData?type=' + this.pieType.name + '&regionType=' + this.activeType).then(res => {
         const data = res.data.data
-        this.chart4 = []
+        this.chart4 = this.chart5
         for (let i = 0; i < data.length; i++) {
-          this.chart4.push({
-            name: data[i].cityName,
-            value: data[i].cityNumber,
-            type: data[i].caseType
-          })
+          for(let j = 0; j < this.chart4.length; j++) {
+            if (data[i].cityName === this.chart4[j].name) {
+              this.chart4[j].value = data[i].cityNumber
+            }
+          }
         }
         this.chart4.sort(this.sortId)
       })
     },
     sortId (a, b) {
       return b.value - a.value
+    },
+    sortNum (a, b) {
+      return b.num - a.num
     }
   },
   mounted () {
@@ -241,6 +245,7 @@ export default {
           unit: '件'
         })
       }
+      this.backList.sort(this.sortNum)
     })
     // 稽查办案案件办理时间情况
     axios.get('/monitor/check/getProvincialTimeData').then(res => {
@@ -323,46 +328,50 @@ export default {
         con: '77',
         unit: '天'
       },
-      chart4: [
-        {
+      chart4: [],
+      chart5: [
+         {
+          name: '省级',
+          value: 0
+        }, {
           name: '唐山市',
-          value: Mock.Random.natural(1, 20)
+          value: 0
         }, {
           name: '石家庄市',
-          value: Mock.Random.natural(1, 20)
+          value: 0
         }, {
           name: '保定市',
-          value: Mock.Random.natural(1, 20)
+          value: 0
         }, {
           name: '辛集市',
-          value: Mock.Random.natural(1, 20)
+          value: 0
         }, {
           name: '定州市',
-          value: Mock.Random.natural(1, 20)
+          value: 0
         }, {
           name: '秦皇岛市',
-          value: Mock.Random.natural(1, 20)
+          value: 0
         }, {
           name: '廊坊市',
-          value: Mock.Random.natural(1, 20)
+          value: 0
         }, {
           name: '承德市',
-          value: Mock.Random.natural(1, 20)
+          value: 0
         }, {
           name: '沧州市',
-          value: Mock.Random.natural(1, 20)
+          value: 0
         }, {
           name: '邢台市',
-          value: Mock.Random.natural(1, 20)
+          value: 0
         }, {
           name: '衡水市',
-          value: Mock.Random.natural(1, 20)
+          value: 0
         }, {
           name: '邯郸市',
-          value: Mock.Random.natural(1, 20)
+          value: 0
         }, {
           name: '张家口市',
-          value: Mock.Random.natural(1, 20)
+          value: 0
         }
       ],
       imgUrl: [
