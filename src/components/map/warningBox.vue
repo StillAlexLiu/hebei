@@ -1,7 +1,7 @@
 <template>
     <div class="warningBox">
       <span class="close" @click="close"></span>
-      <p class="title">案件详情</p>
+      <p class="title">{{title}}</p>
       <div class="main h-4-5">
         <p>{{wData.caseName}}</p>
         <div class="left w-1-2">
@@ -38,7 +38,7 @@
 <script>
 export default {
   name: 'warningBox',
-  props: ['wData'],
+  props: ['wData', 'title'],
   data () {
     return {
       list: ''

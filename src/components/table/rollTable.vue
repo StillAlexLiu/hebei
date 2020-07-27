@@ -14,8 +14,14 @@
                      @click="click(item,index)"
                      :style="{height:liHeight+'px'}"
                      >
-                    <div class="cell w-1-4" v-for="(itemd,indexd) in dimension" :key="indexd+'&'+item.key" :class="{middle: indexd === 1}">
-                        <span>{{item[itemd.value]}}</span>
+                     <div class="cell w-1-4">
+                        <span>{{item.caseTime}}</span>
+                    </div>
+                     <div class="cell w-1-2">
+                        <span>{{item.caseName}}</span>
+                    </div>
+                     <div class="cell w-1-4">
+                        <span>{{item.caseState}}</span>
                     </div>
                 </li>
             </ul>
@@ -25,27 +31,24 @@
                      @click="click(item,index)"
                      :style="{height:liHeight+'px'}"
                      >
-                    <div class="cell w-1-4" v-for="(itemd,indexd) in dimension" :key="indexd+'&'+item.key" :class="{middle: indexd === 1}">
-                        <span>{{item[itemd.value]}}</span>
+                     <div class="cell w-1-4">
+                        <span>{{item.caseTime}}</span>
+                    </div>
+                     <div class="cell w-1-2">
+                        <span>{{item.caseName}}</span>
+                    </div>
+                     <div class="cell w-1-4">
+                        <span>{{item.caseState}}</span>
                     </div>
                 </li>
             </ul>
           </div>
-              <!-- <transition-group name="list" tag='ul' ref="table"
-              style="width: 98.7%;height:100%!important" class="table">
-                <li class="row  body  list-item full-width h-1-9" v-for="(item,index) in demo"
-                     :key="item.key"
-                     @click="click(item,index)">
-                    <div class="cell w-1-4" v-for="(itemd,indexd) in dimension" :key="indexd+'&'+item.key" :class="{middle: indexd === 1}">
-                        <span>{{item[itemd.value]}}</span>
-                    </div>
-                </li>
-            </transition-group> -->
         </div>
     </div>
 </template>
 
 <script>
+import Bus from '@/assets/bus.js'
 export default {
   name: 'rollTable',
   props: {
@@ -96,20 +99,8 @@ export default {
       deep: true,
       immediate: true,
       handler: function () {
-        // clearInterval(this.timer)
         var data = this.tableData
         this.demo = this.initData(data)
-        // this.scrollBox = document.getElementsByClassName('scroll')[0]
-        // this.ul = document.getElementsByClassName('ul')[0]
-        // console.log(this.ul)
-        // this.start()
-        // this.demo = []
-        // if (data.length > 0) {
-        //   this.demo = this.initData(data)
-        //   if (data.length >= 10) {
-        //     this.timer = setInterval(this.add, 1000)
-        //   }
-        // }
       }
     }
   },
@@ -122,13 +113,14 @@ export default {
       this.scrollBox = this.$refs.scroll
       this.ul = this.$refs.ul
       this.liHeight = this.scrollBox.offsetHeight / 9
-      console.log(this.scrollBox.offsetHeight)
+      // console.log(this.scrollBox.offsetHeight)
       this.start()
     })
   },
   methods: {
     click (item, index) {
       this.selectIndex = index
+      Bus.$emit('caseOn', item)
     },
     initData (data) {
       const rtn = []
@@ -207,11 +199,12 @@ export default {
         cursor: pointer;
         background-color: rgba(0,0,0,.5);
         .cell {
-            border: 1px solid #37adc3;
+           
             display: table;
              height: 100%;
             float: left;
             span {
+               border: 1px solid #37adc3;
                 display: table-cell;
                 vertical-align: middle;
             }

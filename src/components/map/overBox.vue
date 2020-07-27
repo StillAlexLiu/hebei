@@ -2,7 +2,7 @@
     <div class="overBox">
       <span class="close" @click="close"></span>
       <div class="full" v-if='flag'>
-        <p class="title">已办结案件</p>
+        <p class="title">{{title}}</p>
         <div class="table h-4-5">
           <div class="thead h-1-12">
             <span class="w-1-12">序号</span>
@@ -26,7 +26,7 @@
           </div>
         </div>
       </div>
-      <overDetails :listData='overData' @back='flag = !flag' v-else/>
+      <overDetails :listData='overData' :title2='title' @back='flag = !flag' v-else/>
     </div>
 </template>
 
@@ -34,6 +34,7 @@
 import overDetails from './overDetails'
 export default {
   name: 'overBox',
+  props: ['type', 'title'],
   components: {
     overDetails
   },
@@ -45,15 +46,15 @@ export default {
     }
   },
   mounted () {
-    this.getData()
+    this.getData(this.type)
   },
   methods: {
     close () {
       this.$emit('closeOverBox', false)
     },
-    getData () {
-      this.$get('monitor/check/getPlaceHomeData').then(res =>{
-        console.log(res)
+    getData (type) {
+      this.$get('monitor/check/' + type).then(res =>{
+        // console.log(res)
         this.list = res.data
       }).catch(err => {
         console.log(err)
@@ -65,6 +66,10 @@ export default {
     }
   },
   watch: {
+    type: function () {
+      this.getData(this.type)
+      this.flag = true
+    },
     overData: function () {
       this.flag = !this.flag
     }

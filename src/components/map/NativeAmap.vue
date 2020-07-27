@@ -6,8 +6,8 @@
             <slot name="info"></slot>
         </MapInfoBlock>
         <SearchBox :number="pointNumber" @inputData='inputFocus' :zoom="zoom2"/>
-        <warningBox @close='close' v-if="warning" :wData='warningData'/>
-        <overBox @closeOverBox='closeOverBox' v-if="over"/>
+        <warningBox @close='close' v-if="warning" :wData='warningData' :title="caseTitle"/>
+        <overBox @closeOverBox='closeOverBox' v-if="over" :type='overType' :title='overTitle'/>
     </div>
 </template>
 
@@ -49,7 +49,10 @@ export default {
       warning: false,
       warningData: '',
       over: false,
-      style: {}
+      style: {},
+      caseTitle: '案件详情',
+      overType: '',
+      overTitle: ''
     }
   },
   props: {
@@ -176,6 +179,7 @@ export default {
           this.warningData = data.data
           this.warning = true
           this.over = false
+          this.caseTitle = '案件详情'
         }).catch(err => {
           console.log(err)
         })
@@ -184,6 +188,8 @@ export default {
     // 累计结案弹框
     Bus.$on('overBox', data => {
       if (data) {
+        this.overType = 'getPlaceHomeData'
+        this.overTitle = '已办结案件'
         this.over = true
         this.warning = false
       }
@@ -194,13 +200,23 @@ export default {
       var map = document.getElementsByClassName('amap-maps')[0]
       map.style.transform = 'scale(' + zoom + ',' + zoom + ')'
     })
-    Bus.$on('zoom2', data => {
-      // console.log(data)
-      // const zoom = 1 / data
-      // this.$set(this.style, 'transform', 'scale(' + zoom + ',' + zoom + ')')
-      var map = document.getElementsByClassName('amap-maps')[0]
-      map.style.transform = 'scale(' + data.x + ',' + data.y + ')'
-    })
+     Bus.$on('caseOn', data => {
+      if (data) {
+          this.warningData = data
+          this.warning = true
+          this.over = false
+          this.caseTitle = '处理中案件详情'
+      }
+    }),
+     Bus.$on('case', data => {
+       console.log(data)
+       if (data) {
+        this.overType = data.type
+        this.overTitle = data.name
+        this.over = true
+        this.warning = false
+      }
+     })
   },
   methods: {
     close (data) {

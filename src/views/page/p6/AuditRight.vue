@@ -2,7 +2,7 @@
     <div class="AuditRight full page-style">
         <container title="本年案件处理流程跟踪" class="h-2-8 full-width">
             <ChartTree :data="treeData" v-if="false"/>
-            <ChartsGraph :data="graphData" :link="graphData"/>
+            <ChartsGraph :data="graphData" :link="graphData" @caseType="caseBox"/>
         </container>
         <div class="h-3-8">
             <container class="w-1-2 full-height" title="线索来源">
@@ -64,6 +64,7 @@ import OtherBox from './components/otherBox'
 import backList from './components/backList'
 import chartPie from './components/ChartsPie'
 import axios from 'axios'
+import Bus from '@/assets/bus.js'
 
 export default {
   name: 'AuditRight',
@@ -232,6 +233,12 @@ export default {
     },
     sortNum (a, b) {
       return b.num - a.num
+    },
+    caseBox (data) {
+      Bus.$emit('case', {
+        type: data.data.type,
+        name: data.name
+      })
     }
   },
   mounted () {
@@ -241,28 +248,28 @@ export default {
       const data = res.data.data[0]
       this.graphData = [
         {
-          name: '线索', index: 0, value: data.clue
+          name: '线索', index: 0, value: data.clue, type: ''
         },
         {
-          name: '立案', index: 1, value: data.fileCase
+          name: '立案', index: 1, value: data.fileCase, type: 'getAlertRegister'
         },
         {
-          name: '调查终结', index: 2, value: data.endOfInvestigation
+          name: '调查终结', index: 2, value: data.endOfInvestigation, type: 'getAlertExamine'
         },
         {
-          name: '处罚建议', index: 3, value: data.punishmentSuggestions
+          name: '处罚建议', index: 3, value: data.punishmentSuggestions, type: 'getAlertAdvise'
         },
         {
-          name: '听证', index: 4, value: data.hearing
+          name: '听证', index: 4, value: data.hearing, type: 'getAlertHearing'
         },
         {
-          name: '处罚决定', index: 5, value: data.penaltyDecision
+          name: '处罚决定', index: 5, value: data.penaltyDecision, type: 'getAlertPunish'
         },
         {
-          name: '执行', index: 6, value: data.implement
+          name: '执行', index: 6, value: data.implement, type: 'getAlertExecute'
         },
         {
-          name: '办案完成', index: 7, value: data.caseCompletion
+          name: '办案完成', index: 7, value: data.caseCompletion, type: 'getAlertFinish'
         }
       ]
     })
