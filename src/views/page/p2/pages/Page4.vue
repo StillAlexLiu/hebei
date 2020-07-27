@@ -98,13 +98,12 @@ export default {
         this.chart4[1].value = data.totleUse
       })
       // 特种设备增长
+      // 线图
       axios.get('/monitor/equpMent/getSpread?equpType=' + this.TypeName.type).then(res => {
         const data = res.data.data
-        // console.log(data, 'klkl22')
+        // 柱图
         axios.get('/monitor/equpMent/getStock?equpType=' + this.TypeName.type).then(res2 => {
           const data2 = res2.data.data
-          // console.log(data, 'kkklk')
-          // this.chart4[0].value = data.totleSum
           this.chart5 = []
           for (let i = 0; i < data.length; i++) {
             this.chart5.push({
