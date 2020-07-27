@@ -1,7 +1,7 @@
 <template>
     <div class="overDetails">
       <span class="back" @click="back"></span>
-      <p class="title">已办结案件详情</p>
+      <p class="title">{{title2}}详情</p>
       <div class="main h-4-5">
         <p>{{listData.caseName}}</p>
         <div class="left w-1-2">
@@ -38,7 +38,7 @@
 <script>
 export default {
   name: 'overDetails',
-  props: ['listData'],
+  props: ['listData', 'title2'],
   data () {
     return {
       list: ''

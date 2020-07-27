@@ -98,21 +98,17 @@ export default {
     // 案件
     axios.get('/monitor/check/getCasesProcessData').then(res => {
       const data = res.data.data
-      console.log(data, '案件')
+      // console.log(data, '案件')
       this.radio[0].name = '处理中案件'
       for (let i = 0; i < data.length; i++) {
-        arr1.push({
-          status: data[i].caseState,
-          name: data[i].caseName,
-          time: data[i].caseTime
-        })
+        arr1.push(data[i])
       }
     })
     // 线索
     axios.get('/monitor/check/getCluesProcessData').then(res => {
       const data = res.data.data
       // console.log(data, '线索')
-      this.radio[1].name = '处理中线索' + data.length + '件'
+      // this.radio[1].name = '处理中线索' + data.length + '件'
       for (let i = 0; i < data.length; i++) {
         arr2.push({
           status: data[i].clueStaus,
@@ -134,6 +130,7 @@ export default {
     //   })
     // }
     this.table = [arr1, arr2]
+    // console.log(this.table)
   }
 }
 </script>
