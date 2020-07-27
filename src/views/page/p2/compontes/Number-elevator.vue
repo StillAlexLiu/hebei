@@ -12,8 +12,12 @@
             <img src="./img/car@2x.png" alt="" v-if="type === '场（厂）内专用车辆'">
         </div>
         <div class="w-1-2 full-height text">
-            <div class="name h-1-2">{{data.name}}</div>
-            <div class="value h-1-2 number-font">{{data.value}}</div>
+            <div v-for="(item, index) in data" :key="index" class="full-width h-1-2">
+                <div class="name h-1-4">{{item.name}}</div>
+                <div class="value h-1-4 number-font">{{item.value}}</div>
+            </div>
+            <!-- <div class="name h-1-4">{{data.name}}</div>
+            <div class="value h-1-4 number-font">{{data.value}}</div> -->
         </div>
     </div>
 </template>
@@ -41,7 +45,7 @@ export default {
     }
 
     .text {
-        padding: 140px 0;
+        padding: 45px 0;
 
         .name {
             font-size: 24px;

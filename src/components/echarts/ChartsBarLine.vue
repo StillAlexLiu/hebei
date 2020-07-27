@@ -91,6 +91,12 @@ export default {
       default: () => {
         return false
       }
+    },
+    right: {
+      type: String,
+      default: () => {
+        return '5%'
+      }
     }
   },
   computed: {
@@ -224,7 +230,7 @@ export default {
         grid: {
           left: '12%',
           top: '15%',
-          right: '4%',
+          right: this.right,
           bottom: '10%'
         },
         legend: {

@@ -112,7 +112,7 @@ export default {
     axios.get('/monitor/check/getCluesProcessData').then(res => {
       const data = res.data.data
       // console.log(data, '线索')
-      this.radio[1].name = '处理中线索' + data.length + '件'
+      // this.radio[1].name = '处理中线索' + data.length + '件'
       for (let i = 0; i < data.length; i++) {
         arr2.push({
           status: data[i].clueStaus,

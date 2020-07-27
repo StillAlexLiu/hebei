@@ -194,6 +194,13 @@ export default {
       var map = document.getElementsByClassName('amap-maps')[0]
       map.style.transform = 'scale(' + zoom + ',' + zoom + ')'
     })
+    Bus.$on('zoom2', data => {
+      // console.log(data)
+      // const zoom = 1 / data
+      // this.$set(this.style, 'transform', 'scale(' + zoom + ',' + zoom + ')')
+      var map = document.getElementsByClassName('amap-maps')[0]
+      map.style.transform = 'scale(' + data.x + ',' + data.y + ')'
+    })
   },
   methods: {
     close (data) {
@@ -336,7 +343,7 @@ export default {
           return '<div style="width: 60px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:60px;text-align:center;color:#000000;height:34px;line-height:26px;font-size:18px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
         } else {
           const count = data.baseCount ? '<div style="width: 100%;text-align: center">' + data.baseCount + '</div>' : ''
-          return '<div style="width: 40px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
+          return '<div style="width: 50px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
         }
       } else {
         if (data.typeIndex === 0) {
@@ -344,7 +351,7 @@ export default {
           return '<div style="width: 60px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:60px;text-align:center;color:#000000;height:34px;line-height:26px;font-size:18px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
         } else {
           const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
-          return '<div style="width: 40px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
+          return '<div style="width: 50px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
         }
       }
     },
