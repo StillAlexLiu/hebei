@@ -70,6 +70,7 @@ export default {
       this.$set(this.style, 'overflow', 'hidden')
       this.$set(this.style, 'transform-origin', 'left top')
       this.$set(this.style2, 'overflow', 'hidden')
+      Bus.$emit('zoom', zoom)
     },
     setAdaptHeight () {
       const bHeight = window.innerHeight
@@ -91,6 +92,11 @@ export default {
       this.$set(this.style, 'transform-origin', 'left top')
       this.$set(this.style, 'overflow', 'hidden')
       this.$set(this.style2, 'overflow', 'hidden')
+      const zoom = {
+        x: 1 / scaleX,
+        y: 1 / scaleY
+      }
+      Bus.$emit('zoom2', zoom)
     }
   }
 }

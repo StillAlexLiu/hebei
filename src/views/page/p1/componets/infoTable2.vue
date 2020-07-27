@@ -60,7 +60,7 @@ export default {
     width: 50%;
     float: left;
     line-height: 2rem;
-    font-size: 1.2rem;
+    font-size: 1.7rem;
 
     > div {
         float: left;

@@ -86,9 +86,9 @@ export default {
     setVideo (data2) {
       axios.get('/monitor/main/cmeras/gethuyCmeras?corpId=' + data2.corpId + '&firmType=' + data2.firmType).then(res => {
         // const data = res.data.data
-        // console.log(data)
+        console.log(res.data.data)
         if (Number(data2.firmType) === 1) {
-          const data = res.data.data[0].devlist
+          const data = res.data.data
           for (let i = 0; i < data.length; i++) {
             if (this.videoIndex >= 6) {
               this.videoIndex = 0
@@ -97,7 +97,7 @@ export default {
               name: data[i].name,
               address: data2.corpId,
               url: data[i].hlsurl,
-              state: Number(data[i].state)
+              state: Number(data[i].result)
             })
             this.videoIndex++
             console.log(data[i].hlsurl)

@@ -2,14 +2,15 @@
     <div class="Page4 full">
         <div class="h-1-3">
             <container class="w-1-2 full-height" :title="TypeName.name + '监管'">
-                <NumberElevator :data='chart4[dimension]' :type="TypeName.name"></NumberElevator>
+                <NumberElevator :data='chart4' :type="TypeName.name"></NumberElevator>
             </container>
             <container class="w-1-2 full-height" :title="'全省' + TypeName.name + '增长趋势'">
-                <ChartsBarLine :data='chart5' :dimensions="['name','value']"
-                               :type="['line']"
-                               :colors="['#61EADF']"
+                <ChartsBarLine :data='chart5' :dimensions="['name','value', 'value1']"
+                               :type="['line', 'bar']"
+                               :colors="['#61EADF', 'rgba(50,198,223,.7)']"
                                :units="['单位：台']"
-                               :legend="[TypeName.name + '数量']"></ChartsBarLine>
+                               :right="'12%'"
+                               :legend="[TypeName.name + '存量数量', TypeName.name + '增量数量']"></ChartsBarLine>
             </container>
         </div>
         <div class="h-1-3">
@@ -92,18 +93,27 @@ export default {
       this.pieCenterData[1].value = ''
       axios.get('/monitor/equpMent/getTotalSum?equpType=' + this.TypeName.type).then(res => {
         const data = res.data.data
+        // console.log(data, 'kkklk')
         this.chart4[0].value = data.totleSum
+        this.chart4[1].value = data.totleUse
       })
       // 特种设备增长
       axios.get('/monitor/equpMent/getSpread?equpType=' + this.TypeName.type).then(res => {
         const data = res.data.data
-        this.chart5 = []
-        for (let i = 0; i < data.length; i++) {
-          this.chart5.push({
-            name: data[i].year,
-            value: data[i].equpNum
-          })
-        }
+        // console.log(data, 'klkl22')
+        axios.get('/monitor/equpMent/getStock?equpType=' + this.TypeName.type).then(res2 => {
+          const data2 = res2.data.data
+          // console.log(data, 'kkklk')
+          // this.chart4[0].value = data.totleSum
+          this.chart5 = []
+          for (let i = 0; i < data.length; i++) {
+            this.chart5.push({
+              name: data[i].year,
+              value: data[i].equpNum,
+              value1: data2[i].equpNum
+            })
+          }
+        })
       })
       // 特种设备类型分布
       axios.get('/monitor/equpMent/getMold?equpType=' + this.TypeName.type).then(res => {
@@ -291,14 +301,11 @@ export default {
         }
       ]),
       chart4: [{
-        name: '全省总量',
+        name: '全省特种设备总量',
         value: 31106
       }, {
-        name: '全省总量',
+        name: '特种设备使用单位数量',
         value: 38106
-      }, {
-        name: '全省总量',
-        value: 47106
       }],
       chart5: [
         {
