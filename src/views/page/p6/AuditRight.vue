@@ -173,50 +173,50 @@ export default {
       axios.get('/monitor/check/getregionalDistributionData?type=' + this.pieType.name + '&regionType=' + this.activeType).then(res => {
         const data = res.data.data
         this.chart4 = [
-        {
-          name: '省级',
-          value: 0
-        }, {
-          name: '唐山市',
-          value: 0
-        }, {
-          name: '石家庄市',
-          value: 0
-        }, {
-          name: '保定市',
-          value: 0
-        }, {
-          name: '辛集市',
-          value: 0
-        }, {
-          name: '定州市',
-          value: 0
-        }, {
-          name: '秦皇岛市',
-          value: 0
-        }, {
-          name: '廊坊市',
-          value: 0
-        }, {
-          name: '承德市',
-          value: 0
-        }, {
-          name: '沧州市',
-          value: 0
-        }, {
-          name: '邢台市',
-          value: 0
-        }, {
-          name: '衡水市',
-          value: 0
-        }, {
-          name: '邯郸市',
-          value: 0
-        }, {
-          name: '张家口市',
-          value: 0
-        }
-      ]
+          {
+            name: '省级',
+            value: 0
+          }, {
+            name: '唐山市',
+            value: 0
+          }, {
+            name: '石家庄市',
+            value: 0
+          }, {
+            name: '保定市',
+            value: 0
+          }, {
+            name: '辛集市',
+            value: 0
+          }, {
+            name: '定州市',
+            value: 0
+          }, {
+            name: '秦皇岛市',
+            value: 0
+          }, {
+            name: '廊坊市',
+            value: 0
+          }, {
+            name: '承德市',
+            value: 0
+          }, {
+            name: '沧州市',
+            value: 0
+          }, {
+            name: '邢台市',
+            value: 0
+          }, {
+            name: '衡水市',
+            value: 0
+          }, {
+            name: '邯郸市',
+            value: 0
+          }, {
+            name: '张家口市',
+            value: 0
+          }
+        ]
         for (let i = 0; i < data.length; i++) {
           for (let j = 0; j < this.chart4.length; j++) {
             if (data[i].cityName === this.chart4[j].name) {

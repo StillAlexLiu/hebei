@@ -200,23 +200,29 @@ export default {
       var map = document.getElementsByClassName('amap-maps')[0]
       map.style.transform = 'scale(' + zoom + ',' + zoom + ')'
     })
-     Bus.$on('caseOn', data => {
+    Bus.$on('zoom2', data => {
+      // const zoom = 1 / data
+      // this.$set(this.style, 'transform', 'scale(' + zoom + ',' + zoom + ')')
+      var map = document.getElementsByClassName('amap-maps')[0]
+      map.style.transform = 'scale(' + data.x + ',' + data.y + ')'
+    })
+    Bus.$on('caseOn', data => {
       if (data) {
-          this.warningData = data
-          this.warning = true
-          this.over = false
-          this.caseTitle = '处理中案件详情'
+        this.warningData = data
+        this.warning = true
+        this.over = false
+        this.caseTitle = '处理中案件详情'
       }
     }),
-     Bus.$on('case', data => {
-       console.log(data)
-       if (data) {
+    Bus.$on('case', data => {
+      console.log(data)
+      if (data) {
         this.overType = data.type
         this.overTitle = data.name
         this.over = true
         this.warning = false
       }
-     })
+    })
   },
   methods: {
     close (data) {
