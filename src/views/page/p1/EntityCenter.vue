@@ -4,11 +4,11 @@
         <span @click="closeBox">×</span>
       </div>
       <div class="centerBox">
-        <div class="w-4-5 full-height">
+        <div class="full-width full-height">
           <oneDayTour :data='entApplyData' v-if='!totwoP' @toTwo="toTwo2"></oneDayTour>
           <oneDayDouble @toOne='toOneFun' v-else></oneDayDouble>
         </div>
-        <div class="w-1-5 full-height">
+        <!-- <div class="w-1-5 full-height">
           <Container class="full-width h-3-5" :title="'一日办地图'">
             <MapHebeiWithClick :data='mapList'></MapHebeiWithClick>
           </Container>
@@ -17,7 +17,7 @@
                 :barBorderRadius="[20, 20, 20, 20]"
                 :color="['#FE6941','#50E3C2','#FFD589','#4A90E2','#FE6941','#50E3C2','#FFD589','#4A90E2']"/>
           </Container>
-        </div>
+        </div> -->
       </div>
     </div>
 </template>
@@ -27,7 +27,7 @@ import Bus from '@/assets/bus.js'
 import oneDayTour from './componets/oneDayTour'
 import oneDayDouble from './componets/oneDayDouble'
 import axios from 'axios'
-import MapHebeiWithClick from './componets/MapHebeiWithClick'
+// import MapHebeiWithClick from './componets/MapHebeiWithClick'
 
 export default {
   name: 'SupervisionCenter',
@@ -50,7 +50,13 @@ export default {
         entDone: '',
         ssUnDOne: '',
         gaUnDone: '',
-        rsUndone: ''
+        rsUndone: '',
+        gaff: '',
+        swff: '',
+        rsff: '',
+        gafk: '',
+        swfk: '',
+        rsfk: ''
       },
       barData: [],
       mapList: [],
@@ -59,8 +65,8 @@ export default {
   },
   components: {
     oneDayTour,
-    oneDayDouble,
-    MapHebeiWithClick
+    oneDayDouble
+    // MapHebeiWithClick
   },
   created () {
   },
@@ -159,6 +165,36 @@ export default {
       // //  console.log(res.data.data, '人社办理时长')
       this.entApplyData.avgrsHours = res.data.data.indexValue
     })
+    // 分发给公安
+    axios.get('/monitor/info/detail?indexCode=GAFF&dataTime=' + now).then(res => {
+      //  console.log(res.data.data, '分发给公安')
+      this.entApplyData.gaff = res.data.data.indexValue
+    })
+    // 分发给税务
+    axios.get('/monitor/info/detail?indexCode=SWFF&dataTime=' + now).then(res => {
+      //  console.log(res.data.data, '分发给公安')
+      this.entApplyData.swff = res.data.data.indexValue
+    })
+    // 分发给人社
+    axios.get('/monitor/info/detail?indexCode=RSFF&dataTime=' + now).then(res => {
+      //  console.log(res.data.data, '分发给公安')
+      this.entApplyData.rsff = res.data.data.indexValue
+    })
+    // 反馈公安
+    axios.get('/monitor/info/detail?indexCode=GAFK&dataTime=' + now).then(res => {
+      //  console.log(res.data.data, '分发给公安')
+      this.entApplyData.gafk = res.data.data.indexValue
+    })
+    // 税务反馈
+    axios.get('/monitor/info/detail?indexCode=SWFK&dataTime=' + now).then(res => {
+      //  console.log(res.data.data, '分发给公安')
+      this.entApplyData.swfk = res.data.data.indexValue
+    })
+    // 人社反馈
+    axios.get('/monitor/info/detail?indexCode=RSFK&dataTime=' + now).then(res => {
+      //  console.log(res.data.data, '分发给公安')
+      this.entApplyData.rsfk = res.data.data.indexValue
+    })
     // 开办成功数
     axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=entDone').then(res => {
       // //  console.log(res.data.data, '开办成功数')
@@ -167,7 +203,7 @@ export default {
     })
     // 数据对接监控柱状图
     axios.get('/monitor/info/apply/zzData?indexCodes=GAFF,RSFF,SWFF,GAFK,SWFK,RSFK').then(res => {
-      // //  console.log(res.data.data.data, '数据对接监控柱状图')
+      console.log(res.data.data.data, '数据对接监控柱状图')
       const data = res.data.data.data
       this.barData = []
       for (let i = 0; i < data.length; i++) {
@@ -234,7 +270,10 @@ export default {
     width: 100%;
     height: 97.5%;
     margin-top: 2.5%;
-    background: rgba(25,27,48,1);
+    // background: rgba(25,27,48,1);
+      // background-image: url('./componets/img/编组 9@2x.png');
+      // background-size: 100% 100%;
+      // background-repeat: no-repeat;
     .close{
       width: 100%;
       height: 50px;

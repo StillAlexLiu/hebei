@@ -913,7 +913,7 @@ export default {
         }
       })
     },
-    getDetails(pripId, cliType) {
+    getDetails (pripId, cliType) {
       axios.get('/monitor/equpMent/getDetails?pripid=' + pripId + '&reportType=' + cliType).then(res => {
         const data = res.data.data
         this.p1Info['特种设备']['特种设备使用单位信息']['锅炉在用'] = data.GLZY
@@ -930,7 +930,40 @@ export default {
         this.p1Info['特种设备']['特种设备使用单位信息']['游乐停用'] = data.YLTY
         this.p1Info['特种设备']['特种设备使用单位信息']['索道在用'] = data.SDZY
         this.p1Info['特种设备']['特种设备使用单位信息']['索道停用'] = data.SDTY
-
+      })
+    },
+    getReportByPripid (pripId, cliType) {
+      axios.get('/monitor/unqualified/getReportByPripid?pripid=' + pripId + '&reportType=' + cliType).then(res => {
+        const data = res.data.data
+        if (cliType === 'AA') {
+          for (let i = 0; i < data.length; i++) {
+            this.p1Info['年报信息']['年报信息'].push({
+              // '生产企业': this.mainMessage[i].SCQY,
+              年报年度: data[i].ANCHEYEAR,
+              年报时间: data[i].ANCHEDATE,
+              资产总额: data[i].ASSGRO,
+              负债总额: '/',
+              营业总收入: data[i].VENDINC,
+              利润总额: '/',
+              纳税总额: data[i].RATGRO,
+              净利润: '/'
+            })
+          }
+        } else {
+          for (let i = 0; i < data.length; i++) {
+            this.p1Info['年报信息']['年报信息'].push({
+              // '生产企业': this.mainMessage[i].SCQY,
+              年报年度: data[i].ANCHEYEAR,
+              年报时间: data[i].ANCHEDATE,
+              资产总额: data[i].ASSGRO,
+              负债总额: data[i].LIAGRO,
+              营业总收入: data[i].VENDINC,
+              利润总额: data[i].PROGRO,
+              纳税总额: data[i].RATGRO,
+              净利润: data[i].NETINC
+            })
+          }
+        }
       })
     },
     p1Select (pripId, cliType) {
@@ -947,6 +980,7 @@ export default {
         this.CjInfo(pripId, cliType)
         this.queryByPripid(pripId, cliType)
         this.getDetails(pripId, cliType)
+        this.getReportByPripid(pripId, cliType)
         this.setPageData({
           key: 'p1',
           data: this.p1Info

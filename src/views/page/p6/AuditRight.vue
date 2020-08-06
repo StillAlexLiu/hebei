@@ -235,6 +235,7 @@ export default {
       return b.num - a.num
     },
     caseBox (data) {
+      console.log(data)
       Bus.$emit('case', {
         type: data.data.type,
         name: data.name
@@ -246,30 +247,31 @@ export default {
     // 稽查办案案件处理流程跟踪
     axios.get('/monitor/check/getCaseProcessData').then(res => {
       const data = res.data.data[0]
+      console.log(data, '流程跟踪')
       this.graphData = [
         {
           name: '线索', index: 0, value: data.clue, type: ''
         },
         {
-          name: '立案', index: 1, value: data.fileCase, type: 'getAlertRegister'
+          name: '立案', index: 1, value: data.fileCase, type: 'getAlertRegister',type: 1
         },
         {
-          name: '调查终结', index: 2, value: data.endOfInvestigation, type: 'getAlertExamine'
+          name: '调查终结', index: 2, value: data.endOfInvestigation, type: 'getAlertExamine',type: 2
         },
         {
-          name: '处罚建议', index: 3, value: data.punishmentSuggestions, type: 'getAlertAdvise'
+          name: '处罚建议', index: 3, value: data.punishmentSuggestions, type: 'getAlertAdvise',type: 3
+        },
+        // {
+        //   name: '听证', index: 4, value: data.hearing, type: 'getAlertHearing'
+        // },
+        {
+          name: '处罚决定', index: 4, value: data.penaltyDecision, type: 'getAlertPunish',type: 4
         },
         {
-          name: '听证', index: 4, value: data.hearing, type: 'getAlertHearing'
+          name: '执行', index: 5, value: data.implement, type: 'getAlertExecute',type: 5
         },
         {
-          name: '处罚决定', index: 5, value: data.penaltyDecision, type: 'getAlertPunish'
-        },
-        {
-          name: '执行', index: 6, value: data.implement, type: 'getAlertExecute'
-        },
-        {
-          name: '办案完成', index: 7, value: data.caseCompletion, type: 'getAlertFinish'
+          name: '办案完成', index: 6, value: data.caseCompletion, type: 'getAlertFinish'
         }
       ]
     })

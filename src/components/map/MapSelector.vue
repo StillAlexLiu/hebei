@@ -128,7 +128,7 @@ export default {
       Bus.$emit('closeMainBox', false)
       if (item.name === '指挥调度') {
         Bus.$emit('zhduTab', true)
-      } else if (item.name === '一日办') {
+      } else if (item.name === '一窗通（一日办）') {
         Bus.$emit('oneDay', true)
       } else {
         this.showBox = false

@@ -14,6 +14,7 @@
                 </div>
                 <player slot='calc' class='full-height video' v-else :index='index'
                         :src='item.url'/>
+                <!-- <HyVideo class='full-height video' slot='calc'></HyVideo> -->
             </container-calc>
         </div>
     </div>
@@ -75,15 +76,23 @@ export default {
   },
   mounted () {
     const data3 = {
-      address: '承德市围场县御道口镇',
+      address: '张家口市怀安县渡口堡乡110国道菜碱滩村西',
       firmType: '2',
-      corpId: 'fe0ccc86-fa00-48c0-aee1-978196a665eb',
-      name: '承德围场御道口站'
+      corpId: '4b7f2481-033d-4cfc-9a25-c4bf7da40ba0',
+      name: '张家口怀安渡口堡站'
     }
     this.setVideo(data3)
+    const data4 = {
+      address: '张家口市阳原县要家庄乡王府庄村',
+      firmType: '2',
+      corpId: '996b4fd9-78fe-42d2-976b-6974a1979405',
+      name: '张家口阳原王府庄站'
+    }
+    this.setVideo(data4)
   },
   methods: {
     setVideo (data2) {
+      console.log(data2, '222')
       axios.get('/monitor/main/cmeras/gethuyCmeras?corpId=' + data2.corpId + '&firmType=' + data2.firmType).then(res => {
         // const data = res.data.data
         console.log(res.data.data)
@@ -115,7 +124,7 @@ export default {
               state: 0
             })
             this.videoIndex++
-            console.log(data[i].hlsUrl)
+            // console.log(data[i].hlsUrl)
           }
         } else if (Number(data2.firmType) === 3) {
           const data = res.data.data[0]

@@ -11,8 +11,8 @@
           <p><span>适用程序</span>{{wData.appprRocedure}}</p>
           <p><span>是否涉外案件</span>{{wData.caseForsign}}</p>
           <p><span>立案机关</span>{{wData.caseFiauth}}</p>
-          <p><span>执行日期</span>{{wData.exeDate}}</p>
-          <p><span>未执行原因类别：</span>{{wData.unexeReaSort}}</p>
+          <!-- <p><span>执行日期</span>{{wData.exeDate}}</p> -->
+          <!-- <p><span>未执行原因类别：</span>{{wData.unexeReaSort}}</p> -->
           <p><span>罚没金额</span>{{wData.punIsham}}</p>
           <p><span>办案机构</span>{{wData.casedep}}</p>
           <p><span>办案期限</span>{{wData.deadLine}}</p>
@@ -25,7 +25,7 @@
           <p><span>是否利用网络</span>{{wData.caseInterneTsign}}</p>
           <p><span>案件类别</span>{{wData.clueType}}</p>
           <p><span>立案日期</span>{{wData.caseFidate}}</p>
-          <p><span>执行类别</span>{{wData.exeSort}}</p>
+          <!-- <p><span>执行类别</span>{{wData.exeSort}}</p> -->
           <p><span>案件状态</span>{{wData.caseState}}</p>
           <p><span>案件结果</span>{{wData.caseResult}}</p>
           <p><span>办案人员</span>{{wData.userNameMain}}</p>

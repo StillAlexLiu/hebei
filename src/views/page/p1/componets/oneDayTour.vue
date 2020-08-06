@@ -1,12 +1,14 @@
 <template>
-    <chart :options="options" @click='tabCli'/>
+    <chart :options="options" @click='tabCli' class="backChart"/>
 </template>
 
 <script>
+const img0 = require('../componets/img/img0.png')
 const img1 = require('../componets/img/img1.png')
 const img2 = require('../componets/img/img2.png')
 const img3 = require('../componets/img/img3.png')
 const img4 = require('../componets/img/img4.png')
+const img5 = require('../componets/img/11.png')
 export default {
   name: 'custom',
   props: {
@@ -89,23 +91,59 @@ export default {
         name: '开办成功',
         value: '321',
         unit: '户'
-      }
+      },
+      info5: [
+        {
+          title: '交换平台',
+          name: '平均用时',
+          value: '',
+          unit: 'h'
+        }, {
+          title: '交换平台',
+          name: '平均用时',
+          value: '',
+          unit: 'h'
+        }, {
+          title: '交换平台',
+          name: '平均用时',
+          value: '',
+          unit: 'h'
+        }
+      ],
+      info6: [
+        {
+          title: '交换平台',
+          name: '平均用时',
+          value: '',
+          unit: 'h'
+        }, {
+          title: '交换平台',
+          name: '平均用时',
+          value: '',
+          unit: 'h'
+        }, {
+          title: '交换平台',
+          name: '平均用时',
+          value: '',
+          unit: 'h'
+        }
+      ]
     }
   },
   computed: {
-    options () {
-      this.sendData()
+      options () {
+        this.sendData()
       const lineData = []
       const lineDataEffect = []
       const colors = ['#89B557', '#89B557', '#89B557']
       for (let i = -3; i < 4; i++) {
         const y = 50 + i * 3
         lineData.push({
-          coords: [[12, y], [36, y]]
+          coords: [[5, y], [32, y]]
         })
         for (let j = 0; j < Math.ceil(Math.random() * 10); j++) {
           lineDataEffect.push({
-            coords: [[12, y], [36, y]],
+            coords: [[5, y], [32, y]],
             lineStyle: {
               normal: {
                 color: colors[j % 3],
@@ -118,27 +156,28 @@ export default {
       }
       for (let i = -13; i < 15; i++) {
         const y = 40 + i * 4
-        if ([9, 8, 7, 1, 0, -1, -2,  -8, -9,-10, -11, -12, -13].indexOf(i) < 0) {
+        if ([9, 8, 7, 1, 0, -1, -2, -8, -9, -10, -11, -12, -13].indexOf(i) < 0) {
           lineData.push({
-            coords: [[36, 50], [47, y]],
+            coords: [[32, 50], [42, y]],
             lineStyle: {
               curveness: this.getCurveness(i)
             }
           })
           lineData.push({
-            coords: [[76, y], [90, 50]],
+            coords: [[82, y], [93, 50]],
             lineStyle: {
               curveness: this.getCurveness(i)
             }
           })
           // 中间层
+          // console.log
           lineData.push({
-            coords: [[47, y], [76, y]]
+            coords: [[42, y], [82, y]]
           })
           // 流动灯光
           for (let j = 0; j < Math.ceil(Math.random() * 4); j++) {
             lineDataEffect.push({
-              coords: [[36, 50], [47, y]],
+              coords: [[32, 50], [42, y]],
               lineStyle: {
                 normal: {
                   color: colors[j % 3],
@@ -148,7 +187,7 @@ export default {
               }
             })
             lineDataEffect.push({
-              coords: [[76, y], [90, 50]],
+              coords: [[82, y], [93, 50]],
               lineStyle: {
                 normal: {
                   color: colors[j % 3],
@@ -158,7 +197,7 @@ export default {
               }
             })
             lineDataEffect.push({
-              coords: [[47, y], [76, y]],
+              coords: [[42, y], [82, y]],
               lineStyle: {
                 normal: {
                   color: colors[j % 2],
@@ -173,9 +212,56 @@ export default {
       for (let i = 0; i < 3; i++) {
         Group.push({
           name: '',
+          value: [48, i * 33 + 21],
+          symbol: 'image://' + img5,
+          symbolSize: [280, 170],
+          label: {
+            show: true,
+            width: '280',
+            height: '170',
+            formatter: () => {
+              return '{title|' + this.info5[i].title + '}\n' +
+                '{name|' + this.info5[i].name + '}' + '{value|' + this.info5[i].value + '}' + '{unit|' + this.info5[i].unit + '}\n'
+            },
+            rich: {
+              title: {
+                color: '#fff',
+                align: 'center',
+                lineHeight: 70,
+                fontSize: 32
+              },
+              name: {
+                color: '#fff',
+                align: 'left',
+                lineHeight: 50,
+                padding: 35,
+                width: 60,
+                fontSize: 22,
+                fontWeight: 'bold'
+              },
+              value: {
+                color: '#79DFEF',
+                align: 'left',
+                lineHeight: 50,
+                verticalAlign: 'bottom',
+                fontFamily: 'LESLIE-Regular,LESLIE',
+                fontSize: 45,
+                align: 'center',
+                width: 80
+              },
+              unit: {
+                color: '#fff',
+                lineHeight: 50,
+                align: 'left',
+                fontSize: 28
+              }
+            }
+          }
+        }, {
+          name: '',
           value: [61, i * 33 + 21],
           symbol: 'image://' + img3,
-          symbolSize: [374, 256],
+          symbolSize: [354, 256],
           label: {
             show: true,
             width: '374',
@@ -218,13 +304,60 @@ export default {
               }
             }
           }
+        }, {
+          name: '',
+          value: [75, i * 33 + 21],
+          symbol: 'image://' + img5,
+          symbolSize: [280, 170],
+          label: {
+            show: true,
+            width: '280',
+            height: '170',
+            formatter: () => {
+              return '{title|' + this.info6[i].title + '}\n' +
+                '{name|' + this.info6[i].name + '}' + '{value|' + this.info6[i].value + '}' + '{unit|' + this.info6[i].unit + '}\n'
+            },
+            rich: {
+              title: {
+                color: '#fff',
+                align: 'center',
+                lineHeight: 70,
+                fontSize: 32
+              },
+              name: {
+                color: '#fff',
+                align: 'left',
+                lineHeight: 50,
+                padding: 35,
+                width: 60,
+                fontSize: 22,
+                fontWeight: 'bold'
+              },
+              value: {
+                color: '#79DFEF',
+                align: 'left',
+                lineHeight: 50,
+                verticalAlign: 'bottom',
+                fontFamily: 'LESLIE-Regular,LESLIE',
+                fontSize: 45,
+                align: 'center',
+                width: 80
+              },
+              unit: {
+                color: '#fff',
+                lineHeight: 50,
+                align: 'left',
+                fontSize: 28
+              }
+            }
+          }
         })
       }
       const show = {
         show: false
       }
       return {
-        backgroundColor: '#191b30',
+        // backgroundColor: require('../componets/img/编组 9@2x.png'),
         xAxis: {
           type: 'value',
           max: 100,
@@ -277,107 +410,139 @@ export default {
           zlevel: 3
         }, {
           zlevel: 5,
-          data: [{
-            name: '',
-            value: [12, 50],
-            symbol: 'image://' + img1,
-            symbolSize: 360,
-            label: {
-              show: true,
-              formatter: () => {
-                return '{name|' + this.info1.name + '}\n' + '{value|' + this.info1.value + '}' + '{unit|' + this.info1.unit + '}'
-              },
-              rich: {
-                name: {
-                  padding: [0, 0, 40, 30],
-                  color: '#fff',
-                  fontSize: 32
+          data: [
+            // 一窗通
+            {
+              name: '',
+              value: [5, 50],
+              symbol: 'image://' + img0,
+              symbolSize: 260,
+              label: {
+                show: false,
+                formatter: () => {
+                  return '{name|' + this.info1.name + '}\n' + '{value|' + this.info1.value + '}' + '{unit|' + this.info1.unit + '}'
                 },
-                value: {
-                  color: '#79DFEF',
-                  fontSize: 60,
-                  fontFamily: 'LESLIE-Regular,LESLIE',
-                  width: 170
-                },
-                unit: {
-                  color: '#fff',
-                  fontSize: 30
+                rich: {
+                  name: {
+                    padding: [0, 0, 40, 30],
+                    color: '#fff',
+                    fontSize: 32
+                  },
+                  value: {
+                    color: '#79DFEF',
+                    fontSize: 60,
+                    fontFamily: 'LESLIE-Regular,LESLIE',
+                    width: 170
+                  },
+                  unit: {
+                    color: '#fff',
+                    fontSize: 30
+                  }
                 }
               }
-            }
-          }, {
-            name: '',
-            value: [36, 50],
-            symbol: 'image://' + img2,
-            symbolSize: [408, 470],
-            label: {
-              show: true,
-              width: '200',
-              formatter: () => {
-                return '{title|' + this.info2.title + '}\n' +
+            }, {
+              name: '',
+              value: [18, 50],
+              symbol: 'image://' + img1,
+              symbolSize: 260,
+              label: {
+                show: true,
+                formatter: () => {
+                  return '{name|' + this.info1.name + '}\n' + '{value|' + this.info1.value + '}' + '{unit|' + this.info1.unit + '}'
+                },
+                rich: {
+                  name: {
+                    padding: [10, 20, 20, 20],
+                    color: '#fff',
+                    fontSize: 35
+                  },
+                  value: {
+                    color: '#79DFEF',
+                    fontSize: 43,
+                    fontFamily: 'LESLIE-Regular,LESLIE',
+                    width: 140,
+                    align: 'center'
+                  },
+                  unit: {
+                    color: '#fff',
+                    fontSize: 30
+                  }
+                }
+              }
+            }, {
+              name: '',
+              value: [32, 50],
+              symbol: 'image://' + img2,
+              symbolSize: 340,
+              label: {
+                show: true,
+                width: '200',
+                formatter: () => {
+                  return '{title|' + this.info2.title + '}\n' +
                   '{value|' + this.info2.data[0].value + '}' + '{unit|' + this.info2.data[0].unit + '}' + '{value|' + this.info2.data[1].value + '}' + '{unit|' + this.info2.data[1].unit + '}\n' +
                   '{name|' + this.info2.data[0].name + '}' + '{name|' + this.info2.data[1].name + '}'
-              },
-              rich: {
-                title: {
-                  color: '#fff',
-                  align: 'center',
-                  lineHeight: 100,
-                  fontSize: 39
                 },
-                name: {
-                  color: '#fff',
-                  align: 'center',
-                  width: 140,
-                  fontSize: 30
-                },
-                value: {
-                  color: '#79DFEF',
-                  align: 'center',
-                  // backgroundColor: 'red',
-                  verticalAlign: 'bottom',
-                  fontSize: 55,
-                  fontFamily: 'LESLIE-Regular,LESLIE',
-                  width: 150
-                },
-                unit: {
-                  color: '#fff',
-                  align: 'center',
-                  // backgroundColor: 'blue',
-                  width: 30,
-                  fontSize: 30
+                rich: {
+                  title: {
+                    color: '#fff',
+                    align: 'center',
+                    lineHeight: 80,
+                    fontSize: 35
+                  },
+                  name: {
+                    color: '#fff',
+                    align: 'center',
+                    width: 140,
+                    fontSize: 30
+                  },
+                  value: {
+                    color: '#79DFEF',
+                    align: 'center',
+                    // backgroundColor: 'red',
+                    verticalAlign: 'bottom',
+                    fontSize: 48,
+                    fontFamily: 'LESLIE-Regular,LESLIE',
+                    width: 150,
+                    padding: [10, 0, 0, 0]
+                  },
+                  unit: {
+                    color: '#fff',
+                    align: 'center',
+                    // backgroundColor: 'blue',
+                    width: 30,
+                    fontSize: 30
+                  }
                 }
               }
-            }
-          }, {
-            name: '开办成功',
-            value: [90, 50],
-            symbol: 'image://' + img4,
-            symbolSize: [420, 420],
-            label: {
-              show: true,
-              formatter: () => {
-                return '{name|' + this.info4.name + '}\n' + '{value|' + this.info4.value + '}' + '{unit|' + this.info4.unit + '}'
-              },
-              rich: {
-                name: {
-                  color: '#fff',
-                  padding: [0, 0, 40, 30],
-                  fontSize: 32
+            }, {
+              name: '开办成功',
+              value: [92, 50],
+              symbol: 'image://' + img4,
+              symbolSize: [350, 350],
+              label: {
+                show: true,
+                formatter: () => {
+                  return '{name|' + this.info4.name + '}\n' + '{value|' + this.info4.value + '}' + '{unit|' + this.info4.unit + '}'
                 },
-                value: {
-                  color: '#79DFEF',
-                  fontSize: 50,
-                  width: 140,
-                  fontFamily: 'LESLIE-Regular,LESLIE'
-                },
-                unit: {
-                  color: '#fff',
-                  fontSize: 30
+                rich: {
+                  name: {
+                    color: '#fff',
+                    padding: [0, 0, 40, 30],
+                    fontSize: 32
+                  },
+                  value: {
+                    color: '#79DFEF',
+                    fontSize: 50,
+                    width: 140,
+                    fontFamily: 'LESLIE-Regular,LESLIE'
+                  },
+                  unit: {
+                    color: '#fff',
+                    fontSize: 30
+                  }
                 }
               }
-            }
-          }, ...Group],
+            }, ...Group],
           type: 'scatter'
         }]
       }
@@ -389,6 +554,7 @@ export default {
       return k
     },
     sendData () {
+      console.log(this.data, '动图数据')
       this.info1.value = this.data.entApply
       this.info2.data[0].value = this.data.avgAppHours
       this.info2.data[1].value = this.data.applyDone
@@ -404,6 +570,12 @@ export default {
       this.info3[0].value1 = this.data.rsdone
       this.info3[0].value = this.data.avgrsHours
       this.info4.value = this.data.entDone
+      this.info5[0].value = this.data.gaff
+      this.info5[1].value = this.data.swff
+      this.info5[2].value = this.data.rsff
+      this.info6[0].value = this.data.gafk
+      this.info6[1].value = this.data.swfk
+      this.info6[2].value = this.data.rsfk
     },
     tabCli (data) {
       this.$emit('toTwo', data)
@@ -413,11 +585,13 @@ export default {
 </script>
 
 <style scoped>
-
-</style>
-<style>
 .echarts {
     width: 100% !important;
     height: 100% !important;
+}
+.backChart {
+  background-image: url('../componets/img/编组 9@2x.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 </style>

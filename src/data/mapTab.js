@@ -585,7 +585,7 @@ export default [
         }
       ]
     }, {
-      name: '一日办',
+      name: '一窗通（一日办）',
       active: false,
       fingle: true
     }]

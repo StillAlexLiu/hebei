@@ -1806,19 +1806,6 @@ export default {
           const data = res.data.data
           this.barData = []
           for (let i = 0; i < data.length; i++) {
-            if (data[i].year === '2020') {
-              if (topType === 'A') {
-                data[i].entepriseNum = 122220
-              } else if (topType === 'B') {
-                data[i].entepriseNum = 1684408
-              } else if (topType === 'C') {
-                data[i].entepriseNum = 9884
-              } else if (topType === 'AA') {
-                data[i].entepriseNum = 4637778
-              } else if (topType === 'D') {
-                data[i].entepriseNum = 115181
-              }
-            }
             this.barData.push({
               name: data[i].year,
               value: data[i].entepriseNum
@@ -1835,11 +1822,10 @@ export default {
             data: []
           }
           if (data.length === 1) {
-            if (topType === 'A') {
               this.quantityData.data = [
                 {
                   name: '户数(个)',
-                  value: 122220
+                  value: data[0].newUserNum
                 }, {
                   name: '同比上涨',
                   value: data[0].userYoy + '%'
@@ -1851,86 +1837,6 @@ export default {
                   value: data[0].capitalYoy + '%'
                 }
               ]
-            } else if (topType === 'B') {
-              this.quantityData.data = [
-                {
-                  name: '户数(个)',
-                  value: 1684408
-                }, {
-                  name: '同比上涨',
-                  value: data[0].userYoy + '%'
-                }, {
-                  name: '资本(亿元)',
-                  value: data[0].newCapitalNum.toFixed(2)
-                }, {
-                  name: '同比上涨',
-                  value: data[0].capitalYoy + '%'
-                }
-              ]
-            } else if (topType === 'C') {
-              this.quantityData.data = [
-                {
-                  name: '户数(个)',
-                  value: 9884
-                }, {
-                  name: '同比上涨',
-                  value: data[0].userYoy + '%'
-                }, {
-                  name: '资本(亿元)',
-                  value: data[0].newCapitalNum.toFixed(2)
-                }, {
-                  name: '同比上涨',
-                  value: data[0].capitalYoy + '%'
-                }
-              ]
-            } else if (topType === 'AA') {
-              this.quantityData.data = [
-                {
-                  name: '户数(个)',
-                  value: 4637778
-                }, {
-                  name: '同比上涨',
-                  value: data[0].userYoy + '%'
-                }, {
-                  name: '资本(亿元)',
-                  value: data[0].newCapitalNum.toFixed(2)
-                }, {
-                  name: '同比上涨',
-                  value: data[0].capitalYoy + '%'
-                }
-              ]
-            } else if (topType === 'D') {
-              this.quantityData.data = [
-                {
-                  name: '户数(个)',
-                  value: 115181
-                }, {
-                  name: '同比上涨',
-                  value: data[0].userYoy + '%'
-                }, {
-                  name: '资本(亿元)',
-                  value: data[0].newCapitalNum.toFixed(2)
-                }, {
-                  name: '同比上涨',
-                  value: data[0].capitalYoy + '%'
-                }
-              ]
-            }
-            // this.quantityData.data = [
-            //   {
-            //     name: '户数(个)',
-            //     value: data[0].newUserNum
-            //   }, {
-            //     name: '同比上涨',
-            //     value: data[0].userYoy + '%'
-            //   }, {
-            //     name: '资本(亿元)',
-            //     value: data[0].newCapitalNum.toFixed(2)
-            //   }, {
-            //     name: '同比上涨',
-            //     value: data[0].capitalYoy + '%'
-            //   }
-            // ]
           } else {
             for (let i = 0; i < data.length; i++) {
               this.quantityData.data.push({
@@ -2174,19 +2080,6 @@ export default {
           const data = res.data.data
           this.barData = []
           for (let i = 0; i < data.length; i++) {
-            if (data[i].year === '2020') {
-              if (topType === 'A') {
-                data[i].entepriseNum = 5873
-              } else if (topType === 'B') {
-                data[i].entepriseNum = 152838
-              } else if (topType === 'C') {
-                data[i].entepriseNum = 237
-              } else if (topType === 'AA') {
-                data[i].entepriseNum = 403510
-              } else if (topType === 'D') {
-                data[i].entepriseNum = 1877
-              }
-            }
             this.barData.push({
               name: data[i].year,
               value: data[i].entepriseNum
@@ -2203,102 +2096,21 @@ export default {
             data: []
           }
           if (data.length === 1) {
-            if (topType === 'A') {
-              this.quantityData.data = [
-                {
-                  name: '户数(个)',
-                  value: 5873
-                }, {
-                  name: '同比上涨',
-                  value: data[0].userYoy + '%'
-                }, {
-                  name: '资本(亿元)',
-                  value: data[0].newCapitalNum.toFixed(2)
-                }, {
-                  name: '同比上涨',
-                  value: data[0].capitalYoy + '%'
-                }
-              ]
-            } else if (topType === 'B') {
-              this.quantityData.data = [
-                {
-                  name: '户数(个)',
-                  value: 152838
-                }, {
-                  name: '同比上涨',
-                  value: data[0].userYoy + '%'
-                }, {
-                  name: '资本(亿元)',
-                  value: data[0].newCapitalNum.toFixed(2)
-                }, {
-                  name: '同比上涨',
-                  value: data[0].capitalYoy + '%'
-                }
-              ]
-            } else if (topType === 'C') {
-              this.quantityData.data = [
-                {
-                  name: '户数(个)',
-                  value: 237
-                }, {
-                  name: '同比上涨',
-                  value: data[0].userYoy + '%'
-                }, {
-                  name: '资本(亿元)',
-                  value: data[0].newCapitalNum.toFixed(2)
-                }, {
-                  name: '同比上涨',
-                  value: data[0].capitalYoy + '%'
-                }
-              ]
-            } else if (topType === 'AA') {
-              this.quantityData.data = [
-                {
-                  name: '户数(个)',
-                  value: 403510
-                }, {
-                  name: '同比上涨',
-                  value: data[0].userYoy + '%'
-                }, {
-                  name: '资本(亿元)',
-                  value: data[0].newCapitalNum.toFixed(2)
-                }, {
-                  name: '同比上涨',
-                  value: data[0].capitalYoy + '%'
-                }
-              ]
-            } else if (topType === 'D') {
-              this.quantityData.data = [
-                {
-                  name: '户数(个)',
-                  value: 1877
-                }, {
-                  name: '同比上涨',
-                  value: data[0].userYoy + '%'
-                }, {
-                  name: '资本(亿元)',
-                  value: data[0].newCapitalNum.toFixed(2)
-                }, {
-                  name: '同比上涨',
-                  value: data[0].capitalYoy + '%'
-                }
-              ]
-            }
-            // this.quantityData.data = [
-            //   {
-            //     name: '户数(个)',
-            //     value: data[0].newUserNum
-            //   }, {
-            //     name: '同比上涨',
-            //     value: data[0].userYoy + '%'
-            //   }, {
-            //     name: '资本(亿元)',
-            //     value: data[0].newCapitalNum.toFixed(2)
-            //   }, {
-            //     name: '同比上涨',
-            //     value: data[0].capitalYoy + '%'
-            //   }
-            // ]
+            this.quantityData.data = [
+              {
+                name: '户数(个)',
+                value: data[0].newUserNum
+              }, {
+                name: '同比上涨',
+                value: data[0].userYoy + '%'
+              }, {
+                name: '资本(亿元)',
+                value: data[0].newCapitalNum.toFixed(2)
+              }, {
+                name: '同比上涨',
+                value: data[0].capitalYoy + '%'
+              }
+            ]
           } else {
             for (let i = 0; i < data.length; i++) {
               this.quantityData.data.push({

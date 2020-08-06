@@ -269,6 +269,7 @@ export default {
       this.warning(this.warningLevel, this.caseState)
     },
     warning (warningLevel, warningType) {
+      this.tableData = []
       // console.log(warningLevel, warningType, '明细状态')
       // 稽查办案当前预警明细
       axios.get('/monitor/check/getAlertDetailsData?warningLevel=' + warningLevel + '&warningType=' + warningType).then(res => {
@@ -281,6 +282,7 @@ export default {
       // 稽查办案预警数量
       axios.get('/monitor/check/getAlertQuantityData?type=' + type).then(res => {
         const data = res.data.data[0]
+        console.log(data, 'ddd')
         if (data) {
           this.data1[type - 1][0].num = data.clue
           this.data1[type - 1][0].addup = data.clueCumulative

@@ -7,7 +7,7 @@
         </MapInfoBlock>
         <SearchBox :number="pointNumber" @inputData='inputFocus' :zoom="zoom2"/>
         <warningBox @close='close' v-if="warning" :wData='warningData' :title="caseTitle"/>
-        <overBox @closeOverBox='closeOverBox' v-if="over" :type='overType' :title='overTitle'/>
+        <overBox @closeOverBox='closeOverBox' :caseType='caseType' v-if="over" :type='overType' :title='overTitle'/>
     </div>
 </template>
 
@@ -52,7 +52,8 @@ export default {
       style: {},
       caseTitle: '案件详情',
       overType: '',
-      overTitle: ''
+      overTitle: '',
+      caseType: 0
     }
   },
   props: {
@@ -174,6 +175,7 @@ export default {
     })
     // 预警列表弹框
     Bus.$on('waringData', data => {
+      console.log(data)
       if (data) {
         this.$get('/monitor/check/detailCase?caseId=' + data.caseId).then(data => {
           this.warningData = data.data
@@ -187,6 +189,7 @@ export default {
     })
     // 累计结案弹框
     Bus.$on('overBox', data => {
+      console.log(data, '结案')
       if (data) {
         this.overType = 'getPlaceHomeData'
         this.overTitle = '已办结案件'
@@ -208,20 +211,56 @@ export default {
     })
     Bus.$on('caseOn', data => {
       if (data) {
-        this.warningData = data
-        this.warning = true
-        this.over = false
-        this.caseTitle = '处理中案件详情'
+        // this.warningData = data
+        // this.warning = true
+        // this.over = false
+        // this.caseTitle = '处理中案件详情'
+        this.$get('/monitor/check/detailCase?caseId=' + data.caseId).then(res => {
+          console.log(res)
+          this.warningData = res.data
+          this.warning = true
+          this.over = false
+          this.caseTitle = '处理中案件详情'
+          this.caseTitle = '案件详情'
+        }).catch(err => {
+          console.log(err)
+        })
       }
-    }),
+    })
     Bus.$on('case', data => {
-      console.log(data)
-      if (data) {
+      if (data.name === '线索') {
+        this.overType = data.type
+        this.overTitle = data.name
+        this.over = true
+        this.warning = false
+      } else if (data.name === '办案完成') {
+        this.overType = data.type
+        this.overTitle = data.name
+        this.over = true
+        this.warning = false
+        this.caseType = 6
+      } else {
+        this.caseType = 2
         this.overType = data.type
         this.overTitle = data.name
         this.over = true
         this.warning = false
       }
+      // if (data) {
+      //   this.overType = data.type
+      //   ths.overTitle = data.name
+      //   this.over = true
+      //   this.warning = false
+      // this.$get('/monitor/check/detailCase?caseId=' + data.caseId).then(res => {
+      //   this.warningData = res.data
+      // this.overType = data.type
+      // this.overTitle = data.name
+      // this.over = true
+      // this.warning = false
+      // }).catch(err => {
+      //   console.log(err)
+      // })
+      // }
     })
   },
   methods: {
@@ -362,18 +401,18 @@ export default {
       if (data.baseCount) {
         if (data.typeIndex === 0) {
           const count = data.baseCount ? '<div style="width: 100%;text-align: center">' + data.baseCount + '</div>' : ''
-          return '<div style="width: 60px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:60px;text-align:center;color:#000000;height:34px;line-height:26px;font-size:18px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
+          return '<div style="width: 70px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:60px;text-align:center;color:#000000;height:34px;line-height:26px;font-size:18px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
         } else {
           const count = data.baseCount ? '<div style="width: 100%;text-align: center">' + data.baseCount + '</div>' : ''
-          return '<div style="width: 50px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
+          return '<div style="width: 40px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
         }
       } else {
         if (data.typeIndex === 0) {
           const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
-          return '<div style="width: 60px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:60px;text-align:center;color:#000000;height:34px;line-height:26px;font-size:18px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
+          return '<div style="width: 70px; position: relative;"><span style="position: absolute;top:0px;display:inline-block;width:60px;text-align:center;color:#000000;height:34px;line-height:26px;font-size:18px;">' + count + '</span><img style="width: 100%" alt="" src="' + data.icon + '"/>' + '</div>'
         } else {
           const count = data.points && data.points.length > 0 ? '<div style="width: 100%;text-align: center">' + data.points.length + '</div>' : ''
-          return '<div style="width: 50px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
+          return '<div style="width: 40px"><img style="width: 100%" alt="" src="' + data.icon + '"/>' + count + '</div>'
         }
       }
     },

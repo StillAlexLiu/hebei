@@ -193,11 +193,11 @@ export default {
         },
         {
           name: '农专',
-          value: 2
+          value: 3
         },
         {
           name: '个体',
-          value: 3
+          value: 2
         }
       ],
       dataTop: [

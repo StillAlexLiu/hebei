@@ -7,7 +7,7 @@
             <container class="w-1-2 full-height" :title="'全省' + TypeName.name + '增长趋势'">
                 <ChartsBarLine :data='chart5' :dimensions="['name','value', 'value1']"
                                :type="['line', 'bar']"
-                               :colors="['#61EADF', 'rgba(50,198,223,.7)']"
+                               :colors="['#61EADF', 'rgba(50,128,223, 0.6)']"
                                :units="['单位：台']"
                                :right="'12%'"
                                :legend="[TypeName.name + '存量数量', TypeName.name + '增量数量']"></ChartsBarLine>
@@ -84,6 +84,7 @@ export default {
     typeTab () {
       // 特种设备监控总数
       this.chart4[0].value = ''
+      this.chart4[1].value = ''
       this.chart5 = []
       this.hellowPie2 = []
       this.chart3[0].data = []
@@ -93,9 +94,13 @@ export default {
       this.pieCenterData[1].value = ''
       axios.get('/monitor/equpMent/getTotalSum?equpType=' + this.TypeName.type).then(res => {
         const data = res.data.data
-        // console.log(data, 'kkklk')
+        console.log(data, this.TypeName, 'kkklk')
         this.chart4[0].value = data.totleSum
-        this.chart4[1].value = data.totleUse
+        if (this.TypeName.name === '特种设备') {
+          this.chart4[1].value = data.enterpriseTotal
+        } else {
+          this.chart4[1].value = data.totleUse
+        }
       })
       // 特种设备增长
       // 线图

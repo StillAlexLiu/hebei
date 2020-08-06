@@ -1,7 +1,8 @@
 <template>
     <div class='oneDayDouble2'>
         <div class="cuo" @click="back">✖</div>
-        <div class="full-width h-1-3">
+        <div class="w-4-5 full-height">
+          <div class="full-width h-1-3">
            <container class="w-1-2 full-height" :title="'一日办注册工作开展情况'">
                <NumberGroup4 :data='numberData2' class="full-height w-1-4"></NumberGroup4>
                 <div class="w-3-4 full-height">
@@ -46,7 +47,7 @@
                 <RadioSimple :data="radioTab" v-model="select2" class="w-2-7 full-height radio "  style="float: right"/>
               </div>
               <div class="full-width h-8-9">
-                <chartAcrossBar :data='acrossData' :max="maxNum" :legend="['市场监督管理局', '人社','税务', '公安']"  :barBorderRadius="[30, 30, 30, 30]"  :unit="select2Legend"
+                <chartAcrossBar :data='acrossData' :max="maxNum" :legend="['市场监督管理局', '税务','人社', '公安']"  :barBorderRadius="[30, 30, 30, 30]"  :unit="select2Legend"
                   :color="['#FE6941', '#EFC578', '#738CE2', '#22C492', '#4A90E2']"></chartAcrossBar>
               </div>
             </container-center-title2>
@@ -62,7 +63,18 @@
                                :legend="[barLineLegend]"
                                :colors="[barColor]"/>
                 </div>
-            </container-center-title2>
+              </container-center-title2>
+          </div>
+        </div>
+        <div class="w-1-5 full-height">
+          <Container class="full-width h-3-5" :title="'一日办地图'">
+            <MapHebeiWithClick :data='mapList'></MapHebeiWithClick>
+          </Container>
+          <Container class="full-width h-2-5" :title="'数据对接监控'">
+             <ChartsBarHorizontal :data="barData" :showLabel='false'  :yName="'单位：分'"
+                :barBorderRadius="[20, 20, 20, 20]"
+                :color="['#FE6941','#50E3C2','#FFD589','#4A90E2','#FE6941','#50E3C2','#FFD589','#4A90E2']"/>
+          </Container>
         </div>
     </div>
 </template>
@@ -77,18 +89,55 @@ import echarts from 'echarts'
 import axios from 'axios'
 import chartAcrossBar from './ChartAcrossBar'
 // import Bus from '@/assets/bus.js'
+import MapHebeiWithClick from './MapHebeiWithClick'
 export default {
   components: {
     onlyOneBox,
     NumberGroup,
     comPlaintBarR,
     NumberGroup4,
-    chartAcrossBar
+    chartAcrossBar,
+    MapHebeiWithClick
   },
   methods: {
     back () {
       console.log('back')
       this.$emit('toOne', false)
+    },
+
+    mapTimeOut () {
+      const date = new Date()
+      const n = date.getFullYear()
+      let m = date.getMonth() + 1
+      let day = date.getDate()
+      let h = date.getHours()
+      let f = date.getMinutes()
+      let otherF = date.getMinutes() - 5
+      if (m < 10) {
+        m = '0' + m
+      }
+      if (h < 10) {
+        h = '0' + h
+      }
+      if (f < 10) {
+        f = '0' + f
+      }
+      if (day < 10) {
+        day = '0' + day
+      }
+      if (otherF < 0) {
+        otherF = 60 + otherF
+      } else if (otherF < 10) {
+        otherF = '0' + otherF
+      }
+      const now = `${n}-${m}-${day} ${h}:${f}:00`
+      const other = `${n}-${m}-${day} ${h}:${otherF}:00`
+      //  console.log(now, other, '接口日期')
+      // 一日办地图
+      axios.get('/monitor/info/apply/onedayMap?beginTime=' + other + '&endTime=' + now).then(res => {
+        //  console.log(res.data.data.mapList, '一日办地图')
+        this.mapList = res.data.data.mapList
+      })
     }
   },
   watch: {
@@ -102,7 +151,8 @@ export default {
           this.barLineLegend = '办理量'
           axios.get('/monitor/info/apply/zzData?indexCodes=BDBLL,TSBLL,DZBLL,LFBLL,ZJKBLL,CDBLL,CZBLL,SJZBLL,QHDBLL,HSBLL,XJBLL,XTBLL,HDBLL').then(res => {
             const data = res.data.data.data
-            // this.barData2 = []
+            // console.log(data, '办理量')
+            this.barData2 = []
             for (let i = 0; i < data.length; i++) {
               this.barData2.push({
                 name: data[i].indexName.substring(0, data[i].indexName.indexOf('市')),
@@ -115,13 +165,15 @@ export default {
           this.barLineLegend = '平均时长'
           axios.get('/monitor/info/apply/zzData?indexCodes=BDBLSJ,TSBLSJ,DZBLSJ,LFBLSJ,ZJKBLSJ,CDBLSJ,CZBLSJ,SJZBLSJ,QHDBLSJ,HSBLSJ,XJBLSJ,XTBLSJ,HDBLSJ').then(res => {
             const data = res.data.data.data
-            // this.barData2 = []
+            // console.log(data, '办理时长')
+            this.barData2 = []
             for (let i = 0; i < data.length; i++) {
               this.barData2.push({
                 name: data[i].indexName.substring(0, data[i].indexName.indexOf('市')),
                 value: data[i].indexValue
               })
             }
+            // console.log(this.barData2)
           })
         }
       }
@@ -136,7 +188,7 @@ export default {
         // 各局办理情况
         axios.get('/monitor/info/apply/' + this.select2.value).then(res => {
           const data = res.data.data
-          // console.log(data, d)
+          // console.log(data, '格局办理量')
           this.acrossData = data
         })
       }
@@ -145,6 +197,8 @@ export default {
   data () {
     return {
       maxNum: '',
+      barData: [],
+      mapList: [],
       select2: {},
       select2Legend: '',
       radioTab: [
@@ -247,6 +301,22 @@ export default {
     }
   },
   mounted () {
+    this.mapTimeOut()
+    this.interval = setInterval(() => {
+      this.mapTimeOut()
+    }, 300000)
+    // 数据对接监控柱状图
+    axios.get('/monitor/info/apply/zzData?indexCodes=GAFF,RSFF,SWFF,GAFK,SWFK,RSFK').then(res => {
+      console.log(res.data.data.data, '数据对接监控柱状图')
+      const data = res.data.data.data
+      this.barData = []
+      for (let i = 0; i < data.length; i++) {
+        this.barData.push({
+          name: data[i].indexName,
+          value: data[i].indexValue
+        })
+      }
+    })
     const date = new Date()
     const h = date.getFullYear()
     let m = date.getMonth() + 1
