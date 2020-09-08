@@ -37,22 +37,22 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
-import Mock from "mockjs";
+import { mapActions, mapState } from 'vuex'
+import Mock from 'mockjs'
 import messgae from '../p2/compontes/peopleMessage'
-import EntityMapInfo from "../p1/componets/EntityMapInfo";
-import WarningMapInfo from "../p4/components/WarningMapInfo";
-import AuditMapInfo from "../p6/components/AuditMapInfo";
+import EntityMapInfo from '../p1/componets/EntityMapInfo'
+import WarningMapInfo from '../p4/components/WarningMapInfo'
+import AuditMapInfo from '../p6/components/AuditMapInfo'
 // import SupervisionMapInfo from '../p2/compontes/SupervisionMapInfo'
-import ComplaintMapInfo from "../p5/compontes/ComplaintMapInfo";
-import KeepOnRecordMapInfo from "../p10/components/KeepOnRecordMapInfo";
-import Bus from "@/assets/bus.js";
-import axios from "axios";
+import ComplaintMapInfo from '../p5/compontes/ComplaintMapInfo'
+import KeepOnRecordMapInfo from '../p10/components/KeepOnRecordMapInfo'
+import Bus from '@/assets/bus.js'
+import axios from 'axios'
 import tablePeople from '../p2/compontes/tablePeople'
 // import { stat } from 'fs'
 
 export default {
-  name: "CenterMap",
+  name: 'CenterMap',
   components: {
     KeepOnRecordMapInfo,
     ComplaintMapInfo,
@@ -63,12 +63,12 @@ export default {
     tablePeople,
     messgae
   },
-  created() {
-    Bus.$on("closeMainBox", target => {
+  created () {
+    Bus.$on('closeMainBox', target => {
       if (target === false) {
-        this.selectInfoState = false;
+        this.selectInfoState = false
       }
-    });
+    })
   },
   props: {
     idKey: {
@@ -76,7 +76,7 @@ export default {
       default: 0
     }
   },
-  data() {
+  data () {
     return {
       // zoom: 5,
       tabList: false,
@@ -100,173 +100,173 @@ export default {
       p2Info: [],
       p2Dimension: [],
       p4Info: {},
-      p4Name: "食品预警",
-      p2Name: "",
+      p4Name: '食品预警',
+      p2Name: '',
       p2InfoDetail: {},
       p5Info: {},
       p6Info: {},
       p10Info: null,
-      routeName: "",
-      showIndex: "",
-      commandName: "",
+      routeName: '',
+      showIndex: '',
+      commandName: '',
       commandDetail: {},
-      mapTopType: "",
+      mapTopType: '',
       peopleList: '',
       city: [
         {
-          name: "秦皇岛市",
+          name: '秦皇岛市',
           center: [119.586579, 39.942531],
           ad_code: 130300
         },
         {
-          name: "廊坊市",
+          name: '廊坊市',
           center: [116.704441, 39.523927],
           ad_code: 131000
         },
         {
-          name: "张家口市",
+          name: '张家口市',
           center: [114.884091, 40.811901],
           ad_code: 130700
         },
         {
-          name: "唐山市",
+          name: '唐山市',
           center: [118.175393, 39.635113],
           ad_code: 130200
         },
         {
-          name: "沧州市",
+          name: '沧州市',
           center: [116.857461, 38.310582],
           ad_code: 130900
         },
         {
-          name: "承德市",
+          name: '承德市',
           center: [117.939152, 40.976204],
           ad_code: 130800
         },
         {
-          name: "邯郸市",
+          name: '邯郸市',
           center: [114.490686, 36.612273],
           ad_code: 130400
         },
         {
-          name: "石家庄市",
+          name: '石家庄市',
           center: [114.502461, 38.045474],
           ad_code: 130100
         },
         {
-          name: "邢台市",
+          name: '邢台市',
           center: [114.508851, 37.0682],
           ad_code: 130500
         },
         {
-          name: "衡水市",
+          name: '衡水市',
           center: [115.665993, 37.735097],
           ad_code: 131100
         },
         {
-          name: "保定市",
+          name: '保定市',
           center: [115.482331, 38.867657],
           ad_code: 130600
         },
         {
-          name: "辛集市",
+          name: '辛集市',
           center: [115.217451, 37.92904],
           ad_code: 130181
         },
         {
-          name: "河北雄安新区",
+          name: '河北雄安新区',
           center: [115.867238, 39.043152],
           ad_code: 133100
         }
       ],
       latPoint: [],
       showThtee: false,
-      icon: "",
-      mainType: "",
-      basicData: "",
-      mainMessage: "",
-      getQtxkByPripId: "",
-      getZfInfoByPripId: "",
-      getTzsbxkByPripId: "",
-      getCjInfoByPid: "",
+      icon: '',
+      mainType: '',
+      basicData: '',
+      mainMessage: '',
+      getQtxkByPripId: '',
+      getZfInfoByPripId: '',
+      getTzsbxkByPripId: '',
+      getCjInfoByPid: '',
       infoData: {
         营业执照: {
-          企业名称: "",
-          类型: "",
-          统一社会信用代码: "",
-          住所: "",
-          登记机关: "",
-          成立日期: "",
-          经营期限自: "",
-          经营期限至: "",
-          注册资本: "",
-          法定代表人: "",
-          登记状态: "",
-          经营范围: ""
+          企业名称: '',
+          类型: '',
+          统一社会信用代码: '',
+          住所: '',
+          登记机关: '',
+          成立日期: '',
+          经营期限自: '',
+          经营期限至: '',
+          注册资本: '',
+          法定代表人: '',
+          登记状态: '',
+          经营范围: ''
         },
         个人营业执照: {
-          统一社会信用代码: "",
-          名称: "",
-          类型: "",
-          经营者: "",
-          组成形式: "",
-          登记机关: "",
-          登记状态: "",
-          经营场所: "",
-          经营范围: "",
-          注册日期: "",
-          核准日期: ""
+          统一社会信用代码: '',
+          名称: '',
+          类型: '',
+          经营者: '',
+          组成形式: '',
+          登记机关: '',
+          登记状态: '',
+          经营场所: '',
+          经营范围: '',
+          注册日期: '',
+          核准日期: ''
         }
       },
-      selectInfo: "",
+      selectInfo: '',
       selectInfoState: false
-    };
+    }
   },
   computed: {
     ...mapState({
-      globalMapSelect: "globalMapSelect"
+      globalMapSelect: 'globalMapSelect'
     })
   },
   watch: {
     globalMapSelect: {
       immediate: false,
       deep: true,
-      handler: function() {
+      handler: function () {
         if (this.globalMapSelect.items.length > 0) {
-          this.mainType = this.globalMapSelect.items[0].type;
+          this.mainType = this.globalMapSelect.items[0].type
         }
       }
     },
     $route: {
       immediate: true,
       deep: true,
-      handler: function() {
+      handler: function () {
         this.tabList = false
         const find = this.$dataAll.config.mapTab.find(value => {
-          return value.name === this.$route.name;
-        });
-        if (this.$route.name !== "主体服务") {
-          this.selectInfoState = false;
+          return value.name === this.$route.name
+        })
+        if (this.$route.name !== '主体服务') {
+          this.selectInfoState = false
         }
-        this.point = [];
-        this.leafNodePoint = false;
+        this.point = []
+        this.leafNodePoint = false
         if (find) {
-          this.routeName = find.name;
-          this.currentSelector = find.children;
+          this.routeName = find.name
+          this.currentSelector = find.children
         } else {
-          this.currentSelector = [];
+          this.currentSelector = []
         }
         this.getSelect({
           tab: find,
           items: []
-        });
+        })
         // 清除地图点
-        this.clearInfo();
+        this.clearInfo()
       }
     }
   },
-  mounted() {
-    this.addGrid();
+  mounted () {
+    this.addGrid()
     // this.makeP0Data();
     // this.makeP2Data();
   },
@@ -276,64 +276,64 @@ export default {
     },
     messageData (data) {
       this.messData = data
-      this.tabList = true;
+      this.tabList = true
     },
-    ...mapActions(["setPageData"]),
-    sendPripIdFun(data) {
+    ...mapActions(['setPageData']),
+    sendPripIdFun (data) {
       // 搜索企业弹出一企一档
-      this.p1Select(data.pripId, data.cliType);
+      this.p1Select(data.pripId, data.cliType)
     },
-    getSelect(data) {
+    getSelect (data) {
       // 分发全局map select 事件
       // console.log(data, 'ssddd')
-      this.point = [];
-      this.Dispatch(data);
-      this.getSelectItem(data);
+      this.point = []
+      this.Dispatch(data)
+      this.getSelectItem(data)
       this.setPageData({
-        key: "globalMapSelect",
+        key: 'globalMapSelect',
         data: data
-      });
+      })
     },
-    getSelectItem(data) {
+    getSelectItem (data) {
       // console.log(data, '点击')
-      this.clearInfo();
-      const items = data.items;
-      this.point = [];
-      this.leafNodePoint = false;
+      this.clearInfo()
+      const items = data.items
+      this.point = []
+      this.leafNodePoint = false
       if (items.length === 0) {
-        this.pointName = [];
+        this.pointName = []
       } else {
-        this.pointName = [];
+        this.pointName = []
         for (let i = 0; i < items.length; i++) {
-          this.pointName.push(items[i].name);
+          this.pointName.push(items[i].name)
           this.point = [
             ...this.point,
             ...this.makeTreePoint(items[i], items[i].icon)
-          ];
-          console.log(this.point, "pppoiii");
+          ]
+          console.log(this.point, 'pppoiii')
         }
       }
     },
-    clearInfo() {
+    clearInfo () {
       // 切换清除右上角
-      this.p1Info = null;
+      this.p1Info = null
       this.setPageData({
-        key: "p1",
+        key: 'p1',
         data: null
-      });
+      })
     },
-    makeTreePoint(number, icon) {
-      const cliType = number.type;
+    makeTreePoint (number, icon) {
+      const cliType = number.type
       // console.log(cliType, 'clitype')
-      const len = this.city.length;
-      this.latPoint = [];
-      if (this.$route.name === "远程监控") {
-        const list = [];
+      const len = this.city.length
+      this.latPoint = []
+      if (this.$route.name === '远程监控') {
+        const list = []
         for (let i = 0; i < len; i++) {
-          const item = this.city[i];
+          const item = this.city[i]
           list.push({
             name: item.name,
-            icon: require("../../../assets/images/mapTabs/p3/t1/集合图标.png"),
+            icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
             coordinate: item.center,
             points: [],
             index: i,
@@ -341,11 +341,11 @@ export default {
             leafNodePoint: false,
             ad_code: item.ad_code,
             level: 1
-          });
+          })
         }
         // var newArray = []
-        axios.get("/monitor/main/cmeras/getAllEntlist").then(res => {
-          this.latPoint = res.data.data;
+        axios.get('/monitor/main/cmeras/getAllEntlist').then(res => {
+          this.latPoint = res.data.data
           // console.log(res.data.data, '列表')
           // console.log('all', this.latPoint)
           // for (let i = 0; i < data.length; i++) {
@@ -366,7 +366,7 @@ export default {
               if (cliType === Number(this.latPoint[i].entType)) {
                 for (let l = 0; l < list.length; l++) {
                   // console.log(this.latPoint[i].address.substring(2, 3), this.latPoint[i].address.substring(3, 5), this.latPoint[i])
-                  if (this.latPoint[i].address.substring(2, 3) === "省") {
+                  if (this.latPoint[i].address.substring(2, 3) === '省') {
                     if (
                       this.latPoint[i].address.substring(3, 5) ===
                       list[l].name.substring(0, 2)
@@ -383,7 +383,7 @@ export default {
                         ad_code: this.latPoint[i].countyCode,
                         corpId: this.latPoint[i].corpId,
                         firmType: this.latPoint[i].firmType
-                      });
+                      })
                     }
                   } else {
                     if (
@@ -402,7 +402,7 @@ export default {
                         ad_code: this.latPoint[i].countyCode,
                         corpId: this.latPoint[i].corpId,
                         firmType: this.latPoint[i].firmType
-                      });
+                      })
                     }
                   }
                 }
@@ -465,244 +465,244 @@ export default {
             }
           }
           // })
-        });
-        return list;
-      } else if (this.$route.name === "主体服务") {
+        })
+        return list
+      } else if (this.$route.name === '主体服务') {
         // console.log('主体服务', number, icon)
-        this.icon = icon;
-        const list = [];
+        this.icon = icon
+        const list = []
         for (let i = 0; i < len; i++) {
-          const item = this.city[i];
+          const item = this.city[i]
           list.push({
             name: item.name,
-            icon: require("../../../assets/images/mapTabs/p3/t1/集合图标.png"),
+            icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
             coordinate: item.center,
             points: [],
             index: i,
             typeIndex: 0,
             baseCount: 0,
             level: 0,
-            ad_code: "",
-            mainClass: ""
-          });
+            ad_code: '',
+            mainClass: ''
+          })
         }
         if (number.mainClass) {
           axios
             .get(
-              "/monitor/main/getDistrictCount?adCode=130000&reportType=" +
+              '/monitor/main/getDistrictCount?adCode=130000&reportType=' +
                 number.mainClass +
-                "&entType=" +
+                '&entType=' +
                 number.type
             )
             .then(res => {
-              const data = res.data.data;
+              const data = res.data.data
               // console.log(data, '地图1层打点2')
               for (let i = 0; i < data.length; i++) {
                 for (let o = 0; o < list.length; o++) {
                   if (list[o].name === data[i].name) {
-                    list[o].baseCount = data[i].baseCount;
-                    list[o].level = data[i].level;
-                    list[o].ad_code = data[i].ad_code;
-                    list[o].mainClass = number.mainClass;
-                    list[o].cliType = cliType;
+                    list[o].baseCount = data[i].baseCount
+                    list[o].level = data[i].level
+                    list[o].ad_code = data[i].ad_code
+                    list[o].mainClass = number.mainClass
+                    list[o].cliType = cliType
                   }
                 }
               }
-            });
+            })
         } else {
           axios
             .get(
-              "/monitor/main/getDistrictCount?adCode=130000&reportType=" +
+              '/monitor/main/getDistrictCount?adCode=130000&reportType=' +
                 cliType
             )
             .then(res => {
-              const data = res.data.data;
+              const data = res.data.data
               // console.log(data, '地图1层打点2')
               for (let i = 0; i < data.length; i++) {
                 for (let o = 0; o < list.length; o++) {
                   if (list[o].name === data[i].name) {
-                    list[o].baseCount = data[i].baseCount;
-                    list[o].level = data[i].level;
-                    list[o].ad_code = data[i].ad_code;
-                    list[o].cliType = cliType;
+                    list[o].baseCount = data[i].baseCount
+                    list[o].level = data[i].level
+                    list[o].ad_code = data[i].ad_code
+                    list[o].cliType = cliType
                   }
                 }
               }
-            });
+            })
         }
-        console.log(list, "主体list");
-        return list;
-      } else if (this.$route.name === "稽查办案") {
-        this.icon = icon;
-        const list = [];
+        console.log(list, '主体list')
+        return list
+      } else if (this.$route.name === '稽查办案') {
+        this.icon = icon
+        const list = []
         for (let i = 0; i < len; i++) {
-          const item = this.city[i];
+          const item = this.city[i]
           list.push({
             name: item.name,
-            icon: require("../../../assets/images/mapTabs/p3/t1/集合图标.png"),
+            icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
             coordinate: item.center,
             points: [],
             index: i,
             typeIndex: 0,
             baseCount: 0,
             level: 0,
-            ad_code: "",
-            mainClass: ""
-          });
+            ad_code: '',
+            mainClass: ''
+          })
         }
         // if (number.type) {
         axios
           .get(
-            "/monitor/check/getScreenDates?casesceDistrict=130000&warningType=1&illegActType=" +
+            '/monitor/check/getScreenDates?casesceDistrict=130000&warningType=1&illegActType=' +
               cliType
           )
           .then(res => {
-            const data = res.data.data;
-            console.log(data, "接口");
+            const data = res.data.data
+            console.log(data, '接口')
             for (let i = 0; i < data.length; i++) {
               for (let o = 0; o < list.length; o++) {
                 if (list[o].name === data[i].warningName) {
-                  list[o].baseCount = Number(data[i].illegActType);
-                  list[o].level = data[i].warningLevel;
-                  list[o].ad_code = data[i].caseName;
-                  list[o].cliType = cliType;
+                  list[o].baseCount = Number(data[i].illegActType)
+                  list[o].level = data[i].warningLevel
+                  list[o].ad_code = data[i].caseName
+                  list[o].cliType = cliType
                 }
               }
             }
-          });
+          })
         // }
-        console.log(list, "稽查list");
-        return list;
-      } else if (this.$route.name === "综合监管") {
-        this.icon = icon;
-        const list = [];
+        console.log(list, '稽查list')
+        return list
+      } else if (this.$route.name === '综合监管') {
+        this.icon = icon
+        const list = []
         for (let i = 0; i < len; i++) {
-          const item = this.city[i];
+          const item = this.city[i]
           list.push({
             name: item.name,
-            icon: require("../../../assets/images/mapTabs/p3/t1/集合图标.png"),
+            icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
             coordinate: item.center,
             points: [],
             index: i,
             typeIndex: 0,
             baseCount: 0,
             level: 0,
-            ad_code: "",
-            mainClass: "",
+            ad_code: '',
+            mainClass: '',
             pkidP: ''
-          });
+          })
         }
         // if (number.type) {
         axios
           .get(
-            "/monitor/baseDistrict/findNameAndLevelByAdPcode?pkidP=13&tag=" +
+            '/monitor/baseDistrict/findNameAndLevelByAdPcode?pkidP=13&tag=' +
               cliType
           )
           .then(res => {
-            const data = res.data.data;
-            console.log(data, "接口");
+            const data = res.data.data
+            console.log(data, '接口')
             for (let i = 0; i < data.length; i++) {
               for (let o = 0; o < list.length; o++) {
                 if (list[o].name === data[i].name) {
-                  list[o].baseCount = Number(data[i].sum);
-                  list[o].level = "2";
-                  list[o].ad_code = data[i].adCode + "00";
-                  list[o].ad_code2 = data[i].adCode;
-                  list[o].cliType = cliType;
-                  list[o].pkidP = data[i].adCode;
+                  list[o].baseCount = Number(data[i].sum)
+                  list[o].level = '2'
+                  list[o].ad_code = data[i].adCode + '00'
+                  list[o].ad_code2 = data[i].adCode
+                  list[o].cliType = cliType
+                  list[o].pkidP = data[i].adCode
                 }
               }
             }
-          });
-        return list;
+          })
+        return list
       } else {
-        const list = [];
+        const list = []
         for (let i = 0; i < len; i++) {
-          const item = this.city[i];
+          const item = this.city[i]
           list.push({
             name: item.name,
-            icon: require("../../../assets/images/mapTabs/p3/t1/集合图标.png"),
+            icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
             coordinate: item.center,
             points: [],
             index: i,
             typeIndex: 0
-          });
+          })
         }
-        return list;
+        return list
       }
     },
     // 经纬度转换
-    getCaption(obj, state) {
+    getCaption (obj, state) {
       // // console.log(obj, state)
       // var index = obj.lastIndexOf('\,')
-      var index = obj.lastIndexOf(",");
+      var index = obj.lastIndexOf(',')
       if (state === 0) {
-        obj = obj.substring(0, index);
+        obj = obj.substring(0, index)
       } else {
-        obj = obj.substring(index + 1, obj.length);
+        obj = obj.substring(index + 1, obj.length)
       }
-      return obj;
+      return obj
     },
-    addGrid() {
+    addGrid () {
       // 初始化网格 用于限制点位置坐标用，可不写
       const find = this.geo.features.find(val => {
-        return val.properties.name === "河北";
-      });
-      const coordinates = find.geometry.coordinates;
+        return val.properties.name === '河北'
+      })
+      const coordinates = find.geometry.coordinates
       for (let i = 0; i < coordinates.length; i++) {
-        const item = coordinates[i];
+        const item = coordinates[i]
         this.grid.push({
           geo: item,
-          border: "rgba(0,0,0,0)",
-          fill: "rgba(0,0,0,0)"
-        });
+          border: 'rgba(0,0,0,0)',
+          fill: 'rgba(0,0,0,0)'
+        })
       }
     },
-    Dispatch(data) {
+    Dispatch (data) {
       // console.log(data, '点击title')
-      this.commandName = "";
-      this.p2InfoDetail = {};
-      this.p4Info = {};
-      this.p5Info = {};
-      this.p6Info = {};
-      this.p10Info = {};
+      this.commandName = ''
+      this.p2InfoDetail = {}
+      this.p4Info = {}
+      this.p5Info = {}
+      this.p6Info = {}
+      this.p10Info = {}
       switch (this.$route.name) {
-        case "综合指挥":
-          this.commandClick(data.tab.name);
-          break;
-        case "智能预警":
-          this.p4Name = data.tab.name;
-          break;
-        case "综合监管":
-          this.p2Name = data.tab.name;
-          break;
+        case '综合指挥':
+          this.commandClick(data.tab.name)
+          break
+        case '智能预警':
+          this.p4Name = data.tab.name
+          break
+        case '综合监管':
+          this.p2Name = data.tab.name
+          break
         default:
-          break;
+          break
       }
     },
-    beforeDestroy() {
-      Bus.$emit("message");
+    beforeDestroy () {
+      Bus.$emit('message')
     },
     // 第二层地图打点
-    returnQu(item) {
-      console.log(item, "第二层");
-      if (this.$route.name === "主体服务") {
+    returnQu (item) {
+      console.log(item, '第二层')
+      if (this.$route.name === '主体服务') {
         if (item.ad_code) {
           if (item.mainClass) {
             axios
               .get(
-                "/monitor/main/getDistrictCount?adCode=" +
+                '/monitor/main/getDistrictCount?adCode=' +
                   item.ad_code +
-                  "&reportType=" +
+                  '&reportType=' +
                   item.mainClass +
-                  "&entType=" +
+                  '&entType=' +
                   item.cliType
               )
               .then(res => {
                 // console.log(res.data.data, '第二层')
-                this.point = [];
-                this.leafNodePoint = false;
-                const data = res.data.data;
+                this.point = []
+                this.leafNodePoint = false
+                const data = res.data.data
                 for (let i = 0; i < data.length; i++) {
                   if (data[i].center) {
                     this.point.push({
@@ -711,30 +711,30 @@ export default {
                         this.getCaption(data[i].center, 0),
                         this.getCaption(data[i].center, 1)
                       ],
-                      icon: require("../../../assets/images/mapTabs/p3/t1/集合图标.png"),
+                      icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
                       baseCount: data[i].baseCount,
                       level: data[i].level,
                       ad_code: data[i].ad_code,
                       typeIndex: 0,
                       mainClass: item.mainClass,
                       cliType: item.cliType
-                    });
+                    })
                   }
                 }
-              });
+              })
           } else {
             axios
               .get(
-                "/monitor/main/getDistrictCount?adCode=" +
+                '/monitor/main/getDistrictCount?adCode=' +
                   item.ad_code +
-                  "&reportType=" +
+                  '&reportType=' +
                   this.mainType
               )
               .then(res => {
                 // console.log(res.data.data, '第二层')
-                this.point = [];
-                this.leafNodePoint = false;
-                const data = res.data.data;
+                this.point = []
+                this.leafNodePoint = false
+                const data = res.data.data
                 for (let i = 0; i < data.length; i++) {
                   if (data[i].center) {
                     this.point.push({
@@ -743,30 +743,30 @@ export default {
                         this.getCaption(data[i].center, 0),
                         this.getCaption(data[i].center, 1)
                       ],
-                      icon: require("../../../assets/images/mapTabs/p3/t1/集合图标.png"),
+                      icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
                       baseCount: data[i].baseCount,
                       level: data[i].level,
                       ad_code: data[i].ad_code,
                       typeIndex: 0,
                       cliType: item.cliType
-                    });
+                    })
                   }
                 }
-              });
+              })
           }
         }
-      } else if (this.$route.name === "稽查办案") {
+      } else if (this.$route.name === '稽查办案') {
         axios
           .get(
-            "/monitor/check/getScreenDates?casesceDistrict=" +
+            '/monitor/check/getScreenDates?casesceDistrict=' +
               item.ad_code +
-              "&warningType=2&illegActType=" +
+              '&warningType=2&illegActType=' +
               item.cliType
           )
           .then(res => {
-            this.point = [];
-            this.leafNodePoint = false;
-            const data = res.data.data;
+            this.point = []
+            this.leafNodePoint = false
+            const data = res.data.data
             for (let i = 0; i < data.length; i++) {
               if (data[i].longitude) {
                 this.point.push({
@@ -775,67 +775,67 @@ export default {
                     this.getCaption(data[i].longitude, 0),
                     this.getCaption(data[i].longitude, 1)
                   ],
-                  icon: require("../../../assets/images/mapTabs/p3/t1/集合图标.png"),
+                  icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
                   baseCount: Number(data[i].illegActType),
                   level: data[i].warningLevel,
                   ad_code: data[i].caseName,
                   typeIndex: 0,
                   cliType: item.cliType
-                });
+                })
               }
             }
-            console.log(this.point, "ppooii");
-          });
-      } else if (this.$route.name === "综合监管") {
+            console.log(this.point, 'ppooii')
+          })
+      } else if (this.$route.name === '综合监管') {
         axios
           .get(
-            "/monitor/baseDistrict/findNameAndLevelByAdPcode?pkidP=" +
+            '/monitor/baseDistrict/findNameAndLevelByAdPcode?pkidP=' +
               item.ad_code2 +
-              "&tag=" +
+              '&tag=' +
               item.cliType
           )
           .then(res => {
-            console.log(res, "rrrss");
-            this.point = [];
-            this.leafNodePoint = false;
-            const data = res.data.data;
+            console.log(res, 'rrrss')
+            this.point = []
+            this.leafNodePoint = false
+            const data = res.data.data
             for (let i = 0; i < data.length; i++) {
               if (data[i].lng) {
                 this.point.push({
                   name: data[i].name,
                   coordinate: [data[i].lng, data[i].lat],
-                  icon: require("../../../assets/images/mapTabs/p3/t1/集合图标.png"),
+                  icon: require('../../../assets/images/mapTabs/p3/t1/集合图标.png'),
                   baseCount: Number(data[i].sum),
-                  level: "3",
+                  level: '3',
                   ad_code: data[i].adCode,
                   pkidP: data[i].adCode,
                   typeIndex: 0,
                   cliType: item.cliType
-                });
+                })
               }
             }
-            console.log(this.point, "ppooii");
-          });
+            console.log(this.point, 'ppooii')
+          })
       }
     },
     // 第三层地图打点
-    returnList(item) {
-      if (this.$route.name === "主体服务") {
+    returnList (item) {
+      if (this.$route.name === '主体服务') {
         if (item.ad_code) {
           if (item.mainClass) {
             axios
               .get(
-                "/monitor/main/getDistrictEntList?adCode=" +
+                '/monitor/main/getDistrictEntList?adCode=' +
                   item.ad_code +
-                  "&reportType=" +
+                  '&reportType=' +
                   item.mainClass +
-                  "&entType=" +
+                  '&entType=' +
                   item.cliType
               )
               .then(res => {
-                this.point = [];
-                this.leafNodePoint = true;
-                const data = res.data.data;
+                this.point = []
+                this.leafNodePoint = true
+                const data = res.data.data
                 for (let i = 0; i < data.length; i++) {
                   this.point.push({
                     name: data[i].entName,
@@ -844,26 +844,26 @@ export default {
                     address: data[i].dom,
                     pripId: data[i].PRIPID,
                     cliType: item.cliType
-                  });
+                  })
                 }
                 // console.log(this.point, 'ppp11')
                 // this.p1Select()
-              });
+              })
           } else {
             // 11错误
             axios
               .get(
-                "/monitor/main/getDistrictEntList?adCode=" +
+                '/monitor/main/getDistrictEntList?adCode=' +
                   item.ad_code +
-                  "&reportType=" +
+                  '&reportType=' +
                   this.mainType
               )
               .then(res => {
                 // console.log('开始')
                 // console.log(new Date())
-                this.point = [];
-                this.leafNodePoint = true;
-                const data = res.data.data;
+                this.point = []
+                this.leafNodePoint = true
+                const data = res.data.data
                 for (let i = 0; i < data.length; i++) {
                   this.point.push({
                     name: data[i].entName,
@@ -872,25 +872,25 @@ export default {
                     address: data[i].dom,
                     pripId: data[i].PRIPID,
                     cliType: item.cliType
-                  });
+                  })
                 }
-              });
+              })
           }
         }
-      } else if (this.$route.name === "稽查办案") {
+      } else if (this.$route.name === '稽查办案') {
         // console.log(item, "稽查");
         axios
           .get(
-            "/monitor/check/getScreenDates?casesceDistrict=" +
+            '/monitor/check/getScreenDates?casesceDistrict=' +
               item.ad_code +
-              "&warningType=3&illegActType=" +
+              '&warningType=3&illegActType=' +
               item.cliType
           )
           .then(res => {
-            console.log("第三层2", res.data.data);
-            this.point = [];
-            this.leafNodePoint = true;
-            const data = res.data.data;
+            console.log('第三层2', res.data.data)
+            this.point = []
+            this.leafNodePoint = true
+            const data = res.data.data
             for (let i = 0; i < data.length; i++) {
               this.point.push({
                 name: data[i].caseName,
@@ -902,25 +902,25 @@ export default {
                 address: data[i].caseName,
                 pripId: data[i].caseId,
                 cliType: item.cliType
-              });
+              })
             }
-          });
-      } else if (this.$route.name === "综合监管") {
+          })
+      } else if (this.$route.name === '综合监管') {
         // console.log(item, "稽查");
         axios
           .get(
-            "/monitor/baseDistrict/findNameAndLevelByAdPcode?pkidP=" +
+            '/monitor/baseDistrict/findNameAndLevelByAdPcode?pkidP=' +
               item.ad_code +
-              "&tag=" +
+              '&tag=' +
               item.cliType
           )
           .then(res => {
-            console.log("第三层2", res.data.data);
-            this.point = [];
-            this.leafNodePoint = true;
-            const data = res.data.data;
+            console.log('第三层2', res.data.data)
+            this.point = []
+            this.leafNodePoint = true
+            const data = res.data.data
             for (let i = 0; i < data.length; i++) {
-              if (data[i].level == 1) {
+              if (Number(data[i].level) === 1) {
                 this.point.push({
                   name: data[i].name,
                   coordinate: [data[i].lng, data[i].lat],
@@ -930,8 +930,8 @@ export default {
                   pripId: data[i].adCode,
                   cliType: item.cliType,
                   ImgLevel: data[i].level
-                });
-              }if (data[i].level == 2) {
+                })
+              } if (Number(data[i].level) === 2) {
                 this.point.push({
                   name: data[i].name,
                   coordinate: [data[i].lng, data[i].lat],
@@ -941,8 +941,8 @@ export default {
                   pripId: data[i].adCode,
                   cliType: item.cliType,
                   ImgLevel: data[i].level
-                });
-              }if (data[i].level == 3) {
+                })
+              } if (Number(data[i].level) === 3) {
                 this.point.push({
                   name: data[i].name,
                   coordinate: [data[i].lng, data[i].lat],
@@ -952,55 +952,55 @@ export default {
                   pripId: data[i].adCode,
                   cliType: item.cliType,
                   ImgLevel: data[i].level
-                });
+                })
               }
             }
-          });
+          })
       }
     },
-    pointClickDispatch(item) {
-      console.log(item, item.cliType, "主体服务");
+    pointClickDispatch (item) {
+      console.log(item, item.cliType, '主体服务')
       switch (this.$route.name) {
-        case "主体服务":
-          if (item.level === "1" || item.level === "2") {
-            this.returnQu(item);
-          } else if (item.level === "3" || item.level === "4") {
-            this.returnList(item);
+        case '主体服务':
+          if (item.level === '1' || item.level === '2') {
+            this.returnQu(item)
+          } else if (item.level === '3' || item.level === '4') {
+            this.returnList(item)
           } else if (item.pripId) {
             // console.log('第三')
-            this.p1Select(item.pripId, item.cliType);
+            this.p1Select(item.pripId, item.cliType)
           }
-          break;
-        case "智能预警":
+          break
+        case '智能预警':
           this.p4Info = {
             name: this.p4Name,
             data: item.data
-          };
-          break;
-        case "综合监管":
-          if (this.p2Name === "特种设备监管") {
+          }
+          break
+        case '综合监管':
+          if (this.p2Name === '特种设备监管') {
             this.p2InfoDetail = {
               name: this.p2Name,
               data: item.data
-            };
+            }
             // // console.log(this.p2InfoDetail)
           }
-          if (this.p2Name === "智慧食品监管") {
+          if (this.p2Name === '智慧食品监管') {
             this.p2InfoDetail = {
               name: this.p2Name,
               data: item.data
-            };
+            }
             // // console.log(this.p2InfoDetail)
           }
-          if (this.p2Name === "综合监管") {
-            console.log(item, "ittt22");
-            if (item.level === "1" || item.level === "2") {
-              this.returnQu(item);
-            } else if (item.level === "3" || item.level === "4") {
-              this.returnList(item);
+          if (this.p2Name === '综合监管') {
+            console.log(item, 'ittt22')
+            if (item.level === '1' || item.level === '2') {
+              this.returnQu(item)
+            } else if (item.level === '3' || item.level === '4') {
+              this.returnList(item)
             } else if (item.pripId) {
               // console.log('第三')
-              this.p1Select(item, item.cliType);
+              this.p1Select(item, item.cliType)
             }
             // this.p2InfoDetail = {
             //   name: this.p2Name,
@@ -1008,41 +1008,41 @@ export default {
             // };
             // // console.log(this.p2InfoDetail)
           }
-          break;
-        case "投诉举报":
-          this.p5Info = item.data;
-          break;
-        case "许可备案":
-          this.p10Info = item;
-          break;
-        case "稽查办案":
+          break
+        case '投诉举报':
+          this.p5Info = item.data
+          break
+        case '许可备案':
+          this.p10Info = item
+          break
+        case '稽查办案':
           // this.p6Info = item.data
-          if (item.level === "1" || item.level === "2") {
-            this.returnQu(item);
-          } else if (item.level === "3" || item.level === "4") {
-            this.returnList(item);
+          if (item.level === '1' || item.level === '2') {
+            this.returnQu(item)
+          } else if (item.level === '3' || item.level === '4') {
+            this.returnList(item)
           } else if (item.pripId) {
             // console.log('第三')
-            this.p1Select(item.pripId, item.cliType);
+            this.p1Select(item.pripId, item.cliType)
           }
-          break;
-        case "远程监控":
-          console.log("远程监控", item);
+          break
+        case '远程监控':
+          console.log('远程监控', item)
           if (item.points) {
-            this.point = item.points;
+            this.point = item.points
           } else if (!item.points) {
-            Bus.$emit("message", item);
+            Bus.$emit('message', item)
           }
-          break;
+          break
         default:
-          break;
+          break
       }
     },
-    rightMessage(pripId, cliType) {
-      axios.get("/monitor/main/getBaseZlggData?pripId=" + pripId).then(res2 => {
-        this.mainMessage = res2.data.data;
+    rightMessage (pripId, cliType) {
+      axios.get('/monitor/main/getBaseZlggData?pripId=' + pripId).then(res2 => {
+        this.mainMessage = res2.data.data
         for (let i = 0; i < this.mainMessage.length; i++) {
-          this.p1Info["抽查信息"]["质量公告"].push({
+          this.p1Info['抽查信息']['质量公告'].push({
             // '生产企业': this.mainMessage[i].SCQY,
             产品名称: this.mainMessage[i].CPMC,
             规格: this.mainMessage[i].GG,
@@ -1053,163 +1053,163 @@ export default {
             被检单位: this.mainMessage[i].BJDW
             // '不合格项': this.mainMessage[i].BHG
             // '主体身份代码': this.mainMessage[i].UNISCID
-          });
+          })
         }
-      });
+      })
     },
     // 一企一档信息
-    oneParty(pripId, cliType) {
-      let url;
-      if (cliType === "AA") {
-        url = "getMainBaseGtData";
+    oneParty (pripId, cliType) {
+      let url
+      if (cliType === 'AA') {
+        url = 'getMainBaseGtData'
       } else {
-        url = "getMainBaseInfoData";
+        url = 'getMainBaseInfoData'
       }
-      axios.get("/monitor/main/" + url + "?pripId=" + pripId).then(res => {
-        this.basicData = res.data.data;
-        if (this.basicData.COMPFORM_CN === "个人经营") {
-          this.p1Info["注册信息"]["基本信息"]["名称"] = this.basicData.TRANAME;
-          this.p1Info["注册信息"]["基本信息"][
-            "类型"
-          ] = this.basicData.COMPFORM_CN;
-          this.p1Info["注册信息"]["基本信息"][
-            "统一社会信用代码"
-          ] = this.basicData.UNISCID;
-          this.p1Info["注册信息"]["基本信息"]["注册号"] = this.basicData.REGNO;
-          this.p1Info["注册信息"]["基本信息"][
-            "登记机关"
-          ] = this.basicData.REGORG_CN;
-          this.p1Info["注册信息"]["基本信息"][
-            "注册日期"
-          ] = this.basicData.ESTDATE;
-          this.p1Info["注册信息"]["基本信息"][
-            "核准日期"
-          ] = this.basicData.APPRDATE;
-          this.p1Info["注册信息"]["基本信息"][
-            "经营期限"
-          ] = this.basicData.OPFROM;
-          this.p1Info["注册信息"]["基本信息"]["地址"] = this.basicData.OPLOC;
-          this.p1Info["注册信息"]["基本信息"][
-            "注册资金"
-          ] = this.basicData.FUNDAM;
-          this.p1Info["注册信息"]["基本信息"][
-            "法定代表人(经营者)"
-          ] = this.basicData.NAME;
-          this.p1Info["注册信息"]["基本信息"][
-            "登记状态"
-          ] = this.basicData.REGSTATE_CN;
-          this.p1Info["注册信息"]["基本信息"][
-            "所属监管所"
-          ] = this.basicData.LOCALADM;
-          this.p1Info["注册信息"]["经营范围信息"][
-            "行业类别"
-          ] = this.basicData.INDUSTRYPHY;
-          this.p1Info["注册信息"]["经营范围信息"][
-            "经营范围"
-          ] = this.basicData.OPSCOPE;
-          this.p1Info["注册信息"]["法定代表人信息"][
-            "法定代表人"
-          ] = this.basicData.NAME;
+      axios.get('/monitor/main/' + url + '?pripId=' + pripId).then(res => {
+        this.basicData = res.data.data
+        if (this.basicData.COMPFORM_CN === '个人经营') {
+          this.p1Info['注册信息']['基本信息']['名称'] = this.basicData.TRANAME
+          this.p1Info['注册信息']['基本信息'][
+            '类型'
+          ] = this.basicData.COMPFORM_CN
+          this.p1Info['注册信息']['基本信息'][
+            '统一社会信用代码'
+          ] = this.basicData.UNISCID
+          this.p1Info['注册信息']['基本信息']['注册号'] = this.basicData.REGNO
+          this.p1Info['注册信息']['基本信息'][
+            '登记机关'
+          ] = this.basicData.REGORG_CN
+          this.p1Info['注册信息']['基本信息'][
+            '注册日期'
+          ] = this.basicData.ESTDATE
+          this.p1Info['注册信息']['基本信息'][
+            '核准日期'
+          ] = this.basicData.APPRDATE
+          this.p1Info['注册信息']['基本信息'][
+            '经营期限'
+          ] = this.basicData.OPFROM
+          this.p1Info['注册信息']['基本信息']['地址'] = this.basicData.OPLOC
+          this.p1Info['注册信息']['基本信息'][
+            '注册资金'
+          ] = this.basicData.FUNDAM
+          this.p1Info['注册信息']['基本信息'][
+            '法定代表人(经营者)'
+          ] = this.basicData.NAME
+          this.p1Info['注册信息']['基本信息'][
+            '登记状态'
+          ] = this.basicData.REGSTATE_CN
+          this.p1Info['注册信息']['基本信息'][
+            '所属监管所'
+          ] = this.basicData.LOCALADM
+          this.p1Info['注册信息']['经营范围信息'][
+            '行业类别'
+          ] = this.basicData.INDUSTRYPHY
+          this.p1Info['注册信息']['经营范围信息'][
+            '经营范围'
+          ] = this.basicData.OPSCOPE
+          this.p1Info['注册信息']['法定代表人信息'][
+            '法定代表人'
+          ] = this.basicData.NAME
           // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
           // this.p1Info['注册信息']['基本信息']['所属网格'] = ''
           // this.p1Info['注册信息']['基本信息']['信用分类'] = ''
           // this.p1Info['注册信息']['基本信息']['经纬度'] = ''
           // 右屏弹窗
-          this.infoData["个人营业执照"]["名称"] = this.basicData.TRANAME;
-          this.infoData["个人营业执照"][
-            "统一社会信用代码"
-          ] = this.basicData.UNISCID;
+          this.infoData['个人营业执照']['名称'] = this.basicData.TRANAME
+          this.infoData['个人营业执照'][
+            '统一社会信用代码'
+          ] = this.basicData.UNISCID
           // this.p1Info['注册信息']['营业执照']['住所'] = this.basicData.DOM
-          this.infoData["个人营业执照"]["经营者"] = this.basicData.NAME;
-          this.infoData["个人营业执照"][
-            "登记状态"
-          ] = this.basicData.REGSTATE_CN;
-          this.infoData["个人营业执照"]["类型"] = this.basicData.COMPFORM_CN;
-          this.infoData["个人营业执照"]["登记机关"] = this.basicData.REGORG_CN;
-          this.infoData["个人营业执照"]["组成形式"] = "个人经营";
-          this.infoData["个人营业执照"]["注册日期"] = this.basicData.ESTDATE;
-          this.infoData["个人营业执照"]["核准日期"] = this.basicData.APPRDATE;
+          this.infoData['个人营业执照']['经营者'] = this.basicData.NAME
+          this.infoData['个人营业执照'][
+            '登记状态'
+          ] = this.basicData.REGSTATE_CN
+          this.infoData['个人营业执照']['类型'] = this.basicData.COMPFORM_CN
+          this.infoData['个人营业执照']['登记机关'] = this.basicData.REGORG_CN
+          this.infoData['个人营业执照']['组成形式'] = '个人经营'
+          this.infoData['个人营业执照']['注册日期'] = this.basicData.ESTDATE
+          this.infoData['个人营业执照']['核准日期'] = this.basicData.APPRDATE
           // this.p1Info['注册信息']['营业执照']['经营期限自'] = this.basicData.OPFROM
           // this.p1Info['注册信息']['营业执照']['经营期限至'] = this.basicData.OPTO
           // this.p1Info['注册信息']['营业执照']['组成形式'] = this.basicData.COMPFORM_CN
           // this.p1Info['注册信息']['营业执照']['注册资本'] = this.basicData.REGCAP + this.basicData.REGCAPCUR_CN
           // console.log(this.selectInfo, '个人营业执照1')
-          this.infoData["个人营业执照"]["经营范围"] = this.basicData.OPSCOPE;
-          this.infoData["个人营业执照"]["经营场所"] = this.basicData.OPLOC;
-          this.selectInfo = this.infoData["个人营业执照"];
-          this.selectInfoState = true;
+          this.infoData['个人营业执照']['经营范围'] = this.basicData.OPSCOPE
+          this.infoData['个人营业执照']['经营场所'] = this.basicData.OPLOC
+          this.selectInfo = this.infoData['个人营业执照']
+          this.selectInfoState = true
           // console.log(this.selectInfo, '个人营业执照2')
         } else {
-          this.p1Info["注册信息"]["基本信息"]["名称"] = this.basicData.ENTNAME;
-          this.p1Info["注册信息"]["基本信息"][
-            "类型"
-          ] = this.basicData.ENTTYPE_CN;
-          this.p1Info["注册信息"]["基本信息"][
-            "统一社会信用代码"
-          ] = this.basicData.UNISCID;
-          this.p1Info["注册信息"]["基本信息"]["注册号"] = this.basicData.REGNO;
-          this.p1Info["注册信息"]["基本信息"][
-            "登记机关"
-          ] = this.basicData.REGORG_CN;
-          this.p1Info["注册信息"]["基本信息"][
-            "注册日期"
-          ] = this.basicData.ESTDATE;
-          this.p1Info["注册信息"]["基本信息"][
-            "核准日期"
-          ] = this.basicData.APPRDATE;
-          this.p1Info["注册信息"]["基本信息"][
-            "经营期限"
-          ] = this.basicData.OPFROM;
-          this.p1Info["注册信息"]["基本信息"]["地址"] = this.basicData.DOM;
-          this.p1Info["注册信息"]["基本信息"]["注册资金"] =
-            this.basicData.REGCAP + this.basicData.REGCAPCUR_CN;
-          this.p1Info["注册信息"]["基本信息"][
-            "法定代表人(经营者)"
-          ] = this.basicData.NAME;
-          this.p1Info["注册信息"]["基本信息"][
-            "登记状态"
-          ] = this.basicData.REGSTATE_CN;
-          this.p1Info["注册信息"]["基本信息"]["所属监管所"] = "";
-          this.p1Info["注册信息"]["经营范围信息"][
-            "行业类别"
-          ] = this.basicData.INDUSTRYPHY;
-          this.p1Info["注册信息"]["经营范围信息"][
-            "经营范围"
-          ] = this.basicData.OPSCOPE;
-          this.p1Info["注册信息"]["法定代表人信息"][
-            "法定代表人"
-          ] = this.basicData.NAME;
+          this.p1Info['注册信息']['基本信息']['名称'] = this.basicData.ENTNAME
+          this.p1Info['注册信息']['基本信息'][
+            '类型'
+          ] = this.basicData.ENTTYPE_CN
+          this.p1Info['注册信息']['基本信息'][
+            '统一社会信用代码'
+          ] = this.basicData.UNISCID
+          this.p1Info['注册信息']['基本信息']['注册号'] = this.basicData.REGNO
+          this.p1Info['注册信息']['基本信息'][
+            '登记机关'
+          ] = this.basicData.REGORG_CN
+          this.p1Info['注册信息']['基本信息'][
+            '注册日期'
+          ] = this.basicData.ESTDATE
+          this.p1Info['注册信息']['基本信息'][
+            '核准日期'
+          ] = this.basicData.APPRDATE
+          this.p1Info['注册信息']['基本信息'][
+            '经营期限'
+          ] = this.basicData.OPFROM
+          this.p1Info['注册信息']['基本信息']['地址'] = this.basicData.DOM
+          this.p1Info['注册信息']['基本信息']['注册资金'] =
+            this.basicData.REGCAP + this.basicData.REGCAPCUR_CN
+          this.p1Info['注册信息']['基本信息'][
+            '法定代表人(经营者)'
+          ] = this.basicData.NAME
+          this.p1Info['注册信息']['基本信息'][
+            '登记状态'
+          ] = this.basicData.REGSTATE_CN
+          this.p1Info['注册信息']['基本信息']['所属监管所'] = ''
+          this.p1Info['注册信息']['经营范围信息'][
+            '行业类别'
+          ] = this.basicData.INDUSTRYPHY
+          this.p1Info['注册信息']['经营范围信息'][
+            '经营范围'
+          ] = this.basicData.OPSCOPE
+          this.p1Info['注册信息']['法定代表人信息'][
+            '法定代表人'
+          ] = this.basicData.NAME
 
           // this.p1Info['注册信息']['基本信息']['经济性质'] = this.basicData.ENTTYPE_CN
           // this.p1Info['注册信息']['基本信息']['所属网格'] = ''
           // this.p1Info['注册信息']['基本信息']['信用分类'] = ''
           // this.p1Info['注册信息']['基本信息']['经纬度'] = ''
-          this.infoData["营业执照"]["企业名称"] = this.basicData.ENTNAME;
-          this.infoData["营业执照"][
-            "统一社会信用代码"
-          ] = this.basicData.UNISCID;
-          this.infoData["营业执照"]["住所"] = this.basicData.DOM;
-          this.infoData["营业执照"]["法定代表人"] = this.basicData.NAME;
-          this.infoData["营业执照"]["登记状态"] = this.basicData.REGSTATE_CN;
-          this.infoData["营业执照"]["类型"] = this.basicData.ENTTYPE_CN;
-          this.infoData["营业执照"]["登记机关"] = this.basicData.REGORG_CN;
-          this.infoData["营业执照"]["成立日期"] = this.basicData.ESTDATE;
-          this.infoData["营业执照"]["经营期限自"] = this.basicData.OPFROM;
-          this.infoData["营业执照"]["经营期限至"] = this.basicData.OPTO;
-          this.infoData["营业执照"]["注册资本"] =
-            this.basicData.REGCAP + this.basicData.REGCAPCUR_CN;
-          this.infoData["营业执照"]["经营范围"] = this.basicData.OPSCOPE;
-          this.selectInfo = this.infoData["营业执照"];
+          this.infoData['营业执照']['企业名称'] = this.basicData.ENTNAME
+          this.infoData['营业执照'][
+            '统一社会信用代码'
+          ] = this.basicData.UNISCID
+          this.infoData['营业执照']['住所'] = this.basicData.DOM
+          this.infoData['营业执照']['法定代表人'] = this.basicData.NAME
+          this.infoData['营业执照']['登记状态'] = this.basicData.REGSTATE_CN
+          this.infoData['营业执照']['类型'] = this.basicData.ENTTYPE_CN
+          this.infoData['营业执照']['登记机关'] = this.basicData.REGORG_CN
+          this.infoData['营业执照']['成立日期'] = this.basicData.ESTDATE
+          this.infoData['营业执照']['经营期限自'] = this.basicData.OPFROM
+          this.infoData['营业执照']['经营期限至'] = this.basicData.OPTO
+          this.infoData['营业执照']['注册资本'] =
+            this.basicData.REGCAP + this.basicData.REGCAPCUR_CN
+          this.infoData['营业执照']['经营范围'] = this.basicData.OPSCOPE
+          this.selectInfo = this.infoData['营业执照']
           // 右上角弹窗
-          this.selectInfoState = true;
+          this.selectInfoState = true
         }
-      });
+      })
     },
-    qtxk(pripId, cliType) {
-      axios.get("/monitor/main/getQtxkByPripId?pripId=" + pripId).then(res3 => {
-        this.getQtxkByPripId = res3.data.data;
+    qtxk (pripId, cliType) {
+      axios.get('/monitor/main/getQtxkByPripId?pripId=' + pripId).then(res3 => {
+        this.getQtxkByPripId = res3.data.data
         for (let i = 0; i < this.getQtxkByPripId.length; i++) {
-          this.p1Info["许可备案"]["其他部门许可"].push({
+          this.p1Info['许可备案']['其他部门许可'].push({
             许可编号: this.getQtxkByPripId[i].LICNO,
             许可名称: this.getQtxkByPripId[i].LICNAME,
             有效期自: this.getQtxkByPripId[i].VALFROM,
@@ -1217,19 +1217,19 @@ export default {
             许可机关: this.getQtxkByPripId[i].LICANTH,
             许可内容: this.getQtxkByPripId[i].LICITEM,
             状态: this.getQtxkByPripId[i].TYPE
-          });
+          })
         }
-      });
+      })
     },
-    getZf(pripId, cliType) {
+    getZf (pripId, cliType) {
       axios
-        .get("/monitor/main/getZfInfoByPripId?pripId=" + pripId)
+        .get('/monitor/main/getZfInfoByPripId?pripId=' + pripId)
         .then(res4 => {
           // console.log(res4.data.data)
-          this.getZfInfoByPripId = res4.data.data;
-          this.getZfInfoByPripId = res4.data.data;
+          this.getZfInfoByPripId = res4.data.data
+          this.getZfInfoByPripId = res4.data.data
           for (let i = 0; i < this.getZfInfoByPripId.length; i++) {
-            this.p1Info["执法信息"]["行政处罚信息"].push({
+            this.p1Info['执法信息']['行政处罚信息'].push({
               案件编号: this.getZfInfoByPripId[i].CASENO,
               案件名称: this.getZfInfoByPripId[i].CASENAME,
               立案日期: this.getZfInfoByPripId[i].CASEFIDATE,
@@ -1239,148 +1239,148 @@ export default {
               罚款金额: this.getZfInfoByPripId[i].PENAM,
               违法行为: this.getZfInfoByPripId[i].LLEGACT,
               处罚类型: this.getZfInfoByPripId[i].PENTYPE
-            });
+            })
           }
-        });
+        })
     },
-    tzsbxk(pripId, cliType) {
+    tzsbxk (pripId, cliType) {
       axios
         .get(
-          "/monitor/main/getTzsbxkByPripId?pripId=" +
+          '/monitor/main/getTzsbxkByPripId?pripId=' +
             pripId +
-            "&reportType=" +
+            '&reportType=' +
             cliType
         )
         .then(res5 => {
-          this.getTzsbxkByPripId = res5.data.data;
+          this.getTzsbxkByPripId = res5.data.data
           // 特种设备许可列表
           for (let i = 0; i < this.getTzsbxkByPripId.length; i++) {
-            this.p1Info["许可备案"]["特种设备许可"].push({
+            this.p1Info['许可备案']['特种设备许可'].push({
               证书编号: this.getTzsbxkByPripId[i].CERTIFICATENO,
               申请类别: this.getTzsbxkByPripId[i].APPLICATECATEGORY,
               许可名称: this.getTzsbxkByPripId[i].XZXKNAME,
               发证机关: this.getTzsbxkByPripId[i].ISSUEORGAN,
               发证日期: this.getTzsbxkByPripId[i].ISSUEDATE,
               有效期至: this.getTzsbxkByPripId[i].EFFECTIVEDATE
-            });
+            })
           }
-        });
+        })
     },
-    CjInfo(pripId, cliType) {
+    CjInfo (pripId, cliType) {
       axios
         .get(
-          "/monitor/main/getCjInfoByPid?pripId=" +
+          '/monitor/main/getCjInfoByPid?pripId=' +
             pripId +
-            "&reportType=" +
+            '&reportType=' +
             cliType
         )
         .then(res6 => {
-          this.getCjInfoByPid = res6.data.data;
+          this.getCjInfoByPid = res6.data.data
           for (let i = 0; i < this.getCjInfoByPid.length; i++) {
-            this.p1Info["抽查信息"]["食品抽检"].push({
+            this.p1Info['抽查信息']['食品抽检'].push({
               // '生产企业': this.mainMessage[i].SCQY,
               食品名称: this.getCjInfoByPid[i].SPMC,
               分类: this.getCjInfoByPid[i].EL,
-              "生产日期/批号": this.getCjInfoByPid[i].SCRQ,
+              '生产日期/批号': this.getCjInfoByPid[i].SCRQ,
               规格型号: this.getCjInfoByPid[i].GGXH,
-              "任务来源/项目名称": this.getCjInfoByPid[i].RWLY,
+              '任务来源/项目名称': this.getCjInfoByPid[i].RWLY,
               检验机构名称: this.getCjInfoByPid[i].JYJGMC,
               生产单位: this.getCjInfoByPid[i].BSSCQYMC,
               被检单位: this.getCjInfoByPid[i].BCYDWMC
               // '不合格项': this.mainMessage[i].BHG
               // '主体身份代码': this.mainMessage[i].UNISCID
-            });
+            })
           }
-        });
+        })
     },
-    queryByPripid(pripId, cliType) {
+    queryByPripid (pripId, cliType) {
       axios
         .get(
-          "/monitor/unqualified/queryByPripid?pripid=" +
+          '/monitor/unqualified/queryByPripid?pripid=' +
             pripId +
-            "&reportType=" +
+            '&reportType=' +
             cliType
         )
         .then(res => {
-          const data = res.data.data;
+          const data = res.data.data
           for (let i = 0; i < data.length; i++) {
-            this.p1Info["抽查信息"]["产品质量抽检"].push({
+            this.p1Info['抽查信息']['产品质量抽检'].push({
               // '生产企业': this.mainMessage[i].SCQY,
               样品名称: data[i].ypmc,
               规格型号: data[i].ggxh,
               判定结果: data[i].pdjg,
               不合格项目: data[i].bhgxm
-            });
+            })
           }
-        });
+        })
     },
-    getDetails(pripId, cliType) {
+    getDetails (pripId, cliType) {
       axios
         .get(
-          "/monitor/equpMent/getDetails?pripid=" +
+          '/monitor/equpMent/getDetails?pripid=' +
             pripId +
-            "&reportType=" +
+            '&reportType=' +
             cliType
         )
         .then(res => {
-          const data = res.data.data;
-          this.p1Info["特种设备"]["特种设备使用单位信息"]["锅炉在用"] =
-            data.GLZY;
-          this.p1Info["特种设备"]["特种设备使用单位信息"]["锅炉停用"] =
-            data.GLTY;
-          this.p1Info["特种设备"]["特种设备使用单位信息"]["容器在用"] =
-            data.RQZY;
-          this.p1Info["特种设备"]["特种设备使用单位信息"]["容器停用"] =
-            data.RQTY;
-          this.p1Info["特种设备"]["特种设备使用单位信息"]["电梯在用"] =
-            data.DTZY;
-          this.p1Info["特种设备"]["特种设备使用单位信息"]["电梯停用"] =
-            data.DTTY;
-          this.p1Info["特种设备"]["特种设备使用单位信息"]["起重机在用"] =
-            data.QZJZY;
-          this.p1Info["特种设备"]["特种设备使用单位信息"]["起重机停用"] =
-            data.QZJTY;
-          this.p1Info["特种设备"]["特种设备使用单位信息"]["厂车在用"] =
-            data.CCZY;
-          this.p1Info["特种设备"]["特种设备使用单位信息"]["厂车停用"] =
-            data.CCTY;
-          this.p1Info["特种设备"]["特种设备使用单位信息"]["游乐在用"] =
-            data.YLZY;
-          this.p1Info["特种设备"]["特种设备使用单位信息"]["游乐停用"] =
-            data.YLTY;
-          this.p1Info["特种设备"]["特种设备使用单位信息"]["索道在用"] =
-            data.SDZY;
-          this.p1Info["特种设备"]["特种设备使用单位信息"]["索道停用"] =
-            data.SDTY;
-        });
+          const data = res.data.data
+          this.p1Info['特种设备']['特种设备使用单位信息']['锅炉在用'] =
+            data.GLZY
+          this.p1Info['特种设备']['特种设备使用单位信息']['锅炉停用'] =
+            data.GLTY
+          this.p1Info['特种设备']['特种设备使用单位信息']['容器在用'] =
+            data.RQZY
+          this.p1Info['特种设备']['特种设备使用单位信息']['容器停用'] =
+            data.RQTY
+          this.p1Info['特种设备']['特种设备使用单位信息']['电梯在用'] =
+            data.DTZY
+          this.p1Info['特种设备']['特种设备使用单位信息']['电梯停用'] =
+            data.DTTY
+          this.p1Info['特种设备']['特种设备使用单位信息']['起重机在用'] =
+            data.QZJZY
+          this.p1Info['特种设备']['特种设备使用单位信息']['起重机停用'] =
+            data.QZJTY
+          this.p1Info['特种设备']['特种设备使用单位信息']['厂车在用'] =
+            data.CCZY
+          this.p1Info['特种设备']['特种设备使用单位信息']['厂车停用'] =
+            data.CCTY
+          this.p1Info['特种设备']['特种设备使用单位信息']['游乐在用'] =
+            data.YLZY
+          this.p1Info['特种设备']['特种设备使用单位信息']['游乐停用'] =
+            data.YLTY
+          this.p1Info['特种设备']['特种设备使用单位信息']['索道在用'] =
+            data.SDZY
+          this.p1Info['特种设备']['特种设备使用单位信息']['索道停用'] =
+            data.SDTY
+        })
     },
-    getReportByPripid(pripId, cliType) {
+    getReportByPripid (pripId, cliType) {
       axios
         .get(
-          "/monitor/unqualified/getReportByPripid?pripid=" +
+          '/monitor/unqualified/getReportByPripid?pripid=' +
             pripId +
-            "&reportType=" +
+            '&reportType=' +
             cliType
         )
         .then(res => {
-          const data = res.data.data;
-          if (cliType === "AA") {
+          const data = res.data.data
+          if (cliType === 'AA') {
             for (let i = 0; i < data.length; i++) {
-              this.p1Info["年报信息"]["年报信息"].push({
+              this.p1Info['年报信息']['年报信息'].push({
                 // '生产企业': this.mainMessage[i].SCQY,
                 年报年度: data[i].ANCHEYEAR,
                 年报时间: data[i].ANCHEDATE,
                 资产总额: data[i].ASSGRO,
-                负债总额: "/",
+                负债总额: '/',
                 营业总收入: data[i].VENDINC,
-                利润总额: "/",
+                利润总额: '/',
                 纳税总额: data[i].RATGRO,
-                净利润: "/"
-              });
+                净利润: '/'
+              })
             }
           } else {
             for (let i = 0; i < data.length; i++) {
-              this.p1Info["年报信息"]["年报信息"].push({
+              this.p1Info['年报信息']['年报信息'].push({
                 // '生产企业': this.mainMessage[i].SCQY,
                 年报年度: data[i].ANCHEYEAR,
                 年报时间: data[i].ANCHEDATE,
@@ -1390,97 +1390,97 @@ export default {
                 利润总额: data[i].PROGRO,
                 纳税总额: data[i].RATGRO,
                 净利润: data[i].NETINC
-              });
+              })
             }
           }
-        });
+        })
     },
-    getRegisteredGhareholder(pripId, cliType) {
+    getRegisteredGhareholder (pripId, cliType) {
       axios
-        .get("/monitor/baseinfoDm/getRegisteredGhareholder?pripid=" + pripId)
+        .get('/monitor/baseinfoDm/getRegisteredGhareholder?pripid=' + pripId)
         .then(res => {
           const data1 = res.data.data
           for (let i = 0; i < data1.length; i++) {
-            this.p1Info["注册信息"]["股东及出资信息"].push({
+            this.p1Info['注册信息']['股东及出资信息'].push({
               // '生产企业': this.mainMessage[i].SCQY,
               股东名称: data1[i].INV,
               证件类型: data1[i].CERTIFICATETYPE,
               认缴出资方式: data1[i].SUBCONFORM,
               认缴出资比例: data1[i].SUBCONPROP,
               认缴出资额: data1[i].SUBSCRIBEFUNDS
-            });
+            })
           }
         })
     },
-    getRegistereDmainStaff(pripId, cliType) {
+    getRegistereDmainStaff (pripId, cliType) {
       axios
-        .get("/monitor/baseinfoDm/getRegistereDmainStaff?pripid=" + pripId)
+        .get('/monitor/baseinfoDm/getRegistereDmainStaff?pripid=' + pripId)
         .then(res => {
-          //主要人员信息
-          const data2 = res.data.data;
+          // 主要人员信息
+          const data2 = res.data.data
           for (let a = 0; a < data2.length; a++) {
-            if (data2[a].SEX === "1") {
-              this.p1Info["注册信息"]["主要人员信息"].push({
+            if (data2[a].SEX === '1') {
+              this.p1Info['注册信息']['主要人员信息'].push({
                 // '生产企业': this.mainMessage[i].SCQY,
                 姓名: data2[a].NAME,
                 证件号码: data2[a].CERNO,
                 职务: data2[a].POSITIONCN,
-                性别: "男"
-              });
-            } else if (data2[a].sex === "2") {
-              this.p1Info["注册信息"]["主要人员信息"].push({
+                性别: '男'
+              })
+            } else if (data2[a].sex === '2') {
+              this.p1Info['注册信息']['主要人员信息'].push({
                 // '生产企业': this.mainMessage[i].SCQY,
                 姓名: data2[a].NAME,
                 证件号码: data2[a].CERNO,
                 职务: data2[a].POSITIONCN,
-                性别: "女"
-              });
+                性别: '女'
+              })
             }
           }
         })
     },
-    getRegisteredBranch(pripId, cliType) {
+    getRegisteredBranch (pripId, cliType) {
       axios
-        .get("/monitor/baseinfoDm/getRegisteredBranch?pripid=" + pripId)
+        .get('/monitor/baseinfoDm/getRegisteredBranch?pripid=' + pripId)
         .then(res => {
-           // 分支机构信息(没发现数据)
-          const data3 = res.data.data;
+          // 分支机构信息(没发现数据)
+          const data3 = res.data.data
           for (let b = 0; b < data3.length; b++) {
-            this.p1Info["注册信息"]["分支机构信息"].push({
+            this.p1Info['注册信息']['分支机构信息'].push({
               // '生产企业': this.mainMessage[i].SCQY,
               分支机构名称: data3[b].BRNAME,
               统一社会信用代码: data3[b].UNISCID,
               登记机关: data3[b].REGORG_CN,
               登记日期: data3[b].REGIDATE
-            });
+            })
           }
         })
     },
-    getRegisteredChangeInfo(pripId, cliType) {
+    getRegisteredChangeInfo (pripId, cliType) {
       axios
-        .get("/monitor/baseinfoDm/getRegisteredChangeInfo?pripid=" + pripId)
+        .get('/monitor/baseinfoDm/getRegisteredChangeInfo?pripid=' + pripId)
         .then(res => {
-           // 变更信息
-          const data4 = res.data.data;
+          // 变更信息
+          const data4 = res.data.data
           for (let c = 0; c < data4.length; c++) {
-            this.p1Info["注册信息"]["变更信息"].push({
+            this.p1Info['注册信息']['变更信息'].push({
               // '生产企业': this.mainMessage[i].SCQY,
               变更事项: data4[c].ALTITEMCN,
               变更前内容: data4[c].ALTBE,
               变更后内容: data4[c].ALTAF,
               变更日期: data4[c].ALTDATE
-            });
+            })
           }
         })
     },
-    getRegisteredEquityPledgor(pripId, cliType) {
+    getRegisteredEquityPledgor (pripId, cliType) {
       axios
-        .get("/monitor/baseinfoDm/getRegisteredEquityPledgor?pripid=" + pripId)
+        .get('/monitor/baseinfoDm/getRegisteredEquityPledgor?pripid=' + pripId)
         .then(res => {
-           // 股权出质登记信息
-          const data5 = res.data.data;
+          // 股权出质登记信息
+          const data5 = res.data.data
           for (let d = 0; d < data5.length; d++) {
-            this.p1Info["注册信息"]["股权出质登记信息"].push({
+            this.p1Info['注册信息']['股权出质登记信息'].push({
               // '生产企业': this.mainMessage[i].SCQY,
               出质人: data5[d].PLEDGOR,
               出质人证件号码: data5[d].PLEDBLICNO,
@@ -1491,54 +1491,54 @@ export default {
               股权出质登记日期: data5[d].EQUPLEDATE,
               状态: data5[d].TYPE,
               公示日期: data5[d].PUBLICDATE
-            });
+            })
           }
         })
     },
-    getRegisteredChattelMortgage(pripId, cliType) {
+    getRegisteredChattelMortgage (pripId, cliType) {
       axios
-        .get("/monitor/baseinfoDm/getRegisteredChattelMortgage?pripid=" + pripId)
+        .get('/monitor/baseinfoDm/getRegisteredChattelMortgage?pripid=' + pripId)
         .then(res => {
           // 动产抵押信息
-          const data6 = res.data.data;
+          const data6 = res.data.data
           for (let e = 0; e < data6.length; e++) {
-            this.p1Info["注册信息"]["动产抵押信息"].push({
+            this.p1Info['注册信息']['动产抵押信息'].push({
               // '生产企业': this.mainMessage[i].SCQY,
               登记编号: data6[e].MORREGCNO,
               登记机关: data6[e].REGORG,
               登记日期: data6[e].REGIDATE
-            });
+            })
           }
         })
     },
-    getRegisteredContact(pripId, cliType) {
+    getRegisteredContact (pripId, cliType) {
       axios
-        .get("/monitor/baseinfoDm/getRegisteredContact?pripid=" + pripId)
+        .get('/monitor/baseinfoDm/getRegisteredContact?pripid=' + pripId)
         .then(res => {
           // 联系人信息
-          const data7 = res.data.data;
-          this.p1Info["注册信息"]["联系人信息"] = []
+          const data7 = res.data.data
+          this.p1Info['注册信息']['联系人信息'] = []
           for (let f = 0; f < data7.length; f++) {
-            this.p1Info["注册信息"]["联系人信息"].push({
+            this.p1Info['注册信息']['联系人信息'].push({
               姓名: data7[f].NAME,
               证件号码: data7[f].CERNO,
               证件类型: data7[f].CERTYPE,
               移动电话: data7[f].TEL
-            });
+            })
           }
         })
     },
     ndESFInfo (pripId, cliType) {
       axios
         .get(
-          "/monitor/main/findESFInfo?pripId=" +
+          '/monitor/main/findESFInfo?pripId=' +
             pripId
         )
         .then(res => {
-          const data = res.data.data;
+          const data = res.data.data
           console.log(data, '股权冻结信息')
           for (let i = 0; i < data.length; i++) {
-            this.p1Info["注册信息"]["股权冻结信息"].push({
+            this.p1Info['注册信息']['股权冻结信息'].push({
               // '生产企业': this.mainMessage[i].SCQY,
               执行裁定书文号: data[i].FRODOCNO,
               被执行人: data[i].INV,
@@ -1547,21 +1547,20 @@ export default {
               股权数额单位: data[i].FORAMME,
               执行法院: data[i].FROAUTH,
               股权冻结状态: data[i].FROZSTATE_CN
-            });
+            })
           }
-        });
+        })
     },
     findTMBaseInfo (pripId, cliType) {
       axios
         .get(
-          "/monitor/main/findTMBaseInfo?pripId=" +
+          '/monitor/main/findTMBaseInfo?pripId=' +
             pripId
         )
         .then(res => {
-          const data = res.data.data;
-          console.log(data, '商标注册信息')
+          const data = res.data.data
           for (let i = 0; i < data.length; i++) {
-            this.p1Info["注册信息"]["商标注册信息"].push({
+            this.p1Info['注册信息']['商标注册信息'].push({
               // '生产企业': this.mainMessage[i].SCQY,
               商标注册号: data[i].REG_NUM,
               商标类别: data[i].INT_CLS,
@@ -1572,20 +1571,20 @@ export default {
               商标图样: data[i].TM_IMAGE,
               商标共有人信息: data[i].COOWNER_CN_NAME,
               商品服务项目: data[i].GOODS_CN_NAME
-            });
+            })
           }
-        });
+        })
     },
-    findAbnormalManagementInfo(pripId, cliType) {
+    findAbnormalManagementInfo (pripId, cliType) {
       axios
         .get(
-          "/monitor/main/findAbnormalManagementInfo?pripId=" +
+          '/monitor/main/findAbnormalManagementInfo?pripId=' +
             pripId + '&type=' + cliType
         )
         .then(res => {
-          const data = res.data.data;
+          const data = res.data.data
           for (let i = 0; i < data.length; i++) {
-            this.p1Info["列异列严"]["列异"].push({
+            this.p1Info['列异列严']['列异'].push({
               // '生产企业': this.mainMessage[i].SCQY,
               列入经营异常名录原因类型: data[i].SPECAUSE_CN,
               列入日期: data[i].ABNTIME,
@@ -1593,20 +1592,20 @@ export default {
               移出经营异常名录原因: data[i].REMEXCPRES_CN,
               移出日期: data[i].REMDATE,
               移出决定机关: data[i].REDECORG_CN
-            });
+            })
           }
-        });
+        })
     },
-    findIllegalCompanyInfo(pripId, cliType) {
+    findIllegalCompanyInfo (pripId, cliType) {
       axios
         .get(
-          "/monitor/main/findIllegalCompanyInfo?pripId=" +
+          '/monitor/main/findIllegalCompanyInfo?pripId=' +
             pripId
         )
         .then(res => {
-          const data = res.data.data;
+          const data = res.data.data
           for (let i = 0; i < data.length; i++) {
-            this.p1Info["列异列严"]["列严"].push({
+            this.p1Info['列异列严']['列严'].push({
               // '生产企业': this.mainMessage[i].SCQY,
               列入严重违法失信企业名单原因: data[i].SERILLREA_CN,
               列入日期: data[i].ABNTIME,
@@ -1614,126 +1613,126 @@ export default {
               移出严重违法失信企业名原因: data[i].REMEXCPRES_CN,
               移出日期: data[i].REMDATE,
               移出决定机关: data[i].REDECORG_CN
-            });
+            })
           }
-        });
+        })
     },
-    p1Select(pripId, cliType) {
-      console.log(pripId, cliType, "pp");
-      if (this.$route.name === "主体服务") {
+    p1Select (pripId, cliType) {
+      console.log(pripId, cliType, 'pp')
+      if (this.$route.name === '主体服务') {
         // 主体服务一企一档
         this.p1Config[12].data().then(value => {
-          this.p1Info = value.data;
+          this.p1Info = value.data
           // 一企一档信息
-          this.oneParty(pripId, cliType);
+          this.oneParty(pripId, cliType)
           // 右屏接口
-          this.rightMessage(pripId, cliType);
-          this.qtxk(pripId, cliType);
-          this.getZf(pripId, cliType);
-          this.tzsbxk(pripId, cliType);
-          this.CjInfo(pripId, cliType);
-          this.queryByPripid(pripId, cliType);
-          this.getDetails(pripId, cliType);
-          this.getReportByPripid(pripId, cliType);
-          this.ndESFInfo(pripId, cliType);
-          this.findTMBaseInfo(pripId, cliType);
-          this.getRegisteredGhareholder(pripId, cliType);
-          this.getRegistereDmainStaff(pripId, cliType);
-          this.getRegisteredBranch(pripId, cliType);
-          this.getRegisteredChangeInfo(pripId, cliType);
-          this.getRegisteredEquityPledgor(pripId, cliType);
-          this.getRegisteredChattelMortgage(pripId, cliType);
-          this.getRegisteredContact(pripId, cliType);
-          this.findAbnormalManagementInfo(pripId, cliType);
-          this.findIllegalCompanyInfo(pripId, cliType);
+          this.rightMessage(pripId, cliType)
+          this.qtxk(pripId, cliType)
+          this.getZf(pripId, cliType)
+          this.tzsbxk(pripId, cliType)
+          this.CjInfo(pripId, cliType)
+          this.queryByPripid(pripId, cliType)
+          this.getDetails(pripId, cliType)
+          this.getReportByPripid(pripId, cliType)
+          this.ndESFInfo(pripId, cliType)
+          this.findTMBaseInfo(pripId, cliType)
+          this.getRegisteredGhareholder(pripId, cliType)
+          this.getRegistereDmainStaff(pripId, cliType)
+          this.getRegisteredBranch(pripId, cliType)
+          this.getRegisteredChangeInfo(pripId, cliType)
+          this.getRegisteredEquityPledgor(pripId, cliType)
+          this.getRegisteredChattelMortgage(pripId, cliType)
+          this.getRegisteredContact(pripId, cliType)
+          this.findAbnormalManagementInfo(pripId, cliType)
+          this.findIllegalCompanyInfo(pripId, cliType)
           this.setPageData({
-            key: "p1",
+            key: 'p1',
             data: this.p1Info
-          });
-        });
-      } else if (this.$route.name === "稽查办案") {
+          })
+        })
+      } else if (this.$route.name === '稽查办案') {
         const data = {
           caseId: pripId
-        };
-        Bus.$emit("waringData", data);
-      } else if (this.$route.name === "综合监管") {
+        }
+        Bus.$emit('waringData', data)
+      } else if (this.$route.name === '综合监管') {
         axios
-        .get(
-          "/monitor/baseDistrict/findWgUserInfoByPkid?pkid=" +
+          .get(
+            '/monitor/baseDistrict/findWgUserInfoByPkid?pkid=' +
             pripId.pripId
-        )
-        .then(res => {
-          console.log(res.data.data, '网格员')
-          this.peopleList =  res.data.data
-        })
+          )
+          .then(res => {
+            console.log(res.data.data, '网格员')
+            this.peopleList = res.data.data
+          })
       }
     },
-    makeP0Data() {
-      this.p0Info = [];
+    makeP0Data () {
+      this.p0Info = []
       for (let i = 0; i < 20; i++) {
         this.p0Info.push({
-          type: "证照临期预警",
-          text: "营业执照临期",
-          name: "河北" + Mock.mock("@cword(3)") + "有限责任公司",
-          time: "2020-02-02 23:00:00"
-        });
+          type: '证照临期预警',
+          text: '营业执照临期',
+          name: '河北' + Mock.mock('@cword(3)') + '有限责任公司',
+          time: '2020-02-02 23:00:00'
+        })
       }
       this.p0Dimension = [
         {
-          name: "类型",
-          value: "type"
+          name: '类型',
+          value: 'type'
         },
         {
-          name: "内容",
-          value: "text"
+          name: '内容',
+          value: 'text'
         },
         {
-          name: "名称",
-          value: "name"
+          name: '名称',
+          value: 'name'
         },
         {
-          name: "时间",
-          value: "time"
+          name: '时间',
+          value: 'time'
         }
-      ];
+      ]
     },
-    makeP2Data() {
-      this.p2Info = [];
+    makeP2Data () {
+      this.p2Info = []
       for (let i = 0; i < 20; i++) {
         this.p2Info.push({
-          people: Mock.mock("@cname()"),
-          name: "河北" + Mock.mock("@cword(3)") + "有限责任公司",
-          text: "无证无照",
-          time: "2020-02-02 23:00:00"
-        });
+          people: Mock.mock('@cname()'),
+          name: '河北' + Mock.mock('@cword(3)') + '有限责任公司',
+          text: '无证无照',
+          time: '2020-02-02 23:00:00'
+        })
       }
       this.p2Dimension = [
         {
-          name: "企业名称",
-          value: "name"
+          name: '企业名称',
+          value: 'name'
         },
         {
-          name: "检查人员",
-          value: "people"
+          name: '检查人员',
+          value: 'people'
         },
         {
-          name: "检查结果",
-          value: "text"
+          name: '检查结果',
+          value: 'text'
         },
         {
-          name: "检查时间",
-          value: "time"
+          name: '检查时间',
+          value: 'time'
         }
-      ];
+      ]
     },
-    commandClick(data) {
-      if (data === "指挥调度") {
-        this.$router.push({ path: "/dispatch" });
+    commandClick (data) {
+      if (data === '指挥调度') {
+        this.$router.push({ path: '/dispatch' })
       }
       // this.$router.push({ name: name })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="less">
