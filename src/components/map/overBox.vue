@@ -72,7 +72,7 @@ export default {
     },
     getData (type) {
       console.log(type, 'tt')
-      if (this.caseType === 2) {
+      if (type !== '') {
         this.$get('/monitor/check/getAlertRegister?appDate=' + type + '&current=' + this.current + '&size=' + this.size).then(res => {
           // console.log(res, 'rrrsss稽查')
           this.total = res.data.total
@@ -80,26 +80,27 @@ export default {
         }).catch(err => {
           console.log(err)
         })
-      } else if(this.caseType === 6){
-        this.$get('monitor/check/getAlertFinish').then(res =>{
-          // console.log(res)
-          this.list = res.data
-        }).catch(err => {
-          console.log(err)
-        })
-      }else {
-        this.$get('monitor/check/' + type).then(res =>{
-          // console.log(res)
-          this.list = res.data
-        }).catch(err => {
-          console.log(err)
-        })
-      }
+      } 
+      // else if(this.caseType === 6){
+      //   this.$get('monitor/check/getAlertFinish').then(res =>{
+      //     // console.log(res)
+      //     this.list = res.data
+      //   }).catch(err => {
+      //     console.log(err)
+      //   })
+      // }else {
+      //   this.$get('monitor/check/' + type).then(res =>{
+      //     // console.log(res)
+      //     this.list = res.data
+      //   }).catch(err => {
+      //     console.log(err)
+      //   })
+      // }
     },
     detail (item) {
       console.log(item, this.type)
       // this.overData = item
-      if (this.type === 1 || this.type === 2 || this.type === 3 || this.type === 4 || this.type === 5) {
+      // if (this.type === 1 || this.type === 2 || this.type === 3 || this.type === 4 || this.type === 5) {
         this.$get('/monitor/check/detailCase?caseId=' + item.caseId).then(data => {
           console.log(data)
             this.overData = data.data
@@ -109,17 +110,17 @@ export default {
           }).catch(err => {
             console.log(err)
           })
-      } else {
-        this.$get('/monitor/check/placeCase?caseId=' + item.caseId).then(data => {
-          console.log(data)
-          this.overData = data.data
-          // this.warning = true
-          // this.over = false
-          // this.caseTitle = '案件详情'
-        }).catch(err => {
-          console.log(err)
-        })
-      }
+      // } else {
+        // this.$get('/monitor/check/placeCase?caseId=' + item.caseId).then(data => {
+        //   console.log(data)
+        //   this.overData = data.data
+        //   // this.warning = true
+        //   // this.over = false
+        //   // this.caseTitle = '案件详情'
+        // }).catch(err => {
+        //   console.log(err)
+        // })
+      // }
     }
   },
   watch: {

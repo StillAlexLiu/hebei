@@ -21,7 +21,7 @@
                         <span>{{item.caseName}}</span>
                     </div>
                      <div class="cell w-1-4">
-                        <span>{{item.caseState}}</span>
+                        <span>{{item.processingCaseState}}</span>
                     </div>
                 </li>
             </ul>
@@ -38,7 +38,7 @@
                         <span>{{item.caseName}}</span>
                     </div>
                      <div class="cell w-1-4">
-                        <span>{{item.caseState}}</span>
+                        <span>{{item.processingCaseState}}</span>
                     </div>
                 </li>
             </ul>

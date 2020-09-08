@@ -603,14 +603,16 @@ export default [
           active: false,
           number: 200,
           json: [],
-          id: ''
+          id: '',
+          type: 1
         }, {
           name: '双随机监管',
           icon: require('./../assets/images/mapTabs/p2/t1/8.png'),
           active: false,
           number: 200,
           json: [],
-          id: ''
+          id: '',
+          type: 2
         }
       // {
       //   name: '智能预警',
@@ -1047,115 +1049,134 @@ export default [
           name: '不正当竞争',
           icon: require('../assets/images/mapTabs/p6/t1/不正当竞争@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 1
         },
         {
           name: '传销',
           icon: require('../assets/images/mapTabs/p6/t1/传销@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 2
         },
         {
           name: '登记',
           icon: require('../assets/images/mapTabs/p6/t1/登记@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 3
         },
         {
           name: '动产抵押',
           icon: require('../assets/images/mapTabs/p6/t1/动产抵押@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 4
         },
         {
           name: '广告',
           icon: require('../assets/images/mapTabs/p6/t1/广告@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 5
         },
         {
           name: '合同',
           icon: require('../assets/images/mapTabs/p6/t1/合同@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 6
         },
         {
           name: '集中贸易',
           icon: require('../assets/images/mapTabs/p6/t1/集中贸易@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 7
         },
         {
           name: '经纪人',
           icon: require('../assets/images/mapTabs/p6/t1/经纪人@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 8
         },
         {
           name: '农贸',
           icon: require('../assets/images/mapTabs/p6/t1/农贸@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 9
         },
         {
           name: '拍卖',
           icon: require('../assets/images/mapTabs/p6/t1/拍卖@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 10
         },
         {
           name: '其他',
           icon: require('../assets/images/mapTabs/p6/t1/其他@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 11
         },
         {
           name: '人民币',
           icon: require('../assets/images/mapTabs/p6/t1/人民币@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 12
         },
         {
           name: '商标',
           icon: require('../assets/images/mapTabs/p6/t1/商标@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 13
         },
         {
           name: '食品',
           icon: require('../assets/images/mapTabs/p6/t1/食品@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 14
         },
         {
           name: '投机倒把',
           icon: require('../assets/images/mapTabs/p6/t1/投机倒把@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 15
         },
         {
           name: '限制竞争',
           icon: require('../assets/images/mapTabs/p6/t1/限制竞争@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 16
         },
         {
           name: '消费者权益',
           icon: require('../assets/images/mapTabs/p6/t1/消费者权益@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 17
         },
         {
           name: '招投标',
           icon: require('../assets/images/mapTabs/p6/t1/招投标@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 18
         },
         {
           name: '直销',
           icon: require('../assets/images/mapTabs/p6/t1/直销@2x.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 19
         }]
     }, {
       name: '案件预警',
@@ -1166,19 +1187,22 @@ export default [
           name: '红色预警',
           icon: require('../assets/images/mapTabs/p6/t1/h.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 20
         },
         {
           name: '橙色预警',
           icon: require('../assets/images/mapTabs/p6/t1/c.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 21
         },
         {
           name: '黄色预警',
           icon: require('../assets/images/mapTabs/p6/t1/hh.png'),
           active: false,
-          number: 20
+          number: 20,
+          type: 22
         }]
     }]
   },

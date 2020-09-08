@@ -193,7 +193,7 @@ export default {
       })
     },
     itemClick (item, index, array) {
-      //  console.log('itemClick', item)
+       console.log('itemClick', item)
       // 关闭营业执照
       Bus.$emit('closeMainBox', false)
       this.shouBtn = item
@@ -236,7 +236,7 @@ export default {
           }
         }
       }
-      if (this.$route.name === '远程监控') {
+      if (this.$route.name === '远程监控' || this.$route.name === '稽查办案'|| this.$route.name === '综合监管') {
         this.send()
       }
     },

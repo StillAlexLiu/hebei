@@ -1,15 +1,20 @@
 <template>
     <div class="searchBox">
         <label v-if="$route.name === '主体服务' || $route.name === '远程监控'">
-            <input v-model="text2">
+            <input v-model="text2" @keyup.enter="inputCli">
+            <p class="txP" v-if="rollList.length >= 50">{{ msg }}</p>
+            <span class="closeInput" @click="close">×</span>
         </label>
         <div class="pullBox" v-if="rollList">
-          <div class="pullBox_li" v-for="(item, index) in rollList" :title="item.name" :key="index" @click="clickItem(item)">
+          <div class="pullBox_li" v-if="$route.name === '主体服务'" v-for="(item, index) in rollList" :title="item.name" :key="index" @click="clickItem(item)">
+            {{index + 1}}、{{item}}
+          </div>
+          <div class="pullBox_li" v-if="$route.name === '远程监控'" v-for="(item, index) in rollList" :title="item.name" :key="index" @click="clickItem(item)">
             {{index + 1}}、{{item.name}}
           </div>
         </div>
         <i  v-if="$route.name === '主体服务' || $route.name === '远程监控'" @click="inputCli"/>
-        <div class="num">总数：{{number}}</div>
+        <!-- <div class="num">总数：{{number}}</div> -->
         <!-- <div class="num2">地图缩放等级: {{zoom}}</div> -->
     </div>
 </template>
@@ -36,7 +41,8 @@ export default {
     return {
       text2: '',
       rollList: [
-      ]
+      ],
+      msg: ''
     }
   },
   watch: {
@@ -50,42 +56,15 @@ export default {
     }
   },
   methods: {
+    close () {
+      this.rollList = []
+      this.text2 = ''
+    },
     main () {
-      axios.get('/monitor/main/getMainBaseDataByCon?entName=' + this.text2).then(res => {
-        const data = res.data.data
-        // console.log(data, '搜索数据')
-        this.rollList = []
-        for (let i = 0; i < data.length; i++) {
-          // console.log(data[i], 'iiiii')
-          if (data[i].type === 'AA') {
-            this.rollList.push({
-              address: data[i].OPLOC,
-              cliType: data[i].type,
-              longitude: data[i].longitude,
-              latitude: data[i].latitude,
-              coordinate: [data[i].longitude, data[i].latitude],
-              icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
-              name: data[i].TRANAME,
-              pripId: data[i].S_EXT_SEQUENCE,
-              level: 5,
-              sousuo: true
-            })
-          } else {
-            this.rollList.push({
-              address: data[i].DOM,
-              cliType: data[i].ENTTYPE,
-              longitude: data[i].longitude,
-              latitude: data[i].latitude,
-              coordinate: [data[i].longitude, data[i].latitude],
-              icon: require('../../assets/images/mapTabs/p1/t1/撒点.png'),
-              name: data[i].ENTNAME,
-              pripId: data[i].PRIPID,
-              level: 5,
-              sousuo: true
-            })
-          }
-          // console.log(this.rollList, '搜索data')
-        }
+      axios.get('/monitor/baseinfoDm/getEnterpriseByName?name=' + this.text2).then(res => {
+        console.log(res.data, '查询')
+        this.msg = res.data.msg
+        this.rollList = res.data.data
       })
     },
     serchVideo () {
@@ -123,7 +102,14 @@ export default {
       }
     },
     clickItem (data) {
+      console.log(data)
+      if (this.$route.name === '主体服务') {
+        this.text2 = data
+      } else if (this.$route.name === '远程监控') {
+        this.text2 = data.name
+      }
       var points = data
+      // console.log(points, 'pp')
       this.$emit('inputData', points)
       this.rollList = []
       // this.text2 = ''
@@ -139,7 +125,22 @@ export default {
     left: 40px;
     height: 106px;
     font-size: 30px;
-    width: 780px;
+    width: 1560px;
+    .closeInput {
+      position: absolute;
+      font-size: 43px;
+      color: #52bcda;
+        right: 840px;
+        top: 0px;
+      cursor: pointer;
+    }
+    .txP {
+      text-align: center;
+      float: left;
+      margin: 0;
+      line-height: 70px;
+      margin-left: 50px;
+    }
     .pullBox{
       width: 780px;
       max-height: 500px;
@@ -167,12 +168,15 @@ export default {
       background: rgb(29, 96, 122);
       border: 1px solid rgb(29, 96, 122);
       padding-left: 30px;
+      float: left;
     }
     .num {
       width: 450px;
       height: 36px;
       // display: block;
       text-align: left;
+      position: absolute;
+    bottom: -815px;
     }
     .num2 {
       width: 450px;
@@ -211,9 +215,9 @@ export default {
         position: absolute;
         background: url("./img/search.png");
         background-size: 100% 100%;
-        right: 30px;
-        top: 20px;
         cursor: pointer;
+      right: 800px;
+      top: 22px;
     }
 }
 </style>

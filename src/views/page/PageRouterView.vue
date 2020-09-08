@@ -19,7 +19,7 @@
                     <div class="cuohao" @click="zhduTab = false">
                       ×
                     </div>
-                    <iframe src="http://60.205.208.38/vdis/?user=4580000&passwd=4580000&auto=2" frameborder="0" width="100%" height="100%"></iframe>
+                    <iframe src="http://211.90.37.246:8081/vdis/?user=1000&passwd=1000&auto=2" frameborder="0" width="100%" height="100%"></iframe>
                 </div>
             </div>
             <HeaderTab class="tab" :data="headerData" v-model="selectIndex" @change="routeTo" v-if="!zhduTab"/>
@@ -109,7 +109,6 @@ export default {
     },
     safeRoute (name) { // 路由安全跳转，同一路由不二次跳转，否则报错
       if (this.$route.name !== name) {
-        console.log(name)
         this.$router.push({ name: name })
       }
     }

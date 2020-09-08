@@ -34,6 +34,7 @@ export default {
   },
   methods: {
     overBox (data) {
+        console.log(data, 'ddd')
       if (data.name === '结案') {
         Bus.$emit('overBox', data.type)
       }

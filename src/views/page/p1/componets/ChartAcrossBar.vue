@@ -102,7 +102,7 @@ export default {
           data: this.legend,
           right: 10,
           top: 10,
-          selectedMode: false,
+          selectedMode: true,
           itemWidth: 15,
           itemHeight: 15,
           textStyle: {

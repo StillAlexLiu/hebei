@@ -81,10 +81,18 @@ export default {
     const date = new Date()
     const h = date.getFullYear()
     let m = date.getMonth() + 1
+    let mm = date.getMonth() + 1
     let nowm = date.getDate() - 1
     let day = date.getDate()
     if (m < 10) {
       m = '0' + m
+    }
+    if (nowm === 0) {
+      nowm = new Date(h, (m - 1) , 0).getDate()
+      mm = mm - 1
+    }
+    if (mm === 0) {
+      mm = '0' + mm
     }
     if (nowm < 10) {
       nowm = '0' + nowm
@@ -92,9 +100,8 @@ export default {
     if (day < 10) {
       day = '0' + day
     }
-    const other = `${h}-${m}-${nowm} 00:00:00`
+    const other = `${h}-${mm}-${nowm} 00:00:00`
     const now = `${h}-${m}-${day} 00:00:00`
-    //  console.log(other, now, '当前日期')
     // 税收已处理
     axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=ssUnDOne').then(res => {
       // console.log(res.data, '税收已处理')
@@ -167,37 +174,30 @@ export default {
     })
     // 分发给公安
     axios.get('/monitor/info/detail?indexCode=GAFF&dataTime=' + now).then(res => {
-      //  console.log(res.data.data, '分发给公安')
       this.entApplyData.gaff = res.data.data.indexValue
     })
     // 分发给税务
     axios.get('/monitor/info/detail?indexCode=SWFF&dataTime=' + now).then(res => {
-      //  console.log(res.data.data, '分发给公安')
       this.entApplyData.swff = res.data.data.indexValue
     })
     // 分发给人社
     axios.get('/monitor/info/detail?indexCode=RSFF&dataTime=' + now).then(res => {
-      //  console.log(res.data.data, '分发给公安')
       this.entApplyData.rsff = res.data.data.indexValue
     })
     // 反馈公安
     axios.get('/monitor/info/detail?indexCode=GAFK&dataTime=' + now).then(res => {
-      //  console.log(res.data.data, '分发给公安')
-      this.entApplyData.gafk = res.data.data.indexValue
+      this.entApplyData.rsfk = res.data.data.indexValue
     })
     // 税务反馈
     axios.get('/monitor/info/detail?indexCode=SWFK&dataTime=' + now).then(res => {
-      //  console.log(res.data.data, '分发给公安')
       this.entApplyData.swfk = res.data.data.indexValue
     })
     // 人社反馈
     axios.get('/monitor/info/detail?indexCode=RSFK&dataTime=' + now).then(res => {
-      //  console.log(res.data.data, '分发给公安')
-      this.entApplyData.rsfk = res.data.data.indexValue
+      this.entApplyData.gafk = res.data.data.indexValue
     })
     // 开办成功数
     axios.get('/monitor/info/detail?dataTime=' + now + '&indexCode=entDone').then(res => {
-      // //  console.log(res.data.data, '开办成功数')
       // this.entApplyData.applyDone = res.data.data.indexValue
       this.entApplyData.entDone = res.data.data.indexValue
     })

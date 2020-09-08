@@ -1613,6 +1613,7 @@ export default {
   },
   methods: {
     clickEch (data) {
+      console.log(data, 'ddss')
       const data2 = data.data
       const dataLast = data2.name.charAt(data2.name.length - 1)
       if (dataLast === '市') {
@@ -1621,14 +1622,25 @@ export default {
           this.chacha = true
           this.barData2 = []
           for (let i = 0; i < 10; i++) {
-            this.barData2.push({
-              name: data3[i].orgName,
-              value: data3[i].entepriseNum,
-              orgCode: data2.orgCode,
-              mainClass: data2.mainClass,
-              subClass: data2.subClass,
-              type: data2.type
-            })
+            if (data3[i].name) {
+              this.barData2.push({
+                name: data3[i].name,
+                value: data3[i].entepriseNum,
+                orgCode: data2.orgCode,
+                mainClass: data2.mainClass,
+                subClass: data2.subClass,
+                type: data2.type
+              })
+            } else if (data3[i].orgName) {
+              this.barData2.push({
+                name: data3[i].orgName,
+                value: data3[i].entepriseNum,
+                orgCode: data2.orgCode,
+                mainClass: data2.mainClass,
+                subClass: data2.subClass,
+                type: data2.type
+              })
+            }
           }
         })
       }
@@ -2239,7 +2251,7 @@ export default {
         case 'D':
           return '农民合作社'
         case '0':
-          return '其他'
+          return '市场主体'
         case '':
           return '市场主体'
       }

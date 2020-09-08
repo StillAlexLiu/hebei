@@ -250,7 +250,7 @@ export default {
           name: '县级网格',
           value: 4032,
           unit: '',
-          img: require('../compontes/img/11.png')
+          img: require('../compontes/img/1112.png')
         },
         {
           name: '乡镇级网格',

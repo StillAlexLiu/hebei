@@ -12,7 +12,7 @@
                     该监控视频暂不在线...
                   </div>
                 </div>
-                <player slot='calc' class='full-height video' v-else :index='index'
+                <player slot='calc' class='full-height video' v-else  :index='index'
                         :src='item.url'/>
                 <!-- <HyVideo class='full-height video' slot='calc'></HyVideo> -->
             </container-calc>
@@ -89,6 +89,7 @@ export default {
       name: '张家口阳原王府庄站'
     }
     this.setVideo(data4)
+    console.log(this.videoNames)
   },
   methods: {
     setVideo (data2) {

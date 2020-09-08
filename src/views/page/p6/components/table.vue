@@ -21,7 +21,7 @@
                 <td>{{item.unitname}}</td>
                 <td>{{item.casedep}}</td>
                 <td>{{item.clueType}}</td>
-                <td>{{item.caseStatus}}</td>
+                <td>{{item.processingCaseState}}</td>
             </tr>
         </table>
     </div>

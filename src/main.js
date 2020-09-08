@@ -12,10 +12,18 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
-Vue.use(ElementUI)
+import 'video.js/dist/video-js.css';
+import VueVideoPlayer from 'vue-video-player';
+import 'videojs-contrib-hls';
+import flash from 'videojs-flash';
+import videojs from 'video.js';
+Vue.use(VueVideoPlayer)
+window.videojs = videojs;
+Vue.use(VueVideoPlayer, flash);
 
 import 'video.js/dist/video-js.css'
 library.add(fas)
+Vue.use(ElementUI)
 
 moment.locale('zh-cn')
 
