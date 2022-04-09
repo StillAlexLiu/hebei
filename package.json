@@ -23,7 +23,7 @@
     "js-md5": "^0.7.3",
     "md5": "^2.2.1",
     "mockjs": "^1.1.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mux.js": "^5.5.3",
     "stats-webpack-plugin": "^0.7.0",
     "video.js": "^7.8.4",
